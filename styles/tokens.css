@@ -276,3 +276,31 @@ input, select, textarea { font-family: inherit; }
     scroll-behavior: auto !important;
   }
 }
+
+/* BEGIN pachisi additive tokens
+   Additions only; every rule above is byte-identical to the Platform source
+   (tests strip this block and compare the remainder with SOURCE_MANIFEST.json).
+   Accessible result-text roles from the typed theme contract
+   (`@electronicslams/pachisi/theme-tokens`, Classic Light/Dark winText,
+   lossText, drawText). Use them for result words on --*-soft fills; the
+   --win/--loss/--draw swatches above are unchanged. */
+:root {
+  --win-text: #1c7c44;
+  --loss-text: #c23c33;
+  --draw-text: #8f6216;
+}
+
+:root[data-theme="dark"] {
+  --win-text: #3ec97e;
+  --loss-text: #ec6a5f;
+  --draw-text: #e0a94a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --win-text: #3ec97e;
+    --loss-text: #ec6a5f;
+    --draw-text: #e0a94a;
+  }
+}
+/* END pachisi additive tokens */

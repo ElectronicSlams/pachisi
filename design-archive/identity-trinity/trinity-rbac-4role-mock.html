@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trinity RBAC — corrected 4-role model</title>
+<link rel="stylesheet" href="eslams/styles/tokens.css">
+<link rel="stylesheet" href="eslams/styles/components.css">
+<style>
+  /* Self-contained mock: renders on open (no build). Colors/radii/type from tokens.css only. */
+  body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-sans); line-height: 1.55; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 40px 28px 80px; }
+  .eyebrow { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); }
+  h1 { font-size: 28px; font-weight: 650; letter-spacing: -0.02em; margin: 8px 0 6px; }
+  h2 { font-size: 19px; font-weight: 650; letter-spacing: -0.02em; margin: 40px 0 6px; }
+  .lede { color: var(--text-2); font-size: 15px; max-width: 68ch; }
+  .note { background: var(--draw-soft); color: var(--draw); border: 1px solid color-mix(in oklch, var(--draw) 30%, transparent); border-radius: var(--r-md); padding: 12px 15px; font-size: 13.5px; margin: 18px 0; }
+  .grid-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 16px 0 8px; }
+  @media (max-width: 780px) { .grid-cards { grid-template-columns: repeat(2, 1fr); } }
+  .rcard { border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); padding: 15px 16px; }
+  .rcard h3 { margin: 0 0 4px; font-size: 15px; }
+  .rcard p { margin: 0; font-size: 12.5px; color: var(--text-3); }
+  /* role badges — tiered, calm (not win/loss semantics) */
+  .rb { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: var(--r-pill); border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--text-2); }
+  .rb-owner { background: var(--accent); color: var(--text-on-accent); border-color: var(--accent); }
+  .rb-admin { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-line); }
+  .rb-developer { background: var(--surface-3); color: var(--text); }
+  .rb-researcher { background: var(--surface-2); color: var(--text-2); }
+  table.matrix { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 13.5px; }
+  table.matrix th, table.matrix td { border-bottom: 1px solid var(--border); padding: 9px 10px; text-align: center; }
+  table.matrix th:first-child, table.matrix td:first-child { text-align: left; color: var(--text-2); white-space: nowrap; }
+  table.matrix thead th { border-bottom: 1px solid var(--border-strong); }
+  table.matrix tr:hover td { background: var(--surface-2); }
+  .yes { color: var(--win); font-weight: 700; }
+  .no { color: var(--text-3); }
+  .ro { color: var(--draw); font-size: 12px; font-weight: 600; }
+  .cols2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 780px) { .cols2 { grid-template-columns: 1fr; } }
+  .dlg { border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-md); padding: 16px 18px; }
+  .dlg-title { font-weight: 650; font-size: 15px; margin-bottom: 6px; }
+  .dlg-sub { color: var(--text-3); font-size: 12.5px; margin-bottom: 12px; }
+  .opt { display: flex; align-items: center; justify-content: space-between; gap: 10px; border: 1px solid var(--border); border-radius: var(--r-md); padding: 9px 12px; margin-bottom: 7px; font-size: 13.5px; }
+  .opt.disabled { opacity: .5; }
+  .opt .pill { font-family: var(--font-mono); font-size: 11px; color: var(--text-3); }
+  .rules { list-style: none; padding: 0; margin: 10px 0; }
+  .rules li { display: flex; gap: 9px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border-faint); font-size: 13.5px; }
+  .rules li b { color: var(--text); }
+  .key { display: inline-block; width: 20px; text-align: center; }
+  .map { font-family: var(--font-mono); font-size: 12.5px; color: var(--text-2); background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 14px; }
+  .src { font-family: var(--font-mono); font-size: 12px; color: var(--text-3); }
+  footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">Extra resource · reconciliation mock</div>
+  <h1>Trinity RBAC — the corrected 4-role model</h1>
+  <p class="lede">The interactive prototype (<span class="src">eSlams Trinity.dc.html</span>) still demos
+  <b>5 roles</b> (<span class="src">super_admin</span>, <span class="src">manager</span>). The shipped
+  backend (<span class="src">packages/auth/src/permissions.ts</span>) is <b>4 roles</b>. This is the
+  authoritative model to build to — matrix, who-manages-whom, and the corrected change-role dialog.</p>
+
+  <div class="note">⚠ Build to this, not the prototype. Enforcement is <b>server-side in <span class="src">workers/api</span></b>
+  via <span class="src">hasTrinityPermission()</span> — nav-hiding is UX only, never the control.</div>
+
+  <h2>The four roles</h2>
+  <div class="grid-cards">
+    <div class="rcard"><h3><span class="rb rb-owner">owner</span></h3><p>Everything. The only role that sets roles, mints admin/owner, acts on an owner, and signs artifacts.</p></div>
+    <div class="rcard"><h3><span class="rb rb-admin">admin</span></h3><p>Full read + write ops. Manages developer/researcher only. Cannot mint admins or sign artifacts.</p></div>
+    <div class="rcard"><h3><span class="rb rb-developer">developer</span></h3><p>Runs + artifacts read/write; API keys (developer:execute). No user/role access.</p></div>
+    <div class="rcard"><h3><span class="rb rb-researcher">researcher</span></h3><p>Read-only: runs, artifacts, research. Default fail-closed role. No user/role access.</p></div>
+  </div>
+
+  <h2>Permission matrix</h2>
+  <table class="matrix">
+    <thead><tr><th>Capability</th><th><span class="rb rb-owner">owner</span></th><th><span class="rb rb-admin">admin</span></th><th><span class="rb rb-developer">developer</span></th><th><span class="rb rb-researcher">researcher</span></th></tr></thead>
+    <tbody>
+      <tr><td>Read all resources (readAll)</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>Mutate all resources (mutateAll)</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>users : read / write</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>roles : write (set roles)</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>runs : read / write</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td><span class="ro">read</span></td></tr>
+      <tr><td>artifacts : read / write</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td><span class="ro">read</span></td></tr>
+      <tr><td>artifacts : sign (canSignArtifacts)</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>leaderboard : publish</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>support : read / write</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="no">–</td></tr>
+      <tr><td>developer : execute (API keys)</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td></tr>
+      <tr><td>research : read</td><td class="yes">✓</td><td class="yes">✓</td><td class="no">–</td><td class="yes">✓</td></tr>
+    </tbody>
+  </table>
+
+  <div class="cols2">
+    <div>
+      <h2>Who can manage whom</h2>
+      <p class="lede" style="font-size:13.5px;"><code class="src">manageableRoles</code> — the roles each actor may grant/revoke:</p>
+      <ul class="rules">
+        <li><span class="rb rb-owner">owner</span> → can set <span class="rb rb-owner">owner</span> <span class="rb rb-admin">admin</span> <span class="rb rb-developer">developer</span> <span class="rb rb-researcher">researcher</span></li>
+        <li><span class="rb rb-admin">admin</span> → can set <span class="rb rb-developer">developer</span> <span class="rb rb-researcher">researcher</span> <span class="no">(not admin/owner)</span></li>
+        <li><span class="rb rb-developer">developer</span> / <span class="rb rb-researcher">researcher</span> → <span class="no">cannot set roles</span></li>
+      </ul>
+    </div>
+    <div>
+      <h2>Hard rules (owner-gated)</h2>
+      <ul class="rules">
+        <li><span class="key">🔑</span><span><b>Only owner</b> sets roles &amp; mints an admin or owner.</span></li>
+        <li><span class="key">🔑</span><span><b>Only owner</b> may act on another owner.</span></li>
+        <li><span class="key">🔑</span><span><b>Only owner</b> signs artifacts (<span class="src">canSignArtifacts</span>).</span></li>
+        <li><span class="key">🔒</span><span><b>Fail closed:</b> unknown/missing role → <span class="rb rb-researcher">researcher</span> (least privilege). No "bare trinity → admin" escalation.</span></li>
+        <li><span class="key">👤</span><span><b>No self-action</b> in the users console — manage your own login under "Your account".</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Corrected "Change role" dialog — by acting role</h2>
+  <p class="lede" style="font-size:13.5px;">The option list is driven by <code class="src">manageableRoles</code>. This replaces the
+  prototype's version (which offered <span class="src">manager</span> and gated on <span class="src">super_admin</span>).</p>
+  <div class="cols2" style="margin-top:12px;">
+    <div class="dlg">
+      <div class="dlg-title">Change role — as <span class="rb rb-owner">owner</span></div>
+      <div class="dlg-sub">Currently <span class="rb rb-developer">developer</span>. All roles available.</div>
+      <div class="opt"><span>researcher</span><span class="pill">grant</span></div>
+      <div class="opt"><span>developer</span><span class="pill">current</span></div>
+      <div class="opt"><span>admin</span><span class="pill">grant</span></div>
+      <div class="opt"><span>owner</span><span class="pill">grant · owner-only</span></div>
+    </div>
+    <div class="dlg">
+      <div class="dlg-title">Change role — as <span class="rb rb-admin">admin</span></div>
+      <div class="dlg-sub">Currently <span class="rb rb-developer">developer</span>. Admin manages developer/researcher only.</div>
+      <div class="opt"><span>researcher</span><span class="pill">grant</span></div>
+      <div class="opt"><span>developer</span><span class="pill">current</span></div>
+      <div class="opt disabled"><span>admin</span><span class="pill">owner only</span></div>
+      <div class="opt disabled"><span>owner</span><span class="pill">owner only</span></div>
+    </div>
+  </div>
+
+  <h2>Legacy role aliases (migration mapping only)</h2>
+  <div class="map">
+    super_admin, superadmin&nbsp; → &nbsp;<b>owner</b><br>
+    admin, trinity&nbsp; → &nbsp;<b>admin</b><br>
+    manager, operator, runner, broadcaster, auditor, support&nbsp; → &nbsp;<b>admin</b><br>
+    developer&nbsp; → &nbsp;<b>developer</b> &nbsp;·&nbsp; researcher&nbsp; → &nbsp;<b>researcher</b>
+  </div>
+  <div class="note" style="background:var(--accent-soft); color:var(--accent); border-color:var(--accent-line);">
+    Note: the old read-only <b>manager</b> tier no longer exists (it maps to full <b>admin</b>). If a
+    read-only admin-viewer is wanted, that's a <b>new role decision</b> — not in the backend today.
+  </div>
+
+  <footer>
+    Source of truth: <span class="src">packages/auth/src/permissions.ts</span>. Full matrix + UI reconciliation:
+    <span class="src">docs/profile-onboarding-implementation.md §D</span>. Styling: <span class="src">eslams/styles</span> tokens (renders light; add <span class="src">data-theme="dark"</span> on &lt;html&gt; for dark).
+  </footer>
+
+</div>
+</body>
+</html>

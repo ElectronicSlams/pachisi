@@ -1,0 +1,174 @@
+.seatmap-preview {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-areas:
+    ". seat1 ."
+    "seat4 table seat2"
+    ". seat3 .";
+  gap: 12px;
+  align-items: center;
+  min-height: 220px;
+  padding: 16px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+}
+
+.seatmap-three {
+  grid-template-areas:
+    ". seat1 ."
+    "seat2 table seat3";
+  min-height: 170px;
+}
+
+.seatmap-ring {
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-areas: none;
+  min-height: auto;
+}
+
+.seatmap-table {
+  grid-area: table;
+  display: grid;
+  place-items: center;
+  min-height: 74px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--surface) 82%, var(--accent) 8%);
+  color: var(--text);
+  text-align: center;
+}
+
+.seatmap-table span,
+.seatmap-table small {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.seatmap-table span {
+  font-weight: 700;
+}
+
+.seatmap-table small {
+  color: var(--text-2);
+  font-size: 11px;
+}
+
+.seatmap-seat {
+  display: grid;
+  gap: 4px;
+  align-content: center;
+  min-height: 58px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  color: var(--text-2);
+  text-align: center;
+}
+
+.seatmap-seat-1 {
+  grid-area: seat1;
+}
+
+.seatmap-seat-2 {
+  grid-area: seat2;
+}
+
+.seatmap-seat-3 {
+  grid-area: seat3;
+}
+
+.seatmap-seat-4 {
+  grid-area: seat4;
+}
+
+.seatmap-ring .seatmap-seat,
+.seatmap-ring .seatmap-table {
+  grid-area: auto;
+}
+
+.seatmap-seat-label {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.seatmap-seat-model {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-2);
+  font-size: 11px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 620px) {
+  .seatmap-preview,
+  .seatmap-three {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+    min-height: auto;
+  }
+
+  .seatmap-table,
+  .seatmap-seat {
+    grid-area: auto;
+  }
+}
+
+.rm-seat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.table-seat-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+  width: 100%;
+}
+
+.table-seat-pill,
+.vw-seat-result-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+}
+
+.table-seat-label,
+.table-seat-meta {
+  color: var(--text-2);
+  font-size: 12px;
+}
+
+.vw-players-table,
+.vw-replay-stage-table {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vw-seat-results {
+  display: grid;
+  gap: 8px;
+}
+
+.vw-seat-result-row {
+  grid-template-columns: auto minmax(0, .6fr) minmax(0, 1fr) repeat(3, auto);
+  font-size: 13px;
+}
+
+@media (max-width: 760px) {
+  .rm-seat-grid,
+  .vw-seat-result-row {
+    grid-template-columns: 1fr;
+  }
+}

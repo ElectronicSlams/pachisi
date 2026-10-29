@@ -8,9 +8,12 @@
 
 /* Shared last-move language: one accent outline; arrive beat on mount. */
 .st-cell[data-last] { box-shadow: inset 0 0 0 2px var(--accent); }
-.st-cell[data-last] > * { animation: stArrive var(--dur-move) var(--ease-out) both; }
+.st-cell[data-last] > :not(.st-coord) { animation: stArrive var(--dur-move) var(--ease-out) both; }
 @keyframes stArrive { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
+/* Board sets --drop on the last Connect Four cell: the rows the disc fell (row index + 1). */
 @keyframes stDrop { from { transform: translateY(calc(var(--drop, 4) * -100%)); } 70% { transform: translateY(4%); } to { transform: none; } }
+/* Threatened cells (e.g. a king in check): a loss-toned ring that wins over the last-move outline. */
+.st-cell[data-check] { box-shadow: inset 0 0 0 3px var(--loss); }
 
 /* Grid boards: CSS grid of square cells */
 .st-board-grid3,
@@ -35,7 +38,7 @@
 .st-board-c4 .st-cell { border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 1px var(--board-line); }
 .st-board-c4 .st-cell[data-last] { box-shadow: inset 0 0 0 2px var(--accent); }
 .st-board-c4 .st-cell[data-line] { box-shadow: inset 0 0 0 2px var(--win); }
-.st-board-c4 .st-cell[data-last] > * { animation: stDrop var(--dur-move-drop) var(--ease-out) both; }
+.st-board-c4 .st-cell[data-last] > :not(.st-coord) { animation: stDrop var(--dur-move-drop) var(--ease-out) both; }
 .st-disc { width: 80%; height: 80%; border-radius: 50%; }
 .st-disc-a { background: var(--accent); }
 .st-disc-b { background: var(--stone-white); box-shadow: inset 0 0 0 3px var(--text-3); }
@@ -58,6 +61,15 @@
 .st-stone { width: 76%; height: 76%; border-radius: 50%; }
 .st-stone-black { background: var(--stone-black); }
 .st-stone-white { background: var(--stone-white); box-shadow: inset 0 0 0 1px var(--board-line); }
+/* Checkers kings: an inner ring in the opposite stone colour. */
+.st-stone-king { display: grid; place-items: center; }
+.st-stone-king::after { content: ""; width: 46%; height: 46%; border-radius: 50%; border: 2px solid var(--stone-white); }
+.st-stone-white.st-stone-king::after { border-color: var(--stone-black); }
+
+/* Rank and file labels (frame.coordinates) sit in the edge cells' corners. */
+.st-coord { position: absolute; font-size: 22cqh; line-height: 1; color: var(--text-3); pointer-events: none; }
+.st-coord-rank { top: 4%; left: 5%; }
+.st-coord-file { bottom: 4%; right: 6%; }
 
 /* go_board (SVG) */
 .st-board-go { display: block; aspect-ratio: 1; height: auto; }
@@ -66,6 +78,9 @@
 .st-go-black { fill: var(--stone-black); }
 .st-go-white { fill: var(--stone-white); stroke: var(--board-line); stroke-width: 0.04; }
 .st-go-stone[data-last] { stroke: var(--accent); stroke-width: 0.1; }
+.st-go-stone[data-check] { stroke: var(--loss); stroke-width: 0.1; }
+.st-go-hoshi circle { fill: var(--board-line); }
+.st-go-coords text { fill: var(--text-3); font-family: var(--font-mono); font-size: 0.32px; }
 
 /* hex_board (SVG) */
 .st-board-hex { display: block; height: auto; overflow: visible; }
@@ -73,10 +88,14 @@
 .st-hex-empty { fill: var(--surface); }
 .st-hex-edge-a { fill: var(--accent-soft); }
 .st-hex-edge-b { fill: var(--surface-3); }
+/* Corner cells touch both goal edges: two tinted halves under a transparent cell. */
+.st-hex-edge-ab { fill: transparent; }
+.st-hex-half { stroke: none; }
 .st-hex-a { fill: var(--accent); }
 .st-hex-b { fill: var(--text-3); }
 .st-hex[data-line] { stroke: var(--text); stroke-width: 0.14; }
 .st-hex[data-last] { stroke: var(--accent); stroke-width: 0.22; }
+.st-hex[data-check] { stroke: var(--loss); stroke-width: 0.22; }
 
 /* card_table */
 .st-board-cards {
@@ -108,7 +127,13 @@
 .st-pcard[data-last] { border-color: var(--accent); box-shadow: inset 0 0 0 2px var(--accent); }
 .st-cards-caption { font-size: clamp(9px, 2.4cqw, 13px); color: var(--text-3); letter-spacing: 0.08em; text-transform: uppercase; }
 
-/* Families without a stadium renderer yet: the striped placeholder. */
+/* toMove / result: a figure with a mono status line under the board. */
+.st-board-figure { display: block; width: 100%; min-width: 0; margin: 0; }
+.st-board-status { display: block; margin-top: 6px; font-size: 11.5px; letter-spacing: 0.04em; color: var(--text-2); text-align: center; }
+.st-board[data-result="win"] + .st-board-status { color: var(--win); }
+.st-board[data-result="draw"] + .st-board-status { color: var(--draw); }
+
+/* Families without a stadium renderer yet, and unsupported states: the striped placeholder. */
 .st-board-placeholder {
   aspect-ratio: 4 / 3;
   display: grid;

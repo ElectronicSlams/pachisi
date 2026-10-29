@@ -1,0 +1,629 @@
+/* =====================================================================
+   eSlams Arena app prototype | six-themes.css  (RESEARCH PACKAGE, not wired in)
+
+   Adds the four material themes (Neon, Club, Arcade, Midnight) to the two
+   Classic themes that tokens.css already defines. Values come straight from
+   assets/02-tokens/mobile-six-themes.ts (the authoritative set); nothing is
+   retuned here. Variable names are exactly tokens.css's.
+
+   HOW TO APPLY (sections 1 to 6 are CSS only; the Arcade trail and the mark
+   tint, sections 6 and 7, each need a few lines of JS, given in theme-materials.md)
+   1. Link it after boards-table.css (anywhere after tokens.css and
+      boards-grid.css works; every rule is #phone / .es-theme scoped).
+   2. app.js: let themePref be 'system'|'light'|'dark'|'neon'|'club'|'arcade'|
+      'midnight', and let resolvedTheme() return the pref when it is one of
+      the six (see theme-picker-spec.md). Everything else is CSS.
+
+   SCOPING (same convention as tokens.css)
+     #phone[data-theme="neon"]  and  .es-theme[data-theme="neon"]  (canvas
+     panels, picker tiles). light/dark keep their tokens.css blocks.
+
+   WHY THE ODD :not() CHAIN ON EVERY THEME SELECTOR
+   tokens.css has a system-dark block:
+       @media (prefers-color-scheme: dark) {
+         #phone:not([data-theme="light"]):not([data-theme="dark"]) { ...dark values... }
+       }
+   specificity (1,2,0). A bare #phone[data-theme="neon"] is (1,1,0), so on a
+   dark-OS machine that block would paint Classic Dark OVER Neon, Arcade,
+   Midnight and Club. Repeating the same :not() chain after the attribute makes
+   these blocks (1,3,0), so they win at any source order. If tokens.css is ever
+   edited, the cleaner fix is to add the four ids to that :not() chain and drop
+   the chain here. The same trap exists in boards-grid.css (--bd-cell), handled
+   in section 3.
+
+   VALUES NOT IN THE TOKEN SOURCE (derived, flagged inline)
+     --accent-press  hover stepped once more in the same direction
+     --gold --silver --bronze  carried from Classic Light (Club) / Classic Dark
+     --shadow-*      v3 sm and md; lg and pop re-based to tokens.css geometry
+   EXTRA TOKENS (only where used; var() fallbacks make every other theme inert)
+     --theme-ink-filter  Club only  (lacquered discs)
+     --theme-trail       Arcade only (phosphor persistence trail)
+   ===================================================================== */
+
+
+/* =====================================================================
+   1. Classic pair: the tokens tokens.css does not have yet
+   (win-text, loss-text, draw-text, theme-plane, card tokens, glow, mark-ink).
+   Values are the Classic sets from mobile-six-themes.ts. --mark-ink is the
+   brand blue for both Classic themes (brief section 6.2): Classic keeps the
+   two-tone brand wordmark and never masks it, so this value is only read by
+   code that asks for it.
+   ===================================================================== */
+#phone,
+#phone[data-theme="light"],
+.es-theme,
+.es-theme[data-theme="light"] {
+  --win-text: #1c7c44;
+  --loss-text: #c23c33;
+  --draw-text: #8f6216;
+  --theme-plane: var(--board-bg);
+  --theme-card-face: #ffffff;
+  --theme-card-back: var(--surface-3);
+  --theme-card-table: var(--surface-2);
+  --glow: none;
+  --mark-ink: #1b32c4;
+}
+#phone[data-theme="dark"],
+.es-theme[data-theme="dark"] {
+  --win-text: #3ec97e;
+  --loss-text: #ec6a5f;
+  --draw-text: #e0a94a;
+  --theme-plane: var(--board-bg);
+  --theme-card-face: var(--surface);
+  --theme-card-back: var(--surface-3);
+  --theme-card-table: var(--surface-2);
+  --glow: none;
+  --mark-ink: #1b32c4;
+}
+@media (prefers-color-scheme: dark) {
+  /* system fallback (no data-theme, or "system"): same dark values as tokens.css */
+  #phone:not([data-theme]),
+  #phone[data-theme="system"],
+  .es-theme:not([data-theme]),
+  .es-theme[data-theme="system"] {
+    --win-text: #3ec97e;
+    --loss-text: #ec6a5f;
+    --draw-text: #e0a94a;
+    --theme-card-face: var(--surface);
+    --mark-ink: #1b32c4;
+  }
+}
+
+
+/* =====================================================================
+   2. The four material themes
+   ===================================================================== */
+
+/* ---------- NEON (dark, glass plane, cold cathode glow on accent roles only) ---------- */
+#phone[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #06060b;
+  --surface: #0c0c15;
+  --surface-2: #12121d;
+  --surface-3: #191926;
+  --surface-inset: #0a0a11;
+
+  /* Borders */
+  --border: rgba(120, 150, 255, 0.14);
+  --border-strong: rgba(140, 170, 255, 0.30);
+  --border-faint: rgba(120, 150, 255, 0.07);
+
+  /* Text */
+  --text: #e8ecff;
+  --text-2: #a3adcf;
+  --text-3: #727ca8;
+  --text-on-accent: #041018;
+
+  /* Accent (one per theme) */
+  --accent: #3fd6f2;
+  --accent-hover: #6ce1f7;
+  --accent-press: #99ecfc; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(63, 214, 242, 0.15);
+  --accent-softer: rgba(63, 214, 242, 0.07);
+  --accent-line: rgba(63, 214, 242, 0.36);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #3ef58e;
+  --win-text: #3ef58e;
+  --win-soft: rgba(62, 245, 142, 0.13);
+  --loss: #ff5c6a;
+  --loss-text: #ff5c6a;
+  --loss-soft: rgba(255, 92, 106, 0.15);
+  --draw: #ffc24d;
+  --draw-text: #ffc24d;
+  --draw-soft: rgba(255, 194, 77, 0.14);
+
+  /* Medals (not in the token source: carried from the Classic Dark set) */
+  --gold: #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  /* Board */
+  --board-light: #131322;
+  --board-dark: #1c1c30;
+  --board-line: #30305a;
+  --board-bg: #0d0d18;
+  --stone-black: #05050c;
+  --stone-white: #e6f6ff;
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: linear-gradient(180deg, #0d0d18, #08080f);
+  --theme-card-face: var(--surface);
+  --theme-card-back: #0a0a14;
+  --theme-card-table: #0b0b16;
+  --glow: 0 0 14px rgba(63, 214, 242, 0.45);
+  --mark-ink: #3fd6f2;
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 10, 0.5);
+  --shadow-md: 0 4px 18px rgba(0, 0, 20, 0.6), 0 1px 3px rgba(0, 0, 10, 0.5);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 20, 0.65), 0 2px 8px rgba(0, 0, 10, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 20, 0.6);
+}
+
+/* ---------- CLUB (light, wood plane, felt table, brass accent, no glow) ---------- */
+#phone[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #efe7d7;
+  --surface: #faf5ea;
+  --surface-2: #f1e9d8;
+  --surface-3: #e7dcc5;
+  --surface-inset: #f6f0e1;
+
+  /* Borders */
+  --border: #ddd2ba;
+  --border-strong: #c3b292;
+  --border-faint: #e9e0cc;
+
+  /* Text */
+  --text: #2a2115;
+  --text-2: #665937;
+  --text-3: #726545;
+  --text-on-accent: #fff8ec;
+
+  /* Accent (one per theme) */
+  --accent: #8a6414;
+  --accent-hover: #6f4f0d;
+  --accent-press: #5b3f08; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(138, 100, 20, 0.11);
+  --accent-softer: rgba(138, 100, 20, 0.055);
+  --accent-line: rgba(138, 100, 20, 0.32);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #2e7d43;
+  --win-text: #276a39;
+  --win-soft: rgba(46, 125, 67, 0.11);
+  --loss: #b8442f;
+  --loss-text: #a13c29;
+  --loss-soft: rgba(184, 68, 47, 0.11);
+  --draw: #a2731c;
+  --draw-text: #785515;
+  --draw-soft: rgba(162, 115, 28, 0.13);
+
+  /* Medals (not in the token source: carried from the Classic Light set) */
+  --gold: #c79a2e;
+  --silver: #9aa0aa;
+  --bronze: #b07440;
+
+  /* Board */
+  --board-light: #ecdcbb;
+  --board-dark: #a97c4c;
+  --board-line: #8f7c58;
+  --board-bg: #decfae;
+  --stone-black: #221a10;
+  --stone-white: #f8f3e6;
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: repeating-linear-gradient(90deg, #c99a5a, #c99a5a 6px, #c19152 6px, #c19152 12px);
+  --theme-card-face: #fbf6ea;
+  --theme-card-back: #8a6414;
+  --theme-card-table: radial-gradient(circle, #2e7d43, #25683a);
+  --glow: none;
+  --mark-ink: #8a6414;
+  --theme-ink-filter: drop-shadow(0 -0.6px 0 color-mix(in srgb, var(--stone-white) 55%, transparent)) drop-shadow(0 1.2px 1.2px color-mix(in srgb, var(--stone-black) 38%, transparent)); /* lacquered discs; extra token, only Club defines it */
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(60, 45, 20, 0.08);
+  --shadow-md: 0 4px 16px rgba(60, 45, 20, 0.12), 0 1px 3px rgba(60, 45, 20, 0.08);
+  --shadow-lg: 0 12px 40px rgba(60, 45, 20, 0.16), 0 2px 8px rgba(60, 45, 20, 0.08);
+  --shadow-pop: 0 8px 28px rgba(60, 45, 20, 0.16);
+}
+
+/* ---------- ARCADE (dark, phosphor plane, glow and persistence trail on accent roles only) ---------- */
+#phone[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #020604;
+  --surface: #06110a;
+  --surface-2: #0a1a10;
+  --surface-3: #0f2417;
+  --surface-inset: #041008;
+
+  /* Borders */
+  --border: rgba(51, 255, 119, 0.16);
+  --border-strong: rgba(51, 255, 119, 0.34);
+  --border-faint: rgba(51, 255, 119, 0.08);
+
+  /* Text */
+  --text: #c9ffd9;
+  --text-2: #7fd99a;
+  --text-3: #549e6e;
+  --text-on-accent: #02180a;
+
+  /* Accent (one per theme) */
+  --accent: #33ff77;
+  --accent-hover: #66ff99;
+  --accent-press: #99ffbb; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(51, 255, 119, 0.13);
+  --accent-softer: rgba(51, 255, 119, 0.06);
+  --accent-line: rgba(51, 255, 119, 0.36);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #33ff77;
+  --win-text: #33ff77;
+  --win-soft: rgba(51, 255, 119, 0.12);
+  --loss: #ff6640;
+  --loss-text: #ff6640;
+  --loss-soft: rgba(255, 102, 64, 0.14);
+  --draw: #ffd23f;
+  --draw-text: #ffd23f;
+  --draw-soft: rgba(255, 210, 63, 0.13);
+
+  /* Medals (not in the token source: carried from the Classic Dark set) */
+  --gold: #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  /* Board */
+  --board-light: #07200f;
+  --board-dark: #0d2f18;
+  --board-line: #1c4a2c;
+  --board-bg: #04150a;
+  --stone-black: #021007;
+  --stone-white: #ccffdd;
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: #04150a;
+  --theme-card-face: var(--surface);
+  --theme-card-back: #07200f;
+  --theme-card-table: #04150a;
+  --glow: 0 0 10px rgba(51, 255, 119, 0.35);
+  --mark-ink: #33ff77;
+  --theme-trail: 0.5; /* start opacity of the phosphor persistence trail; extra token, only Arcade defines it */
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(0, 10, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 10, 0, 0.6), 0 1px 3px rgba(0, 10, 0, 0.5);
+  --shadow-lg: 0 12px 40px rgba(0, 10, 0, 0.65), 0 2px 8px rgba(0, 10, 0, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 10, 0, 0.6);
+}
+
+/* ---------- MIDNIGHT (dark, true black void, no glow) ---------- */
+#phone[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #000000;
+  --surface: #0a0a0c;
+  --surface-2: #101013;
+  --surface-3: #16161a;
+  --surface-inset: #070709;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-faint: rgba(255, 255, 255, 0.04);
+
+  /* Text */
+  --text: #d9d9de;
+  --text-2: #8f8f99;
+  --text-3: #797984;
+  --text-on-accent: #0b0b0d;
+
+  /* Accent (one per theme) */
+  --accent: #7d8dc9;
+  --accent-hover: #94a2d8;
+  --accent-press: #abb7e7; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(125, 141, 201, 0.15);
+  --accent-softer: rgba(125, 141, 201, 0.07);
+  --accent-line: rgba(125, 141, 201, 0.32);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #4fae7d;
+  --win-text: #4fae7d;
+  --win-soft: rgba(79, 174, 125, 0.13);
+  --loss: #c96a62;
+  --loss-text: #c96a62;
+  --loss-soft: rgba(201, 106, 98, 0.14);
+  --draw: #bd9552;
+  --draw-text: #bd9552;
+  --draw-soft: rgba(189, 149, 82, 0.14);
+
+  /* Medals (not in the token source: carried from the Classic Dark set) */
+  --gold: #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  /* Board */
+  --board-light: #131316;
+  --board-dark: #1d1d22;
+  --board-line: #2a2a31;
+  --board-bg: #0c0c0f;
+  --stone-black: #000000;
+  --stone-white: #d6d6de;
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: #000000;
+  --theme-card-face: var(--surface);
+  --theme-card-back: var(--surface-3);
+  --theme-card-table: var(--surface-2);
+  --glow: none;
+  --mark-ink: #7d8dc9;
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.7);
+}
+
+
+/* =====================================================================
+   3. Board cell tone (--bd-cell)
+   boards-grid.css sets it from the theme NAME ("light" = surface, "dark" =
+   board-light) and its system-dark :not() chain would also match the new
+   themes. Re-state it per theme. Phone level first, then nested wrappers
+   (picker tiles) with .es-theme doubled to win over the phone-level rule.
+   ===================================================================== */
+#phone[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+#phone[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+#phone[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+#phone[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host {
+  --bd-cell: var(--board-light);   /* Club cells read as pale maple on the wood plane */
+}
+#phone .es-theme.es-theme[data-theme="light"] .bd-host { --bd-cell: var(--surface); }
+#phone .es-theme.es-theme[data-theme="dark"] .bd-host,
+#phone .es-theme.es-theme[data-theme="neon"] .bd-host,
+#phone .es-theme.es-theme[data-theme="club"] .bd-host,
+#phone .es-theme.es-theme[data-theme="arcade"] .bd-host,
+#phone .es-theme.es-theme[data-theme="midnight"] .bd-host { --bd-cell: var(--board-light); }
+
+
+/* =====================================================================
+   4. Plane and cards (material.plane, cardFace, cardBack, cardTable)
+   Pure token consumers: Classic resolves to exactly what the renderers draw
+   today (plane = --board-bg, card = --surface, back = --surface-3, table =
+   --surface-2), so the Classic pair does not move by a pixel.
+   ===================================================================== */
+#phone .bd-board:not(.bd-board-bare):not(.bd-go),
+#phone .bd-t-mancala,
+#phone .bd-t-morris,
+#phone .bd-t-quad,
+#phone .bd-t-bg,
+#phone .bd-t-shogiwrap,
+#phone .bd-t-xq,
+.es-theme .bd-board:not(.bd-board-bare):not(.bd-go),
+.es-theme .bd-t-mancala,
+.es-theme .bd-t-morris,
+.es-theme .bd-t-quad,
+.es-theme .bd-t-bg,
+.es-theme .bd-t-shogiwrap,
+.es-theme .bd-t-xq {
+  background: var(--theme-plane, var(--board-bg));
+}
+#phone .bd-card,
+#phone .bd-t-fcard,
+.es-theme .bd-card,
+.es-theme .bd-t-fcard { background: var(--theme-card-face, var(--surface)); }
+#phone .bd-card.bd-card-back,
+#phone .bd-t-fcard.is-back,
+.es-theme .bd-card.bd-card-back,
+.es-theme .bd-t-fcard.is-back { background: var(--theme-card-back, var(--surface-3)); }
+#phone .bd-t-felt,
+.es-theme .bd-t-felt { background: var(--theme-card-table, var(--surface-2)); }
+/* Club only: the brass card back keeps a light inner frame instead of a cream panel */
+[data-theme="club"] .bd-card-back .bd-card-inset {
+  background: transparent;
+  border-color: color-mix(in srgb, var(--theme-card-face) 45%, transparent);
+}
+[data-theme="club"] .bd-t-fcard.is-back {
+  box-shadow: inset 0 0 0 2px var(--theme-card-back), inset 0 0 0 3px color-mix(in srgb, var(--theme-card-face) 45%, transparent);
+}
+
+
+/* =====================================================================
+   5. Ink (material.inkTreatment)
+   Flat discs, hairline rim (Classic), light-tube strokes (Neon), phosphor
+   strokes (Arcade) and floating discs, faint rim (Midnight) are already what
+   --stone-black / --stone-white / --text and the existing hairline rims give
+   on those token sets: no hook. Only Club adds something (lacquer), through
+   --theme-ink-filter, which is undefined (so inert) everywhere else.
+   ===================================================================== */
+#phone .bd-stone-b,
+#phone .bd-stone-w,
+#phone .bd-c4-body,
+#phone .bd-disc-body,
+#phone .bd-t-disc,
+#phone .bd-t-marble,
+.es-theme .bd-stone-b,
+.es-theme .bd-stone-w,
+.es-theme .bd-c4-body,
+.es-theme .bd-disc-body,
+.es-theme .bd-t-disc,
+.es-theme .bd-t-marble { filter: var(--theme-ink-filter, none); }
+
+
+/* =====================================================================
+   6. Glow budget: Neon and Arcade, accent-carrying roles ONLY
+   ACCENT_CARRYING_ROLES = last-move, active-seat, active-dock, result-sweep,
+   move-trail. Nothing else may reference --glow. Every rule is scoped to the
+   two glow themes; the value is --glow itself, so a Classic wrapper nested
+   inside a Neon phone (picker tile) still resolves to none.
+   ===================================================================== */
+
+/* last-move: SVG families (markLast) and HTML families (.bd-t-last) */
+[data-theme="neon"] .bd-last-line,
+[data-theme="arcade"] .bd-last-line,
+[data-theme="neon"] .bd-last-ring,
+[data-theme="arcade"] .bd-last-ring {
+  filter: drop-shadow(var(--glow));
+}
+[data-theme="neon"] .bd-t-root .bd-t-last,
+[data-theme="arcade"] .bd-t-root .bd-t-last {
+  box-shadow: var(--glow);
+}
+
+/* result-sweep: the accent wipe card and the winning line */
+[data-theme="neon"] .rs-card.is-win,
+[data-theme="arcade"] .rs-card.is-win {
+  box-shadow: var(--shadow-md), var(--glow);
+}
+[data-theme="neon"] .bd-winline,
+[data-theme="arcade"] .bd-winline,
+[data-theme="neon"] .bd-t-winline,
+[data-theme="arcade"] .bd-t-winline,
+[data-theme="neon"] .bd-g3-underline,
+[data-theme="arcade"] .bd-g3-underline {
+  filter: drop-shadow(var(--glow));
+}
+
+/* active-seat: Stage seat underline, table seat pods */
+[data-theme="neon"] .st-seat,
+[data-theme="arcade"] .st-seat { position: relative; }
+[data-theme="neon"] .st-seat.is-active::after,
+[data-theme="arcade"] .st-seat.is-active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: var(--accent);
+  box-shadow: var(--glow);
+  pointer-events: none;
+}
+[data-theme="neon"] .bd-t-pod.is-toact,
+[data-theme="arcade"] .bd-t-pod.is-toact,
+[data-theme="neon"] .bd-t-dseat.is-toact,
+[data-theme="arcade"] .bd-t-dseat.is-toact {
+  box-shadow: var(--shadow-sm), var(--glow);
+}
+
+/* active-dock: the Arena app has no dock (brief section 2.2). The role stays in
+   the contract; if a dock or tab bar ever returns, its selected item gets:
+   [data-theme="neon"] .ap-dock .is-on, [data-theme="arcade"] .ap-dock .is-on { box-shadow: var(--glow); } */
+
+/* move-trail (Arcade): the previous last-move marker lingers and fades once.
+   Needs the 8-line markLast change in theme-materials.md (it clones the old
+   .bd-last as .bd-trail). --theme-trail is only defined by Arcade; every other
+   theme falls back to 0, so the clone is invisible there and removed with the
+   usual rm() timer. Reduced motion: rm() removes it at once. */
+.bd-trail { pointer-events: none; animation: bdTrail var(--motion-result, 520ms) var(--ease, cubic-bezier(.2, .8, .2, 1)) both; }
+.bd-trail .bd-last-line { animation: none; opacity: 1; }
+.bd-trail .bd-last-ring { animation: none; opacity: 0; }
+@keyframes bdTrail { from { opacity: var(--theme-trail, 0); } to { opacity: 0; } }
+
+
+/* =====================================================================
+   7. The mark in the app (--mark-ink)
+   Material themes tint the in-app wordmark and the share-card mark to the
+   theme ink. The splash, the app icon and the store icon stay brand blue; the
+   Classic pair keeps the two-tone brand wordmark. app.js emits data-ink and
+   --wm-src only for Neon, Club, Arcade and Midnight, on the Home header
+   wordmark and the share card mark (hooks in theme-materials.md).
+   The geometry numbers are the existing .ap-wm image crop in app.css.
+   ===================================================================== */
+.ap-wm[data-ink] {
+  background: var(--mark-ink);
+  -webkit-mask-image: var(--wm-src);
+  mask-image: var(--wm-src);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: auto calc(var(--wm-h) * 1.8068);
+  mask-size: auto calc(var(--wm-h) * 1.8068);
+  -webkit-mask-position: calc(var(--wm-h) * -0.3068) calc(var(--wm-h) * -0.5227);
+  mask-position: calc(var(--wm-h) * -0.3068) calc(var(--wm-h) * -0.5227);
+}
+.ap-wm--text[data-ink] {
+  -webkit-mask-position: calc(var(--wm-h) * -1.4773) calc(var(--wm-h) * -0.5227);
+  mask-position: calc(var(--wm-h) * -1.4773) calc(var(--wm-h) * -0.5227);
+}
+.ap-wm[data-ink] img { visibility: hidden; }
+span.rs-share-mark[data-ink] {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: var(--mark-ink);
+  -webkit-mask: var(--wm-src) center / contain no-repeat;
+  mask: var(--wm-src) center / contain no-repeat;
+}
+
+
+/* =====================================================================
+   8. Appearance picker (Settings) and the "Try a theme" row (result curtain)
+   Tokens only. Markup and behaviour: theme-picker-spec.md.
+   ===================================================================== */
+.ap-th-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ap-th-tile {
+  position: relative;
+  display: block;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid var(--border);
+  border-radius: var(--r-lg);
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.ap-th-tile.is-on { border-color: var(--accent); }
+.ap-th-skin { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 8px 10px; }
+.ap-th-name { font: 600 12px/1.2 var(--font-sans); color: var(--text); }
+.ap-th-check {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: var(--text-on-accent);
+}
+.ap-srow-label .ap-srow-t { display: block; }
+.ap-srow-label .ap-srow-s { display: block; margin-top: 2px; font: 400 12px/1.35 var(--font-sans); color: var(--text-3); }
+.rs-theme-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: var(--tap);
+  margin-top: 2px;
+  padding: 8px 0 0;
+  border: 0;
+  border-top: 1px solid var(--border-faint);
+  background: transparent;
+  color: var(--text-2);
+  font: 550 13px/1.3 var(--font-sans);
+  text-align: left;
+}
+.rs-theme-row .rs-theme-hint { display: block; margin-top: 1px; font-weight: 400; font-size: 12px; color: var(--text-3); }
+.rs-theme-row .ap-ic { color: var(--text-3); flex: none; }

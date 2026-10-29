@@ -1,0 +1,196 @@
+{
+  "base": "file://~/Downloads/eSlams/Arena App Design/eSlams Arena App.html",
+  "at": "2026-10-02T09:15:28.534Z",
+  "screens": [
+    {
+      "id": "home",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-c4",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-holdem",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "roster",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [
+        {
+          "el": ".sh-search-input",
+          "label": "Search models or providers...",
+          "w": 199,
+          "h": 42
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "signin",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-yourmove",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-thinking",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "result",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "matches",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "replay",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "settings",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "home",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-c4",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-holdem",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "roster",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [
+        {
+          "el": ".sh-search-input",
+          "label": "Search models or providers...",
+          "w": 199,
+          "h": 42
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "signin",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-yourmove",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-thinking",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "result",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "matches",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "replay",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "settings",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    }
+  ]
+}

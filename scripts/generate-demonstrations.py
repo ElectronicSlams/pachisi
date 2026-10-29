@@ -1,8 +1,13 @@
 """Build synthetic public preview frames with the preview's pinned Core.
 
-Run using the Core checkout's Python: generate-game-demonstrations.py
---core-root /path/to/core [--check]. No match data, services or hidden suites.
-Only allowlisted public fields are exported; action plans are reproducible.
+Run using the Core checkout's Python:
+    python scripts/generate-demonstrations.py --core-root /path/to/core [--check]
+No match data, services or hidden suites. Only allowlisted public fields are
+exported; action plans are reproducible. The output JSON is pinned by sha256 in
+docs/game-coverage.json and must stay byte-for-byte reproducible, so frames carry
+no presentation-only fields: last-move and win-line cues are derived at render
+time (src/game/cues.ts). Every transition is re-checked without Core by
+scripts/validate-demonstrations.py (`pnpm check:physics`, docs/physics.md).
 """
 import argparse
 import json
@@ -104,6 +109,9 @@ def choose(slug, state, legal, step):
     elif slug == "euchre":
         preferred = "call:D" if p["phase"] == "call" else None
     elif slug in {"leduc-holdem", "limit-texas-holdem", "no-limit-texas-holdem"}:
+        # Always checking keeps the plan deterministic, but it means the Limit and
+        # No-limit demos are identical and no bet/raise/fold is ever shown
+        # (docs/physics.md, "What the traces never exercise").
         preferred = "check" if "check" in legal else "call"
     elif slug in {"go", "gomoku", "hex"}:
         n = len(p["board"]); target = n * (n // 2) + n // 2
@@ -120,6 +128,8 @@ def choose(slug, state, legal, step):
 
 
 def invariants(slug, p):
+    # These mirror Core's variants at the artwork pin (e.g. 5 checkers a side), not
+    # the standard published rules; scripts/validate-demonstrations.py reports both.
     if slug == "mancala":
         assert sum(sum(v) for v in p["pits"].values()) + sum(p["stores"].values()) == 48
     if slug == "backgammon":
@@ -147,7 +157,7 @@ def frame(slug, state, actor=None, action=None):
     p = state.public_state
     public = {k: p[k] for k in FIELDS[slug].split() if k in p}
     for key in ("history", "trick_history", "round_history", "discard_pile"):
-        if key in public: public[key] = public[key][-1:]
+        if key in public: public[key] = public[key][-1:]  # last entry only: a frame never shows older tricks/rounds
     caption = "Opening position" if actor is None else actor.replace("player_", "P") + " · " + str(action)
     if slug in SEALED and actor and not state.terminal:
         caption = actor.replace("player_", "P") + " · sealed choice"

@@ -6,7 +6,7 @@ import { LegalDemonstration } from "./scene";
 import { GameGlyph } from "./icons";
 import { demonstrationFor } from "./demos";
 import { gameAnimationFor } from "./catalogue";
-import { isPreviewVisible, PREVIEW_VISIBILITY_THRESHOLD, registerPreviewMotion } from "./motion";
+import { observePreviewVisibility, registerPreviewMotion } from "./motion";
 
 function subscribeReducedMotion(notify: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -35,6 +35,10 @@ function AnimationSequence({ game, gameName, size, group, presentation, typograp
   const [active, setActive] = useState(false);
   const motion = useRef<ReturnType<typeof registerPreviewMotion> | null>(null);
   const reduced = useSyncExternalStore(subscribeReducedMotion, () => window.matchMedia("(prefers-reduced-motion: reduce)").matches, () => false);
+  // Read through a ref so a reduced-motion toggle refreshes this member in place
+  // instead of re-registering it, which would lose its rotation order.
+  const reducedRef = useRef(reduced);
+  const refresh = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!element || !animation) return;
@@ -44,24 +48,29 @@ function AnimationSequence({ game, gameName, size, group, presentation, typograp
     let hovered = false;
     let focused = false;
     const card = element.closest(".st-poster, .bf-poster") ?? element;
-    const update = () => member.update(visible && !reduced, hovered || focused);
+    const update = () => member.update(visible && !reducedRef.current, hovered || focused);
+    refresh.current = update;
     focused = card.matches(":focus-within");
     const focusIn = () => { focused = true; update(); };
     const focusOut = (event: Event) => { focused = event instanceof FocusEvent && event.relatedTarget instanceof Node && card.contains(event.relatedTarget); update(); };
     const enter = () => { hovered = true; update(); };
     const leave = () => { hovered = false; update(); };
-    const observer = new IntersectionObserver(([entry]) => { visible = isPreviewVisible(entry); update(); }, { threshold: PREVIEW_VISIBILITY_THRESHOLD });
-    observer.observe(element);
+    const disconnect = observePreviewVisibility(element, (next) => { visible = next; update(); });
     card.addEventListener("mouseenter", enter);
     card.addEventListener("mouseleave", leave);
     card.addEventListener("focusin", focusIn);
     card.addEventListener("focusout", focusOut);
     return () => {
-      observer.disconnect(); member.dispose(); motion.current = null;
+      disconnect(); member.dispose(); motion.current = null; refresh.current = null;
       card.removeEventListener("mouseenter", enter); card.removeEventListener("mouseleave", leave);
       card.removeEventListener("focusin", focusIn); card.removeEventListener("focusout", focusOut);
     };
-  }, [animation, element, group, reduced]);
+  }, [animation, element, group]);
+
+  useEffect(() => {
+    reducedRef.current = reduced;
+    refresh.current?.();
+  }, [reduced]);
 
   useEffect(() => {
     if (!active || reduced) return;
@@ -76,6 +85,6 @@ function AnimationSequence({ game, gameName, size, group, presentation, typograp
   const fontStyle = typography ? { "--game-font-label": typography.labels, "--game-font-piece": typography.pieces } as CSSProperties : undefined;
   return <div className={`st-game-animation st-game-animation-${size}`} role="img" aria-label={`${gameName} game animation`} ref={setElement} style={fontStyle} data-presentation={presentation}
     data-game-animation={game} data-preview-frame={shown} data-preview-active={active && !reduced}>
-    {demonstration ? <LegalDemonstration externalSeats={presentation === "arena-table"} game={game} frame={demonstration.frames[shown] ?? demonstration.frames[0]!} /> : <GameGlyph slug="unknown-game" size={32} />}
+    {demonstration ? <LegalDemonstration externalSeats={presentation === "arena-table"} game={game} frame={demonstration.frames[shown] ?? demonstration.frames[0]!} previous={shown > 0 ? (demonstration.frames[shown - 1] ?? null) : null} /> : <GameGlyph slug="unknown-game" size={32} />}
   </div>;
 }

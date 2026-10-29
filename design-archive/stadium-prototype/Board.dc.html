@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<div style="width:100%; aspect-ratio:{{ aspect }}; position:relative; display:flex; align-items:center; justify-content:center; min-width:0;">
+  <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ true }}">
+    <div style="display:grid; grid-template-columns:repeat({{ cols }},1fr); gap:{{ gap }}; width:100%; height:100%;">
+      <sc-for list="{{ cells }}" as="c" hint-placeholder-count="9">
+        <div style="position:relative; background:{{ c.bg }}; border:1px solid {{ c.border }}; border-radius:{{ c.radius }}; display:flex; align-items:center; justify-content:center; box-shadow:{{ c.ring }}; transition:box-shadow .3s ease, background .22s ease; container-type:size; min-width:0;">
+          <span style="font-family:{{ c.font }}; font-size:{{ c.fs }}; line-height:1; color:{{ c.color }}; font-weight:500; transform:scale({{ c.scale }}); transition:transform .22s cubic-bezier(.2,.7,.2,1), opacity .22s ease; opacity:{{ c.op }}; display:inline-flex; align-items:center; justify-content:center; width:{{ c.w }}; height:{{ c.w }}; border-radius:50%; background:{{ c.fill }}; border:{{ c.stroke }};">{{ c.glyph }}</span>
+          <sc-if value="{{ c.dot }}" hint-placeholder-val="{{ false }}"><span style="position:absolute; width:14%; height:14%; border-radius:50%; background:var(--accent); opacity:.18;"></span></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isGo }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative; width:100%; height:100%; background:var(--board-bg); border:1px solid var(--border); border-radius:var(--r-md); padding:{{ goPad }};">
+      <div style="position:absolute; inset:{{ goPad }}; background-image:linear-gradient(var(--board-line) 1px, transparent 1px), linear-gradient(90deg, var(--board-line) 1px, transparent 1px); background-size:calc(100% / {{ goN }}) calc(100% / {{ goN }}); background-position:0 0; opacity:.9;"></div>
+      <div style="position:absolute; inset:{{ goPad }}; display:grid; grid-template-columns:repeat({{ cols }},1fr); transform:translate(calc(-50% / {{ cols }}), calc(-50% / {{ rows }})); width:calc(100% - 2 * {{ goPad }} + 100% / {{ cols }}); height:calc(100% - 2 * {{ goPad }} + 100% / {{ rows }});">
+        <sc-for list="{{ cells }}" as="c" hint-placeholder-count="81">
+          <div style="display:flex; align-items:center; justify-content:center; min-width:0;">
+            <span style="width:{{ c.w }}; height:{{ c.w }}; border-radius:50%; background:{{ c.fill }}; border:{{ c.stroke }}; box-shadow:{{ c.ring }}; transform:scale({{ c.scale }}); transition:transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease; opacity:{{ c.op }};"></span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isHex }}" hint-placeholder-val="{{ false }}">
+    <svg viewBox="{{ hexView }}" style="width:100%; height:100%; display:block; overflow:visible;" role="img" aria-label="Hex board">
+      <sc-for list="{{ hexes }}" as="h" hint-placeholder-count="121">
+        <polygon points="{{ h.pts }}" fill="{{ h.fill }}" stroke="{{ h.stroke }}" stroke-width="{{ h.sw }}" style="transition:fill .22s ease;"></polygon>
+      </sc-for>
+    </svg>
+  </sc-if>
+  <sc-if value="{{ isCards }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%; height:100%; background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-lg); display:grid; grid-template-rows:1fr auto 1fr; padding:6% 8%; gap:4%;">
+      <div style="display:flex; align-items:center; justify-content:center; gap:3%;">
+        <sc-for list="{{ handB }}" as="k" hint-placeholder-count="4"><div style="width:11%; aspect-ratio:5/7; border-radius:9%; background:var(--surface-3); border:1px solid var(--border-strong); background-image:repeating-linear-gradient(45deg, var(--border) 0 2px, transparent 2px 6px);"></div></sc-for>
+        <div style="width:11%; aspect-ratio:5/7; border-radius:9%; background:var(--surface); border:1px solid {{ cardB.border }}; box-shadow:{{ cardB.ring }}; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; color:{{ cardB.color }}; font-size:clamp(9px,3cqw,22px); transform:scale({{ cardB.scale }}); transition:transform .3s ease; container-type:inline-size;">{{ cardB.rank }}</div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:4%;">
+        <div style="width:11%; aspect-ratio:5/7; border-radius:9%; background:var(--surface); border:1px solid var(--accent-line); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; color:var(--text); font-size:clamp(9px,3cqw,22px);">{{ prize.rank }}</div>
+        <span style="font-family:var(--font-mono); font-size:clamp(9px,2.4cqw,13px); color:var(--text-3); letter-spacing:.08em; text-transform:uppercase;">{{ prize.label }}</span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:center; gap:3%;">
+        <div style="width:11%; aspect-ratio:5/7; border-radius:9%; background:var(--surface); border:1px solid {{ cardA.border }}; box-shadow:{{ cardA.ring }}; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; color:{{ cardA.color }}; font-size:clamp(9px,3cqw,22px); transform:scale({{ cardA.scale }}); transition:transform .3s ease;">{{ cardA.rank }}</div>
+        <sc-for list="{{ handA }}" as="k" hint-placeholder-count="4"><div style="width:11%; aspect-ratio:5/7; border-radius:9%; background:var(--surface); border:1px solid var(--border-strong); display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:600; color:var(--text); font-size:clamp(9px,3cqw,22px);">{{ k }}</div></sc-for>
+      </div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ isOther }}" hint-placeholder-val="{{ false }}">
+    <div style="width:100%; height:100%; border:1px dashed var(--border-strong); border-radius:var(--r-lg); background:repeating-linear-gradient(135deg, var(--surface-2) 0 10px, var(--surface) 10px 20px); display:flex; align-items:center; justify-content:center; text-align:center; padding:12px;">
+      <span style="font-family:var(--font-mono); font-size:11.5px; color:var(--text-3); letter-spacing:.08em; text-transform:uppercase;">{{ fam }} · renderer in production</span>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:360,&quot;height&quot;:360},&quot;fam&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;grid_3x3&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;grid_3x3&quot;,&quot;connect_four&quot;,&quot;square_board&quot;,&quot;go_board&quot;,&quot;hex_board&quot;,&quot;card_table&quot;,&quot;custom&quot;]},&quot;frame&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;X.O.X.O..&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;last&quot;:{&quot;editor&quot;:null,&quot;default&quot;:4,&quot;tsType&quot;:&quot;number | [number, number] | null&quot;},&quot;rows&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;tsType&quot;:&quot;number&quot;},&quot;cols&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:3,&quot;tsType&quot;:&quot;number&quot;},&quot;line&quot;:{&quot;editor&quot;:null,&quot;default&quot;:[],&quot;tsType&quot;:&quot;number[]&quot;},&quot;mini&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const fam = p.fam || 'grid_3x3', frame = p.frame || '', last = p.last ?? null, line = p.line || [];
+    const rows = p.rows || 3, cols = p.cols || 3, mini = !!p.mini;
+    const ring = 'inset 0 0 0 2px var(--accent)';
+    const lastSet = new Set(Array.isArray(last) ? last : last == null ? [] : [last]);
+    const lineSet = new Set(line);
+    const out = { fam, rows, cols, aspect: `${cols}/${rows}`, gap: mini ? '3%' : '2.2%', isGrid:false, isGo:false, isHex:false, isCards:false, isOther:false, cells:[], hexes:[], hexView:'0 0 10 10', handA:[], handB:[], cardA:{}, cardB:{}, prize:{}, goPad:'6%', goN: cols-1 };
+    const glyphFont = 'var(--font-sans)';
+    const base = (extra) => ({ bg:'var(--surface)', border:'var(--border)', radius: mini?'14%':'10%', ring:'none', glyph:'', font:glyphFont, fs:'60cqh', color:'var(--text)', scale:1, op:1, w:'auto', fill:'transparent', stroke:'none', dot:false, ...extra });
+    if (fam === 'grid_3x3') {
+      out.isGrid = true; out.gap = mini ? '4%' : '3%';
+      out.cells = Array.from({length: rows*cols}, (_, i) => { const ch = frame[i] || '.'; const isL = lastSet.has(i);
+        return base({ bg: lineSet.has(i) ? 'var(--accent-soft)' : 'var(--surface)', border: 'var(--accent-line)', glyph: ch === '.' ? '' : ch === 'X' ? '✕' : '○', fs: ch === 'X' ? '58cqh' : '70cqh', color:'var(--text)', ring: isL ? ring : 'none', scale: 1, dot: ch === '.' && !mini }); });
+    } else if (fam === 'connect_four') {
+      out.isGrid = true; out.gap = mini ? '4%' : '3%';
+      out.cells = Array.from({length: rows*cols}, (_, i) => { const ch = frame[i] || '.'; const isL = lastSet.has(i);
+        return base({ bg:'var(--board-bg)', border:'var(--board-line)', radius:'50%', glyph: ch === 'Y' ? '' : '', w: ch === '.' ? '0%' : '78%', fill: ch === 'R' ? 'var(--accent)' : ch === 'Y' ? 'var(--stone-white)' : 'transparent', stroke: ch === 'Y' ? '3px solid var(--text-3)' : ch === 'R' ? '3px solid var(--accent)' : 'none', ring: isL ? ring : lineSet.has(i) ? 'inset 0 0 0 2px var(--win)' : 'none' }); });
+    } else if (fam === 'square_board') {
+      out.isGrid = true; out.gap = '0'; out.goN = cols;
+      const chess = /[prnbqkPRNBQK]/.test(frame) || frame.length === 64 && !/[BW]/.test(frame);
+      const G = { K:'♔', Q:'♕', R:'♖', B:'♗', N:'♘', P:'♙', k:'♚', q:'♛', r:'♜', b:'♝', n:'♞', p:'♟' };
+      out.cells = Array.from({length: rows*cols}, (_, i) => { const r = Math.floor(i/cols), c = i%cols, dark = (r+c)%2 === 1, ch = frame[i] || '.'; const isL = lastSet.has(i);
+        if (chess) return base({ bg: dark ? 'var(--board-dark)' : 'var(--board-light)', border:'transparent', radius:'0', glyph: G[ch] || '', fs:'74cqh', color: 'var(--stone-black)', ring: isL ? 'inset 0 0 0 2px var(--accent)' : 'none', op: 1 });
+        // othello
+        return base({ bg: 'var(--board-light)', border:'var(--board-line)', radius:'0', w: ch === '.' ? '0%' : '74%', fill: ch === 'B' ? 'var(--stone-black)' : ch === 'W' ? 'var(--stone-white)' : 'transparent', stroke: ch === 'W' ? '1px solid var(--board-line)' : 'none', ring: isL ? ring : 'none' }); });
+    } else if (fam === 'go_board') {
+      out.isGo = true; out.goPad = cols > 9 ? '4%' : '7%';
+      out.cells = Array.from({length: rows*cols}, (_, i) => { const ch = frame[i] || '.'; const isL = lastSet.has(i);
+        return { w: ch === '.' ? '0%' : '84%', fill: ch === 'B' ? 'var(--stone-black)' : 'var(--stone-white)', stroke: ch === 'W' ? '1px solid var(--board-line)' : '1px solid transparent', ring: isL ? '0 0 0 2px var(--accent)' : '0 1px 1px rgba(0,0,0,.18)', scale: 1, op: 1 }; });
+    } else if (fam === 'hex_board') {
+      out.isHex = true; const n = 11, w = Math.sqrt(3), h = 2;
+      const pts = (cx, cy, s) => Array.from({length:6}, (_, k) => { const a = Math.PI/180*(60*k-30); return `${(cx+s*Math.cos(a)).toFixed(2)},${(cy+s*Math.sin(a)).toFixed(2)}`; }).join(' ');
+      out.hexes = Array.from({length: n*n}, (_, i) => { const r = Math.floor(i/n), c = i%n, cx = c*w + r*w/2 + w/2, cy = r*1.5 + 1, ch = frame[i] || '.'; const isL = lastSet.has(i), onLine = lineSet.has(i);
+        const edgeA = r === 0 || r === n-1, edgeB = c === 0 || c === n-1;
+        return { pts: pts(cx, cy, 0.94), fill: ch === 'R' ? 'var(--accent)' : ch === 'B' ? 'var(--text-3)' : edgeA ? 'var(--accent-soft)' : edgeB ? 'var(--surface-3)' : 'var(--surface)', stroke: isL ? 'var(--accent)' : onLine ? 'var(--text)' : 'var(--border-strong)', sw: isL ? 0.22 : onLine ? 0.14 : 0.06 }; });
+      out.hexView = `-0.2 -0.2 ${(n*w + (n-1)*w/2 + 0.4).toFixed(2)} ${((n-1)*1.5 + 2 + 0.4).toFixed(2)}`;
+      out.aspect = `${(n*w + (n-1)*w/2).toFixed(2)}/${((n-1)*1.5 + 2).toFixed(2)}`;
+    } else if (fam === 'card_table') {
+      out.isCards = true; out.aspect = '4/3';
+      const [bids = '', prize = '', idx = '-1'] = frame.split('|'); const [a = '', b = ''] = bids.split(',');
+      const deck = ['A','K','Q','J','T','9','8','7','6','5','4','3','2']; const played = Number(idx) + 1;
+      const handA = ['K','5','A','7','J'], handB = ['9','Q','K','2','T'];
+      out.handA = handA.slice(played, 5).concat(deck.slice(0, Math.max(0, 0))).slice(0, 5 - played);
+      out.handB = handB.slice(played, 5);
+      const v = r => deck.indexOf(r); const aWins = a && b && v(a) < v(b), bWins = a && b && v(b) < v(a);
+      out.cardA = { rank: a || '', color:'var(--text)', border: aWins ? 'var(--accent)' : 'var(--border-strong)', ring: aWins ? ring : 'none', scale: a ? 1 : 0.6 };
+      out.cardB = { rank: b || '', color:'var(--text)', border: bWins ? 'var(--accent)' : 'var(--border-strong)', ring: bWins ? ring : 'none', scale: b ? 1 : 0.6 };
+      out.prize = { rank: prize || '?', label: prize ? 'prize' : 'next prize' };
+    } else { out.isOther = true; out.aspect = '4/3'; }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

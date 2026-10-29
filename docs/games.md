@@ -70,7 +70,33 @@ const frame: CellBoardFrame = {
 const view = <Board frame={frame} label="Recorded turn 2: X in the centre, O top left" />;
 ```
 
-`Board` does not enforce `cells.length === rows * cols`, sanitize a game protocol or determine whether the board is legal. The typed host adapter must do that. Normalize empties to `.`; the declared type's historical allowance for `""` should not be relied on because several render branches treat any non-dot token as occupied. Validate `last`/`line` indexes and finite positive dimensions; reject unsupported variants to a truthful placeholder. Never silently fall back to another game's example.
+`Board` does not enforce `cells.length === rows * cols`, sanitize a game protocol or determine whether the board is legal. The typed host adapter must do that, and it now exists: `boardFrameFromDisplayFrame` (with `boardFrameFromCells` and `normalizeCellToken`) projects a `DisplayFrameV1` to a `BoardFrame`, checks dimensions, positions and cell count, and returns a placeholder with explicit issues instead of throwing or guessing. See [live-state contracts](contracts.md). It covers only the five cell families; card tables, poker and the bespoke boards below are not projected. Normalize empties to `.`; `normalizeCellToken` treats `""` and whitespace as empty and `Board` no longer draws them as pieces. Validate `last`/`line` indexes and finite positive dimensions; reject unsupported variants to a truthful placeholder. Never silently fall back to another game's example.
+
+## Rule variants in the bundled traces
+
+The physics review (next section) found that the bundled traces are legal under Core's simplified variants, but nine games deviate from the standard published rules. A spectator who knows the standard game may see these frames as illegal. Do not describe these demonstrations by the standard game name alone in a rules-sensitive context.
+
+| Game | Deviation from standard rules |
+| --- | --- |
+| Hearts | 2-player (standard is 4). The first trick is led with 3 of hearts, not 2 of clubs, and a heart is led before hearts are broken while the leader holds a club. |
+| Spades | 2-player (standard is 4). A spade is led before spades are broken while the leader still holds a club. |
+| Euchre | 2-player (standard is 4). |
+| Hanabi | Compact variant: 2 colours and a 12-card deck (standard: 5 colours, 50 cards). Three discards are made while holding 8 clue tokens, which standard Hanabi forbids. |
+| Gin Rummy | 7-card deal (standard is 10). |
+| Mahjong | 108 tiles with no honours and 10-tile hands (standard: 136 or 144 tiles, 13-tile hands). No pung, chow or kong calls occur in the trace. |
+| Backgammon | 5 checkers a side (standard is 15). |
+| Leduc Hold'em | The trace seats 4 players; Leduc Hold'em is a 2-player game. |
+| Cribbage | Ends at the showdown after the crib discard; no pegging or counting is shown. |
+
+Other limits of the traces, not variants: the Limit and No-limit Hold'em demonstrations are frame-for-frame identical (every player checks, so no betting is shown), and several games have private information that a public trace cannot show (blackjack's dealer hole card, bridge's dummy after the opening lead, concealed ships and hands).
+
+These notes are also in `game-coverage.json` as `ruleVariantNote` on each affected game.
+
+## Physics validation
+
+`scripts/validate-demonstrations.py` (`pnpm check:physics`) independently replays every transition of every bundled trace and reports PASS, PASS with a rule-variant note, PASS with a renderer note, or FAIL. On 29 October 2026: 50 games, 722 frames, 672 transitions, 49 pass and 1 known Core issue. Exact rules were simulated for tic-tac-toe, Connect Four, Go, Gomoku, Hex, Othello, Pentago, Ultimate tic-tac-toe, checkers, mancala, backgammon, chess, shogi and xiangqi; the CartPole and MountainCar equations were checked; the remaining games get conservation and arithmetic invariants only. Hidden information cannot be checked from public frames, and some code paths (a Go capture, a Morris mill, a poker raise, a chess castle or promotion) do not occur in the traces. [Physics validation](physics.md) has the method, per-game results and limits. It certifies the artwork pin only, not the newer Platform runtime rules.
+
+**Known Core issue (taxi).** In the taxi trace, frame 10 (after dropoff) reports the passenger at the pickup origin `[0,0]` rather than the destination `[4,0]`. This comes from the Core public state. The decorative scene hides it with its `delivered` flag, so do not build an actual-state viewer on that `passenger` field without checking Core.
 
 ## Frame structures
 
@@ -103,7 +129,7 @@ The common contract below applies to every game; each game entry adds the import
 
 - `GameAnimation` advances bundled frames using each trace's `delay` (100 ms for selected control examples, otherwise 900 ms), holds its final frame for 2 seconds and loops explicitly to the opening. That loop reset is not represented as a legal action. Only engine-terminal frames say Complete.
 - One visible preview per named group owns the clock. Hover, focus, offscreen and hidden-tab states pause it; reduced motion shows the last frame. A group name scopes competing previews, so use separate groups only when simultaneous playback is intentional and measured.
-- `Board` has no state progression or timer. `last` triggers the existing 220 ms arrive cue, Connect Four uses 320 ms drop, and Hex fill uses the move token. Multi-step captures, Pentago rotation, full-card reveal phases and control trajectories require explicit typed transitions; generic frame changes do not promise all those animations. Pause the host clock without inventing wall-clock motion.
+- `Board` has no state progression or timer. `last` triggers the existing 220 ms arrive cue, Connect Four uses 320 ms drop, and Hex fill uses the move token. The bundled traces carry no `last` or `line`, so for the public demonstrations `src/game/cues.ts` derives the last-move and win-line cues from consecutive frames (see the [design decisions](design-decisions.md)); a live host should pass authoritative `last` and `line` from Core events where it has them. Multi-step captures, Pentago rotation, full-card reveal phases and control trajectories require explicit typed transitions; generic frame changes do not promise all those animations. Pause the host clock without inventing wall-clock motion.
 - The standard preview uses a responsive 4:3 canvas, CSS container sizing and game-specific SVG/DOM geometry. The non-cell SVG view box is 320 × 240, or 320 × 158 for `arena-table`. `arena` caps width at 360 px; default feature at 380 px; event at 560 px. Respect view-box proportions. Miniatures are decorative summaries, not a substitute for a readable full board. Provide an enlarged view when numbers, marks or CJK labels become too small.
 - Use `styles.css` and the existing light/dark tokens. The package does not add the retired six-theme product or recolor the approved brand. Optional label/piece font roles do not guarantee all glyphs exist. Icons are vector; chess uses symbol-font glyphs, Shogi/Xiangqi use CJK text, and card suits/labels are text. Font-independent pieces remain future work; verify legibility before changing fonts.
 - `GameAnimation` is announced as “{gameName} game animation”; internal scenes are decorative. `LegalDemonstration` SVG is aria-hidden, so a standalone manually controlled scene needs a labelled surrounding region or an adjacent text equivalent. `Board` is decorative unless `label` is supplied. None of these creates an accessible legal-action grid automatically.
@@ -208,7 +234,7 @@ Support terms: **frame-view** = basic supplied canonical board rendering; **part
 - **Host action contract:** Move as move:<source>-<target>, or pass only when all dice are blocked. This describes payload syntax; Core/the host still decides state-specific legality. The full current schema is in `game-coverage.json`.
 - **Public synthetic state fields:** `bar`, `board`, `borne_off`, `dice`.
 - **Nested object keys observed:** `bar` → `player_1`, `player_2`; `borne_off` → `player_1`, `player_2`. These are observed trace fields, not an exhaustive runtime schema.
-- **Actual adaptation (not-adapted):** The demo draws all 24 points and dice from public state. It does not fully depict bar/borne_off counts even though those are bundled. A complete actual adapter must add those zones and precise point indexing.
+- **Actual adaptation (not-adapted):** The demo draws all 24 points, the bar and the borne-off trays from public state (0.2.0). Stacks above five checkers show a count badge; the dice owner is shown only when the state names one. A complete actual adapter still needs precise point indexing, the cube and used-dice marking.
 - **Motion:** Drive die consumption, capture-to-bar and bearing-off from Core events; preserve per-player checker conservation. Never substitute a familiar 15-checker ruleset for the compact variant.
 - **Visibility/perspective:** Public board/dice; pending hidden randomness must be resolved by Core.
 - **Responsive and accessible use:** Apply the common contract above. Preserve this geometry at all sizes, add an enlarged/readable view when needed, and supply a game-specific textual position/turn/result plus host-owned keyboard legal actions.
@@ -232,7 +258,7 @@ Support terms: **frame-view** = basic supplied canonical board rendering; **part
 - **Host action contract:** Fire at an unrevealed row,column cell on the opponent board. This describes payload syntax; Core/the host still decides state-specific legality. The full current schema is in `game-coverage.json`.
 - **Public synthetic state fields:** `grid_size`, `hits`, `remaining_ship_counts`, `shots`.
 - **Nested object keys observed:** `hits` → `player_1`, `player_2`; `remaining_ship_counts` → `player_1`, `player_2`; `shots` → `player_1`, `player_2`. These are observed trace fields, not an exhaustive runtime schema.
-- **Actual adaptation (not-adapted):** The demo displays public shots, hits and remaining-ship summaries without fleets. It currently draws a fixed 5 × 5 scene; validate grid_size before adapting another variant. Generic square Board is not a private fleet renderer.
+- **Actual adaptation (not-adapted):** The demo displays public shots, hits and remaining-ship summaries without fleets. Since 0.2.0 the grid is sized from grid_size and a shot outside the grid renders the unavailable scene instead of being dropped. Generic square Board is not a private fleet renderer.
 - **Motion:** A shot mark appears only after the server hit/miss result. Do not animate a ship under concealed cells or infer locations from hidden engine data.
 - **Visibility/perspective:** Fleet locations remain concealed; use public attack history or the authorized player perspective, never raw internal state.
 - **Responsive and accessible use:** Apply the common contract above. Preserve this geometry at all sizes, add an enlarged/readable view when needed, and supply a game-specific textual position/turn/result plus host-owned keyboard legal actions.
@@ -348,7 +374,7 @@ Support terms: **frame-view** = basic supplied canonical board rendering; **part
 - **Host action contract:** Drop a disc into a zero-indexed column. This describes payload syntax; Core/the host still decides state-specific legality. The full current schema is in `game-coverage.json`.
 - **Public synthetic state fields:** `board`.
 - **Actual adaptation (frame-view):** Use family:connect_four; map first seat to R, second to Y, empty to .. The host selects a column and receives the final occupied cell from Core; the renderer does not find legal columns.
-- **Motion:** Use last for the landed disc, line for actual winning cells and the existing 320 ms drop token. Do not add a disc to a full column or advance the board during thinking.
+- **Motion:** Use last for the landed disc, line for actual winning cells and the existing 320 ms drop token; Board sets --drop to the rows the disc actually fell. The demo derives both cues from consecutive frames (src/game/cues.ts). Do not add a disc to a full column or advance the board during thinking.
 - **Visibility/perspective:** Public board.
 - **Responsive and accessible use:** Apply the common contract above. Preserve this geometry at all sizes, add an enlarged/readable view when needed, and supply a game-specific textual position/turn/result plus host-owned keyboard legal actions.
 
@@ -737,6 +763,7 @@ Support terms: **frame-view** = basic supplied canonical board rendering; **part
 - **Public synthetic state fields:** `cols`, `destination`, `onboard`, `passenger`, `rows`, `taxi`.
 - **Actual adaptation (not-adapted):** The scene reads rows/cols, taxi, passenger, destination and onboard. Use row/column coordinates consistently. Delivered status additionally uses terminal outcome passenger_delivered; standing at destination is not delivery.
 - **Motion:** Move only to the authoritative taxi cell, then switch passenger/onboard/delivered state from Core. Do not leave a waiting passenger at pickup after delivery.
+- **Known Core issue:** In the bundled trace, frame 10 (after dropoff) reports `passenger` at the pickup origin `[0,0]` instead of the destination `[4,0]`; the scene masks it with its `delivered` flag. See Physics validation above. The physics validator reports this as its one known failure.
 - **Visibility/perspective:** Public grid/state. A future actual adapter must validate dimensions and coordinate bounds.
 - **Responsive and accessible use:** Apply the common contract above. Preserve this geometry at all sizes, add an enlarged/readable view when needed, and supply a game-specific textual position/turn/result plus host-owned keyboard legal actions.
 
