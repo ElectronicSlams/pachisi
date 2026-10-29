@@ -1,0 +1,2541 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-29",
+  "scope": "Pachisi extracted web presentation; not tournament-rule certification or a claim of live/native parity.",
+  "platformSource": {
+    "repository": "https://github.com/makriman/eSlamsPlatform",
+    "commit": "0fa7dfe227fe545036694c915a6b727eb4ee844a",
+    "cataloguePath": "packages/core-types/src/game-catalog.ts",
+    "contractPath": "packages/core-types/src/core-arena-contracts.generated.ts",
+    "coreRelease": {
+      "version": "0.6.2",
+      "commit": "a935245c96555c5c50a5fd8d48b778a50ad8290e",
+      "releasedAt": "2026-10-11T14:48:53Z"
+    }
+  },
+  "artworkSource": {
+    "repository": "https://github.com/ElectronicSlams/eSlams",
+    "commit": "7731e2f3d712e5f4714d640df670fc0224feede1",
+    "publicArtworkSeed": 112,
+    "dataSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322",
+    "legalTransitionsRecorded": 672,
+    "frameCount": 722,
+    "regeneratedInThisDocumentationPass": true
+  },
+  "actualStateSupportLegend": {
+    "frame-view": "The pure Board can depict the basic canonical public cell frame supplied by a validated host adapter. This does not include input controls, a Core state parser, rule execution, legal moves, scores or complete replay UX.",
+    "partial-frame-view": "Generic Board or simple geometry is available, but important game-specific identity, topology, phase, seats or overlays require a dedicated typed host adapter. Do not treat this as complete actual-state support.",
+    "not-adapted": "A specialized decorative scene exists, but no complete typed actual-state Board adapter is exported. Continue using the existing host actual viewer or show a truthful unavailable state."
+  },
+  "games": [
+    {
+      "slug": "alien-shooter",
+      "name": "Alien Shooter",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "left",
+          "stay",
+          "right",
+          "fire"
+        ],
+        "description": "Move the ship or fire one projectile."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": true,
+      "terminalReason": "invasion",
+      "scene": "control/shooter",
+      "geometry": "discrete player/alien/bullet cells",
+      "stateFields": [
+        "aliens",
+        "bullets",
+        "destroyed",
+        "player_x"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Use player_x, aliens, bullets and destroyed. Arrays describe the actual abstract grid; absence means no entity, not an instruction to generate one.",
+      "motionNotes": "Move/projectile advancement happens only on supplied states. Do not create a looping bullet when bullets is empty.",
+      "hiddenInformationNotes": "Public cells/state; no autonomous enemy spawning.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "backgammon",
+      "name": "Backgammon",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Move as move:<source>-<target>, or pass only when all dice are blocked."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/points",
+      "geometry": "24 points; compact five-checker-per-side sample",
+      "stateFields": [
+        "bar",
+        "board",
+        "borne_off",
+        "dice"
+      ],
+      "nestedObjectFields": {
+        "bar": [
+          "player_1",
+          "player_2"
+        ],
+        "borne_off": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo draws all 24 points and dice from public state. It does not fully depict bar/borne_off counts even though those are bundled. A complete actual adapter must add those zones and precise point indexing.",
+      "motionNotes": "Drive die consumption, capture-to-bar and bearing-off from Core events; preserve per-player checker conservation. Never substitute a familiar 15-checker ruleset for the compact variant.",
+      "hiddenInformationNotes": "Public board/dice; pending hidden randomness must be resolved by Core.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "bargaining",
+      "name": "Bargaining",
+      "category": "gametheory",
+      "variant": "core_bilateral_split",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^(accept|reject|offer:(0|10|20|30|40|50|60|70|80|90|100))$",
+        "description": "Offer a player_1 share in increments of 10, accept, or reject."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 4,
+      "demoActions": 3,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "accepted",
+      "scene": "social/offer-split",
+      "geometry": "two players; 100-unit split",
+      "stateFields": [
+        "last_offer"
+      ],
+      "nestedObjectFields": {
+        "last_offer": [
+          "player",
+          "player_1_share"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The example uses last_offer and player_1_share to draw complementary bars. Confirm the unit/total when adding variants; the current artwork assumes 100, not an arbitrary currency amount.",
+      "motionNotes": "Accepted offers/counteroffers change the split; an accept ends at the actual agreed terms. No autonomously drifting percentage bars.",
+      "hiddenInformationNotes": "Use only the public last offer; private reservation values/strategies remain host-side.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "battleship",
+      "name": "Battleship",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^[0-4],[0-4]$",
+        "description": "Fire at an unrevealed row,column cell on the opponent board."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/attack-grids",
+      "geometry": "two public 5 \u00d7 5 shot grids in the demo",
+      "stateFields": [
+        "grid_size",
+        "hits",
+        "remaining_ship_counts",
+        "shots"
+      ],
+      "nestedObjectFields": {
+        "hits": [
+          "player_1",
+          "player_2"
+        ],
+        "remaining_ship_counts": [
+          "player_1",
+          "player_2"
+        ],
+        "shots": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo displays public shots, hits and remaining-ship summaries without fleets. It currently draws a fixed 5 \u00d7 5 scene; validate grid_size before adapting another variant. Generic square Board is not a private fleet renderer.",
+      "motionNotes": "A shot mark appears only after the server hit/miss result. Do not animate a ship under concealed cells or infer locations from hidden engine data.",
+      "hiddenInformationNotes": "Fleet locations remain concealed; use public attack history or the authorized player perspective, never raw internal state.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "bipedal-walker",
+      "name": "Bipedal Walker",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "left-step",
+          "right-step",
+          "balance",
+          "jump"
+        ],
+        "description": "Coordinate stepping and balance across uneven terrain."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 48,
+      "demoActions": 47,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": true,
+      "terminalReason": "course_complete",
+      "scene": "control/walker",
+      "geometry": "walker distance/torso/next-foot; terrain window",
+      "stateFields": [
+        "terrain_window",
+        "walker"
+      ],
+      "nestedObjectFields": {
+        "walker": [
+          "distance",
+          "energy",
+          "next_foot",
+          "torso_angle",
+          "velocity"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The scene illustrates an abstract compact walker using attached limb geometry and interpolated terrain. It does not receive or reproduce full rigid-body joint meshes.",
+      "motionNotes": "Pose follows next_foot/torso_angle; scroll follows distance. No independent CSS running cycle that contradicts a paused or fallen state.",
+      "hiddenInformationNotes": "Public abstract state; native/physics parity is unverified.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "blackjack",
+      "name": "Blackjack",
+      "category": "card",
+      "variant": "core_hit_stand_s17",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "hit",
+          "stand"
+        ],
+        "description": "Player action. Dealer policy is deterministic: hit until 17."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 3,
+      "demoActions": 2,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "stand",
+      "scene": "cards/solo",
+      "geometry": "dealer row and player row; numeric ranks",
+      "stateFields": [
+        "dealer_hand",
+        "player_hand"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The compact hit/stand S17 demo uses actual numeric player_hand/dealer_hand ranks, not invented suits. Generic CardBoardFrame is a two-row picture, not a Blackjack rules or dealer-hole-card adapter.",
+      "motionNotes": "Render hits/draws/reveals only from the eligible state and terminal result. Do not draw a concealed dealer card face because the synthetic example happens to include it.",
+      "hiddenInformationNotes": "Respect the runtime public/player projection and dealer reveal timing; demonstration public fields are not a universal authorization rule.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "boxing-style-arena",
+      "name": "Boxing Style Arena",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "guard",
+          "jab",
+          "hook",
+          "dodge-left",
+          "dodge-right",
+          "step-in",
+          "step-out"
+        ],
+        "description": "Boxing movement, defense, and striking actions."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "control/combat",
+      "geometry": "distance; health/stamina/stances",
+      "stateFields": [
+        "distance",
+        "health",
+        "stamina",
+        "stances"
+      ],
+      "nestedObjectFields": {
+        "health": [
+          "player_1",
+          "player_2"
+        ],
+        "stamina": [
+          "player_1",
+          "player_2"
+        ],
+        "stances": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo depicts two stylized fighters from compact distance and stance state. It does not provide continuous hitboxes or physics. A real adapter must account for stamina/result UI outside the current scene.",
+      "motionNotes": "Extend a striking arm only for the real striking stance. No damage animation or health decrement before Core resolves the event.",
+      "hiddenInformationNotes": "Public abstract state; no invented rigid-body collision.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "bridge",
+      "name": "Bridge",
+      "category": "card",
+      "variant": "core_compact_bridge_play_phase",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Play a legal card as play:<card>, following suit when able."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/tricks",
+      "geometry": "four-seat compact play-phase contract",
+      "stateFields": [
+        "contract",
+        "current_trick",
+        "hand_counts",
+        "trick_history",
+        "tricks"
+      ],
+      "nestedObjectFields": {
+        "contract": [
+          "level",
+          "strain",
+          "target"
+        ],
+        "hand_counts": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ],
+        "tricks": [
+          "EW",
+          "NS"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo depicts contract, current/completed trick and hand counts. It is not an auction/bidding implementation. Generic CardBoardFrame cannot represent all four real seats, partnership scores or dummy/owner-hand rules.",
+      "motionNotes": "Order plays by actual trick order and show the true winner after completion. Never reorder the trick to fit alternating two-seat artwork.",
+      "hiddenInformationNotes": "Apply the shipped public/authorized view for visible hands; do not infer full hands from trick history.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "car-racing",
+      "name": "Car Racing",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "accelerate",
+          "brake",
+          "left",
+          "right",
+          "coast"
+        ],
+        "description": "Control throttle, braking, or steering on a profiled track."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 8,
+      "demoActions": 7,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": true,
+      "terminalReason": "lap_complete",
+      "scene": "control/racing",
+      "geometry": "car lane/heading/progress; track window",
+      "stateFields": [
+        "car",
+        "track_window"
+      ],
+      "nestedObjectFields": {
+        "car": [
+          "heading",
+          "lane",
+          "progress",
+          "speed"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The abstract demo bends the road from track_window and positions the car in that coordinate frame. It is not a mesh-based racing simulation. A typed adapter must define lane/progress units and complete track presentation.",
+      "motionNotes": "Road markings derive from supplied progress; heading and lane derive from state. Do not orbit a car independently of the road.",
+      "hiddenInformationNotes": "Public abstract state; do not claim full vehicle dynamics.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "cartpole",
+      "name": "CartPole",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "left",
+          "right"
+        ],
+        "description": "Apply a left or right force to the cart."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 61,
+      "demoActions": 60,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "control/cart-pole",
+      "geometry": "cart x and pole angle in radians",
+      "stateFields": [
+        "cart",
+        "pole"
+      ],
+      "nestedObjectFields": {
+        "cart": [
+          "velocity",
+          "x"
+        ],
+        "pole": [
+          "angle",
+          "angular_velocity"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo shares the moving cart pivot with the pole and converts state to SVG coordinates. A live adapter needs explicit units/bounds; generic Board cannot render the control state.",
+      "motionNotes": "Use cart.x and pole.angle as supplied, including a legitimate 0 angle. No wall-clock wobble, angle || fallback or autonomous cart drift.",
+      "hiddenInformationNotes": "Public numeric state. Pausing must freeze its physical interpretation.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "checkers",
+      "name": "Checkers",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^[0-7],[0-7]-[0-7],[0-7]$",
+        "description": "Move one piece, e.g. '5,0-4,1'. Captures are mandatory."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/checkers",
+      "geometry": "8 \u00d7 8, dark-square play",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo BoardScene draws ordinary men and king crowns from the case-sensitive state board. Generic Board can draw discs but cannot faithfully distinguish checkers kings or multi-jump paths; retain a specialized actual-state renderer until typed adaptation is added.",
+      "motionNotes": "Show Core capture removals and promotion in the next frame. Do not infer a single jump from a from/to pair when the action may be a capture sequence.",
+      "hiddenInformationNotes": "Public board.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "chess",
+      "name": "Chess",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.1.0",
+      "platformArenaVersion": "1.2.0",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^([a-h][1-8][a-h][1-8][qrbn]?|claim-draw(:[a-h][1-8][a-h][1-8][qrbn]?)?)$",
+        "description": "UCI move, claim-draw, or claim-draw:<intended UCI move>."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 11,
+      "demoActions": 10,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/chess",
+      "geometry": "8 \u00d7 8, FEN rank order",
+      "stateFields": [
+        "fen",
+        "last_move_san"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Decode only the FEN piece-placement field into 64 row-major tokens, expand digits to empty cells, retain uppercase/lowercase side identity and set chess:true. Board draws font glyphs; it does not parse FEN, indicate check or resolve moves. Host supplies legal selection and move labels.",
+      "motionNotes": "Pass source/destination indexes in last for the arrive cue; do not animate an illegal cosmetic route or use piece positions to infer legality.",
+      "hiddenInformationNotes": "Public complete board; retain castling/en-passant/history outside the visual frame when needed by the host.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "cliff-walking",
+      "name": "Cliff Walking",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "down",
+          "right",
+          "up",
+          "left"
+        ],
+        "description": "Move the agent through the grid while avoiding the cliff."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 14,
+      "demoActions": 13,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "reached_goal",
+      "scene": "grid/navigation",
+      "geometry": "4 \u00d7 12 map",
+      "stateFields": [
+        "cliff",
+        "cols",
+        "goal",
+        "position",
+        "rows"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Use rows/cols, position, goal and cliff coordinates. Preserve the long board\u2019s aspect ratio; a square crop can hide the cliff or goal.",
+      "motionNotes": "Advance through actual states only; a cliff reset/reward is the host\u2019s resolved event, not decorative camera motion.",
+      "hiddenInformationNotes": "Public grid/state.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "connect-four",
+      "name": "Connect Four",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 6,
+        "description": "Drop a disc into a zero-indexed column."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 8,
+      "demoActions": 7,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "four_in_a_row",
+      "scene": "cell/gravity",
+      "geometry": "6 rows \u00d7 7 columns",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Use family:connect_four; map first seat to R, second to Y, empty to .. The host selects a column and receives the final occupied cell from Core; the renderer does not find legal columns.",
+      "motionNotes": "Use last for the landed disc, line for actual winning cells and the existing 320 ms drop token. Do not add a disc to a full column or advance the board during thinking.",
+      "hiddenInformationNotes": "Public board.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "crazy-eights",
+      "name": "Crazy Eights",
+      "category": "card",
+      "variant": "core_wild_eight_shedding",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Play a matching card or any eight as play:<card>, draw, or pass."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/discard",
+      "geometry": "five-card opening hands in the demo",
+      "stateFields": [
+        "deck_count",
+        "discard",
+        "hand_counts"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Use discard, deck_count and hand_counts for the wild-eight shedding variant. A dedicated actual hand/action adapter is still needed.",
+      "motionNotes": "Draw/play state comes from Core; do not animate an arbitrary suit change without its legal action result.",
+      "hiddenInformationNotes": "Public discard/counts only; owner hand separated.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "cribbage",
+      "name": "Cribbage",
+      "category": "card",
+      "variant": "core_discard_showdown",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Discard two cards as discard:<card>,<card>."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 3,
+      "demoActions": 2,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "showdown",
+      "scene": "cards/discard-showdown",
+      "geometry": "compact discard/showdown plus starter",
+      "stateFields": [
+        "discard_counts",
+        "discards",
+        "hand_counts",
+        "starter"
+      ],
+      "nestedObjectFields": {
+        "discard_counts": [
+          "player_1",
+          "player_2"
+        ],
+        "discards": [
+          "player_1",
+          "player_2"
+        ],
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The example shows starter and hand counts; discards/discard_counts are bundled but not fully visualized. This variant does not justify an invented animated pegboard. A full actual adapter must add eligible discard/showdown information explicitly.",
+      "motionNotes": "Use the resolved discard/showdown transition; do not animate pegging rounds or count points under unimplemented standard rules.",
+      "hiddenInformationNotes": "Discard identities and showdown details must follow the current Core reveal policy, not assumptions from synthetic data.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "dou-dizhu",
+      "name": "Dou Dizhu",
+      "category": "card",
+      "variant": "core_landlord_shedding",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Play a legal combination as play:<card,...> or pass when contesting a trick."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/shedding",
+      "geometry": "three seats; landlord plus responders",
+      "stateFields": [
+        "hand_counts",
+        "landlord",
+        "last_play",
+        "passes"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2",
+          "player_3"
+        ],
+        "last_play": [
+          "cards",
+          "kind",
+          "player",
+          "rank"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Use landlord, last_play, passes and per-seat counts. Demo seat/card counts are not the real owner hand UI. A future adapter needs legal combination and pass/reset semantics.",
+      "motionNotes": "Preserve accepted singles/pairs/sets and trick-reset state; do not replace the last valid play on a pass unless Core does.",
+      "hiddenInformationNotes": "Only public played cards are shown; hand contents are host-authorized.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "euchre",
+      "name": "Euchre",
+      "category": "card",
+      "variant": "core_call_and_play",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "call:<suit>, pass, or play:<card>."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 12,
+      "demoActions": 11,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "hands_empty",
+      "scene": "cards/tricks",
+      "geometry": "two-seat compact call-and-play",
+      "stateFields": [
+        "current_trick",
+        "hand_counts",
+        "history",
+        "phase",
+        "tricks",
+        "trump",
+        "upcard"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ],
+        "tricks": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Use phase, trump, upcard, current_trick/history and hand counts. Preserve bower/trump identity and the call phase. The demo does not establish a full standard four-player Euchre interface.",
+      "motionNotes": "Calling trump and playing a trick are different phases; reveal the supplied upcard/trump and actual trick winner.",
+      "hiddenInformationNotes": "Public upcard and played cards are visible; private hands remain host-controlled.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "first-price-sealed-bid-auction",
+      "name": "First-Price Sealed-Bid Auction",
+      "category": "gametheory",
+      "variant": "core_two_bidder_private_values",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 10,
+        "description": "Submit a sealed integer bid from 0 to 10."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 3,
+      "demoActions": 2,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "highest_bid",
+      "scene": "social/sealed-bids",
+      "geometry": "two bidders; private values",
+      "stateFields": [
+        "revealed_bids"
+      ],
+      "nestedObjectFields": {
+        "revealed_bids": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The scene shows only revealed_bids after commitments resolve. It is not an open auction/ticker, and it must not display private valuations.",
+      "motionNotes": "Reveal both bids together, then render the real winner/payment from eligible outcome data in the host; no incremental bidding animation.",
+      "hiddenInformationNotes": "Private values and unrevealed bids stay excluded from public props, labels and exports.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "frozen-lake",
+      "name": "Frozen Lake",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "down",
+          "right",
+          "up",
+          "left"
+        ],
+        "description": "Move the agent one tile on the deterministic frozen lake."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 7,
+      "demoActions": 6,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "reached_goal",
+      "scene": "grid/navigation",
+      "geometry": "4 \u00d7 4 map with H holes",
+      "stateFields": [
+        "goal",
+        "grid",
+        "position"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Use grid, position and goal. Render the actual map, not a random ice pattern. The current action schema describes deterministic movement; the renderer still consumes Core\u2019s returned position instead of guessing a transition.",
+      "motionNotes": "Update to the returned position after each action. A falling/goal animation must agree with terminal state.",
+      "hiddenInformationNotes": "Public map; do not synthesize hidden terrain or moves.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "gin-rummy",
+      "name": "Gin Rummy",
+      "category": "card",
+      "variant": "core_compact_gin",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "draw:deck, draw:discard, discard:<card>, or knock:<card>."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/draw-discard",
+      "geometry": "seven-card compact hands",
+      "stateFields": [
+        "deck_count",
+        "discard_top",
+        "hand_counts",
+        "phase"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo shows phase, discard_top and deck/hand counts. It does not present full private melds/deadwood or an actual owner hand. A typed adapter must distinguish draw/discard/knock result phases.",
+      "motionNotes": "Show the accepted draw/discard phase; do not deal visual extra cards or animate a private draw face into a public preview.",
+      "hiddenInformationNotes": "Public discard is visible; hidden hands/meld choices require authorized projection.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "go",
+      "name": "Go",
+      "category": "board",
+      "variant": "board_9x9",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "oneOf": [
+          {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 80,
+            "description": "Place a stone on a zero-indexed 9x9 point in row-major order."
+          },
+          {
+            "type": "string",
+            "enum": [
+              "pass",
+              "resign"
+            ]
+          }
+        ]
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/intersections",
+      "geometry": "9 \u00d7 9 intersections",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Map the 9 \u00d7 9 public board to B/W/. with family:go_board. Captures must already be removed by Core; the renderer does not calculate groups, liberties, ko, territory or score.",
+      "motionNotes": "Replace the captured position from the authoritative next frame and supply the placed intersection as last. A pass is a caption/turn event with no invented stone.",
+      "hiddenInformationNotes": "Public board; scoring and ko state remain host-owned.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "gomoku",
+      "name": "Gomoku",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 224,
+        "description": "Claim a zero-indexed board cell in row-major order."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/intersections",
+      "geometry": "15 \u00d7 15 intersections",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Use family:go_board with 225 B/W/. tokens. The old 9 \u00d7 9 preview is superseded. Supply any actual five-in-a-row separately; generic GoBoard currently highlights last, not a certified winning-line path.",
+      "motionNotes": "One placement per authoritative turn. Do not use a fading trail that implies several moves happened together.",
+      "hiddenInformationNotes": "Public board.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "goofspiel",
+      "name": "Goofspiel",
+      "category": "card",
+      "variant": "core_five_card_goofspiel",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 5,
+        "description": "Bid one remaining card for the current prize."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 11,
+      "demoActions": 10,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "all_prizes_awarded",
+      "scene": "social/sealed-cards",
+      "geometry": "five-card simultaneous bidding",
+      "stateFields": [
+        "current_prize",
+        "points",
+        "round_history"
+      ],
+      "nestedObjectFields": {
+        "points": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The scene uses current_prize, points and round_history. The latest public round bids are shown after reveal. Generic CardBoardFrame supports a simple two-hand picture but does not adapt the sealed bid lifecycle.",
+      "motionNotes": "Both commitments remain sealed until resolution. Show actual prior prize, bids and points after Core resolves the round.",
+      "hiddenInformationNotes": "Never reveal one side\u2019s pending bid before the other commits.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "hanabi",
+      "name": "Hanabi",
+      "category": "card",
+      "variant": "core_compact_hanabi",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.1",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "play:<index>, discard:<index>, or hint:<player>:<color-or-rank>."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 7,
+      "demoActions": 6,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "final_round_complete",
+      "scene": "cards/cooperative",
+      "geometry": "red/blue fireworks; clues/lives/counts",
+      "stateFields": [
+        "clues",
+        "deck_count",
+        "discard",
+        "fireworks",
+        "hand_counts",
+        "lives"
+      ],
+      "nestedObjectFields": {
+        "fireworks": [
+          "B",
+          "R"
+        ],
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The compact Hanabi demo renders fireworks/clues/lives and concealed hand counts. It does not model a full viewer-specific cooperative hand display. Real adaptation must preserve who can see whose cards and final-round state.",
+      "motionNotes": "Firework/life/clue changes must be engine-resolved; no preview-only successful play where the move actually failed.",
+      "hiddenInformationNotes": "Hanabi visibility differs from adversarial poker; use explicit perspective projections, not a blanket show-own-hand rule.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "hearts",
+      "name": "Hearts",
+      "category": "card",
+      "variant": "core_penalty_tricks",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Play a card as play:<card>."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/tricks",
+      "geometry": "two-seat compact penalty tricks",
+      "stateFields": [
+        "current_trick",
+        "hand_counts",
+        "penalties",
+        "trick_history"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ],
+        "penalties": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Use current_trick, trick_history, penalties and hand_counts. The demo shows the latest trick, while a full replay needs host-selected history and score context. Do not assume four-player standard Hearts.",
+      "motionNotes": "Accepted plays, trick completion and penalties come from Core; no decorative hearts scored before a resolved trick.",
+      "hiddenInformationNotes": "Public played cards only; keep remaining hands hidden outside owner perspective.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "hex",
+      "name": "Hex",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 120,
+        "description": "Claim a zero-indexed hex cell in row-major order."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/hex",
+      "geometry": "11 \u00d7 11 skewed hex grid",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Use family:hex_board. Normalize the demo/Core B/W sides to the Board contract R/B consistently; do not pass B directly as first-seat red. Goal-edge colors are positional, not evidence of a win.",
+      "motionNotes": "Pass the last cell and real winning path in line. The renderer supplies skewed geometry and fill transition; Core owns connectivity.",
+      "hiddenInformationNotes": "Public board. Include seat/goal descriptions in host accessible text; color alone is insufficient.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "ice-hockey-style-arena",
+      "name": "Ice Hockey Style Arena",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "skate-left",
+          "skate-right",
+          "advance",
+          "retreat",
+          "hold",
+          "shoot",
+          "check"
+        ],
+        "description": "Move, protect the puck, shoot, or challenge possession."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "control/hockey",
+      "geometry": "player x/lane; puck owner/goals",
+      "stateFields": [
+        "goals",
+        "positions",
+        "puck_owner",
+        "rink"
+      ],
+      "nestedObjectFields": {
+        "goals": [
+          "player_1",
+          "player_2"
+        ],
+        "positions": [
+          "player_1",
+          "player_2"
+        ],
+        "rink": [
+          "lanes",
+          "x"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Map discrete positions and lanes; anchor the puck to puck_owner. The current scene does not adapt every rink boundary field or an unowned flying-puck trajectory.",
+      "motionNotes": "Use actual possession, shots and goals; do not invent a moving puck when ownership/state is absent.",
+      "hiddenInformationNotes": "Public abstract state. A complete live adapter needs explicit free-puck and scoring transition contracts.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "leduc-holdem",
+      "name": "Leduc Hold'em",
+      "category": "card",
+      "variant": "core_compact_leduc_fixed_menu",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "check",
+          "bet",
+          "call",
+          "fold",
+          "raise"
+        ],
+        "description": "Leduc action for the current betting state."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 9,
+      "demoActions": 8,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "showdown",
+      "scene": "cards/poker",
+      "geometry": "four seats; one public community card",
+      "stateFields": [
+        "board",
+        "committed",
+        "folded",
+        "pot",
+        "stacks",
+        "street"
+      ],
+      "nestedObjectFields": {
+        "committed": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ],
+        "stacks": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo renders street, public board, pot/stacks and card backs. Current compact fixed-menu Leduc state is distinct from Texas Hold\u2019em. Actual multi-seat/owner-hand adaptation is not exported by generic CardBoardFrame.",
+      "motionNotes": "Betting and street changes come from Core. Do not invent hole cards, bet sizes or an extra flop/turn/river.",
+      "hiddenInformationNotes": "Keep private hands behind authorized owner projection. Public stack counts do not authorize private card faces.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "liars-dice",
+      "name": "Liar's Dice",
+      "category": "card",
+      "variant": "core_single_round",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^(challenge|[1-9][0-9]*x[1-6])$",
+        "description": "Raise a bid like '3x5' or challenge the previous bid."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 4,
+      "demoActions": 3,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "challenge_resolved",
+      "scene": "social/dice",
+      "geometry": "two seats; five dice each in the demo",
+      "stateFields": [
+        "current_bid",
+        "revealed_dice"
+      ],
+      "nestedObjectFields": {
+        "current_bid": [
+          "count",
+          "face",
+          "player"
+        ],
+        "revealed_dice": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The public scene shows current_bid and revealed_dice. It draws five slots per side, so new dice-count variants need explicit geometry. No generic actual DiceFrame is exported.",
+      "motionNotes": "Dice do not reroll during bidding. Reveal faces only after a resolved challenge; keep the current bid stable between accepted actions.",
+      "hiddenInformationNotes": "Concealed dice use ?; revealed_dice must be absent until public reveal.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "limit-texas-holdem",
+      "name": "Limit Texas Hold'em",
+      "category": "card",
+      "variant": "core_compact_holdem_fixed_menu_limit",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "check",
+          "bet",
+          "call",
+          "fold",
+          "raise"
+        ],
+        "description": "Fixed-limit table Hold'em action."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/poker",
+      "geometry": "four-seat compact Hold\u2019em",
+      "stateFields": [
+        "board",
+        "committed",
+        "folded",
+        "pot",
+        "stacks",
+        "street"
+      ],
+      "nestedObjectFields": {
+        "committed": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ],
+        "stacks": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Render only public community board, street, pot and stack data. The generic card Board has only top/bottom seats, so a full four-seat actual stage requires a dedicated adapter.",
+      "motionNotes": "Use the limit betting action set, authoritative committed/folded state and reveal order; no random pot increments.",
+      "hiddenInformationNotes": "Never include opponents\u2019 hole cards until publicly revealed under the match policy.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "lunar-lander",
+      "name": "Lunar Lander",
+      "category": "rl",
+      "variant": "lander-lite",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "idle",
+          "left",
+          "right",
+          "main"
+        ],
+        "description": "Fire no engine, side thrusters, or main engine."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 18,
+      "demoActions": 17,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": true,
+      "terminalReason": "soft_landing",
+      "scene": "control/lander",
+      "geometry": "lander-lite state; landing pad and fuel",
+      "stateFields": [
+        "fuel",
+        "lander",
+        "landing_pad"
+      ],
+      "nestedObjectFields": {
+        "lander": [
+          "angle",
+          "vx",
+          "vy",
+          "x",
+          "y"
+        ],
+        "landing_pad": [
+          "x_max",
+          "x_min",
+          "y"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo uses lander.x/y/angle and fuel, with attached legs and a fixed illustrated pad. A full actual adapter must honor landing_pad geometry and typed thrust/action data; caption suffixes are artwork conventions, not a robust live event contract.",
+      "motionNotes": "Draw main-thrust flame only for the actual main action while nonterminal. Use real fuel and contact/terminal result, never a continuous cosmetic burn.",
+      "hiddenInformationNotes": "Public numeric state; preserve real failure/landed outcomes.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "mahjong",
+      "name": "Mahjong",
+      "category": "card",
+      "variant": "core_compact_draw_discard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Declare mahjong or discard one tile as discard:<tile>."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/tiles",
+      "geometry": "four-seat compact draw/discard",
+      "stateFields": [
+        "discard_pile",
+        "hand_counts",
+        "wall_count"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo draws recent discard tiles and wall/hand counts; it is the shipped compact draw/discard variant, not a complete traditional Mahjong table. The generic two-row card frame is insufficient for a real four-seat tile layout.",
+      "motionNotes": "Wall decrease, discards and terminal changes come from Core. Do not invent calls, melds or scoring forms absent from the variant.",
+      "hiddenInformationNotes": "Concealed tile hands stay concealed; the example uses public discard history.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "mancala",
+      "name": "Mancala",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 5,
+        "description": "Choose one of your six pits, indexed from left to right."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/pits",
+      "geometry": "2 \u00d7 6 pits plus 2 stores",
+      "stateFields": [
+        "pits",
+        "stores"
+      ],
+      "nestedObjectFields": {
+        "pits": [
+          "player_1",
+          "player_2"
+        ],
+        "stores": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Read per-player pits and stores. The demo reverses the far row visually and labels every count. A future actual adapter must keep pit indexing and store ownership explicit; do not mirror the action protocol.",
+      "motionNotes": "Sowing/capture/extra-turn animations must match the Core action and preserve total 48 stones for this shipped sample variant. Counts are authoritative; decorative stone dots must not change counts.",
+      "hiddenInformationNotes": "Public counts; no hidden pile data.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "mountain-car",
+      "name": "Mountain Car",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "left",
+          "coast",
+          "right"
+        ],
+        "description": "Accelerate left, coast, or accelerate right."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 61,
+      "demoActions": 60,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "control/hill-car",
+      "geometry": "position on sinusoidal hill",
+      "stateFields": [
+        "goal_position",
+        "position",
+        "velocity"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo maps position from approximately \u22121.2\u20260.6 onto a sinusoidal track and rotates the car to its tangent. Velocity remains an engine field; actual unit mapping needs a typed adapter.",
+      "motionNotes": "Use real position/velocity and host clock. Do not change position merely to keep the art moving or report the goal from decoration.",
+      "hiddenInformationNotes": "Public numeric state; no invented physics.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "negotiation",
+      "name": "Negotiation",
+      "category": "gametheory",
+      "variant": "core_price_delivery_grid",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^(accept|reject|offer:(20|30|40|50|60|70|80|90|100):(1|2|3))$",
+        "description": "Offer price and delivery speed, e.g. 'offer:60:2'."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 4,
+      "demoActions": 3,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "accepted",
+      "scene": "social/price-delivery",
+      "geometry": "two players; price and delivery grid",
+      "stateFields": [
+        "last_offer"
+      ],
+      "nestedObjectFields": {
+        "last_offer": [
+          "delivery",
+          "player",
+          "price"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Render last_offer price/delivery terms, not percentage-share bars. The compact action grid and offer ownership remain Core contracts.",
+      "motionNotes": "Only actual offer/counteroffer/accept events change terms; do not interpolate through illegal intermediate offers.",
+      "hiddenInformationNotes": "Keep private valuations/constraints out of public scenes unless the policy explicitly reveals them.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "nine-mens-morris",
+      "name": "Nine Men's Morris",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "place:<point> or move:<from>-<to>, with :capture:<point> when a mill forms."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/graph",
+      "geometry": "24 connected nodes",
+      "stateFields": [
+        "board",
+        "phase",
+        "reserves"
+      ],
+      "nestedObjectFields": {
+        "reserves": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Use the explicit 24-node graph and reserves/phase. A 7 \u00d7 7 coordinate canvas locates nodes; it is not a 49-cell playable grid. Preserve placement, movement and capture phases.",
+      "motionNotes": "Use node identifiers for selection and captured-node removal; show reserve changes and mills only when validated by Core.",
+      "hiddenInformationNotes": "Public board and reserves.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "no-limit-texas-holdem",
+      "name": "No-Limit Texas Hold'em",
+      "category": "card",
+      "variant": "core_compact_holdem_fixed_menu_no_limit",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "check",
+          "bet:2",
+          "bet:4",
+          "call",
+          "fold",
+          "raise:4",
+          "all-in"
+        ],
+        "description": "No-limit table Hold'em action with profiled bet sizes."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/poker",
+      "geometry": "four-seat compact no-limit Hold\u2019em",
+      "stateFields": [
+        "board",
+        "committed",
+        "folded",
+        "pot",
+        "stacks",
+        "street"
+      ],
+      "nestedObjectFields": {
+        "committed": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ],
+        "stacks": [
+          "player_1",
+          "player_2",
+          "player_3",
+          "player_4"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo shares poker geometry but has a distinct fixed-menu no-limit variant. A future actual adapter must expose typed seat, committed, folded and legal bet-option views rather than guessing from amounts.",
+      "motionNotes": "Animate supplied bet/fold/street events only. Sharing visual geometry does not make limit/no-limit action menus interchangeable.",
+      "hiddenInformationNotes": "Private hole cards and discarded state remain excluded from public previews and share images.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "othello",
+      "name": "Othello",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "oneOf": [
+          {
+            "type": "array",
+            "prefixItems": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 7
+              },
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 7
+              }
+            ],
+            "minItems": 2,
+            "maxItems": 2,
+            "description": "Place a disc at [row, col]."
+          },
+          {
+            "const": "pass",
+            "description": "Pass only when no placement is legal."
+          }
+        ]
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/discs",
+      "geometry": "8 \u00d7 8",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Use family:square_board with chess:false and B/W/. tokens. Send the entire next board including all Core flips; supply legal-target overlays separately. Board does not calculate captures, passes or end scoring.",
+      "motionNotes": "State updates show flipped ownership. The generic Board does not implement a certified per-line flip choreography; do not claim such an adapter exists.",
+      "hiddenInformationNotes": "Public board.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "paddle-ball",
+      "name": "Paddle Ball",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "left",
+          "stay",
+          "right"
+        ],
+        "description": "Move the paddle before the ball advances."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 61,
+      "demoActions": 60,
+      "demoDelayMs": 100,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "control/paddle",
+      "geometry": "bottom paddle; normalized ball x/y",
+      "stateFields": [
+        "ball",
+        "bounces",
+        "paddle_x"
+      ],
+      "nestedObjectFields": {
+        "ball": [
+          "vx",
+          "vy",
+          "x",
+          "y"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "This is bottom-paddle ball, not side-paddle Pong. Map paddle_x and ball coordinates into the bounded court; the demo aligns the paddle face to collision y=.08 plus ball radius.",
+      "motionNotes": "Use actual ball x/y/vx/vy and collision outcomes; do not spawn a fallback ball or animate extra bounces.",
+      "hiddenInformationNotes": "Public numeric state. Avoid leaking a false physics assertion through cosmetic motion.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "pentago",
+      "name": "Pentago",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^[0-9]+:[0-3]:(cw|ccw)$",
+        "description": "Place at cell then rotate a quadrant, e.g. '14:2:cw'."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/quadrants",
+      "geometry": "6 \u00d7 6 with four 3 \u00d7 3 quadrants",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo overlays quadrant separators on a generic disc Board. A real adapter needs rotation identity/direction and rotation hit targets; plain Board alone loses those semantics.",
+      "motionNotes": "Each legal action combines placement and quadrant rotation. Replacing snapshots is supported for demos; a true staged rotation transition remains an explicit adapter task.",
+      "hiddenInformationNotes": "Public board.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "prisoners-dilemma",
+      "name": "Prisoner's Dilemma",
+      "category": "gametheory",
+      "variant": "core_one_shot_matrix",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "cooperate",
+          "defect"
+        ],
+        "description": "Choose cooperate or defect for a one-shot prisoner's dilemma."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 3,
+      "demoActions": 2,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "payoff_matrix",
+      "scene": "social/sealed-actions",
+      "geometry": "two simultaneous commitments",
+      "stateFields": [
+        "revealed_actions"
+      ],
+      "nestedObjectFields": {
+        "revealed_actions": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Render revealed_actions only after joint reveal. The scene uses text panels; it is not a general payoff matrix adapter or strategy engine.",
+      "motionNotes": "Before resolution both panels say Sealed; after resolution show the true cooperate/defect values together.",
+      "hiddenInformationNotes": "No pending commitment value in DOM, accessible labels or screenshots.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "rock-paper-scissors",
+      "name": "Rock Paper Scissors",
+      "category": "gametheory",
+      "variant": "core_one_shot_hidden_commit",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "rock",
+          "paper",
+          "scissors"
+        ],
+        "description": "Choose rock, paper, or scissors."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 3,
+      "demoActions": 2,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "beats",
+      "scene": "social/sealed-actions",
+      "geometry": "one simultaneous round",
+      "stateFields": [
+        "revealed_actions"
+      ],
+      "nestedObjectFields": {
+        "revealed_actions": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "Render the two revealed_actions panels. A standard loop cycling all hand signs would misrepresent a match; use a named bundled demonstration only for artwork.",
+      "motionNotes": "Commitments stay concealed and reveal together. Result and rematch remain host-owned.",
+      "hiddenInformationNotes": "Never leak the first player\u2019s pending action while waiting for the second.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "shedding-card-game",
+      "name": "Shedding Card Game",
+      "category": "card",
+      "variant": "core_rank_suit_shedding",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Play a matching card as play:<card>, draw, or pass when the deck is empty."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/discard",
+      "geometry": "public discard plus hand/deck counts",
+      "stateFields": [
+        "deck_count",
+        "discard",
+        "hand_counts"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Use discard, deck_count and hand_counts. The compact rank/suit shedding rules determine playable cards; do not copy Uno branding or full-standard game assumptions.",
+      "motionNotes": "A public discard changes only after Core accepts a play; draws alter hidden counts without exposing the drawn identity.",
+      "hiddenInformationNotes": "Only the authorized owner may receive private hand faces; public scene shows backs/counts.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "shogi",
+      "name": "Shogi",
+      "category": "board",
+      "variant": "core_compact_shogi",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.1",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Move like 7g7f or 2b3c+; drop like P*5e."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/shogi",
+      "geometry": "9 \u00d7 9 and captured-piece hands",
+      "stateFields": [
+        "board",
+        "hands"
+      ],
+      "nestedObjectFields": {
+        "hands": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo draws Japanese piece labels, side orientation and captured-piece counts from board/hands. Core catalogue variant is core_compact_shogi. A live adapter must preserve promoted identities, drops, owned hands and orientation; generic Board cannot do this.",
+      "motionNotes": "Movement/drop/promotion should follow a real event. Rotate the piece shape for seat orientation, not the board state or move coordinates.",
+      "hiddenInformationNotes": "Captured-piece hands are part of this game state, not poker-style secret hands; still consume the validated public projection. Piece labels remain font-dependent.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "spades",
+      "name": "Spades",
+      "category": "card",
+      "variant": "core_trump_tricks",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "description": "Play a card as play:<card>; spades trump."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cards/tricks",
+      "geometry": "two-seat compact trump tricks",
+      "stateFields": [
+        "current_trick",
+        "hand_counts",
+        "trick_history",
+        "tricks"
+      ],
+      "nestedObjectFields": {
+        "hand_counts": [
+          "player_1",
+          "player_2"
+        ],
+        "tricks": [
+          "player_1",
+          "player_2"
+        ]
+      },
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "Use current_trick, trick_history, tricks and counts. A future actual stage must preserve spade-trump and follow-suit semantics from the variant; the renderer does not enforce them.",
+      "motionNotes": "Show real trick sequence/winner and only update trick totals from authoritative state.",
+      "hiddenInformationNotes": "Public trick history; hidden hand faces require authorization.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "taxi",
+      "name": "Taxi",
+      "category": "rl",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "enum": [
+          "down",
+          "right",
+          "up",
+          "left",
+          "pickup",
+          "dropoff"
+        ],
+        "description": "Move the taxi, pick up the passenger, and drop off at the destination."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 11,
+      "demoActions": 10,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "passenger_delivered",
+      "scene": "grid/navigation",
+      "geometry": "5 \u00d7 5 grid",
+      "stateFields": [
+        "cols",
+        "destination",
+        "onboard",
+        "passenger",
+        "rows",
+        "taxi"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The scene reads rows/cols, taxi, passenger, destination and onboard. Use row/column coordinates consistently. Delivered status additionally uses terminal outcome passenger_delivered; standing at destination is not delivery.",
+      "motionNotes": "Move only to the authoritative taxi cell, then switch passenger/onboard/delivered state from Core. Do not leave a waiting passenger at pickup after delivery.",
+      "hiddenInformationNotes": "Public grid/state. A future actual adapter must validate dimensions and coordinate bounds.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "tic-tac-toe",
+      "name": "Tic-Tac-Toe",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.0.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 8,
+        "description": "Claim a zero-indexed square in row-major order."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 10,
+      "demoActions": 9,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": true,
+      "terminalReason": "draw",
+      "scene": "cell/marks",
+      "geometry": "3 \u00d7 3",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "Use family:grid_3x3 and nine X/O/. tokens. Pass only an actual last placement and any actual winning line. The example is a completed legal draw, so it has no invented winning highlight.",
+      "motionNotes": "220 ms arrive cue when a last cell is supplied; hold the true terminal state and use outcome text rather than fabricating a win.",
+      "hiddenInformationNotes": "Public board.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "ultimate-tic-tac-toe",
+      "name": "Ultimate Tic-Tac-Toe",
+      "category": "board",
+      "variant": "standard",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.0",
+      "platformArenaVersion": "1.1.0",
+      "platformActionSchema": {
+        "type": "integer",
+        "minimum": 0,
+        "maximum": 80,
+        "description": "Claim a global cell 0-80. Board is action//9, local cell is action%9."
+      },
+      "sameArenaVersion": false,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "cell/nested-marks",
+      "geometry": "9 local 3 \u00d7 3 boards on a 9 \u00d7 9 canvas",
+      "stateFields": [
+        "boards",
+        "local_status",
+        "next_board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "partial-frame-view",
+      "adaptationNotes": "The demo flattens boards into a 9 \u00d7 9 X/O view and overlays local boundaries/next_board. Generic Board alone lacks local_status and forced-board constraints.",
+      "motionNotes": "Preserve local win/draw state and the forced next board from Core. Do not highlight an arbitrary local board or advertise every empty square as legal.",
+      "hiddenInformationNotes": "Public local boards, local status and next-board constraint.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    },
+    {
+      "slug": "xiangqi",
+      "name": "Xiangqi",
+      "category": "board",
+      "variant": "core_compact_xiangqi",
+      "icon": "implemented-explicit-vector",
+      "demonstration": "implemented-synthetic-public-trace",
+      "artworkArenaVersion": "1.0.1",
+      "platformArenaVersion": "1.0.1",
+      "platformActionSchema": {
+        "type": "string",
+        "pattern": "^[a-i][0-9][a-i][0-9]$",
+        "description": "Move from source to destination, e.g. a9a8."
+      },
+      "sameArenaVersion": true,
+      "demoFrames": 13,
+      "demoActions": 12,
+      "demoDelayMs": 900,
+      "demoEndsTerminal": false,
+      "terminalReason": null,
+      "scene": "special-board/xiangqi",
+      "geometry": "10 rows \u00d7 9 intersections",
+      "stateFields": [
+        "board"
+      ],
+      "nestedObjectFields": {},
+      "actualStateSupport": "not-adapted",
+      "adaptationNotes": "The demo uses intersections, river, palaces and side-specific Chinese labels. Current catalogue variant is core_compact_xiangqi. Do not force pieces into an 8 \u00d7 8 chess board or flatten horse/cannon/king identity.",
+      "motionNotes": "Apply the full authoritative board; animate only the supplied action. Preserve the river and palace geometry while scaling.",
+      "hiddenInformationNotes": "Public board; glyph availability and opposite-side labels must be checked for the chosen font.",
+      "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
+      "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
+      "nativeAdapter": "deferred",
+      "fullFamilySnapshotAdapter": "deferred",
+      "sourceFiles": [
+        "src/game/scene.tsx",
+        "src/game/board.tsx",
+        "src/game/game-demonstrations.json"
+      ]
+    }
+  ]
+}

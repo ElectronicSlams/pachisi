@@ -1,0 +1,197 @@
+.pachisi-gs-hero { --space-bg: #fff; --space-ink: #000; --space-muted: #56565f; --space-border: #e2e2e6; padding: 0; background: var(--space-bg); }
+:root[data-theme="dark"] .pachisi-gs-hero { --space-bg: #000; --space-ink: #fff; --space-muted: #b5b5be; --space-border: #202024; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .pachisi-gs-hero { --space-bg: #000; --space-ink: #fff; --space-muted: #b5b5be; --space-border: #202024; }
+}
+.pachisi-gs-hero {
+  --scene-x: 0px; --scene-y: 0px;
+  position: relative; isolation: isolate; width: 100%; margin: 0; min-height: max(760px, calc(100svh - var(--nav-h)));
+  color: var(--space-ink);
+  background: var(--space-bg); overflow: clip; perspective: 1200px; perspective-origin: 50% 50%;
+}
+.pachisi-gs-space { position: absolute; z-index: 0; inset: 0; pointer-events: none; color: var(--space-ink); }
+.pachisi-gs-starLayer { position: absolute; inset: -7%; transform: translate3d(calc(var(--scene-x) * var(--star-depth)), calc(var(--scene-y) * var(--star-depth)), 0); transition: transform 700ms cubic-bezier(.2,.7,.2,1); }
+.pachisi-gs-starfield { width: 100%; height: 100%; fill: currentColor; overflow: visible; }
+.pachisi-gs-starsFar { --star-depth: .2; opacity: .32; }
+.pachisi-gs-starsMiddle { --star-depth: .6; opacity: .6; }
+.pachisi-gs-starsNear { --star-depth: 1.4; opacity: .82; }
+.pachisi-gs-starDrift { transform-origin: center; animation: pachisiGsStarDrift 76s ease-in-out infinite alternate; }
+.pachisi-gs-starsMiddle .pachisi-gs-starDrift { animation-duration: 54s; animation-delay: -18s; animation-direction: alternate-reverse; }
+.pachisi-gs-starsNear .pachisi-gs-starDrift { animation-duration: 38s; animation-delay: -9s; }
+.pachisi-gs-hero[data-motion-active="false"] .pachisi-gs-starDrift, .pachisi-gs-hero[data-motion-active="false"] .pachisi-gs-boardDrift { animation-play-state: paused; }
+.pachisi-gs-heroCopy { position: relative; z-index: 3; width: min(100% - 40px, 640px); min-height: inherit; margin: 0 auto; padding: 160px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.pachisi-gs-heroCopy::before { content: ""; position: absolute; z-index: -1; inset: 8% -70px; pointer-events: none; background: radial-gradient(ellipse, var(--space-bg) 28%, transparent 72%); }
+.pachisi-gs-kicker { display: flex; justify-content: center; align-items: center; gap: 9px; color: var(--space-muted); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; }
+.pachisi-gs-date { display: inline-block; margin-top: 22px; padding: 7px 12px; border: 1px solid var(--space-border); border-radius: var(--r-pill); color: var(--space-muted); font-size: 12px; }
+.pachisi-gs-title { margin: 22px 0 24px; font-size: clamp(68px, 6.8vw, 98px); line-height: 1.03; font-weight: 540; letter-spacing: -.07em; }
+.pachisi-gs-titleDot { color: inherit; }
+.pachisi-gs-heroSummary { max-width: 35ch; margin: 0 auto; font-size: 17px; line-height: 1.6; color: var(--space-muted); }
+.pachisi-gs-heroActions { display: flex; align-items: center; justify-content: center; gap: 24px; margin: 28px 0 30px; }
+.pachisi-gs-heroPrimary { background: var(--space-ink); border-color: var(--space-ink); color: var(--space-bg); justify-content: center; }
+.pachisi-gs-heroPrimary:hover { background: var(--space-ink); opacity: .85; }
+.pachisi-gs-heroSecondary { color: var(--space-ink); font-size: 13px; padding: 12px 0; }
+.pachisi-gs-heroSecondary span { margin-left: 5px; }
+.pachisi-gs-heroSecondary:hover { text-decoration: underline; }
+.pachisi-gs-finals { font-size: 13px; color: var(--space-ink); }
+.pachisi-gs-local { min-height: 20px; margin-top: 6px; font-size: 13px; color: var(--space-muted); }
+.pachisi-gs-local .gs-local { color: inherit; font-size: inherit; }
+.pachisi-gs-floatingBoards { position: absolute; z-index: 2; inset: 0; transform-style: preserve-3d; }
+.pachisi-gs-boardPlacement { position: absolute; width: clamp(200px, 20vw, 290px); transform: translateZ(var(--depth)); transform-style: preserve-3d; }
+.pachisi-gs-chess { left: 5%; top: 12%; --depth: 70px; --tilt-x: 10deg; --tilt-y: -18deg; --tilt-z: -9deg; --parallax-depth: 1.05; --float-x: 9px; --float-y: -14px; --float-spin: 3deg; --float-duration: 18s; --float-phase: -4s; }
+.pachisi-gs-hex { right: 7%; top: 12%; width: clamp(185px, 19vw, 275px); --depth: -110px; --tilt-x: -9deg; --tilt-y: 19deg; --tilt-z: 10deg; --parallax-depth: .4; --float-x: -8px; --float-y: 12px; --float-spin: -3deg; --float-duration: 23s; --float-phase: -11s; }
+.pachisi-gs-connectFour { left: 9%; bottom: 12%; width: clamp(190px, 19vw, 270px); --depth: -30px; --tilt-x: -13deg; --tilt-y: -12deg; --tilt-z: 7deg; --parallax-depth: .7; --float-x: -12px; --float-y: -10px; --float-spin: -3deg; --float-duration: 21s; --float-phase: -8s; }
+.pachisi-gs-go { right: 10%; bottom: 12%; width: clamp(175px, 17vw, 240px); --depth: 100px; --tilt-x: 12deg; --tilt-y: -19deg; --tilt-z: -10deg; --parallax-depth: 1.25; --float-x: 10px; --float-y: -16px; --float-spin: 4deg; --float-duration: 25s; --float-phase: -6s; }
+.pachisi-gs-boardParallax { transform-style: preserve-3d; transform: translate3d(calc(var(--scene-x) * var(--parallax-depth)), calc(var(--scene-y) * var(--parallax-depth)), 0); transition: transform 700ms cubic-bezier(.2,.7,.2,1); }
+.pachisi-gs-boardDrift { transform-style: preserve-3d; animation: pachisiGsBoardDrift var(--float-duration) ease-in-out var(--float-phase) infinite alternate; }
+.pachisi-gs-boardPlacement:focus-within .pachisi-gs-boardDrift, .pachisi-gs-boardPlacement:hover .pachisi-gs-boardDrift { animation-play-state: paused; }
+.pachisi-gs-boardPlacement:focus-within .pachisi-gs-boardParallax { transform: none; }
+.pachisi-gs-boardLink {
+  --board-light: #efe9dd; --board-dark: #b9a888; --board-line: #9c9486; --board-bg: #f4f1ea; --stone-black: #16161a; --stone-white: #f6f5f2; --surface: #f6f5f2; --border: #d6d6dd; --text: #16161a;
+  display: block; padding: 12px; border-radius: 14px; border: 1px solid rgba(255,255,255,.25); background: #f4f1ea; box-shadow: 0 22px 48px rgba(0,0,0,.3);
+}
+.pachisi-gs-boardLink:hover { box-shadow: 0 22px 48px rgba(0,0,0,.3); }
+.pachisi-gs-boardLink:focus-visible { outline: 3px solid var(--term-blue); outline-offset: 6px; }
+.pachisi-gs-boardLink { scroll-margin-block: calc(var(--nav-h) + 16px) calc(var(--dock-h) + 24px + var(--safe-bottom)); }
+.pachisi-gs-boardArtwork { position: relative; }
+.pachisi-gs-idleArtwork { position: absolute; z-index: 1; inset: 0; display: grid; place-items: center; pointer-events: none; }
+.pachisi-gs-boardArtwork .st-game-animation[data-preview-active="false"][data-preview-frame="0"] { visibility: hidden; }
+/* Waiting previews keep a populated composition. Once started, a focused preview retains its exact frame. */
+.pachisi-gs-boardArtwork:has(.st-game-animation[data-preview-active="true"]) .pachisi-gs-idleArtwork,
+.pachisi-gs-boardArtwork:has(.st-game-animation[data-preview-frame]:not([data-preview-frame="0"])) .pachisi-gs-idleArtwork { visibility: hidden; }
+.pachisi-gs-boardArtwork .st-game-animation { max-width: none; aspect-ratio: 1; }
+.pachisi-gs-boardArtwork .st-legal-board { width: 100%; }
+.pachisi-gs-boardArtwork .st-game-animation[data-presentation="event"] .st-legal-board { width: 100%; }
+.pachisi-gs-boardArtwork .st-legal-caption { display: none; }
+.pachisi-gs-boardArtwork .st-legal-cell-scene { gap: 0; }
+.pachisi-gs-boardLabel { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; color: #36363f; font-size: 11px; }
+.pachisi-gs-hex .pachisi-gs-boardLink { --surface: #282b45; --border-strong: #647cff; --accent: #8fa6ff; --text-3: #f1c277; --accent-soft: #26336a; --surface-3: #514735; background: var(--term-bar); border-color: rgba(143,166,255,.3); }
+.pachisi-gs-hex .pachisi-gs-boardArtwork .st-game-animation { aspect-ratio: 1.22; }
+.pachisi-gs-hex .pachisi-gs-boardLabel { color: var(--term-text); }
+.pachisi-gs-connectFour .pachisi-gs-boardLink { --board-bg: #1b32c4; --surface: #101d63; --board-line: #647cff; --accent: #f1c277; --stone-white: #f6f5f2; --text-3: #8fa6ff; background: #1b32c4; }
+.pachisi-gs-connectFour .pachisi-gs-boardArtwork .st-game-animation { aspect-ratio: 7 / 6; }
+.pachisi-gs-connectFour .pachisi-gs-boardLabel { color: white; }
+.pachisi-gs-content { padding-top: 58px; }
+.pachisi-gs-eyebrow { margin-bottom: 14px; color: var(--text-3); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+.pachisi-gs-updates { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; padding-bottom: 44px; border-bottom: 1px solid var(--border); scroll-margin-top: 100px; }
+.pachisi-gs-updates h2 { font-size: clamp(25px, 2.6vw, 34px); line-height: 1.15; letter-spacing: -.04em; max-width: 18ch; }
+.pachisi-gs-updates .gs-countdown { margin-top: 16px; font-size: 12px; gap: 8px; }
+.pachisi-gs-updates .gs-days { font-size: 26px; }
+.pachisi-gs-updateForm { justify-self: end; width: 100%; max-width: 440px; }
+.pachisi-gs-updateForm input::placeholder { color: var(--text-3); opacity: 1; }
+.pachisi-gs-honesty { margin-top: 15px; color: var(--text-2); font-size: 12px; line-height: 1.6; }
+.pachisi-gs-programme, .pachisi-gs-showcase { padding-top: 64px; scroll-margin-top: 100px; }
+.pachisi-gs-sectionHead { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 28px; }
+.pachisi-gs-sectionHead h2 { font-size: clamp(28px, 3vw, 40px); line-height: 1.15; letter-spacing: -.045em; }
+.pachisi-gs-sectionHead > p { color: var(--text-2); font-size: 13px; line-height: 1.6; }
+.pachisi-gs-schedule { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+.pachisi-gs-scheduleCard { min-width: 0; padding: 26px; border: 1px solid var(--border); border-radius: 16px; background: var(--surface-2); }
+.pachisi-gs-step { display: flex; align-items: center; height: 46px; margin-bottom: 32px; color: var(--text-3); font-size: 28px; }
+.pachisi-gs-scheduleDate { color: var(--text-2); font-size: 11px; line-height: 1.5; }
+.pachisi-gs-scheduleCard h3 { margin: 10px 0 12px; font-size: 24px; letter-spacing: -.035em; }
+.pachisi-gs-scheduleCard > p:last-child { color: var(--text-2); font-size: 14px; line-height: 1.7; max-width: 32ch; }
+.pachisi-gs-finalCard { background: var(--ribbon-tint); border-color: color-mix(in srgb,var(--gold) 40%,var(--border)); }
+.pachisi-gs-finalCard .pachisi-gs-step { color: var(--gold); }
+.pachisi-gs-textLink { color: var(--accent); font-size: 13px; padding: 10px 0; white-space: nowrap; }
+.pachisi-gs-textLink:hover { text-decoration: underline; }
+.pachisi-gs-textLink span { margin-left: 6px; }
+.pachisi-gs-gameGrid { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; list-style: none; }
+.pachisi-gs-gameGrid > li { min-width: 0; }
+.pachisi-gs-gameCard { display: block; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface); transition: border-color var(--dur-fast) ease; }
+.pachisi-gs-gameCard:hover { border-color: var(--accent-line); }
+.pachisi-gs-gameArtwork { display: grid; place-items: center; aspect-ratio: 4/3; padding: 18px; background: var(--surface-2); }
+.pachisi-gs-gameArtwork .st-legal-board { width: 80%; }
+.pachisi-gs-gameArtwork .st-legal-caption { display: none; }
+.pachisi-gs-gameArtwork .st-board-chess, .pachisi-gs-gameArtwork .st-board-go {
+  --board-light: #efe9dd; --board-dark: #b9a888; --board-bg: #f4f1ea; --board-line: #817664;
+  --stone-black: #16161a; --stone-white: #f6f5f2; --border: #d6d6dd;
+}
+.pachisi-gs-gameCardCopy { padding: 18px; }
+.pachisi-gs-gameCardCopy h3 { display: flex; justify-content: space-between; font-size: 16px; letter-spacing: -.02em; }
+.pachisi-gs-gameCardCopy h3 span { color: var(--text-3); }
+.pachisi-gs-gameCardCopy p { margin-top: 8px; color: var(--text-2); font-size: 12px; line-height: 1.6; }
+.pachisi-gs-demoNote { margin-top: 18px; color: var(--text-3); font-size: 12px; line-height: 1.6; }
+.pachisi-gs-entry { display: grid; grid-template-columns: 1.4fr 1fr; gap: 60px; align-items: center; margin-top: 72px; padding: 42px 48px; border: 1px solid var(--accent-line); border-radius: 20px; background: var(--accent-softer); }
+.pachisi-gs-entryCopy { max-width: 54ch; }
+.pachisi-gs-entryCopy h2 { margin-bottom: 20px; font-size: clamp(34px, 4vw, 52px); letter-spacing: -.05em; line-height: 1.1; }
+.pachisi-gs-entryCopy > p:last-of-type { color: var(--text-2); font-size: 15px; line-height: 1.7; }
+.pachisi-gs-entryCopy ul { margin-top: 20px; padding-left: 18px; color: var(--text-2); font-size: 13px; line-height: 2; }
+.pachisi-gs-entryActions { display: flex; flex-direction: column; align-items: stretch; gap: 10px; max-width: 290px; justify-self: end; }
+.pachisi-gs-entryActions .btn { justify-content: center; }
+.pachisi-gs-entryActions p { margin-top: 5px; text-align: center; font-size: 12px; line-height: 1.6; color: var(--text-2); }
+.pachisi-gs-entryMark { align-self: center; display: inline-flex; margin-bottom: 22px; color: var(--gold); }
+.pachisi-gs-content .btn-primary { color: var(--bg); }
+@keyframes pachisiGsBoardDrift {
+  from { transform: translate3d(0, 0, 0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) rotateZ(var(--tilt-z)); }
+  to { transform: translate3d(var(--float-x), var(--float-y), 12px) rotateX(calc(var(--tilt-x) + 3deg)) rotateY(calc(var(--tilt-y) - 4deg)) rotateZ(calc(var(--tilt-z) + var(--float-spin))); }
+}
+@keyframes pachisiGsStarDrift { from { transform: translate(-8px, 6px) scale(1); } to { transform: translate(18px, -22px) scale(1.035); } }
+@media (max-width: 1100px) {
+  .pachisi-gs-hero { min-height: 850px; }
+  .pachisi-gs-heroCopy { padding: 190px 0; width: min(100% - 40px,440px); }
+  .pachisi-gs-title { font-size: 72px; }
+  .pachisi-gs-boardPlacement { width: 180px; }
+  .pachisi-gs-chess { left: 6%; top: 10%; }
+  .pachisi-gs-hex { right: 3%; top: 5%; width: 200px; }
+  .pachisi-gs-connectFour { left: 3%; bottom: 5%; width: 195px; }
+  .pachisi-gs-go { right: 12%; bottom: 12%; width: 175px; }
+  .pachisi-gs-sectionHead { align-items: start; }
+  .pachisi-gs-sectionHead > p { max-width: 26ch; }
+  .pachisi-gs-entry { gap: 30px; padding: 32px; }
+}
+@media (max-width: 900px) {
+  .pachisi-gs-hero { padding-bottom: 48px; }
+  .pachisi-gs-hero { min-height: 0; display: flex; flex-direction: column; perspective: none; }
+  .pachisi-gs-heroCopy { order: 0; min-height: 0; width: min(100% - 36px,440px); padding: 32px 0 16px; }
+  .pachisi-gs-title { font-size: clamp(60px, 17vw, 88px); max-width: 5.5ch; margin: 18px 0; }
+  .pachisi-gs-heroSummary { font-size: 15px; max-width: 31ch; }
+  .pachisi-gs-heroActions { flex-wrap: wrap; gap: 8px 20px; margin: 18px 0; }
+  .pachisi-gs-kicker { font-size: 9px; }
+  .pachisi-gs-date { margin-top: 14px; }
+  .pachisi-gs-floatingBoards { position: relative; order: 1; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: center; gap: max(200px, calc(100svh - 636px + var(--safe-bottom))) 24px; padding: 24px 40px 72px; perspective: 900px; }
+  .pachisi-gs-boardPlacement { position: relative; inset: auto; width: 100%; max-width: 225px; margin: auto; --float-x: 5px; --float-y: -8px; }
+  .pachisi-gs-boardParallax { transform: none; transition: none; }
+  .pachisi-gs-chess { --depth: 20px; --tilt-x: 7deg; --tilt-y: -10deg; --tilt-z: -6deg; }
+  .pachisi-gs-hex { --depth: -45px; --tilt-x: -6deg; --tilt-y: 12deg; --tilt-z: 6deg; }
+  .pachisi-gs-connectFour { --depth: -15px; --tilt-x: -8deg; --tilt-y: -8deg; --tilt-z: 5deg; }
+  .pachisi-gs-go { --depth: 35px; --tilt-x: 9deg; --tilt-y: -12deg; --tilt-z: -5deg; width: 85%; }
+  .pachisi-gs-boardLink { padding: 8px; border-radius: 10px; }
+  .pachisi-gs-boardLabel { font-size: 9px; margin-top: 7px; gap: 5px; }
+  .pachisi-gs-content { padding-top: 38px; }
+  .pachisi-gs-updates { grid-template-columns: minmax(0,1fr); gap: 24px; padding-bottom: 36px; }
+  .pachisi-gs-updates h2 { max-width: 22ch; }
+  .pachisi-gs-updateForm { max-width: none; justify-self: stretch; }
+  .pachisi-gs-programme, .pachisi-gs-showcase { padding-top: 42px; }
+  .pachisi-gs-sectionHead { flex-direction: column; gap: 16px; margin-bottom: 22px; }
+  .pachisi-gs-sectionHead > p { max-width: 42ch; }
+  .pachisi-gs-desktopBreak { display: none; }
+  .pachisi-gs-schedule { grid-template-columns: minmax(0,1fr); gap: 12px; }
+  .pachisi-gs-scheduleCard { padding: 24px; }
+  .pachisi-gs-step { margin-bottom: 16px; height: 32px; font-size: 24px; }
+  .pachisi-gs-scheduleCard > p:last-child { max-width: 45ch; }
+  .pachisi-gs-gameGrid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .pachisi-gs-gameArtwork { padding: 10px; }
+  .pachisi-gs-gameCardCopy { padding: 14px; }
+  .pachisi-gs-gameCardCopy h3 { font-size: 14px; gap: 6px; }
+  .pachisi-gs-entry { grid-template-columns: minmax(0,1fr); gap: 26px; padding: 26px; margin-top: 44px; }
+  .pachisi-gs-entryActions { justify-self: stretch; max-width: none; }
+  .pachisi-gs-entryMark { display: none; }
+}
+@media (max-width: 360px) {
+  .pachisi-gs-heroCopy { padding-top: 12px; }
+  .pachisi-gs-title { font-size: 56px; max-width: none; margin-top: 12px; }
+  .pachisi-gs-heroSummary { font-size: 14px; }
+  .pachisi-gs-date { margin-top: 10px; }
+  .pachisi-gs-heroActions { flex-direction: row; flex-wrap: nowrap; gap: 8px; margin: 12px 0; }
+  .pachisi-gs-heroPrimary { font-size: 12px; padding-inline: 12px; min-height: 44px; }
+  .pachisi-gs-heroSecondary { font-size: 12px; min-height: 44px; white-space: nowrap; }
+  .pachisi-gs-floatingBoards { padding-inline: 20px; column-gap: 14px; }
+  .pachisi-gs-gameGrid { grid-template-columns: minmax(0,1fr); }
+  .pachisi-gs-updateForm .gs-notify-row { flex-direction: column; }
+  .pachisi-gs-updateForm .gs-notify-row .btn { justify-content: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pachisi-gs-hero *, .pachisi-gs-hero *::before, .pachisi-gs-hero *::after { animation: none !important; transition: none !important; }
+  .pachisi-gs-boardDrift, .pachisi-gs-starDrift { animation: none; }
+  .pachisi-gs-boardPlacement, .pachisi-gs-boardDrift, .pachisi-gs-boardParallax, .pachisi-gs-starLayer { transform: none; }
+  .pachisi-gs-gameCard { transition: none; }
+}

@@ -1,0 +1,3 @@
+/* Optional self-hosted font; licensed under the bundled SIL OFL. */
+@font-face { font-family:"JetBrains Mono"; font-style:normal; font-weight:100 800; font-display:swap; src:url("../assets/fonts/jetbrains-mono-latin-wght.woff2") format("woff2"); }
+:root { --font-jetbrains-mono:"JetBrains Mono"; }

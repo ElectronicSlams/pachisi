@@ -1,0 +1,67 @@
+{
+  "reports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "light",
+      "games": 50,
+      "keyboard": true,
+      "dialogFocus": true,
+      "clipboardFailure": true,
+      "reducedMotion": true,
+      "noOverflow": true,
+      "noExternalRequests": true
+    },
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 1000
+      },
+      "theme": "dark",
+      "games": 50,
+      "keyboard": true,
+      "dialogFocus": true,
+      "clipboardFailure": true,
+      "reducedMotion": true,
+      "noOverflow": true,
+      "noExternalRequests": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "light",
+      "games": 50,
+      "keyboard": true,
+      "dialogFocus": true,
+      "clipboardFailure": true,
+      "reducedMotion": true,
+      "noOverflow": true,
+      "noExternalRequests": true
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "theme": "dark",
+      "games": 50,
+      "keyboard": true,
+      "dialogFocus": true,
+      "clipboardFailure": true,
+      "reducedMotion": true,
+      "noOverflow": true,
+      "noExternalRequests": true
+    },
+    {
+      "geometry": {
+        "frames": 722,
+        "bad": 0,
+        "invalid": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "name": "@electronicslams/pachisi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The existing eSlams Stadium design system, reusable React components and game visuals.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ElectronicSlams/pachisi.git"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "packageManager": "pnpm@11.13.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "files": [
+    "dist",
+    "src/game/styles.css",
+    "styles",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md",
+    "SOURCE_MANIFEST.json",
+    "docs",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js"
+    },
+    "./next": {
+      "types": "./dist/next.d.ts",
+      "import": "./dist/next.js"
+    },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    },
+    "./dates": {
+      "types": "./dist/lib/dates.d.ts",
+      "import": "./dist/lib/dates.js"
+    },
+    "./game/icons": {
+      "types": "./dist/game/icons.d.ts",
+      "import": "./dist/game/icons.js"
+    },
+    "./game/ui-icons": {
+      "types": "./dist/game/ui-icons.d.ts",
+      "import": "./dist/game/ui-icons.js"
+    },
+    "./game/board": {
+      "types": "./dist/game/board.d.ts",
+      "import": "./dist/game/board.js"
+    },
+    "./game/board-types": {
+      "types": "./dist/game/board-types.d.ts",
+      "import": "./dist/game/board-types.js"
+    },
+    "./game/scene": {
+      "types": "./dist/game/scene.d.ts",
+      "import": "./dist/game/scene.js"
+    },
+    "./game/demo": {
+      "types": "./dist/game/demo.d.ts",
+      "import": "./dist/game/demo.js"
+    },
+    "./game/demos": {
+      "types": "./dist/game/demos.d.ts",
+      "import": "./dist/game/demos.js"
+    },
+    "./game/catalogue": {
+      "types": "./dist/game/catalogue.d.ts",
+      "import": "./dist/game/catalogue.js"
+    },
+    "./game/motion": {
+      "types": "./dist/game/motion.d.ts",
+      "import": "./dist/game/motion.js"
+    },
+    "./game/icon-catalogue": {
+      "types": "./dist/game/icon-catalogue.d.ts",
+      "import": "./dist/game/icon-catalogue.js"
+    },
+    "./styles.css": "./styles/index.css",
+    "./tokens.css": "./styles/tokens.css",
+    "./fonts.css": "./styles/fonts.css",
+    "./chrome.css": "./styles/stadium-chrome.css",
+    "./assets/*": "./assets/*",
+    "./package.json": "./package.json",
+    "./event": {
+      "types": "./dist/stadium/grand-slams-stage.d.ts",
+      "import": "./dist/stadium/grand-slams-stage.js"
+    },
+    "./event.css": "./styles/grand-slams.css"
+  },
+  "scripts": {
+    "dev": "vite catalogue --host 127.0.0.1",
+    "build": "node scripts/build.mjs",
+    "build:catalogue": "vite build catalogue --outDir ../catalogue-dist --emptyOutDir",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.tsx",
+    "test:browser": "node scripts/browser-check.mjs",
+    "check:public": "node scripts/check-public.mjs",
+    "check": "pnpm typecheck && pnpm build && pnpm test && pnpm build:catalogue && pnpm check:public",
+    "prepublishOnly": "node scripts/refuse-publish.mjs",
+    "test:consumer": "pnpm pack --out ./artifacts/pachisi-0.1.0.tgz && node scripts/verify-consumer.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=19.2 <20",
+    "react-dom": ">=19.2 <20",
+    "next": ">=16.4.1 <17"
+  },
+  "peerDependenciesMeta": {
+    "next": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "next": "16.4.1",
+    "typescript": "^5.9",
+    "tsx": "^4.23",
+    "esbuild": "^0.25",
+    "vite": "^7.3",
+    "@playwright/test": "1.57.0"
+  }
+}

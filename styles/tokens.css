@@ -1,0 +1,278 @@
+/* ============================================================
+   eSlams Stadium — design tokens
+   The one tokens stylesheet. Light by default; dark via
+   [data-theme="dark"] (manual) or the system preference when no
+   manual choice is stored (see lib/theme-preference.ts).
+   Reference: docs/design/stadium/DESIGN_BRIEF.md §4.1, §12, §15.
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #f7f7f9;
+  --surface-3: #f0f0f3;
+  --surface-inset: #fafafb;
+
+  /* Borders */
+  --border: #e8e8ec;
+  --border-strong: #d6d6dd;
+  --border-faint: #f0f0f3;
+
+  /* Text */
+  --text: #0b0b0d;
+  --text-2: #56565f;
+  --text-3: #666672;
+  --text-on-accent: #ffffff;
+
+  /* Accent: the logo blue. Reserved for action, turn, last move and result. */
+  --accent: #1b32c4;
+  --accent-hover: #16299f;
+  --accent-press: #112184;
+  --accent-soft: rgba(27, 50, 196, 0.08);
+  --accent-softer: rgba(27, 50, 196, 0.045);
+  --accent-line: rgba(27, 50, 196, 0.22);
+
+  /* Outcomes */
+  --win: #17703d;
+  --win-soft: rgba(31, 138, 76, 0.1);
+  --loss: #b5332a;
+  --loss-soft: rgba(196, 61, 51, 0.1);
+  --draw: #8a5d0a;
+  --draw-soft: rgba(176, 121, 27, 0.12);
+  --live: #d93a2f;
+
+  /* Grand Slams gold (trophy glyph, event ribbon) */
+  --gold: #c79a2e;
+  --ribbon-tint: rgba(199, 154, 46, 0.1);
+
+  /* Board palette (Arena + Battlefield + home hero) */
+  --board-light: #efe9dd;
+  --board-dark: #b9a888;
+  --board-line: #9c9486;
+  --board-bg: #f4f1ea;
+  --stone-black: #16161a;
+  --stone-white: #f6f5f2;
+
+  /* Terminal: dark in both themes */
+  --term-bg: #16161a;
+  --term-bar: #1f1f25;
+  --term-text: #e8e8ec;
+  --term-dim: #8b8b96;
+  --term-green: #7ee0a8;
+  --term-blue: #8fa6ff;
+  --term-amber: #f1c277;
+  --term-pink: #f59ec0;
+
+  /* Provider marks ship white (public/assets/providers); light theme inverts them */
+  --mark-filter: invert(1);
+
+  /* Elevation: hairlines first, shadows quiet */
+  --shadow-sm: 0 1px 2px rgba(15, 15, 20, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 15, 20, 0.06), 0 1px 3px rgba(15, 15, 20, 0.05);
+  --shadow-lg: 0 12px 40px rgba(15, 15, 20, 0.1), 0 2px 8px rgba(15, 15, 20, 0.05);
+  --shadow-pop: 0 8px 28px rgba(15, 15, 20, 0.12);
+  --surface-action-inset: inset 0 1px 0 rgba(255, 255, 255, .72);
+  --scrim: rgba(9, 12, 16, 0.42);
+
+  /* Radii */
+  --r-xs: 5px;
+  --r-sm: 7px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* Type. --font-jetbrains-mono is set by next/font in app/layout.tsx. */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono, "JetBrains Mono"), "SFMono-Regular", "SF Mono", ui-monospace, Menlo, monospace;
+  --fw-heading: 650;
+  --tracking-heading: -0.02em;
+
+  /* Motion grammar (brief §12): move, reveal, result; one calm ease-out */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-spring: cubic-bezier(0.2, 0.8, 0.2, 1.2);
+  --dur-fast: 160ms;
+  --dur-move: 220ms;
+  --dur-move-drop: 320ms;
+  --dur-reveal: 300ms;
+  --dur-reveal-quick: 180ms;
+  --dur-result: 520ms;
+
+  /* Layout */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --maxw: 1240px;
+  --gutter: 28px;
+  --nav-h: 72px;
+  --dock-h: 62px;
+  --dock-blur: 18px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #0c0c0e;
+  --surface: #121215;
+  --surface-2: #18181c;
+  --surface-3: #1f1f24;
+  --surface-inset: #101013;
+  --border: rgba(255, 255, 255, 0.085);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-faint: rgba(255, 255, 255, 0.05);
+  --text: #ededf0;
+  --text-2: #a2a2ad;
+  --text-3: #9a9aa5;
+  --accent: #647cff;
+  --accent-hover: #7a8dff;
+  --accent-press: #8f9eff;
+  --accent-soft: rgba(100, 124, 255, 0.14);
+  --accent-softer: rgba(100, 124, 255, 0.07);
+  --accent-line: rgba(100, 124, 255, 0.3);
+  --win: #3ec97e;
+  --win-soft: rgba(62, 201, 126, 0.13);
+  --loss: #ec6a5f;
+  --loss-soft: rgba(236, 106, 95, 0.14);
+  --draw: #e0a94a;
+  --draw-soft: rgba(224, 169, 74, 0.14);
+  --live: #ef5b50;
+  --gold: #e3b94a;
+  --ribbon-tint: rgba(227, 185, 74, 0.1);
+  --board-light: #2b2b33;
+  --board-dark: #3a3a45;
+  --board-line: #4a4a56;
+  --board-bg: #1c1c21;
+  --stone-black: #0b0b0d;
+  --stone-white: #e9e9ee;
+  --mark-filter: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.55);
+  --surface-action-inset: inset 0 1px 0 rgba(255, 255, 255, .035);
+  --scrim: rgba(0, 0, 0, 0.6);
+}
+
+/* System dark when no manual preference is stored. Values mirror the block above. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #0c0c0e;
+    --surface: #121215;
+    --surface-2: #18181c;
+    --surface-3: #1f1f24;
+    --surface-inset: #101013;
+    --border: rgba(255, 255, 255, 0.085);
+    --border-strong: rgba(255, 255, 255, 0.16);
+    --border-faint: rgba(255, 255, 255, 0.05);
+    --text: #ededf0;
+    --text-2: #a2a2ad;
+    --text-3: #9a9aa5;
+    --accent: #647cff;
+    --accent-hover: #7a8dff;
+    --accent-press: #8f9eff;
+    --accent-soft: rgba(100, 124, 255, 0.14);
+    --accent-softer: rgba(100, 124, 255, 0.07);
+    --accent-line: rgba(100, 124, 255, 0.3);
+    --win: #3ec97e;
+    --win-soft: rgba(62, 201, 126, 0.13);
+    --loss: #ec6a5f;
+    --loss-soft: rgba(236, 106, 95, 0.14);
+    --draw: #e0a94a;
+    --draw-soft: rgba(224, 169, 74, 0.14);
+    --live: #ef5b50;
+    --gold: #e3b94a;
+    --ribbon-tint: rgba(227, 185, 74, 0.1);
+    --board-light: #2b2b33;
+    --board-dark: #3a3a45;
+    --board-line: #4a4a56;
+    --board-bg: #1c1c21;
+    --stone-black: #0b0b0d;
+    --stone-white: #e9e9ee;
+    --mark-filter: none;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.55);
+    --surface-action-inset: inset 0 1px 0 rgba(255, 255, 255, .035);
+    --scrim: rgba(0, 0, 0, 0.6);
+  }
+}
+
+@media (max-width: 720px) {
+  :root {
+    --gutter: 16px;
+    --nav-h: 60px;
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+::selection { background: var(--accent-soft); }
+
+h1, h2, h3, h4 { margin: 0; font-weight: var(--fw-heading); letter-spacing: var(--tracking-heading); color: var(--text); }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; color: inherit; }
+img { display: block; }
+input, select, textarea { font-family: inherit; }
+
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.tnum { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
+
+/* The 11.5px mono eyebrow: the only all-caps text in the product. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+/* Global 2px accent focus ring; no component suppresses it. */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { transform: scale(0.35); } to { transform: scale(1); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes stRise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes stShimmer { 0% { transform: translateX(-120%) skewX(-18deg); } 100% { transform: translateX(320%) skewX(-18deg); } }
+@keyframes stRing { 0% { box-shadow: 0 0 0 0 var(--accent-line); } 100% { box-shadow: 0 0 0 10px transparent; } }
+
+/* Reduced motion maps every beat to its end state. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

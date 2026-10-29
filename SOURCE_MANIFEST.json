@@ -1,0 +1,455 @@
+{
+  "platformRepository": "https://github.com/makriman/eSlamsPlatform",
+  "platformCommit": "0fa7dfe227fe545036694c915a6b727eb4ee844a",
+  "gameVisualsUpstreamCommit": "35e44a7033ef1240c86c3b815afb05115d897cb2",
+  "extractedOn": "2026-10-29",
+  "license": "MIT",
+  "files": [
+    {
+      "source": "apps/web/components/ui/page-content.tsx",
+      "target": "src/ui/page-content.tsx",
+      "sourceSha256": "be1718d48fa149ea42eb94e99f62c47e2cc0549d382ae73967a31e610b5fe51d",
+      "adapted": false,
+      "targetSha256": "be1718d48fa149ea42eb94e99f62c47e2cc0549d382ae73967a31e610b5fe51d"
+    },
+    {
+      "source": "apps/web/components/ui/password-field.tsx",
+      "target": "src/ui/password-field.tsx",
+      "sourceSha256": "0764222000de4b2c35cc9162459ed9b224cd01d99ac8b575314961198d9f5264",
+      "adapted": true,
+      "targetSha256": "ecbb16e7d81213504b5737e806716b805df7829ca7dfe584ccc88078b5a2a0f6"
+    },
+    {
+      "source": "apps/web/components/ui/tabs.tsx",
+      "target": "src/ui/tabs.tsx",
+      "sourceSha256": "f9acba4dd9663adb50b0745df755322936ef2d0a7833926b5d7665ad0acc87bb",
+      "adapted": true,
+      "targetSha256": "358dcab7c0309152b7dc0624eb8db22f089ae9391e3786cb713b68dade662a8a"
+    },
+    {
+      "source": "apps/web/components/ui/role-badge.tsx",
+      "target": "src/ui/role-badge.tsx",
+      "sourceSha256": "bf9798c382acc10585ca4f35421dbd23f7054efa32f11df7d5ac1743608d07d2",
+      "adapted": true,
+      "targetSha256": "f656ad00bd2ca1cffba57822efb3c4e051c2dc33b7f5fdbc8a73caaafc82b185"
+    },
+    {
+      "source": "apps/web/components/ui/icon.tsx",
+      "target": "src/ui/icon.tsx",
+      "sourceSha256": "a08af57b5ed80f624d1a2148edea30493cf873c6af38643c7f6b9f4f7a2ed385",
+      "adapted": true,
+      "targetSha256": "044416959f7ee4cc83a322bca9e0eb95185654cff512548a1597cd95997cf1ad"
+    },
+    {
+      "source": "apps/web/components/ui/field.tsx",
+      "target": "src/ui/field.tsx",
+      "sourceSha256": "c4510c1ebaea9e44cec702db20b5dce063c469bdbc4147010c4ec3fb7ac16f38",
+      "adapted": false,
+      "targetSha256": "c4510c1ebaea9e44cec702db20b5dce063c469bdbc4147010c4ec3fb7ac16f38"
+    },
+    {
+      "source": "apps/web/components/ui/tag.tsx",
+      "target": "src/ui/tag.tsx",
+      "sourceSha256": "4b36556c7cf1f4906fcb68e17c28fad4dcd5adef1d67684c30b605472f600f2e",
+      "adapted": false,
+      "targetSha256": "4b36556c7cf1f4906fcb68e17c28fad4dcd5adef1d67684c30b605472f600f2e"
+    },
+    {
+      "source": "apps/web/components/ui/dialog.tsx",
+      "target": "src/ui/dialog.tsx",
+      "sourceSha256": "b08f66a1825ab4278b3655078368b01b20f2950b81016e72403be3c02a628ec7",
+      "adapted": true,
+      "targetSha256": "f5b9c395236462e3e519518efef56fe91d6445872aed35f67592f490554bdb95"
+    },
+    {
+      "source": "apps/web/components/ui/button.tsx",
+      "target": "src/ui/button.tsx",
+      "sourceSha256": "776b4613c1c4d05bd15466e2b9cb271257cc754a747abe2b7b8ac77925fb4871",
+      "adapted": true,
+      "targetSha256": "836735b9403deaa526739d924b936a1984ff4fb7e94d6169ccbaea92d33f8c20"
+    },
+    {
+      "source": "apps/web/components/ui/setting-row.tsx",
+      "target": "src/ui/setting-row.tsx",
+      "sourceSha256": "9210b159cdf263530b53e78dfe0976bfa3e6c285b654a4244523e88509d1a7fa",
+      "adapted": false,
+      "targetSha256": "9210b159cdf263530b53e78dfe0976bfa3e6c285b654a4244523e88509d1a7fa"
+    },
+    {
+      "source": "apps/web/components/ui/callout.tsx",
+      "target": "src/ui/callout.tsx",
+      "sourceSha256": "a524b136149816557aae23ddaf29e473794374eb90a5277def71a3f4f9a32568",
+      "adapted": true,
+      "targetSha256": "31a84f72fdb69b303368ca56d2402ccf08ba12ffb8f27c4a1aa7615599f1bcd6"
+    },
+    {
+      "source": "apps/web/components/ui/copy-field.tsx",
+      "target": "src/ui/copy-field.tsx",
+      "sourceSha256": "d6055578c7497909e3f84c244a7448a81355630c31f2a4f5882a02398052b892",
+      "adapted": true,
+      "targetSha256": "b94777b68ab132e1be9ccfc33a99a66fc80923df410687e2db11feca34cb4db0"
+    },
+    {
+      "source": "apps/web/components/ui/use-controlled-modal-dialog.ts",
+      "target": "src/ui/use-controlled-modal-dialog.ts",
+      "sourceSha256": "1038b96aeff4f703e42655db710c4c2cb4651c11c0ea994fc323cdabddd2312d",
+      "adapted": true,
+      "targetSha256": "629131202ec9cb24a0adccfd5d8a5e6b2ceb8eda4bd40990de112831a647da44"
+    },
+    {
+      "source": "apps/web/components/stadium/game-glyph.tsx",
+      "target": "src/stadium/game-glyph.tsx",
+      "sourceSha256": "a93e33a5dde3764d63e97aee30f095560f203a5729760afc9105b7281dae08fd",
+      "adapted": true,
+      "targetSha256": "d0baf09f0902e82e75ad2381eca800b6636b0402f12b8aca855a32edca9240a7"
+    },
+    {
+      "source": "apps/web/components/stadium/game-tile.tsx",
+      "target": "src/stadium/game-tile.tsx",
+      "sourceSha256": "2d266418890b7d3329869180ba1de4c732bc1d3242922b7df5b9a29d8537ea8c",
+      "adapted": true,
+      "targetSha256": "3c9f0eb627a73152f38d6f96a5685d62536bbbc1865b599c561265fad84a3cf8"
+    },
+    {
+      "source": "apps/web/components/stadium/model-chip.tsx",
+      "target": "src/stadium/model-chip.tsx",
+      "sourceSha256": "d3992107226ce0c46d15fd7308837d880fbd2fa2dce610cb03a699e408d2fbe3",
+      "adapted": true,
+      "targetSha256": "10201725be71e981c4ef9a55ff07274525fd2a896dc7ef7d3d656b6bc7c9bdb8"
+    },
+    {
+      "source": "apps/web/components/stadium/match-poster.tsx",
+      "target": "src/stadium/match-poster.tsx",
+      "sourceSha256": "a9a323bab6c8243242a6800991dfd381d13053e1ae97bd419877b819ed5a0271",
+      "adapted": true,
+      "targetSha256": "b65433c4d7493c3c498700798e19f2f81bef492704a186d42b35a193d831fef3"
+    },
+    {
+      "source": "apps/web/components/stadium/match-preview.tsx",
+      "target": "src/stadium/match-preview.tsx",
+      "sourceSha256": "1e7a846d98ad77ab9ced779080088bc0df4b67a3a7bad70f08011cac55bd2477",
+      "adapted": true,
+      "targetSha256": "a5e5e28978ecba3ecb690eb7e7914ff1ef5139c8d1f47f14356ce732db7e0dba"
+    },
+    {
+      "source": "apps/web/components/stadium/stadium-date.tsx",
+      "target": "src/stadium/stadium-date.tsx",
+      "sourceSha256": "99dbbb06f11fd61ddc4d567048f387b60bca2728dd0317d750594cab6b796d8e",
+      "adapted": true,
+      "targetSha256": "d6fd895d4e184eac1a53b88c87b779be157cb8a3e1e2741eb960a533e64060b3"
+    },
+    {
+      "source": "apps/web/components/stadium/status-strip.tsx",
+      "target": "src/stadium/status-strip.tsx",
+      "sourceSha256": "684272e3873a8061ad4d17f4c28decb96e55be4b7ff55301c9c5a2ebdc12b8d8",
+      "adapted": true,
+      "targetSha256": "d2f4b6f575671cff705d48ae958731e47bd5b4702b2e9849ac1e2599f28d1688"
+    },
+    {
+      "source": "apps/web/components/stadium/states.tsx",
+      "target": "src/stadium/states.tsx",
+      "sourceSha256": "f6e3335f829e15a3ca871b1dfe4811120af8ffd428099b59bfcaff027ac833bd",
+      "adapted": true,
+      "targetSha256": "87d3de067e231ead7a0162b07a7245907ca5e6eaeb83a92c6597a236ffe9944c"
+    },
+    {
+      "source": "apps/web/components/stadium/sheet.tsx",
+      "target": "src/stadium/sheet.tsx",
+      "sourceSha256": "2257d85702adb17ef17f6fc62c0b47a9dd2691ff0ac09449df6052470fb3d26a",
+      "adapted": true,
+      "targetSha256": "83c753b746d5058ccfc73d3e48de4e85953f29a4d03ed68d6bc1d30868cfd457"
+    },
+    {
+      "source": "apps/web/components/stadium/terminal.tsx",
+      "target": "src/stadium/terminal.tsx",
+      "sourceSha256": "ff03964b00043e006d12b78cb5512478819fa3141aa686b90cda7c8f3564b0c5",
+      "adapted": true,
+      "targetSha256": "730700493f713d6a46dfaa716d9849443bf3dd2168acae1d51b5833a58ac1edd"
+    },
+    {
+      "source": "apps/web/components/stadium/board.tsx",
+      "target": "src/stadium/board.tsx",
+      "sourceSha256": "9fe5514a232d20b71d1c4de23ed145b83696c95371c30b1a2b2099fa9f52ba2c",
+      "adapted": true,
+      "targetSha256": "c0ad1e911a443b2695c14a57eaeb0465510fc4563e8c37d28b8ead490e9e7c23"
+    },
+    {
+      "source": "apps/web/components/stadium/game-animation.tsx",
+      "target": "src/stadium/game-animation.tsx",
+      "sourceSha256": "d46090d991f73e64afdf1d8510b502627deb4dfa54c62c57d87485d3f25e2c01",
+      "adapted": true,
+      "targetSha256": "ab4973c090351da738f3cd4ae939608352fe7a064ef96821911a72e0de8f6bc6"
+    },
+    {
+      "source": "apps/web/components/stadium/legal-demonstration.tsx",
+      "target": "src/stadium/legal-demonstration.tsx",
+      "sourceSha256": "69984d2c71b6f9ba7853e8008f86ce5306ec4919abc1723538a6e3b3227e9b48",
+      "adapted": true,
+      "targetSha256": "23a6c810215ddf9968a812fa326d7aaf28b971540b0b6edf28506cb1a141b6c7"
+    },
+    {
+      "source": "apps/web/components/avatar.tsx",
+      "target": "src/ui/avatar.tsx",
+      "sourceSha256": "9533edaaf350739eb03f76b1410d76760a143a4c9087e2949df6fe94f5c39425",
+      "adapted": true,
+      "targetSha256": "1873c21d0f7f4527214db4bc06536b6f1ef3a8fc583858f5e197ede697cef225"
+    },
+    {
+      "source": "apps/web/lib/stadium/dates.ts",
+      "target": "src/lib/dates.ts",
+      "sourceSha256": "606c41b06cda63ad4ff836c975846bece72fb4037bd4ec1f53326b557ef74fda",
+      "adapted": false,
+      "targetSha256": "606c41b06cda63ad4ff836c975846bece72fb4037bd4ec1f53326b557ef74fda"
+    },
+    {
+      "source": "apps/web/lib/stadium/variant-label.ts",
+      "target": "src/lib/variant-label.ts",
+      "sourceSha256": "9541d71d8a6ca02d55d9cb8f9989db20869143e2c7d4983032af650f8f1e29c9",
+      "adapted": false,
+      "targetSha256": "9541d71d8a6ca02d55d9cb8f9989db20869143e2c7d4983032af650f8f1e29c9"
+    },
+    {
+      "source": "apps/web/lib/stadium/model-names.ts",
+      "target": "src/lib/model-names.ts",
+      "sourceSha256": "3527570d5ec3b3d2ddcf050590845f9761e620787c1bcaa10c3ab1a15e49de32",
+      "adapted": true,
+      "targetSha256": "783b4595b3cc60698ec2a5f04748a40c15d32f61338459ad0c9b25c5e791b0e1"
+    },
+    {
+      "source": "apps/web/lib/avatar-image-load-state.ts",
+      "target": "src/lib/avatar-image-load-state.ts",
+      "sourceSha256": "16bf8b795a7bf4689553b077ea01a36bb1258b8c1ec0e22964f6ea6ef2ccde77",
+      "adapted": false,
+      "targetSha256": "16bf8b795a7bf4689553b077ea01a36bb1258b8c1ec0e22964f6ea6ef2ccde77"
+    },
+    {
+      "source": "apps/web/lib/theme-preference.ts",
+      "target": "src/theme.ts",
+      "sourceSha256": "0a63c2423ffecf258dd54dff7d7909b19f2ef2c3ac93158c52a253b1e634a6fb",
+      "adapted": false,
+      "targetSha256": "0a63c2423ffecf258dd54dff7d7909b19f2ef2c3ac93158c52a253b1e634a6fb"
+    },
+    {
+      "source": "packages/game-visuals/src/catalogue.ts",
+      "target": "src/game/catalogue.ts",
+      "sourceSha256": "21d7229ccff24e5f4f84e6451c9e9b714261303b51759b2a221dded6327bb223",
+      "adapted": false,
+      "targetSha256": "21d7229ccff24e5f4f84e6451c9e9b714261303b51759b2a221dded6327bb223"
+    },
+    {
+      "source": "packages/game-visuals/src/board-types.ts",
+      "target": "src/game/board-types.ts",
+      "sourceSha256": "e102b7cae18c5ad606b1e0e6d07134a7d8bb330151ffa700e5467676ea390848",
+      "adapted": true,
+      "targetSha256": "b10c3b5b8bbdac6752c23ddd7abe29f5faa7dc681dbc2c674dc17c27547da0b0"
+    },
+    {
+      "source": "packages/game-visuals/src/styles.css",
+      "target": "src/game/styles.css",
+      "sourceSha256": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf",
+      "adapted": false,
+      "targetSha256": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf"
+    },
+    {
+      "source": "packages/game-visuals/src/demo.tsx",
+      "target": "src/game/demo.tsx",
+      "sourceSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202",
+      "adapted": false,
+      "targetSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202"
+    },
+    {
+      "source": "packages/game-visuals/src/game-demonstrations.json",
+      "target": "src/game/game-demonstrations.json",
+      "sourceSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322",
+      "adapted": false,
+      "targetSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322"
+    },
+    {
+      "source": "packages/game-visuals/src/ui-icons.tsx",
+      "target": "src/game/ui-icons.tsx",
+      "sourceSha256": "b80b5d783a8ac4acc852903ee9063c38e1842159182b83e9b9cd392c1aa117b3",
+      "adapted": false,
+      "targetSha256": "b80b5d783a8ac4acc852903ee9063c38e1842159182b83e9b9cd392c1aa117b3"
+    },
+    {
+      "source": "packages/game-visuals/src/motion.ts",
+      "target": "src/game/motion.ts",
+      "sourceSha256": "0c0bb98206d32cc217162b5007c45157b56a157f3236f3e81bd484e5b11d445e",
+      "adapted": false,
+      "targetSha256": "0c0bb98206d32cc217162b5007c45157b56a157f3236f3e81bd484e5b11d445e"
+    },
+    {
+      "source": "packages/game-visuals/src/board.tsx",
+      "target": "src/game/board.tsx",
+      "sourceSha256": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f",
+      "adapted": false,
+      "targetSha256": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f"
+    },
+    {
+      "source": "packages/game-visuals/src/icons.tsx",
+      "target": "src/game/icons.tsx",
+      "sourceSha256": "72d48bef16dbe8d9a1bd35574eeb8d8ce54f658432f8e1ec598cac14a95ae766",
+      "adapted": false,
+      "targetSha256": "72d48bef16dbe8d9a1bd35574eeb8d8ce54f658432f8e1ec598cac14a95ae766"
+    },
+    {
+      "source": "packages/game-visuals/src/game-demonstrations-source.json",
+      "target": "src/game/game-demonstrations-source.json",
+      "sourceSha256": "0f5a706b0851e786dd7c7c4b097cf05efcdb5f8007f39c8cbfe13ee3517f4bda",
+      "adapted": false,
+      "targetSha256": "0f5a706b0851e786dd7c7c4b097cf05efcdb5f8007f39c8cbfe13ee3517f4bda"
+    },
+    {
+      "source": "packages/game-visuals/src/demos.ts",
+      "target": "src/game/demos.ts",
+      "sourceSha256": "1310e228b0c055cfb887b28fb3e61049356c9a0026a7cde0fc5e3603d3ec1a61",
+      "adapted": false,
+      "targetSha256": "1310e228b0c055cfb887b28fb3e61049356c9a0026a7cde0fc5e3603d3ec1a61"
+    },
+    {
+      "source": "packages/game-visuals/src/icon-catalogue.ts",
+      "target": "src/game/icon-catalogue.ts",
+      "sourceSha256": "da226a48cb6ed531fa1bcda4335044bae52bfa1f075e09049a4e95d04782b4c3",
+      "adapted": false,
+      "targetSha256": "da226a48cb6ed531fa1bcda4335044bae52bfa1f075e09049a4e95d04782b4c3"
+    },
+    {
+      "source": "packages/game-visuals/src/scene.tsx",
+      "target": "src/game/scene.tsx",
+      "sourceSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
+      "adapted": false,
+      "targetSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8"
+    },
+    {
+      "source": "packages/game-visuals/scripts/generate-demonstrations.py",
+      "target": "scripts/generate-demonstrations.py",
+      "sourceSha256": "9935d3f27463ebbe30d59bcd1012b6c79d93fc69f95f72fab9aee1aca33b670e",
+      "adapted": true,
+      "targetSha256": "3d0edb5a7c27e259fadd2cca24ac6f545216f7aabacbbc9ade8f2dbda5dc1e92"
+    },
+    {
+      "source": "packages/game-visuals/assets/logo-dark.png",
+      "target": "assets/logo-dark.png",
+      "sourceSha256": "0cea2d0109a42ed56f83209a5beede244cbca840aee80ea944252150b4b0dde1",
+      "adapted": false,
+      "targetSha256": "0cea2d0109a42ed56f83209a5beede244cbca840aee80ea944252150b4b0dde1"
+    },
+    {
+      "source": "packages/game-visuals/assets/mark.png",
+      "target": "assets/mark.png",
+      "sourceSha256": "a8b856f5d91e3dc08395cd9b125585b2e28a909dc9410d2456b8ef364477e0b4",
+      "adapted": false,
+      "targetSha256": "a8b856f5d91e3dc08395cd9b125585b2e28a909dc9410d2456b8ef364477e0b4"
+    },
+    {
+      "source": "packages/game-visuals/assets/logo-light.png",
+      "target": "assets/logo-light.png",
+      "sourceSha256": "953f926b59c13305ed16ca1dbd9e09172734dff833d890c35ad17e2b943af8c0",
+      "adapted": false,
+      "targetSha256": "953f926b59c13305ed16ca1dbd9e09172734dff833d890c35ad17e2b943af8c0"
+    },
+    {
+      "source": "apps/web/app/fonts/jetbrains-mono-latin-wght.woff2",
+      "target": "assets/fonts/jetbrains-mono-latin-wght.woff2",
+      "sourceSha256": "18be452724bfdc236c074ca94a249a7f41a86752c7d04ab258ce9ed5651f6a7e",
+      "adapted": false,
+      "targetSha256": "18be452724bfdc236c074ca94a249a7f41a86752c7d04ab258ce9ed5651f6a7e"
+    },
+    {
+      "source": "apps/web/app/fonts/JetBrainsMono-OFL.txt",
+      "target": "assets/fonts/OFL.txt",
+      "sourceSha256": "403581b69dac5cff4079205e01c6b467e56af449ecbd7247693ddb1baafa005b",
+      "adapted": false,
+      "targetSha256": "403581b69dac5cff4079205e01c6b467e56af449ecbd7247693ddb1baafa005b"
+    },
+    {
+      "source": "LICENSE",
+      "target": "LICENSE",
+      "sourceSha256": "8e74e7f4e9f2c0caa171be10318e4dd5e57ed0e7fc4c59275a32cc13fead5104",
+      "adapted": false,
+      "targetSha256": "8e74e7f4e9f2c0caa171be10318e4dd5e57ed0e7fc4c59275a32cc13fead5104"
+    },
+    {
+      "source": "apps/web/styles/tokens.css",
+      "target": "styles/tokens.css",
+      "sourceSha256": "3cff781aff5520f4cc0312e4a6b0ed906c0cafb37c7cf5e9325021255d2273b0",
+      "adapted": false,
+      "targetSha256": "3cff781aff5520f4cc0312e4a6b0ed906c0cafb37c7cf5e9325021255d2273b0"
+    },
+    {
+      "source": "apps/web/styles/components.css",
+      "target": "styles/components.css",
+      "sourceSha256": "666a5ab0fb6dc33a1511de123666b8a631d4ff2867075a55a27b303e6b8ebd86",
+      "adapted": false,
+      "targetSha256": "666a5ab0fb6dc33a1511de123666b8a631d4ff2867075a55a27b303e6b8ebd86"
+    },
+    {
+      "source": "apps/web/styles/stadium.css",
+      "target": "styles/stadium.css",
+      "sourceSha256": "3255ac1b990a0230497612c037cd0998cd221bed9a7055d3a41d955029574e63",
+      "adapted": false,
+      "targetSha256": "3255ac1b990a0230497612c037cd0998cd221bed9a7055d3a41d955029574e63"
+    },
+    {
+      "source": "apps/web/styles/stadium-board.css",
+      "target": "styles/stadium-board.css",
+      "sourceSha256": "a3c7670d6e5914e47f525f3d5c850f78e84e71401913f0be536b61c8eed38c72",
+      "adapted": false,
+      "targetSha256": "a3c7670d6e5914e47f525f3d5c850f78e84e71401913f0be536b61c8eed38c72"
+    },
+    {
+      "source": "apps/web/styles/stadium-match-preview.css",
+      "target": "styles/stadium-match-preview.css",
+      "sourceSha256": "384e3aa62af5e6e6409242f4b8889d3256bed92bb48eb94e8e3c1ed1f2fc81f1",
+      "adapted": false,
+      "targetSha256": "384e3aa62af5e6e6409242f4b8889d3256bed92bb48eb94e8e3c1ed1f2fc81f1"
+    },
+    {
+      "source": "apps/web/styles/stadium-chrome.css",
+      "target": "styles/stadium-chrome.css",
+      "sourceSha256": "b6bcfa633532934c5187e2f9569227b723399b248ee1e40a322a1be36571198f",
+      "adapted": true,
+      "targetSha256": "76c73df5ce6a0ae1617bbed4c86be0b25f4a10cd44981f06423d4accce0644fa"
+    },
+    {
+      "source": "apps/web/components/grand-slams/grand-slams-stage.tsx",
+      "target": "src/stadium/grand-slams-stage.tsx",
+      "sourceSha256": "b91dfec24c433b1c8db51864b61c0dfd41eaa29de3a34918e4f410a44ff0b7d3",
+      "adapted": true,
+      "targetSha256": "d9cf8d3f1f9006fe6da2719958ddf0e865c37348638fb46e0f5bb9e982701501"
+    },
+    {
+      "source": "apps/web/components/grand-slams/grand-slams.module.css",
+      "target": "styles/grand-slams.css",
+      "sourceSha256": "18af3efe961e6c23a8bc691434e6305470b8a882857d835eecac63c073c61926",
+      "adapted": true,
+      "targetSha256": "13b0aa7baf8079171ffad486d01c0700ca279a4380d85e71f8fc422bfec58137"
+    },
+    {
+      "source": "apps/web/components/platform-ui.tsx",
+      "target": "src/ui/structure.tsx",
+      "sourceSha256": "99992cf99f427d5ba75fa0c597ae8ff709e87fc50d962a862a7afdb05b4a14b4",
+      "adapted": true,
+      "adaptation": "SectionHead anatomy extracted; Card wraps its existing CSS recipe.",
+      "targetSha256": "0a24e0f982f4038d1b5e8bf4c1dc5fd0d5ad498524c311aaefffc6639d16e858"
+    },
+    {
+      "source": "apps/web/lib/stadium/model-identity.ts",
+      "target": "src/lib/model-identity.ts",
+      "sourceSha256": "ba704ccd9361191f2f7302769d9819af8b28f3f11a1342fcccbf82bf7eab4e09",
+      "adapted": true,
+      "adaptation": "Serializable type extracted; catalogue lookup remains host-owned.",
+      "targetSha256": "9cde52cfab7f8e3cc686e54ad3ffbf9abcb9a51d7e596890443d5eecbb0c22f9"
+    }
+  ],
+  "adaptations": [
+    "Relative package imports replace Platform aliases.",
+    "Native anchor defaults with explicit optional Next adapter.",
+    "Model lookup/auth/network/controller behavior stays host-owned.",
+    "Multiple tab instances use unique IDs. Dialog reuses the existing controlled focus loop.",
+    "Terminal handles denied clipboard writes without an unhandled promise rejection.",
+    "Event CSS classes/keyframes and four navigation destinations are explicit.",
+    "Source generator uses the relocated game directory.",
+    "Build emits ESM and NodeNext-compatible declarations without bundling React."
+  ]
+}

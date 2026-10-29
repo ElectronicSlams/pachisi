@@ -1,0 +1,11 @@
+/* Extracted host dependencies needed by the portable components. */
+.icon-btn { display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border:1px solid transparent; border-radius:var(--r-md); background:transparent; color:var(--text-2); }
+.icon-btn:hover { background:var(--surface-2); color:var(--text); }
+.set-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.set-row-strong { padding:10px 0; border-bottom:1px solid var(--border-faint); }
+.set-row-strong:last-child { border-bottom:0; }
+.set-l { font-size:13.5px; color:var(--text-2); }
+.set-v { font-size:13px; color:var(--text); }
+@media(max-width:720px) { .set-row { align-items:flex-start; flex-direction:column; } }
+.avatar-fallback { display:flex; align-items:center; justify-content:center; width:100%; height:100%; }
+.avatar-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
