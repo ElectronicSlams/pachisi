@@ -10,7 +10,11 @@ The initial extraction is pinned in `SOURCE_MANIFEST.json`. Do not silently sync
 
 ## Checks
 
+While hosted CI is unavailable, `pnpm ci:local` is the release gate. It mirrors the workflow job, records `docs/validation/local-ci.json` with the commit, host versions and per-step result, and refreshes the browser and consumer records. Commit that evidence with the change it verifies; a push without a matching `local-ci.json` is unverified.
+
 ```sh
+pnpm ci:local
+# or the individual steps:
 pnpm check
 pnpm check:physics
 pnpm exec playwright install chromium

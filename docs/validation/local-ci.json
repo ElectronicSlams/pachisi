@@ -1,0 +1,51 @@
+{
+  "ranOn": "2026-10-29T23:42:15.601Z",
+  "commit": "be005ef37467eaa24cca0858da4fb15fb3453cf3",
+  "branch": "consolidate/all-eslams-work-and-physics-review",
+  "workingTreeClean": false,
+  "host": {
+    "platform": "darwin 25.6.0 arm64",
+    "node": "v26.4.0",
+    "pnpm": "11.13.0",
+    "python3": "Python 3.9.6"
+  },
+  "chromium": {
+    "executable": "~/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+    "source": "PLAYWRIGHT_CHROMIUM_EXECUTABLE"
+  },
+  "mirrors": ".github/workflows/ci.yml (library job)",
+  "steps": [
+    {
+      "name": "install",
+      "command": "pnpm install --frozen-lockfile --ignore-scripts",
+      "status": "skipped"
+    },
+    {
+      "name": "check",
+      "command": "pnpm check",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 14943
+    },
+    {
+      "name": "consumer",
+      "command": "pnpm test:consumer",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 19672
+    },
+    {
+      "name": "playwright-install",
+      "command": "pnpm exec playwright install chromium",
+      "status": "skipped"
+    },
+    {
+      "name": "browser",
+      "command": "pnpm test:browser",
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 29744
+    }
+  ],
+  "result": "passed"
+}

@@ -91,4 +91,6 @@ The Platform has not been switched to Pachisi and no live deployment occurred. I
 
 See [validation record](docs/validation.md) for completed checks and limitations. CI runs local package/catalogue checks (including `pnpm check:physics`) and browser tests; it has no registry publication, GitHub Pages or application deployment step.
 
+Hosted GitHub Actions are unavailable while the organisation's billing is locked, so the gate is local: `pnpm ci:local` runs the same steps as the workflow (install, `pnpm check`, packed-consumer test, Chromium install, browser suite) and writes dated evidence to `docs/validation/local-ci.json`, `browser.json`, `consumer.json` and the captures. Run it before every push and commit the evidence with the change.
+
 MIT code © 2026 Electronic Slams. Brand and font notices apply separately.

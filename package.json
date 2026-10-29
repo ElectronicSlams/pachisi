@@ -134,6 +134,7 @@
     "check:physics": "python3 -I scripts/validate-demonstrations.py && python3 -I scripts/selftest-mutations.py",
     "check": "pnpm typecheck && pnpm test && pnpm build:catalogue && pnpm check:public && pnpm check:physics",
     "prepublishOnly": "node scripts/refuse-publish.mjs",
+    "ci:local": "node scripts/ci-local.mjs",
     "test:consumer": "pnpm pack --out ./artifacts/pachisi-0.2.0.tgz && node scripts/verify-consumer.mjs"
   },
   "peerDependencies": {

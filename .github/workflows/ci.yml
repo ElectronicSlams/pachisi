@@ -1,7 +1,11 @@
 name: Pachisi checks
+# Hosted Actions cannot run while the organisation's GitHub billing is locked, so the
+# workflow is manual-only. The release gate is the local mirror of this job:
+#   pnpm ci:local
+# It runs the same steps and records evidence in docs/validation/local-ci.json.
+# Restore `on: [push, pull_request]` once hosted runners are available again.
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
