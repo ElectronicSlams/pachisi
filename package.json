@@ -1,6 +1,6 @@
 {
   "name": "@electronicslams/pachisi",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "The existing eSlams Stadium design system, reusable React components and game visuals.",
   "type": "module",
@@ -46,6 +46,14 @@
       "types": "./dist/theme.d.ts",
       "import": "./dist/theme.js"
     },
+    "./theme-tokens": {
+      "types": "./dist/theme-tokens/index.d.ts",
+      "import": "./dist/theme-tokens/index.js"
+    },
+    "./contract": {
+      "types": "./dist/contract/index.d.ts",
+      "import": "./dist/contract/index.js"
+    },
     "./dates": {
       "types": "./dist/lib/dates.d.ts",
       "import": "./dist/lib/dates.js"
@@ -66,6 +74,14 @@
       "types": "./dist/game/board-types.d.ts",
       "import": "./dist/game/board-types.js"
     },
+    "./game/board-adapter": {
+      "types": "./dist/game/board-adapter.d.ts",
+      "import": "./dist/game/board-adapter.js"
+    },
+    "./game/interactions": {
+      "types": "./dist/game/interactions.d.ts",
+      "import": "./dist/game/interactions.js"
+    },
     "./game/scene": {
       "types": "./dist/game/scene.d.ts",
       "import": "./dist/game/scene.js"
@@ -81,6 +97,10 @@
     "./game/catalogue": {
       "types": "./dist/game/catalogue.d.ts",
       "import": "./dist/game/catalogue.js"
+    },
+    "./game/cues": {
+      "types": "./dist/game/cues.d.ts",
+      "import": "./dist/game/cues.js"
     },
     "./game/motion": {
       "types": "./dist/game/motion.d.ts",
@@ -107,12 +127,15 @@
     "build": "node scripts/build.mjs",
     "build:catalogue": "vite build catalogue --outDir ../catalogue-dist --emptyOutDir",
     "typecheck": "tsc --noEmit",
+    "pretest": "node scripts/build.mjs",
     "test": "node --import tsx --test tests/*.test.tsx",
     "test:browser": "node scripts/browser-check.mjs",
     "check:public": "node scripts/check-public.mjs",
-    "check": "pnpm typecheck && pnpm build && pnpm test && pnpm build:catalogue && pnpm check:public",
+    "check:physics": "python3 -I scripts/validate-demonstrations.py && python3 -I scripts/selftest-mutations.py",
+    "check": "pnpm typecheck && pnpm test && pnpm build:catalogue && pnpm check:public && pnpm check:physics",
     "prepublishOnly": "node scripts/refuse-publish.mjs",
-    "test:consumer": "pnpm pack --out ./artifacts/pachisi-0.1.0.tgz && node scripts/verify-consumer.mjs"
+    "ci:local": "node scripts/ci-local.mjs",
+    "test:consumer": "pnpm pack --out ./artifacts/pachisi-0.2.0.tgz && node scripts/verify-consumer.mjs"
   },
   "peerDependencies": {
     "react": ">=19.2 <20",

@@ -1,0 +1,17 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ESAuth test</title>
+<link rel="stylesheet" href="../src/tokens.css"><link rel="stylesheet" href="../src/app.css">
+<link rel="stylesheet" href="../src/onboard.css"><link rel="stylesheet" href="../src/auth.css">
+<style>body{margin:0;background:var(--surface-2)} #phone{position:relative;width:390px;height:844px;margin:0 auto;overflow:hidden;background:var(--bg)}</style>
+</head><body>
+<div id="phone" data-theme="light"></div>
+<script src="../src/assets.js"></script><script src="../src/data.js"></script><script src="../src/auth.js"></script>
+<script>
+  window.__tf = false; window.__log = [];
+  window.ESApp = { state: () => ({ platform: 'ios', dev: { twoFactorProviders: window.__tf } }) };
+  window.mount = function (o) {
+    const ph = document.getElementById('phone'); ph.innerHTML = '';
+    ph.appendChild(ESAuth.build(Object.assign({ onBack: () => __log.push('back'), onAuthed: (r) => __log.push(r), reduced: () => false, appState: () => ESApp.state() }, o || {})));
+  };
+  mount();
+</script></body></html>

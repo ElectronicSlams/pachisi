@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+<title>Arena — eSlams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"></link>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"></link>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet"></link>
+<style>
+:root {
+  --bg: #0A0A0F;
+  --panel: #111118;
+  --line: #2A2A3A;
+  --line-dim: #1E1E2E;
+  --yellow: #FFE600;
+  --pink: #FF2D6B;
+  --cyan: #00F5FF;
+  --text: #EDEDF2;
+  --text-dim: #8A8A9E;
+  --font-head: "Barlow Condensed", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+}
+
+/* Scanline overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    #FFFFFF 3px,
+    transparent 4px
+  );
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* ============ NAV ============ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 44px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line-dim);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 1px;
+  color: var(--text);
+  text-decoration: none;
+  text-transform: lowercase;
+}
+.nav-logo span { color: var(--cyan); }
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-decoration: none;
+  color: var(--text-dim);
+  padding: 4px 0;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: var(--text); }
+.nav-links a.active {
+  color: var(--text);
+  border-bottom: 2px solid var(--cyan);
+}
+.nav-links a.signin {
+  color: var(--bg);
+  background: var(--text);
+  padding: 5px 12px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+.nav-links a.signin:hover { background: var(--cyan); }
+
+/* ============ ZONE 1 — BATTLE STAGE ============ */
+.stage {
+  min-height: 55vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  background-image:
+    radial-gradient(ellipse 60% 70% at 25% 45%, rgba(0,245,255,0.04), transparent 70%),
+    radial-gradient(ellipse 60% 70% at 75% 45%, rgba(255,45,107,0.04), transparent 70%);
+  border-bottom: 1px solid var(--line);
+}
+
+.stage::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(0,245,255,0.5), transparent);
+  box-shadow: 0 0 8px rgba(0,245,255,0.3);
+}
+
+/* --- Left: game preview --- */
+.preview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 36px 24px;
+}
+
+.board {
+  position: relative;
+  width: min(220px, 38vw);
+  aspect-ratio: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  background: rgba(0,245,255,0.35);
+  gap: 3px;
+  padding: 3px;
+  box-shadow: 0 0 24px rgba(0,245,255,0.12);
+}
+
+.board .cell {
+  background: #0D0D14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(28px, 5vw, 46px);
+  line-height: 1;
+}
+.board .cell.x { color: var(--pink); text-shadow: 0 0 12px var(--pink); }
+.board .cell.o { color: var(--cyan); text-shadow: 0 0 12px var(--cyan); }
+
+.board-overlay {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10,10,15,0.82);
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 26px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 12px;
+  color: var(--cyan);
+  text-shadow: 0 0 14px var(--cyan);
+}
+.board-overlay.show { display: flex; }
+
+.game-title {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(40px, 5.5vw, 72px);
+  line-height: 0.95;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-align: center;
+  text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan);
+  animation: glitch-idle 4s steps(1) infinite;
+}
+
+@keyframes glitch-idle {
+  0%, 92%  { text-shadow: 2px 0 var(--pink), -2px 0 var(--cyan); }
+  93%      { text-shadow: -3px 0 var(--pink), 3px 0 var(--cyan); }
+  95%      { text-shadow: 3px 1px var(--pink), -3px -1px var(--cyan); }
+  97%      { text-shadow: -2px -1px var(--pink), 2px 1px var(--cyan); }
+}
+
+.game-variant {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.category-badge {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  padding: 5px 12px;
+}
+
+/* --- Right: combatants --- */
+.combat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 26px;
+  padding: 36px clamp(20px, 4vw, 56px);
+}
+
+.vs-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 14px;
+  align-items: start;
+  width: 100%;
+  max-width: 440px;
+}
+
+.fighter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.fighter-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.avatar {
+  width: 84px;
+  height: 84px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  border: 1px solid var(--line);
+  background: var(--panel);
+  padding: 6px;
+  gap: 1px;
+}
+
+.avatar .px { background: transparent; }
+
+/* simple round smiley — human */
+.avatar.human {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.avatar.human svg { width: 60px; height: 60px; }
+.avatar.human .face {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-width: 5;
+  filter: drop-shadow(0 0 5px rgba(0,245,255,0.55));
+}
+.avatar.human .eye { fill: var(--cyan); stroke: none; }
+
+/* pixel robot — model */
+.avatar .px.c { background: #7E8AA0; }                                  /* steel frame */
+.avatar .px.d { background: #10141E; }                                  /* faceplate */
+.avatar .px.g { background: var(--cyan); box-shadow: 0 0 6px var(--cyan); } /* glowing eyes */
+.avatar .px.r { background: #0A6E78; }                                  /* mouth grill */
+.avatar .px.a { background: #58E0EA; }                                  /* antenna stem */
+.avatar .px.t { background: var(--pink); box-shadow: 0 0 6px var(--pink); } /* antenna tip */
+
+.fighter-name {
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 24px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.fighter-rank {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--pink);
+  text-transform: uppercase;
+}
+
+.vs-badge {
+  align-self: center;
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 44px;
+  letter-spacing: 1px;
+  color: var(--pink);
+  text-shadow: 0 0 18px var(--pink);
+  animation: vs-pulse 1.6s ease-in-out infinite;
+  padding: 0 6px;
+}
+
+@keyframes vs-pulse {
+  0%, 100% { transform: scale(1); text-shadow: 0 0 14px var(--pink); }
+  50%      { transform: scale(1.12); text-shadow: 0 0 28px var(--pink), 0 0 50px rgba(255,45,107,0.5); }
+}
+
+.model-select-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+}
+
+.model-select-wrap::after {
+  content: "▼";
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 9px;
+  color: var(--cyan);
+  pointer-events: none;
+}
+
+select#model-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 9px 26px 9px 10px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+select#model-select:hover,
+select#model-select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 10px rgba(0,245,255,0.3);
+  outline: none;
+}
+
+.enter-battle {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  background: var(--cyan);
+  color: #06121A;
+  border: none;
+  font-family: var(--font-head);
+  font-weight: 800;
+  font-size: 19px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 13px;
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(0,245,255,0.4), 0 8px 24px -8px rgba(0,245,255,0.45);
+  transition: box-shadow 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+.enter-battle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -75%;
+  width: 40%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,0.45), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+.enter-battle:hover {
+  background: #4FF8FF;
+  box-shadow: 0 0 0 1px rgba(0,245,255,0.6), 0 10px 30px -6px rgba(0,245,255,0.55);
+  transform: translateY(-2px);
+}
+.enter-battle:hover::after { left: 130%; }
+.enter-battle:active {
+  transform: translateY(0px);
+  box-shadow: 0 0 0 1px rgba(0,245,255,0.5), 0 4px 14px -6px rgba(0,245,255,0.4);
+}
+
+/* ============ ZONE 2 — GAME SELECT ============ */
+.select-zone {
+  padding: 36px clamp(16px, 4vw, 48px) 64px;
+}
+
+.select-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.select-header h2 {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(28px, 3.5vw, 44px);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.arena-count {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--pink);
+  border: 1px solid var(--pink);
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+.filter-row {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.filter-tab {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--line);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.filter-tab:hover { color: var(--text); border-color: var(--text-dim); }
+.filter-tab.active {
+  color: #000000;
+  background: var(--cyan);
+  border-color: var(--cyan);
+  font-weight: 600;
+}
+
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 12px;
+}
+
+.game-card {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 16px 14px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.game-card:hover {
+  border-color: var(--cyan);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 24px rgba(0,245,255,0.18);
+}
+
+.game-card.selected {
+  border-color: var(--pink);
+  box-shadow: 0 0 16px rgba(255,45,107,0.22);
+}
+
+.game-card .active-badge {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--pink);
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 3px 7px;
+}
+.game-card.selected .active-badge { display: block; }
+
+.game-card .icon {
+  font-size: 24px;
+  line-height: 1;
+  color: var(--cyan);
+}
+.game-card.selected .icon { color: var(--pink); }
+
+.game-card .name {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 19px;
+  line-height: 1.05;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.game-card .variant {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+.game-card.hidden { display: none; }
+
+/* ============ BATTLE MODAL ============ */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10,10,15,0.96);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+}
+.modal.open { display: flex; }
+
+.modal-inner { max-width: 560px; }
+
+.modal-glitch {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: clamp(40px, 7vw, 80px);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 3px 0 var(--pink), -3px 0 var(--cyan);
+}
+
+.modal-glitch.flashing {
+  animation: battle-flash 0.3s steps(2) 3;
+}
+
+@keyframes battle-flash {
+  0%   { opacity: 1; transform: translateX(0); }
+  25%  { opacity: 0.15; transform: translateX(-6px); text-shadow: -4px 0 var(--pink), 4px 0 var(--cyan); }
+  50%  { opacity: 1; transform: translateX(4px); }
+  75%  { opacity: 0.3; transform: translateX(-2px); text-shadow: 4px 2px var(--pink), -4px -2px var(--cyan); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.modal-message {
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.modal-message.show { display: flex; }
+
+.modal-message p {
+  font-size: 13px;
+  line-height: 1.8;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+}
+.modal-message p strong { color: var(--cyan); font-weight: 600; }
+
+.modal-close {
+  background: transparent;
+  color: var(--cyan);
+  border: 1px solid var(--cyan);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 3px;
+  padding: 12px 36px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+.modal-close:hover {
+  background: var(--cyan);
+  color: #000000;
+  box-shadow: 0 0 20px rgba(0,245,255,0.5);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 820px) {
+  .stage { grid-template-columns: 1fr; }
+  .stage::before {
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 50%;
+    width: auto;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--cyan), transparent);
+  }
+  .preview { padding: 28px 20px; }
+  .combat { padding: 28px 20px 36px; }
+  .game-grid { grid-template-columns: repeat(2, 1fr); }
+  .nav-links { gap: 14px; }
+}
+
+@media (min-width: 821px) and (max-width: 1200px) {
+  .game-grid { grid-template-columns: repeat(4, 1fr); }
+}
+@media (min-width: 1201px) {
+  .game-grid { grid-template-columns: repeat(6, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .game-title, .vs-badge, .enter-battle:hover, .modal-glitch.flashing { animation: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" data-screen-label="Arena">
+  <a class="nav-logo" href="#">e<span>slams</span></a>
+  <div class="nav-links">
+    <a href="#">Leaderboard</a>
+    <a href="#">Battlefield</a>
+    <a href="#" class="active">Arena</a>
+    <a href="#" class="signin">Sign in</a>
+  </div>
+</nav>
+
+<!-- ZONE 1 — BATTLE STAGE -->
+<section class="stage" id="stage" data-screen-label="Battle Stage">
+
+  <div class="preview">
+    <div class="board" id="board" aria-hidden="true">
+      <div class="cell x">X</div><div class="cell"></div><div class="cell o">O</div>
+      <div class="cell"></div><div class="cell x">X</div><div class="cell"></div>
+      <div class="cell o">O</div><div class="cell"></div><div class="cell x">X</div>
+      <div class="board-overlay" id="board-overlay"></div>
+    </div>
+    <h1 class="game-title" id="game-title">Tic-Tac-Toe</h1>
+    <div class="game-variant" id="game-variant">STANDARD // 3×3</div>
+    <div class="category-badge" id="category-badge">Board &amp; Strategy</div>
+  </div>
+
+  <div class="combat">
+    <div class="vs-row">
+      <div class="fighter">
+        <div class="fighter-label">You</div>
+        <div class="avatar human" id="human-avatar">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="face" cx="50" cy="50" r="38"></circle>
+            <circle class="eye" cx="38" cy="42" r="5"></circle>
+            <circle class="eye" cx="62" cy="42" r="5"></circle>
+            <path class="face" d="M34 60 Q50 74 66 60" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="fighter-name">Human</div>
+        <div class="fighter-rank">Challenger</div>
+      </div>
+
+      <div class="vs-badge">VS</div>
+
+      <div class="fighter">
+        <div class="fighter-label" id="model-label">Claude Opus 4.6</div>
+        <div class="avatar model" id="model-avatar"></div>
+        <div class="model-select-wrap">
+          <select id="model-select" aria-label="Select model opponent">
+            <option>GPT-4o</option>
+            <option selected="selected">Claude Opus 4.6</option>
+            <option>Gemini 1.5 Pro</option>
+            <option>Llama 3.1 405B</option>
+            <option>Mistral Large</option>
+            <option>DeepSeek V3</option>
+            <option>Claude Sonnet 4.6</option>
+            <option>Grok 2</option>
+          </select>
+        </div>
+        <div class="fighter-rank" style="color: var(--cyan);">Public Model</div>
+      </div>
+    </div>
+
+    <button class="enter-battle" id="enter-battle">Enter Battle</button>
+  </div>
+
+</section>
+
+<!-- ZONE 2 — GAME SELECT -->
+<section class="select-zone" data-screen-label="Game Select">
+  <div class="select-header">
+    <h2>Select Your Arena</h2>
+    <span class="arena-count">50 Arenas</span>
+  </div>
+
+  <div class="filter-row" id="filter-row" role="tablist">
+    <button class="filter-tab active" data-cat="all">All</button>
+    <button class="filter-tab" data-cat="Board &amp; Strategy">Board &amp; Strategy</button>
+    <button class="filter-tab" data-cat="Card &amp; Hidden-Info">Card &amp; Hidden-Info</button>
+    <button class="filter-tab" data-cat="Social &amp; Economic">Social &amp; Economic</button>
+    <button class="filter-tab" data-cat="Control &amp; Arcade">Control &amp; Arcade</button>
+  </div>
+
+  <div class="game-grid" id="game-grid"></div>
+</section>
+
+<!-- BATTLE MODAL -->
+<div class="modal" id="battle-modal" role="dialog" aria-modal="true">
+  <div class="modal-inner">
+    <div class="modal-glitch" id="modal-glitch">Battle Starting...</div>
+    <div class="modal-message" id="modal-message">
+      <p>Game engine integration coming soon.<br></br>Your match vs <strong id="modal-model">Claude Opus 4.6</strong> in <strong id="modal-game">Tic-Tac-Toe</strong> has been queued.</p>
+      <button class="modal-close" id="modal-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Game data: [name, variant, category, icon] ----
+const CAT = {
+  B: "Board & Strategy",
+  C: "Card & Hidden-Info",
+  S: "Social & Economic",
+  A: "Control & Arcade"
+};
+
+const GAMES = [
+  ["Chess", "Standard", "B", "\u265E"],
+  ["Go", "Board 9\u00D79", "B", "\u25CF"],
+  ["Connect Four", "Standard", "B", "\u25CD"],
+  ["Tic-Tac-Toe", "Standard // 3\u00D73", "B", "\u00D7"],
+  ["Othello", "Standard", "B", "\u25D1"],
+  ["Checkers", "Standard", "B", "\u26C2"],
+  ["Shogi", "Standard", "B", "\u2616"],
+  ["Xiangqi", "Standard", "B", "\u5C07"],
+  ["Gomoku", "Standard", "B", "\u25CB"],
+  ["Hex", "Standard", "B", "\u2B21"],
+  ["Mancala", "Standard", "B", "\u25CC"],
+  ["Nine Men's Morris", "Standard", "B", "\u29BF"],
+  ["Pentago", "Standard", "B", "\u27F3"],
+  ["Ultimate Tic-Tac-Toe", "Standard", "B", "\u229E"],
+  ["Battleship", "Standard", "B", "\u2693"],
+  ["Backgammon", "Standard", "B", "\u2680"],
+  ["Blackjack", "Hit Stand S17", "C", "\u2660"],
+  ["Leduc Hold'em", "Standard Leduc", "C", "\u2666"],
+  ["Limit Texas Hold'em", "Heads Up Limit", "C", "\u2665"],
+  ["No-Limit Texas Hold'em", "Profiled No Limit", "C", "\u2663"],
+  ["Shedding Card Game", "Rank Suit Shedding", "C", "\u2664"],
+  ["Gin Rummy", "Compact Gin", "C", "\u2667"],
+  ["Mahjong", "Compact Draw Discard", "C", "\u3020"],
+  ["Dou Dizhu", "Landlord Shedding", "C", "\u2662"],
+  ["Bridge", "Contract Play", "C", "\u2661"],
+  ["Hearts", "Penalty Tricks", "C", "\u2665"],
+  ["Spades", "Trump Tricks", "C", "\u2660"],
+  ["Euchre", "Call And Play", "C", "\u2666"],
+  ["Cribbage", "Discard Showdown", "C", "\u2042"],
+  ["Crazy Eights", "Wild Eight Shedding", "C", "8"],
+  ["Hanabi", "Compact Hanabi", "C", "\u2737"],
+  ["Prisoner's Dilemma", "One Shot Matrix", "S", "\u29C9"],
+  ["Bargaining", "Bilateral Split", "S", "\u2696"],
+  ["Negotiation", "Price Delivery Grid", "S", "\u21C4"],
+  ["First-Price Sealed-Bid Auction", "Two Bidder Private Values", "S", "\u2709"],
+  ["Liar's Dice", "Single Round", "S", "\u2684"],
+  ["Goofspiel", "Five Card Goofspiel", "S", "\u2696"],
+  ["Rock Paper Scissors", "Standard", "S", "\u270C"],
+  ["Taxi", "Standard", "A", "\u25A3"],
+  ["Frozen Lake", "Standard", "A", "\u2746"],
+  ["Cliff Walking", "Standard", "A", "\u26F0"],
+  ["CartPole", "Standard", "A", "\u2195"],
+  ["Mountain Car", "Standard", "A", "\u223F"],
+  ["Lunar Lander", "Standard", "A", "\u2604"],
+  ["Car Racing", "Standard", "A", "\u26FF"],
+  ["Bipedal Walker", "Standard", "A", "\u23F6"],
+  ["Paddle Ball", "Standard", "A", "\u25AC"],
+  ["Alien Shooter", "Standard", "A", "\u2630"],
+  ["Boxing Style Arena", "Standard", "A", "\u2694"],
+  ["Ice Hockey Style Arena", "Standard", "A", "\u26F8"]
+];
+
+// ---- Build pixel avatars (12x12 maps; letters = palette classes) ----
+function buildPixelAvatar(id, rows) {
+  const el = document.getElementById(id);
+  rows.join("").split("").forEach(function (ch) {
+    const px = document.createElement("div");
+    px.className = ch === "." ? "px" : "px " + ch;
+    el.appendChild(px);
+  });
+}
+
+// Human: pink punk hair, tan skin, eyes, nose, mouth
+// Human is a simple SVG smiley (in HTML). Robot below is pixel-built.
+
+// Robot: antennae, steel frame, dark faceplate, glowing eyes, mouth grill
+buildPixelAvatar("model-avatar", [
+  "...t....t...",
+  "...a....a...",
+  ".cccccccccc.",
+  ".cddddddddc.",
+  ".cdggddggdc.",
+  ".cdggddggdc.",
+  ".cddddddddc.",
+  ".cddddddddc.",
+  ".cdrrrrrrdc.",
+  ".cddddddddc.",
+  ".cccccccccc.",
+  "...cc..cc..."
+]);
+
+// ---- Build game grid ----
+const grid = document.getElementById("game-grid");
+let selectedIndex = 3; // Tic-Tac-Toe default
+
+GAMES.forEach(function (g, i) {
+  const card = document.createElement("button");
+  card.className = "game-card" + (i === selectedIndex ? " selected" : "");
+  card.dataset.cat = CAT[g[2]];
+  card.dataset.index = i;
+  card.innerHTML =
+    '<span class="active-badge">ACTIVE</span>' +
+    '<span class="icon">' + g[3] + "</span>" +
+    '<span class="name">' + g[0] + "</span>" +
+    '<span class="variant">' + g[1] + "</span>";
+  card.addEventListener("click", function () { selectGame(i); });
+  grid.appendChild(card);
+});
+
+function selectGame(i) {
+  selectedIndex = i;
+  const g = GAMES[i];
+  document.querySelectorAll(".game-card").forEach(function (c) {
+    c.classList.toggle("selected", Number(c.dataset.index) === i);
+  });
+  document.getElementById("game-title").textContent = g[0];
+  document.getElementById("game-variant").textContent = g[1].toUpperCase();
+  document.getElementById("category-badge").textContent = CAT[g[2]];
+  const overlay = document.getElementById("board-overlay");
+  if (g[0] === "Tic-Tac-Toe") {
+    overlay.classList.remove("show");
+    overlay.textContent = "";
+  } else {
+    overlay.textContent = g[0];
+    overlay.classList.add("show");
+  }
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ---- Filter tabs ----
+document.getElementById("filter-row").addEventListener("click", function (e) {
+  const tab = e.target.closest(".filter-tab");
+  if (!tab) return;
+  document.querySelectorAll(".filter-tab").forEach(function (t) {
+    t.classList.toggle("active", t === tab);
+  });
+  const cat = tab.dataset.cat;
+  document.querySelectorAll(".game-card").forEach(function (c) {
+    c.classList.toggle("hidden", cat !== "all" && c.dataset.cat !== cat);
+  });
+});
+
+// ---- Model select ----
+const modelSelect = document.getElementById("model-select");
+modelSelect.addEventListener("change", function () {
+  document.getElementById("model-label").textContent = modelSelect.value;
+});
+
+// ---- Battle modal ----
+const modal = document.getElementById("battle-modal");
+const glitch = document.getElementById("modal-glitch");
+const message = document.getElementById("modal-message");
+
+document.getElementById("enter-battle").addEventListener("click", function () {
+  document.getElementById("modal-model").textContent = modelSelect.value;
+  document.getElementById("modal-game").textContent = GAMES[selectedIndex][0];
+  message.classList.remove("show");
+  glitch.style.display = "block";
+  modal.classList.add("open");
+  glitch.classList.remove("flashing");
+  void glitch.offsetWidth; // restart animation
+  glitch.classList.add("flashing");
+  setTimeout(function () {
+    glitch.style.display = "none";
+    message.classList.add("show");
+  }, 1000);
+});
+
+document.getElementById("modal-close").addEventListener("click", function () {
+  modal.classList.remove("open");
+});
+modal.addEventListener("click", function (e) {
+  if (e.target === modal) modal.classList.remove("open");
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>eSlams Arena app · interactive prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&family=JetBrains+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="tokens.css">
+<link rel="stylesheet" href="boards-grid.css">
+<link rel="stylesheet" href="boards-table.css">
+<link rel="stylesheet" href="app.css">
+<link rel="stylesheet" href="onboard.css">
+<link rel="stylesheet" href="scene.css">
+<link rel="stylesheet" href="auth.css">
+<link rel="stylesheet" href="canvas.css">
+</head>
+<body class="cv-page">
+<main class="cv-main">
+  <header class="cv-head">
+    <div class="cv-eyebrow-row">
+      <img class="cv-head-mark" data-cv-mark alt="eSlams mark" width="34" height="34">
+      <div class="cv-eyebrow">ESLAMS · THE ARENA APP · V1 · INTERACTIVE PROTOTYPE</div>
+    </div>
+    <h1 class="cv-title">Arena only. One verb: Play.</h1>
+    <p class="cv-lede">You open the app and a table is already set. The board you played last night is one tap away, a frontier model is seated across from it, and the status line says it is ready. You tap. The model takes its seat, visibly thinks, drops a disc, and tells you in one sentence why. You answer. Ten minutes later a scoreline rises over the final position. You share it. Tomorrow you try Chess. <strong>Everything below the phone is real:</strong> Connect Four and nine other tables play a real engine, every other table plays an engine-recorded demo, and every count comes from the catalogue.</p>
+  </header>
+
+  <div class="cv-row">
+    <div class="cv-device-col">
+      <div class="cv-device" aria-label="Phone, 390 by 844">
+        <div class="cv-island" aria-hidden="true"></div>
+        <div id="phone" data-theme="light"></div>
+      </div>
+      <div class="cv-device-note">iOS · 390 × 844 · fully interactive · tap around</div>
+    </div>
+
+    <aside class="cv-panels">
+      <section class="cv-panel" id="cv-controls" aria-labelledby="cv-controls-h">
+        <h2 class="cv-panel-h" id="cv-controls-h">Controls</h2>
+        <div class="cv-ctl">
+          <div class="cv-ctl-label">Theme</div>
+          <div class="cv-seg" role="radiogroup" aria-label="Theme">
+            <button type="button" role="radio" data-cv-theme="system">System</button>
+            <button type="button" role="radio" data-cv-theme="light">Light</button>
+            <button type="button" role="radio" data-cv-theme="dark">Dark</button>
+          </div>
+        </div>
+        <div class="cv-ctl">
+          <div class="cv-ctl-label">Look <span class="cv-hint">six themes, applied to the phone at once</span></div>
+          <div class="cv-seg" role="radiogroup" aria-label="Look">
+            <button type="button" role="radio" data-ob-theme="system">Follow system</button>
+            <button type="button" role="radio" data-ob-theme="light">Classic Light</button>
+            <button type="button" role="radio" data-ob-theme="dark">Classic Dark</button>
+            <button type="button" role="radio" data-ob-theme="neon">Neon</button>
+            <button type="button" role="radio" data-ob-theme="club">Club</button>
+            <button type="button" role="radio" data-ob-theme="arcade">Arcade</button>
+            <button type="button" role="radio" data-ob-theme="midnight">Midnight</button>
+          </div>
+        </div>
+        <label class="cv-ctl cv-ctl--toggle"><span class="cv-ctl-label">Desktop <span class="cv-hint">1024 × 720, first-run screens in two columns</span></span><input type="checkbox" id="cv-desktop" data-ob-desktop><span class="cv-switch" aria-hidden="true"></span></label>
+        <div class="cv-ctl">
+          <div class="cv-ctl-label">First run</div>
+          <div class="cv-btns">
+            <button type="button" data-ob-open="welcome">Welcome</button>
+            <button type="button" data-ob-open="setup">Profile setup</button>
+            <button type="button" data-ob-open="themepick">Theme pick</button>
+            <button type="button" data-ob-open="reset">Reset first run</button>
+          </div>
+        </div>
+        <label class="cv-ctl cv-ctl--toggle"><span class="cv-ctl-label">Signed in</span><input type="checkbox" id="cv-signed"><span class="cv-switch" aria-hidden="true"></span></label>
+        <label class="cv-ctl cv-ctl--toggle"><span class="cv-ctl-label">Reduced motion</span><input type="checkbox" id="cv-reduced"><span class="cv-switch" aria-hidden="true"></span></label>
+        <label class="cv-ctl cv-ctl--toggle"><span class="cv-ctl-label">Two-factor after GitHub / Google</span><input type="checkbox" id="cv-2fa"><span class="cv-switch" aria-hidden="true"></span></label>
+        <div class="cv-ctl">
+          <div class="cv-ctl-label">Model speed <span class="cv-mono" id="cv-speed-label">1.5–5.0 s</span></div>
+          <input type="range" id="cv-speed" min="0" max="4" step="1" value="2" aria-label="Model speed">
+        </div>
+        <div class="cv-ctl">
+          <div class="cv-ctl-label">Force stage <span class="cv-hint">on the model's turn</span></div>
+          <div class="cv-btns">
+            <button type="button" data-cv-stage="thinking">Thinking</button>
+            <button type="button" data-cv-stage="keep_waiting">Taking longer</button>
+            <button type="button" data-cv-stage="claim">Claim the win</button>
+          </div>
+        </div>
+        <div class="cv-ctl">
+          <div class="cv-ctl-label">Engine <span class="cv-hint">runner tables only</span></div>
+          <div class="cv-seg" role="radiogroup" aria-label="Engine">
+            <button type="button" role="radio" data-cv-engine="ok">OK</button>
+            <button type="button" role="radio" data-cv-engine="cold">Cold</button>
+            <button type="button" role="radio" data-cv-engine="unavailable">Unavailable</button>
+          </div>
+        </div>
+        <label class="cv-ctl cv-ctl--toggle"><span class="cv-ctl-label">Conflict <span class="cv-hint">a match is running on the web</span></span><input type="checkbox" id="cv-conflict"><span class="cv-switch" aria-hidden="true"></span></label>
+        <div class="cv-ctl cv-ctl--end">
+          <button type="button" class="cv-reset" id="cv-reset">Reset prototype</button>
+        </div>
+      </section>
+
+      <section class="cv-panel" aria-labelledby="cv-icon-h">
+        <h2 class="cv-panel-h" id="cv-icon-h">App icon · the mark alone</h2>
+        <div class="cv-icons">
+          <div class="cv-icon cv-icon--dark"><img data-cv-mark alt="App icon, dark"></div>
+          <div class="cv-icon cv-icon--light"><img data-cv-mark alt="App icon, light"></div>
+        </div>
+        <p class="cv-note">The mark on the OS squircle, dark and light. Royal blue in both, never re-tinted. Exported per platform.</p>
+      </section>
+
+      <section class="cv-panel" aria-labelledby="cv-share-h">
+        <h2 class="cv-panel-h" id="cv-share-h">Share card · last result</h2>
+        <div class="cv-share-row">
+          <div class="cv-share es-theme" data-theme="light" id="cv-share-light"></div>
+          <div class="cv-share es-theme" data-theme="dark" id="cv-share-dark"></div>
+        </div>
+        <p class="cv-note">Rendered live from the most recent finished match. Exports at 1080 × 1350 and 1080 × 1920.</p>
+      </section>
+
+      <section class="cv-panel" aria-labelledby="cv-states-h">
+        <h2 class="cv-panel-h" id="cv-states-h">States · honest by design</h2>
+        <div id="cv-states" class="cv-states"></div>
+      </section>
+
+      <section class="cv-panel" aria-labelledby="cv-copy-h">
+        <h2 class="cv-panel-h" id="cv-copy-h">Copy deck · from ESD.copy</h2>
+        <div id="cv-copy" class="cv-copy"></div>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<script src="assets.js"></script>
+<script src="data.js"></script>
+<script src="engines-core-a.js"></script>
+<script src="engines-core.js"></script>
+<script src="engines-scripted-board.js"></script>
+<script src="engines-scripted-table.js"></script>
+<script src="engines.js"></script>
+<script src="boards-grid.js"></script>
+<script src="boards-table.js"></script>
+<script src="app.js"></script>
+<script src="scene.js"></script><script src="auth.js"></script>
+<script src="onboard.js"></script>
+</body>
+</html>

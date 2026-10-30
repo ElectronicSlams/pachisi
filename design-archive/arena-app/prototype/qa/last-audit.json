@@ -1,0 +1,762 @@
+{
+  "base": "http://localhost:8787/src/index.html",
+  "at": "2026-10-02T23:45:09.122Z",
+  "screens": [
+    {
+      "id": "home",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "seeall",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-c4",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-holdem",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "roster",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "welcome",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 4,
+        "min": 9.13,
+        "worst": {
+          "id": 1,
+          "kind": "text",
+          "text": "Play Against AI",
+          "ratio": 9.13,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-choose",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 11,
+        "min": 7.13,
+        "worst": {
+          "id": 4,
+          "kind": "text",
+          "text": "or",
+          "ratio": 7.13,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-email",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 4,
+        "min": 9.13,
+        "worst": {
+          "id": 1,
+          "kind": "text",
+          "text": "Continue",
+          "ratio": 9.13,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-password",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 6,
+        "min": 7.03,
+        "worst": {
+          "id": 2,
+          "kind": "text",
+          "text": "Forgot password?",
+          "ratio": 7.03,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-create",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [
+        {
+          "el": "text",
+          "text": "Completing security check…",
+          "ratio": 1.26,
+          "need": 4.5,
+          "size": 0
+        }
+      ],
+      "smallTargets": [],
+      "scene": {
+        "n": 8,
+        "min": 1.26,
+        "worst": {
+          "id": 4,
+          "kind": "text",
+          "text": "Completing security check…",
+          "ratio": 1.26,
+          "need": 4.5
+        },
+        "fails": [
+          {
+            "id": 4,
+            "kind": "text",
+            "text": "Completing security check…",
+            "ratio": 1.26,
+            "need": 4.5
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "id": "setup",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 22,
+        "min": 5.61,
+        "worst": {
+          "id": 2,
+          "kind": "text",
+          "text": "eslams.com/",
+          "ratio": 5.61,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "setup-error",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 20,
+        "min": 4.98,
+        "worst": {
+          "id": 15,
+          "kind": "text",
+          "text": "Standard",
+          "ratio": 4.98,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "themepick",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-yourmove",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-thinking",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "result",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "matches",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "replay",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "settings",
+      "theme": "light",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "home",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "seeall",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-c4",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-holdem",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "roster",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "welcome",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 4,
+        "min": 5.84,
+        "worst": {
+          "id": 1,
+          "kind": "text",
+          "text": "Play Against AI",
+          "ratio": 5.84,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-choose",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 11,
+        "min": 7.61,
+        "worst": {
+          "id": 4,
+          "kind": "text",
+          "text": "or",
+          "ratio": 7.61,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-email",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 4,
+        "min": 5.84,
+        "worst": {
+          "id": 1,
+          "kind": "text",
+          "text": "Continue",
+          "ratio": 5.84,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-password",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 6,
+        "min": 5.84,
+        "worst": {
+          "id": 3,
+          "kind": "text",
+          "text": "Continue",
+          "ratio": 5.84,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-create",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [
+        {
+          "el": "text",
+          "text": "Completing security check…",
+          "ratio": 2.31,
+          "need": 4.5,
+          "size": 0
+        }
+      ],
+      "smallTargets": [],
+      "scene": {
+        "n": 8,
+        "min": 2.31,
+        "worst": {
+          "id": 4,
+          "kind": "text",
+          "text": "Completing security check…",
+          "ratio": 2.31,
+          "need": 4.5
+        },
+        "fails": [
+          {
+            "id": 4,
+            "kind": "text",
+            "text": "Completing security check…",
+            "ratio": 2.31,
+            "need": 4.5
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "id": "setup",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 22,
+        "min": 5.12,
+        "worst": {
+          "id": 17,
+          "kind": "text",
+          "text": "Connect Four",
+          "ratio": 5.12,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "setup-error",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 20,
+        "min": 5.46,
+        "worst": {
+          "id": 17,
+          "kind": "text",
+          "text": "Connect Four",
+          "ratio": 5.46,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "themepick",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-yourmove",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-thinking",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "result",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "matches",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "replay",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "settings",
+      "theme": "dark",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "home",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "seeall",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-c4",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "table-holdem",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "roster",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "welcome",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 4,
+        "min": 6.11,
+        "worst": {
+          "id": 1,
+          "kind": "text",
+          "text": "Play Against AI",
+          "ratio": 6.11,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-choose",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 11,
+        "min": 6.41,
+        "worst": {
+          "id": 4,
+          "kind": "text",
+          "text": "or",
+          "ratio": 6.41,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-email",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 4,
+        "min": 6.11,
+        "worst": {
+          "id": 1,
+          "kind": "text",
+          "text": "Continue",
+          "ratio": 6.11,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-password",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 6,
+        "min": 6.11,
+        "worst": {
+          "id": 3,
+          "kind": "text",
+          "text": "Continue",
+          "ratio": 6.11,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "auth-create",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [
+        {
+          "el": "text",
+          "text": "Completing security check…",
+          "ratio": 1,
+          "need": 4.5,
+          "size": 0
+        }
+      ],
+      "smallTargets": [],
+      "scene": {
+        "n": 8,
+        "min": 1,
+        "worst": {
+          "id": 4,
+          "kind": "text",
+          "text": "Completing security check…",
+          "ratio": 1,
+          "need": 4.5
+        },
+        "fails": [
+          {
+            "id": 4,
+            "kind": "text",
+            "text": "Completing security check…",
+            "ratio": 1,
+            "need": 4.5
+          }
+        ]
+      },
+      "errors": []
+    },
+    {
+      "id": "setup",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 22,
+        "min": 5.25,
+        "worst": {
+          "id": 11,
+          "kind": "text",
+          "text": "0/160",
+          "ratio": 5.25,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "setup-error",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "scene": {
+        "n": 20,
+        "min": 4.68,
+        "worst": {
+          "id": 15,
+          "kind": "text",
+          "text": "Standard",
+          "ratio": 4.68,
+          "need": 4.5
+        },
+        "fails": []
+      },
+      "errors": []
+    },
+    {
+      "id": "themepick",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-yourmove",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "stage-thinking",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "result",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "matches",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "replay",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    },
+    {
+      "id": "settings",
+      "theme": "midnight",
+      "ok": true,
+      "lowContrast": [],
+      "smallTargets": [],
+      "errors": []
+    }
+  ]
+}

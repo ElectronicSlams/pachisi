@@ -1,0 +1,94 @@
+{
+  "base": "file://~/Downloads/eSlams/Arena App Design/eSlams Arena App.html",
+  "at": "2026-10-02T11:32:11.175Z",
+  "results": [
+    {
+      "id": 1,
+      "theme": "light",
+      "title": "Cold launch, brand beat, Home",
+      "ok": true,
+      "notes": [
+        "Welcome first paint settled after 1048 ms (incl. load)"
+      ],
+      "errors": [],
+      "warnings": [],
+      "ms": 5334
+    },
+    {
+      "id": 2,
+      "theme": "light",
+      "title": "Play now to result, share, play again",
+      "ok": true,
+      "notes": [
+        "Connect Four finished after 21 human moves"
+      ],
+      "errors": [],
+      "warnings": [],
+      "ms": 33856
+    },
+    {
+      "id": 9,
+      "theme": "light",
+      "title": "First run: Welcome, create account, setup (taken handle, favourites), Theme pick, Home",
+      "ok": true,
+      "notes": [],
+      "errors": [],
+      "warnings": [],
+      "ms": 11039
+    },
+    {
+      "id": 10,
+      "theme": "light",
+      "title": "Sign out to Welcome, I have an account, Home",
+      "ok": true,
+      "notes": [],
+      "errors": [],
+      "warnings": [],
+      "ms": 5048
+    },
+    {
+      "id": 1,
+      "theme": "dark",
+      "title": "Cold launch, brand beat, Home",
+      "ok": true,
+      "notes": [
+        "Welcome first paint settled after 1025 ms (incl. load)"
+      ],
+      "errors": [],
+      "warnings": [],
+      "ms": 5075
+    },
+    {
+      "id": 2,
+      "theme": "dark",
+      "title": "Play now to result, share, play again",
+      "ok": true,
+      "notes": [
+        "Connect Four finished after 21 human moves"
+      ],
+      "errors": [],
+      "warnings": [],
+      "ms": 34854
+    },
+    {
+      "id": 9,
+      "theme": "dark",
+      "title": "First run: Welcome, create account, setup (taken handle, favourites), Theme pick, Home",
+      "ok": true,
+      "notes": [],
+      "errors": [],
+      "warnings": [],
+      "ms": 11451
+    },
+    {
+      "id": 10,
+      "theme": "dark",
+      "title": "Sign out to Welcome, I have an account, Home",
+      "ok": true,
+      "notes": [],
+      "errors": [],
+      "warnings": [],
+      "ms": 5204
+    }
+  ]
+}

@@ -8,6 +8,9 @@
 | `/client` | Controlled fields, password/copy controls, tabs, dialog/sheet, avatar, terminal and poster/preview composites. Contains a React client boundary. |
 | `/game/icons`, `/game/ui-icons` | Canonical game/common UI icon sets. |
 | `/game/board`, `/game/board-types` | Stateless supplied simple-board rendering and frame contracts. |
+| `/game/board-adapter`, `/contract` | Host adapter (`boardFrameFromDisplayFrame`, `boardFrameFromCells`, `normalizeCellToken`) and the server-safe live render contract (`DisplayFrameV1`, `BoardScene`, version constants, privacy checks). See [contracts](contracts.md). |
+| `/game/interactions` | Pure legal-action labels, board from/to, cell targets and RL control slots. Describes actions; never decides legality. |
+| `/theme-tokens` | Typed theme contract with Classic Light/Dark and archived-mobile palettes as data. `tokens.css` remains the web source. |
 | `/game/demo`, `/game/demos`, `/game/catalogue` | Explicit synthetic artwork, dataset and metadata. Avoid these imports on routes that only need icons. |
 | `/game/scene` | Decorative `LegalDemonstration`; not a general actual-state renderer. |
 | `/game/motion`, `/game/icon-catalogue` | Visibility scheduling and icon identity list. |
@@ -19,16 +22,20 @@
 
 React and ReactDOM 19.2+ are peer dependencies. Next 16 is an optional peer used only by `/next`. Import client components from `/client`; don't mark your entire application layout as client to use the library. The package build preserves every source `use client` directive and emits ESM JavaScript plus declarations.
 
+## Live match frames
+
+To draw a real match, don't hand-build `BoardFrame`s from replay data. Parse the Platform's public display frame with `/contract` (`parseDisplayFrame` or `buildSceneEnvelope`), then project it with `boardFrameFromDisplayFrame` from `/game/board-adapter`. You get the `Board` frame, a list of `issues` (unsupported family, size mismatch, unknown token, privacy rejection) and the actor/turn/score `metadata` that `BoardFrame` cannot carry. Unsupported families come back as a placeholder that names the family. Legality, sessions, key/value (e.g. FEN) decoding and non-cell renderers stay in the host. Read [Live-state contracts](contracts.md) for the full pipeline, versions and the known breadth of the privacy key check.
+
 ## Local archive workflow
 
 ```sh
 # In Pachisi:
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm check
-pnpm pack --out ./artifacts/pachisi-0.1.0.tgz
+pnpm pack --out ./artifacts/pachisi-0.2.0.tgz
 
 # In a consumer (use the real archive path):
-pnpm add /path/to/pachisi/artifacts/pachisi-0.1.0.tgz
+pnpm add /path/to/pachisi/artifacts/pachisi-0.2.0.tgz
 ```
 
 Keep the archive in a reviewed vendor location if a lockfile needs to resolve it on another developer's machine. A path into somebody's laptop is not a reproducible CI dependency. Git installations require an explicit build step because registry publication is disabled and generated `dist` is not committed; do not point production at an unbuilt branch. A pinned reviewed snapshot or packed archive is the present distribution mechanism. There is no cross-repository `workspace:*` resolution.

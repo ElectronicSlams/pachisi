@@ -68,6 +68,19 @@ Separate the six modes explicitly:
 | Replay | Authorized recorded state plus host clock | Pausing freezes the interpreted game; no wall-clock invented physics |
 | Snapshot | One explicitly eligible actual frame, or explicitly labeled demo artwork | Match/turn shares must preserve actual provenance and hidden-information boundaries |
 
+## Live contract and board rendering decisions (29 October 2026)
+
+- **`DisplayFrameV1` is the live contract; `BoardFrame` is its projection.** A real match reaches the package as a versioned `DisplayFrameV1` (see [contracts](contracts.md)). `boardFrameFromDisplayFrame` projects it to a `BoardFrame` for the five cell families and returns a placeholder with issues for everything else. `BoardFrame` is not a second contract and is not extended into a table or poker model; seat, stack, trick and hole-card semantics belong in the contract first. `DisplayFrameV1` is not projected to `CardBoardFrame`.
+- **Three Connect Four drop curves exist. The web curve is canonical for DOM.**
+  - Pachisi `stDrop` (`src/game/styles.css`): from a start of `--drop` cells above (default 4; the landing-row distance is being set per frame), an overshoot keyframe at 70% (4% past the resting cell), then rest, 320 ms (`--dur-move-drop`), `--ease-out`.
+  - Legacy Platform `c4drop` (`reference/platform/.../games.css`): two keyframes only, from 340% above to rest, 320 ms, easing `cubic-bezier(.34,1.3,.5,1)` supplying its own overshoot. Its start distance does not depend on the landing row.
+  - Native `controlledDropBounce` (`reference/platform/mobile-8dd06c12/packages/board-skia/src/motion.ts`): quadratic fall to 1.055 of the distance by 82% of progress, then a cosine settle (5.5% overshoot), returning 1 under reduced motion.
+
+  Pachisi's `stDrop` is the DOM standard, with the drop distance set from the landing row. The native curve is preserved in `reference/platform` for a future native adapter and is not ported. The legacy curve stays as history.
+- **Cues are derived, not regenerated.** Last-move and win-line cues come from comparing consecutive frames (`src/game/cues.ts`). The bundled traces and their source pin are unchanged. The alternative, regenerating traces with per-frame `last` and `line`, would change artwork data and its Core provenance for a presentation concern. A live host should still supply authoritative `last` and `line` from Core events where it has them; derivation from frame differences is for the public demonstrations.
+- **Renderers fail closed.** An unknown token, an empty token drawn as a piece, a wrong cell count, a missing field or an unknown slug renders a labelled placeholder or a stated issue. A renderer never picks a side, shows a plausible default (an upright pole, an agent on the goal) or substitutes another game's artwork. A truthful "unavailable" state is preferred to a wrong picture.
+- **Archive and reference are history, not source.** `design-archive/` and `reference/platform/` are append-only, never imported by `src/`, and lose to `src/` and `styles/` on any disagreement. Porting means a new typed file in `src/` plus a manifest entry.
+
 ## Foundations that remain locked
 
 - **Brand:** keep the approved blue mark and light/dark wordmarks byte-for-byte. Never recolor, gradient-fill, outline, shadow or redraw the mark. Provider marks and user avatars are separate identity assets supplied by hosts; they are not eSlams brand variants.

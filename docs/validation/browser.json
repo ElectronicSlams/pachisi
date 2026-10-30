@@ -57,11 +57,111 @@
       "noExternalRequests": true
     },
     {
+      "themePersistence": {
+        "os": "light",
+        "saved": "dark",
+        "bg": "rgb(12, 12, 14)"
+      }
+    },
+    {
+      "themePersistence": {
+        "os": "dark",
+        "saved": "light",
+        "bg": "rgb(255, 255, 255)"
+      }
+    },
+    {
       "geometry": {
         "frames": 722,
         "bad": 0,
         "invalid": []
-      }
+      },
+      "drops": [
+        {
+          "width": 500,
+          "row": 0,
+          "drop": 1,
+          "duration": 320,
+          "boardTop": 160,
+          "startTop": 111.8828125,
+          "endTop": 180.90625,
+          "travel": 69.0234375,
+          "rowPitch": 69,
+          "colPitch": 69,
+          "endCentreOffset": -0.0078125,
+          "overshoot": 0.04000002763530244
+        },
+        {
+          "width": 500,
+          "row": 2,
+          "drop": 3,
+          "duration": 320,
+          "boardTop": 160,
+          "startTop": 111.8359375,
+          "endTop": 318.90625,
+          "travel": 207.0703125,
+          "rowPitch": 69,
+          "colPitch": 69,
+          "endCentreOffset": -0.0078125,
+          "overshoot": 0.04000002763530244
+        },
+        {
+          "width": 500,
+          "row": 5,
+          "drop": 6,
+          "duration": 320,
+          "boardTop": 160,
+          "startTop": 111.765625,
+          "endTop": 525.90625,
+          "travel": 414.140625,
+          "rowPitch": 69,
+          "colPitch": 69,
+          "endCentreOffset": -0.0078125,
+          "overshoot": 0.03999933675274142
+        },
+        {
+          "width": 240,
+          "row": 0,
+          "drop": 1,
+          "duration": 320,
+          "boardTop": 160,
+          "startTop": 137.54296875,
+          "endTop": 170.53125,
+          "travel": 32.98828125,
+          "rowPitch": 32.984375,
+          "colPitch": 32.96875,
+          "endCentreOffset": 0,
+          "overshoot": 0.04000002891376758
+        },
+        {
+          "width": 240,
+          "row": 2,
+          "drop": 3,
+          "duration": 320,
+          "boardTop": 160,
+          "startTop": 137.53515625,
+          "endTop": 236.5,
+          "travel": 98.96484375,
+          "rowPitch": 32.984375,
+          "colPitch": 32.96875,
+          "endCentreOffset": 0,
+          "overshoot": 0.04000002891376758
+        },
+        {
+          "width": 240,
+          "row": 5,
+          "drop": 6,
+          "duration": 320,
+          "boardTop": 160,
+          "startTop": 137.5234375,
+          "endTop": 335.453125,
+          "travel": 197.9296875,
+          "rowPitch": 32.984375,
+          "colPitch": 32.96875,
+          "endCentreOffset": 0,
+          "overshoot": 0.03999930606957809
+        }
+      ]
     }
   ]
 }

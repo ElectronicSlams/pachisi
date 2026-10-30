@@ -241,21 +241,21 @@
       "target": "src/game/board-types.ts",
       "sourceSha256": "e102b7cae18c5ad606b1e0e6d07134a7d8bb330151ffa700e5467676ea390848",
       "adapted": true,
-      "targetSha256": "b10c3b5b8bbdac6752c23ddd7abe29f5faa7dc681dbc2c674dc17c27547da0b0"
+      "targetSha256": "4db0e72b133c1907cc0a2cd78e2593ec3b7f63d1d85c57f5562f8fd1416da51d"
     },
     {
       "source": "packages/game-visuals/src/styles.css",
       "target": "src/game/styles.css",
       "sourceSha256": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf",
-      "adapted": false,
-      "targetSha256": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf"
+      "adapted": true,
+      "targetSha256": "0438bd45e8debfe5228d183118bc637b9dfe40c1dd2ef3ab41b2091c71ad8883"
     },
     {
       "source": "packages/game-visuals/src/demo.tsx",
       "target": "src/game/demo.tsx",
       "sourceSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202",
-      "adapted": false,
-      "targetSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202"
+      "adapted": true,
+      "targetSha256": "a1a1d84c956bfff09a4353debc892d6e79f0abc9a57f22216a51403b9ab8be06"
     },
     {
       "source": "packages/game-visuals/src/game-demonstrations.json",
@@ -275,15 +275,15 @@
       "source": "packages/game-visuals/src/motion.ts",
       "target": "src/game/motion.ts",
       "sourceSha256": "0c0bb98206d32cc217162b5007c45157b56a157f3236f3e81bd484e5b11d445e",
-      "adapted": false,
-      "targetSha256": "0c0bb98206d32cc217162b5007c45157b56a157f3236f3e81bd484e5b11d445e"
+      "adapted": true,
+      "targetSha256": "f38e2ece20a3d04ef53abbcb3e535bd587ec4347442a95599ac204c51401e49a"
     },
     {
       "source": "packages/game-visuals/src/board.tsx",
       "target": "src/game/board.tsx",
       "sourceSha256": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f",
-      "adapted": false,
-      "targetSha256": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f"
+      "adapted": true,
+      "targetSha256": "1cea19bf5c984bb320d0b693b1ce0f0d2b48793a0edf0ffe06ba99b5424b0fb8"
     },
     {
       "source": "packages/game-visuals/src/icons.tsx",
@@ -317,15 +317,15 @@
       "source": "packages/game-visuals/src/scene.tsx",
       "target": "src/game/scene.tsx",
       "sourceSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
-      "adapted": false,
-      "targetSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8"
+      "adapted": true,
+      "targetSha256": "e478f3d9a07f999d6787a3d16729db8032f1125350f31e1f0366503229ecdff1"
     },
     {
       "source": "packages/game-visuals/scripts/generate-demonstrations.py",
       "target": "scripts/generate-demonstrations.py",
       "sourceSha256": "9935d3f27463ebbe30d59bcd1012b6c79d93fc69f95f72fab9aee1aca33b670e",
       "adapted": true,
-      "targetSha256": "3d0edb5a7c27e259fadd2cca24ac6f545216f7aabacbbc9ade8f2dbda5dc1e92"
+      "targetSha256": "48a2abf43c371cf67530fbf03d4348d1d1c0a1c4ab15420c85a37d0607bd5bf7"
     },
     {
       "source": "packages/game-visuals/assets/logo-dark.png",
@@ -373,8 +373,8 @@
       "source": "apps/web/styles/tokens.css",
       "target": "styles/tokens.css",
       "sourceSha256": "3cff781aff5520f4cc0312e4a6b0ed906c0cafb37c7cf5e9325021255d2273b0",
-      "adapted": false,
-      "targetSha256": "3cff781aff5520f4cc0312e4a6b0ed906c0cafb37c7cf5e9325021255d2273b0"
+      "adapted": true,
+      "targetSha256": "e3347be374c19f645c713375ac69d1fc766a01371821e2ec012a12555a5ecd8d"
     },
     {
       "source": "apps/web/styles/components.css",
@@ -440,6 +440,110 @@
       "adapted": true,
       "adaptation": "Serializable type extracted; catalogue lookup remains host-owned.",
       "targetSha256": "9cde52cfab7f8e3cc686e54ad3ffbf9abcb9a51d7e596890443d5eecbb0c22f9"
+    },
+    {
+      "source": "packages/game-render-contract/src/index.ts",
+      "target": "src/contract/render-contract.ts",
+      "sourceSha256": "9354208a0ef0c85e90cf76bf672b05a2b2344a7db1f623182298e10e2eb7cd95",
+      "adapted": true,
+      "targetSha256": "d58aa6f4c0c37c8b8ed79588c597280139add3bbfd46f0ff9807507d8a3ed374"
+    },
+    {
+      "source": "packages/core-types/src/game-render.ts",
+      "target": "src/contract/core-types.ts",
+      "sourceSha256": "1fe986e7d58f9fde0713008eb1311c9033bab39dbdd0e24a1ead14f6edc37587",
+      "adapted": true,
+      "targetSha256": "0ce71f11e1adbdc9d6765007aaad7f0dbae859d4577d868f62123278b79ecda0"
+    },
+    {
+      "source": "packages/core-types/src/contract-versions.ts",
+      "target": "src/contract/core-types.ts",
+      "sourceSha256": "24019ada1b121a9add6f3b67f09e11f1663b31f82aff2d6c4cbc338e7cbfba5f",
+      "adapted": true,
+      "targetSha256": "0ce71f11e1adbdc9d6765007aaad7f0dbae859d4577d868f62123278b79ecda0"
+    },
+    {
+      "source": "packages/core-types/src/public-replay-safety.ts",
+      "target": "src/contract/core-types.ts",
+      "sourceSha256": "bdde545f41f9809cdb8ba273002b4e08ad475fb2693bedb21477faf1a71adefe",
+      "adapted": true,
+      "targetSha256": "0ce71f11e1adbdc9d6765007aaad7f0dbae859d4577d868f62123278b79ecda0"
+    },
+    {
+      "source": "apps/web/lib/stadium/board.ts",
+      "target": "src/game/board-adapter.ts",
+      "sourceSha256": "0cdae048f3ee8f32df2fbb72c48366768f992947ec59c8fe976c3aead4b9ef87",
+      "adapted": true,
+      "targetSha256": "34c68b47d48b7cc6f810de8962bf634c8cbff72cfe152717af26479c44c39347"
+    },
+    {
+      "source": "apps/web/lib/arena-interactions.ts",
+      "target": "src/game/interactions.ts",
+      "sourceSha256": "2c27a15469701107dda01f6de15ced5bb8901850b57e3b4ac02d2d76f352edfb",
+      "adapted": true,
+      "targetSha256": "c137cb653027a3cb6ef3fa7718ba53e69276ad9ec1bf638d2f0bca574b45cc9e"
+    },
+    {
+      "source": "packages/theme-tokens/src/contract.ts",
+      "sourceCommit": "8dd06c12819b062d983ca68f05b2c5213e43d9b8",
+      "target": "src/theme-tokens/contract.ts",
+      "sourceSha256": "e51b0db4eefb551ef5764d977a422cf430efbf033d1f4087735d20578ac2103d",
+      "adapted": true,
+      "targetSha256": "6f68529272154bd8a9b3162f6d1642afc2c6b270fc9f3b2a556fc2d148a4d7d7"
+    },
+    {
+      "source": "packages/theme-tokens/src/themes.ts",
+      "sourceCommit": "8dd06c12819b062d983ca68f05b2c5213e43d9b8",
+      "target": "src/theme-tokens/themes.ts",
+      "sourceSha256": "6f2eda4e1d3af8d47d2b64f7163d1bdf664d7aa8947a814c8d1296d18bdec70c",
+      "adapted": true,
+      "targetSha256": "b7b9bd07dc62a0237a67a94bb3ee60d937ee07df1e3bd317caefe0637ae433b2"
+    },
+    {
+      "source": "packages/theme-tokens/src/resolution.ts",
+      "sourceCommit": "8dd06c12819b062d983ca68f05b2c5213e43d9b8",
+      "target": "src/theme-tokens/resolution.ts",
+      "sourceSha256": "f8da941b23e197a04a7d589837905462ee5f48fe152a3e7138797fad2a4660aa",
+      "adapted": true,
+      "targetSha256": "9e99c5525ded459646be2810fb6f765ddc4cb2bef9f9835791dbe4f371d32997"
+    },
+    {
+      "source": "packages/theme-tokens/src/css.ts",
+      "sourceCommit": "8dd06c12819b062d983ca68f05b2c5213e43d9b8",
+      "target": "src/theme-tokens/css.ts",
+      "sourceSha256": "9e9a3f56551f9724697625d98e975bc1b6c6fa69ce271c8e19b6fdb145eef94a",
+      "adapted": true,
+      "targetSha256": "acf974d984c8fa8c123e5f2f28ebac22a00e88f4d2c65a6d112943df827695ce"
+    },
+    {
+      "source": "packages/theme-tokens/src/snapshot.ts",
+      "sourceCommit": "8dd06c12819b062d983ca68f05b2c5213e43d9b8",
+      "target": "src/theme-tokens/snapshot.ts",
+      "sourceSha256": "281a8474eff66fa43d5d5c2a396a9b8a5b27ccf13fe1605c73722271914c570c",
+      "adapted": true,
+      "targetSha256": "72c39ba627db606d643b963066ff46cc4b56899bf2e8e194fd036ab903d37673"
+    },
+    {
+      "source": "packages/theme-tokens/src/index.ts",
+      "sourceCommit": "8dd06c12819b062d983ca68f05b2c5213e43d9b8",
+      "target": "src/theme-tokens/index.ts",
+      "sourceSha256": "dca5ab5de95521252b7b736dcce6bec740e97c6c3827e0eef6e771e7ac2fadb7",
+      "adapted": true,
+      "targetSha256": "6df4c8a58422b2a7e6d8b346c3acba37d3946ec8f001921657bb49804ca3dfdd"
+    },
+    {
+      "source": "packages/game-render-contract/tests/game-render-contract.test.ts",
+      "target": "tests/contract.test.tsx",
+      "sourceSha256": "6ad1b78b5b0af858ac09d3333da3630752b15feaed623d1da3cb53534c9fd0cd",
+      "adapted": true,
+      "targetSha256": "e50ab3ce833aac7453d943b0a944cea6e52ce19a125e02be924c0eac601ab669"
+    },
+    {
+      "source": "apps/web/tests/arena-interactions.test.ts",
+      "target": "tests/board-adapter.test.tsx",
+      "sourceSha256": "fd574a504bdbb6597dd60c3817b5fc8447a6742a9a0291bb2521e52fc0000800",
+      "adapted": true,
+      "targetSha256": "fbb158e3a003a0bc3213687ae8ac88e085247807637188aab8ce1c86a72297b8"
     }
   ],
   "adaptations": [
@@ -451,5 +555,6 @@
     "Event CSS classes/keyframes and four navigation destinations are explicit.",
     "Source generator uses the relocated game directory.",
     "Build emits ESM and NodeNext-compatible declarations without bundling React."
-  ]
+  ],
+  "fileCommitNote": "Entries without sourceCommit come from platformCommit. Entries with sourceCommit were recovered from the older Platform main noted there (packages deleted upstream in 8b88fde0 on 2026-08-16)."
 }

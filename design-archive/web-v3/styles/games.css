@@ -1,0 +1,117 @@
+/* ============================================================
+   eSlams — Game boards & arena visuals
+   ============================================================ */
+
+/* ---------- Chess ---------- */
+.chessboard {
+  display: grid; grid-template-columns: repeat(8, 1fr); aspect-ratio: 1;
+  border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm); user-select: none;
+}
+.cb-md { width: 100%; max-width: 420px; }
+.cb-sm { width: 100%; max-width: 240px; }
+.cb-lg { width: 100%; max-width: 520px; }
+.cb-sq { display:flex; align-items:center; justify-content:center; aspect-ratio:1; position:relative; }
+.cb-light { background: var(--board-light); }
+.cb-dark { background: var(--board-dark); }
+.cb-last::after { content:''; position:absolute; inset:0; background: var(--accent-soft); box-shadow: inset 0 0 0 2px var(--accent-line); }
+.cb-pc { font-size: clamp(18px, 5.2cqw, 40px); line-height:1; position:relative; z-index:1; }
+.chessboard { container-type: inline-size; }
+.cb-white { color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,.35), 0 0 1px #555, 0.6px 0 0 #4a4a4a, -0.6px 0 0 #4a4a4a, 0 0.6px 0 #4a4a4a, 0 -0.6px 0 #4a4a4a; }
+.cb-black { color: #1a1a1d; text-shadow: 0 1px 1px rgba(255,255,255,.18); }
+:root[data-theme="dark"] .cb-black, :root:not([data-theme="light"]) .cb-black { color: #0a0a0c; }
+
+/* ---------- Connect Four ---------- */
+.c4board {
+  background: var(--accent); padding: 12px; border-radius: var(--r-lg); display:grid;
+  grid-template-columns: repeat(7, 1fr); gap: 8px; box-shadow: var(--shadow-md);
+  container-type: inline-size; width: 100%; max-width: 420px;
+}
+:root[data-theme="dark"] .c4board, :root:not([data-theme="light"]) .c4board { background: color-mix(in oklch, var(--accent) 60%, #1a1a2e); }
+.c4cell { aspect-ratio:1; background: var(--bg); border-radius: 50%; position:relative; box-shadow: inset 0 2px 5px rgba(0,0,0,.18); }
+.c4disc { position:absolute; inset:5%; border-radius:50%; animation: c4drop .32s cubic-bezier(.34,1.3,.5,1); }
+.c4-R { background: radial-gradient(circle at 35% 30%, #ff8a7a, #e0463a); }
+.c4-Y { background: radial-gradient(circle at 35% 30%, #ffe08a, #e8b21f); }
+.c4col { cursor:pointer; }
+.c4colwrap { display:grid; grid-template-columns: repeat(7,1fr); gap:8px; position:absolute; inset:12px; }
+.c4colhit { cursor:pointer; border-radius: 8px; transition: background .12s; }
+.c4colhit:hover { background: rgba(255,255,255,0.12); }
+.c4win { box-shadow: 0 0 0 3px #fff, 0 0 12px rgba(255,255,255,.6); z-index:2; }
+@keyframes c4drop { from { transform: translateY(-340%); } to { transform: none; } }
+.c4wrap { position: relative; width:100%; max-width:420px; }
+
+/* ---------- Tic Tac Toe ---------- */
+.tttboard {
+  display:grid; grid-template-columns: repeat(3,1fr); gap: 10px; width:100%; max-width: 320px;
+  container-type: inline-size;
+}
+.tttcell {
+  aspect-ratio:1; background: var(--surface-2); border: 1.5px solid var(--border); border-radius: var(--r-md);
+  display:flex; align-items:center; justify-content:center; font-size: clamp(36px, 22cqw, 64px); font-weight:600;
+  cursor:pointer; transition: all .14s; position:relative;
+}
+.tttcell:hover:not(.filled) { border-color: var(--accent-line); background: var(--accent-softer); }
+.tttcell.filled { cursor: default; }
+.ttt-X { color: var(--accent); }
+.ttt-O { color: var(--text); }
+.ttt-mark { animation: popIn .2s ease; line-height:1; }
+.tttcell.tttwin { background: var(--accent-soft); border-color: var(--accent); }
+
+/* ---------- Othello ---------- */
+.othboard {
+  display:grid; grid-template-columns: repeat(8,1fr); gap: 2px; background: var(--board-line);
+  padding: 8px; border-radius: var(--r-md); width:100%; max-width: 400px; container-type: inline-size;
+  border:1px solid var(--border-strong);
+}
+.othcell { aspect-ratio:1; background: #1f7a4d; display:flex; align-items:center; justify-content:center; position:relative; border-radius:2px; }
+:root[data-theme="dark"] .othcell, :root:not([data-theme="light"]) .othcell { background: #1c6b45; }
+.othcell.legal { cursor:pointer; }
+.othcell.legal::after { content:''; width:26%; height:26%; border-radius:50%; background: rgba(255,255,255,.28); transition: transform .12s; }
+.othcell.legal:hover::after { transform: scale(1.25); background: rgba(255,255,255,.5); }
+.othdisc { width:78%; height:78%; border-radius:50%; animation: popIn .18s ease; }
+.othdisc.d-B { background: radial-gradient(circle at 35% 30%, #444, #0c0c0d); }
+.othdisc.d-W { background: radial-gradient(circle at 35% 30%, #fff, #d3d3d6); }
+
+/* ---------- Go ---------- */
+.goboard { background: var(--board-bg); border-radius: var(--r-md); padding: 4%; border:1px solid var(--border-strong); container-type: inline-size; }
+.go-grid { width:100%; height:100%; display:block; overflow: visible; }
+.go-grid line { stroke: var(--board-line); stroke-width: 0.03; }
+.go-star { fill: var(--board-line); }
+.go-b { fill: var(--stone-black); }
+.go-w { fill: var(--stone-white); stroke: var(--board-line); stroke-width: 0.025; }
+
+/* ---------- Generic board ---------- */
+.genboard { display:grid; grid-template-columns: repeat(8,1fr); width:100%; max-width: 360px; aspect-ratio:1; border-radius: var(--r-md); overflow:hidden; border:1px solid var(--border-strong); }
+.gb-sq { aspect-ratio:1; }
+.gb-l { background: var(--board-light); }
+.gb-d { background: var(--board-dark); }
+
+/* ---------- Cards ---------- */
+.cardtable { display:flex; gap: -10px; justify-content:center; align-items:center; padding: 24px; min-height: 180px; }
+.playcard {
+  width: 76px; height: 108px; background: var(--surface); border:1px solid var(--border-strong); border-radius: 9px;
+  box-shadow: var(--shadow-md); display:flex; flex-direction:column; justify-content:space-between; padding: 9px; margin-left: -22px;
+  transform: rotate(calc((var(--i) - 1.5) * 6deg)) translateY(calc(var(--i) * -2px)); transition: transform .2s; color: var(--text);
+}
+.playcard:first-child { margin-left: 0; }
+.playcard:hover { transform: rotate(calc((var(--i) - 1.5) * 6deg)) translateY(-14px); z-index:2; }
+.pc-red { color: var(--loss); }
+.pc-rank { font-size: 19px; font-weight: 700; font-family: var(--font-mono); }
+.pc-suit { font-size: 30px; text-align:right; }
+
+/* ---------- RL preview ---------- */
+.rlview { display:flex; align-items:center; justify-content:center; padding: 20px; }
+.rl-svg { width: 100%; max-width: 340px; }
+.rl-ground { stroke: var(--border-strong); stroke-width: 1.5; }
+.rl-track { stroke: var(--accent-line); stroke-width: 2; fill:none; stroke-dasharray: 3 4; }
+.rl-agent { fill: var(--accent); }
+.rl-goal { fill: var(--win); }
+
+/* ---------- Strategy matrix ---------- */
+.matrixview { display:flex; align-items:center; justify-content:center; padding: 24px; }
+.payoff { display:grid; grid-template-columns: repeat(2,1fr); gap: 6px; }
+.po-cell {
+  width: 78px; height: 60px; display:flex; align-items:center; justify-content:center; font-family: var(--font-mono);
+  font-size: 15px; background: var(--surface-2); border:1px solid var(--border); border-radius: var(--r-sm); color: var(--text-2);
+}
+.po-diag { background: var(--accent-soft); color: var(--accent); border-color: var(--accent-line); }
