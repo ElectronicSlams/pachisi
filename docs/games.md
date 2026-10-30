@@ -679,7 +679,7 @@ Support terms: **frame-view** = basic supplied canonical board rendering; **part
 - **Host action contract:** Move the paddle before the ball advances. This describes payload syntax; Core/the host still decides state-specific legality. The full current schema is in `game-coverage.json`.
 - **Public synthetic state fields:** `ball`, `bounces`, `paddle_x`.
 - **Nested object keys observed:** `ball` → `vx`, `vy`, `x`, `y`. These are observed trace fields, not an exhaustive runtime schema.
-- **Actual adaptation (not-adapted):** This is bottom-paddle ball, not side-paddle Pong. Map paddle_x and ball coordinates into the bounded court; the demo aligns the paddle face to collision y=.08 plus ball radius.
+- **Actual adaptation (not-adapted):** This is bottom-paddle ball, not side-paddle Pong. Map paddle_x and ball coordinates into the bounded court; the demo insets the ball centre range by ball radius plus stroke (6.2 SVG units) so the ball never crosses the drawn walls, and aligns the paddle face to collision y=.08 with the same inset.
 - **Motion:** Use actual ball x/y/vx/vy and collision outcomes; do not spawn a fallback ball or animate extra bounces.
 - **Visibility/perspective:** Public numeric state. Avoid leaking a false physics assertion through cosmetic motion.
 - **Responsive and accessible use:** Apply the common contract above. Preserve this geometry at all sizes, add an enlarged/readable view when needed, and supply a game-specific textual position/turn/result plus host-owned keyboard legal actions.

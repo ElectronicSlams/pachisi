@@ -11,8 +11,10 @@ import {
  arenaBoardCellActionFromAction, arenaBoardMoveFromAction, arenaRlControlSlotFromAction, arenaSideLabelForGame,
  arenaSideOptionsForGame, describeArenaAction, type ArenaCategory, type ArenaGameLike, type ArenaLegalAction,
 } from '../dist/game/interactions.js';
-import { DISPLAY_FRAME_VERSION, PUBLIC_STATE_VERSION, RENDERER_VERSION, RENDER_ADAPTER_VERSION, buildSceneEnvelope, parseDisplayFrame, type DisplayCell, type DisplayFrameV1 } from '../dist/contract/index.js';
+import { DISPLAY_FRAME_VERSION, PUBLIC_STATE_VERSION, RENDERER_VERSION, RENDER_ADAPTER_VERSION, adaptPublicStateToDisplayFrame, buildSceneEnvelope, parseDisplayFrame, type DisplayCell, type DisplayFrameV1 } from '../dist/contract/index.js';
 import { GAME_ANIMATIONS } from '../dist/game/catalogue.js';
+import { GAME_DEMONSTRATIONS } from '../dist/game/demos.js';
+import { LegalDemonstration } from '../dist/game/scene.js';
 
 const TTT = { family: 'grid_3x3', rows: 3, cols: 3, name: 'Tic-Tac-Toe' } as const;
 const C4 = { family: 'connect_four', rows: 6, cols: 7, name: 'Connect Four' } as const;
@@ -244,4 +246,80 @@ test('board moves, cell targets and RL slots parse without inventing tokens', ()
  assert.equal(arenaRlControlSlotFromAction(action('guard', 'Guard')), 'center');
  assert.equal(arenaRlControlSlotFromAction(action('fire', 'Fire', { verb: 'fire' })), null);
  assert.equal(isCellBoardFamily('dice_table'), false);
+});
+
+test('F2: boardFrameFromCells fails closed on an unknown non-empty token instead of erasing it', () => {
+ const square = { family: 'square_board', rows: 2, cols: 2, name: 'Othello' } as const;
+ const unknown = boardFrameFromCellsWithIssues(square, ['B', 'DRAGON', '.', 'W']);
+ assert.deepEqual(unknown.frame, { kind: 'placeholder', family: 'square_board', label: 'Othello' });
+ assert.equal(unknown.issues.length, 1);
+ assert.match(unknown.issues[0]!, /Cell 1 token "DRAGON" is not a recognised square_board token; returned a placeholder/u);
+ assert.deepEqual(boardFrameFromCells(square, ['B', 'DRAGON', '.', 'W']), unknown.frame);
+ for (const [geometry, cells, bad] of [
+  [TTT, ['X', 'O', 'Q', '', '', '', '', '', ''], /"Q" is not a recognised grid_3x3/u],
+  [CHESS, ['K', ...Array.from({ length: 62 }, () => '.'), 'Z'], /Cell 63 token "Z" is not a recognised chess/u],
+  [{ family: 'square_board', rows: 1, cols: 2, variant: 'checkers' }, ['r', 'w'], /"w" is not a recognised checkers/u],
+  [{ family: 'hex_board', rows: 1, cols: 2 }, ['R', 'W'], /"W" is not a recognised hex_board/u],
+  [TTT, ['X', 4 as unknown as string, '', '', '', '', '', '', ''], /Cell 1 token 4 /u],
+ ] as const) {
+  const result = boardFrameFromCellsWithIssues(geometry, cells);
+  assert.equal(result.frame.kind, 'placeholder', String(bad)); assert.match(result.issues[0]!, bad);
+ }
+ // Valid boards and every empty spelling are unchanged.
+ const valid = boardFrameFromCellsWithIssues(square, ['B', null, '-', 'W']);
+ assert.deepEqual(valid, { frame: { kind: 'cells', family: 'square_board', rows: 2, cols: 2, cells: ['B', '.', '.', 'W'] }, issues: [] });
+ assert.deepEqual(boardFrameFromCells(TTT, ['player_1', '', ' ', '_', 'O', undefined, null, '.', 'x']), { kind: 'cells', family: 'grid_3x3', rows: 3, cols: 3, cells: ['X', '.', '.', '.', 'O', '.', '.', '.', 'X'] });
+ // normalizeCellToken itself keeps its documented lossy semantics.
+ assert.equal(normalizeCellToken('square_board', 'DRAGON'), '.');
+});
+
+/** Classes of the rendered hex cells, in order: "a" (first seat), "b" (second seat) or "empty". */
+const hexClasses = (html: string) => [...html.matchAll(/st-hex-(a|b|empty)\b/gu)].map((match) => match[1]);
+
+test('F3: Core Hex tokens (B = player 1, W = player 2) project to Board R / B only with tokens: "core"', () => {
+ const demo = GAME_DEMONSTRATIONS.hex!;
+ for (const [i, demoFrame] of demo.frames.entries()) {
+  const board = (demoFrame.state.board as (string | null)[][]).flat();
+  const live = adaptPublicStateToDisplayFrame({ board, rows: 11, cols: 11 }, { gameSlug: 'hex', rendererFamily: 'hex_board' });
+  assert.ok(live, `frame ${i}`);
+  const core = boardFrameFromDisplayFrame(live, { tokens: 'core' });
+  assert.deepEqual(core.issues, [], `frame ${i}`);
+  assert.equal(core.frame.kind, 'cells');
+  if (core.frame.kind !== 'cells') continue;
+  assert.deepEqual(core.frame.cells, board.map((v) => (v === 'B' ? 'R' : v === 'W' ? 'B' : '.')), `frame ${i}`);
+  // Same seats as the decorative scene draws from the same Core state.
+  const scene = renderToStaticMarkup(<LegalDemonstration game="hex" frame={demoFrame} />);
+  assert.deepEqual(hexClasses(renderToStaticMarkup(<Board frame={core.frame} />)), hexClasses(scene), `frame ${i}`);
+  // The direct cell path agrees.
+  assert.deepEqual(boardFrameFromCells({ family: 'hex_board', rows: 11, cols: 11, tokens: 'core' }, board), core.frame, `frame ${i}`);
+ }
+ const flat = ['B', 'W', null, null];
+ const live = adaptPublicStateToDisplayFrame({ board: flat, rows: 2, cols: 2 }, { gameSlug: 'hex', rendererFamily: 'hex_board' })!;
+ assert.deepEqual(boardFrameFromDisplayFrame(live, { tokens: 'core' }).frame, { kind: 'cells', family: 'hex_board', rows: 2, cols: 2, cells: ['R', 'B', '.', '.'] });
+ // Core vocabulary on Hex accepts only Core's B/W; Board's R is not a Core Hex token.
+ const boardR = boardFrameFromCellsWithIssues({ family: 'hex_board', rows: 1, cols: 2, tokens: 'core' }, ['R', '.']);
+ assert.equal(boardR.frame.kind, 'placeholder'); assert.match(boardR.issues[0]!, /"R" is not a recognised Core hex_board token/u);
+});
+
+test('F3: the default "board" vocabulary keeps B as the second Hex seat and still rejects W', () => {
+ const live = adaptPublicStateToDisplayFrame({ board: ['R', 'B', null, null], rows: 2, cols: 2 }, { gameSlug: 'hex', rendererFamily: 'hex_board' })!;
+ for (const options of [{}, { tokens: 'board' as const }]) {
+  assert.deepEqual(boardFrameFromDisplayFrame(live, options).frame, { kind: 'cells', family: 'hex_board', rows: 2, cols: 2, cells: ['R', 'B', '.', '.'] });
+ }
+ const white = boardFrameFromDisplayFrame({ ...live, cells: live.cells.map((c, i) => (i === 1 ? { ...c, label: 'W' } : c)) });
+ assert.equal(white.frame.kind, 'placeholder'); assert.match(white.issues[0]!, /"W" is not a recognised hex_board token/u);
+ assert.deepEqual(boardFrameFromCells({ family: 'hex_board', rows: 1, cols: 2 }, ['R', 'B']), { kind: 'cells', family: 'hex_board', rows: 1, cols: 2, cells: ['R', 'B'] });
+});
+
+test('F3: non-Hex families read the same in both vocabularies', () => {
+ const go = { family: 'go_board', rows: 1, cols: 3 } as const;
+ for (const tokens of ['board', 'core'] as const) {
+  assert.deepEqual(boardFrameFromCells({ ...go, tokens }, ['B', 'W', null]), { kind: 'cells', family: 'go_board', rows: 1, cols: 3, cells: ['B', 'W', '.'] }, tokens);
+  assert.deepEqual(boardFrameFromCells({ ...TTT, tokens }, ['X', 'O', ...Array.from({ length: 7 }, () => '')]).kind, 'cells', tokens);
+  assert.deepEqual(boardFrameFromCells({ ...C4, tokens }, ['R', 'Y', ...Array.from({ length: 40 }, () => null)]), { kind: 'cells', family: 'connect_four', rows: 6, cols: 7, cells: ['R', 'Y', ...Array.from({ length: 40 }, () => '.')] }, tokens);
+  assert.equal(boardFrameFromCells({ ...CHESS, tokens }, ['K', ...Array.from({ length: 62 }, () => '.'), 'k']).kind, 'cells', tokens);
+  const ttt = boardFrameFromDisplayFrame(liveFrame(tttLabels.map((label, index) => cell(index, label))), { tokens });
+  assert.deepEqual([ttt.issues, ttt.frame.kind === 'cells' && ttt.frame.cells.join('')], [[], 'O...X...X'], tokens);
+  assert.equal(boardFrameFromCellsWithIssues({ ...go, tokens }, ['B', 'DRAGON', null]).frame.kind, 'placeholder', tokens);
+ }
 });

@@ -15,6 +15,10 @@
  *   hard-coded the scripted stadium-record hands.
  * - New: `boardFrameFromDisplayFrame`, a non-throwing projection of the live
  *   render contract that reports issues and preserves actor/turn/score metadata.
+ * - New: `tokens: "board" | "core"` names the source cell vocabulary, so Core's
+ *   Hex `B`/`W` (player 1 / player 2) is never read as Board's `B` (second seat).
+ * - Both projections fail closed: a non-empty token the family does not
+ *   recognise returns a placeholder plus an issue instead of an empty cell.
  *
  * Pure TypeScript: no React, DOM, network or catalogue imports.
  */
@@ -45,7 +49,32 @@ export type BoardGeometry = {
   readonly variant?: "discs" | "checkers";
   /** Human-readable game name, used as the placeholder label. */
   readonly name?: string;
+  /**
+   * Source vocabulary of the supplied cell tokens. "board" (the default) reads
+   * them as Board/normalised tokens. "core" first applies Core's per-family
+   * encoding (see `CORE_TOKEN_MAPS`); today only Hex differs.
+   */
+  readonly tokens?: CellTokenVocabulary;
 };
+
+/**
+ * Which vocabulary a host's cell tokens are written in.
+ * - "board": pachisi's Board vocabulary (and the spellings `normalizeCellToken`
+ *   accepts). On a hex board `R` is the first seat and `B` the second (blue).
+ * - "core": the bundled Core engines' public state. On a hex board Core writes
+ *   `B` for player 1 and `W` for player 2, which become Board `R` and `B`.
+ * The meaning of a bare `B` is never guessed: the host states the vocabulary.
+ */
+export type CellTokenVocabulary = "board" | "core";
+
+/**
+ * Core → Board token maps for families whose Core encoding differs from Board's.
+ * Families not listed use Core tokens as Board tokens (X/O, R/Y, B/W, chess letters).
+ * Matches the decorative scene's own conversion in `scene.tsx` (`cellModel`).
+ */
+export const CORE_TOKEN_MAPS: Readonly<Partial<Record<CellBoardFamily, Readonly<Record<string, string>>>>> = Object.freeze({
+  hex_board: Object.freeze({ B: "R", W: "B" }),
+});
 
 export const CELL_BOARD_FAMILIES: readonly CellBoardFamily[] = Object.freeze([
   "grid_3x3",
@@ -141,12 +170,22 @@ function projectCells(
   }
   const chess = geometry.chess === true;
   const variant = family === "square_board" && !chess ? geometry.variant : undefined;
+  const vocabulary = geometry.tokens ?? "board";
+  const projected: string[] = [];
+  for (const [index, cell] of cells.entries()) {
+    const token = projectCellToken(family, cell, chess, variant, vocabulary);
+    if (token === null) {
+      issues.push(`Cell ${index} token ${JSON.stringify(cell)} is not a recognised ${tokenSetName(family, chess, variant, vocabulary)} token; returned a placeholder.`);
+      return { frame: placeholderFrame(family, label), issues };
+    }
+    projected.push(token);
+  }
   const frame: CellBoardFrame = {
     kind: "cells",
     family,
     rows,
     cols,
-    cells: cells.map((cell) => normalizeCellToken(family, cell, chess, variant)),
+    cells: projected,
     ...(chess ? { chess: true } : {}),
     ...(variant ? { variant } : {}),
     ...overlay("last", options.last, rows * cols, issues),
@@ -191,7 +230,11 @@ export function isEmptyCellToken(token: string | null | undefined): boolean {
  * - chess keeps its piece letters (KQRBNP white, kqrbnp black)
  * - square_board with `variant: "checkers"` keeps men `r` / `b` and kings `R` / `B`
  * Empty cells are always "." (including `""`, null and undefined). Unrecognised
- * tokens also become "."; use `boardFrameFromDisplayFrame` when that must be reported.
+ * tokens also become ".", so this function alone cannot tell an empty cell from
+ * an unknown piece. `boardFrameFromCells`, `boardFrameFromCellsWithIssues` and
+ * `boardFrameFromDisplayFrame` check for that and fail closed to a placeholder;
+ * call `isEmptyCellToken` yourself if you use this function directly.
+ * Tokens are read in the Board vocabulary; see `CellTokenVocabulary` for Core.
  */
 export function normalizeCellToken(
   family: CellBoardFamily,
@@ -213,6 +256,34 @@ export function normalizeCellToken(
   if (family === "grid_3x3") return seat === 1 ? "X" : seat === 2 ? "O" : ".";
   if (family === "connect_four") return seat === 1 ? "R" : seat === 2 ? "Y" : ".";
   return seat === 1 ? "B" : seat === 2 ? "W" : ".";
+}
+
+/**
+ * One cell token in the stated vocabulary → Board token, `"."` for every empty
+ * spelling, or null when a non-empty token is not recognised (the caller fails closed).
+ */
+function projectCellToken(
+  family: CellBoardFamily,
+  token: unknown,
+  chess: boolean,
+  variant: "discs" | "checkers" | undefined,
+  vocabulary: CellTokenVocabulary,
+): string | null {
+  if (token === null || token === undefined) return ".";
+  if (typeof token !== "string") return null;
+  if (isEmptyCellToken(token)) return ".";
+  const coreMap = vocabulary === "core" && !chess ? CORE_TOKEN_MAPS[family] : undefined;
+  if (coreMap) {
+    const mapped = coreMap[token.trim().toUpperCase()];
+    return mapped ?? null;
+  }
+  const normalised = normalizeCellToken(family, token, chess, variant);
+  return normalised === "." ? null : normalised;
+}
+
+function tokenSetName(family: CellBoardFamily, chess: boolean, variant: "discs" | "checkers" | undefined, vocabulary: CellTokenVocabulary): string {
+  const name = chess ? "chess" : variant === "checkers" ? "checkers" : family;
+  return vocabulary === "core" && !chess && CORE_TOKEN_MAPS[family] ? `Core ${name}` : name;
 }
 
 const cardRankValue = "23456789TJQKA";
@@ -286,6 +357,12 @@ export type DisplayFrameProjectionOptions = BoardOverlayOptions & {
   readonly chess?: boolean;
   /** Placeholder label (usually the game name). Defaults to the frame's game slug. */
   readonly label?: string;
+  /**
+   * Vocabulary of the cell labels. "board" (the default) keeps today's reading;
+   * pass "core" for labels copied from Core public state (e.g. Hex `B`/`W` via
+   * `adaptPublicStateToDisplayFrame`). See `CellTokenVocabulary`.
+   */
+  readonly tokens?: CellTokenVocabulary;
 };
 
 export type DisplayFrameProjection = {
@@ -305,6 +382,7 @@ const boardCellKinds = new Set<DisplayCell["kind"]>(["board", "grid", "cells"]);
  *   unique and in range, and the board-cell count must equal `rows * cols`;
  * - `""`, null and the other empty spellings normalise to `"."`; a non-empty label the
  *   family does not recognise fails closed to a placeholder instead of drawing an empty cell;
+ * - labels are read in `options.tokens` vocabulary ("board" by default, "core" for Core state);
  * - `last`/`line` come only from `options` (DisplayFrameV1 has no last-move field, so
  *   nothing is inferred from `actionLabel` or diffs) and are bounds-checked;
  * - keys matching the privacy patterns reject the whole frame.
@@ -363,6 +441,7 @@ export function boardFrameFromDisplayFrame(frame: DisplayFrameV1, options: Displ
   }
 
   const chess = options.chess ?? gameSlug === "chess";
+  const vocabulary = options.tokens ?? "board";
   const tokens: (string | undefined)[] = Array.from({ length: rows * cols });
   for (const cell of boardCells) {
     const position = positionOf(cell, cols);
@@ -374,9 +453,9 @@ export function boardFrameFromDisplayFrame(frame: DisplayFrameV1, options: Displ
     if (tokens[position] !== undefined) return fail(`Two cells occupy position ${position}; returned a placeholder.`);
     const labelText = typeof cell.label === "string" ? cell.label : cell.label === null || cell.label === undefined ? "" : null;
     if (labelText === null) return fail(`Cell "${String(cell.id)}" label is not a string; returned a placeholder.`);
-    const token = normalizeCellToken(family, labelText, chess);
-    if (token === "." && !isEmptyCellToken(labelText)) {
-      return fail(`Cell "${String(cell.id)}" label ${JSON.stringify(labelText)} is not a recognised ${chess ? "chess" : family} token; returned a placeholder.`);
+    const token = projectCellToken(family, labelText, chess, undefined, vocabulary);
+    if (token === null) {
+      return fail(`Cell "${String(cell.id)}" label ${JSON.stringify(labelText)} is not a recognised ${tokenSetName(family, chess, undefined, vocabulary)} token; returned a placeholder.`);
     }
     tokens[position] = token;
   }

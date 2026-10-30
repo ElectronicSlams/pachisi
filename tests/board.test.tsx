@@ -104,6 +104,30 @@ test('Go draws separate row/col line counts and hoshi; square boards otherwise u
  assert.match(html(cellsFrame('go_board', 5, 9, placed)), /cx="8\.9" cy="4\.9"/);
 });
 
+test('a terminal Gomoku five-in-a-row draws its winning line on the Go board (review F6)', () => {
+ const cells = Array(225).fill('.') as string[];
+ const run = [105, 106, 107, 108, 109];
+ for (const index of run) cells[index] = 'B';
+ cells[120] = 'W'; cells[121] = 'W'; cells[122] = 'W'; cells[123] = 'W';
+ const won = html(cellsFrame('go_board', 15, 15, cells, { last: [109], line: run, result: { winner: 'Black', reason: 'five in a row' } }));
+ assert.equal(count(won, /data-line="true"/g), 5);
+ // Exactly the five run stones carry the marker: row 7, columns 0-4 at x = pad (.7) + column.
+ for (const [k, cx] of ['0.7', '1.7', '2.7', '3.7', '4.7'].entries()) {
+  assert.match(won, new RegExp(`<circle class="st-go-stone st-go-black" cx="${cx}" cy="7\\.7"[^>]*data-line="true"`), `stone ${run[k]}`);
+ }
+ assert.match(won, /<line aria-hidden="true" class="st-go-winline" x1="0\.7" x2="4\.7" y1="7\.7" y2="7\.7"/);
+ assert.equal(count(won, /data-last="true"/g), 1);
+ // No line supplied: no markers and no stroke; a scattered line keeps the markers only.
+ const live = html(cellsFrame('go_board', 15, 15, cells, { last: [109] }));
+ assert.equal(count(live, /data-line/g), 0); assert.doesNotMatch(live, /st-go-winline/);
+ const scattered = html(cellsFrame('go_board', 15, 15, cells, { line: [105, 107, 109] }));
+ assert.equal(count(scattered, /data-line="true"/g), 3); assert.doesNotMatch(scattered, /st-go-winline/);
+ // Second-seat orientation draws the same run, mirrored.
+ const flipped = html(cellsFrame('go_board', 15, 15, cells, { line: run, orientation: 'second-seat-bottom' }));
+ assert.equal(count(flipped, /data-line="true"/g), 5);
+ assert.match(flipped, /class="st-go-winline" x1="14\.7" x2="10\.7" y1="7\.7" y2="7\.7"/);
+});
+
 test('empty Hex corners carry both goal-edge tints (review 2.13)', () => {
  const markup = html(cellsFrame('hex_board', 3, 3, Array(9).fill('.')));
  assert.equal(count(markup, /st-hex-edge-ab/g), 4);

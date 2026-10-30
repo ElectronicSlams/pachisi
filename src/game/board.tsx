@@ -280,7 +280,9 @@ function GoBoard({ frame, className, ...root }: SvgBoardProps) {
   const x = (column: number) => pad + (flipped ? cols - 1 - column : column);
   const y = (row: number) => pad + (flipped ? rows - 1 - row : row);
   const last = new Set(frame.last ?? []);
+  const line = new Set(frame.line ?? []);
   const check = new Set(frame.check ?? []);
+  const run = straightRun(frame.line, cols);
   const lines: ReactNode[] = [];
   for (let index = 0; index < size; index += 1) {
     if (index < rows) lines.push(<line key={`h${index}`} x1={pad} x2={pad + cols - 1} y1={pad + index} y2={pad + index} />);
@@ -322,13 +324,45 @@ function GoBoard({ frame, className, ...root }: SvgBoardProps) {
             cy={y(Math.floor(index / cols))}
             data-check={check.has(index) || undefined}
             data-last={last.has(index) || undefined}
+            data-line={line.has(index) || undefined}
             key={`${cellKey(frame, index)}:${token}`}
             r={0.44}
           />
         );
       })}
+      {run ? (
+        <line
+          aria-hidden="true"
+          className="st-go-winline"
+          x1={x(run[0] % cols)}
+          x2={x(run[1] % cols)}
+          y1={y(Math.floor(run[0] / cols))}
+          y2={y(Math.floor(run[1] / cols))}
+        />
+      ) : null}
     </svg>
   );
+}
+
+/**
+ * The end points of a supplied winning line when it is one contiguous straight run
+ * (row, column or diagonal) on a board `cols` wide; otherwise null, and only the
+ * per-stone `data-line` markers are drawn.
+ */
+function straightRun(line: readonly number[] | undefined, cols: number): readonly [number, number] | null {
+  if (!line || line.length < 2) return null;
+  const sorted = [...new Set(line)].sort((a, b) => a - b);
+  if (sorted.length < 2) return null;
+  const at = (index: number) => [Math.floor(index / cols), index % cols] as const;
+  const [r0, c0] = at(sorted[0]!);
+  const [r1, c1] = at(sorted[1]!);
+  const dr = r1 - r0, dc = c1 - c0;
+  if (!((dr === 0 && dc === 1) || (dr === 1 && Math.abs(dc) <= 1))) return null;
+  for (let k = 2; k < sorted.length; k += 1) {
+    const [r, c] = at(sorted[k]!);
+    if (r !== r0 + dr * k || c !== c0 + dc * k) return null;
+  }
+  return [sorted[0]!, sorted.at(-1)!];
 }
 
 const SQRT3 = Math.sqrt(3);

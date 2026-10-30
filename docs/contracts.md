@@ -29,16 +29,35 @@ Core public state ──► PublicStateEnvelope ──► DisplayFrameV1 ──�
    - Only `grid_3x3`, `connect_four`, `square_board`, `go_board` and `hex_board` project to cells. Every other family (and any unknown family) becomes a placeholder that names that family. It never substitutes another game's example.
    - Board cells need a position (`index`, or `row` + `col`); positions must agree, be unique and lie inside the board, and the board-cell count must equal `rows * cols`. Size is inferred from the largest row/col or passed as `options.rows/cols`. Dimensions must be finite positive integers.
    - `""`, null, `"-"`, `"_"` and `"."` normalise to `"."`. A non-empty label the family does not recognise fails closed to a placeholder rather than being drawn as empty.
+   - `options.tokens` names the label vocabulary (see below). The default `"board"` keeps the Board reading; pass `"core"` for labels copied from Core public state.
    - `last`/`line` come only from `options` and are bounds-checked. `DisplayFrameV1` has no last-move field, so nothing is inferred from `actionLabel` or frame diffs.
    - `metadata` keeps `frameId`, `actorPlayer`, `actionLabel`, `activePlayer`, `terminal`, `turn`, `scores` and status-cell labels for the host's chrome.
    - Core frames that carry key/value cells (chess sends a FEN cell, not 64 positioned cells) are reported as a placeholder with an issue. Converting FEN to cells is host work.
    - `card_table` is not projected. `DisplayFrameV1` does not say which cards belong to which seat or which were played, so the host builds `CardBoardFrame` itself (or uses `cardFrameFromRecord` with its own hands).
 
-`boardFrameFromCells(geometry, cells, options)` is the older direct path for a known row-major board. Geometry (`{ family, rows, cols, chess?, name? }`) is explicit because pachisi has no game catalogue.
+`boardFrameFromCells(geometry, cells, options)` is the older direct path for a known row-major board. Geometry (`{ family, rows, cols, chess?, variant?, name?, tokens? }`) is explicit because pachisi has no game catalogue. It fails closed the same way: a non-empty token the family does not recognise (e.g. `"DRAGON"` on a disc board) returns a placeholder and an issue from `boardFrameFromCellsWithIssues`, never an empty cell. `normalizeCellToken` on its own stays lossy (unknown → `"."`); callers using it directly must check `isEmptyCellToken` themselves.
+
+### Token vocabulary (`tokens: "board" | "core"`)
+
+The same letter means different seats in Core and in Board, so the source vocabulary is explicit rather than guessed:
+
+| Family | `"board"` (default) | `"core"` (bundled Core public state) |
+|---|---|---|
+| `hex_board` | `R` first seat, `B` second seat (blue); `W` rejected | `B` player 1 → Board `R`, `W` player 2 → Board `B`; `R` rejected |
+| every other cell family | Board tokens and the spellings `normalizeCellToken` accepts | Same as `"board"`: Core's X/O, R/Y, B/W and chess letters are already Board tokens |
+
+The Core map is exported as `CORE_TOKEN_MAPS` and matches the decorative scene's own Hex conversion. `adaptPublicStateToDisplayFrame` copies Core labels unchanged, so a host projecting a Core Hex board must pass `{ tokens: "core" }` to `boardFrameFromDisplayFrame`. The meaning of a bare `B` is never changed globally.
 
 ## Legal actions
 
-`ActionTarget { id, action, label, disabled }` binds one legal action to one cell id in a scene. `/game/interactions` turns Core legal-action tokens into labels and targets: `describeArenaAction`, `arenaBoardMoveFromAction` (chess/shogi/xiangqi/checkers from, to, promotion), `arenaBoardCellActionFromAction` (go, gomoku, hex, ultimate tic-tac-toe, othello, battleship), `arenaRlControlSlotFromAction` and seat labels. These helpers only describe actions the host already received as legal. They do not compute legality.
+`ActionTarget { id, action, label, disabled }` binds one legal action to one cell id in a scene. `/game/interactions` turns Core legal-action tokens into labels and targets: `describeArenaAction`, `arenaBoardMoveFromAction` (chess/shogi/xiangqi/checkers from, to, promotion), `arenaBoardSquareToCell`, `arenaBoardCellActionFromAction` (go, gomoku, hex, ultimate tic-tac-toe, othello, battleship), `arenaRlControlSlotFromAction` and seat labels. These helpers only describe actions the host already received as legal. They do not compute legality.
+
+Per-game notation:
+
+- **Chess** (and chess-style checkers labels): `e2e4`, `e7e8q`; files a-h, rank 8 is row 0.
+- **Shogi** (USI): `1g1f`, promotion `1c1a+` (`promotion: "+"`), drop `P*5e` (`from: "P*"`, `drop: "P"`). Files 1-9 run right to left (file 1 is column 8), ranks a-i top to bottom.
+- **Xiangqi**: `a0a1`, `b0a2`; files a-i, rank digit 0-9 is the Core board row (0 is the top row).
+- **Ultimate tic-tac-toe**: Core's action is `subBoard * 9 + localCell`. The target is the visible 9x9 cell the scene draws (row `floor(sub/3)*3 + floor(local/3)`, column `(sub%3)*3 + local%3`); `token` stays the original action. Requires a 9x9 board.
 
 ## Still host-owned
 

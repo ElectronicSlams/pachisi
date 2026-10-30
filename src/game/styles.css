@@ -10,8 +10,12 @@
 .st-cell[data-last] { box-shadow: inset 0 0 0 2px var(--accent); }
 .st-cell[data-last] > :not(.st-coord) { animation: stArrive var(--dur-move) var(--ease-out) both; }
 @keyframes stArrive { from { transform: scale(0.6); opacity: 0; } to { transform: none; opacity: 1; } }
-/* Board sets --drop on the last Connect Four cell: the rows the disc fell (row index + 1). */
-@keyframes stDrop { from { transform: translateY(calc(var(--drop, 4) * -100%)); } 70% { transform: translateY(4%); } to { transform: none; } }
+/* Board sets --drop on the last Connect Four cell: the rows the disc fell (row index + 1).
+   The disc starts exactly --drop row pitches up, i.e. above the board's top edge. Its cell is a
+   size container, so 100cqh is the hole height; the row pitch is that hole plus its two
+   --c4-inset margins (see connect_four below): pitch = 100cqh / (1 - 2 * inset). The 70% key
+   is the 4% overshoot (of the disc's own height) before it settles. */
+@keyframes stDrop { from { transform: translateY(calc(var(--drop, 4) * -100cqh / (1 - 2 * var(--c4-inset, 0.1)))); } 70% { transform: translateY(4%); } to { transform: none; } }
 /* Threatened cells (e.g. a king in check): a loss-toned ring that wins over the last-move outline. */
 .st-cell[data-check] { box-shadow: inset 0 0 0 3px var(--loss); }
 
@@ -33,9 +37,12 @@
 .st-board-mini.st-board-grid3 { gap: 4%; }
 .st-xo { width: 62%; height: 62%; color: var(--text); }
 
-/* connect_four */
-.st-board-c4 { gap: 3%; padding: 3%; background: var(--board-bg); border: 1px solid var(--border); border-radius: var(--r-md); }
-.st-board-c4 .st-cell { border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 1px var(--board-line); }
+/* connect_four. No grid gap: every track is one square row/column pitch and each hole is inset by
+   --c4-inset of that pitch on all four sides (grid-item margin percentages resolve against the
+   track width, so the vertical spacing equals the horizontal one). Rows size to their content
+   (aspect-ratio: auto), so the row pitch is exactly the column pitch the drop keyframe assumes. */
+.st-board-c4 { --c4-inset: 0.1; gap: 0; padding: 1.5%; aspect-ratio: auto; align-content: start; background: var(--board-bg); border: 1px solid var(--border); border-radius: var(--r-md); }
+.st-board-c4 .st-cell { margin: calc(var(--c4-inset) * 100%); aspect-ratio: 1; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 1px var(--board-line); }
 .st-board-c4 .st-cell[data-last] { box-shadow: inset 0 0 0 2px var(--accent); }
 .st-board-c4 .st-cell[data-line] { box-shadow: inset 0 0 0 2px var(--win); }
 .st-board-c4 .st-cell[data-last] > :not(.st-coord) { animation: stDrop var(--dur-move-drop) var(--ease-out) both; }
@@ -77,6 +84,9 @@
 .st-go-lines line { stroke: var(--board-line); stroke-width: 0.035; }
 .st-go-black { fill: var(--stone-black); }
 .st-go-white { fill: var(--stone-white); stroke: var(--board-line); stroke-width: 0.04; }
+/* Winning run (frame.line): a win-toned ring on each stone plus a stroke through their centres. */
+.st-go-stone[data-line] { stroke: var(--win); stroke-width: 0.1; }
+.st-go-winline { stroke: var(--win); stroke-width: 0.12; stroke-linecap: round; opacity: 0.85; pointer-events: none; }
 .st-go-stone[data-last] { stroke: var(--accent); stroke-width: 0.1; }
 .st-go-stone[data-check] { stroke: var(--loss); stroke-width: 0.1; }
 .st-go-hoshi circle { fill: var(--board-line); }

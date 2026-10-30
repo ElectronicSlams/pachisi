@@ -39,6 +39,12 @@ def mutations():
     yield m("mahjong", lambda d: d["frames"][3]["state"].__setitem__("wall_count", 70), "wall grows")
     yield m("goofspiel", lambda d: d["frames"][-1]["state"]["points"].__setitem__("player_1", 9), "points miscount")
     yield m("paddle-ball", lambda d: d["frames"][18]["state"].__setitem__("paddle_x", 0.5), "paddle teleport")
+    # Ball dynamics (review F8): each changes only the ball, never the paddle or bounces.
+    yield m("paddle-ball", lambda d: d["frames"][20]["state"]["ball"].__setitem__("x", 0.01), "ball x teleport (0.94464 -> 0.01)")
+    yield m("paddle-ball", lambda d: d["frames"][30]["state"]["ball"].__setitem__("vx", -0.05), "ball velocity jump")
+    yield m("paddle-ball", lambda d: d["frames"][18]["state"]["ball"].__setitem__("vx", 0.02768), "missing side-wall reflection")
+    yield m("paddle-ball", lambda d: d["frames"][39]["state"]["ball"].__setitem__("vy", 0.042), "missing top-wall reflection")
+    yield m("paddle-ball", lambda d: d["frames"][55]["state"]["ball"].__setitem__("vx", 0.04), "speed gained at a wall")
 
 
 # Renderer-source corruptions: (slug, file under src/game, old, new, label).

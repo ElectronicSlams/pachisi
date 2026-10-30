@@ -12,7 +12,7 @@ import { Board } from "../src/game/board";
 import type { CellBoardFrame } from "../src/game/board-types";
 import { boardFrameFromDisplayFrame, describeBoardFrame } from "../src/game/board-adapter";
 import { DISPLAY_FRAME_VERSION, PUBLIC_STATE_VERSION, RENDERER_VERSION, RENDER_ADAPTER_VERSION, type DisplayFrameV1 } from "../src/contract";
-import { applyThemePreference, readThemePreference, type ThemePreference } from "../src/theme";
+import { applyThemePreference, readThemePreference, syncDocumentThemePreference, type ThemePreference } from "../src/theme";
 import "../styles/index.css";
 import "../styles/fonts.css";
 import "../styles/grand-slams.css";
@@ -45,10 +45,32 @@ pnpm test"/></Card></section>
  <footer className="catalogue-footer">Pachisi · Electronic Slams · MIT code, separate brand and font notices. <a href="https://github.com/ElectronicSlams/pachisi">Read the documentation ↗</a></footer></main>
  <Dialog open={modal==='dialog'} onClose={()=>setModal(null)} title="A reusable dialog" description="Focus stays inside, Escape closes, and focus returns to its trigger." footer={<Button onClick={()=>setModal(null)}>Done</Button>}><Field label="Example field" placeholder="Try keyboard navigation"/></Dialog><Sheet open={modal==='sheet'} onClose={()=>setModal(null)} title="A Stadium sheet" description="A bottom sheet on phones and a centred dialog on desktop." footer={<Button onClick={()=>setModal(null)}>Close sheet</Button>}><p>The application supplies content and actions.</p></Sheet></div>;
 }
+// Restore a saved Light/Dark choice before the first render (index.html already did this
+// pre-paint; this keeps the document and the select in sync if that script was blocked).
+syncDocumentThemePreference(readThemePreference());
 createRoot(document.getElementById('root')!).render(<StrictMode><App/></StrictMode>);
 
 
-declare global { interface Window { pachisiProbe?: (host: HTMLElement) => Promise<{frames:number;bad:number;invalid:string[]}>; } }
+type DropMeasure={width:number;row:number;drop:number;duration:number;boardTop:number;startTop:number;endTop:number;travel:number;rowPitch:number;colPitch:number;endCentreOffset:number;overshoot:number};
+declare global { interface Window { pachisiProbe?: (host: HTMLElement) => Promise<{frames:number;bad:number;invalid:string[]}>; pachisiDropProbe?: (host: HTMLElement, widths: readonly number[]) => Promise<DropMeasure[]>; } }
+// Connect Four drop geometry (review F5): the last disc's stDrop animation, paused at its first
+// frame, its 70% overshoot key and its end, at each board width, for the top and bottom rows.
+window.pachisiDropProbe = async (host, widths) => {
+ const probeRoot=createRoot(host);const out:DropMeasure[]=[];
+ for(const width of widths)for(const row of [0,2,5]){
+  host.style.width=`${width}px`;
+  const index=row*7+3;const cells=Array<string>(42).fill('.');for(let r=row;r<6;r++)cells[r*7+3]=r===row?'R':'Y';
+  flushSync(()=>probeRoot.render(<Board key={`${width}:${row}`} frame={{kind:'cells',family:'connect_four',rows:6,cols:7,cells,last:[index]}}/>));
+  const board=host.querySelector('.st-board-c4')!,all=[...board.querySelectorAll('.st-cell')].map(el=>el.getBoundingClientRect());
+  const cell=board.querySelector('[data-last]')!,disc=cell.querySelector('.st-disc') as HTMLElement;
+  const anim=disc.getAnimations()[0]!;anim.pause();const duration=Number(anim.effect!.getComputedTiming().duration);
+  anim.currentTime=0;const start=disc.getBoundingClientRect();
+  anim.currentTime=duration*.7;const over=disc.getBoundingClientRect();
+  anim.currentTime=duration;const end=disc.getBoundingClientRect();const c=cell.getBoundingClientRect();
+  out.push({width,row,drop:row+1,duration,boardTop:board.getBoundingClientRect().top,startTop:start.top,endTop:end.top,travel:end.top-start.top,rowPitch:all[7]!.top-all[0]!.top,colPitch:all[1]!.left-all[0]!.left,endCentreOffset:end.top+end.height/2-(c.top+c.height/2),overshoot:(over.top-end.top)/end.height});
+ }
+ probeRoot.unmount();host.remove();return out;
+};
 window.pachisiProbe = async (host) => {
  const probeRoot=createRoot(host);let frames=0,bad=0;const invalid:string[]=[];
  for(const [game,demo] of Object.entries(GAME_DEMONSTRATIONS))for(const frame of demo.frames){

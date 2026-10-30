@@ -62,6 +62,19 @@ try{
   reports.push({viewport,theme,games:slugs.length,keyboard:true,dialogFocus:true,clipboardFailure:true,reducedMotion:true,noOverflow:true,noExternalRequests:true});
   await context.close();
  }
+ // A saved Light/Dark choice opposite to the OS survives a reload (review F10).
+ for(const [os,saved] of [['light','dark'],['dark','light']]){
+  const context=await browser.newContext({viewport:{width:1280,height:900},colorScheme:os,reducedMotion:'reduce'});const page=await context.newPage();
+  await page.goto(origin,{waitUntil:'networkidle'});
+  const appearance=page.getByLabel('Appearance',{exact:true});await appearance.selectOption(saved);
+  await page.waitForTimeout(300);// let the body colour transition settle before sampling
+  const bg=await page.evaluate(()=>getComputedStyle(document.body).backgroundColor);
+  await page.reload({waitUntil:'networkidle'});await page.waitForTimeout(300);
+  assert.equal(await page.locator('html').getAttribute('data-theme'),saved,`saved ${saved} on a ${os} OS must survive reload`);
+  assert.equal(await appearance.inputValue(),saved);
+  assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),bg,`saved ${saved} colours after reload`);
+  reports.push({themePersistence:{os,saved,bg}});await context.close();
+ }
  // Normal-motion scheduling, plus actual browser geometry for all 722 demo frames.
  const context=await browser.newContext({viewport:{width:1280,height:900},colorScheme:'light'});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(origin,{waitUntil:'networkidle'});await page.locator('#games').scrollIntoViewIfNeeded();
  await page.locator('.catalogue-stage').scrollIntoViewIfNeeded();await page.mouse.move(0,0);
@@ -76,6 +89,22 @@ try{
   return window.pachisiProbe ? await window.pachisiProbe(host) : {missing:true};
  });
  assert.equal(geometry.frames,722);assert.equal(geometry.bad,0,JSON.stringify(geometry));assert.deepEqual(errors,[]);
- reports.push({geometry});await context.close();
- await writeFile('artifacts/browser/report.json',JSON.stringify({reports},null,2)+'\n');console.log(JSON.stringify({browserCases:reports.length-1,galleryScenes:200,geometryFrames:geometry.frames,results:'passed'}));
+ // Connect Four drop (review F5): the disc starts above the board's top edge and travels exactly
+ // --drop row pitches (row index + 1) into its cell, at two board widths; 320 ms with a 4% overshoot.
+ const drops=await page.evaluate(async()=>{
+  const host=document.createElement('div');host.style.cssText='position:fixed;left:0;top:160px;z-index:10000';document.body.append(host);
+  return window.pachisiDropProbe ? await window.pachisiDropProbe(host,[500,240]) : null;
+ });
+ assert.equal(drops?.length,6,'drop probe missing');
+ for(const d of drops){
+  const at=`connect-four drop ${JSON.stringify(d)}`;
+  assert.equal(d.duration,320,at);
+  assert.ok(d.startTop<d.boardTop,`disc starts inside the board: ${at}`);
+  assert.ok(Math.abs(d.rowPitch-d.colPitch)<0.5,`row pitch != column pitch: ${at}`);
+  assert.ok(Math.abs(d.travel-d.drop*d.rowPitch)<0.5,`travel != drop x row pitch: ${at}`);
+  assert.ok(Math.abs(d.endCentreOffset)<0.5,`disc does not settle in its cell: ${at}`);
+  assert.ok(Math.abs(d.overshoot-0.04)<0.005,`overshoot is not 4%: ${at}`);
+ }
+ reports.push({geometry,drops});await context.close();
+ await writeFile('artifacts/browser/report.json',JSON.stringify({reports},null,2)+'\n');console.log(JSON.stringify({browserCases:reports.filter(r=>r.viewport).length,themePersistence:reports.filter(r=>r.themePersistence).length,dropCases:drops.length,galleryScenes:200,geometryFrames:geometry.frames,results:'passed'}));
 }finally{await browser?.close();server.kill('SIGTERM');}

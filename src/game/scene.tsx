@@ -354,6 +354,13 @@ function lunarThrust(s: State, previous: State | undefined, terminal: boolean, c
   return caption.endsWith("main");
 }
 
+/**
+ * Paddle-ball court (SVG units), ball radius and the scene stroke width (.st-legal-scene,
+ * 1.2). A contact puts the ball's painted edge on the wall's painted inner edge: the centre
+ * sits radius + half a ball stroke + half a wall stroke = radius + stroke inside the wall line.
+ */
+const PADDLE_COURT = { x: 20, y: 16, width: 280, height: 194, ball: 5, stroke: 1.2 } as const;
+
 function controlScene(game: string, s: State, { terminal, caption, previous }: { readonly terminal: boolean; readonly caption: string; readonly previous: State | undefined }): ReactNode {
   if (game === "cartpole") {
     const cart = rec(s, "cart"), pole = rec(s, "pole");
@@ -377,9 +384,14 @@ function controlScene(game: string, s: State, { terminal, caption, previous }: {
   if (game === "paddle-ball") {
     const b = rec(s, "ball"), p = num(s, "paddle_x"), bounces = num(s, "bounces");
     if (!b || !isNum(b.x) || !isNum(b.y) || p === undefined) return null;
-    // Core bounces the ball centre at y=.08; place the paddle below its radius.
-    const paddleTop = 210 - .08 * 194 + 5;
-    return <g><rect x={20} y={16} width={280} height={194} className="st-legal-square" /><rect x={20+Math.max(0,p-.16)*280} y={paddleTop} width={Math.max(0, Math.min(1,p+.16)-Math.max(0,p-.16))*280} height={7} rx={3} className="st-legal-agent" /><Disc x={20+b.x*280} y={210-b.y*194} r={5} />{bounces !== undefined && <Label y={28}>Rally · {bounces}</Label>}</g>;
+    // Core's ball state is the centre in [0,1]². The drawn court is the box the ball's edge
+    // touches, so the centre range is inset by the contact inset (radius + stroke) on every side
+    // (x=0/1 and y=1 are wall contacts). The paddle uses the same x transform; Core bounces the centre at y=.08, so the
+    // paddle face sits the same contact inset below that.
+    const { x: cx, y: cy, width: cw, height: ch, ball: r, stroke } = PADDLE_COURT, inset = r + stroke;
+    const px = (u: number) => cx + inset + u * (cw - 2 * inset), py = (v: number) => cy + ch - inset - v * (ch - 2 * inset);
+    const left = Math.max(0, p - .16), right = Math.min(1, p + .16);
+    return <g><rect x={cx} y={cy} width={cw} height={ch} className="st-legal-square" /><rect x={px(left)} y={py(.08) + inset} width={Math.max(0, px(right) - px(left))} height={7} rx={3} className="st-legal-agent" /><Disc x={px(b.x)} y={py(b.y)} r={r} />{bounces !== undefined && <Label y={28}>Rally · {bounces}</Label>}</g>;
   }
   if (game === "alien-shooter") {
     const px = num(s, "player_x"), aliens = list(s, "aliens")?.map(point), bullets = list(s, "bullets")?.map(point);

@@ -98,6 +98,62 @@ test("scene: CellScene passes last and line through to Board", () => {
   assert.equal(count(render(<LegalDemonstration game="chess" frame={chess.frames[1]!} previous={chess.frames[0]!} />), /data-last="true"/g), 2);
 });
 
+test("scene: a terminal Gomoku five-in-a-row renders five line markers (review F6)", () => {
+  const before = Array.from({ length: 15 }, () => Array<string | null>(15).fill(null));
+  for (const column of [0, 1, 2, 3]) before[7]![column] = "B";
+  for (const column of [0, 1, 2, 3]) before[8]![column] = "W";
+  const after = before.map((row) => [...row]);
+  after[7]![4] = "B"; // index 7 * 15 + 4 = 109 completes 105-109
+  const previous = frame({ board: before }, { caption: "P2 · 123", turn: 8 });
+  const final = frame({ board: after }, { caption: "P1 · 109", turn: 9, terminal: true, outcomeReason: "five_in_a_row" });
+  const html = render(<LegalDemonstration game="gomoku" frame={final} previous={previous} />);
+  assert.equal(count(html, /data-line="true"/g), 5);
+  assert.equal(count(html, /data-last="true"/g), 1);
+  assert.match(html, /st-go-winline/);
+  // Not terminal: the same five stones draw no line.
+  assert.equal(count(render(<LegalDemonstration game="gomoku" frame={{ ...final, terminal: false }} previous={previous} />), /data-line/g), 0);
+});
+
+test("scene: paddle-ball ball stays inside the drawn court at wall contacts (review F7)", () => {
+  const d = demo("paddle-ball");
+  const attr = (tag: string, name: string) => Number(new RegExp(`\\b${name}="([^"]+)"`).exec(tag)![1]);
+  const box = (i: number) => {
+    const html = render(<LegalDemonstration game="paddle-ball" frame={d.frames[i]!} previous={i ? d.frames[i - 1]! : null} />);
+    const [court, paddle] = html.match(/<rect [^>]*>/g)!;
+    const ball = /<circle [^>]*>/.exec(html)![0];
+    return {
+      court: { left: attr(court!, "x"), top: attr(court!, "y"), right: attr(court!, "x") + attr(court!, "width"), bottom: attr(court!, "y") + attr(court!, "height") },
+      paddle: { left: attr(paddle!, "x"), top: attr(paddle!, "y"), right: attr(paddle!, "x") + attr(paddle!, "width") },
+      ball: { cx: attr(ball, "cx"), cy: attr(ball, "cy"), r: attr(ball, "r") },
+      state: d.frames[i]!.state as { ball: { x: number; y: number }; paddle_x: number },
+    };
+  };
+  // Frames 18, 39 and 55 are the right, top and left wall contacts (x=1, y=1, x=0).
+  for (const [i, side] of [[18, "right"], [39, "top"], [55, "left"]] as const) {
+    const { court, ball, state } = box(i);
+    assert.ok(ball.cx - ball.r > court.left && ball.cx + ball.r < court.right, `frame ${i} x extent ${ball.cx}±${ball.r} inside ${court.left}-${court.right}`);
+    assert.ok(ball.cy - ball.r > court.top && ball.cy + ball.r < court.bottom, `frame ${i} y extent ${ball.cy}±${ball.r} inside ${court.top}-${court.bottom}`);
+    const gap = side === "right" ? court.right - (ball.cx + ball.r) : side === "left" ? ball.cx - ball.r - court.left : ball.cy - ball.r - court.top;
+    // The contact leaves exactly one stroke width (1.2) between the geometric edges: painted edges touch.
+    assert.ok(Math.abs(gap - 1.2) < 1e-9, `frame ${i} ${side} contact gap ${gap}`);
+    assert.equal(side === "top" ? state.ball.y : state.ball.x, side === "left" ? 0 : 1);
+  }
+  // Every frame: the ball never crosses the drawn walls.
+  for (let i = 0; i < d.frames.length; i += 1) {
+    const { court, ball } = box(i);
+    assert.ok(ball.cx - ball.r > court.left && ball.cx + ball.r < court.right && ball.cy - ball.r > court.top && ball.cy + ball.r < court.bottom, `frame ${i}`);
+  }
+  // Paddle contact (frame 17, y=.08) uses the same transform: the ball rests on the paddle face,
+  // and the paddle span maps paddle_x ± .16 through the ball's x transform.
+  const hit = box(17);
+  assert.ok(Math.abs(hit.paddle.top - (hit.ball.cy + hit.ball.r) - 1.2) < 1e-9, `paddle face ${hit.paddle.top} vs ball bottom ${hit.ball.cy + hit.ball.r}`);
+  assert.ok(hit.paddle.left <= hit.ball.cx && hit.ball.cx <= hit.paddle.right, "ball over the paddle");
+  const toX = (u: number) => hit.court.left + 6.2 + u * (hit.court.right - hit.court.left - 12.4);
+  assert.ok(Math.abs(hit.ball.cx - toX(hit.state.ball.x)) < 1e-9);
+  assert.ok(Math.abs(hit.paddle.left - toX(hit.state.paddle_x - .16)) < 1e-9);
+  assert.ok(Math.abs(hit.paddle.right - toX(Math.min(1, hit.state.paddle_x + .16))) < 1e-9);
+});
+
 test("scene: every bundled frame of all 50 games renders with its previous frame", () => {
   assert.equal(SLUGS.length, 50);
   let frames = 0;

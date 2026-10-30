@@ -7,8 +7,14 @@
  * Source: eSlamsPlatform @ 0fa7dfe227fe545036694c915a6b727eb4ee844a,
  * apps/web/lib/arena-interactions.ts.
  *
- * Adaptation: the `ArenaSeed` import from the Platform's product data is
- * replaced by the minimal local `ArenaGameLike` shape below. Logic is unchanged.
+ * Adaptations:
+ * - The `ArenaSeed` import from the Platform's product data is replaced by the
+ *   minimal local `ArenaGameLike` shape below.
+ * - Ultimate tic-tac-toe cell targets decode Core's `subBoard * 9 + localCell`
+ *   into the visible 9x9 row/col the scene draws (the Platform read it row-major).
+ * - Shogi (USI: `1g1f`, `1c1a+`, `P*5e`) and Xiangqi (`a0a1`, ranks 0-9) have
+ *   their own move grammars instead of the chess one; `arenaBoardSquareToCell`
+ *   maps a square to the row/col of the bundled Core board for each game.
  *
  * Note: `ArenaLegalAction.token` is rejected by the render contract's privacy
  * pattern (any key containing "token"), so legal actions travel beside a
@@ -64,9 +70,19 @@ export type ArenaActionDescriptor = {
 
 export type ArenaBoardMove = {
   readonly token: string;
+  /** Source square, or for a Shogi drop the USI source part (e.g. `"P*"`). */
   readonly from: string;
   readonly to: string;
+  /** Chess/checkers: the promotion piece letter. Shogi: `"+"` when the move promotes. */
   readonly promotion: string | null;
+  /** Shogi drops only: the dropped piece letter (uppercase, USI). Absent for board moves. */
+  readonly drop?: string;
+};
+
+/** A square's position on the game's row-major Core board (row 0 = first row of `state.board`). */
+export type ArenaBoardSquareCell = {
+  readonly row: number;
+  readonly col: number;
 };
 
 export type ArenaBoardCellAction = {
@@ -263,8 +279,9 @@ export function describeArenaAction(game: Pick<ArenaGameLike, "slug" | "category
     if (move) return { token, label: `Move ${move.from}${via.length ? ` via ${via.join(" then ")}` : ""} to ${move.to}`, shortLabel: `${move.from} → ${move.to}`, hint: "Select this complete legal move or capture path.", kind: "board" };
   }
 
-  const chessMove = chessMoveLabel(token);
-  if (chessMove && (game.slug === "chess" || game.slug === "shogi" || game.slug === "xiangqi" || game.slug === "checkers")) {
+  // Checkers paths were handled above; as in the Platform, a chess-style checkers token still gets a move label.
+  const chessMove = boardMoveSlugs.has(game.slug) ? boardMoveLabel(game.slug === "checkers" ? boardMoveFromToken(token) : boardMoveForGame(game.slug, token)) : null;
+  if (chessMove) {
     return {
       token,
       label: tokenLabel ?? chessMove.label,
@@ -323,10 +340,32 @@ export function describeArenaAction(game: Pick<ArenaGameLike, "slug" | "category
 }
 
 export function arenaBoardMoveFromAction(game: Pick<ArenaGameLike, "slug">, action: ArenaLegalAction): ArenaBoardMove | null {
-  if (!(game.slug === "chess" || game.slug === "shogi" || game.slug === "xiangqi" || game.slug === "checkers")) {
-    return null;
+  return boardMoveSlugs.has(game.slug) ? boardMoveForGame(game.slug, action.token) : null;
+}
+
+/**
+ * Maps a square name from `arenaBoardMoveFromAction` to its row/col on the
+ * game's bundled Core board (`state.board[row][col]`):
+ * - chess and checkers: files a-h left to right, rank 8 is row 0;
+ * - shogi: files 1-9 right to left (file 1 is col 8), ranks a-i top to bottom (a is row 0);
+ * - xiangqi: files a-i left to right, rank digit 0-9 is the row (0 is the top row).
+ * Returns null for anything else, including a Shogi drop source such as `"P*"`.
+ */
+export function arenaBoardSquareToCell(game: Pick<ArenaGameLike, "slug">, square: string): ArenaBoardSquareCell | null {
+  const value = square.trim().toLowerCase();
+  if (game.slug === "chess" || game.slug === "checkers") {
+    const match = /^([a-h])([1-8])$/u.exec(value);
+    return match ? { row: 8 - Number(match[2]), col: "abcdefgh".indexOf(match[1]!) } : null;
   }
-  return game.slug === "checkers" ? checkersMoveFromToken(action.token) : boardMoveFromToken(action.token);
+  if (game.slug === "shogi") {
+    const match = /^([1-9])([a-i])$/u.exec(value);
+    return match ? { row: "abcdefghi".indexOf(match[2]!), col: 9 - Number(match[1]) } : null;
+  }
+  if (game.slug === "xiangqi") {
+    const match = /^([a-i])([0-9])$/u.exec(value);
+    return match ? { row: Number(match[2]), col: "abcdefghi".indexOf(match[1]!) } : null;
+  }
+  return null;
 }
 
 export function arenaBoardCellActionFromAction(
@@ -340,7 +379,10 @@ export function arenaBoardCellActionFromAction(
   }
   const token = action.token.trim();
   const dimensions = { rows, cols };
-  if (game.slug === "go" || game.slug === "gomoku" || game.slug === "hex" || game.slug === "ultimate-tic-tac-toe") {
+  if (game.slug === "ultimate-tic-tac-toe") {
+    return rows === 9 && cols === 9 ? ultimateCellAction(action, numberToken(token)) : null;
+  }
+  if (game.slug === "go" || game.slug === "gomoku" || game.slug === "hex") {
     return cellActionFromIndex(action, numberToken(token), dimensions);
   }
   if (game.slug === "othello" || game.slug === "battleship") {
@@ -401,10 +443,24 @@ function ticTacToeCellLabel(index: number): string {
   ][index] ?? `Cell ${index + 1}`;
 }
 
-function chessMoveLabel(token: string): { label: string; shortLabel: string } | null {
-  const move = boardMoveFromToken(token);
+const boardMoveSlugs = new Set(["chess", "shogi", "xiangqi", "checkers"]);
+
+function boardMoveForGame(slug: string, token: string): ArenaBoardMove | null {
+  if (slug === "checkers") return checkersMoveFromToken(token);
+  if (slug === "shogi") return shogiMoveFromToken(token);
+  if (slug === "xiangqi") return xiangqiMoveFromToken(token);
+  return boardMoveFromToken(token);
+}
+
+function boardMoveLabel(move: ArenaBoardMove | null): { label: string; shortLabel: string } | null {
   if (!move) {
     return null;
+  }
+  if (move.drop) {
+    return { label: `Drop ${move.drop} on ${move.to}`, shortLabel: `${move.drop}*${move.to}` };
+  }
+  if (move.promotion === "+") {
+    return { label: `Move ${move.from} to ${move.to}, promote`, shortLabel: `${move.from}-${move.to}+` };
   }
   const promotion = move.promotion?.toUpperCase();
   return {
@@ -439,6 +495,55 @@ function boardMoveFromToken(token: string): ArenaBoardMove | null {
     from: source,
     to: target,
     promotion: promotion?.toLowerCase() ?? null,
+  };
+}
+
+/**
+ * Shogi in USI notation: files 1-9, ranks a-i. A move is `<from><to>` with an
+ * optional `+` for promotion (`1g1f`, `1c1a+`); a drop is `<piece>*<to>` with
+ * piece one of P L N S G B R (`P*5e`).
+ */
+function shogiMoveFromToken(token: string): ArenaBoardMove | null {
+  const compact = token.trim();
+  const drop = /^([PLNSGBR])\*([1-9][a-i])$/u.exec(compact);
+  if (drop) {
+    return { token, from: `${drop[1]!}*`, to: drop[2]!, promotion: null, drop: drop[1]! };
+  }
+  const move = /^([1-9][a-i])([1-9][a-i])(\+)?$/u.exec(compact);
+  if (!move || move[1] === move[2]) {
+    return null;
+  }
+  return { token, from: move[1]!, to: move[2]!, promotion: move[3] ? "+" : null };
+}
+
+/** Xiangqi: files a-i, ranks 0-9 (`a0a1`, `b0a2`). No promotion. */
+function xiangqiMoveFromToken(token: string): ArenaBoardMove | null {
+  const move = /^([a-i][0-9])([a-i][0-9])$/u.exec(token.trim().toLowerCase());
+  if (!move || move[1] === move[2]) {
+    return null;
+  }
+  return { token, from: move[1]!, to: move[2]!, promotion: null };
+}
+
+/**
+ * Core encodes an ultimate tic-tac-toe move as `subBoard * 9 + localCell`, both
+ * row-major 3x3 indexes. The scene draws sub-board `s` at block row `floor(s/3)`,
+ * block col `s % 3`, and local cell `l` at row `floor(l/3)`, col `l % 3` inside it.
+ */
+function ultimateCellAction(action: ArenaLegalAction, value: number | null): ArenaBoardCellAction | null {
+  if (value === null || value >= 81) {
+    return null;
+  }
+  const subBoard = Math.floor(value / 9);
+  const localCell = value % 9;
+  const row = Math.floor(subBoard / 3) * 3 + Math.floor(localCell / 3);
+  const col = (subBoard % 3) * 3 + (localCell % 3);
+  return {
+    token: action.token,
+    index: row * 9 + col,
+    row,
+    col,
+    label: cleanText(action.label) ?? `Row ${row + 1}, column ${col + 1}`,
   };
 }
 

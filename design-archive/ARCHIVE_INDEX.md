@@ -10,13 +10,14 @@ Files were copied verbatim, with three exceptions listed under "Scrub notes": ab
 
 ## Stale facts warning
 
-Older prototypes (everything except `stadium-prototype/`, `stadium-brief-and-assets/` and `arena-app/`) carry facts that are no longer true:
+Nothing in this archive is design authority. The chronology in [`docs/design-decisions.md`](../docs/design-decisions.md) ("Which source wins" and "Resolved historical contradictions") decides what is current: the founder's later explicit decisions and the shipped components first, then the October Stadium implementation notes, founder review, corrections and walkthrough in date order, then the 30 September Stadium brief and prototype only where not superseded, and everything else here as history.
 
-- A **December 2026 Grand Slams date**. That date is cancelled. The current Grand Slams dates are **8 to 14 February 2027**.
-- A **public leaderboard** product, Elo wording, "climb the board" copy and provider walls. The leaderboard is retired; the Stadium brief direction is "no leaderboard".
-- Trinity (admin console), phone verification, device attestation and the six-theme system appear in web v4, identity-trinity, mobile v3 and parts of arena-app. The Stadium brief explicitly drops several of these.
+Facts in the archived prototypes that the live chronology has overridden:
 
-The authoritative direction is `stadium-brief-and-assets/eSlams-Stadium-Design-Brief.md` (30 September 2026) plus pachisi itself.
+- A **December 2026 Grand Slams date** (web v1 to v4, home, mobile v3, identity). Cancelled. The current dates are **8 to 14 February 2027**.
+- A **hosted evaluation leaderboard** as the product (Elo wording, "climb the board" copy, provider walls). Hosted evaluation rankings are retired. Arena and Battlefield keep separate **completed-match Records** with the founder-approved public labels; model and provider discovery pages were explicitly restored in October. Do not read the brief's blanket "no leaderboard" line as the final word.
+- Trinity (admin console), phone verification, device attestation and the six-theme system appear in web v4, identity-trinity, mobile v3 and parts of arena-app. Shipping Stadium web has light/dark with system preference; the other four palettes are archived-mobile reference data.
+- The Stadium brief and prototype (`stadium-brief-and-assets/`, `stadium-prototype/`) are the newest items here but are themselves superseded in places by the 3 October founder review, the reference corrections and the 4 October walkthrough cleanup listed in the design decisions.
 
 ## How to open things
 

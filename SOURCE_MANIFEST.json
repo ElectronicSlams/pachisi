@@ -248,7 +248,7 @@
       "target": "src/game/styles.css",
       "sourceSha256": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf",
       "adapted": true,
-      "targetSha256": "f3a397e169b7f1be986c61a95dc8ac03a3a3dea7acfa4902f813cfd0c4345c2c"
+      "targetSha256": "0438bd45e8debfe5228d183118bc637b9dfe40c1dd2ef3ab41b2091c71ad8883"
     },
     {
       "source": "packages/game-visuals/src/demo.tsx",
@@ -283,7 +283,7 @@
       "target": "src/game/board.tsx",
       "sourceSha256": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f",
       "adapted": true,
-      "targetSha256": "e3079e79a3c81289aadb96544ecec1f8106a500fd6ee8d23a9297d6ea93995b6"
+      "targetSha256": "1cea19bf5c984bb320d0b693b1ce0f0d2b48793a0edf0ffe06ba99b5424b0fb8"
     },
     {
       "source": "packages/game-visuals/src/icons.tsx",
@@ -318,7 +318,7 @@
       "target": "src/game/scene.tsx",
       "sourceSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
       "adapted": true,
-      "targetSha256": "dea3ea629e5d58d95cf92f2ff5147988ad779a00d4754e21e57c1ebd3e7907fb"
+      "targetSha256": "e478f3d9a07f999d6787a3d16729db8032f1125350f31e1f0366503229ecdff1"
     },
     {
       "source": "packages/game-visuals/scripts/generate-demonstrations.py",
@@ -474,14 +474,14 @@
       "target": "src/game/board-adapter.ts",
       "sourceSha256": "0cdae048f3ee8f32df2fbb72c48366768f992947ec59c8fe976c3aead4b9ef87",
       "adapted": true,
-      "targetSha256": "b8409978315a4a9e9a3a8d91abf91d5dcae2a5cc1948af1e2bfa9b2fd403078a"
+      "targetSha256": "34c68b47d48b7cc6f810de8962bf634c8cbff72cfe152717af26479c44c39347"
     },
     {
       "source": "apps/web/lib/arena-interactions.ts",
       "target": "src/game/interactions.ts",
       "sourceSha256": "2c27a15469701107dda01f6de15ced5bb8901850b57e3b4ac02d2d76f352edfb",
       "adapted": true,
-      "targetSha256": "58adcb5db390041a3beccf02b8bf101e7b32f5707cf1d29de21d16404b9e4515"
+      "targetSha256": "c137cb653027a3cb6ef3fa7718ba53e69276ad9ec1bf638d2f0bca574b45cc9e"
     },
     {
       "source": "packages/theme-tokens/src/contract.ts",
@@ -543,7 +543,7 @@
       "target": "tests/board-adapter.test.tsx",
       "sourceSha256": "fd574a504bdbb6597dd60c3817b5fc8447a6742a9a0291bb2521e52fc0000800",
       "adapted": true,
-      "targetSha256": "2322e2565722193301cb73f06c50fcd1c996f757043585fd07605a50bbcad95b"
+      "targetSha256": "fbb158e3a003a0bc3213687ae8ac88e085247807637188aab8ce1c86a72297b8"
     }
   ],
   "adaptations": [

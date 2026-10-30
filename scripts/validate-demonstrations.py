@@ -1534,9 +1534,26 @@ def check_lunar(demo, r, scene_src=""):
         r.fail(None, "renderer hard-codes the landing pad instead of reading landing_pad", "RENDER")
 
 
+# Paddle-ball ball rule, as evidenced by the bundled Core trace (frames 16-18, 38-39, 54-55):
+# the ball moves by its pre-step velocity, p1 = p0 + v0. A coordinate that would leave the court
+# is clamped onto the wall (x=0, x=1, top y=1) and that velocity component is negated, so a wall
+# reflection conserves |v|. When the centre would pass the paddle line y=.08 over the paddle,
+# Core sets y=.08, counts a bounce and serves a new upward velocity (vx may change: paddle spin,
+# so |v| is not conserved there). With no wall or paddle contact, v1 == v0 exactly.
+PADDLE_BOUNCE_Y = 0.08
+PADDLE_HALF_WIDTH = 0.16
+# The trace stores at most 5 decimals; recomputing p0 + v0 leaves only float noise (max residual
+# on the bundled trace is 1.1e-16). 1e-6 is far above that noise and 10x below the 1e-5 quantum,
+# so any real change to a stored coordinate or velocity is caught.
+PADDLE_TOL = 1e-6
+
+
 def check_paddle(demo, r):
-    r.ran("paddle ±.12 clipped [0,1]", "ball x/y += v", "wall reflections", "paddle bounce only when |ball-paddle|<=.16 (=renderer half-width)", "bounces counter")
+    r.ran("paddle ±.12 clipped [0,1]", "ball x/y += v (pre-step velocity)", "side-wall reflection: x clamped to 0/1, vx negated",
+          "top-wall reflection: y clamped to 1, vy negated", "|v| conserved on wall reflection", "v unchanged off walls and paddle",
+          "paddle bounce only when |ball-paddle|<=.16 (=renderer half-width), at y=.08, vy>0", "bounces counter")
     frames, actions = demo["frames"], demo["actions"]
+    close = lambda a, b: abs(a - b) <= PADDLE_TOL
     for i, a in enumerate(actions, 1):
         s0, s1 = frames[i - 1]["state"], frames[i]["state"]
         px = min(1.0, max(0.0, s0["paddle_x"] + {"left": -0.12, "stay": 0, "right": 0.12}[a["action"]]))
@@ -1545,8 +1562,9 @@ def check_paddle(demo, r):
         b0, b1 = s0["ball"], s1["ball"]
         if not (0 <= b1["x"] <= 1 and 0 <= b1["y"] <= 1):
             r.fail(i, "ball out of court")
-        if s1["bounces"] == s0["bounces"] + 1:
-            if abs(b1["x"] - s1["paddle_x"]) > 0.16 + 1e-6 and abs(b0["x"] + b0["vx"] - s1["paddle_x"]) > 0.16 + 1e-6:
+        bounced = s1["bounces"] == s0["bounces"] + 1
+        if bounced:
+            if abs(b1["x"] - s1["paddle_x"]) > PADDLE_HALF_WIDTH + 1e-6 and abs(b0["x"] + b0["vx"] - s1["paddle_x"]) > PADDLE_HALF_WIDTH + 1e-6:
                 r.fail(i, "bounce counted but ball not over rendered paddle")
             if b1["vy"] <= 0:
                 r.fail(i, "bounce without vy reversal")
@@ -1554,6 +1572,38 @@ def check_paddle(demo, r):
             r.fail(i, "bounces jumped")
         elif b1["vy"] * b0["vy"] < 0 and b1["vy"] > 0:
             r.fail(i, "ball reversed upward without paddle bounce")
+
+        # Horizontal: integrate, then reflect off a side wall.
+        ex = b0["x"] + b0["vx"]
+        wall_x = ex > 1 or ex < 0
+        if not close(b1["x"], min(1.0, max(0.0, ex))):
+            r.fail(i, f"ball x {b1['x']} != x + vx = {min(1.0, max(0.0, ex)):.6f}")
+        if wall_x and not close(b1["vx"], -b0["vx"]):
+            r.fail(i, f"side-wall hit without vx reflection (vx {b0['vx']} -> {b1['vx']})")
+        if not wall_x and not bounced and not close(b1["vx"], b0["vx"]):
+            r.fail(i, f"vx changed off the walls and paddle ({b0['vx']} -> {b1['vx']})")
+
+        # Vertical: integrate, then reflect off the top wall or the paddle line.
+        ey = b0["y"] + b0["vy"]
+        wall_y = ey > 1
+        if bounced:
+            if ey >= PADDLE_BOUNCE_Y - PADDLE_TOL:
+                r.fail(i, f"paddle bounce before the ball reached y={PADDLE_BOUNCE_Y}")
+            if not close(b1["y"], PADDLE_BOUNCE_Y):
+                r.fail(i, f"paddle bounce leaves the ball at y {b1['y']}, not {PADDLE_BOUNCE_Y}")
+        elif ey < PADDLE_BOUNCE_Y:
+            # Missed the paddle: Core ends the rally; the position past the line is not modelled.
+            if not frames[i].get("terminal"):
+                r.fail(i, "ball passed the paddle line without a bounce or a terminal frame")
+        else:
+            if not close(b1["y"], min(1.0, ey)):
+                r.fail(i, f"ball y {b1['y']} != y + vy = {min(1.0, ey):.6f}")
+            if wall_y and not close(b1["vy"], -b0["vy"]):
+                r.fail(i, f"top-wall hit without vy reflection (vy {b0['vy']} -> {b1['vy']})")
+            if not wall_y and not close(b1["vy"], b0["vy"]):
+                r.fail(i, f"vy changed off the walls and paddle ({b0['vy']} -> {b1['vy']})")
+        if (wall_x or wall_y) and not bounced and not close(math.hypot(b1["vx"], b1["vy"]), math.hypot(b0["vx"], b0["vy"])):
+            r.fail(i, "speed changed at a wall reflection")
 
 
 def check_simple_control(slug, demo, r):

@@ -55,8 +55,8 @@ A demonstration is physically sound when all four of these hold:
   The validator prints `KNOWN` entries and exits 0 when they are the only failures. It exits 1
   on any other FAIL, or on a stale entry that no longer matches anything. Renderer bugs never
   belong in the allowlist.
-- `scripts/selftest-mutations.py` plants 25 errors and requires each one to be caught:
-  - 23 trace corruptions: a teleported stone, a missing flip, an illegal jump, a phantom hand
+- `scripts/selftest-mutations.py` plants 30 errors and requires each one to be caught:
+  - 28 trace corruptions: a teleported stone, a ball teleport, a ball velocity jump, a missing side-wall and top-wall reflection, speed gained at a wall, a missing flip, an illegal jump, a phantom hand
     piece, created chips, a wrong trick winner, a pole teleport, a paddle teleport, and so on;
   - 2 renderer-source corruptions: `CellScene` stops passing cues, or the cue rule version
     changes without the mirror.
@@ -124,7 +124,7 @@ Summary: 37 PASS, 9 PASS-with-RULE, 3 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | nine-mens-morris | scene/board | 13 | generic + 24 points, renderer-points/lines collinear, renderer-adjacency==rule-adjacency, placement-on-empty, reserves-decrement, mill=>removal, turn-order | **PASS** |
 | no-limit-texas-holdem | scene/cards | 13 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
 | othello | Board square 8x8 | 13 | generic + 8x8, standard-opening, move-must-flip, exact-flip-set, B=P1/W=P2, pass-only-when-no-move, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
-| paddle-ball | scene/control | 61 | generic + paddle ±.12 clipped [0,1], ball x/y += v, wall reflections, paddle bounce only when |ball-paddle|<=.16 (=renderer half-width), bounces counter | **PASS** |
+| paddle-ball | scene/control | 61 | generic + paddle ±.12 clipped [0,1], ball x/y += v (pre-step velocity), side-wall reflection: x clamped to 0/1, vx negated, top-wall reflection: y clamped to 1, vy negated, |v| conserved on wall reflection, v unchanged off walls and paddle, paddle bounce only when |ball-paddle|<=.16 (=renderer half-width), at y=.08, vy>0, bounces counter | **PASS** |
 | pentago | Board square 6x6 | 13 | generic + 6x6, place-on-empty, quadrant-rotation(cw/ccw), no-five-before-terminal, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | prisoners-dilemma | scene/social | 3 | generic + hidden until both chose, revealed == actions, valid action set, turn-order | **PASS** · NC: winner / payoff values are not in frame state (only outcomeReason); renderer cannot show who won |
 | rock-paper-scissors | scene/social | 3 | generic + hidden until both chose, revealed == actions, valid action set, turn-order | **PASS** · NC: winner / payoff values are not in frame state (only outcomeReason); renderer cannot show who won |

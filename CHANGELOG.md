@@ -34,6 +34,19 @@ Minor release: additive exports, new tests and docs, renderer fixes. No existing
 - Fixed: `LegalDemonstration` no longer throws on a missing state field, and an unknown slug no longer draws a card table.
 - Fixed: hover or focus no longer hands the shared clock to another preview; `IntersectionObserver` use is guarded.
 
+### Review fixes (29 October end-to-end review, `docs/reviews/2026-10-29-end-to-end-review.md`)
+
+- F1: Ultimate tic-tac-toe action targets now map `subBoard*9 + localCell` to the visible 9x9 cell the scene draws; all 81 mappings tested against the rendered scene.
+- F2: `boardFrameFromCells` fails closed on an unknown non-empty token (placeholder plus issue) instead of erasing the piece.
+- F3: new `tokens: "board" | "core"` vocabulary option on `BoardGeometry` and the display-frame projection; `"core"` maps Core Hex `B`/`W` to Board `R`/`B`. Default unchanged.
+- F4: Shogi (USI moves, `+` promotion, `P*5e` drops) and Xiangqi (ranks 0–9) get their own move grammars; every bundled action parses. New `arenaBoardSquareToCell` and `ArenaBoardMove.drop`.
+- F5: Connect Four discs now start above the board and travel exactly `--drop` row pitches (cells are square pitches with an inset hole instead of a grid gap; `.st-board-c4` no longer uses `gap`). Browser check measures start, travel, overshoot and settle at two widths.
+- F6: Go-family boards draw a supplied winning `line` (Gomoku five-in-a-row markers and a win line through contiguous runs).
+- F7: paddle-ball ball centre is inset by radius plus stroke so it never crosses the drawn walls; paddle uses the same transform.
+- F8: the validator now checks ball integration, wall reflection and speed conservation for paddle-ball; the self-test grew to 30 planted errors.
+- F9: `design-archive/ARCHIVE_INDEX.md` defers to the live design chronology and distinguishes retired evaluation rankings from retained match Records.
+- F10: the catalogue applies a saved theme before first paint; browser check covers persistence across reload.
+
 ### Tooling
 
 - Add `scripts/validate-demonstrations.py` and `pnpm check:physics`; the physics check is part of `pnpm check` and CI.
