@@ -567,6 +567,8 @@ function cardScene(game: string, s: State, externalSeats: boolean, terminal: boo
   const seatSource = byChips ? numRecord(s.stacks) ?? {} : counts!;
   const seats = Object.entries(seatSource).sort(([a], [b]) => seatNumber(a) - seatNumber(b));
   const folded = new Set(strings(s.folded) ?? []);
+  // Hold'em: chips put in on the current street (Core resets `committed` each street).
+  const committed = game.endsWith("holdem") ? numRecord(s.committed) ?? {} : {};
   const dealer = [s.dealer, s.button].find(isStr);
   const spots = seatSpots(seats.length);
   const contract = rec(s, "contract");
@@ -575,7 +577,7 @@ function cardScene(game: string, s: State, externalSeats: boolean, terminal: boo
       const spot = spots[i]!, out = folded.has(p);
       return <g key={p} data-seat={p} data-folded={out || undefined}>
         {(byChips || n > 0) && (game==="mahjong" ? <Tile x={spot.x} y={spot.y}/> : <Card x={spot.x} y={spot.y} back dim={out} />)}
-        <Label x={spot.lx} y={spot.ly} anchor={spot.anchor}>{seat(p)} · {byChips ? `${n} chips` : `${n} ${game==="mahjong" ? "tiles" : "cards"}`}{out ? " · folded" : ""}{dealer === p ? " · D" : ""}</Label>
+        <Label x={spot.lx} y={spot.ly} anchor={spot.anchor}>{seat(p)} · {byChips ? `${n} chips` : `${n} ${game==="mahjong" ? "tiles" : "cards"}`}{!out && (committed[p] ?? 0) > 0 ? ` · ${committed[p]} in` : ""}{out ? " · folded" : ""}{dealer === p ? " · D" : ""}</Label>
       </g>;
     })}
     {game === "bridge" && contract && isNum(contract.level) && isStr(contract.strain) && <Label y={76}>Contract {contract.level}{contract.strain}</Label>}

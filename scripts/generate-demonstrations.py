@@ -35,6 +35,17 @@ PLANS = {
     "rock-paper-scissors": ["rock", "scissors"],
     "liars-dice": ["2x5", "3x5", "challenge"],
 }
+# Poker betting plans, one action per transition, seats in Core's 4-handed order.
+POKER_PLANS = {
+    # preflop: bet, call, raise, fold, call, call | flop: check, bet, call, call |
+    # turn and river: checked down to a showdown.
+    "limit-texas-holdem": "bet call raise fold call call check bet call call check check check check check check".split(),
+    # preflop: bet:2, raise:4, fold, call, call | flop: bet:4, fold, call |
+    # turn: all-in, call | river: both stacks empty, checked to a showdown.
+    "no-limit-texas-holdem": "bet:2 raise:4 fold call call bet:4 fold call all-in call check check".split(),
+    # preflop: bet, call, fold, call | board: check, bet, fold, raise, call -> showdown.
+    "leduc-holdem": "bet call fold call check bet fold raise call".split(),
+}
 CONTROL = {"cartpole", "mountain-car", "lunar-lander", "car-racing", "bipedal-walker", "paddle-ball", "alien-shooter"}
 SEALED = {"rock-paper-scissors", "prisoners-dilemma", "goofspiel", "first-price-sealed-bid-auction"}
 
@@ -70,11 +81,11 @@ def choose(slug, state, legal, step):
         preferred = "play:0" if step < 3 else "discard:0"
     elif slug == "euchre":
         preferred = "call:D" if p["phase"] == "call" else None
-    elif slug in {"leduc-holdem", "limit-texas-holdem", "no-limit-texas-holdem"}:
-        # Always checking keeps the plan deterministic, but it means the Limit and
-        # No-limit demos are identical and no bet/raise/fold is ever shown
-        # (docs/physics.md, "What the traces never exercise").
-        preferred = "check" if "check" in legal else "call"
+    elif slug in POKER_PLANS:
+        # Scripted betting so each variant shows its own actions. Every planned action
+        # is legal at Core's pin; if Core ever makes one illegal, fall back to legal[0]
+        # (the --check run and pinned sha256 would then flag the drift for review).
+        preferred = POKER_PLANS[slug][step]
     elif slug in {"go", "gomoku", "hex"}:
         n = len(p["board"]); target = n * (n // 2) + n // 2
         return min((a for a in legal if isinstance(a, int)), key=lambda a: (abs(a // n - target // n) + abs(a % n - target % n), a))
@@ -145,7 +156,7 @@ def main():
     for slug in registry.list():
         arena = registry.create(slug); state = arena.initial_state(SEED)
         frames = [frame(slug, state)]; actions = []
-        length = len(PLANS[slug]) if slug in PLANS else 60 if slug in CONTROL or slug == "pentago" else 12
+        length = len(PLANS[slug]) if slug in PLANS else len(POKER_PLANS[slug]) if slug in POKER_PLANS else 60 if slug in CONTROL or slug == "pentago" else 12
         for step in range(length):
             if state.terminal: break
             legal = arena.legal_actions_for(state, state.active_player)

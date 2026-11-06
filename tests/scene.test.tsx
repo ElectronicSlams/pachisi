@@ -260,6 +260,33 @@ test("scene: four-seat tables sit N/E/S/W with partners opposite, folded and dea
   assert.match(holdem, /P2 · 19 chips · D/u);
 });
 
+test("scene: hold'em traces show real betting, folded seats and street commitments", () => {
+  const actions = (slug: string) => demo(slug).actions.map((a) => String(a.action));
+  for (const slug of ["leduc-holdem", "limit-texas-holdem", "no-limit-texas-holdem"]) {
+    const d = demo(slug);
+    let foldedSeen = false, inSeen = false;
+    d.frames.forEach((f, i) => {
+      const html = render(<LegalDemonstration game={slug} frame={f} previous={i ? d.frames[i - 1]! : null} />);
+      assert.doesNotMatch(html, /data-scene-state=/u, `${slug} frame ${i} must not fall back to the placeholder`);
+      foldedSeen ||= /data-folded="true"/u.test(html) && /chips · folded/u.test(html);
+      inSeen ||= /chips · \d+ in/u.test(html);
+    });
+    assert.ok(foldedSeen, `${slug} dims and labels a folded seat`);
+    assert.ok(inSeen, `${slug} labels chips committed this street`);
+    assert.equal(d.frames[0]!.caption, "Opening position");
+    assert.ok(actions(slug).some((a) => a.startsWith("bet")), `${slug} shows a bet`);
+    assert.ok(actions(slug).includes("call") && actions(slug).includes("fold"), `${slug} shows a call and a fold`);
+  }
+  for (const slug of ["limit-texas-holdem", "no-limit-texas-holdem"]) {
+    const captions = demo(slug).frames.map((f) => f.caption).join("\n");
+    for (const word of ["bet", "raise", "fold", "call"]) assert.match(captions, new RegExp(`· ${word}`, "u"), `${slug} caption shows ${word}`);
+  }
+  assert.ok(actions("no-limit-texas-holdem").some((a) => /^(bet:[24]|raise:4|all-in)$/u.test(a)), "No-limit uses profiled sizes");
+  assert.ok(actions("no-limit-texas-holdem").includes("all-in"));
+  assert.notDeepEqual(actions("limit-texas-holdem"), actions("no-limit-texas-holdem"), "Limit and No-limit traces differ");
+  assert.notDeepEqual(demo("limit-texas-holdem").frames.map((f) => f.state), demo("no-limit-texas-holdem").frames.map((f) => f.state));
+});
+
 test("scene: captions carry the rules variant where the bundled trace deviates from standard rules", () => {
   for (const slug of ["hearts", "spades", "euchre", "hanabi", "gin-rummy", "mahjong", "backgammon", "leduc-holdem", "cribbage"]) {
     const note = VARIANT_NOTES[slug]!;

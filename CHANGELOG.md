@@ -2,10 +2,11 @@
 
 ## Unreleased
 
-Post-merge hygiene for the November work on `main` (`486aa05`). No export was removed and the bundled traces are unchanged.
+Post-merge hygiene for the November work on `main` (`486aa05`). No export was removed. The pinned Core commit is unchanged; only the three hold'em traces were regenerated.
 
 - Fixed: `GameReplay` no longer resets to the first frame when a host re-renders with an inline `demonstration` object.
 - The physics validator now checks Goofspiel `committed` and Pentago `placement`. Six new planted corruptions bring the self-test to 44 planted errors.
+- Hold'em traces regenerated at the same pin (`7731e2f`) with scripted betting plans: Limit shows bet, call, raise and fold to a showdown, No-limit shows bet:2, raise:4, bet:4, fold, call and all-in, and Leduc shows bet, call, fold and raise, so the Limit and No-limit demos no longer match. The poker validator now checks action sizes, folds, street commitments and the pot ledger, with four new planted corruptions (48 in all), and seats show chips committed on the street. The bundled set is now 745 frames and 695 transitions.
 - `GameReplay`, `GameAnimation` and `Board` validate the `design` prop against the designs registered for the game.
 - The catalogue lazy-loads its census, sweep, source and coverage JSON.
 - The package tarball no longer includes `docs/captures` or `docs/research`.

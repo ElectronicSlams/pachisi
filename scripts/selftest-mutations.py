@@ -32,6 +32,11 @@ def mutations():
     yield m("mancala", lambda d: d["frames"][4]["state"]["pits"]["player_1"].__setitem__(1, 8), "seed created")
     yield m("backgammon", lambda d: d["actions"].__setitem__(0, {"player": "player_1", "action": "move:0-3"}), "distance not a die")
     yield m("limit-texas-holdem", lambda d: d["frames"][5]["state"].__setitem__("pot", 5), "chips created")
+    # Betting paths (review 2026-11-06 #3): raise sizing, folds and the pot ledger.
+    yield m("limit-texas-holdem", lambda d: (d["frames"][3]["state"]["stacks"].__setitem__("player_3", 16), d["frames"][3]["state"]["committed"].__setitem__("player_3", 4)), "chips created on a raise")
+    yield m("no-limit-texas-holdem", lambda d: (d["frames"][3]["state"]["stacks"].__setitem__("player_3", 17), d["frames"][3]["state"].__setitem__("pot", 14), d["frames"][3]["state"]["committed"].__setitem__("player_3", 3)), "fold that keeps betting")
+    yield m("limit-texas-holdem", lambda d: d["frames"][3]["state"]["committed"].__setitem__("player_3", 6), "committed does not match the raise")
+    yield m("no-limit-texas-holdem", lambda d: d["actions"].__setitem__(7, {"player": "player_4", "action": "call"}), "folded seat acts again")
     yield m("bridge", lambda d: d["frames"][4]["state"]["trick_history"][0].__setitem__("winner", "player_1"), "wrong trick winner")
     yield m("shedding-card-game", lambda d: d["actions"].__setitem__(1, {"player": "player_2", "action": "play:9H"}), "card does not match")
     yield m("cartpole", lambda d: d["frames"][10]["state"]["pole"].__setitem__("angle", 0.05), "pole teleport")

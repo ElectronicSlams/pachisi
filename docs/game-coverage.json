@@ -17,21 +17,21 @@
     "repository": "https://github.com/ElectronicSlams/eSlams",
     "commit": "7731e2f3d712e5f4714d640df670fc0224feede1",
     "publicArtworkSeed": 112,
-    "dataSha256": "cba9149a86543aa620cb661213eecf7bb25f3b6d2e57ec9d3007b012ea517a1f",
-    "legalTransitionsRecorded": 690,
-    "frameCount": 740,
+    "dataSha256": "127b688b56addefdf835a0ec00506fdada0f8b49056da6888ade431ce8bf6f3f",
+    "legalTransitionsRecorded": 695,
+    "frameCount": 745,
     "regeneratedInThisDocumentationPass": true
   },
   "physicsValidation": {
     "validatedOn": "2026-11-05",
     "script": "scripts/validate-demonstrations.py",
-    "transitions": 690,
-    "frames": 740,
+    "transitions": 695,
+    "frames": 745,
     "pass": 49,
     "knownCoreIssues": [
       "taxi: frame 10 passenger position after dropoff"
     ],
-    "mutationChecks": 38
+    "mutationChecks": 48
   },
   "actualStateSupportLegend": {
     "frame-view": "The pure Board can depict the basic canonical public cell frame supplied by a validated host adapter. This does not include input controls, a Core state parser, rule execution, legal moves, scores or complete replay UX.",
@@ -1527,8 +1527,8 @@
         "description": "Leduc action for the current betting state."
       },
       "sameArenaVersion": false,
-      "demoFrames": 9,
-      "demoActions": 8,
+      "demoFrames": 10,
+      "demoActions": 9,
       "demoDelayMs": 900,
       "demoEndsTerminal": true,
       "terminalReason": "showdown",
@@ -1559,7 +1559,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "The demo renders street, public board, pot/stacks and card backs. Current compact fixed-menu Leduc state is distinct from Texas Hold’em. Actual multi-seat/owner-hand adaptation is not exported by generic CardBoardFrame.",
       "motionNotes": "Betting and street changes come from Core. Do not invent hole cards, bet sizes or an extra flop/turn/river.",
-      "ruleVariantNote": "Leduc Hold'em is a 2-player game; the bundled trace seats 4 players.",
+      "ruleVariantNote": "Leduc Hold'em is a 2-player game; Core's compact variant seats 4 players, so the bundled trace is 4-handed (bet, call, fold, raise and a 2-seat showdown).",
       "hiddenInformationNotes": "Keep private hands behind authorized owner projection. Public stack counts do not authorize private card faces.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -1647,11 +1647,11 @@
         "description": "Fixed-limit table Hold'em action."
       },
       "sameArenaVersion": false,
-      "demoFrames": 13,
-      "demoActions": 12,
+      "demoFrames": 17,
+      "demoActions": 16,
       "demoDelayMs": 900,
-      "demoEndsTerminal": false,
-      "terminalReason": null,
+      "demoEndsTerminal": true,
+      "terminalReason": "showdown",
       "scene": "cards/poker",
       "geometry": "four-seat compact Hold’em",
       "stateFields": [
@@ -2028,8 +2028,8 @@
       "demoFrames": 13,
       "demoActions": 12,
       "demoDelayMs": 900,
-      "demoEndsTerminal": false,
-      "terminalReason": null,
+      "demoEndsTerminal": true,
+      "terminalReason": "showdown",
       "scene": "cards/poker",
       "geometry": "four-seat compact no-limit Hold’em",
       "stateFields": [

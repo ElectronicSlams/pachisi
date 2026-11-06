@@ -74,7 +74,7 @@ pnpm exec playwright install chromium
 pnpm ci:local
 ```
 
-The gate checks types, unit regressions, design-source integrity, the catalogue build, and installations of the packed library in ESM, TypeScript and Next consumers. Browser tests cover phone and desktop, light and dark, keyboard and touch controls, settled stills, and distinct rendered designs. The physics suite checks **690 transitions across 740 frames** against the pinned Core rules. The known Taxi terminal-state defect and Bridge dummy-hand limitation are recorded in [physics validation](docs/physics.md).
+The gate checks types, unit regressions, design-source integrity, the catalogue build, and installations of the packed library in ESM, TypeScript and Next consumers. Browser tests cover phone and desktop, light and dark, keyboard and touch controls, settled stills, and distinct rendered designs. The physics suite checks **695 transitions across 745 frames** against the pinned Core rules. The known Taxi terminal-state defect and Bridge dummy-hand limitation are recorded in [physics validation](docs/physics.md).
 
 ## Physics and real-gameplay readiness
 
