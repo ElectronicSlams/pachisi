@@ -2,7 +2,7 @@
  * Typed theme contract: six theme ids, 32 token names, ink/material shapes, result text roles.
  *
  * Source: eSlamsPlatform @ 8dd06c12819b062d983ca68f05b2c5213e43d9b8 (main, 2026-08-02),
- * packages/theme-tokens/src/contract.ts. Unchanged apart from this header. The package was
+ * packages/theme-tokens/src/contract.ts. Brand colours include the Pachisi pack inks. The package was
  * removed from the Platform in 8b88fde0 (2026-08-16); persistence.ts was not ported because
  * pachisi's `/theme` entry already owns preference storage (`es-theme`).
  */
@@ -145,6 +145,7 @@ export const ACCENT_CARRYING_ROLES = Object.freeze([
 export type AccentCarryingRole = (typeof ACCENT_CARRYING_ROLES)[number];
 
 export const BRAND_COLORS = Object.freeze({
-  royalBlue: "#1b32c4",
+  royalBlue: "#012eb1",
+  violet: "#6620a9",
   storeIcon: "#1b32c4",
 } as const);

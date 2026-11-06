@@ -4,6 +4,10 @@ Pachisi is eSlams' existing Stadium design system made independently maintainabl
 
 The baseline is Platform commit [`0fa7dfe227fe545036694c915a6b727eb4ee844a`](https://github.com/makriman/eSlamsPlatform/tree/0fa7dfe227fe545036694c915a6b727eb4ee844a), reviewed 29 October 2026. File origins and hashes are in [`SOURCE_MANIFEST.json`](../SOURCE_MANIFEST.json). The package source and current catalogue are the implementation contract; the following source map explains why older references can disagree.
 
+## Classic game palette · 5 November 2026
+
+Royal blue `#012EB1` carries actions and violet `#6620A9` identifies authored studies. Lime `#CDE352`, red `#DC3F4A` and yellow `#F6BF32` distinguish wins, losses and draws. The Foundation swatches show the pack inks alongside the current theme’s action colour. On dark surfaces, use the lighter action and study inks. Use `--win-text`, `--loss-text` and `--draw-text` for words and fine marks, and keep an outcome label or other visible cue beside the colour.
+
 ## Which source wins
 
 1. The founder's later explicit decisions and the current approved component implementation.

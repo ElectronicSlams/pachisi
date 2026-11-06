@@ -53,10 +53,9 @@ A demonstration is physically sound when all four of these hold:
 - **Allowlist.** `scripts/physics-known-issues.json` lists upstream Core engine bugs at the
   artwork pin. An entry matches on slug, frame and check id, and turns that FAIL into `KNOWN`.
   The validator prints `KNOWN` entries and exits 0 when they are the only failures. It exits 1
-  on any other FAIL, or on a stale entry that no longer matches anything. Renderer bugs never
-  belong in the allowlist.
-- `scripts/selftest-mutations.py` plants 30 errors and requires each one to be caught:
-  - 28 trace corruptions: a teleported stone, a ball teleport, a ball velocity jump, a missing side-wall and top-wall reflection, speed gained at a wall, a missing flip, an illegal jump, a phantom hand
+  on any other FAIL, or on a stale entry that no longer matches anything. The only baselined renderer limitation is Bridge’s missing dummy hand. Each additional renderer finding and a stale baseline fail the default command.
+- `scripts/selftest-mutations.py` plants 38 errors and requires each one to be caught:
+  - 36 trace corruptions: a teleported stone, a ball teleport, a ball velocity jump, a missing side-wall and top-wall reflection, speed gained at a wall, a missing flip, an illegal jump, a phantom hand
     piece, created chips, a wrong trick winner, a pole teleport, a paddle teleport, and so on;
   - 2 renderer-source corruptions: `CellScene` stops passing cues, or the cue rule version
     changes without the mirror.
@@ -69,12 +68,11 @@ python3 -I scripts/validate-demonstrations.py --json     # machine-readable resu
 python3 -I scripts/validate-demonstrations.py --strict   # also fail on KNOWN/RULE/RENDER
 ```
 
-`pnpm check` runs it after the tests, and CI runs `pnpm check` on `ubuntu-latest` with its
-system `python3`.
+`pnpm check` runs it after the tests. `pnpm ci:local` is the local release gate; hosted CI is currently disabled.
 
-## Results (50 games, 672 transitions, artwork pin `7731e2f3`)
+## Results (50 games, 690 transitions, artwork pin `7731e2f3`)
 
-Summary: 37 PASS, 9 PASS-with-RULE, 3 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
+Summary: 39 PASS, 9 PASS-with-RULE, 1 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 
 `generic` means:
 
@@ -89,11 +87,11 @@ Summary: 37 PASS, 9 PASS-with-RULE, 3 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | backgammon | scene/board | 13 | generic + 24 points, dice 1-6, move distance==unused die, direction(P1 up/P2 down), no landing on >=2 opp, hit->bar, checker conservation(5/side Core variant), dice exhausted before turn passes, renderer draws bar/borne_off | **PASS*(RULE)** — RULE@- Core variant uses 5 checkers/side; standard backgammon uses 15 |
 | bargaining | scene/social | 4 | generic + alternating offers, share/price bounds, accept terminates with last offer, turn-order | **PASS** |
 | battleship | scene/board | 13 | generic + grid_size, one-new-shot-per-action at action cell, no repeat shots, hits==hit shots, renderer grid==grid_size, turn-order | **PASS** · NC: ship placement is private; hit/miss truth not checkable |
-| bipedal-walker | scene/control | 48 | generic + distance += velocity, feet alternate, energy -2 per step, torso within ±.2 except balance | **PASS** |
-| blackjack | scene/cards | 3 | generic + card values 1-11, hit adds one card, dealer draws to >=17, terminal on stand/bust | **PASS*(RENDER)** — RENDER@0 dealer hole card omitted from public state; renderer shows 1 card instead of up-card + face-down card · NC: cards carry no suit; deck composition not checkable |
+| bipedal-walker | scene/control | 48 | generic + distance += velocity, action-specific foot order and energy, terrain-dependent velocity and torso integration, velocity clipped [.02,.22] | **PASS** |
+| blackjack | scene/cards | 3 | generic + card values 1-11, hit adds one card, dealer draws to >=17, terminal on stand/bust | **PASS** · NC: cards carry no suit; deck composition not checkable; dealer hole-card conceal/reveal is covered by renderer regression tests |
 | boxing-style-arena | scene/control | 13 | generic + health non-increasing, 0≤stamina≤100, jab only damages at distance 1, step-in reduces distance, turn-order | **PASS** |
 | bridge | scene/cards | 13 | generic + trick winner per led suit/trump, winner leads next, rotation within trick, hand counts -1, no card played twice, provable revoke (failed to follow then later played led suit), tricks tally | **PASS*(RENDER)** — RENDER@- dummy hand is public after the opening lead in bridge; frames carry only hand_counts so dummy can't be shown |
-| car-racing | scene/control | 8 | generic + progress monotone ≤1, speed monotone on accelerate, track window shifts | **PASS** |
+| car-racing | scene/control | 11 | generic + throttle/brake speed clipped [.02,.18], lane += heading - track curve, heading damping .82, off-track speed .65, progress integrates speed and lane | **PASS** |
 | cartpole | scene/control | 61 | generic + Gym CartPole Euler integration (tau .02, F 10), |x|<2.4 & |theta|<.2095 while live, max error 9.2e-07 | **PASS** |
 | checkers | scene/board | 13 | generic + 8x8, pieces-on-dark-squares, renderer-dark==(r+c)%2, diagonal-step/jump, man-forward-only, mandatory-capture, multi-jump-continuation, promotion, piece-conservation | **PASS** |
 | chess | Board square+chess 8x8 | 11 | generic + 8x8 from FEN, piece-geometry+path, side-to-move, king-not-left-in-check, castling-shape/rights, en-passant, promotion-shape, castling-rights-update, halfmove/fullmove clocks, SAN==move, a1-dark-square(renderer), turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
@@ -112,11 +110,11 @@ Summary: 37 PASS, 9 PASS-with-RULE, 3 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | hanabi | scene/cards | 7 | generic + fireworks +1 on successful play, clues 0..8, lives 0..3, deck-1 per draw, hand refills while deck>0, discard grows by one, turn-order | **PASS*(RULE)** — RULE@4 discarded with 8 clue tokens (forbidden in standard Hanabi); RULE@5 discarded with 8 clue tokens (forbidden in standard Hanabi); RULE@6 discarded with 8 clue tokens (forbidden in standard Hanabi); RULE@- Core variant: 2 colours, 12-card deck; standard Hanabi has 5 colours/50 cards |
 | hearts | scene/cards | 13 | generic + trick winner per led suit/trump, winner leads next, rotation within trick, hand counts -1, no card played twice, provable revoke (failed to follow then later played led suit), tricks tally | **PASS*(RULE)** — RULE@1 first trick led with 3H; standard Hearts requires 2C lead; RULE@1 player_1 led 3H before H broken while holding 5C; RULE@- Core variant is 2-player; standard hearts is 4-player |
 | hex | Board hex 11x11 | 13 | generic + 11x11 rhombus, place-on-empty, B=P1/W=P2, no-connection-before-terminal, renderer-adjacency==rule-adjacency, edge-colour==goal-axis, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
-| ice-hockey-style-arena | scene/control | 13 | generic + positions within rink, x moves ≤1, goals monotone, puck owner is a player, renderer: two skaters on one cell, turn-order | **PASS*(RENDER)** — RENDER@6 both skaters on the same cell; scene draws one disc on top of the other; RENDER@7 both skaters on the same cell; scene draws one disc on top of the other; RENDER@8 both skaters on the same cell; scene draws one disc on top of the other; RENDER@9 both skaters on the same cell; scene draws one disc on top of the other; RENDER@10 both skaters on the same cell; scene draws one disc on top of the other |
+| ice-hockey-style-arena | scene/control | 13 | generic + positions within rink, x moves ≤1, goals monotone, puck owner is a player, renderer: two skaters on one cell, turn-order | **PASS** |
 | leduc-holdem | scene/cards | 9 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS*(RULE)** — RULE@- Leduc Hold'em is a 2-player game; trace has 4 seats · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
 | liars-dice | scene/social | 4 | generic + bids strictly increase, 5 dice/player values 1-6, challenge resolution count, turn-order | **PASS** · NC: bid 3x5, actual 2 (ones-wild variant would be 2); winner not in state |
 | limit-texas-holdem | scene/cards | 13 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
-| lunar-lander | scene/control | 18 | generic + y += vy (semi-implicit), x += vx, idle: vy -= .028 gravity, main burns fuel, fuel monotone, landing inside pad, renderer pad == state pad | **PASS** |
+| lunar-lander | scene/control | 18 | generic + y += vy (semi-implicit), x += vx, idle: vy -= .028 gravity, main burns fuel, fuel monotone, landing inside pad, renderer pad == state pad, main/side thrust integrates vx/vy with exact fuel cost | **PASS** |
 | mahjong | scene/cards | 13 | generic + tile conservation(wall+hands+discards), discarder -1 / next draws +1, rotation 1-4, discard_pile matches action, turn-order | **PASS*(RULE)** — RULE@- Core variant: 108 tiles (no honours), 10-tile hands; standard mahjong uses 136/144 tiles and 13-tile hands · NC: calls (pung/chow/kong) not present in trace |
 | mancala | scene/board | 13 | generic + 2x6 pits + 2 stores, sowing CCW skip opp store, capture(opposite non-empty), extra-turn on store, seed-conservation(48), renderer-ccw-layout | **PASS** |
 | mountain-car | scene/control | 61 | generic + Gym MountainCar dynamics (v+=.001a-.0025cos3x), |v|<=.07, x>=-1.2 | **PASS** |
@@ -125,7 +123,7 @@ Summary: 37 PASS, 9 PASS-with-RULE, 3 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | no-limit-texas-holdem | scene/cards | 13 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
 | othello | Board square 8x8 | 13 | generic + 8x8, standard-opening, move-must-flip, exact-flip-set, B=P1/W=P2, pass-only-when-no-move, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | paddle-ball | scene/control | 61 | generic + paddle ±.12 clipped [0,1], ball x/y += v (pre-step velocity), side-wall reflection: x clamped to 0/1, vx negated, top-wall reflection: y clamped to 1, vy negated, |v| conserved on wall reflection, v unchanged off walls and paddle, paddle bounce only when |ball-paddle|<=.16 (=renderer half-width), at y=.08, vy>0, bounces counter | **PASS** |
-| pentago | Board square 6x6 | 13 | generic + 6x6, place-on-empty, quadrant-rotation(cw/ccw), no-five-before-terminal, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
+| pentago | Board square 6x6 | 28 | generic + 6x6, place-on-empty, quadrant-rotation(cw/ccw), no-five-before-terminal, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | prisoners-dilemma | scene/social | 3 | generic + hidden until both chose, revealed == actions, valid action set, turn-order | **PASS** · NC: winner / payoff values are not in frame state (only outcomeReason); renderer cannot show who won |
 | rock-paper-scissors | scene/social | 3 | generic + hidden until both chose, revealed == actions, valid action set, turn-order | **PASS** · NC: winner / payoff values are not in frame state (only outcomeReason); renderer cannot show who won |
 | shedding-card-game | scene/cards | 13 | generic + match rank or suit, play: hand-1, draw: hand+1 & deck-1, card conservation(52), no card played twice, turn-order | **PASS** |
@@ -135,9 +133,6 @@ Summary: 37 PASS, 9 PASS-with-RULE, 3 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | tic-tac-toe | Board grid_3x3 | 10 | generic + 9 cells, place-one-mark, X=P1/O=P2, no-win-before-terminal, terminal-reason, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | ultimate-tic-tac-toe | Board grid_3x3 9x9 | 13 | generic + 9x(3x3), action=board*9+cell, must-play-in-next_board, next_board=cell-or-free, local_status, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | xiangqi | scene/board | 13 | generic + 10x9 intersections, file-letter/row-digit coords, piece-geometry(R,H-leg,E-eye+river,A/G-palace,C-screen,S-river), flying-general, piece-conservation, turn-order | **PASS** · NC: check/checkmate not checked |
-
-Regenerate this table with `python3 -I scripts/validate-demonstrations.py --markdown`. Keep it
-in sync when the traces or rules change.
 
 ## Known Core issues to file upstream
 
@@ -182,3 +177,14 @@ These results certify the artwork pin only: Core `7731e2f3`, recorded in
 `docs/game-coverage.json` marks **32 of 50 games** `sameArenaVersion: false`. For those games
 a live match may legally do things the demos never show, or follow different rules. A host
 rendering live state must validate against the live arena, not against this page.
+
+
+## Game-lab deep pass (2026-11-01)
+
+The new replay inspector is paused by default and shows exact supplied snapshots. Seeks never invent a trajectory through a wall or a capture. Decorative previews retain their separate motion scheduler.
+
+Car Racing now checks throttle/braking, steering, lane integration, heading damping, off-track speed and progress. Bipedal Walker checks action-specific energy, terrain-dependent velocity/torso integration and foot order. Lander-lite checks main/side thrust, vx/vy integration and exact fuel use. These equations are independently evaluated against the six-decimal pinned public snapshots with a 2e-6 tolerance; they are not Box2D or continuous-control certification. Eight new mutations prove that the added checks reject motion/fuel/energy corruption.
+
+Renderer regressions separately check tall-map fit, shooter edges, terrain contact, shared hockey cells, concealed dealer cards, card overflow, table crop scope, and special chess moves. Browser geometry checks cover all 33 authored studies (47 frames) as well as the original 722 frames. Blackjack and hockey no longer carry their old renderer findings. Bridge still lacks public dummy identity/cards in the pinned trace; the renderer cannot manufacture that data.
+
+See [the individual game review](reviews/2026-11-01-game-design-lab.md) for declared variants, inspection priorities, evidence and remaining limits.

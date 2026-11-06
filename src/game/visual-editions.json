@@ -1,0 +1,161 @@
+{
+  "wood": {
+    "games": [
+      "chess",
+      "checkers",
+      "shogi",
+      "xiangqi",
+      "othello",
+      "tic-tac-toe",
+      "ultimate-tic-tac-toe",
+      "backgammon",
+      "mancala",
+      "nine-mens-morris",
+      "battleship",
+      "hex"
+    ],
+    "looks": [
+      {
+        "id": "design-1",
+        "name": "Blueprint",
+        "detail": "The original Stadium board."
+      },
+      {
+        "id": "design-2",
+        "name": "Joinery",
+        "detail": "A grained maple playing surface with carved, bevelled pieces and dark inlay."
+      },
+      {
+        "id": "design-3",
+        "name": "Proof Sheet",
+        "detail": "Printed crosshatching, outlined pieces and registration marks on paper."
+      }
+    ]
+  },
+  "stones": {
+    "games": [
+      "go",
+      "gomoku",
+      "pentago"
+    ],
+    "looks": [
+      {
+        "id": "design-1",
+        "name": "Blueprint",
+        "detail": "The original intersection board."
+      },
+      {
+        "id": "design-2",
+        "name": "Kaya",
+        "detail": "Wood grain, softly lit slate and shell, and a lacquered rim."
+      },
+      {
+        "id": "design-3",
+        "name": "Kifu",
+        "detail": "A paper position diagram with coordinates, solid ink and hollow white stones."
+      },
+      {
+        "id": "design-4",
+        "name": "Porcelain",
+        "detail": "Sabaki Shudan’s original gradient stones on a cool porcelain grid."
+      }
+    ]
+  },
+  "felt": {
+    "games": [
+      "blackjack",
+      "bridge",
+      "crazy-eights",
+      "cribbage",
+      "dou-dizhu",
+      "euchre",
+      "gin-rummy",
+      "goofspiel",
+      "hanabi",
+      "hearts",
+      "leduc-holdem",
+      "liars-dice",
+      "limit-texas-holdem",
+      "mahjong",
+      "no-limit-texas-holdem",
+      "shedding-card-game",
+      "spades"
+    ],
+    "looks": [
+      {
+        "id": "design-1",
+        "name": "Blueprint",
+        "detail": "The original Stadium table."
+      },
+      {
+        "id": "design-2",
+        "name": "Baize",
+        "detail": "Woven felt, ivory faces, corner ranks and patterned concealed cards."
+      },
+      {
+        "id": "design-3",
+        "name": "Letterpress",
+        "detail": "Ruled stock, engraved backs and heavy ink on printed faces."
+      }
+    ]
+  },
+  "ledger": {
+    "games": [
+      "bargaining",
+      "negotiation",
+      "first-price-sealed-bid-auction",
+      "prisoners-dilemma",
+      "rock-paper-scissors"
+    ],
+    "looks": [
+      {
+        "id": "design-1",
+        "name": "Blueprint",
+        "detail": "The original public-state panel."
+      },
+      {
+        "id": "design-2",
+        "name": "Switchboard",
+        "detail": "A dark instrument plate with luminous readouts and etched cells."
+      },
+      {
+        "id": "design-3",
+        "name": "Carbon Copy",
+        "detail": "Ruled accounting paper with inked panels, hatching and registration points."
+      }
+    ]
+  },
+  "field": {
+    "games": [
+      "alien-shooter",
+      "bipedal-walker",
+      "boxing-style-arena",
+      "car-racing",
+      "cartpole",
+      "cliff-walking",
+      "frozen-lake",
+      "ice-hockey-style-arena",
+      "lunar-lander",
+      "mountain-car",
+      "paddle-ball",
+      "taxi"
+    ],
+    "looks": [
+      {
+        "id": "design-1",
+        "name": "Blueprint",
+        "detail": "The original Stadium control scene."
+      },
+      {
+        "id": "design-2",
+        "name": "Vector Scope",
+        "detail": "A phosphor display with scan lines, outlined obstacles and a bright tracking grid."
+      },
+      {
+        "id": "design-3",
+        "name": "Field Manual",
+        "detail": "An illustrated plotting sheet with survey ticks and crosshatched terrain."
+      }
+    ]
+  }
+}

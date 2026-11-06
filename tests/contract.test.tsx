@@ -6,7 +6,7 @@ import {
  SCENE_BUILDER_REGISTRY, adaptPublicStateToDisplayFrame, assertBoardSceneSafe, assertPublicReplaySafe, buildSceneEnvelope,
  collectNonRenderableFieldIssues, displayFrameAsLegacyRecord, parseDisplayFrame, parseRendererFamily,
 } from '../dist/contract/index.js';
-import { CLASSIC_DARK, CLASSIC_LIGHT, RESULT_SEMANTIC_TEXT_TOKENS, THEMES, THEME_IDS, TOKEN_CSS_VARIABLES, TOKEN_NAMES, resolveTheme } from '../dist/theme-tokens/index.js';
+import { BRAND_COLORS, CLASSIC_DARK, CLASSIC_LIGHT, THEMES, THEME_IDS, TOKEN_CSS_VARIABLES, TOKEN_NAMES, resolveTheme } from '../dist/theme-tokens/index.js';
 
 // Ported from eSlamsPlatform@0fa7dfe packages/game-render-contract/tests/game-render-contract.test.ts.
 const legacyFrame = {
@@ -122,7 +122,7 @@ test('enforces exact action-target and accessibility graph integrity', () => {
  }), /exactly one scene node/u);
 });
 
-test('typed theme tokens carry classic result-text roles that match tokens.css additions', async () => {
+test('Classic palette roles agree in typed, manual and system themes', async () => {
  assert.deepEqual([...THEME_IDS], ['classic-light', 'classic-dark', 'neon', 'club', 'arcade', 'midnight']);
  for (const id of THEME_IDS) { assert.deepEqual(Object.keys(THEMES[id].color), [...TOKEN_NAMES]); assert.equal(Object.isFrozen(THEMES[id].color), true); }
  assert.equal(resolveTheme('system', 'dark').id, 'classic-dark');
@@ -132,9 +132,12 @@ test('typed theme tokens carry classic result-text roles that match tokens.css a
  const additive = css.slice(css.indexOf('/* BEGIN pachisi additive tokens'));
  const blocks = [...additive.matchAll(/\{([^{}]*)\}/gu)].map((match) => match[1]!);
  assert.equal(blocks.length, 3);
+ assert.match(blocks[0]!, new RegExp(`--brand-blue: ${BRAND_COLORS.royalBlue};`));
+ assert.match(blocks[0]!, new RegExp(`--brand-violet: ${BRAND_COLORS.violet};`));
  for (const [index, theme] of [CLASSIC_LIGHT, CLASSIC_DARK, CLASSIC_DARK].entries()) {
-  for (const token of Object.values(RESULT_SEMANTIC_TEXT_TOKENS)) {
-   assert.match(blocks[index]!, new RegExp(`${TOKEN_CSS_VARIABLES[token]}: ${theme.color[token]};`, 'u'), `${theme.id} ${token}`);
+  for (const token of ['textOnAccent','accent','accentHover','accentSoft','accentSofter','accentLine',
+    'win','winText','winSoft','loss','lossText','lossSoft','draw','drawText','drawSoft'] as const) {
+   assert.ok(blocks[index]!.includes(`${TOKEN_CSS_VARIABLES[token]}: ${theme.color[token]};`), `${theme.id} ${token}`);
   }
  }
 });

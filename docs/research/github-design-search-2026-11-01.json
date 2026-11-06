@@ -1,0 +1,3493 @@
+{
+  "searchedOn": "2026-11-01",
+  "method": "GitHub repository search; top five by stars per explicit query. Not an exhaustive index.",
+  "queries": [
+    {
+      "game": "chess",
+      "query": "chessboard UI",
+      "totalCount": 145,
+      "repositories": [
+        {
+          "full_name": "shaack/cm-chessboard",
+          "html_url": "https://github.com/shaack/cm-chessboard",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 309,
+          "language": "JavaScript",
+          "pushed_at": "2026-10-19T18:03:03Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "ruilisi/react-chessground",
+          "html_url": "https://github.com/ruilisi/react-chessground",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 134,
+          "language": "JavaScript",
+          "pushed_at": "2023-01-07T04:12:02Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "moroshko/chessboard",
+          "html_url": "https://github.com/moroshko/chessboard",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 14,
+          "language": "JavaScript",
+          "pushed_at": "2014-09-01T11:12:01Z",
+          "license": null
+        },
+        {
+          "full_name": "skilldill/react-chessboard-ui",
+          "html_url": "https://github.com/skilldill/react-chessboard-ui",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 9,
+          "language": "TypeScript",
+          "pushed_at": "2026-10-10T19:30:40Z",
+          "license": null
+        },
+        {
+          "full_name": "NSStudent/fischer-ui",
+          "html_url": "https://github.com/NSStudent/fischer-ui",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 3,
+          "language": "Swift",
+          "pushed_at": "2025-04-13T13:35:54Z",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "game": "go",
+      "query": "goban go board",
+      "totalCount": 74,
+      "repositories": [
+        {
+          "full_name": "SabakiHQ/Sabaki",
+          "html_url": "https://github.com/SabakiHQ/Sabaki",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2794,
+          "language": "JavaScript",
+          "pushed_at": "2026-10-31T14:35:26Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "jokkebk/jgoboard",
+          "html_url": "https://github.com/jokkebk/jgoboard",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 122,
+          "language": "JavaScript",
+          "pushed_at": "2026-05-12T07:10:19Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "popojan/goban",
+          "html_url": "https://github.com/popojan/goban",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 55,
+          "language": "C++",
+          "pushed_at": "2026-09-05T17:29:08Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "umutseven92/Goban",
+          "html_url": "https://github.com/umutseven92/Goban",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 32,
+          "language": "Dart",
+          "pushed_at": "2019-07-16T15:57:49Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "eagleflo/goban",
+          "html_url": "https://github.com/eagleflo/goban",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 23,
+          "language": "Python",
+          "pushed_at": "2019-03-04T22:10:16Z",
+          "license": "BSD-2-Clause"
+        }
+      ]
+    },
+    {
+      "game": "connect-four",
+      "query": "connect four game",
+      "totalCount": 8995,
+      "repositories": [
+        {
+          "full_name": "kenrick95/c4",
+          "html_url": "https://github.com/kenrick95/c4",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 280,
+          "language": "TypeScript",
+          "pushed_at": "2026-10-28T14:10:58Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "kubowania/connect-four",
+          "html_url": "https://github.com/kubowania/connect-four",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 127,
+          "language": "JavaScript",
+          "pushed_at": "2021-12-24T20:05:54Z",
+          "license": null
+        },
+        {
+          "full_name": "blanyal/alpha-zero",
+          "html_url": "https://github.com/blanyal/alpha-zero",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 94,
+          "language": "Python",
+          "pushed_at": "2018-04-14T17:57:57Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "Carapacik/Beltz",
+          "html_url": "https://github.com/Carapacik/Beltz",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 83,
+          "language": "C#",
+          "pushed_at": "2026-10-15T14:47:22Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "YashasG98/Multiplayer-Game-Server",
+          "html_url": "https://github.com/YashasG98/Multiplayer-Game-Server",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 52,
+          "language": "HTML",
+          "pushed_at": "2023-05-01T21:17:10Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "tic-tac-toe",
+      "query": "tic tac toe react",
+      "totalCount": 36174,
+      "repositories": [
+        {
+          "full_name": "raiv200/Tic-Tac-Toe-Game",
+          "html_url": "https://github.com/raiv200/Tic-Tac-Toe-Game",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 206,
+          "language": "TypeScript",
+          "pushed_at": "2025-09-03T09:38:08Z",
+          "license": null
+        },
+        {
+          "full_name": "geohot/twitchtactoe",
+          "html_url": "https://github.com/geohot/twitchtactoe",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 97,
+          "language": "JavaScript",
+          "pushed_at": "2023-04-08T03:04:45Z",
+          "license": null
+        },
+        {
+          "full_name": "harman052/react-tutorial-solutions",
+          "html_url": "https://github.com/harman052/react-tutorial-solutions",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 75,
+          "language": "JavaScript",
+          "pushed_at": "2024-04-23T02:22:38Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "negomi/react-tic-tac-toe",
+          "html_url": "https://github.com/negomi/react-tic-tac-toe",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 71,
+          "language": "JavaScript",
+          "pushed_at": "2022-06-14T15:12:43Z",
+          "license": null
+        },
+        {
+          "full_name": "ipenywis/react-socketio-tic-tac-toe",
+          "html_url": "https://github.com/ipenywis/react-socketio-tic-tac-toe",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 67,
+          "language": "TypeScript",
+          "pushed_at": "2023-01-01T10:23:29Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "othello",
+      "query": "reversi game",
+      "totalCount": 3464,
+      "repositories": [
+        {
+          "full_name": "kovidomi/game-reversing",
+          "html_url": "https://github.com/kovidomi/game-reversing",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 1733,
+          "language": null,
+          "pushed_at": "2023-04-05T15:11:33Z",
+          "license": "Unlicense"
+        },
+        {
+          "full_name": "abakh/nbsdgames",
+          "html_url": "https://github.com/abakh/nbsdgames",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 317,
+          "language": "C",
+          "pushed_at": "2026-10-24T23:55:04Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "VelocityRa/awesome-game-file-format-reversing",
+          "html_url": "https://github.com/VelocityRa/awesome-game-file-format-reversing",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 235,
+          "language": "Python",
+          "pushed_at": "2026-11-01T12:45:47Z",
+          "license": "CC0-1.0"
+        },
+        {
+          "full_name": "repnz/ReversingMinesweeper",
+          "html_url": "https://github.com/repnz/ReversingMinesweeper",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 146,
+          "language": "C",
+          "pushed_at": "2019-06-25T19:27:06Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "laserwave/reversi",
+          "html_url": "https://github.com/laserwave/reversi",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 108,
+          "language": "Java",
+          "pushed_at": "2016-08-22T02:18:01Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "checkers",
+      "query": "checkers game",
+      "totalCount": 7062,
+      "repositories": [
+        {
+          "full_name": "abakh/nbsdgames",
+          "html_url": "https://github.com/abakh/nbsdgames",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 317,
+          "language": "C",
+          "pushed_at": "2026-10-24T23:55:04Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "Aryia-Behroziuan/References",
+          "html_url": "https://github.com/Aryia-Behroziuan/References",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 75,
+          "language": null,
+          "pushed_at": "2022-09-02T16:06:15Z",
+          "license": null
+        },
+        {
+          "full_name": "codethejason/checkers",
+          "html_url": "https://github.com/codethejason/checkers",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 71,
+          "language": "JavaScript",
+          "pushed_at": "2022-11-06T04:26:50Z",
+          "license": "GPL-2.0"
+        },
+        {
+          "full_name": "SamRagusa/Checkers-Reinforcement-Learning",
+          "html_url": "https://github.com/SamRagusa/Checkers-Reinforcement-Learning",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 60,
+          "language": "Python",
+          "pushed_at": "2020-05-30T23:39:42Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "Hsankesara/Draughts-AI",
+          "html_url": "https://github.com/Hsankesara/Draughts-AI",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 54,
+          "language": "Python",
+          "pushed_at": "2022-09-22T09:26:56Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "shogi",
+      "query": "shogi board",
+      "totalCount": 184,
+      "repositories": [
+        {
+          "full_name": "nozaq/shogi-rs",
+          "html_url": "https://github.com/nozaq/shogi-rs",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 49,
+          "language": "Rust",
+          "pushed_at": "2026-10-01T05:07:43Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "lissy93/hasami-shogi",
+          "html_url": "https://github.com/lissy93/hasami-shogi",
+          "default_branch": "dev",
+          "archived": false,
+          "stargazers_count": 36,
+          "language": "Swift",
+          "pushed_at": "2022-10-30T11:38:39Z",
+          "license": null
+        },
+        {
+          "full_name": "murosan/shogi-board",
+          "html_url": "https://github.com/murosan/shogi-board",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 34,
+          "language": "TypeScript",
+          "pushed_at": "2024-10-05T23:35:40Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "mogproject/mog-playground",
+          "html_url": "https://github.com/mogproject/mog-playground",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 31,
+          "language": "Scala",
+          "pushed_at": "2026-07-26T09:13:14Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "WandererXII/shogiground",
+          "html_url": "https://github.com/WandererXII/shogiground",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 20,
+          "language": "TypeScript",
+          "pushed_at": "2026-10-27T16:22:17Z",
+          "license": "GPL-3.0"
+        }
+      ]
+    },
+    {
+      "game": "xiangqi",
+      "query": "xiangqi board",
+      "totalCount": 91,
+      "repositories": [
+        {
+          "full_name": "lengyanyu258/xiangqiboardjs",
+          "html_url": "https://github.com/lengyanyu258/xiangqiboardjs",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 61,
+          "language": "JavaScript",
+          "pushed_at": "2020-07-20T03:30:30Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "VietTho1989/TurnBasedGame",
+          "html_url": "https://github.com/VietTho1989/TurnBasedGame",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 45,
+          "language": "C++",
+          "pushed_at": "2019-07-31T02:52:29Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "shaochuan/Xiangqi",
+          "html_url": "https://github.com/shaochuan/Xiangqi",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 8,
+          "language": "Python",
+          "pushed_at": "2013-09-25T09:29:27Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "sashite/qi.rb",
+          "html_url": "https://github.com/sashite/qi.rb",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "Ruby",
+          "pushed_at": "2026-06-30T20:55:13Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "DuyLeTran/DeepXiangQi",
+          "html_url": "https://github.com/DuyLeTran/DeepXiangQi",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 6,
+          "language": "Python",
+          "pushed_at": "2026-04-03T18:14:09Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "gomoku",
+      "query": "gomoku game",
+      "totalCount": 2814,
+      "repositories": [
+        {
+          "full_name": "suragnair/alpha-zero-general",
+          "html_url": "https://github.com/suragnair/alpha-zero-general",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 4527,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2025-01-01T19:59:02Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "hzyhhzy/KataGomo",
+          "html_url": "https://github.com/hzyhhzy/KataGomo",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 198,
+          "language": null,
+          "pushed_at": "2026-10-24T16:17:23Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "Kesoyuh/Gomoku",
+          "html_url": "https://github.com/Kesoyuh/Gomoku",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 191,
+          "language": "Objective-C",
+          "pushed_at": "2020-03-19T09:50:49Z",
+          "license": null
+        },
+        {
+          "full_name": "pandezhao/alpha_sigma",
+          "html_url": "https://github.com/pandezhao/alpha_sigma",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 167,
+          "language": "Python",
+          "pushed_at": "2019-04-04T04:12:52Z",
+          "license": null
+        },
+        {
+          "full_name": "gomoku/Carbon-Gomoku",
+          "html_url": "https://github.com/gomoku/Carbon-Gomoku",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 110,
+          "language": "C++",
+          "pushed_at": "2017-04-14T12:00:20Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "hex",
+      "query": "hex board game",
+      "totalCount": 532,
+      "repositories": [
+        {
+          "full_name": "hzyhhzy/KataGomo",
+          "html_url": "https://github.com/hzyhhzy/KataGomo",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 198,
+          "language": null,
+          "pushed_at": "2026-10-24T16:17:23Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "pgeerkens/HexGridUtilitiesForGames",
+          "html_url": "https://github.com/pgeerkens/HexGridUtilitiesForGames",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 147,
+          "language": "C#",
+          "pushed_at": "2019-12-20T21:13:58Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "playhex/playhex",
+          "html_url": "https://github.com/playhex/playhex",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 73,
+          "language": "TypeScript",
+          "pushed_at": "2026-10-31T23:46:43Z",
+          "license": "AGPL-3.0"
+        },
+        {
+          "full_name": "masouduut94/MCTS-agent-python",
+          "html_url": "https://github.com/masouduut94/MCTS-agent-python",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 71,
+          "language": "Python",
+          "pushed_at": "2024-03-10T00:26:42Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "jseppanen/azalea",
+          "html_url": "https://github.com/jseppanen/azalea",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 37,
+          "language": "Python",
+          "pushed_at": "2019-12-15T21:38:50Z",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "game": "mancala",
+      "query": "mancala game",
+      "totalCount": 1660,
+      "repositories": [
+        {
+          "full_name": "k-gerner/Game-Pigeon-Solvers",
+          "html_url": "https://github.com/k-gerner/Game-Pigeon-Solvers",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 45,
+          "language": "Python",
+          "pushed_at": "2024-10-30T02:47:00Z",
+          "license": null
+        },
+        {
+          "full_name": "marchete/CGZero",
+          "html_url": "https://github.com/marchete/CGZero",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 26,
+          "language": "C++",
+          "pushed_at": "2023-07-20T08:00:29Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "esfand55/mancala-game",
+          "html_url": "https://github.com/esfand55/mancala-game",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 20,
+          "language": "Java",
+          "pushed_at": "2023-07-23T05:40:17Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "OMerkel/Oware",
+          "html_url": "https://github.com/OMerkel/Oware",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 12,
+          "language": "JavaScript",
+          "pushed_at": "2026-09-20T20:10:37Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "EhsanAsaDev/mancala-game",
+          "html_url": "https://github.com/EhsanAsaDev/mancala-game",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 10,
+          "language": "Java",
+          "pushed_at": "2021-10-13T12:52:30Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "nine-mens-morris",
+      "query": "nine mens morris",
+      "totalCount": 742,
+      "repositories": [
+        {
+          "full_name": "1902325620-del/fanorona-tactician",
+          "html_url": "https://github.com/1902325620-del/fanorona-tactician",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 34,
+          "language": "TypeScript",
+          "pushed_at": "2026-07-14T07:44:18Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "miguelgazela/nine-mens-morris",
+          "html_url": "https://github.com/miguelgazela/nine-mens-morris",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 14,
+          "language": "Java",
+          "pushed_at": "2013-12-03T13:55:46Z",
+          "license": null
+        },
+        {
+          "full_name": "liuweilhy/NineChess",
+          "html_url": "https://github.com/liuweilhy/NineChess",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 13,
+          "language": "C++",
+          "pushed_at": "2026-10-30T11:07:22Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "yadav-rahul/Nine-Mens-Morris",
+          "html_url": "https://github.com/yadav-rahul/Nine-Mens-Morris",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 12,
+          "language": "JavaScript",
+          "pushed_at": "2016-12-17T18:59:38Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "rajko-z/nine-mens-morris-python",
+          "html_url": "https://github.com/rajko-z/nine-mens-morris-python",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Python",
+          "pushed_at": "2020-10-10T22:01:26Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "pentago",
+      "query": "pentago",
+      "totalCount": 2357,
+      "repositories": [
+        {
+          "full_name": "FairwindsOps/pentagon",
+          "html_url": "https://github.com/FairwindsOps/pentagon",
+          "default_branch": "master",
+          "archived": true,
+          "stargazers_count": 185,
+          "language": "Python",
+          "pushed_at": "2019-04-12T23:08:51Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "skoshx/pentagon",
+          "html_url": "https://github.com/skoshx/pentagon",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 159,
+          "language": "TypeScript",
+          "pushed_at": "2023-12-20T21:32:25Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "developer-shivam/PentagonFloatingActionButton",
+          "html_url": "https://github.com/developer-shivam/PentagonFloatingActionButton",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 104,
+          "language": "Java",
+          "pushed_at": "2017-01-27T09:46:23Z",
+          "license": null
+        },
+        {
+          "full_name": "vimeo/pentagon",
+          "html_url": "https://github.com/vimeo/pentagon",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 61,
+          "language": "Go",
+          "pushed_at": "2026-06-23T09:53:47Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "girving/pentago",
+          "html_url": "https://github.com/girving/pentago",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 56,
+          "language": "C++",
+          "pushed_at": "2026-09-07T05:50:34Z",
+          "license": "NOASSERTION"
+        }
+      ]
+    },
+    {
+      "game": "ultimate-tic-tac-toe",
+      "query": "ultimate tic tac toe",
+      "totalCount": 3289,
+      "repositories": [
+        {
+          "full_name": "arnowaczynski/utttai",
+          "html_url": "https://github.com/arnowaczynski/utttai",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 86,
+          "language": "JavaScript",
+          "pushed_at": "2022-04-23T12:55:22Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "jbradberry/ultimate_tictactoe",
+          "html_url": "https://github.com/jbradberry/ultimate_tictactoe",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 76,
+          "language": "Python",
+          "pushed_at": "2026-09-30T18:35:04Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "mck-/T3",
+          "html_url": "https://github.com/mck-/T3",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 59,
+          "language": "JavaScript",
+          "pushed_at": "2013-08-14T22:40:03Z",
+          "license": null
+        },
+        {
+          "full_name": "kennycason/ultimate_tictactoe",
+          "html_url": "https://github.com/kennycason/ultimate_tictactoe",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 54,
+          "language": "JavaScript",
+          "pushed_at": "2018-12-01T13:26:36Z",
+          "license": null
+        },
+        {
+          "full_name": "shayakbanerjee/ultimate-ttt-rl",
+          "html_url": "https://github.com/shayakbanerjee/ultimate-ttt-rl",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 30,
+          "language": "Python",
+          "pushed_at": "2018-11-15T12:27:16Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "battleship",
+      "query": "battleship game",
+      "totalCount": 18875,
+      "repositories": [
+        {
+          "full_name": "bigardone/phoenix-battleship",
+          "html_url": "https://github.com/bigardone/phoenix-battleship",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 520,
+          "language": "Elixir",
+          "pushed_at": "2020-10-01T13:24:35Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "abakh/nbsdgames",
+          "html_url": "https://github.com/abakh/nbsdgames",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 317,
+          "language": "C",
+          "pushed_at": "2026-10-24T23:55:04Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "javierbyte/clashjs",
+          "html_url": "https://github.com/javierbyte/clashjs",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 247,
+          "language": "JavaScript",
+          "pushed_at": "2022-05-03T08:09:58Z",
+          "license": "BSD-3-Clause"
+        },
+        {
+          "full_name": "deepu105/battleship-rs",
+          "html_url": "https://github.com/deepu105/battleship-rs",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 97,
+          "language": "Rust",
+          "pushed_at": "2024-10-16T16:31:45Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "orhun/battleship-rs",
+          "html_url": "https://github.com/orhun/battleship-rs",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 92,
+          "language": "Rust",
+          "pushed_at": "2024-05-29T20:50:06Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "backgammon",
+      "query": "backgammon game",
+      "totalCount": 817,
+      "repositories": [
+        {
+          "full_name": "sotetsuk/pgx",
+          "html_url": "https://github.com/sotetsuk/pgx",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 657,
+          "language": "Python",
+          "pushed_at": "2025-03-06T06:36:01Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "quasoft/backgammonjs",
+          "html_url": "https://github.com/quasoft/backgammonjs",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 104,
+          "language": "JavaScript",
+          "pushed_at": "2025-06-09T17:46:38Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "dellalibera/gym-backgammon",
+          "html_url": "https://github.com/dellalibera/gym-backgammon",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 59,
+          "language": "Python",
+          "pushed_at": "2024-05-16T08:01:32Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "dellalibera/td-gammon",
+          "html_url": "https://github.com/dellalibera/td-gammon",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 53,
+          "language": "Python",
+          "pushed_at": "2023-09-25T10:02:36Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "alexbarry/AlexGames",
+          "html_url": "https://github.com/alexbarry/AlexGames",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 47,
+          "language": "Lua",
+          "pushed_at": "2026-07-03T14:45:21Z",
+          "license": "NOASSERTION"
+        }
+      ]
+    },
+    {
+      "game": "blackjack",
+      "query": "blackjack game UI",
+      "totalCount": 179,
+      "repositories": [
+        {
+          "full_name": "tankdadank/cardian",
+          "html_url": "https://github.com/tankdadank/cardian",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 175,
+          "language": null,
+          "pushed_at": "2026-06-07T15:54:50Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "m4xy07/Blackjack-With-UI",
+          "html_url": "https://github.com/m4xy07/Blackjack-With-UI",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 8,
+          "language": "Python",
+          "pushed_at": "2024-10-10T16:15:33Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "mightyleader/CardSharp",
+          "html_url": "https://github.com/mightyleader/CardSharp",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 4,
+          "language": "Objective-C",
+          "pushed_at": "2013-06-23T11:52:16Z",
+          "license": null
+        },
+        {
+          "full_name": "dylanmccormick/blackjack-tui",
+          "html_url": "https://github.com/dylanmccormick/blackjack-tui",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 3,
+          "language": "Go",
+          "pushed_at": "2026-03-02T22:44:34Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "OnlyReFLeX/ElectronBlackJack",
+          "html_url": "https://github.com/OnlyReFLeX/ElectronBlackJack",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "JavaScript",
+          "pushed_at": "2022-12-09T07:20:14Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "leduc-holdem",
+      "query": "leduc poker",
+      "totalCount": 74,
+      "repositories": [
+        {
+          "full_name": "datamllab/rlcard",
+          "html_url": "https://github.com/datamllab/rlcard",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 3588,
+          "language": "Python",
+          "pushed_at": "2024-06-26T23:01:52Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "lifrordi/DeepStack-Leduc",
+          "html_url": "https://github.com/lifrordi/DeepStack-Leduc",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 951,
+          "language": "Lua",
+          "pushed_at": "2018-01-06T23:02:27Z",
+          "license": null
+        },
+        {
+          "full_name": "scfenton6/leduc-cfr-poker-bot",
+          "html_url": "https://github.com/scfenton6/leduc-cfr-poker-bot",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "Python",
+          "pushed_at": "2023-01-05T20:02:54Z",
+          "license": null
+        },
+        {
+          "full_name": "itscal123/LeducRebel",
+          "html_url": "https://github.com/itscal123/LeducRebel",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 4,
+          "language": "Python",
+          "pushed_at": "2022-06-07T02:45:15Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "brandonaltermatt/rlcard",
+          "html_url": "https://github.com/brandonaltermatt/rlcard",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 4,
+          "language": "Python",
+          "pushed_at": "2021-07-03T22:55:49Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "limit-texas-holdem",
+      "query": "poker UI",
+      "totalCount": 364,
+      "repositories": [
+        {
+          "full_name": "a9876543245/DEEPFOLD-SOLVER",
+          "html_url": "https://github.com/a9876543245/DEEPFOLD-SOLVER",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 419,
+          "language": "C++",
+          "pushed_at": "2026-10-15T14:45:50Z",
+          "license": null
+        },
+        {
+          "full_name": "tankdadank/cardian",
+          "html_url": "https://github.com/tankdadank/cardian",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 175,
+          "language": null,
+          "pushed_at": "2026-06-07T15:54:50Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "MatthewPDingle/GTOpen",
+          "html_url": "https://github.com/MatthewPDingle/GTOpen",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 72,
+          "language": "Python",
+          "pushed_at": "2026-10-31T22:29:24Z",
+          "license": null
+        },
+        {
+          "full_name": "Fulafu-ai/Godot4-Fake3D-Card-Game-UI-Demo",
+          "html_url": "https://github.com/Fulafu-ai/Godot4-Fake3D-Card-Game-UI-Demo",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 49,
+          "language": "GDScript",
+          "pushed_at": "2026-01-24T17:04:06Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "mbatv/fullhouse-engine",
+          "html_url": "https://github.com/mbatv/fullhouse-engine",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 44,
+          "language": "Python",
+          "pushed_at": "2026-05-24T20:04:02Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "no-limit-texas-holdem",
+      "query": "texas holdem game",
+      "totalCount": 550,
+      "repositories": [
+        {
+          "full_name": "jacobhyphenated/PokerServer",
+          "html_url": "https://github.com/jacobhyphenated/PokerServer",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 167,
+          "language": "Java",
+          "pushed_at": "2017-12-03T14:46:55Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "NikolayIT/TexasHoldemGameEngine",
+          "html_url": "https://github.com/NikolayIT/TexasHoldemGameEngine",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 157,
+          "language": "C#",
+          "pushed_at": "2026-08-24T14:59:39Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "DogLooksGood/holdem",
+          "html_url": "https://github.com/DogLooksGood/holdem",
+          "default_branch": "master",
+          "archived": true,
+          "stargazers_count": 128,
+          "language": "Clojure",
+          "pushed_at": "2021-11-29T14:18:12Z",
+          "license": "Unlicense"
+        },
+        {
+          "full_name": "alexbeloi/nn-holdem",
+          "html_url": "https://github.com/alexbeloi/nn-holdem",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 48,
+          "language": "Python",
+          "pushed_at": "2016-01-17T22:38:25Z",
+          "license": null
+        },
+        {
+          "full_name": "ccqi/TexasHoldem",
+          "html_url": "https://github.com/ccqi/TexasHoldem",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 44,
+          "language": "C#",
+          "pushed_at": "2014-01-26T19:24:30Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "shedding-card-game",
+      "query": "shedding card game",
+      "totalCount": 62,
+      "repositories": [
+        {
+          "full_name": "abhisheks008/UNO",
+          "html_url": "https://github.com/abhisheks008/UNO",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "JavaScript",
+          "pushed_at": "2022-09-22T07:43:08Z",
+          "license": null
+        },
+        {
+          "full_name": "turtleman99/Dou-Dizhu",
+          "html_url": "https://github.com/turtleman99/Dou-Dizhu",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "MATLAB",
+          "pushed_at": "2020-10-30T16:17:42Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "seanpm2001/SNU_CardStack_GameHouse_Shedding",
+          "html_url": "https://github.com/seanpm2001/SNU_CardStack_GameHouse_Shedding",
+          "default_branch": "SNU_CardStack_GameHouse_Shedding_Main-dev",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "HTML",
+          "pushed_at": "2025-06-09T05:44:40Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "seanpm2001/SNU_CardStack_GameHouse_Shedding_Solitaire",
+          "html_url": "https://github.com/seanpm2001/SNU_CardStack_GameHouse_Shedding_Solitaire",
+          "default_branch": "SNU_CardStack_GameHouse_Shedding_Solitaire_Main-dev",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "HTML",
+          "pushed_at": "2025-06-09T05:46:55Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "seanpm2001/SNU_CardStack_GameHouse_Shedding_CrazyEights",
+          "html_url": "https://github.com/seanpm2001/SNU_CardStack_GameHouse_Shedding_CrazyEights",
+          "default_branch": "SNU_CardStack_GameHouse_Shedding_CrazyEights_Main-dev",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "HTML",
+          "pushed_at": "2025-06-09T05:45:47Z",
+          "license": "GPL-3.0"
+        }
+      ]
+    },
+    {
+      "game": "gin-rummy",
+      "query": "gin rummy",
+      "totalCount": 379,
+      "repositories": [
+        {
+          "full_name": "sangttruong/ginrummy",
+          "html_url": "https://github.com/sangttruong/ginrummy",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 8,
+          "language": "Java",
+          "pushed_at": "2021-08-06T17:17:14Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "vlmlee/Gin-Rummy",
+          "html_url": "https://github.com/vlmlee/Gin-Rummy",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 8,
+          "language": "Go",
+          "pushed_at": "2026-09-03T03:27:15Z",
+          "license": null
+        },
+        {
+          "full_name": "jmhummel/Gin-Rummy-Java",
+          "html_url": "https://github.com/jmhummel/Gin-Rummy-Java",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 8,
+          "language": "Java",
+          "pushed_at": "2017-04-23T03:09:31Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "Meirshomron/GinRummy",
+          "html_url": "https://github.com/Meirshomron/GinRummy",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "C#",
+          "pushed_at": "2021-12-27T13:06:05Z",
+          "license": null
+        },
+        {
+          "full_name": "ajyang99/Gin-Rummy",
+          "html_url": "https://github.com/ajyang99/Gin-Rummy",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 6,
+          "language": "Python",
+          "pushed_at": "2021-01-01T22:48:55Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "mahjong",
+      "query": "mahjong tiles",
+      "totalCount": 358,
+      "repositories": [
+        {
+          "full_name": "FluffyStuff/riichi-mahjong-tiles",
+          "html_url": "https://github.com/FluffyStuff/riichi-mahjong-tiles",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 600,
+          "language": null,
+          "pushed_at": "2024-06-15T08:44:30Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "SyaoranHinata/I.Mahjong",
+          "html_url": "https://github.com/SyaoranHinata/I.Mahjong",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 128,
+          "language": null,
+          "pushed_at": "2024-04-19T08:57:56Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "Camerash/mahjong-dataset",
+          "html_url": "https://github.com/Camerash/mahjong-dataset",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 98,
+          "language": null,
+          "pushed_at": "2022-01-23T06:11:58Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "eric03742/mahgen",
+          "html_url": "https://github.com/eric03742/mahgen",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 48,
+          "language": "TypeScript",
+          "pushed_at": "2023-03-08T05:53:26Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "rutopio/mahjong-font",
+          "html_url": "https://github.com/rutopio/mahjong-font",
+          "default_branch": "base-ui",
+          "archived": false,
+          "stargazers_count": 31,
+          "language": "TypeScript",
+          "pushed_at": "2026-07-31T19:27:24Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "dou-dizhu",
+      "query": "doudizhu",
+      "totalCount": 1052,
+      "repositories": [
+        {
+          "full_name": "kwai/DouZero",
+          "html_url": "https://github.com/kwai/DouZero",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 4693,
+          "language": "Python",
+          "pushed_at": "2024-06-26T23:02:16Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "datamllab/rlcard",
+          "html_url": "https://github.com/datamllab/rlcard",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 3588,
+          "language": "Python",
+          "pushed_at": "2024-06-26T23:01:52Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "yuanfengyun/q_algorithm",
+          "html_url": "https://github.com/yuanfengyun/q_algorithm",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2103,
+          "language": "Lua",
+          "pushed_at": "2024-06-14T02:49:03Z",
+          "license": null
+        },
+        {
+          "full_name": "svzdev/doudizhu",
+          "html_url": "https://github.com/svzdev/doudizhu",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 521,
+          "language": "Python",
+          "pushed_at": "2026-11-01T09:10:04Z",
+          "license": null
+        },
+        {
+          "full_name": "dwg255/landlord",
+          "html_url": "https://github.com/dwg255/landlord",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 400,
+          "language": "Go",
+          "pushed_at": "2021-01-13T09:02:50Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "bridge",
+      "query": "bridge card game",
+      "totalCount": 246,
+      "repositories": [
+        {
+          "full_name": "dds-bridge/dds",
+          "html_url": "https://github.com/dds-bridge/dds",
+          "default_branch": "develop",
+          "archived": false,
+          "stargazers_count": 183,
+          "language": "C++",
+          "pushed_at": "2026-11-01T22:46:14Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "oriyanh/Bridge-AI",
+          "html_url": "https://github.com/oriyanh/Bridge-AI",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 20,
+          "language": "Python",
+          "pushed_at": "2020-08-22T16:33:39Z",
+          "license": null
+        },
+        {
+          "full_name": "Viewforview/introduce",
+          "html_url": "https://github.com/Viewforview/introduce",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 13,
+          "language": null,
+          "pushed_at": "2022-10-04T13:30:42Z",
+          "license": null
+        },
+        {
+          "full_name": "macroxue/bridge-solver",
+          "html_url": "https://github.com/macroxue/bridge-solver",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "JavaScript",
+          "pushed_at": "2026-10-03T14:32:30Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "KennethJAllen/ygo-small-world",
+          "html_url": "https://github.com/KennethJAllen/ygo-small-world",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Python",
+          "pushed_at": "2026-11-01T13:35:32Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "hearts",
+      "query": "hearts card game",
+      "totalCount": 424,
+      "repositories": [
+        {
+          "full_name": "danderfer/Comp_Sci_Sem_2",
+          "html_url": "https://github.com/danderfer/Comp_Sci_Sem_2",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 219,
+          "language": "Python",
+          "pushed_at": "2023-04-03T17:47:53Z",
+          "license": null
+        },
+        {
+          "full_name": "yyjhao/html5-hearts",
+          "html_url": "https://github.com/yyjhao/html5-hearts",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 122,
+          "language": "JavaScript",
+          "pushed_at": "2021-09-06T05:17:41Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "uwburn/cardia",
+          "html_url": "https://github.com/uwburn/cardia",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 114,
+          "language": "C#",
+          "pushed_at": "2024-06-14T09:22:58Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "visibait/valentines",
+          "html_url": "https://github.com/visibait/valentines",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 104,
+          "language": "TypeScript",
+          "pushed_at": "2026-02-11T11:21:02Z",
+          "license": null
+        },
+        {
+          "full_name": "MarkipTheMudkip/in-class-project-2",
+          "html_url": "https://github.com/MarkipTheMudkip/in-class-project-2",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 96,
+          "language": "HTML",
+          "pushed_at": "2022-06-04T11:05:38Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "spades",
+      "query": "spades card game",
+      "totalCount": 193,
+      "repositories": [
+        {
+          "full_name": "danielcorin/Hearts",
+          "html_url": "https://github.com/danielcorin/Hearts",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 26,
+          "language": "Python",
+          "pushed_at": "2021-10-25T16:16:55Z",
+          "license": "Unlicense"
+        },
+        {
+          "full_name": "mreishus/spades",
+          "html_url": "https://github.com/mreishus/spades",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 25,
+          "language": "Elixir",
+          "pushed_at": "2023-12-01T01:32:58Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "hparcells/cards-against-humanity",
+          "html_url": "https://github.com/hparcells/cards-against-humanity",
+          "default_branch": "master",
+          "archived": true,
+          "stargazers_count": 16,
+          "language": "JavaScript",
+          "pushed_at": "2020-07-30T14:19:53Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "rawhat/spades",
+          "html_url": "https://github.com/rawhat/spades",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 16,
+          "language": "Gleam",
+          "pushed_at": "2025-02-04T03:06:03Z",
+          "license": null
+        },
+        {
+          "full_name": "ReillyBova/spades",
+          "html_url": "https://github.com/ReillyBova/spades",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Python",
+          "pushed_at": "2021-10-11T23:29:06Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "euchre",
+      "query": "euchre",
+      "totalCount": 1024,
+      "repositories": [
+        {
+          "full_name": "ImperialBower/cardpack.rs",
+          "html_url": "https://github.com/ImperialBower/cardpack.rs",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 24,
+          "language": "Rust",
+          "pushed_at": "2026-11-01T01:04:27Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "matgrioni/euchre-bot",
+          "html_url": "https://github.com/matgrioni/euchre-bot",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 18,
+          "language": "Go",
+          "pushed_at": "2025-12-01T05:01:02Z",
+          "license": null
+        },
+        {
+          "full_name": "dbravender/websocket_cardgames",
+          "html_url": "https://github.com/dbravender/websocket_cardgames",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Python",
+          "pushed_at": "2020-04-30T02:38:03Z",
+          "license": null
+        },
+        {
+          "full_name": "jamesterrell/Euchre_Calculator",
+          "html_url": "https://github.com/jamesterrell/Euchre_Calculator",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 6,
+          "language": "Python",
+          "pushed_at": "2026-10-31T03:28:19Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "terrymah/Euchre",
+          "html_url": "https://github.com/terrymah/Euchre",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "C++",
+          "pushed_at": "2012-02-26T05:39:23Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "cribbage",
+      "query": "cribbage",
+      "totalCount": 1199,
+      "repositories": [
+        {
+          "full_name": "richard-moulton/Cribbage",
+          "html_url": "https://github.com/richard-moulton/Cribbage",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 10,
+          "language": "Python",
+          "pushed_at": "2021-01-24T15:05:58Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "jonathanmcmahon/cribbage",
+          "html_url": "https://github.com/jonathanmcmahon/cribbage",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "Python",
+          "pushed_at": "2024-06-11T08:27:18Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "lpaulger/cribbage-the-game",
+          "html_url": "https://github.com/lpaulger/cribbage-the-game",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "JavaScript",
+          "pushed_at": "2016-02-25T15:41:58Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "zachcalvert/cribbage-live-original",
+          "html_url": "https://github.com/zachcalvert/cribbage-live-original",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 6,
+          "language": "Python",
+          "pushed_at": "2023-05-01T21:25:21Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "wroberts/cribbage",
+          "html_url": "https://github.com/wroberts/cribbage",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "Python",
+          "pushed_at": "2026-10-29T19:43:46Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "crazy-eights",
+      "query": "crazy eights",
+      "totalCount": 733,
+      "repositories": [
+        {
+          "full_name": "danderfer/Comp_Sci_Sem_2",
+          "html_url": "https://github.com/danderfer/Comp_Sci_Sem_2",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 219,
+          "language": "Python",
+          "pushed_at": "2023-04-03T17:47:53Z",
+          "license": null
+        },
+        {
+          "full_name": "MarkipTheMudkip/in-class-project-2",
+          "html_url": "https://github.com/MarkipTheMudkip/in-class-project-2",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 96,
+          "language": "HTML",
+          "pushed_at": "2022-06-04T11:05:38Z",
+          "license": null
+        },
+        {
+          "full_name": "sugeth/xxx",
+          "html_url": "https://github.com/sugeth/xxx",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 74,
+          "language": null,
+          "pushed_at": "2021-04-11T14:33:04Z",
+          "license": null
+        },
+        {
+          "full_name": "S4ltster/Beemovie",
+          "html_url": "https://github.com/S4ltster/Beemovie",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 52,
+          "language": "CSS",
+          "pushed_at": "2023-07-05T20:47:19Z",
+          "license": null
+        },
+        {
+          "full_name": "landonasato/Function",
+          "html_url": "https://github.com/landonasato/Function",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 38,
+          "language": "HTML",
+          "pushed_at": "2020-10-03T13:31:55Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "hanabi",
+      "query": "hanabi game",
+      "totalCount": 277,
+      "repositories": [
+        {
+          "full_name": "djeedai/bevy_hanabi",
+          "html_url": "https://github.com/djeedai/bevy_hanabi",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1442,
+          "language": "Rust",
+          "pushed_at": "2026-11-01T21:22:21Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "Hanabi-Live/hanabi-live",
+          "html_url": "https://github.com/Hanabi-Live/hanabi-live",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 215,
+          "language": "TypeScript",
+          "pushed_at": "2026-11-02T04:22:11Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "bstnfrmry/hanabi",
+          "html_url": "https://github.com/bstnfrmry/hanabi",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 106,
+          "language": "TypeScript",
+          "pushed_at": "2026-04-16T19:56:05Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "chikinn/hanabi",
+          "html_url": "https://github.com/chikinn/hanabi",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 25,
+          "language": "Python",
+          "pushed_at": "2019-03-21T04:51:46Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "WesleyAC/hanabi",
+          "html_url": "https://github.com/WesleyAC/hanabi",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 17,
+          "language": "Rust",
+          "pushed_at": "2020-11-28T14:13:22Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "liars-dice",
+      "query": "liars dice",
+      "totalCount": 796,
+      "repositories": [
+        {
+          "full_name": "thomasahle/liars-dice",
+          "html_url": "https://github.com/thomasahle/liars-dice",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 37,
+          "language": "Python",
+          "pushed_at": "2026-10-13T19:55:11Z",
+          "license": null
+        },
+        {
+          "full_name": "Kryha/boloney",
+          "html_url": "https://github.com/Kryha/boloney",
+          "default_branch": "develop",
+          "archived": false,
+          "stargazers_count": 22,
+          "language": "TypeScript",
+          "pushed_at": "2023-07-18T07:22:19Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "ardanlabs/liarsdice",
+          "html_url": "https://github.com/ardanlabs/liarsdice",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 16,
+          "language": "Go",
+          "pushed_at": "2026-06-08T16:03:29Z",
+          "license": "Apache-2.0"
+        },
+        {
+          "full_name": "akalink/VRC-Liars-Dice",
+          "html_url": "https://github.com/akalink/VRC-Liars-Dice",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "C#",
+          "pushed_at": "2023-01-09T01:12:50Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "thomasahle/snyd",
+          "html_url": "https://github.com/thomasahle/snyd",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Python",
+          "pushed_at": "2022-01-10T09:43:48Z",
+          "license": "GPL-3.0"
+        }
+      ]
+    },
+    {
+      "game": "goofspiel",
+      "query": "goofspiel",
+      "totalCount": 60,
+      "repositories": [
+        {
+          "full_name": "rafd/goofspiel",
+          "html_url": "https://github.com/rafd/goofspiel",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 3,
+          "language": "CoffeeScript",
+          "pushed_at": "2012-03-18T19:16:29Z",
+          "license": null
+        },
+        {
+          "full_name": "ChrisUnderhill/Goofspiel",
+          "html_url": "https://github.com/ChrisUnderhill/Goofspiel",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "C++",
+          "pushed_at": "2017-11-09T00:11:54Z",
+          "license": null
+        },
+        {
+          "full_name": "SamWarmuth/Goofspiel",
+          "html_url": "https://github.com/SamWarmuth/Goofspiel",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "Ruby",
+          "pushed_at": "2010-03-11T01:03:04Z",
+          "license": null
+        },
+        {
+          "full_name": "gitvijayy/Goofspiel",
+          "html_url": "https://github.com/gitvijayy/Goofspiel",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "JavaScript",
+          "pushed_at": "2023-01-11T01:29:44Z",
+          "license": null
+        },
+        {
+          "full_name": "bajh/Goofspiel",
+          "html_url": "https://github.com/bajh/Goofspiel",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "JavaScript",
+          "pushed_at": "2015-09-18T18:22:33Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "prisoners-dilemma",
+      "query": "prisoners dilemma visualization",
+      "totalCount": 23,
+      "repositories": [
+        {
+          "full_name": "semaj/evolutionary-prisoner",
+          "html_url": "https://github.com/semaj/evolutionary-prisoner",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "JavaScript",
+          "pushed_at": "2016-12-15T05:11:33Z",
+          "license": null
+        },
+        {
+          "full_name": "Hhhpraise/prisoners-dilemma-tournament",
+          "html_url": "https://github.com/Hhhpraise/prisoners-dilemma-tournament",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "JavaScript",
+          "pushed_at": "2026-05-27T07:37:34Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "shoyo/prisoners-dilemma-analysis",
+          "html_url": "https://github.com/shoyo/prisoners-dilemma-analysis",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Python",
+          "pushed_at": "2018-11-24T02:43:33Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "timwoelfle/Prisoners-Dilemma",
+          "html_url": "https://github.com/timwoelfle/Prisoners-Dilemma",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "JavaScript",
+          "pushed_at": "2020-10-29T14:24:24Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "RorriMaesu/AiGameTheoryFishbowl-PrisonersDilemma",
+          "html_url": "https://github.com/RorriMaesu/AiGameTheoryFishbowl-PrisonersDilemma",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "JavaScript",
+          "pushed_at": "2025-08-20T00:44:01Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "bargaining",
+      "query": "bargaining game",
+      "totalCount": 90,
+      "repositories": [
+        {
+          "full_name": "AvivNavon/nash-mtl",
+          "html_url": "https://github.com/AvivNavon/nash-mtl",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 248,
+          "language": "Python",
+          "pushed_at": "2025-06-25T06:16:44Z",
+          "license": null
+        },
+        {
+          "full_name": "AvivSham/auxinash",
+          "html_url": "https://github.com/AvivSham/auxinash",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 34,
+          "language": "Python",
+          "pushed_at": "2024-01-19T13:33:00Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "velochy/rl-bargaining",
+          "html_url": "https://github.com/velochy/rl-bargaining",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "Python",
+          "pushed_at": "2019-08-09T08:13:22Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "unoori/FlexP2P",
+          "html_url": "https://github.com/unoori/FlexP2P",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": null,
+          "pushed_at": "2023-07-12T16:47:25Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "Stunspot/stunspots-guide-to-game-theory",
+          "html_url": "https://github.com/Stunspot/stunspots-guide-to-game-theory",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": null,
+          "pushed_at": "2026-08-02T19:30:22Z",
+          "license": "NOASSERTION"
+        }
+      ]
+    },
+    {
+      "game": "negotiation",
+      "query": "negotiation game",
+      "totalCount": 236,
+      "repositories": [
+        {
+          "full_name": "facebookresearch/diplomacy_cicero",
+          "html_url": "https://github.com/facebookresearch/diplomacy_cicero",
+          "default_branch": "main",
+          "archived": true,
+          "stargazers_count": 1433,
+          "language": "Python",
+          "pushed_at": "2025-04-17T19:14:56Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "diplomacy/diplomacy",
+          "html_url": "https://github.com/diplomacy/diplomacy",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 185,
+          "language": "Python",
+          "pushed_at": "2024-02-18T01:38:38Z",
+          "license": "AGPL-3.0"
+        },
+        {
+          "full_name": "ShenzheZhu/A2A-NT",
+          "html_url": "https://github.com/ShenzheZhu/A2A-NT",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 32,
+          "language": "Python",
+          "pushed_at": "2026-06-09T05:38:34Z",
+          "license": null
+        },
+        {
+          "full_name": "saltandsilicon/game-theorist",
+          "html_url": "https://github.com/saltandsilicon/game-theorist",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 16,
+          "language": "JavaScript",
+          "pushed_at": "2026-09-02T22:30:21Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "bloo-mind/awesome-multi-agent-systems",
+          "html_url": "https://github.com/bloo-mind/awesome-multi-agent-systems",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 6,
+          "language": "Python",
+          "pushed_at": "2026-10-30T10:48:57Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "first-price-sealed-bid-auction",
+      "query": "sealed bid auction",
+      "totalCount": 409,
+      "repositories": [
+        {
+          "full_name": "baedrik/SCRT-sealed-bid-auction",
+          "html_url": "https://github.com/baedrik/SCRT-sealed-bid-auction",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 25,
+          "language": "Shell",
+          "pushed_at": "2020-12-25T18:10:40Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "heidekrueger/bnelearn",
+          "html_url": "https://github.com/heidekrueger/bnelearn",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 24,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2023-03-17T09:34:17Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "baedrik/secret-auction-factory",
+          "html_url": "https://github.com/baedrik/secret-auction-factory",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Rust",
+          "pushed_at": "2021-01-26T04:48:14Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "W1tnezz/Fabric-Based-Sealed-bid-auction",
+          "html_url": "https://github.com/W1tnezz/Fabric-Based-Sealed-bid-auction",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 8,
+          "language": "Java",
+          "pushed_at": "2023-09-27T10:10:50Z",
+          "license": null
+        },
+        {
+          "full_name": "shyam0x1e/AuctionHouse",
+          "html_url": "https://github.com/shyam0x1e/AuctionHouse",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "Java",
+          "pushed_at": "2022-05-17T07:28:19Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "rock-paper-scissors",
+      "query": "rock paper scissors game",
+      "totalCount": 71142,
+      "repositories": [
+        {
+          "full_name": "alexmngn/react-rock-paper-scissors",
+          "html_url": "https://github.com/alexmngn/react-rock-paper-scissors",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 340,
+          "language": "JavaScript",
+          "pushed_at": "2020-10-01T14:14:09Z",
+          "license": null
+        },
+        {
+          "full_name": "iciamyplant/Poker_CFR",
+          "html_url": "https://github.com/iciamyplant/Poker_CFR",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 144,
+          "language": "Python",
+          "pushed_at": "2022-06-23T11:25:57Z",
+          "license": null
+        },
+        {
+          "full_name": "DrGFreeman/rps-cv",
+          "html_url": "https://github.com/DrGFreeman/rps-cv",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 125,
+          "language": "Python",
+          "pushed_at": "2019-08-16T18:46:07Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "arifikhsan/batu-gunting-kertas-nuxt",
+          "html_url": "https://github.com/arifikhsan/batu-gunting-kertas-nuxt",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 119,
+          "language": "Vue",
+          "pushed_at": "2024-01-25T20:27:50Z",
+          "license": null
+        },
+        {
+          "full_name": "andypotato/rock-paper-scissors",
+          "html_url": "https://github.com/andypotato/rock-paper-scissors",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 112,
+          "language": "JavaScript",
+          "pushed_at": "2021-11-15T16:03:25Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "taxi",
+      "query": "taxi gymnasium",
+      "totalCount": 127,
+      "repositories": [
+        {
+          "full_name": "tekgulburak/Q-learning-taxi-v3-",
+          "html_url": "https://github.com/tekgulburak/Q-learning-taxi-v3-",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 9,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2023-11-06T21:39:39Z",
+          "license": null
+        },
+        {
+          "full_name": "Matheussbzp/Aprendizado-por-Reforco-no-Ambiente-Taxi-v3",
+          "html_url": "https://github.com/Matheussbzp/Aprendizado-por-Reforco-no-Ambiente-Taxi-v3",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 4,
+          "language": "Python",
+          "pushed_at": "2024-06-04T23:27:09Z",
+          "license": null
+        },
+        {
+          "full_name": "phamduyaaaa/Play-All-ToyText-with-Q-Learning",
+          "html_url": "https://github.com/phamduyaaaa/Play-All-ToyText-with-Q-Learning",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 3,
+          "language": "Python",
+          "pushed_at": "2025-03-04T03:19:29Z",
+          "license": null
+        },
+        {
+          "full_name": "ATMRI-NTU/OpenTaxi",
+          "html_url": "https://github.com/ATMRI-NTU/OpenTaxi",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 3,
+          "language": "Python",
+          "pushed_at": "2026-06-01T09:02:18Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "HalilSacpapa/RL-TaxiDriver",
+          "html_url": "https://github.com/HalilSacpapa/RL-TaxiDriver",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2023-07-28T08:50:44Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "frozen-lake",
+      "query": "frozen lake gymnasium",
+      "totalCount": 105,
+      "repositories": [
+        {
+          "full_name": "tekgulburak/FrozenLake-v1",
+          "html_url": "https://github.com/tekgulburak/FrozenLake-v1",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 9,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2023-11-23T05:09:12Z",
+          "license": null
+        },
+        {
+          "full_name": "AleksandarHaber/Greedy-in-the-Limit-with-Infinite-Exploration-GLIE-Monte-Carlo-Reinforcement-Learning-in-Python",
+          "html_url": "https://github.com/AleksandarHaber/Greedy-in-the-Limit-with-Infinite-Exploration-GLIE-Monte-Carlo-Reinforcement-Learning-in-Python",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 5,
+          "language": "Python",
+          "pushed_at": "2023-01-19T02:35:05Z",
+          "license": null
+        },
+        {
+          "full_name": "realtmxi/FrozenLake",
+          "html_url": "https://github.com/realtmxi/FrozenLake",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 3,
+          "language": "Python",
+          "pushed_at": "2023-06-26T12:50:38Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "Jordan-Haidee/FrozenLake-IRL",
+          "html_url": "https://github.com/Jordan-Haidee/FrozenLake-IRL",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "Python",
+          "pushed_at": "2025-02-12T10:44:38Z",
+          "license": null
+        },
+        {
+          "full_name": "bilalfatian/Implementing-FrozenLake-Q-learning-with-Gymnasium",
+          "html_url": "https://github.com/bilalfatian/Implementing-FrozenLake-Q-learning-with-Gymnasium",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 2,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2024-05-05T14:58:47Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "cliff-walking",
+      "query": "cliff walking",
+      "totalCount": 474,
+      "repositories": [
+        {
+          "full_name": "zeynepCankara/Cliff-Walking-Solution",
+          "html_url": "https://github.com/zeynepCankara/Cliff-Walking-Solution",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 21,
+          "language": "Python",
+          "pushed_at": "2019-05-19T09:14:35Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "cvhu/CliffWalking",
+          "html_url": "https://github.com/cvhu/CliffWalking",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 17,
+          "language": "Java",
+          "pushed_at": "2017-07-10T13:48:37Z",
+          "license": null
+        },
+        {
+          "full_name": "woutervanheeswijk/cliff_walking_public",
+          "html_url": "https://github.com/woutervanheeswijk/cliff_walking_public",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 15,
+          "language": "Python",
+          "pushed_at": "2023-12-05T12:08:12Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "enCoy/Cliff-Walking---Reinforcement-Learning",
+          "html_url": "https://github.com/enCoy/Cliff-Walking---Reinforcement-Learning",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2019-06-15T13:50:00Z",
+          "license": null
+        },
+        {
+          "full_name": "TissueC/QLearning-and-Sarsa-for-Cliff-Walking",
+          "html_url": "https://github.com/TissueC/QLearning-and-Sarsa-for-Cliff-Walking",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 7,
+          "language": "Python",
+          "pushed_at": "2019-04-28T16:44:58Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "cartpole",
+      "query": "cartpole rendering",
+      "totalCount": 9,
+      "repositories": [
+        {
+          "full_name": "Abezzam10/CartPole_problem",
+          "html_url": "https://github.com/Abezzam10/CartPole_problem",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Python",
+          "pushed_at": "2019-08-18T00:49:16Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "aminishereai/cartpole-dqn-",
+          "html_url": "https://github.com/aminishereai/cartpole-dqn-",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2025-09-30T08:48:29Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "anslex/cartpole_with_rendering",
+          "html_url": "https://github.com/anslex/cartpole_with_rendering",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 0,
+          "language": "Python",
+          "pushed_at": "2021-04-23T01:43:12Z",
+          "license": null
+        },
+        {
+          "full_name": "AnimeshSinha1309/assignment-cudacart",
+          "html_url": "https://github.com/AnimeshSinha1309/assignment-cudacart",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 0,
+          "language": "Cuda",
+          "pushed_at": "2023-12-25T06:55:36Z",
+          "license": null
+        },
+        {
+          "full_name": "Salemmander/parallel-cartpole",
+          "html_url": "https://github.com/Salemmander/parallel-cartpole",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 0,
+          "language": "Python",
+          "pushed_at": "2026-10-19T00:31:39Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "mountain-car",
+      "query": "mountain car gymnasium",
+      "totalCount": 45,
+      "repositories": [
+        {
+          "full_name": "MehdiShahbazi/DQN-Mountain-Car-Gymnasium",
+          "html_url": "https://github.com/MehdiShahbazi/DQN-Mountain-Car-Gymnasium",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 10,
+          "language": "Python",
+          "pushed_at": "2024-03-19T11:27:28Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "jerryalinalin/MountainCar-QLearning-Experiments",
+          "html_url": "https://github.com/jerryalinalin/MountainCar-QLearning-Experiments",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Python",
+          "pushed_at": "2026-07-16T09:14:41Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "Morri3/MountainCarAgent",
+          "html_url": "https://github.com/Morri3/MountainCarAgent",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Python",
+          "pushed_at": "2025-05-19T06:29:31Z",
+          "license": null
+        },
+        {
+          "full_name": "saimeda1/MountainCarRL",
+          "html_url": "https://github.com/saimeda1/MountainCarRL",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Python",
+          "pushed_at": "2024-07-11T02:58:46Z",
+          "license": null
+        },
+        {
+          "full_name": "1Mike-e/MountainCar-RL",
+          "html_url": "https://github.com/1Mike-e/MountainCar-RL",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 1,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2025-08-18T21:40:42Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "lunar-lander",
+      "query": "lunar lander game",
+      "totalCount": 722,
+      "repositories": [
+        {
+          "full_name": "s-macke/Interplanetary-Postal-Service",
+          "html_url": "https://github.com/s-macke/Interplanetary-Postal-Service",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 678,
+          "language": "C",
+          "pushed_at": "2024-09-27T22:02:33Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "CS-LX/CPURacer",
+          "html_url": "https://github.com/CS-LX/CPURacer",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 303,
+          "language": "C#",
+          "pushed_at": "2026-09-19T15:08:11Z",
+          "license": null
+        },
+        {
+          "full_name": "ehmorris/lunar-lander",
+          "html_url": "https://github.com/ehmorris/lunar-lander",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 179,
+          "language": "JavaScript",
+          "pushed_at": "2026-10-06T17:18:48Z",
+          "license": null
+        },
+        {
+          "full_name": "maryrosecook/retro-games",
+          "html_url": "https://github.com/maryrosecook/retro-games",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 68,
+          "language": "JavaScript",
+          "pushed_at": "2014-08-22T19:09:35Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "juliankappler/lunar-lander",
+          "html_url": "https://github.com/juliankappler/lunar-lander",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 43,
+          "language": "Jupyter Notebook",
+          "pushed_at": "2023-05-15T19:59:29Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "car-racing",
+      "query": "car racing pygame",
+      "totalCount": 378,
+      "repositories": [
+        {
+          "full_name": "VIDAKHOSHPEY22/Atari-Racer",
+          "html_url": "https://github.com/VIDAKHOSHPEY22/Atari-Racer",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 114,
+          "language": "Python",
+          "pushed_at": "2026-11-01T12:13:13Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "techwithtim/Pygame-Car-Racer",
+          "html_url": "https://github.com/techwithtim/Pygame-Car-Racer",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 105,
+          "language": "Python",
+          "pushed_at": "2024-10-17T13:30:08Z",
+          "license": null
+        },
+        {
+          "full_name": "drilistbox/HighSpeedRacing",
+          "html_url": "https://github.com/drilistbox/HighSpeedRacing",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 21,
+          "language": "Python",
+          "pushed_at": "2018-05-01T16:05:28Z",
+          "license": null
+        },
+        {
+          "full_name": "abidurrahman11/Pygame-Racing-Car",
+          "html_url": "https://github.com/abidurrahman11/Pygame-Racing-Car",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 18,
+          "language": "Python",
+          "pushed_at": "2026-05-24T17:19:16Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "WARlord05/SpeedyHighway",
+          "html_url": "https://github.com/WARlord05/SpeedyHighway",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 13,
+          "language": "Python",
+          "pushed_at": "2026-02-20T04:23:25Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "bipedal-walker",
+      "query": "bipedal walker",
+      "totalCount": 449,
+      "repositories": [
+        {
+          "full_name": "nikhilbarhate99/TD3-PyTorch-BipedalWalker-v2",
+          "html_url": "https://github.com/nikhilbarhate99/TD3-PyTorch-BipedalWalker-v2",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 105,
+          "language": "Python",
+          "pushed_at": "2019-06-07T12:30:53Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "XinJingHao/TD3-BipedalWalkerHardcore-v2",
+          "html_url": "https://github.com/XinJingHao/TD3-BipedalWalkerHardcore-v2",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 100,
+          "language": "Python",
+          "pushed_at": "2023-05-21T14:29:43Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "Kyziridis/BipedalWalker-v2",
+          "html_url": "https://github.com/Kyziridis/BipedalWalker-v2",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 27,
+          "language": "Python",
+          "pushed_at": "2020-05-26T10:23:11Z",
+          "license": "GPL-2.0"
+        },
+        {
+          "full_name": "CoderAT13/BipedalWalkerHardcore-SAC",
+          "html_url": "https://github.com/CoderAT13/BipedalWalkerHardcore-SAC",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 27,
+          "language": "Python",
+          "pushed_at": "2023-10-28T08:42:03Z",
+          "license": null
+        },
+        {
+          "full_name": "b-vm/bipedal_walker_terrain",
+          "html_url": "https://github.com/b-vm/bipedal_walker_terrain",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 24,
+          "language": "Python",
+          "pushed_at": "2023-06-29T10:51:51Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "paddle-ball",
+      "query": "pong pygame",
+      "totalCount": 3473,
+      "repositories": [
+        {
+          "full_name": "jatinmandav/Gaming-in-Python",
+          "html_url": "https://github.com/jatinmandav/Gaming-in-Python",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 114,
+          "language": "Python",
+          "pushed_at": "2025-04-07T05:49:02Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "clear-code-projects/Pong_in_Pygame",
+          "html_url": "https://github.com/clear-code-projects/Pong_in_Pygame",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 69,
+          "language": "Python",
+          "pushed_at": "2020-06-12T17:53:40Z",
+          "license": null
+        },
+        {
+          "full_name": "techwithtim/Pong-Python",
+          "html_url": "https://github.com/techwithtim/Pong-Python",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 58,
+          "language": "Python",
+          "pushed_at": "2024-10-17T13:28:09Z",
+          "license": null
+        },
+        {
+          "full_name": "hhhrrrttt222111/PyBox",
+          "html_url": "https://github.com/hhhrrrttt222111/PyBox",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 53,
+          "language": "HTML",
+          "pushed_at": "2022-10-02T15:47:14Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "JulesVerny/PongReinforcementLearning",
+          "html_url": "https://github.com/JulesVerny/PongReinforcementLearning",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 43,
+          "language": "Python",
+          "pushed_at": "2018-01-26T23:09:12Z",
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "alien-shooter",
+      "query": "space invaders pygame",
+      "totalCount": 2684,
+      "repositories": [
+        {
+          "full_name": "attreyabhatt/Space-Invaders-Pygame",
+          "html_url": "https://github.com/attreyabhatt/Space-Invaders-Pygame",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 358,
+          "language": "Python",
+          "pushed_at": "2023-05-28T20:19:38Z",
+          "license": null
+        },
+        {
+          "full_name": "leerob/space-invaders",
+          "html_url": "https://github.com/leerob/space-invaders",
+          "default_branch": "master",
+          "archived": true,
+          "stargazers_count": 264,
+          "language": "Python",
+          "pushed_at": "2024-07-31T03:28:10Z",
+          "license": "MIT"
+        },
+        {
+          "full_name": "clear-code-projects/Space-invaders",
+          "html_url": "https://github.com/clear-code-projects/Space-invaders",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 70,
+          "language": "Python",
+          "pushed_at": "2021-08-02T11:06:00Z",
+          "license": null
+        },
+        {
+          "full_name": "meezan-mallick/space_invader_game",
+          "html_url": "https://github.com/meezan-mallick/space_invader_game",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 52,
+          "language": "Python",
+          "pushed_at": "2020-11-16T08:06:56Z",
+          "license": null
+        },
+        {
+          "full_name": "Amegma/Galaxy-Attack",
+          "html_url": "https://github.com/Amegma/Galaxy-Attack",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 44,
+          "language": "Python",
+          "pushed_at": "2023-08-23T18:56:49Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "boxing-style-arena",
+      "query": "boxing game",
+      "totalCount": 1094,
+      "repositories": [
+        {
+          "full_name": "k7d/punchball",
+          "html_url": "https://github.com/k7d/punchball",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 43,
+          "language": "C",
+          "pushed_at": "2011-05-29T08:56:16Z",
+          "license": null
+        },
+        {
+          "full_name": "japalekhin/shadow-training",
+          "html_url": "https://github.com/japalekhin/shadow-training",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 28,
+          "language": "Dart",
+          "pushed_at": "2019-05-18T21:07:50Z",
+          "license": "GPL-3.0"
+        },
+        {
+          "full_name": "Dung-tech/Boxing_Game",
+          "html_url": "https://github.com/Dung-tech/Boxing_Game",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "Java",
+          "pushed_at": "2026-06-15T02:44:10Z",
+          "license": null
+        },
+        {
+          "full_name": "itzyongan/asia-pvp-servers",
+          "html_url": "https://github.com/itzyongan/asia-pvp-servers",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 11,
+          "language": "HTML",
+          "pushed_at": "2026-10-30T14:39:09Z",
+          "license": null
+        },
+        {
+          "full_name": "erfansn/BoxingWithML",
+          "html_url": "https://github.com/erfansn/BoxingWithML",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 9,
+          "language": "Python",
+          "pushed_at": "2022-04-15T10:06:28Z",
+          "license": "Apache-2.0"
+        }
+      ]
+    },
+    {
+      "game": "ice-hockey-style-arena",
+      "query": "hockey game",
+      "totalCount": 2150,
+      "repositories": [
+        {
+          "full_name": "zengm-games/zengm",
+          "html_url": "https://github.com/zengm-games/zengm",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 476,
+          "language": "TypeScript",
+          "pushed_at": "2026-11-02T04:10:41Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "danderfer/Comp_Sci_Sem_2",
+          "html_url": "https://github.com/danderfer/Comp_Sci_Sem_2",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 219,
+          "language": "Python",
+          "pushed_at": "2023-04-03T17:47:53Z",
+          "license": null
+        },
+        {
+          "full_name": "learnopengles/airhockey",
+          "html_url": "https://github.com/learnopengles/airhockey",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 164,
+          "language": "Objective-C",
+          "pushed_at": "2013-11-08T14:47:47Z",
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "MarkipTheMudkip/in-class-project-2",
+          "html_url": "https://github.com/MarkipTheMudkip/in-class-project-2",
+          "default_branch": "master",
+          "archived": false,
+          "stargazers_count": 96,
+          "language": "HTML",
+          "pushed_at": "2022-06-04T11:05:38Z",
+          "license": null
+        },
+        {
+          "full_name": "Mknsri/HockeySlam",
+          "html_url": "https://github.com/Mknsri/HockeySlam",
+          "default_branch": "main",
+          "archived": false,
+          "stargazers_count": 54,
+          "language": "C++",
+          "pushed_at": "2023-07-10T19:28:21Z",
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "euchre",
+      "query": "euchre license:mit",
+      "totalCount": 98,
+      "repositories": [
+        {
+          "full_name": "jamesterrell/Euchre_Calculator",
+          "html_url": "https://github.com/jamesterrell/Euchre_Calculator",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "boldandbrad/euchre-cli",
+          "html_url": "https://github.com/boldandbrad/euchre-cli",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "ahuth/euchre",
+          "html_url": "https://github.com/ahuth/euchre",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "Patward22/euchre-counter",
+          "html_url": "https://github.com/Patward22/euchre-counter",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "lharperm/Euchre",
+          "html_url": "https://github.com/lharperm/Euchre",
+          "archived": false,
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "crazy-eights",
+      "query": "\"crazy eights\" license:mit",
+      "totalCount": 30,
+      "repositories": [
+        {
+          "full_name": "cezarbulancea/CrazyEights",
+          "html_url": "https://github.com/cezarbulancea/CrazyEights",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "baptisterey/8americain",
+          "html_url": "https://github.com/baptisterey/8americain",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "luishowin/Crazy-Eights",
+          "html_url": "https://github.com/luishowin/Crazy-Eights",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "CalebABG/CrazyEightsSimulator",
+          "html_url": "https://github.com/CalebABG/CrazyEightsSimulator",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "JeffreyMJohnson/Loco_Ocho",
+          "html_url": "https://github.com/JeffreyMJohnson/Loco_Ocho",
+          "archived": false,
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "gin-rummy",
+      "query": "\"gin rummy\" license:mit",
+      "totalCount": 32,
+      "repositories": [
+        {
+          "full_name": "sangttruong/ginrummy",
+          "html_url": "https://github.com/sangttruong/ginrummy",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "7enTropy7/Rummy_RL",
+          "html_url": "https://github.com/7enTropy7/Rummy_RL",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "jrheling/pylgrum",
+          "html_url": "https://github.com/jrheling/pylgrum",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "krishkalai07/Gin-Rummy",
+          "html_url": "https://github.com/krishkalai07/Gin-Rummy",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "lokkant/Gin-Rummy",
+          "html_url": "https://github.com/lokkant/Gin-Rummy",
+          "archived": false,
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "bargaining",
+      "query": "bargaining otree",
+      "totalCount": 5,
+      "repositories": [
+        {
+          "full_name": "BaileyYi19307/BargainingExperiment",
+          "html_url": "https://github.com/BaileyYi19307/BargainingExperiment",
+          "archived": false,
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "stanmart/unstructured-bargaining-experiment",
+          "html_url": "https://github.com/stanmart/unstructured-bargaining-experiment",
+          "archived": true,
+          "license": "MIT"
+        },
+        {
+          "full_name": "amohseni/Minority-Majority-Experiment",
+          "html_url": "https://github.com/amohseni/Minority-Majority-Experiment",
+          "archived": false,
+          "license": "CC0-1.0"
+        },
+        {
+          "full_name": "snunnari/otree_dynamic_barg",
+          "html_url": "https://github.com/snunnari/otree_dynamic_barg",
+          "archived": false,
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "snunnari/otree_static_barg",
+          "html_url": "https://github.com/snunnari/otree_static_barg",
+          "archived": false,
+          "license": "NOASSERTION"
+        }
+      ]
+    },
+    {
+      "game": "negotiation",
+      "query": "negotiation game language:JavaScript license:mit",
+      "totalCount": 2,
+      "repositories": [
+        {
+          "full_name": "saltandsilicon/game-theorist",
+          "html_url": "https://github.com/saltandsilicon/game-theorist",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "Phani3108/MaximusPrime",
+          "html_url": "https://github.com/Phani3108/MaximusPrime",
+          "archived": false,
+          "license": "MIT"
+        }
+      ]
+    },
+    {
+      "game": "first-price-sealed-bid-auction",
+      "query": "auction otree",
+      "totalCount": 15,
+      "repositories": [
+        {
+          "full_name": "IOP-Experiments/otree-double-auction",
+          "html_url": "https://github.com/IOP-Experiments/otree-double-auction",
+          "archived": false,
+          "license": "NOASSERTION"
+        },
+        {
+          "full_name": "otree-tools/jbef-channels",
+          "html_url": "https://github.com/otree-tools/jbef-channels",
+          "archived": false,
+          "license": null
+        },
+        {
+          "full_name": "chapkovski/miniebay",
+          "html_url": "https://github.com/chapkovski/miniebay",
+          "archived": false,
+          "license": null
+        },
+        {
+          "full_name": "domidt/CDA",
+          "html_url": "https://github.com/domidt/CDA",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "chapkovski/double_auction",
+          "html_url": "https://github.com/chapkovski/double_auction",
+          "archived": false,
+          "license": null
+        }
+      ]
+    },
+    {
+      "game": "pentago",
+      "query": "pentago game language:JavaScript",
+      "totalCount": 29,
+      "repositories": [
+        {
+          "full_name": "kevinkh89/Pentago",
+          "html_url": "https://github.com/kevinkh89/Pentago",
+          "archived": false,
+          "license": "MIT"
+        },
+        {
+          "full_name": "papoms/Pentago",
+          "html_url": "https://github.com/papoms/Pentago",
+          "archived": false,
+          "license": null
+        },
+        {
+          "full_name": "guetux/pentago",
+          "html_url": "https://github.com/guetux/pentago",
+          "archived": false,
+          "license": null
+        },
+        {
+          "full_name": "fiumad/Pentago-React",
+          "html_url": "https://github.com/fiumad/Pentago-React",
+          "archived": false,
+          "license": null
+        },
+        {
+          "full_name": "jjblek/pentago",
+          "html_url": "https://github.com/jjblek/pentago",
+          "archived": false,
+          "license": null
+        }
+      ]
+    }
+  ],
+  "deepInspections": [
+    {
+      "repository": "7enTropy7/Rummy_RL",
+      "commit": "2d07b8d2d6bebc41aa46abaf7817350b15fbdadf",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "Boris-Em/Goban",
+      "commit": "44fcbe90a4f8e78c761e9d3992af93a49cc5c88f",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "Farama-Foundation/Gymnasium",
+      "commit": "c08564bb8edd741ff20430d3b500b2e76966772d",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "Farama-Foundation/PettingZoo",
+      "commit": "6b3f4950d23da03a0061a6225ab493a47aace3e3",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "FluffyStuff/riichi-mahjong-tiles",
+      "commit": "26e127ba2117f45cdce5ea0225748cc0cfad3169",
+      "reportedLicense": "NOASSERTION",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "IOP-Experiments/otree-double-auction",
+      "commit": "bc61bbb9fda680f4b5dd619498daf6cfdf7db1c4",
+      "reportedLicense": "NOASSERTION",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "ImperialBower/cardpack.rs",
+      "commit": "95ee243ccb8226baad800d358f33bc618128f2af",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "Kryha/boloney",
+      "commit": "17e9e6236413bbb5ef982f92a5737f1e82686893",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "Mknsri/HockeySlam",
+      "commit": "0776bc00b2a454c9ab67bcf4c14627301d10811d",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "SabakiHQ/Shudan",
+      "commit": "bf2be30c568338c77294a782742036c1b3167c72",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "WandererXII/shogiground",
+      "commit": "661ed8ca0c2ccb84679376ac523b5742e6235aee",
+      "reportedLicense": "GPL-3.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "ahuth/euchre",
+      "commit": "57bee8016b38557e531e546b6e1d562775877056",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "arnowaczynski/utttai",
+      "commit": "622dae66b18198f6f12aef0a0bccd5bd40de2d8e",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "baptisterey/8americain",
+      "commit": "28703a09e5786f20aaf99a9196356f1a3189680b",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "bb4/bb4-games",
+      "commit": "2afbe944caad6c45d956d2b3d382bd74db09dec7",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "bigardone/phoenix-battleship",
+      "commit": "1077e13eb871ab4fd52eef09c1b42cabd44f4d8f",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "boardgameio/boardgame.io",
+      "commit": "47adef2b46e375999931209ba7b41e9654c506e1",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "bstnfrmry/hanabi",
+      "commit": "9a9ce26ab14680cc48f7a105c32faec0cf002804",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "calcitem/Sanmill",
+      "commit": "8901a06f088bf49a1602fee8686ed25ac5a33925",
+      "reportedLicense": "AGPL-3.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "cezarbulancea/CrazyEights",
+      "commit": "5952844c828980c457d69c981802df944a453c4a",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "chapkovski/miniebay",
+      "commit": "64be348aa5fbcebb6a95417d1412de2403480344",
+      "reportedLicense": null,
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "datamllab/rlcard",
+      "commit": "d7d0a957baf4cc7225a50522adb0164bf130a9d0",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "erfansn/BoxingWithML",
+      "commit": "254ac35a44649c0ea9f341d69db284a42170e43b",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "esfand55/mancala-game",
+      "commit": "29835ee02540202930a08fd821246725e903bc72",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "gbtami/chessgroundx",
+      "commit": "b898e080dfa2d9d2ef9d8f87c2ac9bd19071e053",
+      "reportedLicense": "GPL-3.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "girving/pentago",
+      "commit": "d8ae9b10d407da2dfccc644b2f56cc59958772e1",
+      "reportedLicense": "NOASSERTION",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "google-deepmind/open_spiel",
+      "commit": "8eb13ab561c4fac6829a5fa03635d3e1658bbb60",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "Hanabi-Live/hanabi-live",
+      "commit": "1844d6db553f346f1b64f8a1cd68868f76ec0430",
+      "reportedLicense": "GPL-3.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "hayeah/playing-cards-assets",
+      "commit": "1e4497c05c3da9956c9f517bd386e9a7090ff7fa",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "jatinmandav/Gaming-in-Python",
+      "commit": "f51b9e1e0f8a2d5ac03285de7b37a66340216657",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "leerob/space-invaders",
+      "commit": "ccb37ac159e8528b41b96c4e6f65c30ed9e421fb",
+      "reportedLicense": "MIT",
+      "archived": true,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "lengyanyu258/xiangqiboardjs",
+      "commit": "c36e1046c424e7abf1405904006043f6426b8ee8",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "lharperm/Euchre",
+      "commit": "152c9cd8d4e7da9a2fa8d92d440e2e1cebf1634b",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "lichess-org/chessground",
+      "commit": "b4f605018e1043640c917e82a74b214cb58e4a05",
+      "reportedLicense": "GPL-3.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "lpaulger/cribbage-the-game",
+      "commit": "26b1657b7a3735dfa7f773a9a5d9651d82533e99",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "maryrosecook/retro-games",
+      "commit": "2c9a82216cd4a97bd4bb2b9c40f95dbb0a6d2222",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "mreishus/spades",
+      "commit": "095d840ba0084ed3bac57354286eb422b183d108",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "ncase/trust",
+      "commit": "6ec45d73befdb922bd40654dd1c1c903a953562f",
+      "reportedLicense": "CC0-1.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "online-go/goban",
+      "commit": "d139d00134dff1bce099f2acfafe827b2a5be6e6",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "playhex/playhex",
+      "commit": "5750af48f8c3c9250f31c45d89a4b38d512bddc2",
+      "reportedLicense": "AGPL-3.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "quasoft/backgammonjs",
+      "commit": "f85f6ff0b0af9efcc5ef98a6d7bf7fc140090782",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "saltandsilicon/game-theorist",
+      "commit": "3c5128d9ea3c31ad8e540ac9d6ea0bf01c96900d",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "sangttruong/ginrummy",
+      "commit": "45f6a10eeb53b979b152d6bf9e904f38df9473f0",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "shaack/cm-chessboard",
+      "commit": "2069b9ef3c10f1e2f005dad9eb9a2c35ee60a865",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "shaochuan/Xiangqi",
+      "commit": "fe138ffd7ea478592e8c74154e26ddb3de76edc7",
+      "reportedLicense": "MIT",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "snunnari/otree_dynamic_barg",
+      "commit": "47ff7b0dad52cb63f99368410c59c2a9b0b7f591",
+      "reportedLicense": "NOASSERTION",
+      "archived": false,
+      "status": "not-imported",
+      "treeComplete": true
+    },
+    {
+      "repository": "sotetsuk/pgx",
+      "commit": "87278d2d6e677fd87248c457207b59cfa42e578d",
+      "reportedLicense": "Apache-2.0",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "stanmart/unstructured-bargaining-experiment",
+      "commit": "b79d3dedff04d70555aedf022735118eb4c76ad6",
+      "reportedLicense": "MIT",
+      "archived": true,
+      "status": "imported-selection",
+      "treeComplete": true
+    },
+    {
+      "repository": "yyjhao/html5-hearts",
+      "commit": "501fffd98964ff1a543020be09e7efe4cc7c8f6a",
+      "reportedLicense": "NOASSERTION",
+      "archived": false,
+      "status": "imported-selection",
+      "treeComplete": true
+    }
+  ],
+  "scope": "57 targeted repository queries across all 50 Pachisi identities, top five candidates by stars, supplemented by known primary renderer projects. Search results are discovery evidence, not endorsements or license clearance. This is not every public GitHub repository.",
+  "metadataNote": "Repository descriptions omitted; query, result identity, URL, ranking metadata and inspection dispositions retained."
+}

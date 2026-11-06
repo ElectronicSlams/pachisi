@@ -48,3 +48,7 @@ Changes intended for production consumers need their own review and visual/perfo
 ## Public review
 
 Run `pnpm check:public` and inspect `git diff --cached` before every public push. Include only reusable source, synthetic fixtures, docs/tests and appropriately licensed assets. Exclude credentials, customer data, private screenshots, logs, operator evidence, hidden suites and production database material. Preserve MIT/OFL notices and brand identity restrictions. No third-party provider marks should be added without a documented redistribution basis.
+
+## Public game-design references
+
+`reference/public-games/` is also non-canonical, immutable reference material, independently licensed per source. Keep every imported byte, license and notice with its full commit and hashes in its own manifest. Do not import or execute these modules in Pachisi. The catalogue may use the separate authored metadata index; it must keep dedicated renderers, related variants, shared assets and rules-only references distinct. Run `pnpm check:design-sources` after changes. Missing-license or separately restricted assets remain links until their redistribution basis is established; never infer an artwork license from a repository's code license.

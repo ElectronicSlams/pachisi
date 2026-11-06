@@ -3,6 +3,8 @@ import bundled from "./game-demonstrations.json";
 export type DemonstrationFrame = {
   readonly state: Readonly<Record<string, unknown>>;
   readonly caption: string;
+  /** Core Pentago placement before rotating the indicated tray. */
+  readonly placement?: { readonly cell: number; readonly quadrant: number; readonly direction: string };
   readonly turn: number;
   readonly terminal: boolean;
   readonly outcomeReason?: string | null;

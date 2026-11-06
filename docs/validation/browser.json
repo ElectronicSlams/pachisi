@@ -7,6 +7,19 @@
       },
       "theme": "light",
       "games": 50,
+      "studyCases": 33,
+      "presentationCases": 214,
+      "c4DesignLayoutCases": 80,
+      "otherDesignLayoutCases": 642,
+      "localCensus": true,
+      "githubSweep": true,
+      "presentationFit": true,
+      "categorySelection": true,
+      "variantComparison": true,
+      "gameDeepLinks": true,
+      "publicDesignSources": 38,
+      "sourceFilters": true,
+      "replayControls": true,
       "keyboard": true,
       "dialogFocus": true,
       "clipboardFailure": true,
@@ -21,6 +34,19 @@
       },
       "theme": "dark",
       "games": 50,
+      "studyCases": 33,
+      "presentationCases": 214,
+      "c4DesignLayoutCases": 80,
+      "otherDesignLayoutCases": 642,
+      "localCensus": true,
+      "githubSweep": true,
+      "presentationFit": true,
+      "categorySelection": true,
+      "variantComparison": true,
+      "gameDeepLinks": true,
+      "publicDesignSources": 38,
+      "sourceFilters": true,
+      "replayControls": true,
       "keyboard": true,
       "dialogFocus": true,
       "clipboardFailure": true,
@@ -35,6 +61,19 @@
       },
       "theme": "light",
       "games": 50,
+      "studyCases": 33,
+      "presentationCases": 214,
+      "c4DesignLayoutCases": 80,
+      "otherDesignLayoutCases": 642,
+      "localCensus": true,
+      "githubSweep": true,
+      "presentationFit": true,
+      "categorySelection": true,
+      "variantComparison": true,
+      "gameDeepLinks": true,
+      "publicDesignSources": 38,
+      "sourceFilters": true,
+      "replayControls": true,
       "keyboard": true,
       "dialogFocus": true,
       "clipboardFailure": true,
@@ -49,6 +88,19 @@
       },
       "theme": "dark",
       "games": 50,
+      "studyCases": 33,
+      "presentationCases": 214,
+      "c4DesignLayoutCases": 80,
+      "otherDesignLayoutCases": 642,
+      "localCensus": true,
+      "githubSweep": true,
+      "presentationFit": true,
+      "categorySelection": true,
+      "variantComparison": true,
+      "gameDeepLinks": true,
+      "publicDesignSources": 38,
+      "sourceFilters": true,
+      "replayControls": true,
       "keyboard": true,
       "dialogFocus": true,
       "clipboardFailure": true,
@@ -72,7 +124,7 @@
     },
     {
       "geometry": {
-        "frames": 722,
+        "frames": 740,
         "bad": 0,
         "invalid": []
       },
@@ -161,7 +213,23 @@
           "endCentreOffset": 0,
           "overshoot": 0.03999930606957809
         }
-      ]
+      ],
+      "studies": {
+        "studies": 33,
+        "frames": 47,
+        "bad": 0,
+        "invalid": []
+      },
+      "replayPlayback": true
+    },
+    {
+      "review": {
+        "games": 50,
+        "distinctPaintedDesigns": 170,
+        "settledPlacements": 4,
+        "motionPreferences": 2,
+        "publicPositionInspection": true
+      }
     }
   ]
 }

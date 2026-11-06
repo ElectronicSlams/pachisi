@@ -241,28 +241,28 @@
       "target": "src/game/board-types.ts",
       "sourceSha256": "e102b7cae18c5ad606b1e0e6d07134a7d8bb330151ffa700e5467676ea390848",
       "adapted": true,
-      "targetSha256": "4db0e72b133c1907cc0a2cd78e2593ec3b7f63d1d85c57f5562f8fd1416da51d"
+      "targetSha256": "ed4960eea9de37cf9f320b01b4fb82a9bf6d66b740961eba1ba243f165c52799"
     },
     {
       "source": "packages/game-visuals/src/styles.css",
       "target": "src/game/styles.css",
       "sourceSha256": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf",
       "adapted": true,
-      "targetSha256": "0438bd45e8debfe5228d183118bc637b9dfe40c1dd2ef3ab41b2091c71ad8883"
+      "targetSha256": "5569fbe9d50e9a95977d74cfca4d9f87d9fe59b4bc44ca8e8ed08b26eb556bc2"
     },
     {
       "source": "packages/game-visuals/src/demo.tsx",
       "target": "src/game/demo.tsx",
       "sourceSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202",
       "adapted": true,
-      "targetSha256": "a1a1d84c956bfff09a4353debc892d6e79f0abc9a57f22216a51403b9ab8be06"
+      "targetSha256": "63c7337600d8997c03336a0ba185ededc6d0b341655049b26bbeaaaaa48a6750"
     },
     {
       "source": "packages/game-visuals/src/game-demonstrations.json",
       "target": "src/game/game-demonstrations.json",
       "sourceSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322",
-      "adapted": false,
-      "targetSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322"
+      "adapted": true,
+      "targetSha256": "cba9149a86543aa620cb661213eecf7bb25f3b6d2e57ec9d3007b012ea517a1f"
     },
     {
       "source": "packages/game-visuals/src/ui-icons.tsx",
@@ -283,7 +283,7 @@
       "target": "src/game/board.tsx",
       "sourceSha256": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f",
       "adapted": true,
-      "targetSha256": "1cea19bf5c984bb320d0b693b1ce0f0d2b48793a0edf0ffe06ba99b5424b0fb8"
+      "targetSha256": "6b86497cd6d26203ebd868117c7a1700a6c7f376f964a4c30411c80391008b51"
     },
     {
       "source": "packages/game-visuals/src/icons.tsx",
@@ -303,8 +303,8 @@
       "source": "packages/game-visuals/src/demos.ts",
       "target": "src/game/demos.ts",
       "sourceSha256": "1310e228b0c055cfb887b28fb3e61049356c9a0026a7cde0fc5e3603d3ec1a61",
-      "adapted": false,
-      "targetSha256": "1310e228b0c055cfb887b28fb3e61049356c9a0026a7cde0fc5e3603d3ec1a61"
+      "adapted": true,
+      "targetSha256": "21786e6c4d97bf386b80ffde446fd18b645a512ca6c7bf702e9f9c46d14f8cc3"
     },
     {
       "source": "packages/game-visuals/src/icon-catalogue.ts",
@@ -318,14 +318,14 @@
       "target": "src/game/scene.tsx",
       "sourceSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
       "adapted": true,
-      "targetSha256": "e478f3d9a07f999d6787a3d16729db8032f1125350f31e1f0366503229ecdff1"
+      "targetSha256": "9a8942e3dd3f4d03a35fc0e2cb810688262653f9c0f760333a72308bd13a07c2"
     },
     {
       "source": "packages/game-visuals/scripts/generate-demonstrations.py",
       "target": "scripts/generate-demonstrations.py",
       "sourceSha256": "9935d3f27463ebbe30d59bcd1012b6c79d93fc69f95f72fab9aee1aca33b670e",
       "adapted": true,
-      "targetSha256": "48a2abf43c371cf67530fbf03d4348d1d1c0a1c4ab15420c85a37d0607bd5bf7"
+      "targetSha256": "3944eccab0231b479c2c8f9333fd3efdc64f10178ae350d8e81909401ea4b9ad"
     },
     {
       "source": "packages/game-visuals/assets/logo-dark.png",
@@ -374,21 +374,21 @@
       "target": "styles/tokens.css",
       "sourceSha256": "3cff781aff5520f4cc0312e4a6b0ed906c0cafb37c7cf5e9325021255d2273b0",
       "adapted": true,
-      "targetSha256": "e3347be374c19f645c713375ac69d1fc766a01371821e2ec012a12555a5ecd8d"
+      "targetSha256": "84624c59e07b4850d7de9528a4d71b15ff1d611090420758bbd2b2760842027b"
     },
     {
       "source": "apps/web/styles/components.css",
       "target": "styles/components.css",
       "sourceSha256": "666a5ab0fb6dc33a1511de123666b8a631d4ff2867075a55a27b303e6b8ebd86",
-      "adapted": false,
-      "targetSha256": "666a5ab0fb6dc33a1511de123666b8a631d4ff2867075a55a27b303e6b8ebd86"
+      "adapted": true,
+      "targetSha256": "8208692a5e7d2f67324f4228a97e22b32070ce00c4c1e59be43c8e9533457fc5"
     },
     {
       "source": "apps/web/styles/stadium.css",
       "target": "styles/stadium.css",
       "sourceSha256": "3255ac1b990a0230497612c037cd0998cd221bed9a7055d3a41d955029574e63",
-      "adapted": false,
-      "targetSha256": "3255ac1b990a0230497612c037cd0998cd221bed9a7055d3a41d955029574e63"
+      "adapted": true,
+      "targetSha256": "6de6408a0a861d3a1fce32f6e65a78e967ef1e2a8b49dbe99344589b0a6de559"
     },
     {
       "source": "apps/web/styles/stadium-board.css",
@@ -409,7 +409,7 @@
       "target": "styles/stadium-chrome.css",
       "sourceSha256": "b6bcfa633532934c5187e2f9569227b723399b248ee1e40a322a1be36571198f",
       "adapted": true,
-      "targetSha256": "76c73df5ce6a0ae1617bbed4c86be0b25f4a10cd44981f06423d4accce0644fa"
+      "targetSha256": "498df20eaa13b151499d7e1c61f90a4010426f6e49500d278f5adcef41ea89de"
     },
     {
       "source": "apps/web/components/grand-slams/grand-slams-stage.tsx",
@@ -474,7 +474,7 @@
       "target": "src/game/board-adapter.ts",
       "sourceSha256": "0cdae048f3ee8f32df2fbb72c48366768f992947ec59c8fe976c3aead4b9ef87",
       "adapted": true,
-      "targetSha256": "34c68b47d48b7cc6f810de8962bf634c8cbff72cfe152717af26479c44c39347"
+      "targetSha256": "ce2b6cf8717bf5eec10ea5df0eb3245c9b06a7fdf931b10121de00da3971c560"
     },
     {
       "source": "apps/web/lib/arena-interactions.ts",
@@ -489,7 +489,7 @@
       "target": "src/theme-tokens/contract.ts",
       "sourceSha256": "e51b0db4eefb551ef5764d977a422cf430efbf033d1f4087735d20578ac2103d",
       "adapted": true,
-      "targetSha256": "6f68529272154bd8a9b3162f6d1642afc2c6b270fc9f3b2a556fc2d148a4d7d7"
+      "targetSha256": "a8f942fd6b4d461352e954859035fecf4909d6a57568d12f85fad7652f7edbd9"
     },
     {
       "source": "packages/theme-tokens/src/themes.ts",
@@ -497,7 +497,7 @@
       "target": "src/theme-tokens/themes.ts",
       "sourceSha256": "6f2eda4e1d3af8d47d2b64f7163d1bdf664d7aa8947a814c8d1296d18bdec70c",
       "adapted": true,
-      "targetSha256": "b7b9bd07dc62a0237a67a94bb3ee60d937ee07df1e3bd317caefe0637ae433b2"
+      "targetSha256": "81f754bd25a1d69537bc41f9c29574762560cc92422ab8f0917e8e54cf06d0cf"
     },
     {
       "source": "packages/theme-tokens/src/resolution.ts",
@@ -536,14 +536,14 @@
       "target": "tests/contract.test.tsx",
       "sourceSha256": "6ad1b78b5b0af858ac09d3333da3630752b15feaed623d1da3cb53534c9fd0cd",
       "adapted": true,
-      "targetSha256": "e50ab3ce833aac7453d943b0a944cea6e52ce19a125e02be924c0eac601ab669"
+      "targetSha256": "d8aed7ec24057520c3d53f819f05f4db7ffad0b1f66691c8b0a89cf3eac645e3"
     },
     {
       "source": "apps/web/tests/arena-interactions.test.ts",
       "target": "tests/board-adapter.test.tsx",
       "sourceSha256": "fd574a504bdbb6597dd60c3817b5fc8447a6742a9a0291bb2521e52fc0000800",
       "adapted": true,
-      "targetSha256": "fbb158e3a003a0bc3213687ae8ac88e085247807637188aab8ce1c86a72297b8"
+      "targetSha256": "63b8ef3bedc8b60cf77385b9a09560591c2d21ba7f4095ac83a3e0679e0d991c"
     }
   ],
   "adaptations": [
@@ -556,5 +556,368 @@
     "Source generator uses the relocated game directory.",
     "Build emits ESM and NodeNext-compatible declarations without bundling React."
   ],
-  "fileCommitNote": "Entries without sourceCommit come from platformCommit. Entries with sourceCommit were recovered from the older Platform main noted there (packages deleted upstream in 8b88fde0 on 2026-08-16)."
+  "fileCommitNote": "Entries without sourceCommit come from platformCommit. Entries with sourceCommit were recovered from the older Platform main noted there (packages deleted upstream in 8b88fde0 on 2026-08-16).",
+  "externalReferenceCollections": [
+    {
+      "path": "reference/public-games",
+      "manifest": "reference/public-games/MANIFEST.json",
+      "selection": "reference/public-games/SOURCES.json",
+      "reviewedOn": "2026-11-01",
+      "license": "Per-source original licenses; not relicensed under the root MIT license",
+      "runtimeImported": false,
+      "packaged": false
+    },
+    {
+      "path": "reference/github-visual-sweep",
+      "manifest": "reference/github-visual-sweep/MANIFEST.json",
+      "selection": "reference/github-visual-sweep/SOURCES.json",
+      "reviewedOn": "2026-11-04",
+      "license": "Per-source original licenses",
+      "runtimeImported": false,
+      "packaged": false
+    }
+  ],
+  "connectFourDesignCollection": {
+    "game": "connect-four",
+    "registry": "src/game/connect-four-designs.ts",
+    "materials": "styles/connect-four-designs.css",
+    "adaptations": [
+      {
+        "design": "design-1",
+        "source": "src/game/styles.css",
+        "kind": "existing Pachisi board"
+      },
+      {
+        "design": "design-2",
+        "kind": "original web adaptation of archived rack and gradients",
+        "sources": [
+          {
+            "path": "design-archive/home-v1/eSlams Home.dc.html",
+            "sha256": "f59bd2a9a95efca5ecde463ed66cdc298842e25b4b9007789f27e23cc719a30d"
+          },
+          {
+            "path": "design-archive/home-v2/eSlams Home v2.dc.html",
+            "sha256": "44d6eb642f07d1321453e5e6a683cb0d0c0ea0894c642b71df156d2a0957d734"
+          }
+        ]
+      },
+      {
+        "design": "design-3",
+        "kind": "original web adaptation of ring/pip motifs",
+        "sources": [
+          {
+            "path": "design-archive/arena-app/eSlams Arena App.html",
+            "sha256": "50c8ea46bf344c3827108ccccaa3743f3a793f429d0d758e3d0aa05217ea733f"
+          }
+        ]
+      },
+      {
+        "design": "design-4",
+        "kind": "independent CSS diagram study",
+        "sourceId": "sotetsuk--pgx",
+        "upstreamPath": "pgx/_src/dwg/connect_four.py"
+      },
+      {
+        "design": "design-5",
+        "kind": "independent CSS colour/material study without upstream sprites",
+        "sourceId": "farama-foundation--pettingzoo",
+        "upstreamPath": "pettingzoo/classic/connect_four/connect_four.py"
+      }
+    ],
+    "originalDesigns": [
+      "design-6",
+      "design-7",
+      "design-8",
+      "design-9",
+      "design-10",
+      "design-11",
+      "design-12",
+      "design-13",
+      "design-14",
+      "design-15",
+      "design-16",
+      "design-17",
+      "design-18",
+      "design-19",
+      "design-20"
+    ],
+    "nativeCaptures": [
+      {
+        "source": "makriman/eSlamsPlatform@8dd06c12:packages/board-skia/goldens/offscreen/family-themes/connect_four/arcade.png",
+        "archivedPath": "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/family-themes/connect_four/arcade.png",
+        "cataloguePath": "catalogue/public/c4-native/arcade.png",
+        "sha256": "cffe18819f3ab18271fa178750005a979797bbb52924b2e9c7e814573e3cd633",
+        "modified": false
+      },
+      {
+        "source": "makriman/eSlamsPlatform@8dd06c12:packages/board-skia/goldens/offscreen/family-themes/connect_four/classic-dark.png",
+        "archivedPath": "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/family-themes/connect_four/classic-dark.png",
+        "cataloguePath": "catalogue/public/c4-native/classic-dark.png",
+        "sha256": "1089ad9993fa1acfe5e5451843083135607732e07f090f3e0baa200306a13648",
+        "modified": false
+      },
+      {
+        "source": "makriman/eSlamsPlatform@8dd06c12:packages/board-skia/goldens/offscreen/family-themes/connect_four/classic-light.png",
+        "archivedPath": "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/family-themes/connect_four/classic-light.png",
+        "cataloguePath": "catalogue/public/c4-native/classic-light.png",
+        "sha256": "ca2d2aef7fdabb44b39216e8b9c004496d013f5873404a0e99e7f9ef0f7f0807",
+        "modified": false
+      },
+      {
+        "source": "makriman/eSlamsPlatform@8dd06c12:packages/board-skia/goldens/offscreen/family-themes/connect_four/club.png",
+        "archivedPath": "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/family-themes/connect_four/club.png",
+        "cataloguePath": "catalogue/public/c4-native/club.png",
+        "sha256": "555e342e48ef8f11b121b9037a587b42216007fcc54363840ee9d54548eb1346",
+        "modified": false
+      },
+      {
+        "source": "makriman/eSlamsPlatform@8dd06c12:packages/board-skia/goldens/offscreen/family-themes/connect_four/midnight.png",
+        "archivedPath": "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/family-themes/connect_four/midnight.png",
+        "cataloguePath": "catalogue/public/c4-native/midnight.png",
+        "sha256": "a3a672b02328ae61a828fe5006729637e1c6e043239735ab126fc9e74265b7c4",
+        "modified": false
+      },
+      {
+        "source": "makriman/eSlamsPlatform@8dd06c12:packages/board-skia/goldens/offscreen/family-themes/connect_four/neon.png",
+        "archivedPath": "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/family-themes/connect_four/neon.png",
+        "cataloguePath": "catalogue/public/c4-native/neon.png",
+        "sha256": "d32ca0b9d9b144e0f36fd9e0869cc93ec76c0245cbb3994e38f296e4b8910c87",
+        "modified": false
+      }
+    ]
+  },
+  "localDesignCensus": {
+    "index": "catalogue/local-game-design-census.json",
+    "report": "docs/research/local-game-design-census.md",
+    "sourceRevision": "makriman/eSlamsPlatform@8dd06c12",
+    "cataloguePreviewFiles": [
+      {
+        "path": "catalogue/public/design-census/0959391fb2e24351559dd31ff45a20f45c9156de2cc120dfff22f46452169c9e.png",
+        "sha256": "0959391fb2e24351559dd31ff45a20f45c9156de2cc120dfff22f46452169c9e",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/goofspiel/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/095fb64a068670cf4f110ed44d3e99ff850487f4e810bd0d65659356c1fad007.png",
+        "sha256": "095fb64a068670cf4f110ed44d3e99ff850487f4e810bd0d65659356c1fad007",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/battleship/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/1089ad9993fa1acfe5e5451843083135607732e07f090f3e0baa200306a13648.png",
+        "sha256": "1089ad9993fa1acfe5e5451843083135607732e07f090f3e0baa200306a13648",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/connect-four/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/241e17c066b0db54aa3bfcc3e5678d6c457cea3d37cfa94fa79e14c4214af16e.png",
+        "sha256": "241e17c066b0db54aa3bfcc3e5678d6c457cea3d37cfa94fa79e14c4214af16e",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/ultimate-tic-tac-toe/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/268dfc74fe5c3da260f51e7a06aefbed391a7724b50c90b879b3b85f207d8908.png",
+        "sha256": "268dfc74fe5c3da260f51e7a06aefbed391a7724b50c90b879b3b85f207d8908",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/first-price-sealed-bid-auction/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/26ab4a49f94338b1685e6a9fb1b545f30c6c6dd0d9273a3ac422b7022acb83a1.png",
+        "sha256": "26ab4a49f94338b1685e6a9fb1b545f30c6c6dd0d9273a3ac422b7022acb83a1",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/chess/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/2968e3713a13f1c0c104d8adf30af2a6607eb5f9d4118e4eb5e58bfc548330d8.png",
+        "sha256": "2968e3713a13f1c0c104d8adf30af2a6607eb5f9d4118e4eb5e58bfc548330d8",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/go/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/2a5b61af6fd4cb42b668ac5d51a52fdd1fdeda608079da7eac4e7be0e8e191c8.png",
+        "sha256": "2a5b61af6fd4cb42b668ac5d51a52fdd1fdeda608079da7eac4e7be0e8e191c8",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/prisoners-dilemma/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/2c7bc034c5c2e660f7b34f396e80c5d8ccf670074183e7e482af8e44490a1f99.png",
+        "sha256": "2c7bc034c5c2e660f7b34f396e80c5d8ccf670074183e7e482af8e44490a1f99",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/mancala/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/3c08969dfc151affa25806843a23f478006c06ab4f0e504b71c71d64387e25d2.png",
+        "sha256": "3c08969dfc151affa25806843a23f478006c06ab4f0e504b71c71d64387e25d2",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/shogi/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/3f90e22d7ad299737be6caae7ce80970e0e9134623e528630ae53a266b9606ef.png",
+        "sha256": "3f90e22d7ad299737be6caae7ce80970e0e9134623e528630ae53a266b9606ef",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/xiangqi/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/4b56520d109e2301ec5aca2637a09c2caa8abca11ce6bc6d3b850b6c7183a695.png",
+        "sha256": "4b56520d109e2301ec5aca2637a09c2caa8abca11ce6bc6d3b850b6c7183a695",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/tic-tac-toe/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/4d4c8bae8c3992f3f8a2d1c858c772bbded933b82283c77532fc03f083fb6bd9.png",
+        "sha256": "4d4c8bae8c3992f3f8a2d1c858c772bbded933b82283c77532fc03f083fb6bd9",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/checkers/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/othello/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/523a6f71c64121ae7dae2a2f79b83d0406e3e700207834a2546f3e48c6c06e3a.png",
+        "sha256": "523a6f71c64121ae7dae2a2f79b83d0406e3e700207834a2546f3e48c6c06e3a",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/backgammon/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/52ede424499da452396461fda55592e76b2a64cee41b31055fa6ff9680f4c2f1.png",
+        "sha256": "52ede424499da452396461fda55592e76b2a64cee41b31055fa6ff9680f4c2f1",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/blackjack/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/7e2c864cf44dc7f3e1f8e0833886b21df485bf3e128ef794a5eac7dd8e5bbc96.png",
+        "sha256": "7e2c864cf44dc7f3e1f8e0833886b21df485bf3e128ef794a5eac7dd8e5bbc96",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/limit-texas-holdem/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/no-limit-texas-holdem/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/84a6ea8cfd1b36c14d160dee4748f4478f88f91ee9e07427b4992bb8486b2bb7.png",
+        "sha256": "84a6ea8cfd1b36c14d160dee4748f4478f88f91ee9e07427b4992bb8486b2bb7",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/liars-dice/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/84c8f59d03809273f331141b2f2efa7f40aa64d664e520eb2e3f5fcdad93d2f7.png",
+        "sha256": "84c8f59d03809273f331141b2f2efa7f40aa64d664e520eb2e3f5fcdad93d2f7",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/nine-mens-morris/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/9dc74689d7adc3d90a702736cfcad0800a6a97b0f714eb530fda3da6b52d5f4b.png",
+        "sha256": "9dc74689d7adc3d90a702736cfcad0800a6a97b0f714eb530fda3da6b52d5f4b",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/bridge/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/euchre/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/hearts/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/spades/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/b660197cd32143cc5929b83c77eb29a335fed7817cd6ff5de34a53f3fe6a0711.png",
+        "sha256": "b660197cd32143cc5929b83c77eb29a335fed7817cd6ff5de34a53f3fe6a0711",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/bargaining/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/d5e5ada706c1db801c1daf27e4ada183ecbbf0df2545472672ec7079c8120f79.png",
+        "sha256": "d5e5ada706c1db801c1daf27e4ada183ecbbf0df2545472672ec7079c8120f79",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/pentago/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/d6743c59c080b63c759b97fbbedb45195f26cfa7a2ed40aa2c820af7115b508a.png",
+        "sha256": "d6743c59c080b63c759b97fbbedb45195f26cfa7a2ed40aa2c820af7115b508a",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/negotiation/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/dbdc923feda3232b20a0fabb1365c9dc5de8723d6fd3d65e1f4f3685bc9a02b2.png",
+        "sha256": "dbdc923feda3232b20a0fabb1365c9dc5de8723d6fd3d65e1f4f3685bc9a02b2",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/gomoku/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/e22b85a7128fe6105eb3fcafbdd658a9c7f0894aea43187b650392e2e7ca83c4.png",
+        "sha256": "e22b85a7128fe6105eb3fcafbdd658a9c7f0894aea43187b650392e2e7ca83c4",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/rock-paper-scissors/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/e46eb717aff6e1a91a5c5845d8fabfe2184794fe8d376dfa601a2b6c760a4801.png",
+        "sha256": "e46eb717aff6e1a91a5c5845d8fabfe2184794fe8d376dfa601a2b6c760a4801",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/crazy-eights/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/cribbage/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/dou-dizhu/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/gin-rummy/active_turn.png",
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/mahjong/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/e80310e906fe3bb3d48b9b41840eb2a3de5dd42c53f1fa0ad30af90cc3e2f965.png",
+        "sha256": "e80310e906fe3bb3d48b9b41840eb2a3de5dd42c53f1fa0ad30af90cc3e2f965",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/hanabi/active_turn.png"
+        ]
+      },
+      {
+        "path": "catalogue/public/design-census/e935a37699544ccfdc9a8e7c69b604c5a877db1423f1412e5cc1b974a3159b2b.png",
+        "sha256": "e935a37699544ccfdc9a8e7c69b604c5a877db1423f1412e5cc1b974a3159b2b",
+        "archivedSources": [
+          "reference/platform/mobile-8dd06c12/packages/board-skia/goldens/offscreen/games/hex/active_turn.png"
+        ]
+      }
+    ]
+  },
+  "gameVisualEditions": {
+    "registry": "src/game/visual-editions.json",
+    "materials": [
+      "styles/game-editions.css",
+      "src/game/edition-materials.tsx"
+    ],
+    "sharedByFamily": true,
+    "shudanAssets": [
+      {
+        "source": "reference/public-games/sources/sabakihq--shudan@bf2be30c5683/LICENSE",
+        "target": "assets/go-stones-shudan/LICENSE",
+        "sha256": "4f7dfbe3d284cdd836ee4fc19890b567164789af6e1852a18a9cf6f66f92f3b6",
+        "modified": false
+      },
+      {
+        "source": "reference/public-games/sources/sabakihq--shudan@bf2be30c5683/css/stone_-1.svg",
+        "target": "assets/go-stones-shudan/stone_-1.svg",
+        "sha256": "20693fea1ad13db7af4c33a38616431922d05819e1e82a9cb1c8589194e1d253",
+        "modified": false
+      },
+      {
+        "source": "reference/public-games/sources/sabakihq--shudan@bf2be30c5683/css/stone_1.svg",
+        "target": "assets/go-stones-shudan/stone_1.svg",
+        "sha256": "d3620632c62b291fa7cc5ce23cae7cc6a4467ada75d14eaaf504984324d6b5fd",
+        "modified": false
+      }
+    ],
+    "sourceLicense": "MIT (SabakiHQ/Shudan), original LICENSE included with packaged stones"
+  }
 }

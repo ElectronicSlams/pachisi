@@ -1,4 +1,7 @@
 import React from "react";
+import { EditionField } from "./edition-materials";
+import { hasTableCentre } from "./designs";
+import type { GameDesignId } from "./designs";
 import type { ReactNode } from "react";
 import { Board } from "./board";
 import type { CellBoardFamily, CellBoardFrame } from "./board-types";
@@ -37,6 +40,11 @@ const TRICK_GAMES = new Set(["bridge", "hearts", "spades", "euchre"]);
 const CARD_GAMES = new Set(["blackjack", "leduc-holdem", "limit-texas-holdem", "no-limit-texas-holdem", "shedding-card-game", "crazy-eights", "gin-rummy", "mahjong", "dou-dizhu", "bridge", "hearts", "spades", "euchre", "cribbage", "hanabi"]);
 const PLAYERS = ["player_1", "player_2"] as const;
 
+/** The compact centre crop requires seat labels supplied outside the scene. */
+export function supportsTablePresentation(game: string): boolean {
+  return hasTableCentre(game);
+}
+
 // ---------------------------------------------------------------- field readers (undefined = invalid)
 function isRecord(v: unknown): v is Readonly<Record<string, unknown>> { return typeof v === "object" && v !== null && !Array.isArray(v); }
 function isNum(v: unknown): v is number { return typeof v === "number" && Number.isFinite(v); }
@@ -72,32 +80,32 @@ function Unavailable({ game, caption, label = STATE_UNAVAILABLE_LABEL, reason = 
 }
 
 /**
- * One rules-accurate frame of a demonstration. `previous` is the frame before
+ * One supplied frame of a demonstration; legality remains the engine’s responsibility. `previous` is the frame before
  * it (when there is one); cell boards use it for the last-move and win-line
  * cues (see cues.ts) and the lunar lander for engine thrust.
  */
-export function LegalDemonstration({ game, frame, previous = null, externalSeats = false }: { readonly game: string; readonly frame: DemonstrationFrame; readonly previous?: DemonstrationFrame | null; readonly externalSeats?: boolean }) {
+export function LegalDemonstration({ game, frame, previous = null, externalSeats = false, variantNote, design }: { readonly game: string; readonly frame: DemonstrationFrame; readonly previous?: DemonstrationFrame | null; readonly externalSeats?: boolean; readonly design?: GameDesignId; readonly variantNote?: string | null }) {
+  // Only the generic card table has external seat chrome. Other families need their full viewport.
+  externalSeats = externalSeats && supportsTablePresentation(game);
   const caption = isRecord(frame) && isStr(frame.caption) ? frame.caption : "";
-  const variant = variantNoteFor(game);
+  const variant = variantNote === undefined ? variantNoteFor(game) : variantNote;
   const shownCaption = variant && caption ? `${caption} · ${variant}` : caption || variant || "";
   const known = CELL_GAMES.has(game) || BOARD_GAMES.has(game) || GRID_GAMES.has(game) || CONTROL_GAMES.has(game) || SOCIAL_GAMES.has(game) || CARD_GAMES.has(game);
   if (!known) return <Unavailable game={game} caption={caption} label="Unsupported game" reason="unsupported" />;
   const s = stateOf(frame);
   let content: ReactNode = null;
   try {
-    if (s && CELL_GAMES.has(game)) content = cellScene(game, s, frame, stateOf(previous), shownCaption);
+    if (s && CELL_GAMES.has(game)) content = cellScene(game, s, frame, stateOf(previous), shownCaption, design);
     else if (s) {
       const terminal = frame.terminal === true;
       const body = BOARD_GAMES.has(game) ? boardScene(game, s)
         : CONTROL_GAMES.has(game) ? controlScene(game, s, { terminal, caption, previous: stateOf(previous) })
           : GRID_GAMES.has(game) ? gridScene(game, s, terminal && frame.outcomeReason === "passenger_delivered")
-            : SOCIAL_GAMES.has(game) ? socialScene(game, s) : cardScene(game, s, externalSeats);
+            : SOCIAL_GAMES.has(game) ? socialScene(game, s) : cardScene(game, s, externalSeats, terminal);
       content = body === null ? null
-        : <svg viewBox={externalSeats ? "0 42 320 158" : "0 0 320 240"} className="st-legal-scene" aria-hidden="true" data-rules-scene={game} data-rules-variant={variant ?? undefined}>
-          {body}
-          {!externalSeats && <Label y={232}>{shownCaption}</Label>}
-          {externalSeats && variant && <Label y={170}>{variant}</Label>}
-        </svg>;
+        : <div className="st-legal-svg-scene"><svg viewBox={externalSeats ? "0 42 320 158" : "0 0 320 240"} className="st-legal-scene" aria-hidden="true" data-rules-scene={game} data-rules-variant={variant ?? undefined}>
+          {design==='design-2'||design==='design-3' ? <EditionField game={game} design={design}>{body}</EditionField> : body}
+        </svg>{shownCaption && <span className="st-legal-caption">{shownCaption}</span>}</div>;
     }
   } catch {
     content = null; // Malformed host state must never unmount the host tree.
@@ -150,15 +158,32 @@ function cellModel(game: string, s: State): { rows: number; cols: number; cells:
   return { rows: rows.length, cols, cells };
 }
 
-function cellScene(game: string, s: State, frame: DemonstrationFrame, previous: State | undefined, caption: string): ReactNode {
+function cellScene(game: string, s: State, frame: DemonstrationFrame, previous: State | undefined, caption: string, design?: GameDesignId): ReactNode {
   const model = cellModel(game, s);
   if (!model) return null;
   const family = CELL_FAMILY[game]!;
   const before = previous ? cellModel(game, previous) : null;
-  const winLength = Object.hasOwn(WIN_LENGTH, game) ? WIN_LENGTH[game] : undefined;
+  const winLength = game === "pentago" && frame.outcomeReason === "five_in_a_row"
+    ? 5 : Object.hasOwn(WIN_LENGTH, game) ? WIN_LENGTH[game] : undefined;
   const cues = deriveCellCues(before?.cells ?? null, model.cells, family, model.rows, model.cols, { terminal: frame.terminal === true, chess: game === "chess", ...(winLength ? { winLength } : {}) });
-  const board: CellBoardFrame = { kind: "cells", family, rows: model.rows, cols: model.cols, cells: model.cells, chess: game === "chess", last: cues.last, ...(cues.line ? { line: cues.line } : {}) };
+  const board: CellBoardFrame = { kind: "cells", family, rows: model.rows, cols: model.cols, cells: model.cells, chess: game === "chess", ...(game === "pentago" ? {variant:"pentago" as const} : {}), last: cues.last, ...(cues.line ? { line: cues.line } : {}) };
   let overlay: ReactNode = null;
+  const placement = game === "pentago" ? frame.placement : undefined;
+  let move = "";
+  if (placement && Number.isInteger(placement.cell) && placement.cell >= 0 && placement.cell < 36 &&
+      [0,1,2,3].includes(placement.quadrant) && ["cw","ccw"].includes(placement.direction)) {
+    const {cell, quadrant, direction} = placement;
+    const row = Math.floor(cell / 6), col = cell % 6;
+    const top = Math.floor(quadrant / 2) * 3, left = quadrant % 2 * 3;
+    let settledRow = row, settledCol = col;
+    if (row >= top && row < top+3 && col >= left && col < left+3) {
+      const y = row-top, x = col-left;
+      settledRow = top + (direction === "cw" ? x : 2-x);
+      settledCol = left + (direction === "cw" ? 2-y : y);
+    }
+    move = `Place R${row+1} C${col+1} · ${["upper left","upper right","lower left","lower right"][quadrant]} ${direction === "cw" ? "clockwise" : "counterclockwise"}`;
+    overlay = <svg viewBox="0 0 6 6" className="st-pentago-move" aria-hidden="true"><rect x={left+.05} y={top+.05} width={2.9} height={2.9}/><circle cx={settledCol+.5} cy={settledRow+.5} r={.38}/></svg>;
+  }
   if (game === "ultimate-tic-tac-toe") {
     const nextBoard = s.next_board;
     if (!(nextBoard === null || nextBoard === undefined || (isInt(nextBoard) && nextBoard >= 0 && nextBoard < 9))) return null;
@@ -180,10 +205,10 @@ function cellScene(game: string, s: State, frame: DemonstrationFrame, previous: 
     </svg>;
   }
   return <div className={`st-legal-cell-scene st-legal-cell-${game}`} data-rules-scene={game}>
-    <div className="st-legal-board"><Board frame={board} />
+    <div className="st-legal-board"><Board frame={board} design={design} />
       {game === "pentago" && <div className="st-legal-quadrants" />}
       {overlay}
-    </div><span className="st-legal-caption">{caption}</span>
+    </div><span className="st-legal-caption">{move ? `${move}${frame.terminal ? " · " + caption : ""}` : caption}</span>
   </div>;
 }
 
@@ -307,7 +332,7 @@ function gridScene(game: string, s: State, delivered: boolean): ReactNode {
     if (!grid || !grid.length || !grid.every((row) => strings(row))) return null;
     const g = grid as readonly (readonly string[])[];
     rows = g.length; cols = g[0]!.length;
-    if (!cols || g.some((row) => row.length !== cols)) return null;
+    if (!cols || rows > 40 || cols > 40 || g.some((row) => row.length !== cols || row.some((cell) => !["S", "F", "H", "G"].includes(cell)))) return null;
     holes = (r, c) => g[r]![c] === "H";
   } else {
     const r0 = num(s, "rows"), c0 = num(s, "cols");
@@ -326,7 +351,7 @@ function gridScene(game: string, s: State, delivered: boolean): ReactNode {
     onboard = s.onboard === true || s.passenger === "in_taxi";
     if (!onboard) { passenger = point(s.passenger) ?? null; if (!passenger || !inBounds(passenger, rows, cols)) return null; }
   }
-  const step=Math.min(34,280/cols),left=(320-step*cols)/2,top=(214-step*rows)/2;
+  const step=Math.min(34,280/cols,180/rows),left=(320-step*cols)/2,top=(214-step*rows)/2;
   return <g>{Array.from({length:rows*cols},(_,i)=>{const r=Math.floor(i/cols),c=i%cols,x=left+c*step,y=top+r*step,hole=holes(r,c);
     return <g key={i}><rect x={x} y={y} width={step} height={step} className={hole?"st-legal-hazard":"st-legal-square"} />{goal[0]===r&&goal[1]===c&&<text x={x+step/2} y={y+step*.68} textAnchor="middle" fontSize={step*.6}>⚑</text>}{
       // Core's taxi reports the passenger back at the pickup point after dropoff (a known
@@ -396,29 +421,52 @@ function controlScene(game: string, s: State, { terminal, caption, previous }: {
   if (game === "alien-shooter") {
     const px = num(s, "player_x"), aliens = list(s, "aliens")?.map(point), bullets = list(s, "bullets")?.map(point);
     if (px === undefined || !aliens || !bullets || aliens.some((a) => !a) || bullets.some((b) => !b)) return null;
-    const x=38+px*40;
-    return <g><path d={`M${x-10} 205v-8h7v-8h6v8h7v8Z`} className="st-legal-agent" />{aliens.map((p,i)=>{const [a,b]=p!;return <path key={i} d={`M${38+a*40-9} ${188-b*27}h18v12h-4v-3h-10v3h-4Zm3 -3v3m12 -3v3`} className="st-legal-ship" />;})}{bullets.map((p,i)=>{const [a,b]=p!;return <line key={i} x1={38+a*40} y1={188-b*27} x2={38+a*40} y2={182-b*27} className="st-legal-accent" />;})}</g>;
+    if (!isInt(px) || px < 0 || px > 7 || [...aliens, ...bullets].some((p) => p![0] < 0 || p![0] > 7 || p![1] < 0 || p![1] > 6)) return null;
+    const column = (v: number) => 28 + v * (264/7);
+    const x=column(px);
+    return <g><path d={`M${x-10} 205v-8h7v-8h6v8h7v8Z`} className="st-legal-agent" />{aliens.map((p,i)=>{const [a,b]=p!;return <path key={i} d={`M${column(a)-9} ${188-b*27}h18v12h-4v-3h-10v3h-4Zm3 -3v3m12 -3v3`} className="st-legal-ship" />;})}{bullets.map((p,i)=>{const [a,b]=p!;return <line key={i} x1={column(a)} y1={188-b*27} x2={column(a)} y2={182-b*27} className="st-legal-accent" />;})}</g>;
   }
   if (game === "car-racing") {
     const c = rec(s, "car"), curves = numbers(s.track_window);
     if (!c || !isNum(c.lane) || !isNum(c.heading) || !isNum(c.progress) || !curves) return null;
     const bend=(curves[0]??0)*350, progress=c.progress;
-    return <g><path d={`M70 214Q${70+bend} 110 ${70+bend*2} 14M250 214Q${250+bend} 110 ${250+bend*2} 14`} className="st-legal-limb" />{Array.from({length:7},(_,i)=><line key={i} x1={160+bend*(1-i/7)} y1={(i*40+progress*80)%220} x2={160+bend*(1-i/7)} y2={(i*40+progress*80)%220+14} strokeDasharray="5 3" />)}<g transform={`translate(${160+bend*.48+c.lane*80} 166) rotate(${c.heading*180/Math.PI})`}><rect x={-10} y={-19} width={20} height={38} rx={5} className="st-legal-agent" /><rect x={-7} y={-10} width={14} height={9} className="st-legal-card" /></g></g>;
+    // Both road edges have x(t)=start+2*bend*t and y(t)=214-208*t+8*t².
+    const centre = (y: number) => 160 + 2*bend*((208-Math.sqrt(208*208-32*(214-y)))/16);
+    const carX=centre(166)+c.lane*80;
+    const minX=Math.min(70,70+2*bend,carX-24), maxX=Math.max(250,250+2*bend,carX+24);
+    const scale=Math.min(1,280/(maxX-minX));
+    // Fit a camera to the road and car without clipping or changing lane coordinates.
+    const camera=`translate(${160-(minX+maxX)*scale/2} ${114*(1-scale)}) scale(${scale})`;
+    return <g><g data-road-camera="" transform={camera}><path d={`M70 214Q${70+bend} 110 ${70+bend*2} 14M250 214Q${250+bend} 110 ${250+bend*2} 14`} className="st-legal-limb" />{Array.from({length:7},(_,i)=><line key={i} x1={centre(20+(i*27+progress*80)%174)} y1={20+(i*27+progress*80)%174} x2={centre(34+(i*27+progress*80)%174)} y2={34+(i*27+progress*80)%174} strokeDasharray="5 3" />)}<g transform={`translate(${carX} 166) rotate(${c.heading*180/Math.PI})`}><rect x={-10} y={-19} width={20} height={38} rx={5} className="st-legal-agent" /><rect x={-7} y={-10} width={14} height={9} className="st-legal-card" /></g></g><Label y={231}>Speed {isNum(c.speed) ? c.speed.toFixed(2) : "—"} · lane {c.lane.toFixed(2)}</Label></g>;
   }
   if (game === "bipedal-walker") {
     const w = rec(s, "walker"), terrain = numbers(s.terrain_window);
     if (!w || !isNum(w.distance) || !isNum(w.torso_angle) || (w.next_foot !== "left" && w.next_foot !== "right") || !terrain) return null;
     const torso = w.torso_angle, distance = w.distance;
     const ground=(x:number)=>{ const u=Math.max(0,Math.min(4,x/64)), lo=Math.floor(u), t=u-lo; return 187-((terrain[lo]??0)*(1-t)+(terrain[Math.min(4,lo+1)]??0)*t)*15; };
-    const hip:Point=[160+Math.sin(torso)*22,139],left:Point=[140+(w.next_foot==="left"?16:-8),ground(140)],right:Point=[180+(w.next_foot==="right"?-16:8),ground(180)];
-    return <g><path d={Array.from({length:6},(_,i)=>`${i?"L":"M"}${i*64} ${ground(i*64)}`).join(" ")} />{Array.from({length:12},(_,i)=><circle key={i} cx={((i*31-distance*24)%320+320)%320} cy={204} r={1} />)}{[left,right].map(([x,y],i)=><path key={i} d={`M${hip[0]} ${hip[1]}L${(hip[0]+x)/2+(i?8:-8)} ${(hip[1]+y)/2}L${x} ${y}h${i?8:-8}`} className="st-legal-limb" />)}<line x1={hip[0]} y1={hip[1]} x2={160+Math.sin(torso)*44} y2={99} className="st-legal-limb" /><Disc x={160+Math.sin(torso)*48} y={88} r={9} /></g>;
+    const lx=140+(w.next_foot==="left"?16:-8), rx=180+(w.next_foot==="right"?-16:8);
+    const hip:Point=[160+Math.sin(torso)*22,139],left:Point=[lx,ground(lx)],right:Point=[rx,ground(rx)];
+    return <g><path d={Array.from({length:6},(_,i)=>`${i?"L":"M"}${i*64} ${ground(i*64)}`).join(" ")} />{Array.from({length:12},(_,i)=><circle key={i} cx={((i*31-distance*24)%320+320)%320} cy={204} r={1} />)}{[left,right].map(([x,y],i)=><path data-foot={i ? "right" : "left"} data-contact-x={x} data-contact-y={y} key={i} d={`M${hip[0]} ${hip[1]}L${(hip[0]+x)/2+(i?8:-8)} ${(hip[1]+y)/2}L${x} ${y}h${i?8:-8}`} className="st-legal-limb" />)}<line x1={hip[0]} y1={hip[1]} x2={160+Math.sin(torso)*44} y2={99} className="st-legal-limb" /><Disc x={160+Math.sin(torso)*48} y={88} r={9} /></g>;
   }
   if (game === "ice-hockey-style-arena") {
     const positions = rec(s, "positions"), owner = s.puck_owner, goals = numRecord(s.goals);
     if (!positions || !goals || !(owner === null || isStr(owner)) || !Object.values(positions).every((p) => isRecord(p) && isNum(p.x) && isNum(p.lane))) return null;
-    const skaters = Object.entries(positions) as [string, { x: number; lane: number }][];
-    return <g><rect x={20} y={25} width={280} height={175} rx={36} className="st-legal-square" /><line x1={160} y1={25} x2={160} y2={200} /><circle cx={160} cy={112} r={24} fill="none" />{skaters.map(([p,pos])=><g key={p}><Disc x={35+pos.x*62} y={54+pos.lane*56} r={10} white={p==="player_2"} /><path d={`M${35+pos.x*62} ${64+pos.lane*56}l12 9h9`} />{owner===p&&<circle cx={56+pos.x*62} cy={77+pos.lane*56} r={3} />}</g>)}<Label y={17}>{Object.values(goals).join(" : ")}</Label></g>;
+    const rink = rec(s, "rink");
+    if (!rink || !isInt(rink.x) || !isInt(rink.lanes) || rink.x < 2 || rink.lanes < 1 || !PLAYERS.every((p) => isRecord(positions[p]) && isNum(goals[p])) || (owner !== null && !PLAYERS.includes(owner as typeof PLAYERS[number]))) return null;
+    const skaters = PLAYERS.map((p) => [p, positions[p]] as [string, { x: number; lane: number }]);
+    if (skaters.some(([, p]) => !isInt(p.x) || !isInt(p.lane) || p.x < 0 || p.x >= (rink.x as number) || p.lane < 0 || p.lane >= (rink.lanes as number))) return null;
+    const shared = skaters[0]![1].x === skaters[1]![1].x && skaters[0]![1].lane === skaters[1]![1].lane;
+    return <g><rect x={20} y={25} width={280} height={175} rx={36} className="st-legal-square" /><line x1={160} y1={25} x2={160} y2={200} /><circle cx={160} cy={112} r={24} fill="none" />{skaters.map(([p,pos],i)=>{
+      const x=45+pos.x*230/((rink.x as number)-1), y=(rink.lanes as number) === 1 ? 112 : 54+pos.lane*112/((rink.lanes as number)-1);
+      // Same state position, complementary halves. Neither player is moved or hidden.
+      return <g key={p} data-skater={p} data-shared-cell={shared || undefined} data-world-x={pos.x} data-world-lane={pos.lane}>
+        {shared ? <path d={i ? `M${x} ${y-10}a10 10 0 0 1 0 20Z` : `M${x} ${y-10}a10 10 0 0 0 0 20Z`} className={i ? "st-legal-piece-b" : "st-legal-piece-a"} /> : <Disc x={x} y={y} r={10} white={Boolean(i)} />}
+        <Label x={x+(shared?(i?16:-16):0)} y={y-15}>{seat(p)}</Label>
+        {owner===p&&<g data-puck-owner={p}><path d={`M${x} ${y+10}l12 9h9`} /><circle cx={x+21} cy={y+23} r={3} /></g>}
+      </g>;
+    })}<Label y={17}>{`P1 ${goals.player_1} : ${goals.player_2} P2`}</Label></g>;
   }
+
   if (game === "boxing-style-arena") {
     const distance = num(s, "distance"), stances = rec(s, "stances"), health = numRecord(s.health);
     if (distance === undefined || !stances || !health || !PLAYERS.every((p) => isNum(health[p]))) return null;
@@ -431,10 +479,19 @@ function controlScene(game: string, s: State, { terminal, caption, previous }: {
 function Card({ value, x, y, back = false, dim = false }: { readonly value?: string | number | undefined; readonly x: number; readonly y: number; readonly back?: boolean; readonly dim?: boolean }) {
   const raw=String(value??""),suit=raw.slice(-1);
   const face=SUITS[suit] ? raw.slice(0,-1)+SUITS[suit] : raw;
-  return <g transform={`translate(${x} ${y})`} opacity={dim ? .35 : undefined}><rect width={34} height={48} rx={4} className={back?"st-legal-card-back":"st-legal-card"} />{back?<path d="M8 10h18v28H8Z" />:<text x={17} y={29} textAnchor="middle" fontSize={12} className={suit==="H"||suit==="D"?"st-legal-accent":""}>{face}</text>}</g>;
+  return <g transform={`translate(${x} ${y})`} opacity={dim ? .35 : undefined}><rect width={34} height={48} rx={4} className={back?"st-legal-card-back":"st-legal-card"} />{back?<path d="M8 10h18v28H8Z" />:<text x={17} y={29} textAnchor="middle" fontSize={12} className={suit==="H"||suit==="D"?"st-legal-accent":""}>{face}</text>}{!back&&SUITS[suit]&&<g className="st-ed-corners" aria-hidden="true"><text x={4} y={9} fontSize={7}>{raw.slice(0,-1)}</text><text x={29} y={44} textAnchor="end" fontSize={8}>{SUITS[suit]}</text></g>}</g>;
 }
-function Cards({ cards, y }: { readonly cards: readonly (string | number)[]; readonly y: number }) {
-  return <g>{cards.slice(-7).map((card,i)=><Card key={`${card}:${cards.slice(0,i).filter(c=>c===card).length}`} x={160-Math.min(7,cards.length)*39/2+i*39} y={y} value={card} />)}</g>;
+function Tile({x,y,value}:{x:number;y:number;value?:string}) {
+  return <g transform={`translate(${x} ${y})`} data-mahjong-tile={value ?? "back"}><rect x={1} y={4} width={31} height={39} rx={4} className="st-legal-card-back"/><rect x={1} y={1} width={31} height={37} rx={4} className={value ? "st-legal-card" : "st-legal-card-back"}/>{value && <text x={16} y={25} textAnchor="middle" fontSize={14}>{value}</text>}</g>;
+}
+function Cards({ cards, y, hidden = 0, width = 280, tiles = false }: { readonly cards: readonly (string | number)[]; readonly y: number; readonly tiles?: boolean; readonly hidden?: number; readonly width?: number }) {
+  const shown = cards.slice(-7), slots = shown.length + hidden;
+  const scale = Math.min(1, width/Math.max(1,slots*39-5));
+  return <g data-card-count={cards.length} data-hidden-count={hidden}><g transform={`translate(160 ${y}) scale(${scale}) translate(-160 ${-y})`}>
+    {shown.map((card,i)=>tiles ? <Tile key={i} x={160-(slots*39-5)/2+i*39} y={y} value={String(card)} /> : <Card key={i} x={160-(slots*39-5)/2+i*39} y={y} value={card} />)}
+    {Array.from({length:hidden},(_,i)=><Card key={`hidden-${i}`} x={160-(slots*39-5)/2+(shown.length+i)*39} y={y} back />)}
+    </g>{cards.length > 7 && <Label y={y+48*scale+13}>{`+${cards.length-7} earlier · ${cards.length} total`}</Label>}
+  </g>;
 }
 function cardsOf(v: unknown): readonly (string | number)[] | undefined {
   return Array.isArray(v) && v.every((c) => isStr(c) || isNum(c)) ? v : undefined;
@@ -448,17 +505,17 @@ function seatSpots(n: number): readonly { readonly x: number; readonly y: number
   if (n === 4) return [
     { x: 143, y: 162, lx: 160, ly: 220, anchor: "middle" }, // S
     { x: 2, y: 96, lx: 3, ly: 158, anchor: "start" }, // W
-    { x: 143, y: 12, lx: 160, ly: 9, anchor: "middle" }, // N
+    { x: 143, y: 18, lx: 160, ly: 13, anchor: "middle" }, // N
     { x: 284, y: 96, lx: 317, ly: 158, anchor: "end" }, // E
   ];
-  return Array.from({ length: n }, (_, i) => { const x = 320/(n+1)*(i+1); return { x: x-17, y: i%2?162:12, lx: x, ly: i%2?220:9, anchor: "middle" as const }; });
+  return Array.from({ length: n }, (_, i) => { const x = 320/(n+1)*(i+1); return { x: x-17, y: i%2?162:18, lx: x, ly: i%2?220:13, anchor: "middle" as const }; });
 }
 
-function cardScene(game: string, s: State, externalSeats: boolean): ReactNode {
+function cardScene(game: string, s: State, externalSeats: boolean, terminal: boolean): ReactNode {
   if (game === "blackjack") {
     const dealer = cardsOf(s.dealer_hand), player = cardsOf(s.player_hand);
     if (!dealer || !player) return null;
-    return <g><Label y={28}>Dealer</Label><Cards cards={dealer} y={36} /><Label y={122}>Player</Label><Cards cards={player} y={132} /></g>;
+    return <g><Label y={28}>Dealer</Label><Cards cards={dealer} y={36} hidden={!terminal && dealer.length === 1 ? 1 : 0} /><Label y={122}>Player</Label><Cards cards={player} y={132} /></g>;
   }
   const counts = s.hand_counts === undefined ? undefined : numRecord(s.hand_counts);
   if (s.hand_counts !== undefined && !counts) return null;
@@ -480,12 +537,12 @@ function cardScene(game: string, s: State, externalSeats: boolean): ReactNode {
   } else if (game === "mahjong") {
     const pile = list(s, "discard_pile"), wall = num(s, "wall_count");
     if (!pile || wall === undefined || !counts || !pile.every((v) => isRecord(v) && isStr(v.tile))) return null;
-    cards = pile.map((v) => (v as { tile: string }).tile); zone = `Discards · wall ${wall}`;
+    cards = pile.map((v) => (v as { tile: string }).tile); zone = `Discarded tiles · wall ${wall}`;
   } else if (game === "dou-dizhu") {
     const play = s.last_play, landlord = str(s, "landlord");
     if (!counts || landlord === undefined || !(play === null || (isRecord(play) && strings(play.cards) && isStr(play.player)))) return null;
     const lp = play as { cards: readonly string[]; player: string } | null;
-    cards = lp?.cards ?? []; zone = lp ? `${seat(lp.player)} played` : `Landlord ${seat(landlord)}`;
+    cards = lp?.cards ?? []; zone = `Landlord ${seat(landlord)}${lp ? " · " + seat(lp.player) + " played" : ""}`;
   } else if (game === "gin-rummy") {
     const top = str(s, "discard_top"), phase = str(s, "phase"), deck = num(s, "deck_count");
     if (top === undefined || phase === undefined || deck === undefined || !counts) return null;
@@ -493,7 +550,7 @@ function cardScene(game: string, s: State, externalSeats: boolean): ReactNode {
   } else if (game === "cribbage") {
     const starter = str(s, "starter");
     if (starter === undefined || !counts) return null;
-    cards = starter ? [starter] : []; zone = "Starter · discard two to the crib";
+    cards = starter ? [starter] : []; zone = terminal ? "Showdown · starter" : "Starter · discard two to the crib";
   } else if (game === "hanabi") {
     const fireworks = numRecord(s.fireworks), clues = num(s, "clues"), lives = num(s, "lives");
     if (!fireworks || clues === undefined || lives === undefined || !counts) return null;
@@ -512,16 +569,16 @@ function cardScene(game: string, s: State, externalSeats: boolean): ReactNode {
   const dealer = [s.dealer, s.button].find(isStr);
   const spots = seatSpots(seats.length);
   const contract = rec(s, "contract");
-  return <g>{!externalSeats && <rect x={14} y={62} width={292} height={116} rx={40} className="st-legal-square" />}<Label y={87}>{zone}</Label><Cards cards={cards} y={100} />
+  return <g>{!externalSeats && <rect x={14} y={62} width={292} height={116} rx={40} className="st-legal-square" />}<Label y={87}>{zone}</Label><Cards tiles={game==="mahjong"} cards={cards} y={100} width={externalSeats ? 280 : 226} />
     {!externalSeats && seats.map(([p, n], i) => {
       const spot = spots[i]!, out = folded.has(p);
       return <g key={p} data-seat={p} data-folded={out || undefined}>
-        {(byChips || n > 0) && <Card x={spot.x} y={spot.y} back dim={out} />}
-        <Label x={spot.lx} y={spot.ly} anchor={spot.anchor}>{seat(p)} · {byChips ? `${n} chips` : `${n} cards`}{out ? " · folded" : ""}{dealer === p ? " · D" : ""}</Label>
+        {(byChips || n > 0) && (game==="mahjong" ? <Tile x={spot.x} y={spot.y}/> : <Card x={spot.x} y={spot.y} back dim={out} />)}
+        <Label x={spot.lx} y={spot.ly} anchor={spot.anchor}>{seat(p)} · {byChips ? `${n} chips` : `${n} ${game==="mahjong" ? "tiles" : "cards"}`}{out ? " · folded" : ""}{dealer === p ? " · D" : ""}</Label>
       </g>;
     })}
-    {game === "bridge" && contract && isNum(contract.level) && isStr(contract.strain) && <Label y={60}>Contract {contract.level}{contract.strain}</Label>}
-    {game === "euchre" && <Label y={60}>Trump · {s.trump === null ? "uncalled" : str(s, "trump") ?? "?"} · upcard {str(s, "upcard") ?? "?"}</Label>}
+    {game === "bridge" && contract && isNum(contract.level) && isStr(contract.strain) && <Label y={76}>Contract {contract.level}{contract.strain}</Label>}
+    {game === "euchre" && <Label y={76}>Trump · {s.trump === null ? "uncalled" : str(s, "trump") ?? "?"} · upcard {str(s, "upcard") ?? "?"}</Label>}
   </g>;
 }
 
@@ -551,7 +608,11 @@ function socialScene(game: string, s: State): ReactNode {
     const rounds = list(s, "round_history"), points = numRecord(s.points), prize = s.current_prize;
     if (!rounds || !points || !(prize === null || isNum(prize)) || !rounds.every(isRecord)) return null;
     const last = rounds.at(-1) as { bids?: Record<string, number>; prize?: number; winner?: string | null } | undefined;
-    return <g><Label y={44}>Prize · {prize ?? "complete"}</Label>{PLAYERS.map((p,i)=><g key={p}><Label x={95+i*130} y={80}>{seat(p)} · {points[p] ?? "—"} points</Label><Card x={78+i*130} y={96} value={last?.bids?.[p]} back={!last} /></g>)}<Label y={180}>{last?`Previous prize ${last.prize} · ${last.winner?seat(last.winner):"tied"}`:"Choose sealed bids 1–5"}</Label></g>;
+    const committed = strings(s.committed) ?? [];
+    const reveal = last && committed.length === 0;
+    return <g><Label y={36}>{reveal ? `Revealed prize · ${last.prize}` : `Prize · ${prize ?? "complete"}`}</Label>
+      {PLAYERS.map((p,i)=><g key={p}><Label x={95+i*130} y={66}>{seat(p)} · {points[p] ?? "—"} points</Label><Card x={78+i*130} y={78} value={reveal ? last.bids?.[p] : undefined} back={!reveal}/><Label x={95+i*130} y={150}>{reveal ? "Revealed" : committed.includes(p) ? "Committed" : "Awaiting bid"}</Label></g>)}
+      <Label y={192}>{reveal ? `${last.winner ? seat(last.winner) + " wins" : "Tied"} · ${prize === null ? "Complete" : "Next prize " + prize}` : "Sealed bids"}</Label></g>;
   }
   const reveals = rec(s, game === "first-price-sealed-bid-auction" ? "revealed_bids" : "revealed_actions");
   if (!reveals) return null;

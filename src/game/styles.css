@@ -44,7 +44,7 @@
 .st-board-c4 { --c4-inset: 0.1; gap: 0; padding: 1.5%; aspect-ratio: auto; align-content: start; background: var(--board-bg); border: 1px solid var(--border); border-radius: var(--r-md); }
 .st-board-c4 .st-cell { margin: calc(var(--c4-inset) * 100%); aspect-ratio: 1; border-radius: 50%; background: var(--surface); box-shadow: inset 0 0 0 1px var(--board-line); }
 .st-board-c4 .st-cell[data-last] { box-shadow: inset 0 0 0 2px var(--accent); }
-.st-board-c4 .st-cell[data-line] { box-shadow: inset 0 0 0 2px var(--win); }
+.st-board-c4 .st-cell[data-line] { box-shadow: inset 0 0 0 2px var(--win-text); }
 .st-board-c4 .st-cell[data-last] > :not(.st-coord) { animation: stDrop var(--dur-move-drop) var(--ease-out) both; }
 .st-disc { width: 80%; height: 80%; border-radius: 50%; }
 .st-disc-a { background: var(--accent); }
@@ -85,8 +85,8 @@
 .st-go-black { fill: var(--stone-black); }
 .st-go-white { fill: var(--stone-white); stroke: var(--board-line); stroke-width: 0.04; }
 /* Winning run (frame.line): a win-toned ring on each stone plus a stroke through their centres. */
-.st-go-stone[data-line] { stroke: var(--win); stroke-width: 0.1; }
-.st-go-winline { stroke: var(--win); stroke-width: 0.12; stroke-linecap: round; opacity: 0.85; pointer-events: none; }
+.st-go-stone[data-line] { stroke: var(--win-text); stroke-width: 0.1; }
+.st-go-winline { stroke: var(--win-text); stroke-width: 0.12; stroke-linecap: round; opacity: 0.85; pointer-events: none; }
 .st-go-stone[data-last] { stroke: var(--accent); stroke-width: 0.1; }
 .st-go-stone[data-check] { stroke: var(--loss); stroke-width: 0.1; }
 .st-go-hoshi circle { fill: var(--board-line); }
@@ -140,8 +140,8 @@
 /* toMove / result: a figure with a mono status line under the board. */
 .st-board-figure { display: block; width: 100%; min-width: 0; margin: 0; }
 .st-board-status { display: block; margin-top: 6px; font-size: 11.5px; letter-spacing: 0.04em; color: var(--text-2); text-align: center; }
-.st-board[data-result="win"] + .st-board-status { color: var(--win); }
-.st-board[data-result="draw"] + .st-board-status { color: var(--draw); }
+.st-board[data-result="win"] + .st-board-status { color: var(--win-text); }
+.st-board[data-result="draw"] + .st-board-status { color: var(--draw-text); }
 
 /* Families without a stadium renderer yet, and unsupported states: the striped placeholder. */
 .st-board-placeholder {
@@ -197,14 +197,49 @@
 
 /* Presentation variants share rules/assets while changing composition by surface. */
 .st-game-animation[data-presentation="arena"] { max-width:360px; }
-.st-game-animation[data-presentation="arena"] .st-legal-board { width:72%; }
+.st-game-animation[data-presentation="arena"] .st-legal-board { width:68%; }
 .st-game-animation[data-presentation="arena"] .st-legal-cell-connect-four .st-legal-board { width:80%; }
 .st-game-animation[data-presentation="arena"] .st-legal-cell-hex .st-legal-board { width:88%; }
 .st-game-animation[data-presentation="card"] .st-legal-caption { font-size:clamp(7px, 3cqw, 11px); }
 .st-game-animation[data-presentation="event"] { max-width:560px; }
-.st-game-animation[data-presentation="event"] .st-legal-board { width:70%; }
+.st-game-animation[data-presentation="event"] .st-legal-board { width:68%; }
 .st-chess { font-family:var(--game-font-piece, "Apple Symbols", "Segoe UI Symbol", "Noto Sans Symbols 2", var(--font-sans)); }
 
 .st-legal-scene text:not(.st-legal-label) { font-family:var(--game-font-piece, var(--font-sans)); }
 
 .st-game-animation[data-presentation="arena-table"] { max-width:360px; aspect-ratio:320 / 158; }
+
+/* Captions wrap outside SVG coordinates; entity geometry keeps a stable viewport. */
+.st-legal-svg-scene { width:100%; height:100%; display:flex; flex-direction:column; justify-content:center; min-height:0; }
+.st-legal-svg-scene > svg { flex:1; min-height:0; }
+.st-legal-scene .st-legal-piece-a { fill:var(--text); }
+.st-legal-scene .st-legal-piece-b { fill:var(--surface); }
+.st-game-replay { width:100%; min-width:0; }
+.st-replay-board { width:100%; max-width:600px; aspect-ratio:4/3; margin:0 auto 20px; container-type:inline-size; }
+.st-replay-board *, .st-replay-board *::before, .st-replay-board *::after { animation:none!important; transition:none!important; }
+.st-replay-transport { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.st-replay-transport button, .st-replay-transport select { min-height:44px; padding:8px 12px; border:1px solid var(--border-strong); border-radius:var(--r-sm); background:var(--surface); color:var(--text); font:inherit; font-size:13px; }
+.st-replay-transport button:disabled { opacity:.45; cursor:default; }
+.st-replay-transport button[aria-pressed=true] { background:var(--accent-soft); border-color:var(--accent); }
+.st-replay-transport label { display:flex; align-items:center; gap:8px; font-size:12px; }
+.st-replay-timeline { display:flex; gap:14px; align-items:center; margin:16px 0; font:12px var(--font-mono); }
+.st-replay-timeline input { flex:1; min-width:0; min-height:44px; accent-color:var(--accent); }
+.st-replay-status, .st-replay-note { font-size:12px; color:var(--text-2); overflow-wrap:anywhere; }
+.st-game-replay :focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
+/* Inspector boards use the available width; preview-card scaling stays independent. */
+.st-replay-board { aspect-ratio:1; max-width:560px; }
+.st-replay-board .st-legal-board { width:86%; }
+.st-replay-board .st-legal-cell-hex .st-legal-board { width:94%; }
+.st-go-black { stroke:var(--board-line); stroke-width:.055; }
+
+.st-porcelain-marble { width:86%; height:86%; object-fit:contain; }
+.st-board-discs.st-ed-board-design-4 .st-cell { background:#dce2e9; }
+.st-pentago-move { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; fill:none; stroke:var(--accent); stroke-width:.065; }
+.st-pentago-move rect { stroke-dasharray:.18 .1; }
+.st-position-details { font-size:13px; overflow-wrap:anywhere; }
+.st-position-details summary { cursor:pointer; }
+.st-position-details dl { display:grid; grid-template-columns:auto 1fr; gap:.4em 1em; }
+.st-position-details dd { margin:0; white-space:pre-line; }
+.st-legal-cell-pentago .st-cell[data-line] { box-shadow:inset 0 0 0 2px var(--win-text); }
+/* Rotation captions occupy two lines, including the terminal result. */
+.st-game-animation:is([data-presentation="arena"],[data-presentation="event"]) .st-legal-cell-pentago .st-legal-board { width:62%; }

@@ -2,5 +2,9 @@
   "archive": "pachisi-0.2.0.tgz",
   "esmRender": true,
   "nodeNextTypes": true,
-  "nextRscBuild": true
+  "nextRscBuild": true,
+  "gameReplay": true,
+  "connectFourDesign": true,
+  "sharedWebEditions": true,
+  "referenceSourcesExcluded": true
 }

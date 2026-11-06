@@ -1,0 +1,373 @@
+/* ============================================================
+   Hearts — classic Windows look & feel
+   ============================================================ */
+
+:root {
+  --felt-top: #2f8f4e;
+  --felt-bottom: #1c6b38;
+  --card-w: 76px;
+  --card-h: 106px;
+  --card-radius: 6px;
+  --win-face: #ece9d8;      /* classic XP window face  */
+  --win-border: #0a246a;    /* XP title blue           */
+  --btn-face: #ece9d8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #316ac5;
+  font-family: "Tahoma", "Segoe UI", "MS Sans Serif", Geneva, sans-serif;
+  font-size: 13px;
+  overflow: hidden;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;        /* fallback */
+  height: 100dvh;       /* dynamic viewport height — avoids mobile toolbar clipping */
+  width: 100vw;
+}
+
+/* ---------- Title bar ---------- */
+.titlebar {
+  display: flex;
+  align-items: center;
+  height: 26px;
+  background: linear-gradient(180deg, #0a53c8 0%, #0a246a 100%);
+  color: #fff;
+  font-weight: bold;
+  padding: 0 4px;
+  flex: 0 0 auto;
+}
+.title-left { display: flex; align-items: center; gap: 5px; padding-left: 4px; }
+.title-text { font-size: 13px; text-shadow: 1px 1px 1px rgba(0,0,0,.4); }
+.suit-mini { font-size: 15px; }
+.suit-mini.red { color: #ff5a5a; }
+
+.menubar { display: flex; margin-left: 16px; gap: 2px; }
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 3px 8px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+.menu-btn:hover { background: rgba(255,255,255,.22); }
+
+.window-controls { margin-left: auto; display: flex; gap: 3px; padding-right: 2px; }
+.wc {
+  width: 22px; height: 20px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: #2b6fd8;
+  border: 1px solid #7ba7e6;
+  border-radius: 3px;
+  color: #fff; font-size: 11px;
+}
+.wc.close { background: #d84a3f; border-color: #eb8a80; }
+
+/* ---------- Felt table ---------- */
+.table {
+  position: relative;
+  flex: 1 1 auto;
+  background:
+    radial-gradient(ellipse at center, var(--felt-top) 0%, var(--felt-bottom) 85%);
+  overflow: hidden;
+  box-shadow: inset 0 0 120px rgba(0,0,0,.45);
+}
+
+/* ---------- Seats ---------- */
+.seat { position: absolute; }
+.nameplate {
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 13px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.6);
+  background: rgba(0,0,0,.28);
+  border-radius: 10px;
+  padding: 2px 12px;
+  white-space: nowrap;
+  min-width: 60px;
+}
+.nameplate.active {
+  background: rgba(255,235,120,.9);
+  color: #4a3a00;
+  text-shadow: none;
+  box-shadow: 0 0 10px rgba(255,235,120,.8);
+}
+
+.seat-south {
+  bottom: 8px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.seat-north {
+  top: 10px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.seat-west {
+  left: 12px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.seat-east {
+  right: 12px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+
+/* ---------- Hands ---------- */
+.hand { position: relative; }
+.hand-h { display: flex; height: var(--card-h); }
+.hand-v { display: flex; flex-direction: column; width: var(--card-h); }
+
+/* Overlapping cards. Backs (opponents) fan tightly; the player's face-up
+   hand fans loosely so every card's index corner stays readable. */
+.hand-h .card:not(:first-child),
+.hand-h .card-back:not(:first-child) { margin-left: calc(var(--card-w) * -0.5); }
+.player-hand .card:not(:first-child) { margin-left: calc(var(--card-w) * -0.36); }
+.hand-v .card-back:not(:first-child) { margin-top: -78px; }
+
+.player-hand .card { cursor: pointer; transition: transform .12s ease, box-shadow .12s ease; }
+.player-hand .card.playable:hover { transform: translateY(-16px); box-shadow: 0 8px 16px rgba(0,0,0,.5); z-index: 50; }
+.player-hand .card.selected { transform: translateY(-22px); box-shadow: 0 10px 18px rgba(0,0,0,.55); }
+.player-hand .card.disabled { filter: brightness(.72) saturate(.6); cursor: not-allowed; }
+
+/* ---------- Cards ---------- */
+.card, .card-back {
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: var(--card-radius);
+  flex: 0 0 auto;
+  position: relative;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4);
+  border: 1px solid #b7b7b7;
+}
+.card-back {
+  background:
+    repeating-linear-gradient(45deg, #12489e 0, #12489e 6px, #1a5bc0 6px, #1a5bc0 12px);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.4), inset 0 0 0 2px #0d3a82;
+}
+.card-back::after {
+  content: "";
+  position: absolute; inset: 6px;
+  border: 2px solid rgba(255,255,255,.55);
+  border-radius: 3px;
+}
+
+.card svg { width: 100%; height: 100%; display: block; }
+
+/* ---------- Center play area ---------- */
+.center {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px; height: 300px;
+}
+.trick-slot {
+  position: absolute;
+  width: var(--card-w); height: var(--card-h);
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all .25s ease;
+}
+.slot-north { transform: translate(-50%, -118%); }
+.slot-south { transform: translate(-50%, 18%); }
+.slot-west  { transform: translate(-118%, -50%); }
+.slot-east  { transform: translate(18%, -50%); }
+.trick-slot .card { position: absolute; top: 0; left: 0; }
+
+.center-msg {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 22px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0,0,0,.7);
+  text-align: center;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* ---------- Pass button & general button ---------- */
+.pass-btn {
+  position: absolute;
+  left: 50%; bottom: 130px;
+  transform: translateX(-50%);
+  z-index: 60;
+}
+.pass-btn, .btn {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 5px 16px;
+  background: linear-gradient(180deg, #fdfefe 0%, #dfe6ee 45%, #c9d3df 100%);
+  border: 1px solid #7c93b0;
+  border-radius: 4px;
+  cursor: pointer;
+  min-width: 82px;
+  color: #123;
+}
+.pass-btn:hover, .btn:hover { background: linear-gradient(180deg, #ffffff 0%, #e8eef6 45%, #d4dde8 100%); }
+.pass-btn:active, .btn:active { background: #c9d3df; }
+.pass-btn:disabled { opacity: .5; cursor: default; }
+
+/* ---------- Status bar ---------- */
+.statusbar {
+  flex: 0 0 auto;
+  height: 22px;
+  background: var(--win-face);
+  border-top: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  font-size: 12px;
+  color: #222;
+  box-shadow: inset 1px 1px 0 #b0ac9c;
+}
+
+/* ---------- Modals / dialogs ---------- */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.35);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 200;
+}
+.modal-overlay[hidden] { display: none; }
+
+.dialog {
+  background: var(--win-face);
+  border: 1px solid #0a246a;
+  border-radius: 6px 6px 3px 3px;
+  min-width: 300px;
+  max-width: 420px;
+  box-shadow: 0 8px 30px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+.dialog-wide { max-width: 480px; }
+.dialog-title {
+  background: linear-gradient(180deg, #0a53c8 0%, #0a246a 100%);
+  color: #fff; font-weight: bold;
+  padding: 5px 10px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.dialog-close { cursor: pointer; padding: 0 4px; }
+.dialog-close:hover { color: #ffd0d0; }
+.dialog-body { padding: 16px; color: #1a1a1a; line-height: 1.5; }
+.dialog-buttons {
+  display: flex; justify-content: flex-end; gap: 8px;
+  padding: 10px 14px; background: #e4e1d5;
+  border-top: 1px solid #fff;
+}
+.dialog-label { margin: 0 0 8px; }
+.dialog-note { margin: 12px 0 0; font-size: 12px; color: #555; }
+
+.text-input {
+  width: 100%;
+  padding: 5px 7px;
+  font-family: inherit; font-size: 13px;
+  border: 1px solid #7f9db9;
+  border-radius: 2px;
+}
+
+/* ---------- Score table ---------- */
+.help-body h3 { margin: 12px 0 4px; font-size: 13px; color: #0a246a; }
+.help-body h3:first-child { margin-top: 0; }
+.help-body ul { margin: 4px 0; padding-left: 20px; }
+.help-body p { margin: 4px 0; }
+
+.score-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.score-table th, .score-table td {
+  border: 1px solid #b9b6a8;
+  padding: 5px 10px;
+  text-align: center;
+}
+.score-table th { background: #d7d3c4; }
+.score-table td.name-cell { text-align: left; font-weight: bold; }
+.score-table tr.you-row td.name-cell { color: #0a246a; }
+.score-table tr.leader td { background: #d7f0d7; }
+.score-table .total-col { font-weight: bold; }
+
+.red { color: #cc0000; }
+.black { color: #000; }
+
+/* ---------- Passing highlight ---------- */
+.card.pass-selected { transform: translateY(-22px); box-shadow: 0 0 0 3px #ffd83d, 0 8px 16px rgba(0,0,0,.5); z-index: 40; }
+
+/* points badge floats up when taken */
+.points-float {
+  position: absolute;
+  font-weight: bold;
+  font-size: 20px;
+  color: #ffe14d;
+  text-shadow: 1px 1px 2px rgba(0,0,0,.7);
+  animation: floatUp 1s ease forwards;
+  pointer-events: none;
+}
+@keyframes floatUp {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-40px); }
+}
+
+/* ---------- Difficulty picker (New Game dialog) ---------- */
+.field-label { margin: 12px 0 5px; font-weight: bold; }
+.difficulty-group { display: flex; gap: 14px; }
+.difficulty-group label {
+  display: inline-flex; align-items: center; gap: 5px; cursor: pointer;
+}
+.difficulty-group input { cursor: pointer; }
+
+/* ---------- Animations ---------- */
+/* Cards flying into the hand at deal time (staggered via inline delay). */
+@keyframes dealIn {
+  from { opacity: 0; transform: translateY(-46px) scale(.8); }
+  to   { opacity: 1; transform: none; }
+}
+.card.deal-anim, .card-back.deal-anim { animation: dealIn .34s ease both; }
+
+/* A card sliding from its seat into the center as it is played. */
+@keyframes enterFromSouth { from { opacity: .25; transform: translate(0, 90px)  scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes enterFromNorth { from { opacity: .25; transform: translate(0, -90px) scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes enterFromWest  { from { opacity: .25; transform: translate(-120px, 0) scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes enterFromEast  { from { opacity: .25; transform: translate(120px, 0)  scale(.92); } to { opacity: 1; transform: none; } }
+.trick-slot .card.enter-south { animation: enterFromSouth .3s ease; }
+.trick-slot .card.enter-north { animation: enterFromNorth .3s ease; }
+.trick-slot .card.enter-west  { animation: enterFromWest  .3s ease; }
+.trick-slot .card.enter-east  { animation: enterFromEast  .3s ease; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card.deal-anim, .card-back.deal-anim,
+  .trick-slot .card.enter-south, .trick-slot .card.enter-north,
+  .trick-slot .card.enter-west, .trick-slot .card.enter-east { animation: none; }
+}
+
+@media (max-width: 720px) {
+  :root { --card-w: 56px; --card-h: 78px; }
+  .center { width: 240px; height: 220px; }
+  .hand-v .card-back:not(:first-child) { margin-top: -58px; }
+}
+
+@media (max-width: 480px) {
+  :root { --card-w: 46px; --card-h: 64px; }
+  .center { width: 196px; height: 168px; }
+  .center-msg { font-size: 18px; }
+  .pass-btn { bottom: 92px; }
+  .seat-west { left: 6px; }
+  .seat-east { right: 6px; }
+  .nameplate { font-size: 12px; padding: 2px 9px; min-width: 48px; }
+  /* Tighten the title bar so all menu items fit on a phone. */
+  .window-controls { display: none; }
+  .title-left { padding-left: 2px; }
+  .title-text { font-size: 12px; }
+  .menubar { margin-left: 8px; gap: 0; }
+  .menu-btn { padding: 3px 6px; font-size: 12px; }
+}

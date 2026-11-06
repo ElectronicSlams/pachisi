@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Bootstrap CDN-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Alfa+Slab+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+    <!-- Firebase Reference -->
+    <script src="https://www.gstatic.com/firebasejs/5.8.6/firebase.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <iframe src="assets/audio/bensound-punky.mp3" allow="autoplay" style="display:none" id="iframeAudio"></iframe>
+    
+    <header class="animated fadeInDownBig delay-4s">
+        <h1 id="font_1" style="display: inline;">ROCK </h1><h1 id="font_2" style="display: inline;"> PAPER </h1><h1 id="font_3" style="display: inline;"> SCISSORS</h1>
+    </header>
+
+    <!--Header, start button-->
+    <div class="container">        
+        <div id="main_content" class="row text-center">
+            <div class="col-12">
+                <a class="clicked" data-btnID="r" href="#"><img class="animated bounce delay-1s" src="assets/images/Rock.jpg"></a>
+                <a class="clicked" data-btnID="p" href="#"><img class="animated bounce delay-2s" src="assets/images/Paper.jpg"></a>
+                <a class="clicked" data-btnID="s" href="#"><img class="animated bounce delay-3s" src="assets/images/scissors.png"></a>
+                <h5 id="online_users" class="text-center"></h5>
+                <div class="row justify-content-center">
+                    <div class="col-4 animated bounceInUp slow delay-5s">
+                        <form id="entry-form">
+                            <div class="form-group">
+                                <input type="name" class="form-control" id="name-input" aria-describedby="username" placeholder="Enter a unique alias name">
+                            </div>
+                        </form>
+                        <button id="start_button" type="button" class="btn btn-dark">Play</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--messenger form-->
+    <div class="row justify-content-center">
+        <div id="message-form" style="display: none;" class="col-4">
+            <div class="form-group">
+                <textarea class="form-control" id="message-area" rows="3"></textarea>
+            </div>
+            <button id="IM_button" type="button" class="btn btn-dark">Send IM</button>
+        </div>
+    </div>
+    
+
+    <!--message board-->
+    <div class="container">
+        <div id="status" style="display: none;" class="row">
+            <h5>Message Board</h5>
+            <div id="message_board" class="col-12 border-top border-dark">
+            </div>
+        </div>
+    </div>
+    
+    <script src="assets/javascript/game.js"></script>
+    
+</body>
+</html>

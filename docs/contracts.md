@@ -89,6 +89,10 @@ The second pattern matches substrings, case-insensitively. **Any key containing 
 
 ## Theme tokens
 
-`/theme-tokens` is the typed contract the archived mobile app and non-DOM renderers used. `styles/tokens.css` stays the web source of truth and its Platform bytes are unchanged. One delimited additive block at the end adds `--win-text`, `--loss-text` and `--draw-text` for light, manual dark and system dark, using the Classic values (`#1c7c44`/`#c23c33`/`#8f6216` light, `#3ec97e`/`#ec6a5f`/`#e0a94a` dark).
+Classic Light and Dark share the pack palette with the web stylesheet. Use `win`, `loss` and `draw` for swatches or fills, their `*Text` roles for labels, and `textOnAccent` for content on solid action backgrounds. CSS exposes the same roles as `--win`, `--win-text`, `--text-on-accent` and their counterparts. Manual and system dark use the same colours. The final block in `styles/tokens.css` applies Pachisi’s palette to the extracted Platform baseline. [Palette decisions](design-decisions.md#classic-game-palette--5-november-2026)
 
-The typed Classic Light data predates later web changes. Its `win`/`loss`/`draw` swatches (`#1f8a4c`/`#c43d33`/`#b0791b`) differ from the web tokens (`#17703d`/`#b5332a`/`#8a5d0a`), which are darker than the new light text roles. Both pass WCAG AA on the soft fills (text roles about 4.6:1, web swatches above 5:1). Classic Dark's `textOnAccent` (`#0b0b0d`) is also not reflected in `tokens.css`, whose dark blocks inherit white `--text-on-accent`. Neon, Club, Arcade and Midnight are archived-mobile reference palettes, kept as data only. `THEME_CSS` targets `[data-eslams-theme]` for visual tooling, not the web `data-theme` switch. Preference storage stays in `/theme` (`es-theme`); the old package's `persistence.ts` was not ported.
+Neon, Club, Arcade and Midnight are archived mobile reference palettes. `THEME_CSS` targets `[data-eslams-theme]` for visual tools. The web theme switch uses `data-theme` and stores its preference under `es-theme`.
+
+## Checkers live frames
+
+For `gameSlug: "checkers"` and `rendererFamily: "square_board"`, the live adapter preserves `r` and `b` men, and `R` and `B` kings. The resulting frame has `variant: "checkers"`. Hosts using another slug can pass `variant: "checkers"` explicitly. Unrecognized labels produce a placeholder and issues. Legal moves and multi-jump paths come from the host.

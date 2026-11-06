@@ -323,3 +323,20 @@ test('F3: non-Hex families read the same in both vocabularies', () => {
   assert.equal(boardFrameFromCellsWithIssues({ ...go, tokens }, ['B', 'DRAGON', null]).frame.kind, 'placeholder', tokens);
  }
 });
+
+test('parsed live Checkers preserves both seats and crowns including a lone king', () => {
+ for (const ranks of [['r','R','b','B'], ['B']]) {
+  const cells=Array.from({length:64},(_,i)=>cell(i, i%2===1 ? ranks[(i-1)/2] ?? '.' : '.',8));
+  const input=liveFrame(cells,{gameSlug:'checkers',rendererFamily:'square_board'});
+  const parsed=parseDisplayFrame(input,{gameSlug:'checkers',rendererFamily:'square_board'});
+  assert.ok(parsed);
+  const result=boardFrameFromDisplayFrame(parsed);
+  assert.deepEqual(result.issues,[]);
+  assert.equal(result.frame.kind,'cells');
+  if(result.frame.kind!=='cells') throw Error('Expected Checkers board');
+  assert.equal(result.frame.variant,'checkers');
+  assert.deepEqual(result.frame.cells.filter(t=>t!=='.'),ranks);
+  const rendered=renderToStaticMarkup(<Board frame={result.frame}/>);
+  assert.equal((rendered.match(/st-stone-king/g)??[]).length,ranks.filter(t=>t===t.toUpperCase()).length);
+ }
+});

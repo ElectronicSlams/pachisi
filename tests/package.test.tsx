@@ -71,7 +71,7 @@ test('every bundled demonstration frame renders with finite geometry',()=>{
  for(const [game,demo] of Object.entries(GAME_DEMONSTRATIONS))for(const frame of demo.frames){
   const html=render(<LegalDemonstration game={game} frame={frame}/>);assert.ok(html.length>0,game);assert.doesNotMatch(html,/NaN|Infinity/,`${game} turn ${frame.turn}`); count++;
  }
- assert.equal(count,722);
+ assert.equal(count,740);
 });
 test('actual Board never mutates, advances or substitutes a demo for supplied state',()=>{
  const frame:CellBoardFrame=Object.freeze({kind:'cells',family:'grid_3x3',rows:3,cols:3,cells:Object.freeze(['O','.','.','.','X','.','.','.','.']),last:Object.freeze([4])});

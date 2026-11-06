@@ -3,7 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 const tracked=execFileSync('git',['ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8'}).split('\0').filter(Boolean);
 const failures=[];
 const prohibited=[/(?:^|\/)\.env(?:\.|$)/,/(?:^|\/)(?:node_modules|\.next|\.open-next|\.release-private|runs|artifacts)(?:\/|$)/,/\.(?:sqlite|db|pem|key|tgz)$/];
-const secrets=[/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,/\bAKIA[A-Z0-9]{16}\b/,/\bgh[pousr]_[A-Za-z0-9]{30,}\b/,/\bsk-(?:proj-|ant-)[A-Za-z0-9_-]{20,}\b/,/GOCSPX-[A-Za-z0-9_-]{20,}/,/\/Users\/[^/\s]+\//,/\.eslams-private\//];
+const secrets=[/\b(?:key-[0-9a-fA-F]{32}|[0-9a-fA-F]{32}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8})\b/,/-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/,/\bAKIA[A-Z0-9]{16}\b/,/\bgh[pousr]_[A-Za-z0-9]{30,}\b/,/\bsk-(?:proj-|ant-)[A-Za-z0-9_-]{20,}\b/,/GOCSPX-[A-Za-z0-9_-]{20,}/,/\/Users\/[^/\s]+\//,/\.eslams-private\//];
 for(const path of tracked){
  if(prohibited.some(r=>r.test(path)))failures.push(`Excluded path: ${path}`);
  const info=await stat(path);if(!info.isFile())continue;

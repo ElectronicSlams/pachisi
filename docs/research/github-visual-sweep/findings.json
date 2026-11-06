@@ -1,0 +1,1498 @@
+[
+  {
+    "game": "first-price-sealed-bid-auction",
+    "repository": "20010208/blind-auction",
+    "file": "public/index.html",
+    "relationship": "auction relative",
+    "design": "A timed browser bidding interface for a sealed-bid strategy game. Verify the settlement rule independently.",
+    "commit": "adb8377e3fd49c1ab6ed5266d59909cc2f1b8317",
+    "license": "MIT",
+    "evidence": {
+      "path": "public/index.html",
+      "gitBlob": "ff7e8d209b55619943867120bb5ec8b2fb61ef20",
+      "line": 15
+    },
+    "sourceId": "20010208--blind-auction",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "frozen-lake",
+    "repository": "AlecWaumans/ML-FrozenLake",
+    "file": "frozen_lake_enhanced.py",
+    "relationship": "physics relative",
+    "design": "An enhanced Pygame grid renderer for the stochastic lake environment.",
+    "commit": "4000e0316564ee3fede2fd916f2a598f2c59af24",
+    "license": "MIT",
+    "evidence": {
+      "path": "frozen_lake_enhanced.py",
+      "gitBlob": "c7ce0a3a67a70b03301f009d68e7c13ca1e995f3",
+      "line": 19
+    },
+    "sourceId": "alecwaumans--ml-frozenlake",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "alien-shooter",
+    "repository": "Amegma/Galaxy-Attack",
+    "file": "screens/game.py",
+    "relationship": "arcade relative",
+    "design": "Separate Pygame play and score screens for a sprite-based shooter.",
+    "commit": "ecc2de618cc11d12ae55e906f3b3ba3689088f5a",
+    "license": "MIT",
+    "evidence": {
+      "path": "screens/game.py",
+      "gitBlob": "e235110fb99a9a552877660fb8a99d7d66a9a141",
+      "line": 1
+    },
+    "sourceId": "amegma--galaxy-attack",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "ice-hockey-style-arena",
+    "repository": "ArtisVitols/hockey",
+    "file": "src/arena/icePainter.ts",
+    "relationship": "arcade relative",
+    "design": "Rink-painting layer in a 3D hockey game; use it for markings and camera study.",
+    "commit": "458973bdbdf53fdff6544c5f2302af8ea228cabe",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "src/arena/icePainter.ts",
+      "gitBlob": "936995d86957c2c13253cb9191b2eea53a940d03",
+      "line": 14
+    },
+    "sourceId": "artisvitols--hockey",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "crazy-eights",
+    "repository": "BNAS24/Crazy-Eights-Game",
+    "file": "src/pages/gamepage/GameContainer.jsx",
+    "relationship": "game screen",
+    "design": "React game container and a separate modal for choosing the effect of a wild eight.",
+    "commit": "1fded5412b338032c5de3084015d1520abc4d564",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/pages/gamepage/GameContainer.jsx",
+      "gitBlob": "9114e570b93830ece7bf8282216fb8be13b75c7b",
+      "line": 1
+    },
+    "sourceId": "bnas24--crazy-eights-game",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "chess",
+    "repository": "Clariity/react-chessboard",
+    "file": "src/Board.tsx",
+    "relationship": "board component",
+    "design": "Responsive React board with an independent piece layer and analysis examples.",
+    "commit": "5f99614dabadfcad6f78eaa5d7822e42b28179e6",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/Board.tsx",
+      "gitBlob": "4f631999335e48cbb45a12dc66d65c2d19e32668",
+      "line": 26
+    },
+    "sourceId": "clariity--react-chessboard",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "dou-dizhu",
+    "repository": "ConstStar/dou-di-zhu",
+    "file": "poker_client.py",
+    "relationship": "game screen",
+    "design": "A dedicated landlord-game client using Pygame alongside a Tk interface.",
+    "commit": "3e29202ffd5c29d4fc2b7c17b83ef3b34396dda9",
+    "license": "MIT",
+    "evidence": {
+      "path": "poker_client.py",
+      "gitBlob": "9329222e984849cc7975151e982e9076d6573c43",
+      "line": 7
+    },
+    "sourceId": "conststar--dou-di-zhu",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "dou-dizhu",
+    "repository": "DavidWang1231/doudizhu-online",
+    "file": "css/style.css",
+    "relationship": "game screen",
+    "design": "A browser landlord-game stylesheet to compare against the Pygame client.",
+    "commit": "8d750b58ea17667573709401d6c882a8d2392da7",
+    "license": "MIT",
+    "evidence": {
+      "path": "css/style.css",
+      "gitBlob": "406fee6bd64906b5445db413c1b08f45c6c84772",
+      "line": 7
+    },
+    "sourceId": "davidwang1231--doudizhu-online",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "bipedal-walker",
+    "repository": "De-Rosa/PPO-BipedalWalker",
+    "file": "Rendering/Renderer.cs",
+    "relationship": "physics relative",
+    "design": "A dedicated C# renderer for a biped simulation with an impulse-based physics engine.",
+    "commit": "4080f451b5588d0d90bda58a29d8d2c6308dd208",
+    "license": "MIT",
+    "evidence": {
+      "path": "Rendering/Renderer.cs",
+      "gitBlob": "d7d44f9bc85a775f148240bb92d2a971d03d0eab",
+      "line": 4
+    },
+    "sourceId": "de-rosa--ppo-bipedalwalker",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "pentago",
+    "repository": "DevJac/gloss-pentago",
+    "file": "src/Main.hs",
+    "relationship": "game screen",
+    "design": "Haskell/Gloss rendering provides an alternative desktop treatment for the rotating quadrants.",
+    "commit": "ec7e9b0206fee1c142400ca063fee7dca1955826",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/Main.hs",
+      "gitBlob": "a7ca649c4aaec29d13b4813bb81b36e0a107d5b7",
+      "line": 1
+    },
+    "sourceId": "devjac--gloss-pentago",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "hex",
+    "repository": "FutaAlice/FutaHex2",
+    "file": "src/futahex2/canvas.cpp",
+    "relationship": "game screen",
+    "design": "Dedicated native canvas for a Hex connection board.",
+    "commit": "2786e2e291b6de171d74b1dbbe76c013478f925e",
+    "license": "GPL-2.0",
+    "evidence": {
+      "path": "src/futahex2/canvas.cpp",
+      "gitBlob": "820a30809f50f428eba3fc20eb4ec2f7f3e4a25a",
+      "line": 133
+    },
+    "sourceId": "futaalice--futahex2",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "gomoku",
+    "repository": "Hexik/Gomoku_GUI",
+    "file": "app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt",
+    "relationship": "board component",
+    "design": "An Android board view for a generic Gomoku interface.",
+    "commit": "36940e0d5390cc8ca91370535993ee278ec6a288",
+    "license": "MIT",
+    "evidence": {
+      "path": "app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt",
+      "gitBlob": "5aa4b0c45a13339a302e77e42d8e8b03558ed12a",
+      "line": 5
+    },
+    "sourceId": "hexik--gomoku_gui",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "bargaining",
+    "repository": "IMC-Lab/UG-causation",
+    "file": "exp/exp-accept.js",
+    "relationship": "related experiment",
+    "design": "An ultimatum-game acceptance interface built from experimental response controls. Participant data are excluded.",
+    "commit": "40890ce3feaa94316cfd28fb576f9a7acf9ee2d9",
+    "license": "MIT",
+    "evidence": {
+      "path": "exp/exp-accept.js",
+      "gitBlob": "88a2a152973c32cd170a26ccd67ef87cd194af86",
+      "line": 4
+    },
+    "sourceId": "imc-lab--ug-causation",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "blackjack",
+    "repository": "JHoff1/NeonTableGames",
+    "file": "src/blackjack/BlackjackTable.tsx",
+    "relationship": "game screen",
+    "design": "Browser table with explicit face-down cards, suit marks and visible rank corners.",
+    "commit": "af8b7b5fd8f53e7ff967326e8512654dc56838c7",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "src/blackjack/BlackjackTable.tsx",
+      "gitBlob": "4ec630aa000eccf07df2c1950e790517fdf63d4e",
+      "line": 13
+    },
+    "sourceId": "jhoff1--neontablegames",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "cribbage",
+    "repository": "Kinsa/cribbage-board-app",
+    "file": "components/CribbageBoard.tsx",
+    "relationship": "scoring surface",
+    "design": "A React Native cribbage board for tracking pegging positions.",
+    "commit": "8c17210d088fce0bf90c28be7391578dba029a7b",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "components/CribbageBoard.tsx",
+      "gitBlob": "6c6c66385a683960dc98e3342731772888309f3a",
+      "line": 115
+    },
+    "sourceId": "kinsa--cribbage-board-app",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "nine-mens-morris",
+    "repository": "LouisRadek/muehle",
+    "file": "src/ui/game.rs",
+    "relationship": "game screen",
+    "design": "Rust game screen for the mill board, complementing the Cairo implementation.",
+    "commit": "d7f6f4cd3fc93e2d1c638493947efae747a10be3",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/ui/game.rs",
+      "gitBlob": "65ce602f8b68854f0f80070750bd8b286c8ea04f",
+      "line": 4
+    },
+    "sourceId": "louisradek--muehle",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "goofspiel",
+    "repository": "Metta-AI/cogame-goofspiel-oshi-zumo",
+    "file": "client/renderer.js",
+    "relationship": "game screen",
+    "design": "A dedicated sealed-bid card renderer with a separate replay viewer.",
+    "commit": "6cf155196fcf8aebd5cac24b218b62425e5f821f",
+    "license": "MIT",
+    "evidence": {
+      "path": "client/renderer.js",
+      "gitBlob": "6022c4b7681e11133653813c731ed5ccc4c3f942",
+      "line": 66
+    },
+    "sourceId": "metta-ai--cogame-goofspiel-oshi-zumo",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "shedding-card-game",
+    "repository": "NiyiOke/open-shed-card-engine",
+    "file": "app/components/GameTableCanvas.tsx",
+    "relationship": "rule variant",
+    "design": "Canvas table for an extensible multiplayer shedding game. Compare rank/suit rules before adoption.",
+    "commit": "f20a5c15bfb2b1aa943f61f8b17bcbd27f185c40",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "app/components/GameTableCanvas.tsx",
+      "gitBlob": "a0e16c9b074a347a8c217ebcc9aca5ea70a8e1aa",
+      "line": 14
+    },
+    "sourceId": "niyioke--open-shed-card-engine",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "mancala",
+    "repository": "Noah-Vincenz/ProjectCrawl",
+    "file": "src/main/java/com/noahvincenz/oware/view/GameBoardView.java",
+    "relationship": "rule variant",
+    "design": "Oware board view for the Mancala family. Pit and capture conventions must be checked before reuse.",
+    "commit": "c6c789f2d354e5f04bb1df7391e4d5ba950c0d1c",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/main/java/com/noahvincenz/oware/view/GameBoardView.java",
+      "gitBlob": "ceafef63ad2e42d88de3a80504691032a1b838f4",
+      "line": 33
+    },
+    "sourceId": "noah-vincenz--projectcrawl",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "shogi",
+    "repository": "OsakiTsukiko/lishogi-client",
+    "file": "src/core/main_screen/tabs/play_tab/game.tscn",
+    "relationship": "game screen",
+    "design": "Godot play-tab scene for a desktop shogi client.",
+    "commit": "ed6dafbc99258a694c202f4b80ed8e9bb296e46e",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "src/core/main_screen/tabs/play_tab/game.tscn",
+      "gitBlob": "d2dce405786f7ceea9431de1f830fada74b41d56",
+      "line": 28
+    },
+    "sourceId": "osakitsukiko--lishogi-client",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "lunar-lander",
+    "repository": "PeiP-2018-Work-Nantes-DUT-INFO/Planet-Lander-Lunar-Lander-with-Pygame",
+    "file": "states/game.py",
+    "relationship": "physics relative",
+    "design": "Separate Pygame flight state for a planetary landing game.",
+    "commit": "cc694785ea0587e1edb0546a306e1162be76f4fc",
+    "license": "MIT",
+    "evidence": {
+      "path": "states/game.py",
+      "gitBlob": "660041d749c669e78dc7f275842ad06ba16b2d04",
+      "line": 2
+    },
+    "sourceId": "peip-2018-work-nantes-dut-info--planet-lander-lunar-lander-with-pygame",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "ultimate-tic-tac-toe",
+    "repository": "PhilAldridge/REACT-Ultimate-tic-tac-toe",
+    "file": "src/bigBoard.js",
+    "relationship": "game screen",
+    "design": "A React macro-board for composing the nine smaller boards.",
+    "commit": "816d0f81d8ff1d0720290d0b59b323d990b99330",
+    "license": "CC0-1.0",
+    "evidence": {
+      "path": "src/bigBoard.js",
+      "gitBlob": "d084a39d1fc9113732ef3d048d49f81b66a1cc08",
+      "line": 104
+    },
+    "sourceId": "philaldridge--react-ultimate-tic-tac-toe",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "hearts",
+    "repository": "Rescator7/Hearts2",
+    "file": "cardscene.cpp",
+    "relationship": "game screen",
+    "design": "A native Qt card scene for Hearts. Its standard table differs from the compact two-player trace.",
+    "commit": "d4f533dad693e87736121861c9c6eb6147faf535",
+    "license": "MIT",
+    "evidence": {
+      "path": "cardscene.cpp",
+      "gitBlob": "3dd41dbcbfc6bfe34389d849f3063ae7c5921ffe",
+      "line": 3
+    },
+    "sourceId": "rescator7--hearts2",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "cliff-walking",
+    "repository": "Sebastian-Griesbach/MonsterCliffWalking",
+    "file": "monstercliffwalking.py",
+    "relationship": "rule variant",
+    "design": "A rendered cliff grid with an additional moving hazard. Keep monster state separate from the standard cliff.",
+    "commit": "704112ea619365fae18acc6bc3fecf25d6edd765",
+    "license": "MIT",
+    "evidence": {
+      "path": "monstercliffwalking.py",
+      "gitBlob": "39bff34da78d7c8456390ab8f589c4f7636b4f24",
+      "line": 159
+    },
+    "sourceId": "sebastian-griesbach--monstercliffwalking",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "cartpole",
+    "repository": "SensorsINI/CartPoleSimulation",
+    "file": "CartPole/cartpole_drawer.py",
+    "relationship": "physics relative",
+    "design": "Cart and pendulum drawing inside a desktop control simulator.",
+    "commit": "50402405912f199f5cfaf76efeb67a8e32a982fe",
+    "license": "MIT",
+    "evidence": {
+      "path": "CartPole/cartpole_drawer.py",
+      "gitBlob": "88c1beb23958357428f5cb45fec24abb635bb250",
+      "line": 1
+    },
+    "sourceId": "sensorsini--cartpolesimulation",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "pentago",
+    "repository": "Starfox64/Pentago",
+    "file": "src/pentagoGUI.py",
+    "relationship": "game screen",
+    "design": "Dedicated Python graphical interface for Pentago.",
+    "commit": "82b215aaba3a0ff17593c281fd9d853c72eae91e",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/pentagoGUI.py",
+      "gitBlob": "01bfab018b9062f2566945c0b6b2d224f3ff62f8",
+      "line": 1
+    },
+    "sourceId": "starfox64--pentago",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "prisoners-dilemma",
+    "repository": "Taku0172/Repeated-Prisoners-Dilemma-Simulator",
+    "file": "index.html",
+    "relationship": "rule variant",
+    "design": "Interactive repeated-game strategy simulator with implementation errors; useful for a history view.",
+    "commit": "50d784640f2ce667bac40046b128cac0195a3b12",
+    "license": "MIT",
+    "evidence": {
+      "path": "index.html",
+      "gitBlob": "884946d6b64b0b4481d745e32acb16a80b733ee3",
+      "line": 49
+    },
+    "sourceId": "taku0172--repeated-prisoners-dilemma-simulator",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "first-price-sealed-bid-auction",
+    "repository": "TiantianFlow/qiju",
+    "file": "apps/web/src/pages/Table.tsx",
+    "relationship": "auction relative",
+    "design": "Four-seat sealed-bid table with a lot board and a round-by-round event feed. The Core two-bidder payoff is not established here.",
+    "commit": "683845fb4540c482f7dad9f79382611f5f9334b9",
+    "license": "MIT",
+    "evidence": {
+      "path": "apps/web/src/pages/Table.tsx",
+      "gitBlob": "3200d5ac64e8cb63ee3369f82e29b6f5069f2a49",
+      "line": 58
+    },
+    "sourceId": "tiantianflow--qiju",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "xiangqi",
+    "repository": "Velithia/JieqiBox",
+    "file": "src/components/Chessboard.vue",
+    "relationship": "rule variant",
+    "design": "Desktop board for Jieqi, a hidden-piece relative of Xiangqi. Face-down identities need a private-state contract.",
+    "commit": "3958989feda0164ec09e34d13c0e090c053fa5d9",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/components/Chessboard.vue",
+      "gitBlob": "fcf36d3871e81fb321943fe2b5dcea1339a9688f",
+      "line": 2
+    },
+    "sourceId": "velithia--jieqibox",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "limit-texas-holdem",
+    "repository": "ZoliQua/Texas-Holdem-Game",
+    "file": "src/ui/Table.tsx",
+    "relationship": "related table",
+    "design": "No-limit tournament table. Its seat layout is relevant to fixed-limit poker, but its betting controls differ.",
+    "commit": "18a7ce1539a18ac9666a6b6d34c3f1d9d78b8905",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/ui/Table.tsx",
+      "gitBlob": "4c58152129abe9bc93910ac32b24800ecc6574e7",
+      "line": 189
+    },
+    "sourceId": "zoliqua--texas-holdem-game",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "no-limit-texas-holdem",
+    "repository": "ZoliQua/Texas-Holdem-Game",
+    "file": "src/ui/Table.tsx",
+    "relationship": "game screen",
+    "design": "React tournament table with its own scoped table stylesheet.",
+    "commit": "18a7ce1539a18ac9666a6b6d34c3f1d9d78b8905",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/ui/Table.tsx",
+      "gitBlob": "4c58152129abe9bc93910ac32b24800ecc6574e7",
+      "line": 189
+    },
+    "sourceId": "zoliqua--texas-holdem-game",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "battleship",
+    "repository": "abdullahjamal1/battleshipBoardGame",
+    "file": "src/draw.ts",
+    "relationship": "rule variant",
+    "design": "Island-edition Battleship drawing code; terrain changes the placement problem.",
+    "commit": "c4f09f09f0a92be89034137ca2d80889c1c2d02c",
+    "license": "GPL-3.0",
+    "evidence": {
+      "path": "src/draw.ts",
+      "gitBlob": "b60daf2d3e31aeb785ad0bb028cac0b6e1ca8800",
+      "line": 27
+    },
+    "sourceId": "abdullahjamal1--battleshipboardgame",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "leduc-holdem",
+    "repository": "acaen007/GameLab",
+    "file": "src/poker-app.js",
+    "relationship": "game screen",
+    "design": "Shared browser lab for Kuhn and Leduc poker, useful for making the smaller betting tree visible.",
+    "commit": "fec0984d339ec946118dd6ae45cdab691451bd13",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "src/poker-app.js",
+      "gitBlob": "8f35b8c2b7a5a9838c244ade89395d2d8df33bbc",
+      "line": 749
+    },
+    "sourceId": "acaen007--gamelab",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "taxi",
+    "repository": "agrawalanshika/Routemind-AI",
+    "file": "index.html",
+    "relationship": "physics relative",
+    "design": "Interactive browser simulation of Taxi-v3. Treat its presentation separately from the learned policy.",
+    "commit": "5a5d5d2e0d65ff7e330e6cf2256453968caa7435",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "index.html",
+      "gitBlob": "8788091059e97a0575318859a020e6ecd8cc6451",
+      "line": 15
+    },
+    "sourceId": "agrawalanshika--routemind-ai",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "paddle-ball",
+    "repository": "akshatjain02/Breakout",
+    "file": "Breakout.css",
+    "relationship": "arcade relative",
+    "design": "Breakout playfield presentation; brick destruction differs from the bundled paddle rally.",
+    "commit": "4acd4fb33ea8e6da74eba53a6e7a4490d267ccf5",
+    "license": "MIT",
+    "evidence": {
+      "path": "Breakout.css",
+      "gitBlob": "6a14edd33faf2c7a26b5156056f7b8cc538f12d4",
+      "line": 8
+    },
+    "sourceId": "akshatjain02--breakout",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "go",
+    "repository": "ale64bit/WeiqiHub",
+    "file": "lib/board/board_annotation.dart",
+    "relationship": "board component",
+    "design": "Flutter board annotations for a Go client with puzzle support.",
+    "commit": "cd1997863d7e2e6d6105c4b6f0580f607170ba19",
+    "license": "BSD-3-Clause",
+    "evidence": {
+      "path": "lib/board/board_annotation.dart",
+      "gitBlob": "28a2c47028da17aaf4e2117a63397c4e08685faf",
+      "line": 24
+    },
+    "sourceId": "ale64bit--weiqihub",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "gin-rummy",
+    "repository": "alexwitting/cardgames",
+    "file": "feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt",
+    "relationship": "game screen",
+    "design": "Native Android Gin Rummy screen inside a multi-game card application.",
+    "commit": "c895605c5672dd72919bcfe17c8b65e7c53cb6e5",
+    "license": "MIT",
+    "evidence": {
+      "path": "feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt",
+      "gitBlob": "b7814c2a30dc8613bb0c45ed02e59408cb1d0c9e",
+      "line": 30
+    },
+    "sourceId": "alexwitting--cardgames",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "bipedal-walker",
+    "repository": "andrefkruger/walker-ai",
+    "file": "render/renderer.py",
+    "relationship": "physics relative",
+    "design": "Pygame visualizer kept separate from the Box2D locomotion training code.",
+    "commit": "42c704ae883e4df03c05376b9d72922f8881d176",
+    "license": "MIT",
+    "evidence": {
+      "path": "render/renderer.py",
+      "gitBlob": "1c8404bae4f4795d8e9233da50f3c4944e01f2f3",
+      "line": 1
+    },
+    "sourceId": "andrefkruger--walker-ai",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "chess",
+    "repository": "andrew-wilkes/godot-chess",
+    "file": "src/Board.gd",
+    "relationship": "board component",
+    "design": "Godot Control-based board with its own pieces scene, an alternative to web layout.",
+    "commit": "e16a2423e8425f04c04807be874f54e252655fc8",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/Board.gd",
+      "gitBlob": "4a6ebe72ef205fec3bce5a739567e9aa925e88b9",
+      "line": 1
+    },
+    "sourceId": "andrew-wilkes--godot-chess",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "othello",
+    "repository": "batuhanisik751/JavaHexagonalReversi",
+    "file": "src/main/java/cs3500/reversi/view/FxReversiCanvas.java",
+    "relationship": "rule variant",
+    "design": "JavaFX canvas for hexagonal Reversi. Six neighbour directions change flipping and valid moves.",
+    "commit": "79a35eb7a78d68a9f5c786e34e89e9157d4c4dcf",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/main/java/cs3500/reversi/view/FxReversiCanvas.java",
+      "gitBlob": "69e78a567261863470ce47200e031df56490f434",
+      "line": 10
+    },
+    "sourceId": "batuhanisik751--javahexagonalreversi",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "go",
+    "repository": "cbelsole/easygo",
+    "file": "web/src/components/Board.tsx",
+    "relationship": "board component",
+    "design": "Browser Go board used alongside KataGo analysis and joseki recognition.",
+    "commit": "20293034c781d3c64eab63d4a4dccbada7cd9b12",
+    "license": "MIT",
+    "evidence": {
+      "path": "web/src/components/Board.tsx",
+      "gitBlob": "23bf27d5350eae8235df069e3f53b079d0ac96fd",
+      "line": 62
+    },
+    "sourceId": "cbelsole--easygo",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "ultimate-tic-tac-toe",
+    "repository": "chacestew/u3t",
+    "file": "client/src/Components/GameArea/LocalBoard/LocalBoard.tsx",
+    "relationship": "game screen",
+    "design": "A local-board component inside the larger multiplayer game area; useful for nested-board feedback.",
+    "commit": "743c7cd70cfae431695a34af153aa28f214942e0",
+    "license": "MIT",
+    "evidence": {
+      "path": "client/src/Components/GameArea/LocalBoard/LocalBoard.tsx",
+      "gitBlob": "248b37d89e44384229ae07d44c89f8d03c48ac5d",
+      "line": 39
+    },
+    "sourceId": "chacestew--u3t",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "bargaining",
+    "repository": "cherylwang2028/Ultimatum-game",
+    "file": "public/index.html",
+    "relationship": "related experiment",
+    "design": "Browser interface for a dynamic two-player ultimatum experiment.",
+    "commit": "9ec2e8369ca4b2018a1369225fefa0bb1a200883",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "public/index.html",
+      "gitBlob": "198b052500dfcdbbead54e09b253d515a082259c",
+      "line": 13
+    },
+    "sourceId": "cherylwang2028--ultimatum-game",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "rock-paper-scissors",
+    "repository": "digamjain/Rock-Paper-Scissors-GUI",
+    "file": "Stone-Paper-scissors/Rock-Paper-Scissors.py",
+    "relationship": "game screen",
+    "design": "A dedicated graphical single-player gesture-selection interface.",
+    "commit": "76f4a54555a4502dd281ad7b00d1d565a9819ffb",
+    "license": "MIT",
+    "evidence": {
+      "path": "Stone-Paper-scissors/Rock-Paper-Scissors.py",
+      "gitBlob": "551dafd16567b93bfa2d0ddeb32c5b768389d694",
+      "line": 1
+    },
+    "sourceId": "digamjain--rock-paper-scissors-gui",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "rock-paper-scissors",
+    "repository": "doyBrian/RPS-Multiplayer",
+    "file": "index.html",
+    "relationship": "game screen",
+    "design": "Two-player browser layout for simultaneous gesture choices.",
+    "commit": "c37b0888b87c5b9084351083fee5977628ed2d35",
+    "license": "MIT",
+    "evidence": {
+      "path": "index.html",
+      "gitBlob": "acce9e469929c54300cdc597ead57942e3d54c80",
+      "line": 37
+    },
+    "sourceId": "doybrian--rps-multiplayer",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "backgammon",
+    "repository": "eamag/nard",
+    "file": "src/components/GameBoard.svelte",
+    "relationship": "game screen",
+    "design": "Browser training board with a preview state and a separate coaching panel.",
+    "commit": "6468c949a9f631368ae5e1690781ca5b7d9a015d",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/components/GameBoard.svelte",
+      "gitBlob": "de287838ab5426596dc51f95888a8aa8c6dd5654",
+      "line": 48
+    },
+    "sourceId": "eamag--nard",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "hex",
+    "repository": "eliaxyzz/HEX",
+    "file": "src/ui/background_renderer.cpp",
+    "relationship": "game screen",
+    "design": "Desktop Hex client with a separately drawn game background.",
+    "commit": "fadf672b8a61035c83c28206b57b3a359656a8f6",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/ui/background_renderer.cpp",
+      "gitBlob": "d549e286ae18da2069ea8b1f31c96cebd5701024",
+      "line": 78
+    },
+    "sourceId": "eliaxyzz--hex",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "chess",
+    "repository": "enzomanuelmangano/react-native-chessboard",
+    "file": "src/components/skia/board-background.tsx",
+    "relationship": "board component",
+    "design": "Native Skia board background as an alternative to a DOM checkerboard.",
+    "commit": "d1c3e0aa9372b2b78c07f50412b09a50ad31d4ae",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/components/skia/board-background.tsx",
+      "gitBlob": "dd331803808cd490545686a8c2333468f3db0210",
+      "line": 54
+    },
+    "sourceId": "enzomanuelmangano--react-native-chessboard",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "nine-mens-morris",
+    "repository": "farindk/morris",
+    "file": "src/gtkcairo_boardgui.cc",
+    "relationship": "game screen",
+    "design": "GTK/Cairo rendering of the mill board and its playing pieces.",
+    "commit": "60ac099eb02b82e9f9a9e7add577f296ddc1bd2d",
+    "license": "GPL-3.0",
+    "evidence": {
+      "path": "src/gtkcairo_boardgui.cc",
+      "gitBlob": "2f3c53259587276a3e13d74595213b000de1d92b",
+      "line": 600
+    },
+    "sourceId": "farindk--morris",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "othello",
+    "repository": "felipeap92/othello-game",
+    "file": "othello-gui/src/components/Board.tsx",
+    "relationship": "game screen",
+    "design": "Standalone React board in a Reversi client with multiplayer support.",
+    "commit": "aa9dd2bd3d2ebc101405c3fabf24b27810c7086b",
+    "license": "MIT",
+    "evidence": {
+      "path": "othello-gui/src/components/Board.tsx",
+      "gitBlob": "a8531c16cd5b8832c50de5f6c3571bb8b6cd33f1",
+      "line": 40
+    },
+    "sourceId": "felipeap92--othello-game",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "bridge",
+    "repository": "frankwallis/redouble",
+    "file": "src/ui/table/table.jsx",
+    "relationship": "game screen",
+    "design": "Hands and player names live on named seat edges, with separate bidding controls and history.",
+    "commit": "22487e6e51d00b34668f97f94f96c2eef4d1dd95",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/ui/table/table.jsx",
+      "gitBlob": "0ee02157c01ef4231ea633e1ff12b50ee4fbed54",
+      "line": 60
+    },
+    "sourceId": "frankwallis--redouble",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "gomoku",
+    "repository": "guijixzh/Inverse-Gomoku-GUI-vs-AI",
+    "file": "web/src/board.ts",
+    "relationship": "rule variant",
+    "design": "An inverse-Gomoku board that supports a piece-movement rule absent from standard Gomoku.",
+    "commit": "49470d3cf1916ac1671fbbc2b54cba84b36d3b6d",
+    "license": "MIT",
+    "evidence": {
+      "path": "web/src/board.ts",
+      "gitBlob": "615f100d913e09b2c94cccb3f34a2c2002e80c6f",
+      "line": 84
+    },
+    "sourceId": "guijixzh--inverse-gomoku-gui-vs-ai",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "crazy-eights",
+    "repository": "hakon1233/card-games",
+    "file": "components/game/table-display-settings.tsx",
+    "relationship": "shared table",
+    "design": "Display-settings component shared across several card games including Crazy Eights.",
+    "commit": "0d85e1195238c35daa9557bf2057b4fd6ac6e742",
+    "license": "MIT",
+    "evidence": {
+      "path": "components/game/table-display-settings.tsx",
+      "gitBlob": "abaf1354e33f06c52bf18a1f95f17c05f08604b3",
+      "line": 59
+    },
+    "sourceId": "hakon1233--card-games",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "alien-shooter",
+    "repository": "iandevlin/canvasinvaders",
+    "file": "canvasinvaders.js",
+    "relationship": "arcade relative",
+    "design": "Browser canvas playfield for the invader formation and moving shots.",
+    "commit": "25dedf94b7f5c21ba1f003459b388c7f998d4f90",
+    "license": "MIT",
+    "evidence": {
+      "path": "canvasinvaders.js",
+      "gitBlob": "e8d23c3a6e0bcd11bfc08497569f9854602a5ad5",
+      "line": 7
+    },
+    "sourceId": "iandevlin--canvasinvaders",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "spades",
+    "repository": "indiagames/spade",
+    "file": "frontend/src/features/room/Table.tsx",
+    "relationship": "game screen",
+    "design": "A dedicated table component in a real-time multiplayer Spades room.",
+    "commit": "095d840ba0084ed3bac57354286eb422b183d108",
+    "license": "MIT",
+    "evidence": {
+      "path": "frontend/src/features/room/Table.tsx",
+      "gitBlob": "06fd07780c271b3a39dc61a037e7082d54f2ed70",
+      "line": 46
+    },
+    "sourceId": "indiagames--spade",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "shedding-card-game",
+    "repository": "intrepion/kata-inspired-by-uno-codex-dot",
+    "file": "src/style.css",
+    "relationship": "rule variant",
+    "design": "Prism Relay's browser table and card styling for a related shedding game.",
+    "commit": "42ea008d13c2bea37a0ffcd5976f01fbf6372958",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/style.css",
+      "gitBlob": "0b931cd75f33b77773d5214fe35512a05d5b9f49",
+      "line": 10
+    },
+    "sourceId": "intrepion--kata-inspired-by-uno-codex-dot",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "negotiation",
+    "repository": "issamoham-art/cargo-game",
+    "file": "index.html",
+    "relationship": "related experiment",
+    "design": "A browser shipping negotiation exercise, useful as an alternative negotiation-room composition.",
+    "commit": "2347f3519c47b79a24c43984c5bb31e71ba3a88f",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "index.html",
+      "gitBlob": "b5343cafc1abd6b8e2946356b007a9c660881388",
+      "line": 15
+    },
+    "sourceId": "issamoham-art--cargo-game",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "bridge",
+    "repository": "juef17/LibreBridge",
+    "file": "src/gui/CardWidget.cpp",
+    "relationship": "game screen",
+    "design": "Native desktop card widget from a dedicated contract-bridge client.",
+    "commit": "38e344a2fab649c1cce9189b92dadbe7bdb63f31",
+    "license": "GPL-3.0",
+    "evidence": {
+      "path": "src/gui/CardWidget.cpp",
+      "gitBlob": "14ee093cff993530a25fa20686886a13406ed799",
+      "line": 23
+    },
+    "sourceId": "juef17--librebridge",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "mahjong",
+    "repository": "junosan/Nama",
+    "file": "code/glwidget.cpp",
+    "relationship": "game screen",
+    "design": "Qt/OpenGL widget from a riichi Mahjong client. Its rules extend beyond the compact bundled game.",
+    "commit": "6ace0bb25a986d71b8e08d74334481eadb96650e",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "code/glwidget.cpp",
+      "gitBlob": "32334f04396c32d23e50e09399c9c3bbca2928d6",
+      "line": 18
+    },
+    "sourceId": "junosan--nama",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "car-racing",
+    "repository": "juzzlin/DustRacing2D",
+    "file": "src/game/scene.cpp",
+    "relationship": "physics relative",
+    "design": "Top-down track scene with a minimap, timing overlay and crash overlay.",
+    "commit": "06da67229775ddb57fcb7c4d0763e97a70a21f70",
+    "license": "GPL-3.0",
+    "evidence": {
+      "path": "src/game/scene.cpp",
+      "gitBlob": "e9d0c5b42f8c78fe05c4ec4c23281936959278fa",
+      "line": 706
+    },
+    "sourceId": "juzzlin--dustracing2d",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "connect-four",
+    "repository": "kenrick95/c4",
+    "file": "browser/src/board/index.ts",
+    "relationship": "game screen",
+    "design": "Dedicated browser board for a red/blue Connect Four implementation.",
+    "commit": "5f0b141806decad56a70f691413165091f7849a1",
+    "license": "MIT",
+    "evidence": {
+      "path": "browser/src/board/index.ts",
+      "gitBlob": "08740c055de1cb51b8b7b9649d42a5462c2c3230",
+      "line": 3
+    },
+    "sourceId": "kenrick95--c4",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "hanabi",
+    "repository": "krinj/hanabi-simulator",
+    "file": "py_hanabi/interface/widget_board_info.py",
+    "relationship": "game screen",
+    "design": "Board-information widget separate from game controls in an agent-assisted Hanabi interface.",
+    "commit": "b77b04aa09bab8bd8d7b784e04bf8b9d5d76d1a6",
+    "license": "MIT",
+    "evidence": {
+      "path": "py_hanabi/interface/widget_board_info.py",
+      "gitBlob": "234f8626b39127dbf2889bb4b06b509f3ae3b9da",
+      "line": 8
+    },
+    "sourceId": "krinj--hanabi-simulator",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "negotiation",
+    "repository": "lnwcode2003eiei/the-inner-circle",
+    "file": "src/components/TradingCard.tsx",
+    "relationship": "related experiment",
+    "design": "An SVG trading-card surface for a multiplayer negotiation game. Core negotiates price and delivery instead.",
+    "commit": "46f60084cc457662875fcccb8225c838364fdfc1",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "src/components/TradingCard.tsx",
+      "gitBlob": "1b578d0bf4f2ead8729e058ef6435fd57b40b732",
+      "line": 99
+    },
+    "sourceId": "lnwcode2003eiei--the-inner-circle",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "gin-rummy",
+    "repository": "lokkant/Gin-Rummy",
+    "file": "src/scenes/layoff_scene.lua",
+    "relationship": "game screen",
+    "design": "A separate L\u00d6VE scene for laying cards off after the hand.",
+    "commit": "58c3c41214d2d18e76ada757987daa3d5f80c1f7",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/scenes/layoff_scene.lua",
+      "gitBlob": "240429cff91ccdb1806a1b078e6312deb6f757b8",
+      "line": 170
+    },
+    "sourceId": "lokkant--gin-rummy",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "chess",
+    "repository": "luisfer-cli/gui-dgt-sim",
+    "file": "src/board_widget.rs",
+    "relationship": "board component",
+    "design": "Rust egui widget that centres piece glyphs on their ink bounds for a digital board.",
+    "commit": "7ef624cb900dad0bc86d965c9f111b676dd8f95d",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "src/board_widget.rs",
+      "gitBlob": "9b2eae2602e166d6ed44e3cb9b1cb454056186f0",
+      "line": 6
+    },
+    "sourceId": "luisfer-cli--gui-dgt-sim",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "liars-dice",
+    "repository": "mmousawy/dicebluff",
+    "file": "src/dicebluff-client/styles/main.css",
+    "relationship": "game screen",
+    "design": "Browser dice-bluff client with a dedicated stylesheet for its game displays.",
+    "commit": "e3c7f81810434f513eb34f2eefb7952f33f2ac95",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/dicebluff-client/styles/main.css",
+      "gitBlob": "efa4d38431ebb7b3f10d3c7fa20be442efe15fbb",
+      "line": 14
+    },
+    "sourceId": "mmousawy--dicebluff",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "backgammon",
+    "repository": "mvichosfm/plakoto",
+    "file": "src/effects.js",
+    "relationship": "rule variant",
+    "design": "A three-dimensional tavli presentation with board effects, lessons and puzzles. Plakoto pins opposing checkers.",
+    "commit": "08f64fcd95d8196c23f74e7c6ec706f2add64855",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/effects.js",
+      "gitBlob": "7a27dbb7e4709463c14664476d72aa07a5861896",
+      "line": 15
+    },
+    "sourceId": "mvichosfm--plakoto",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "hanabi",
+    "repository": "nina-cohen/hanabi-ui",
+    "file": "scripts/PaintStackManager.js",
+    "relationship": "game screen",
+    "design": "A stack-painting module within a dedicated cooperative Hanabi interface.",
+    "commit": "5273475fc1bb48bd154b44d86bb8071ce22f97d5",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "scripts/PaintStackManager.js",
+      "gitBlob": "522c522c2dc76735b56412ba57a28562d01f7b97",
+      "line": 7
+    },
+    "sourceId": "nina-cohen--hanabi-ui",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "shogi",
+    "repository": "pentla/shogi-board",
+    "file": "src/components/Board/CapturedPieceBoard/index.tsx",
+    "relationship": "board component",
+    "design": "Reserve-piece board kept separate from the main grid, useful for representing drops.",
+    "commit": "12d74a0a8ddd1ff42ab56e6cb3c8be2345f7f97a",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/components/Board/CapturedPieceBoard/index.tsx",
+      "gitBlob": "a05a288245403516356a5619d46d568088482e1d",
+      "line": 28
+    },
+    "sourceId": "pentla--shogi-board",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "go",
+    "repository": "peterblazejewicz/gobanhaus",
+    "file": "src/app/components/Board.tsx",
+    "relationship": "game screen",
+    "design": "A dedicated interactive 9\u00d79 Go board for a single-page browser client.",
+    "commit": "460341bf469ce93c268b7a555160cdeac7a5aa2e",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/app/components/Board.tsx",
+      "gitBlob": "fc2f309dd33361a0cb95caa41a48048a9f091a4f",
+      "line": 63
+    },
+    "sourceId": "peterblazejewicz--gobanhaus",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "go",
+    "repository": "popojan/goban",
+    "file": "src/main.cpp",
+    "relationship": "board component",
+    "design": "A three-dimensional goban rendered through a GLSL ray-tracing interface.",
+    "commit": "eb52413fcec8843fc888ccfee1bb28237941b66a",
+    "license": "GPL-3.0",
+    "evidence": {
+      "path": "src/main.cpp",
+      "gitBlob": "e853fc0738cdbe20dfb61d44c562b213ab912773",
+      "line": 603
+    },
+    "sourceId": "popojan--goban",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "checkers",
+    "repository": "portnov/hcheckers",
+    "file": "python/hcheckers/board.py",
+    "relationship": "game screen",
+    "design": "Qt painter-based draughts board, separate from the rule implementation.",
+    "commit": "511517b9b3cd2d7b6944688550f3dc5bf941a0a4",
+    "license": "BSD-3-Clause",
+    "evidence": {
+      "path": "python/hcheckers/board.py",
+      "gitBlob": "b9eeb96bf11ae29f213cd00cd321aa75cda8aaea",
+      "line": 6
+    },
+    "sourceId": "portnov--hcheckers",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "tic-tac-toe",
+    "repository": "razvan404/tic-tac-toe-multiplayer",
+    "file": "Client/src/main/resources/application/gui/css/style.css",
+    "relationship": "game screen",
+    "design": "Desktop client styling for a networked noughts-and-crosses board.",
+    "commit": "c412047c45f499de7f6a297a6d8e6ba9a2bdca9c",
+    "license": "MIT",
+    "evidence": {
+      "path": "Client/src/main/resources/application/gui/css/style.css",
+      "gitBlob": "c2fd8f61216928c9e5f1a96d0e0ea4a987c175d4",
+      "line": 31
+    },
+    "sourceId": "razvan404--tic-tac-toe-multiplayer",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "cribbage",
+    "repository": "rheostaticsfan/CribbageBoard",
+    "file": "app/src/main/java/com/moira/cribbage/BoardView.kt",
+    "relationship": "scoring surface",
+    "design": "Colour e-ink pegboard with touch-driven peg movement. This is a scorekeeper surface.",
+    "commit": "400e5751d65bc04fe137bc54768c2e48d5e0544c",
+    "license": "MIT",
+    "evidence": {
+      "path": "app/src/main/java/com/moira/cribbage/BoardView.kt",
+      "gitBlob": "31c2c3fd29cc2c36391ad42e0a7234ac070f1966",
+      "line": 21
+    },
+    "sourceId": "rheostaticsfan--cribbageboard",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "boxing-style-arena",
+    "repository": "san-santra/pyboxing",
+    "file": "main.py",
+    "relationship": "arcade relative",
+    "design": "Atari-style two-fighter boxing in a Pygame ring.",
+    "commit": "cbba833d49546c063c79a8bfb2c79ecccbecc1de",
+    "license": "GPL-3.0",
+    "evidence": {
+      "path": "main.py",
+      "gitBlob": "b5497593f76694527bfc2894f19e6706182eb914",
+      "line": 1
+    },
+    "sourceId": "san-santra--pyboxing",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "battleship",
+    "repository": "scc416/battleship",
+    "file": "src/Components/Display/Board/index.jsx",
+    "relationship": "game screen",
+    "design": "Board and coordinate-label components separate the playable grid from its axes.",
+    "commit": "add5b7a9cc47f00d436dc91955735408978a4ca6",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/Components/Display/Board/index.jsx",
+      "gitBlob": "3ae858e180714e0e6822655c2041bfe0e50bea53",
+      "line": 25
+    },
+    "sourceId": "scc416--battleship",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "spades",
+    "repository": "sruckh/spades-coach",
+    "file": "src/ui/Table.tsx",
+    "relationship": "game screen",
+    "design": "A trick-taking table paired with a coaching view; the coaching information needs a distinct spectator policy.",
+    "commit": "87ec070084566ef25fc0e899293eef1cfbd37bc0",
+    "license": "Apache-2.0",
+    "evidence": {
+      "path": "src/ui/Table.tsx",
+      "gitBlob": "ba25fc54903ee8112768742d055bc3f7f19f70b3",
+      "line": 16
+    },
+    "sourceId": "sruckh--spades-coach",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "mountain-car",
+    "repository": "subhamdangar/MountainCar-Reinforcement-Learning",
+    "file": "fancy_mountaincar.py",
+    "relationship": "physics relative",
+    "design": "Custom Pygame presentation of the mountain-car task, separate from its training loop.",
+    "commit": "94fc1c875c54216b3bd2edbffa40ed17f7c5da75",
+    "license": "Unspecified",
+    "evidence": {
+      "path": "fancy_mountaincar.py",
+      "gitBlob": "79084da04662ab16754cea443ab0e7d65734d495",
+      "line": 5
+    },
+    "sourceId": "subhamdangar--mountaincar-reinforcement-learning",
+    "archived": false,
+    "reason": "No supported, identified root license/document pair in this review."
+  },
+  {
+    "game": "mancala",
+    "repository": "togiberlin/kalah_mancala",
+    "file": "static/kalahMancala/gameScreenStyle.css",
+    "relationship": "rule variant",
+    "design": "Kalah game-screen styling for a web board and its stores.",
+    "commit": "4dfe49c9c78fb4aab572afaf9056070c55cffe91",
+    "license": "MIT",
+    "evidence": {
+      "path": "static/kalahMancala/gameScreenStyle.css",
+      "gitBlob": "97c4a9da354787ec84b1ad0dfd62427fe890b09a",
+      "line": 49
+    },
+    "sourceId": "togiberlin--kalah_mancala",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "blackjack",
+    "repository": "tukiains/blackjack-gui",
+    "file": "blackjack_gui/table_components.py",
+    "relationship": "game screen",
+    "design": "Desktop table components keep dealer information and player controls distinct.",
+    "commit": "4203d24452ea0f5b6a75789ab56e8c87f51475e0",
+    "license": "MIT",
+    "evidence": {
+      "path": "blackjack_gui/table_components.py",
+      "gitBlob": "2294e6ec276048b914f0e9ff3352216f5cecb11b",
+      "line": 2
+    },
+    "sourceId": "tukiains--blackjack-gui",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "boxing-style-arena",
+    "repository": "ujjwalkrmfp16-creator/air-boxing-prototype",
+    "file": "air_boxing_vs_fast_stable.py",
+    "relationship": "interaction relative",
+    "design": "Webcam pose feedback is a different input and display treatment from the discrete arena.",
+    "commit": "d60cafa9fcc765390f9a164218ca9073c0a1b5b7",
+    "license": "MIT",
+    "evidence": {
+      "path": "air_boxing_vs_fast_stable.py",
+      "gitBlob": "f29f1de603ad3b95ce2ad6e6a5e0769ec2ba7e18",
+      "line": 5
+    },
+    "sourceId": "ujjwalkrmfp16-creator--air-boxing-prototype",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "tic-tac-toe",
+    "repository": "vlokesh7/Dynamic-Tic-Tac-Toe-Game-with-Python-Tkinter",
+    "file": "TicTacToe.py",
+    "relationship": "game screen",
+    "design": "A desktop Tkinter noughts-and-crosses interface.",
+    "commit": "2260d569fbc06ef1c29ea99e37183ba2bb48b986",
+    "license": "MIT",
+    "evidence": {
+      "path": "TicTacToe.py",
+      "gitBlob": "fbb0f3f6b5a6e2ff36d020af5bbb4a569d17a9d8",
+      "line": 1
+    },
+    "sourceId": "vlokesh7--dynamic-tic-tac-toe-game-with-python-tkinter",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "hearts",
+    "repository": "wesmcd6/Game-of-hearts",
+    "file": "style.css",
+    "relationship": "game screen",
+    "design": "Browser reconstruction of the classic desktop Hearts presentation.",
+    "commit": "4184d8cd23d49789ee49769daa894aa83deeddf0",
+    "license": "MIT",
+    "evidence": {
+      "path": "style.css",
+      "gitBlob": "d73a7cadbad541a8d6de402b1a28f65ea265471d",
+      "line": 22
+    },
+    "sourceId": "wesmcd6--game-of-hearts",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "euchre",
+    "repository": "whtdrgn101/game-euchre",
+    "file": "src/client/Board.tsx",
+    "relationship": "game screen",
+    "design": "Partnership trick-taking board with hand, turn and team-results panels.",
+    "commit": "c90db152e552b0acdf8c3f60611048c02dd5e4b6",
+    "license": "BSD-3-Clause",
+    "evidence": {
+      "path": "src/client/Board.tsx",
+      "gitBlob": "8d561e8276a5198d8e33df9d96e723f351eb8ee0",
+      "line": 57
+    },
+    "sourceId": "whtdrgn101--game-euchre",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "xiangqi",
+    "repository": "xiewang233/XiangqiAI",
+    "file": "gui/board_view.py",
+    "relationship": "game screen",
+    "design": "Pygame board view separated from the Xiangqi search engine.",
+    "commit": "d32f6bdbd55707d45348fa220a829d66f68387f9",
+    "license": "MIT",
+    "evidence": {
+      "path": "gui/board_view.py",
+      "gitBlob": "803dd2a5c93c172a215e6ed3b20b247029c3e3e1",
+      "line": 6
+    },
+    "sourceId": "xiewang233--xiangqiai",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "backgammon",
+    "repository": "yavuzkrm/tavla-online",
+    "file": "client/src/components/Board.tsx",
+    "relationship": "game screen",
+    "design": "Two-player tavla board rendered as a React component.",
+    "commit": "c3c991f027656f510ad4aa459a113d9ade112a5e",
+    "license": "MIT",
+    "evidence": {
+      "path": "client/src/components/Board.tsx",
+      "gitBlob": "717e1963b1b9ef35ff1829c5e2d4c1ff88d16aec",
+      "line": 18
+    },
+    "sourceId": "yavuzkrm--tavla-online",
+    "archived": true,
+    "reason": ""
+  },
+  {
+    "game": "bridge",
+    "repository": "yurets-16/handviewer",
+    "file": "handviewer.html",
+    "relationship": "board component",
+    "design": "A single-page deal viewer with a rotate control, useful for comparing seat viewpoints.",
+    "commit": "61ffdcaf51f154daf048abdb17a19ffe4c22df52",
+    "license": "MIT",
+    "evidence": {
+      "path": "handviewer.html",
+      "gitBlob": "805f3eaf0924b11b9a1852060258b4cff9e1ee7f",
+      "line": 13
+    },
+    "sourceId": "yurets-16--handviewer",
+    "archived": false,
+    "reason": "Embedded material or file-level terms require separate review."
+  },
+  {
+    "game": "connect-four",
+    "repository": "zaymonoid/Connect4-3D-R3F",
+    "file": "src/App.js",
+    "relationship": "rule variant",
+    "design": "React Three Fiber implementation of a 4\u00d74\u00d74 board. The extra depth is a rules change.",
+    "commit": "310c919b89c2d14e51de4a7459f4b4b1f1365083",
+    "license": "MIT",
+    "evidence": {
+      "path": "src/App.js",
+      "gitBlob": "1e08f1ae7390556743129a7209d3695a0b917b8c",
+      "line": 396
+    },
+    "sourceId": "zaymonoid--connect4-3d-r3f",
+    "archived": true,
+    "reason": ""
+  }
+]

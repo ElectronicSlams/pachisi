@@ -1,12 +1,14 @@
 "use client";
 
 import React from "react";
+import type { GameDesignId } from "./designs";
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
-import { LegalDemonstration } from "./scene";
+import { LegalDemonstration, supportsTablePresentation } from "./scene";
 import { GameGlyph } from "./icons";
 import { demonstrationFor } from "./demos";
 import { gameAnimationFor } from "./catalogue";
 import { observePreviewVisibility, registerPreviewMotion } from "./motion";
+export { GameReplay, type GameReplayProps } from "./replay";
 
 function subscribeReducedMotion(notify: () => void) {
   const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -17,15 +19,16 @@ function subscribeReducedMotion(notify: () => void) {
 export type GamePresentation = "card" | "arena" | "arena-table" | "feature" | "event";
 export type GameTypography = { readonly labels?: string; readonly pieces?: string };
 
-export function GameAnimation({ game, gameName, size = "full", group = "game-detail", presentation = size === "mini" ? "card" : "feature", typography }: {
-  readonly game: string; readonly gameName: string; readonly size?: "full" | "mini"; readonly group?: string; readonly presentation?: GamePresentation; readonly typography?: GameTypography;
+export function GameAnimation({ game, gameName, size = "full", group = "game-detail", presentation = size === "mini" ? "card" : "feature", typography, design }: {
+  readonly game: string; readonly gameName: string; readonly size?: "full" | "mini"; readonly group?: string; readonly presentation?: GamePresentation; readonly typography?: GameTypography; readonly design?: GameDesignId;
 }) {
   // Reset only this demonstration when the game changes, not the motion group.
-  return <AnimationSequence key={game} game={game} gameName={gameName} size={size} group={group} presentation={presentation} {...(typography ? { typography } : {})} />;
+  const fittedPresentation = presentation === "arena-table" && !supportsTablePresentation(game) ? "arena" : presentation;
+  return <AnimationSequence design={design} key={game} game={game} gameName={gameName} size={size} group={group} presentation={fittedPresentation} {...(typography ? { typography } : {})} />;
 }
 
-function AnimationSequence({ game, gameName, size, group, presentation, typography }: {
-  readonly game: string; readonly gameName: string; readonly size: "full" | "mini"; readonly group: string; readonly presentation: GamePresentation; readonly typography?: GameTypography;
+function AnimationSequence({ game, gameName, size, group, presentation, typography, design }: {
+  readonly game: string; readonly gameName: string; readonly size: "full" | "mini"; readonly group: string; readonly presentation: GamePresentation; readonly typography?: GameTypography; readonly design?: GameDesignId;
 }) {
   const animation = gameAnimationFor(game);
   const demonstration = demonstrationFor(game);
@@ -85,6 +88,6 @@ function AnimationSequence({ game, gameName, size, group, presentation, typograp
   const fontStyle = typography ? { "--game-font-label": typography.labels, "--game-font-piece": typography.pieces } as CSSProperties : undefined;
   return <div className={`st-game-animation st-game-animation-${size}`} role="img" aria-label={`${gameName} game animation`} ref={setElement} style={fontStyle} data-presentation={presentation}
     data-game-animation={game} data-preview-frame={shown} data-preview-active={active && !reduced}>
-    {demonstration ? <LegalDemonstration externalSeats={presentation === "arena-table"} game={game} frame={demonstration.frames[shown] ?? demonstration.frames[0]!} previous={shown > 0 ? (demonstration.frames[shown - 1] ?? null) : null} /> : <GameGlyph slug="unknown-game" size={32} />}
+    {demonstration ? <LegalDemonstration design={design} externalSeats={presentation === "arena-table"} game={game} frame={demonstration.frames[shown] ?? demonstration.frames[0]!} previous={shown > 0 ? (demonstration.frames[shown - 1] ?? null) : null} /> : <GameGlyph slug="unknown-game" size={32} />}
   </div>;
 }

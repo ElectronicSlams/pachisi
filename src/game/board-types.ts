@@ -28,7 +28,7 @@ export type CellBoardFrame = {
    * Square boards without `chess`: "checkers" reads r/b men and R/B kings, "discs"
    * reads B/W discs. Omitted: inferred from the tokens ("B" alone is a disc).
    */
-  readonly variant?: "discs" | "checkers";
+  readonly variant?: "discs" | "checkers" | "pentago";
   /** Last-move cells (one, or from/to for a moved piece). */
   readonly last?: readonly number[];
   /** Winning line, highlighted on completed games. */

@@ -1,4 +1,5 @@
 import React from "react";
+import type { GameDesignId } from "./designs";
 import type { CSSProperties, ReactNode } from "react";
 import { describeBoardFrame } from "./board-adapter";
 import type { BoardFrame, CardBoardFrame, CellBoardFamily, CellBoardFrame } from "./board-types";
@@ -15,6 +16,7 @@ import type { BoardFrame, CardBoardFrame, CellBoardFamily, CellBoardFrame } from
  * than guessing a side.
  */
 export type BoardProps = {
+  readonly design?: GameDesignId;
   readonly frame: BoardFrame;
   /** "mini" tightens gaps for posters and tiles. */
   readonly size?: "full" | "mini";
@@ -56,8 +58,9 @@ const squareFiles = "abcdefghijklmnopqrstuvwxyz";
 /** Go column letters skip I. */
 const goFiles = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
 
-export function Board({ frame, size = "full", label, className }: BoardProps) {
-  const classes = (name: string) => `st-board ${name} st-board-${size}${className ? ` ${className}` : ""}`;
+export function Board({ frame, size = "full", label, className, design }: BoardProps) {
+  const edition = frame.kind==="cells" && frame.family!=="connect_four" && (design==="design-2" || design==="design-3" || (design==="design-4" && (frame.family==="go_board" || frame.variant==="pentago"))) ? design : undefined;
+  const classes = (name: string) => `st-board ${name}${edition ? " st-ed-board-"+edition : ""} st-board-${size}${className ? ` ${className}` : ""}`;
 
   if (frame.kind === "placeholder") {
     return (
@@ -90,9 +93,9 @@ export function Board({ frame, size = "full", label, className }: BoardProps) {
   };
 
   let board: ReactNode;
-  if (cells.family === "go_board") board = <GoBoard {...a11y} {...statusData} className={classes("st-board-go")} frame={cells} />;
-  else if (cells.family === "hex_board") board = <HexBoard {...a11y} {...statusData} className={classes("st-board-hex")} frame={cells} />;
-  else board = <GridBoard {...a11y} {...statusData} className={classes(gridFamilyClass(cells, read.pieces))} frame={cells} pieces={read.pieces} />;
+  if (cells.family === "go_board") board = <GoBoard edition={edition} {...a11y} {...statusData} className={classes("st-board-go")} frame={cells} />;
+  else if (cells.family === "hex_board") board = <HexBoard edition={edition} {...a11y} {...statusData} className={classes("st-board-hex")} frame={cells} />;
+  else board = <GridBoard porcelain={edition==="design-4" && cells.variant==="pentago"} data-c4-design={cells.family === "connect_four" ? design ?? "design-1" : undefined} {...a11y} {...statusData} className={classes(gridFamilyClass(cells, read.pieces))} frame={cells} pieces={read.pieces} />;
 
   if (!status) return board;
   return (
@@ -189,7 +192,7 @@ type BoardRootProps = {
   readonly "data-result"?: "draw" | "win" | undefined;
 };
 
-function GridBoard({ frame, pieces, className, ...root }: BoardRootProps & { readonly frame: CellBoardFrame; readonly pieces: PieceSet }) {
+function GridBoard({ frame, pieces, porcelain, className, ...root }: BoardRootProps & { readonly porcelain:boolean; readonly frame: CellBoardFrame; readonly pieces: PieceSet }) {
   const last = new Set(frame.last ?? []);
   const line = new Set(frame.line ?? []);
   const check = new Set(frame.check ?? []);
@@ -218,7 +221,7 @@ function GridBoard({ frame, pieces, className, ...root }: BoardRootProps & { rea
             key={cellKey(frame, index)}
             style={cellStyle}
           >
-            {token === "." ? null : <Piece key={token} pieces={pieces} token={token} />}
+            {token === "." ? null : porcelain ? <img className="st-porcelain-marble" alt="" src={shudanStone[token === "B" ? "B" : "W"]}/> : <Piece key={token} pieces={pieces} token={token} />}
             {coordinates && position % frame.cols === 0 ? <span aria-hidden="true" className="st-coord st-coord-rank mono">{frame.rows - row}</span> : null}
             {coordinates && position >= count - frame.cols ? <span aria-hidden="true" className="st-coord st-coord-file mono">{squareFiles[column] ?? String(column + 1)}</span> : null}
           </span>
@@ -256,7 +259,7 @@ function Piece({ pieces, token }: { readonly pieces: PieceSet; readonly token: s
   }
 }
 
-type SvgBoardProps = BoardRootProps & { readonly frame: CellBoardFrame };
+type SvgBoardProps = BoardRootProps & { readonly frame: CellBoardFrame; readonly edition?: GameDesignId };
 
 /** Star points for the standard square Go sizes; other sizes draw none. */
 function hoshiPoints(rows: number, cols: number): readonly (readonly [number, number])[] {
@@ -270,7 +273,13 @@ function hoshiPoints(rows: number, cols: number): readonly (readonly [number, nu
   return points;
 }
 
-function GoBoard({ frame, className, ...root }: SvgBoardProps) {
+const shudanStone = {
+  B:new URL("../../assets/go-stones-shudan/stone_1.svg",import.meta.url).href,
+  W:new URL("../../assets/go-stones-shudan/stone_-1.svg",import.meta.url).href,
+};
+
+function GoBoard({ frame, className, edition, ...root }: SvgBoardProps) {
+  const paint = "stones"+React.useId().replace(/[^a-zA-Z0-9_-]/g,"");
   const { rows, cols } = frame;
   const size = Math.max(rows, cols);
   const pad = size > 9 ? 0.7 : 0.9;
@@ -298,14 +307,19 @@ function GoBoard({ frame, className, ...root }: SvgBoardProps) {
       style={rows === cols ? undefined : { aspectRatio: `${width} / ${height}` }}
       viewBox={`0 0 ${width} ${height}`}
     >
-      <rect className="st-go-bg" height={height} rx={0.35} width={width} />
+      {edition && <defs>
+        <pattern id={paint} width="2" height="0.45" patternUnits="userSpaceOnUse"><rect width="2" height=".45" stroke="none" fill={edition==='design-2'?'#dfb674':edition==='design-4'?'#dce2e9':'#faf3df'}/><path d={edition==='design-2'?'M0 .19Q.55 .04 1 .17T2 .19':'M0 .44H2'} style={{stroke:edition==='design-2'?'#bb8b50':'#ddd3b7',fill:'none',strokeWidth:.018}}/></pattern>
+        <radialGradient id={paint+'b'} cx="35%" cy="24%" r="80%"><stop stopColor="#606065"/><stop offset=".48" stopColor="#28272a"/><stop offset="1" stopColor="#101015"/></radialGradient>
+        <radialGradient id={paint+'w'} cx="33%" cy="26%" r="85%"><stop stopColor="#fffef1"/><stop offset=".62" stopColor="#f0e9da"/><stop offset="1" stopColor="#b8b0a6"/></radialGradient>
+      </defs>}
+      <rect className="st-go-bg" style={edition?{fill:`url(#${paint})`}:undefined} height={height} rx={0.35} width={width} />
       <g className="st-go-lines">{lines}</g>
       {hoshi.length > 0 ? (
         <g className="st-go-hoshi">
           {hoshi.map(([row, column]) => <circle cx={x(column)} cy={y(row)} key={`${row}:${column}`} r={rows > 9 ? 0.1 : 0.11} />)}
         </g>
       ) : null}
-      {frame.coordinates ? (
+      {(frame.coordinates || edition==="design-3") ? (
         <g aria-hidden="true" className="st-go-coords">
           {Array.from({ length: cols }, (_, column) => (
             <text key={`f${column}`} textAnchor="middle" x={x(column)} y={height - pad * 0.28}>{goFiles[column] ?? String(column + 1)}</text>
@@ -318,8 +332,11 @@ function GoBoard({ frame, className, ...root }: SvgBoardProps) {
       {frame.cells.map((token, index) => {
         if (token === ".") return null;
         return (
+          <React.Fragment key={`${cellKey(frame, index)}:${token}`}>
+          {edition==="design-4" && <image href={token==="W"?shudanStone.W:shudanStone.B} x={x(index%cols)-.44} y={y(Math.floor(index/cols))-.44} width={.88} height={.88}/>}
           <circle
             className={`st-go-stone st-go-${token === "W" ? "white" : "black"}`}
+            style={edition==="design-2" ? {fill:`url(#${paint}${token==="W"?"w":"b"})`} : edition==="design-4" ? {fill:"transparent"} : undefined}
             cx={x(index % cols)}
             cy={y(Math.floor(index / cols))}
             data-check={check.has(index) || undefined}
@@ -327,7 +344,7 @@ function GoBoard({ frame, className, ...root }: SvgBoardProps) {
             data-line={line.has(index) || undefined}
             key={`${cellKey(frame, index)}:${token}`}
             r={0.44}
-          />
+          /></React.Fragment>
         );
       })}
       {run ? (
@@ -380,7 +397,7 @@ function hexPoints(cx: number, cy: number, radius: number, corners: readonly num
 const HEX_LEFT_HALF = [4, 3, 2, 5] as const;
 const HEX_RIGHT_HALF = [5, 0, 1, 2] as const;
 
-function HexBoard({ frame, className, ...root }: SvgBoardProps) {
+function HexBoard({ frame, className, edition, ...root }: SvgBoardProps) {
   const n = frame.cols;
   const width = n * SQRT3 + (frame.rows - 1) * (SQRT3 / 2);
   const height = (frame.rows - 1) * 1.5 + 2;
@@ -412,6 +429,9 @@ function HexBoard({ frame, className, ...root }: SvgBoardProps) {
             points={hexPoints(cx, cy, 0.94)}
           />
         );
+        if (!empty && edition) {
+          return <React.Fragment key={index}>{cell}<circle cx={cx} cy={cy} r={.48} className={token==="R"?"st-hex-inlay-a":"st-hex-inlay-b"} pointerEvents="none"/></React.Fragment>;
+        }
         if (!empty || edge !== "ab") return cell;
         // The half nearer the left/right (b) goal edge takes b; the other half takes a.
         const bOnLeft = shownColumn === 0;

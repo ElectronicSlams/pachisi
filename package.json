@@ -120,7 +120,15 @@
       "types": "./dist/stadium/grand-slams-stage.d.ts",
       "import": "./dist/stadium/grand-slams-stage.js"
     },
-    "./event.css": "./styles/grand-slams.css"
+    "./event.css": "./styles/grand-slams.css",
+    "./game/connect-four-designs": {
+      "types": "./dist/game/connect-four-designs.d.ts",
+      "import": "./dist/game/connect-four-designs.js"
+    },
+    "./game/designs": {
+      "types": "./dist/game/designs.d.ts",
+      "import": "./dist/game/designs.js"
+    }
   },
   "scripts": {
     "dev": "vite catalogue --host 127.0.0.1",
@@ -132,10 +140,11 @@
     "test:browser": "node scripts/browser-check.mjs",
     "check:public": "node scripts/check-public.mjs",
     "check:physics": "python3 -I scripts/validate-demonstrations.py && python3 -I scripts/selftest-mutations.py",
-    "check": "pnpm typecheck && pnpm test && pnpm build:catalogue && pnpm check:public && pnpm check:physics",
+    "check": "pnpm typecheck && pnpm test && pnpm build:catalogue && pnpm check:public && pnpm check:design-sources && pnpm check:physics",
     "prepublishOnly": "node scripts/refuse-publish.mjs",
     "ci:local": "node scripts/ci-local.mjs",
-    "test:consumer": "pnpm pack --out ./artifacts/pachisi-0.2.0.tgz && node scripts/verify-consumer.mjs"
+    "test:consumer": "pnpm pack --out ./artifacts/pachisi-0.2.0.tgz && node scripts/verify-consumer.mjs",
+    "check:design-sources": "python3 -I scripts/import-public-designs.py --verify && python3 -I scripts/import-public-designs.py --collection github-visual-sweep --verify"
   },
   "peerDependencies": {
     "react": ">=19.2 <20",

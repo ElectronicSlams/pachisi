@@ -1,0 +1,1566 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-04",
+  "files": [
+    {
+      "sourceId": "20010208--blind-auction",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/20010208--blind-auction@adb8377e3fd4/LICENSE",
+      "url": "https://raw.githubusercontent.com/20010208/blind-auction/adb8377e3fd49c1ab6ed5266d59909cc2f1b8317/LICENSE",
+      "gitBlob": "b4d2bd7a8fc6205c7f5d83b0c9fa730193322051",
+      "sha256": "3c8cb1bf8cf12934cf5ceaea52c55f71077d86046ab46e44900dab55125c251c",
+      "bytes": 1078,
+      "modified": false
+    },
+    {
+      "sourceId": "20010208--blind-auction",
+      "upstreamPath": "public/index.html",
+      "path": "reference/github-visual-sweep/sources/20010208--blind-auction@adb8377e3fd4/public/index.html",
+      "url": "https://raw.githubusercontent.com/20010208/blind-auction/adb8377e3fd49c1ab6ed5266d59909cc2f1b8317/public/index.html",
+      "gitBlob": "ff7e8d209b55619943867120bb5ec8b2fb61ef20",
+      "sha256": "c369eb8aa535c5ea40cbd28d3fcb06318ac59d5ff32cbd0a82c89dc3d21241ff",
+      "bytes": 2714,
+      "modified": false
+    },
+    {
+      "sourceId": "alecwaumans--ml-frozenlake",
+      "upstreamPath": "License",
+      "path": "reference/github-visual-sweep/sources/alecwaumans--ml-frozenlake@4000e0316564/License",
+      "url": "https://raw.githubusercontent.com/AlecWaumans/ML-FrozenLake/4000e0316564ee3fede2fd916f2a598f2c59af24/License",
+      "gitBlob": "b5babedce342f13bc6e1f90dbdb0f3d767040aa7",
+      "sha256": "db021bc6e720d591cd1e46babb6cb67c954fb63eacb47f8d055fc14aa933130a",
+      "bytes": 1078,
+      "modified": false
+    },
+    {
+      "sourceId": "alecwaumans--ml-frozenlake",
+      "upstreamPath": "frozen_lake_enhanced.py",
+      "path": "reference/github-visual-sweep/sources/alecwaumans--ml-frozenlake@4000e0316564/frozen_lake_enhanced.py",
+      "url": "https://raw.githubusercontent.com/AlecWaumans/ML-FrozenLake/4000e0316564ee3fede2fd916f2a598f2c59af24/frozen_lake_enhanced.py",
+      "gitBlob": "c7ce0a3a67a70b03301f009d68e7c13ca1e995f3",
+      "sha256": "fdddef8d90954b305894838f7fdb657619e14bb9a2e81288658a20db191e4a48",
+      "bytes": 22786,
+      "modified": false
+    },
+    {
+      "sourceId": "amegma--galaxy-attack",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/amegma--galaxy-attack@ecc2de618cc1/LICENSE",
+      "url": "https://raw.githubusercontent.com/Amegma/Galaxy-Attack/ecc2de618cc11d12ae55e906f3b3ba3689088f5a/LICENSE",
+      "gitBlob": "53b15156e0f1dc944fde1fca43888a47fb6a2cf0",
+      "sha256": "b2cc227669c1ca8e4c7d2a29bc740d642876bfce66ea733ea14600a916a4190c",
+      "bytes": 1072,
+      "modified": false
+    },
+    {
+      "sourceId": "amegma--galaxy-attack",
+      "upstreamPath": "screens/game.py",
+      "path": "reference/github-visual-sweep/sources/amegma--galaxy-attack@ecc2de618cc1/screens/game.py",
+      "url": "https://raw.githubusercontent.com/Amegma/Galaxy-Attack/ecc2de618cc11d12ae55e906f3b3ba3689088f5a/screens/game.py",
+      "gitBlob": "e235110fb99a9a552877660fb8a99d7d66a9a141",
+      "sha256": "fc62550a725df62e7c807afd1768a9e49f0d195bdce1a05db71aa6012b3a4aba",
+      "bytes": 10096,
+      "modified": false
+    },
+    {
+      "sourceId": "bnas24--crazy-eights-game",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/bnas24--crazy-eights-game@1fded5412b33/LICENSE",
+      "url": "https://raw.githubusercontent.com/BNAS24/Crazy-Eights-Game/1fded5412b338032c5de3084015d1520abc4d564/LICENSE",
+      "gitBlob": "fac6e630f9dd7bd883579ffc3feb526a6cbab3f7",
+      "sha256": "ac0a6a47c086358dbc39505509694cc43202c4e5b097eb4c1ddedb8c40237ad4",
+      "bytes": 1063,
+      "modified": false
+    },
+    {
+      "sourceId": "bnas24--crazy-eights-game",
+      "upstreamPath": "src/pages/gamepage/GameContainer.jsx",
+      "path": "reference/github-visual-sweep/sources/bnas24--crazy-eights-game@1fded5412b33/src/pages/gamepage/GameContainer.jsx",
+      "url": "https://raw.githubusercontent.com/BNAS24/Crazy-Eights-Game/1fded5412b338032c5de3084015d1520abc4d564/src/pages/gamepage/GameContainer.jsx",
+      "gitBlob": "9114e570b93830ece7bf8282216fb8be13b75c7b",
+      "sha256": "fba0c9f291edb04965e09f9907346ff61adda359b783c72bba8c125d11663b82",
+      "bytes": 4954,
+      "modified": false
+    },
+    {
+      "sourceId": "clariity--react-chessboard",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/clariity--react-chessboard@5f99614dabad/LICENSE",
+      "url": "https://raw.githubusercontent.com/Clariity/react-chessboard/5f99614dabadfcad6f78eaa5d7822e42b28179e6/LICENSE",
+      "gitBlob": "1fe9fea399cc137160548b3e22af1558e8cd5190",
+      "sha256": "3081fe03f1fc49022e944ab7854004c8027e92b06f8cdaf177cb0781dcf06ba0",
+      "bytes": 1069,
+      "modified": false
+    },
+    {
+      "sourceId": "clariity--react-chessboard",
+      "upstreamPath": "src/Board.tsx",
+      "path": "reference/github-visual-sweep/sources/clariity--react-chessboard@5f99614dabad/src/Board.tsx",
+      "url": "https://raw.githubusercontent.com/Clariity/react-chessboard/5f99614dabadfcad6f78eaa5d7822e42b28179e6/src/Board.tsx",
+      "gitBlob": "4f631999335e48cbb45a12dc66d65c2d19e32668",
+      "sha256": "dd005f8d43a1374ed391eb7e3d0fd7204a6a728b4765b467118b5d535ab32fdc",
+      "bytes": 2091,
+      "modified": false
+    },
+    {
+      "sourceId": "conststar--dou-di-zhu",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/conststar--dou-di-zhu@3e29202ffd5c/LICENSE",
+      "url": "https://raw.githubusercontent.com/ConstStar/dou-di-zhu/3e29202ffd5c29d4fc2b7c17b83ef3b34396dda9/LICENSE",
+      "gitBlob": "afd14bcdc2cc4c990a719c6957fc5e36dc74b275",
+      "sha256": "3730628bd594937d5e2e9411a0c4afa6050da74b50543ce68a7fff3e6b5f3b85",
+      "bytes": 1066,
+      "modified": false
+    },
+    {
+      "sourceId": "conststar--dou-di-zhu",
+      "upstreamPath": "poker_client.py",
+      "path": "reference/github-visual-sweep/sources/conststar--dou-di-zhu@3e29202ffd5c/poker_client.py",
+      "url": "https://raw.githubusercontent.com/ConstStar/dou-di-zhu/3e29202ffd5c29d4fc2b7c17b83ef3b34396dda9/poker_client.py",
+      "gitBlob": "9329222e984849cc7975151e982e9076d6573c43",
+      "sha256": "601950deb79145b69e82fd411bc2735d735f2618fe0b8bd9bd7fd002ea7f3de7",
+      "bytes": 40018,
+      "modified": false
+    },
+    {
+      "sourceId": "davidwang1231--doudizhu-online",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/davidwang1231--doudizhu-online@8d750b58ea17/LICENSE",
+      "url": "https://raw.githubusercontent.com/DavidWang1231/doudizhu-online/8d750b58ea17667573709401d6c882a8d2392da7/LICENSE",
+      "gitBlob": "6a0e5a5553a34d7d329dda7f4f1b28b27cc9358d",
+      "sha256": "28244493d4dc7148d9c8dd81fb729294c19129ffaf2904378a7386a5930bd50f",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "davidwang1231--doudizhu-online",
+      "upstreamPath": "css/style.css",
+      "path": "reference/github-visual-sweep/sources/davidwang1231--doudizhu-online@8d750b58ea17/css/style.css",
+      "url": "https://raw.githubusercontent.com/DavidWang1231/doudizhu-online/8d750b58ea17667573709401d6c882a8d2392da7/css/style.css",
+      "gitBlob": "406fee6bd64906b5445db413c1b08f45c6c84772",
+      "sha256": "3baf4f6c3a992ba7656bce1a03b386183f71ee9b9786bdd2959ded40eadc0379",
+      "bytes": 14944,
+      "modified": false
+    },
+    {
+      "sourceId": "de-rosa--ppo-bipedalwalker",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/de-rosa--ppo-bipedalwalker@4080f451b558/LICENSE",
+      "url": "https://raw.githubusercontent.com/De-Rosa/PPO-BipedalWalker/4080f451b5588d0d90bda58a29d8d2c6308dd208/LICENSE",
+      "gitBlob": "2f331e18a2b9dcd96f2f5a60045d967033a75674",
+      "sha256": "e3250a9f5f76a1bec9862ef65954709cb15ee4a49a065337ce976a9a395a49ae",
+      "bytes": 1064,
+      "modified": false
+    },
+    {
+      "sourceId": "de-rosa--ppo-bipedalwalker",
+      "upstreamPath": "Rendering/Renderer.cs",
+      "path": "reference/github-visual-sweep/sources/de-rosa--ppo-bipedalwalker@4080f451b558/Rendering/Renderer.cs",
+      "url": "https://raw.githubusercontent.com/De-Rosa/PPO-BipedalWalker/4080f451b5588d0d90bda58a29d8d2c6308dd208/Rendering/Renderer.cs",
+      "gitBlob": "d7d44f9bc85a775f148240bb92d2a971d03d0eab",
+      "sha256": "3b17fad283f8e9d111c90329a075b5a9f8ce100f30e7ad1509dac72f82daf250",
+      "bytes": 4596,
+      "modified": false
+    },
+    {
+      "sourceId": "devjac--gloss-pentago",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/devjac--gloss-pentago@ec7e9b0206fe/LICENSE",
+      "url": "https://raw.githubusercontent.com/DevJac/gloss-pentago/ec7e9b0206fee1c142400ca063fee7dca1955826/LICENSE",
+      "gitBlob": "5171a453d836c132bd32756ea5144b95ee0826c1",
+      "sha256": "bf71a25bdc2b66f2c02cee3adeebdbad7f08cd8860484bc14fff8ce3b5f54481",
+      "bytes": 1056,
+      "modified": false
+    },
+    {
+      "sourceId": "devjac--gloss-pentago",
+      "upstreamPath": "src/Main.hs",
+      "path": "reference/github-visual-sweep/sources/devjac--gloss-pentago@ec7e9b0206fe/src/Main.hs",
+      "url": "https://raw.githubusercontent.com/DevJac/gloss-pentago/ec7e9b0206fee1c142400ca063fee7dca1955826/src/Main.hs",
+      "gitBlob": "a7ca649c4aaec29d13b4813bb81b36e0a107d5b7",
+      "sha256": "9923bba5d94e3569f4c47e42563f29c77f4b88295842690edc4aca199319556e",
+      "bytes": 6940,
+      "modified": false
+    },
+    {
+      "sourceId": "futaalice--futahex2",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/futaalice--futahex2@2786e2e291b6/LICENSE",
+      "url": "https://raw.githubusercontent.com/FutaAlice/FutaHex2/2786e2e291b6de171d74b1dbbe76c013478f925e/LICENSE",
+      "gitBlob": "1b8a5cdd20283d6673d4fcc0c0cbbce7eb919d8d",
+      "sha256": "90b664a6fbc82b38595cbb39606268bef0b2eb9b76b0e9e03826befe204190bb",
+      "bytes": 18045,
+      "modified": false
+    },
+    {
+      "sourceId": "futaalice--futahex2",
+      "upstreamPath": "src/futahex2/canvas.cpp",
+      "path": "reference/github-visual-sweep/sources/futaalice--futahex2@2786e2e291b6/src/futahex2/canvas.cpp",
+      "url": "https://raw.githubusercontent.com/FutaAlice/FutaHex2/2786e2e291b6de171d74b1dbbe76c013478f925e/src/futahex2/canvas.cpp",
+      "gitBlob": "820a30809f50f428eba3fc20eb4ec2f7f3e4a25a",
+      "sha256": "66ccf1edb00eec160fe3b4500ced09de1274638cd6a7d4b1804d97c59453e35e",
+      "bytes": 8336,
+      "modified": false
+    },
+    {
+      "sourceId": "hexik--gomoku_gui",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/hexik--gomoku_gui@36940e0d5390/LICENSE",
+      "url": "https://raw.githubusercontent.com/Hexik/Gomoku_GUI/36940e0d5390cc8ca91370535993ee278ec6a288/LICENSE",
+      "gitBlob": "001519af51a9b1b0144a7ccecf137c5e5dbde42c",
+      "sha256": "97fee7651e2c8e08157c36ae6677d8bb144410e9bbdfc7cfafbfccd6dda48a3f",
+      "bytes": 1068,
+      "modified": false
+    },
+    {
+      "sourceId": "hexik--gomoku_gui",
+      "upstreamPath": "app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt",
+      "path": "reference/github-visual-sweep/sources/hexik--gomoku_gui@36940e0d5390/app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt",
+      "url": "https://raw.githubusercontent.com/Hexik/Gomoku_GUI/36940e0d5390cc8ca91370535993ee278ec6a288/app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt",
+      "gitBlob": "5aa4b0c45a13339a302e77e42d8e8b03558ed12a",
+      "sha256": "a9b0427f52ea8a6d7093e3649449b28dc1a521d61efad6395d26f6cd161ebb7a",
+      "bytes": 10084,
+      "modified": false
+    },
+    {
+      "sourceId": "imc-lab--ug-causation",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/imc-lab--ug-causation@40890ce3feaa/LICENSE",
+      "url": "https://raw.githubusercontent.com/IMC-Lab/UG-causation/40890ce3feaa94316cfd28fb576f9a7acf9ee2d9/LICENSE",
+      "gitBlob": "0ca59c3c1316bbb137ad510886ad316d036717e0",
+      "sha256": "4b4dc8efe85ad8fc61bba3fa65e551f57b7c76eb10b27fa00ec1adf94dea7c25",
+      "bytes": 1092,
+      "modified": false
+    },
+    {
+      "sourceId": "imc-lab--ug-causation",
+      "upstreamPath": "exp/exp-accept.js",
+      "path": "reference/github-visual-sweep/sources/imc-lab--ug-causation@40890ce3feaa/exp/exp-accept.js",
+      "url": "https://raw.githubusercontent.com/IMC-Lab/UG-causation/40890ce3feaa94316cfd28fb576f9a7acf9ee2d9/exp/exp-accept.js",
+      "gitBlob": "88a2a152973c32cd170a26ccd67ef87cd194af86",
+      "sha256": "7388baa9adb1fc52978f8c5cc9eaf1319c75f372ecb9b71a90d08cdcc7d0ca90",
+      "bytes": 17261,
+      "modified": false
+    },
+    {
+      "sourceId": "jhoff1--neontablegames",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/jhoff1--neontablegames@af8b7b5fd8f5/LICENSE",
+      "url": "https://raw.githubusercontent.com/JHoff1/NeonTableGames/af8b7b5fd8f53e7ff967326e8512654dc56838c7/LICENSE",
+      "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357,
+      "modified": false
+    },
+    {
+      "sourceId": "jhoff1--neontablegames",
+      "upstreamPath": "src/blackjack/BlackjackTable.tsx",
+      "path": "reference/github-visual-sweep/sources/jhoff1--neontablegames@af8b7b5fd8f5/src/blackjack/BlackjackTable.tsx",
+      "url": "https://raw.githubusercontent.com/JHoff1/NeonTableGames/af8b7b5fd8f53e7ff967326e8512654dc56838c7/src/blackjack/BlackjackTable.tsx",
+      "gitBlob": "4ec630aa000eccf07df2c1950e790517fdf63d4e",
+      "sha256": "b6a49692dda0697fe3cc9f24a4d4dae856e3a7a8d11e4d840ecdf08e15062e03",
+      "bytes": 4714,
+      "modified": false
+    },
+    {
+      "sourceId": "kinsa--cribbage-board-app",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/kinsa--cribbage-board-app@8c17210d088f/LICENSE",
+      "url": "https://raw.githubusercontent.com/Kinsa/cribbage-board-app/8c17210d088fce0bf90c28be7391578dba029a7b/LICENSE",
+      "gitBlob": "26b7f89ccd19464a6de7675106a84ef5c9e70b9c",
+      "sha256": "0f6016b7954cba9db6e90db56b401e01bce3dfe05f689b72b1c7ef318b4a0393",
+      "bytes": 11357,
+      "modified": false
+    },
+    {
+      "sourceId": "kinsa--cribbage-board-app",
+      "upstreamPath": "components/CribbageBoard.tsx",
+      "path": "reference/github-visual-sweep/sources/kinsa--cribbage-board-app@8c17210d088f/components/CribbageBoard.tsx",
+      "url": "https://raw.githubusercontent.com/Kinsa/cribbage-board-app/8c17210d088fce0bf90c28be7391578dba029a7b/components/CribbageBoard.tsx",
+      "gitBlob": "6c6c66385a683960dc98e3342731772888309f3a",
+      "sha256": "0a5bf305d1641f8a3a8d732810217bbad7547818c96db3acddfced5edff8f6ad",
+      "bytes": 5169,
+      "modified": false
+    },
+    {
+      "sourceId": "louisradek--muehle",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/louisradek--muehle@d7f6f4cd3fc9/LICENSE",
+      "url": "https://raw.githubusercontent.com/LouisRadek/muehle/d7f6f4cd3fc93e2d1c638493947efae747a10be3/LICENSE",
+      "gitBlob": "4c9f0c2256a2ee5205730da4d877b5a74c17e487",
+      "sha256": "b23b7348a70992bc6fc8d6035becf4a484a113bc6e733b12e4bb4f12884d73c7",
+      "bytes": 1068,
+      "modified": false
+    },
+    {
+      "sourceId": "louisradek--muehle",
+      "upstreamPath": "src/ui/game.rs",
+      "path": "reference/github-visual-sweep/sources/louisradek--muehle@d7f6f4cd3fc9/src/ui/game.rs",
+      "url": "https://raw.githubusercontent.com/LouisRadek/muehle/d7f6f4cd3fc93e2d1c638493947efae747a10be3/src/ui/game.rs",
+      "gitBlob": "65ce602f8b68854f0f80070750bd8b286c8ea04f",
+      "sha256": "25d542be4523a572b96c975fc40b70ef03785a3799513b55fefb961f988cc601",
+      "bytes": 8499,
+      "modified": false
+    },
+    {
+      "sourceId": "metta-ai--cogame-goofspiel-oshi-zumo",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/metta-ai--cogame-goofspiel-oshi-zumo@6cf155196fcf/LICENSE",
+      "url": "https://raw.githubusercontent.com/Metta-AI/cogame-goofspiel-oshi-zumo/6cf155196fcf8aebd5cac24b218b62425e5f821f/LICENSE",
+      "gitBlob": "16eecf55b7d2a4255d8e7fbd27b581515e667a24",
+      "sha256": "33d2db92f6733d8556e7f5be6547e78568e89fa78a76b6431f1937959a18067f",
+      "bytes": 1064,
+      "modified": false
+    },
+    {
+      "sourceId": "metta-ai--cogame-goofspiel-oshi-zumo",
+      "upstreamPath": "client/renderer.js",
+      "path": "reference/github-visual-sweep/sources/metta-ai--cogame-goofspiel-oshi-zumo@6cf155196fcf/client/renderer.js",
+      "url": "https://raw.githubusercontent.com/Metta-AI/cogame-goofspiel-oshi-zumo/6cf155196fcf8aebd5cac24b218b62425e5f821f/client/renderer.js",
+      "gitBlob": "6022c4b7681e11133653813c731ed5ccc4c3f942",
+      "sha256": "1fe627f7be161b8d1617138dfe4e29a73c1f35dc0389d33fb6d762fe62cb1587",
+      "bytes": 41847,
+      "modified": false
+    },
+    {
+      "sourceId": "niyioke--open-shed-card-engine",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/niyioke--open-shed-card-engine@f20a5c15bfb2/LICENSE",
+      "url": "https://raw.githubusercontent.com/NiyiOke/open-shed-card-engine/f20a5c15bfb2b1aa943f61f8b17bcbd27f185c40/LICENSE",
+      "gitBlob": "41960a3af181b97a703c013a08b1e3c1fe301289",
+      "sha256": "df795d13cc9787853d65800733484f5e06a320473e4b824d61af3fbccce5a418",
+      "bytes": 11352,
+      "modified": false
+    },
+    {
+      "sourceId": "niyioke--open-shed-card-engine",
+      "upstreamPath": "app/components/GameTableCanvas.tsx",
+      "path": "reference/github-visual-sweep/sources/niyioke--open-shed-card-engine@f20a5c15bfb2/app/components/GameTableCanvas.tsx",
+      "url": "https://raw.githubusercontent.com/NiyiOke/open-shed-card-engine/f20a5c15bfb2b1aa943f61f8b17bcbd27f185c40/app/components/GameTableCanvas.tsx",
+      "gitBlob": "a0e16c9b074a347a8c217ebcc9aca5ea70a8e1aa",
+      "sha256": "0e883b02a761666bd0c7037de975025aec1201fadb9a261ca8aedb9b016eb3f8",
+      "bytes": 4298,
+      "modified": false
+    },
+    {
+      "sourceId": "noah-vincenz--projectcrawl",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/noah-vincenz--projectcrawl@c6c789f2d354/LICENSE",
+      "url": "https://raw.githubusercontent.com/Noah-Vincenz/ProjectCrawl/c6c789f2d354e5f04bb1df7391e4d5ba950c0d1c/LICENSE",
+      "gitBlob": "d828206268dbf9a39c4e38afbf5d2367b624c536",
+      "sha256": "99330300fad25a95315db9396a9372bd6848437e3d73eb23e1b58333ba967c33",
+      "bytes": 1074,
+      "modified": false
+    },
+    {
+      "sourceId": "noah-vincenz--projectcrawl",
+      "upstreamPath": "src/main/java/com/noahvincenz/oware/view/GameBoardView.java",
+      "path": "reference/github-visual-sweep/sources/noah-vincenz--projectcrawl@c6c789f2d354/src/main/java/com/noahvincenz/oware/view/GameBoardView.java",
+      "url": "https://raw.githubusercontent.com/Noah-Vincenz/ProjectCrawl/c6c789f2d354e5f04bb1df7391e4d5ba950c0d1c/src/main/java/com/noahvincenz/oware/view/GameBoardView.java",
+      "gitBlob": "ceafef63ad2e42d88de3a80504691032a1b838f4",
+      "sha256": "e311261f46a30bd5bb806da016454bdb9aa0f0f175966571482b39902d36538f",
+      "bytes": 11727,
+      "modified": false
+    },
+    {
+      "sourceId": "peip-2018-work-nantes-dut-info--planet-lander-lunar-lander-with-pygame",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/peip-2018-work-nantes-dut-info--planet-lander-lunar-lander-with-pygame@cc694785ea05/LICENSE",
+      "url": "https://raw.githubusercontent.com/PeiP-2018-Work-Nantes-DUT-INFO/Planet-Lander-Lunar-Lander-with-Pygame/cc694785ea0587e1edb0546a306e1162be76f4fc/LICENSE",
+      "gitBlob": "fd1784c4fdc8e4f627b23eb9bfbf184452de7884",
+      "sha256": "b0d423d0cc37296482bf7e73b49109444dbf4710b52c5c4a31547b84a7f6d236",
+      "bytes": 1081,
+      "modified": false
+    },
+    {
+      "sourceId": "peip-2018-work-nantes-dut-info--planet-lander-lunar-lander-with-pygame",
+      "upstreamPath": "states/game.py",
+      "path": "reference/github-visual-sweep/sources/peip-2018-work-nantes-dut-info--planet-lander-lunar-lander-with-pygame@cc694785ea05/states/game.py",
+      "url": "https://raw.githubusercontent.com/PeiP-2018-Work-Nantes-DUT-INFO/Planet-Lander-Lunar-Lander-with-Pygame/cc694785ea0587e1edb0546a306e1162be76f4fc/states/game.py",
+      "gitBlob": "660041d749c669e78dc7f275842ad06ba16b2d04",
+      "sha256": "4b8666c7a26ea331b894198465051cc7e3e07de6e58a9e087ebc58bc66bf4581",
+      "bytes": 12289,
+      "modified": false
+    },
+    {
+      "sourceId": "philaldridge--react-ultimate-tic-tac-toe",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/philaldridge--react-ultimate-tic-tac-toe@816d0f81d8ff/LICENSE",
+      "url": "https://raw.githubusercontent.com/PhilAldridge/REACT-Ultimate-tic-tac-toe/816d0f81d8ff1d0720290d0b59b323d990b99330/LICENSE",
+      "gitBlob": "0e259d42c996742e9e3cba14c677129b2c1b6311",
+      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
+      "bytes": 7048,
+      "modified": false
+    },
+    {
+      "sourceId": "philaldridge--react-ultimate-tic-tac-toe",
+      "upstreamPath": "src/bigBoard.js",
+      "path": "reference/github-visual-sweep/sources/philaldridge--react-ultimate-tic-tac-toe@816d0f81d8ff/src/bigBoard.js",
+      "url": "https://raw.githubusercontent.com/PhilAldridge/REACT-Ultimate-tic-tac-toe/816d0f81d8ff1d0720290d0b59b323d990b99330/src/bigBoard.js",
+      "gitBlob": "d084a39d1fc9113732ef3d048d49f81b66a1cc08",
+      "sha256": "638c37c71100f0c25435d218827a94e380661a26f62238f17bd673d4356044e4",
+      "bytes": 3597,
+      "modified": false
+    },
+    {
+      "sourceId": "rescator7--hearts2",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/rescator7--hearts2@d4f533dad693/LICENSE",
+      "url": "https://raw.githubusercontent.com/Rescator7/Hearts2/d4f533dad693e87736121861c9c6eb6147faf535/LICENSE",
+      "gitBlob": "3d4951770a94a53efe28b3dbc9f4f77f120dca86",
+      "sha256": "670d4ec3df983a7bfc4ed398da136b729a042e3cf5848cbca2885741c185b71f",
+      "bytes": 1066,
+      "modified": false
+    },
+    {
+      "sourceId": "rescator7--hearts2",
+      "upstreamPath": "cardscene.cpp",
+      "path": "reference/github-visual-sweep/sources/rescator7--hearts2@d4f533dad693/cardscene.cpp",
+      "url": "https://raw.githubusercontent.com/Rescator7/Hearts2/d4f533dad693e87736121861c9c6eb6147faf535/cardscene.cpp",
+      "gitBlob": "3dd41dbcbfc6bfe34389d849f3063ae7c5921ffe",
+      "sha256": "31d3c26545f068f91ea86297735a9a4bcdf5f4c4f5d9165b6991b9ba6d7af8ac",
+      "bytes": 2647,
+      "modified": false
+    },
+    {
+      "sourceId": "sebastian-griesbach--monstercliffwalking",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/sebastian-griesbach--monstercliffwalking@704112ea6193/LICENSE",
+      "url": "https://raw.githubusercontent.com/Sebastian-Griesbach/MonsterCliffWalking/704112ea619365fae18acc6bc3fecf25d6edd765/LICENSE",
+      "gitBlob": "48255159a7004d680470ee68d1be06cb539be21c",
+      "sha256": "e55e210243362e2edd0fcfee5c6da7f8afae430f854676ec372581b14772d9e6",
+      "bytes": 1076,
+      "modified": false
+    },
+    {
+      "sourceId": "sebastian-griesbach--monstercliffwalking",
+      "upstreamPath": "monstercliffwalking.py",
+      "path": "reference/github-visual-sweep/sources/sebastian-griesbach--monstercliffwalking@704112ea6193/monstercliffwalking.py",
+      "url": "https://raw.githubusercontent.com/Sebastian-Griesbach/MonsterCliffWalking/704112ea619365fae18acc6bc3fecf25d6edd765/monstercliffwalking.py",
+      "gitBlob": "39bff34da78d7c8456390ab8f589c4f7636b4f24",
+      "sha256": "f5cce50c07f9b16f875ee83a02bbf92fccda80e6175be9221695d1f83c048b24",
+      "bytes": 20974,
+      "modified": false
+    },
+    {
+      "sourceId": "sensorsini--cartpolesimulation",
+      "upstreamPath": "CartPole/cartpole_drawer.py",
+      "path": "reference/github-visual-sweep/sources/sensorsini--cartpolesimulation@50402405912f/CartPole/cartpole_drawer.py",
+      "url": "https://raw.githubusercontent.com/SensorsINI/CartPoleSimulation/50402405912f199f5cfaf76efeb67a8e32a982fe/CartPole/cartpole_drawer.py",
+      "gitBlob": "88c1beb23958357428f5cb45fec24abb635bb250",
+      "sha256": "cbe550606c0e697339ebfa2f723297b91ffa3497bae5befd96b89c4017ba84b0",
+      "bytes": 13511,
+      "modified": false
+    },
+    {
+      "sourceId": "sensorsini--cartpolesimulation",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/sensorsini--cartpolesimulation@50402405912f/LICENSE",
+      "url": "https://raw.githubusercontent.com/SensorsINI/CartPoleSimulation/50402405912f199f5cfaf76efeb67a8e32a982fe/LICENSE",
+      "gitBlob": "78caa56741a8d56077e5ad03b2c334e486a4ee3a",
+      "sha256": "442ff7c2600734f18018333ba7a13b60ae0640898c324f0b8c60f50b901227eb",
+      "bytes": 1113,
+      "modified": false
+    },
+    {
+      "sourceId": "starfox64--pentago",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/starfox64--pentago@82b215aaba3a/LICENSE",
+      "url": "https://raw.githubusercontent.com/Starfox64/Pentago/82b215aaba3a0ff17593c281fd9d853c72eae91e/LICENSE",
+      "gitBlob": "8fe392322473daac25136b646612f4b61ae012a3",
+      "sha256": "09d3491901f8ae28f034106416d5638442ee10d1e72796a2b542fb93b9577fa9",
+      "bytes": 1081,
+      "modified": false
+    },
+    {
+      "sourceId": "starfox64--pentago",
+      "upstreamPath": "src/pentagoGUI.py",
+      "path": "reference/github-visual-sweep/sources/starfox64--pentago@82b215aaba3a/src/pentagoGUI.py",
+      "url": "https://raw.githubusercontent.com/Starfox64/Pentago/82b215aaba3a0ff17593c281fd9d853c72eae91e/src/pentagoGUI.py",
+      "gitBlob": "01bfab018b9062f2566945c0b6b2d224f3ff62f8",
+      "sha256": "a91a2dc6c2024a295a7c219845f58d61bd8e0ef76e9f226d81370ab31d0ea753",
+      "bytes": 8456,
+      "modified": false
+    },
+    {
+      "sourceId": "taku0172--repeated-prisoners-dilemma-simulator",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/taku0172--repeated-prisoners-dilemma-simulator@50d784640f2c/LICENSE",
+      "url": "https://raw.githubusercontent.com/Taku0172/Repeated-Prisoners-Dilemma-Simulator/50d784640f2ce667bac40046b128cac0195a3b12/LICENSE",
+      "gitBlob": "45c223148df6f7aafb2052803d46b847ed550404",
+      "sha256": "691f4dd18523d891b5bb3fd30c20d3a1ac1ab3fa503737d09e6dedef04acb7b7",
+      "bytes": 1065,
+      "modified": false
+    },
+    {
+      "sourceId": "taku0172--repeated-prisoners-dilemma-simulator",
+      "upstreamPath": "index.html",
+      "path": "reference/github-visual-sweep/sources/taku0172--repeated-prisoners-dilemma-simulator@50d784640f2c/index.html",
+      "url": "https://raw.githubusercontent.com/Taku0172/Repeated-Prisoners-Dilemma-Simulator/50d784640f2ce667bac40046b128cac0195a3b12/index.html",
+      "gitBlob": "884946d6b64b0b4481d745e32acb16a80b733ee3",
+      "sha256": "0b7ec63011a9e2de2facff43f5e3057b56aff4b4deda130f544bbe4d11849c69",
+      "bytes": 9864,
+      "modified": false
+    },
+    {
+      "sourceId": "tiantianflow--qiju",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/tiantianflow--qiju@683845fb4540/LICENSE",
+      "url": "https://raw.githubusercontent.com/TiantianFlow/qiju/683845fb4540c482f7dad9f79382611f5f9334b9/LICENSE",
+      "gitBlob": "44c4aa369e84f45ccacd1c669957aa69373b0eea",
+      "sha256": "f4b955b4b0ea59447328c3e986ea54ecb308a9c678f4b69cc86dfc2e318b93fa",
+      "bytes": 1074,
+      "modified": false
+    },
+    {
+      "sourceId": "tiantianflow--qiju",
+      "upstreamPath": "apps/web/src/pages/Table.tsx",
+      "path": "reference/github-visual-sweep/sources/tiantianflow--qiju@683845fb4540/apps/web/src/pages/Table.tsx",
+      "url": "https://raw.githubusercontent.com/TiantianFlow/qiju/683845fb4540c482f7dad9f79382611f5f9334b9/apps/web/src/pages/Table.tsx",
+      "gitBlob": "3200d5ac64e8cb63ee3369f82e29b6f5069f2a49",
+      "sha256": "eb2e9d6b355f8b6c2cb164648ef33b2e4e629e0963a3764437fba05e15165bf4",
+      "bytes": 16975,
+      "modified": false
+    },
+    {
+      "sourceId": "velithia--jieqibox",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/velithia--jieqibox@3958989feda0/LICENSE",
+      "url": "https://raw.githubusercontent.com/Velithia/JieqiBox/3958989feda0164ec09e34d13c0e090c053fa5d9/LICENSE",
+      "gitBlob": "0a15330e5e8f3380688e3b325ce857fdc1a58241",
+      "sha256": "ead87d7875075df3548e83f7142f5befee2c0289756571a09f2841f242e486f0",
+      "bytes": 1065,
+      "modified": false
+    },
+    {
+      "sourceId": "velithia--jieqibox",
+      "upstreamPath": "src/components/Chessboard.vue",
+      "path": "reference/github-visual-sweep/sources/velithia--jieqibox@3958989feda0/src/components/Chessboard.vue",
+      "url": "https://raw.githubusercontent.com/Velithia/JieqiBox/3958989feda0164ec09e34d13c0e090c053fa5d9/src/components/Chessboard.vue",
+      "gitBlob": "fcf36d3871e81fb321943fe2b5dcea1339a9688f",
+      "sha256": "1a30281e5bd667955d4e74bebb24692acb16b49047beaffed8a08461ef78dcf7",
+      "bytes": 47239,
+      "modified": false
+    },
+    {
+      "sourceId": "zoliqua--texas-holdem-game",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/zoliqua--texas-holdem-game@18a7ce1539a1/LICENSE",
+      "url": "https://raw.githubusercontent.com/ZoliQua/Texas-Holdem-Game/18a7ce1539a18ac9666a6b6d34c3f1d9d78b8905/LICENSE",
+      "gitBlob": "666bcabccaf3b199a4fcb583dad49330683f4a0e",
+      "sha256": "80a105c3d0e6933ce86a1d2c81b02ffc30e265382a041188ede661cc7e3ea956",
+      "bytes": 1068,
+      "modified": false
+    },
+    {
+      "sourceId": "zoliqua--texas-holdem-game",
+      "upstreamPath": "src/ui/Table.tsx",
+      "path": "reference/github-visual-sweep/sources/zoliqua--texas-holdem-game@18a7ce1539a1/src/ui/Table.tsx",
+      "url": "https://raw.githubusercontent.com/ZoliQua/Texas-Holdem-Game/18a7ce1539a18ac9666a6b6d34c3f1d9d78b8905/src/ui/Table.tsx",
+      "gitBlob": "4c58152129abe9bc93910ac32b24800ecc6574e7",
+      "sha256": "4fca39f736e7ae9b262888e4e40b5078b2128fc49bdf628ce55fb75523f53d3d",
+      "bytes": 16663,
+      "modified": false
+    },
+    {
+      "sourceId": "abdullahjamal1--battleshipboardgame",
+      "upstreamPath": "LICENSE.md",
+      "path": "reference/github-visual-sweep/sources/abdullahjamal1--battleshipboardgame@c4f09f09f0a9/LICENSE.md",
+      "url": "https://raw.githubusercontent.com/abdullahjamal1/battleshipBoardGame/c4f09f09f0a92be89034137ca2d80889c1c2d02c/LICENSE.md",
+      "gitBlob": "e72bfddabc15be5718a7cc061ac10e47741d8219",
+      "sha256": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+      "bytes": 35148,
+      "modified": false
+    },
+    {
+      "sourceId": "abdullahjamal1--battleshipboardgame",
+      "upstreamPath": "src/draw.ts",
+      "path": "reference/github-visual-sweep/sources/abdullahjamal1--battleshipboardgame@c4f09f09f0a9/src/draw.ts",
+      "url": "https://raw.githubusercontent.com/abdullahjamal1/battleshipBoardGame/c4f09f09f0a92be89034137ca2d80889c1c2d02c/src/draw.ts",
+      "gitBlob": "b60daf2d3e31aeb785ad0bb028cac0b6e1ca8800",
+      "sha256": "2b933965703d2aa032e262beb8082976a147c5f85671c49c1be3e589fab02022",
+      "bytes": 2170,
+      "modified": false
+    },
+    {
+      "sourceId": "akshatjain02--breakout",
+      "upstreamPath": "Breakout.css",
+      "path": "reference/github-visual-sweep/sources/akshatjain02--breakout@4acd4fb33ea8/Breakout.css",
+      "url": "https://raw.githubusercontent.com/akshatjain02/Breakout/4acd4fb33ea8e6da74eba53a6e7a4490d267ccf5/Breakout.css",
+      "gitBlob": "6a14edd33faf2c7a26b5156056f7b8cc538f12d4",
+      "sha256": "3165ed65998d9d3d44e2998def3852d4b49e0e05289e13aeaf141a86b08f90a9",
+      "bytes": 637,
+      "modified": false
+    },
+    {
+      "sourceId": "akshatjain02--breakout",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/akshatjain02--breakout@4acd4fb33ea8/LICENSE",
+      "url": "https://raw.githubusercontent.com/akshatjain02/Breakout/4acd4fb33ea8e6da74eba53a6e7a4490d267ccf5/LICENSE",
+      "gitBlob": "fb2e294b2c8df92f90e411551b0367b62c4ef4c0",
+      "sha256": "3c43eef3e1a6c31333a79c5ab3a83da0069749f6b9ee01621067b4b11b4921b1",
+      "bytes": 1068,
+      "modified": false
+    },
+    {
+      "sourceId": "ale64bit--weiqihub",
+      "upstreamPath": "LICENSE.md",
+      "path": "reference/github-visual-sweep/sources/ale64bit--weiqihub@cd1997863d7e/LICENSE.md",
+      "url": "https://raw.githubusercontent.com/ale64bit/WeiqiHub/cd1997863d7e2e6d6105c4b6f0580f607170ba19/LICENSE.md",
+      "gitBlob": "b4874a4cc9ffa8bdb3cba2e3b94407af29774961",
+      "sha256": "83a025fab6dc743f1c1df103f1a9822566b231984245b9174a388c7a8fd6a1b9",
+      "bytes": 1512,
+      "modified": false
+    },
+    {
+      "sourceId": "ale64bit--weiqihub",
+      "upstreamPath": "lib/board/board_annotation.dart",
+      "path": "reference/github-visual-sweep/sources/ale64bit--weiqihub@cd1997863d7e/lib/board/board_annotation.dart",
+      "url": "https://raw.githubusercontent.com/ale64bit/WeiqiHub/cd1997863d7e2e6d6105c4b6f0580f607170ba19/lib/board/board_annotation.dart",
+      "gitBlob": "28a2c47028da17aaf4e2117a63397c4e08685faf",
+      "sha256": "5bf21a14c7a5124714d19d759b27188572df3d38eba0378b1bb9689d1588fd65",
+      "bytes": 12119,
+      "modified": false
+    },
+    {
+      "sourceId": "alexwitting--cardgames",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/alexwitting--cardgames@c895605c5672/LICENSE",
+      "url": "https://raw.githubusercontent.com/alexwitting/cardgames/c895605c5672dd72919bcfe17c8b65e7c53cb6e5/LICENSE",
+      "gitBlob": "bff8dfc4ae22c5c809ffde8632bb75ddb9720781",
+      "sha256": "1abead871bb07402c08f9936f93028027c001a56931da1a8ba4d3ca983b7b5f9",
+      "bytes": 1069,
+      "modified": false
+    },
+    {
+      "sourceId": "alexwitting--cardgames",
+      "upstreamPath": "feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt",
+      "path": "reference/github-visual-sweep/sources/alexwitting--cardgames@c895605c5672/feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt",
+      "url": "https://raw.githubusercontent.com/alexwitting/cardgames/c895605c5672dd72919bcfe17c8b65e7c53cb6e5/feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt",
+      "gitBlob": "b7814c2a30dc8613bb0c45ed02e59408cb1d0c9e",
+      "sha256": "5dd6983cf54a3f9be1992e3550870d22ac92cf8c6fc779024ef3613a3ff66fb8",
+      "bytes": 17863,
+      "modified": false
+    },
+    {
+      "sourceId": "andrefkruger--walker-ai",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/andrefkruger--walker-ai@42c704ae883e/LICENSE",
+      "url": "https://raw.githubusercontent.com/andrefkruger/walker-ai/42c704ae883e4df03c05376b9d72922f8881d176/LICENSE",
+      "gitBlob": "c136a2a6a87d595d057ae2c261a0e59c31b83ec3",
+      "sha256": "cd7c8e2a3c4130c881c8e4acc40e487c46cc55cece973dfd20a098af0dc745a9",
+      "bytes": 1062,
+      "modified": false
+    },
+    {
+      "sourceId": "andrefkruger--walker-ai",
+      "upstreamPath": "render/renderer.py",
+      "path": "reference/github-visual-sweep/sources/andrefkruger--walker-ai@42c704ae883e/render/renderer.py",
+      "url": "https://raw.githubusercontent.com/andrefkruger/walker-ai/42c704ae883e4df03c05376b9d72922f8881d176/render/renderer.py",
+      "gitBlob": "1c8404bae4f4795d8e9233da50f3c4944e01f2f3",
+      "sha256": "7e162852dc6b08ac8cb12aadf2930cb9297d84fa2cd129454185fbd270b0d9be",
+      "bytes": 14004,
+      "modified": false
+    },
+    {
+      "sourceId": "andrew-wilkes--godot-chess",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/andrew-wilkes--godot-chess@e16a2423e842/LICENSE",
+      "url": "https://raw.githubusercontent.com/andrew-wilkes/godot-chess/e16a2423e8425f04c04807be874f54e252655fc8/LICENSE",
+      "gitBlob": "6c7ce43040fadce05cd1e840f8f3ad97e0f15011",
+      "sha256": "c54c769f94d6973ad98cc8c78144eaccfaa6acf741defe930c6705c9c09b4427",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "andrew-wilkes--godot-chess",
+      "upstreamPath": "src/Board.gd",
+      "path": "reference/github-visual-sweep/sources/andrew-wilkes--godot-chess@e16a2423e842/src/Board.gd",
+      "url": "https://raw.githubusercontent.com/andrew-wilkes/godot-chess/e16a2423e8425f04c04807be874f54e252655fc8/src/Board.gd",
+      "gitBlob": "4a6ebe72ef205fec3bce5a739567e9aa925e88b9",
+      "sha256": "ff75040da8d6db966a6c2ffcbac2df2a7751c02dd570599dc42f794889319a03",
+      "bytes": 17375,
+      "modified": false
+    },
+    {
+      "sourceId": "batuhanisik751--javahexagonalreversi",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/batuhanisik751--javahexagonalreversi@79a35eb7a78d/LICENSE",
+      "url": "https://raw.githubusercontent.com/batuhanisik751/JavaHexagonalReversi/79a35eb7a78d68a9f5c786e34e89e9157d4c4dcf/LICENSE",
+      "gitBlob": "233e7c91c28f07f1178f2129bdeaa56706e31b4d",
+      "sha256": "35bf0a049b34174624cc0e0ad144eb291de18b41ecf6a9a864509ff97a37017c",
+      "bytes": 1071,
+      "modified": false
+    },
+    {
+      "sourceId": "batuhanisik751--javahexagonalreversi",
+      "upstreamPath": "src/main/java/cs3500/reversi/view/FxReversiCanvas.java",
+      "path": "reference/github-visual-sweep/sources/batuhanisik751--javahexagonalreversi@79a35eb7a78d/src/main/java/cs3500/reversi/view/FxReversiCanvas.java",
+      "url": "https://raw.githubusercontent.com/batuhanisik751/JavaHexagonalReversi/79a35eb7a78d68a9f5c786e34e89e9157d4c4dcf/src/main/java/cs3500/reversi/view/FxReversiCanvas.java",
+      "gitBlob": "69e78a567261863470ce47200e031df56490f434",
+      "sha256": "0455eac31faea3391b05aef80e113d64f6cecdc80aaba50e85b3ff0c5775855e",
+      "bytes": 10543,
+      "modified": false
+    },
+    {
+      "sourceId": "cbelsole--easygo",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/cbelsole--easygo@20293034c781/LICENSE",
+      "url": "https://raw.githubusercontent.com/cbelsole/easygo/20293034c781d3c64eab63d4a4dccbada7cd9b12/LICENSE",
+      "gitBlob": "23df198458e0f7d599894fad2a49364d0be0669b",
+      "sha256": "e3a56701cd361c1faf531ae07a622ccf293c1c4457098ddd858a247a00bd04cd",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "cbelsole--easygo",
+      "upstreamPath": "web/src/components/Board.tsx",
+      "path": "reference/github-visual-sweep/sources/cbelsole--easygo@20293034c781/web/src/components/Board.tsx",
+      "url": "https://raw.githubusercontent.com/cbelsole/easygo/20293034c781d3c64eab63d4a4dccbada7cd9b12/web/src/components/Board.tsx",
+      "gitBlob": "23bf27d5350eae8235df069e3f53b079d0ac96fd",
+      "sha256": "85d43648cf492a3b4264a216df2ac88fd66e772125e77708b15afde83d9f34e2",
+      "bytes": 12335,
+      "modified": false
+    },
+    {
+      "sourceId": "chacestew--u3t",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/chacestew--u3t@743c7cd70cfa/LICENSE",
+      "url": "https://raw.githubusercontent.com/chacestew/u3t/743c7cd70cfae431695a34af153aa28f214942e0/LICENSE",
+      "gitBlob": "8fa517d852b5c1966c2c2ece250ac934ffabefbf",
+      "sha256": "105a46f376177af08f944ea4811ef850f89a432bdfc52354a70b28ae7a3876b0",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "chacestew--u3t",
+      "upstreamPath": "client/src/Components/GameArea/LocalBoard/LocalBoard.tsx",
+      "path": "reference/github-visual-sweep/sources/chacestew--u3t@743c7cd70cfa/client/src/Components/GameArea/LocalBoard/LocalBoard.tsx",
+      "url": "https://raw.githubusercontent.com/chacestew/u3t/743c7cd70cfae431695a34af153aa28f214942e0/client/src/Components/GameArea/LocalBoard/LocalBoard.tsx",
+      "gitBlob": "248b37d89e44384229ae07d44c89f8d03c48ac5d",
+      "sha256": "3d771e664fc1e69e2c689e44310ab663a2e3c3fd5042fac3c52975e45cf7a8fd",
+      "bytes": 2603,
+      "modified": false
+    },
+    {
+      "sourceId": "digamjain--rock-paper-scissors-gui",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/digamjain--rock-paper-scissors-gui@76f4a54555a4/LICENSE",
+      "url": "https://raw.githubusercontent.com/digamjain/Rock-Paper-Scissors-GUI/76f4a54555a4502dd281ad7b00d1d565a9819ffb/LICENSE",
+      "gitBlob": "aae0a1751671c8965d01220a61ea5a22a5d74bdb",
+      "sha256": "13e94527cbd84564bb280debd9e364496ed7864d811d833c6ad99932a2d555b4",
+      "bytes": 1067,
+      "modified": false
+    },
+    {
+      "sourceId": "digamjain--rock-paper-scissors-gui",
+      "upstreamPath": "Stone-Paper-scissors/Rock-Paper-Scissors.py",
+      "path": "reference/github-visual-sweep/sources/digamjain--rock-paper-scissors-gui@76f4a54555a4/Stone-Paper-scissors/Rock-Paper-Scissors.py",
+      "url": "https://raw.githubusercontent.com/digamjain/Rock-Paper-Scissors-GUI/76f4a54555a4502dd281ad7b00d1d565a9819ffb/Stone-Paper-scissors/Rock-Paper-Scissors.py",
+      "gitBlob": "551dafd16567b93bfa2d0ddeb32c5b768389d694",
+      "sha256": "1cdd6017f094654373958f4bf72fd51cc55d97c30ac320fc57ff360fcf9f6fc6",
+      "bytes": 10052,
+      "modified": false
+    },
+    {
+      "sourceId": "doybrian--rps-multiplayer",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/doybrian--rps-multiplayer@c37b0888b87c/LICENSE",
+      "url": "https://raw.githubusercontent.com/doyBrian/RPS-Multiplayer/c37b0888b87c5b9084351083fee5977628ed2d35/LICENSE",
+      "gitBlob": "947f4cf222ea15d2e327652f255fa9fcf077b063",
+      "sha256": "ed7c625bae4eebd5f312d9bbe81e97a378ae6ee26388049961ad5a06de9ea7eb",
+      "bytes": 1065,
+      "modified": false
+    },
+    {
+      "sourceId": "doybrian--rps-multiplayer",
+      "upstreamPath": "index.html",
+      "path": "reference/github-visual-sweep/sources/doybrian--rps-multiplayer@c37b0888b87c/index.html",
+      "url": "https://raw.githubusercontent.com/doyBrian/RPS-Multiplayer/c37b0888b87c5b9084351083fee5977628ed2d35/index.html",
+      "gitBlob": "acce9e469929c54300cdc597ead57942e3d54c80",
+      "sha256": "44a702d0b8ba340d4d4b5712136faaf448cb076b1914141ec5925c99c9c125e5",
+      "bytes": 3556,
+      "modified": false
+    },
+    {
+      "sourceId": "eamag--nard",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/eamag--nard@6468c949a9f6/LICENSE",
+      "url": "https://raw.githubusercontent.com/eamag/nard/6468c949a9f631368ae5e1690781ca5b7d9a015d/LICENSE",
+      "gitBlob": "3b40e7c3863fe5c2ba5cfbefb8c2aeb970f7ca6a",
+      "sha256": "06a82e96f8643d059531438da3e871b82cc838a10219f207e9546c88bacdb4fd",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "eamag--nard",
+      "upstreamPath": "src/components/GameBoard.svelte",
+      "path": "reference/github-visual-sweep/sources/eamag--nard@6468c949a9f6/src/components/GameBoard.svelte",
+      "url": "https://raw.githubusercontent.com/eamag/nard/6468c949a9f631368ae5e1690781ca5b7d9a015d/src/components/GameBoard.svelte",
+      "gitBlob": "de287838ab5426596dc51f95888a8aa8c6dd5654",
+      "sha256": "e29f7481557e0918f023d8a934e058c70a535601879d5d61750df23fec6296c9",
+      "bytes": 24497,
+      "modified": false
+    },
+    {
+      "sourceId": "eliaxyzz--hex",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/eliaxyzz--hex@fadf672b8a61/LICENSE",
+      "url": "https://raw.githubusercontent.com/eliaxyzz/HEX/fadf672b8a61035c83c28206b57b3a359656a8f6/LICENSE",
+      "gitBlob": "3f8128c6a22659228ab88b7a4e3c92672f942185",
+      "sha256": "7f1076f0c12bbb36d4c23ae33ff4313bde523975a6f64a184c49d7c7eb155ce6",
+      "bytes": 1071,
+      "modified": false
+    },
+    {
+      "sourceId": "eliaxyzz--hex",
+      "upstreamPath": "src/ui/background_renderer.cpp",
+      "path": "reference/github-visual-sweep/sources/eliaxyzz--hex@fadf672b8a61/src/ui/background_renderer.cpp",
+      "url": "https://raw.githubusercontent.com/eliaxyzz/HEX/fadf672b8a61035c83c28206b57b3a359656a8f6/src/ui/background_renderer.cpp",
+      "gitBlob": "d549e286ae18da2069ea8b1f31c96cebd5701024",
+      "sha256": "181ce3f1edab7a4550aec618e1f14be10578824f3c514c1097f634b69b9082d0",
+      "bytes": 3056,
+      "modified": false
+    },
+    {
+      "sourceId": "enzomanuelmangano--react-native-chessboard",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/enzomanuelmangano--react-native-chessboard@d1c3e0aa9372/LICENSE",
+      "url": "https://raw.githubusercontent.com/enzomanuelmangano/react-native-chessboard/d1c3e0aa9372b2b78c07f50412b09a50ad31d4ae/LICENSE",
+      "gitBlob": "e634a689ab59f945505b7fb7902f14b21d232e95",
+      "sha256": "b3db1635a504d4fe9e35dcf8cc54d7edbca295e2fc4aea9299e052c7405be49d",
+      "bytes": 1076,
+      "modified": false
+    },
+    {
+      "sourceId": "enzomanuelmangano--react-native-chessboard",
+      "upstreamPath": "src/components/skia/board-background.tsx",
+      "path": "reference/github-visual-sweep/sources/enzomanuelmangano--react-native-chessboard@d1c3e0aa9372/src/components/skia/board-background.tsx",
+      "url": "https://raw.githubusercontent.com/enzomanuelmangano/react-native-chessboard/d1c3e0aa9372b2b78c07f50412b09a50ad31d4ae/src/components/skia/board-background.tsx",
+      "gitBlob": "dd331803808cd490545686a8c2333468f3db0210",
+      "sha256": "466f1489cfc2de42d898148c94995ec281b5da3013fa69678c3cb028dc597fe1",
+      "bytes": 4505,
+      "modified": false
+    },
+    {
+      "sourceId": "farindk--morris",
+      "upstreamPath": "COPYING",
+      "path": "reference/github-visual-sweep/sources/farindk--morris@60ac099eb02b/COPYING",
+      "url": "https://raw.githubusercontent.com/farindk/morris/60ac099eb02b82e9f9a9e7add577f296ddc1bd2d/COPYING",
+      "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147,
+      "modified": false
+    },
+    {
+      "sourceId": "farindk--morris",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/farindk--morris@60ac099eb02b/LICENSE",
+      "url": "https://raw.githubusercontent.com/farindk/morris/60ac099eb02b82e9f9a9e7add577f296ddc1bd2d/LICENSE",
+      "gitBlob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149,
+      "modified": false
+    },
+    {
+      "sourceId": "farindk--morris",
+      "upstreamPath": "src/gtkcairo_boardgui.cc",
+      "path": "reference/github-visual-sweep/sources/farindk--morris@60ac099eb02b/src/gtkcairo_boardgui.cc",
+      "url": "https://raw.githubusercontent.com/farindk/morris/60ac099eb02b82e9f9a9e7add577f296ddc1bd2d/src/gtkcairo_boardgui.cc",
+      "gitBlob": "2f3c53259587276a3e13d74595213b000de1d92b",
+      "sha256": "7f72e27ce06e3eaa70b7684e7a922cea5dc34e9d0f923e657c6d81a15e75e2b1",
+      "bytes": 29857,
+      "modified": false
+    },
+    {
+      "sourceId": "felipeap92--othello-game",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/felipeap92--othello-game@aa9dd2bd3d2e/LICENSE",
+      "url": "https://raw.githubusercontent.com/felipeap92/othello-game/aa9dd2bd3d2ebc101405c3fabf24b27810c7086b/LICENSE",
+      "gitBlob": "372669839b396eb6935bf5ceb0920bce73dbff87",
+      "sha256": "4523ac98a5dab179f87669e2cc7fa55c2724375495de80ae3786cd7916a51b7f",
+      "bytes": 1078,
+      "modified": false
+    },
+    {
+      "sourceId": "felipeap92--othello-game",
+      "upstreamPath": "othello-gui/src/components/Board.tsx",
+      "path": "reference/github-visual-sweep/sources/felipeap92--othello-game@aa9dd2bd3d2e/othello-gui/src/components/Board.tsx",
+      "url": "https://raw.githubusercontent.com/felipeap92/othello-game/aa9dd2bd3d2ebc101405c3fabf24b27810c7086b/othello-gui/src/components/Board.tsx",
+      "gitBlob": "a8531c16cd5b8832c50de5f6c3571bb8b6cd33f1",
+      "sha256": "25b6b19ad7ad9d08a0c5bbd58c3616eea2ee5879aec5be927c24bc4196050c56",
+      "bytes": 1478,
+      "modified": false
+    },
+    {
+      "sourceId": "frankwallis--redouble",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/frankwallis--redouble@22487e6e51d0/LICENSE",
+      "url": "https://raw.githubusercontent.com/frankwallis/redouble/22487e6e51d00b34668f97f94f96c2eef4d1dd95/LICENSE",
+      "gitBlob": "c54f15316e43130a24f0e1c4d698d343a72d49ea",
+      "sha256": "39e1336959934ec6f7968a0ff1680ef32c129d8ce0206877bbc37e247be26670",
+      "bytes": 1079,
+      "modified": false
+    },
+    {
+      "sourceId": "frankwallis--redouble",
+      "upstreamPath": "src/ui/table/table.jsx",
+      "path": "reference/github-visual-sweep/sources/frankwallis--redouble@22487e6e51d0/src/ui/table/table.jsx",
+      "url": "https://raw.githubusercontent.com/frankwallis/redouble/22487e6e51d00b34668f97f94f96c2eef4d1dd95/src/ui/table/table.jsx",
+      "gitBlob": "0ee02157c01ef4231ea633e1ff12b50ee4fbed54",
+      "sha256": "79e70bdd3a528bd77bdb20bc758b23209e6de717d2a8a810a7267cd7282873c8",
+      "bytes": 2782,
+      "modified": false
+    },
+    {
+      "sourceId": "guijixzh--inverse-gomoku-gui-vs-ai",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/guijixzh--inverse-gomoku-gui-vs-ai@49470d3cf191/LICENSE",
+      "url": "https://raw.githubusercontent.com/guijixzh/Inverse-Gomoku-GUI-vs-AI/49470d3cf1916ac1671fbbc2b54cba84b36d3b6d/LICENSE",
+      "gitBlob": "74ad2c4df8d176e0aeb49c7b5249b2eceb4f44d0",
+      "sha256": "549c0229c7d1fedc96e3624a4513506ab8b061f631d00fe32f21141dbbe3fd25",
+      "bytes": 1086,
+      "modified": false
+    },
+    {
+      "sourceId": "guijixzh--inverse-gomoku-gui-vs-ai",
+      "upstreamPath": "web/src/board.ts",
+      "path": "reference/github-visual-sweep/sources/guijixzh--inverse-gomoku-gui-vs-ai@49470d3cf191/web/src/board.ts",
+      "url": "https://raw.githubusercontent.com/guijixzh/Inverse-Gomoku-GUI-vs-AI/49470d3cf1916ac1671fbbc2b54cba84b36d3b6d/web/src/board.ts",
+      "gitBlob": "615f100d913e09b2c94cccb3f34a2c2002e80c6f",
+      "sha256": "2daaee7dcb3753c39c9174aeabdbff9b363297b3258a026dd0bfcfa556923265",
+      "bytes": 15488,
+      "modified": false
+    },
+    {
+      "sourceId": "hakon1233--card-games",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/hakon1233--card-games@0d85e1195238/LICENSE",
+      "url": "https://raw.githubusercontent.com/hakon1233/card-games/0d85e1195238c35daa9557bf2057b4fd6ac6e742/LICENSE",
+      "gitBlob": "33522ef9a1952bb776fdbe7eb4ad8e3467c06357",
+      "sha256": "81e6eff0db9a6f0d47642eaa9126aa769903c369148219f3dac92c57944eed9d",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "hakon1233--card-games",
+      "upstreamPath": "components/game/table-display-settings.tsx",
+      "path": "reference/github-visual-sweep/sources/hakon1233--card-games@0d85e1195238/components/game/table-display-settings.tsx",
+      "url": "https://raw.githubusercontent.com/hakon1233/card-games/0d85e1195238c35daa9557bf2057b4fd6ac6e742/components/game/table-display-settings.tsx",
+      "gitBlob": "abaf1354e33f06c52bf18a1f95f17c05f08604b3",
+      "sha256": "4ca9238049e22eab72ce8efc80d651bed955e44ccbe1fa92df56062d2f544233",
+      "bytes": 3410,
+      "modified": false
+    },
+    {
+      "sourceId": "iandevlin--canvasinvaders",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/iandevlin--canvasinvaders@25dedf94b7f5/LICENSE",
+      "url": "https://raw.githubusercontent.com/iandevlin/canvasinvaders/25dedf94b7f5c21ba1f003459b388c7f998d4f90/LICENSE",
+      "gitBlob": "7a35842d21888248020365a7a252ee06fef309c9",
+      "sha256": "049a88ca9053535063f028837f28f009f5ac9d55cb6a542c8fa785605002017c",
+      "bytes": 1078,
+      "modified": false
+    },
+    {
+      "sourceId": "iandevlin--canvasinvaders",
+      "upstreamPath": "canvasinvaders.js",
+      "path": "reference/github-visual-sweep/sources/iandevlin--canvasinvaders@25dedf94b7f5/canvasinvaders.js",
+      "url": "https://raw.githubusercontent.com/iandevlin/canvasinvaders/25dedf94b7f5c21ba1f003459b388c7f998d4f90/canvasinvaders.js",
+      "gitBlob": "e8d23c3a6e0bcd11bfc08497569f9854602a5ad5",
+      "sha256": "087ebae0e9c36c6aaa4815f73570e44e0a2ec3e9b0aabeb637b4e20590793f9d",
+      "bytes": 9405,
+      "modified": false
+    },
+    {
+      "sourceId": "indiagames--spade",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/indiagames--spade@095d840ba008/LICENSE",
+      "url": "https://raw.githubusercontent.com/indiagames/spade/095d840ba0084ed3bac57354286eb422b183d108/LICENSE",
+      "gitBlob": "25e7f5ace49a299fb2faff45b5b094a03fc6f893",
+      "sha256": "70a94865e5a65f982a2f3e59bd4c99498a792babf136467045ff069b353cba20",
+      "bytes": 1072,
+      "modified": false
+    },
+    {
+      "sourceId": "indiagames--spade",
+      "upstreamPath": "frontend/src/features/room/Table.tsx",
+      "path": "reference/github-visual-sweep/sources/indiagames--spade@095d840ba008/frontend/src/features/room/Table.tsx",
+      "url": "https://raw.githubusercontent.com/indiagames/spade/095d840ba0084ed3bac57354286eb422b183d108/frontend/src/features/room/Table.tsx",
+      "gitBlob": "06fd07780c271b3a39dc61a037e7082d54f2ed70",
+      "sha256": "2b8d2f650657d504c45eb0918a6229e1164d6ad73e13595f4ae773515de39431",
+      "bytes": 4795,
+      "modified": false
+    },
+    {
+      "sourceId": "intrepion--kata-inspired-by-uno-codex-dot",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/intrepion--kata-inspired-by-uno-codex-dot@42ea008d13c2/LICENSE",
+      "url": "https://raw.githubusercontent.com/intrepion/kata-inspired-by-uno-codex-dot/42ea008d13c2bea37a0ffcd5976f01fbf6372958/LICENSE",
+      "gitBlob": "311635ee156324bd8d003e1f05df037551706881",
+      "sha256": "2f7504aefe81dc75829aae73d97c08b9fa5fadcc3118d91a9925aa5cbf480b8a",
+      "bytes": 1070,
+      "modified": false
+    },
+    {
+      "sourceId": "intrepion--kata-inspired-by-uno-codex-dot",
+      "upstreamPath": "src/style.css",
+      "path": "reference/github-visual-sweep/sources/intrepion--kata-inspired-by-uno-codex-dot@42ea008d13c2/src/style.css",
+      "url": "https://raw.githubusercontent.com/intrepion/kata-inspired-by-uno-codex-dot/42ea008d13c2bea37a0ffcd5976f01fbf6372958/src/style.css",
+      "gitBlob": "0b931cd75f33b77773d5214fe35512a05d5b9f49",
+      "sha256": "dc8a826ff9adf9f3460e5e0a33f414adae80d970b6e9c01893fe066d3465a6aa",
+      "bytes": 11488,
+      "modified": false
+    },
+    {
+      "sourceId": "juef17--librebridge",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/juef17--librebridge@38e344a2fab6/LICENSE",
+      "url": "https://raw.githubusercontent.com/juef17/LibreBridge/38e344a2fab649c1cce9189b92dadbe7bdb63f31/LICENSE",
+      "gitBlob": "9cecc1d4669ee8af2ca727a5d8cde10cd8b2d7cc",
+      "sha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+      "bytes": 35141,
+      "modified": false
+    },
+    {
+      "sourceId": "juef17--librebridge",
+      "upstreamPath": "src/gui/CardWidget.cpp",
+      "path": "reference/github-visual-sweep/sources/juef17--librebridge@38e344a2fab6/src/gui/CardWidget.cpp",
+      "url": "https://raw.githubusercontent.com/juef17/LibreBridge/38e344a2fab649c1cce9189b92dadbe7bdb63f31/src/gui/CardWidget.cpp",
+      "gitBlob": "14ee093cff993530a25fa20686886a13406ed799",
+      "sha256": "c46d5206f2c4975ee3d6a5f50954d5cd023f3e470bcde7c5dbc21d5f101a1bad",
+      "bytes": 2469,
+      "modified": false
+    },
+    {
+      "sourceId": "junosan--nama",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/junosan--nama@6ace0bb25a98/LICENSE",
+      "url": "https://raw.githubusercontent.com/junosan/Nama/6ace0bb25a986d71b8e08d74334481eadb96650e/LICENSE",
+      "gitBlob": "8dada3edaf50dbc082c9a125058f25def75e625a",
+      "sha256": "b40930bbcf80744c86c46a12bc9da056641d722716c378f5659b9e555ef833e1",
+      "bytes": 11357,
+      "modified": false
+    },
+    {
+      "sourceId": "junosan--nama",
+      "upstreamPath": "NOTICE",
+      "path": "reference/github-visual-sweep/sources/junosan--nama@6ace0bb25a98/NOTICE",
+      "url": "https://raw.githubusercontent.com/junosan/Nama/6ace0bb25a986d71b8e08d74334481eadb96650e/NOTICE",
+      "gitBlob": "1ee365ea4aaed1dd6dd6d6841da3f3ef3e1204c5",
+      "sha256": "dc8102b8cfb0420bfde2637d8be5a0577b6479d832336b8e217dd0c436469d94",
+      "bytes": 28758,
+      "modified": false
+    },
+    {
+      "sourceId": "junosan--nama",
+      "upstreamPath": "code/glwidget.cpp",
+      "path": "reference/github-visual-sweep/sources/junosan--nama@6ace0bb25a98/code/glwidget.cpp",
+      "url": "https://raw.githubusercontent.com/junosan/Nama/6ace0bb25a986d71b8e08d74334481eadb96650e/code/glwidget.cpp",
+      "gitBlob": "32334f04396c32d23e50e09399c9c3bbca2928d6",
+      "sha256": "db8db8e8bb90ca617859494530e1a2e7b6b1a2856fefc96865e76c3b419efeec",
+      "bytes": 37578,
+      "modified": false
+    },
+    {
+      "sourceId": "juzzlin--dustracing2d",
+      "upstreamPath": "COPYING",
+      "path": "reference/github-visual-sweep/sources/juzzlin--dustracing2d@06da67229775/COPYING",
+      "url": "https://raw.githubusercontent.com/juzzlin/DustRacing2D/06da67229775ddb57fcb7c4d0763e97a70a21f70/COPYING",
+      "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903",
+      "bytes": 35147,
+      "modified": false
+    },
+    {
+      "sourceId": "juzzlin--dustracing2d",
+      "upstreamPath": "src/game/scene.cpp",
+      "path": "reference/github-visual-sweep/sources/juzzlin--dustracing2d@06da67229775/src/game/scene.cpp",
+      "url": "https://raw.githubusercontent.com/juzzlin/DustRacing2D/06da67229775ddb57fcb7c4d0763e97a70a21f70/src/game/scene.cpp",
+      "gitBlob": "e9d0c5b42f8c78fe05c4ec4c23281936959278fa",
+      "sha256": "688c5e78edf00cd27687638075587ae12dcb592b1dc89bde7e69821eb053d154",
+      "bytes": 22659,
+      "modified": false
+    },
+    {
+      "sourceId": "kenrick95--c4",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/kenrick95--c4@5f0b141806de/LICENSE",
+      "url": "https://raw.githubusercontent.com/kenrick95/c4/5f0b141806decad56a70f691413165091f7849a1/LICENSE",
+      "gitBlob": "a23f70a5f320c5d2dfde06be133fa8c42236df60",
+      "sha256": "17771612c6323140777dcef4e5071f8983b8c01de292017a3d8b0223eeecc8c2",
+      "bytes": 1069,
+      "modified": false
+    },
+    {
+      "sourceId": "kenrick95--c4",
+      "upstreamPath": "browser/src/board/index.ts",
+      "path": "reference/github-visual-sweep/sources/kenrick95--c4@5f0b141806de/browser/src/board/index.ts",
+      "url": "https://raw.githubusercontent.com/kenrick95/c4/5f0b141806decad56a70f691413165091f7849a1/browser/src/board/index.ts",
+      "gitBlob": "08740c055de1cb51b8b7b9649d42a5462c2c3230",
+      "sha256": "c56d8949f36da30d44677f5b8ac3269e61d7376c5d7cb56cae80c19422ec1378",
+      "bytes": 4620,
+      "modified": false
+    },
+    {
+      "sourceId": "krinj--hanabi-simulator",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/krinj--hanabi-simulator@b77b04aa09ba/LICENSE",
+      "url": "https://raw.githubusercontent.com/krinj/hanabi-simulator/b77b04aa09bab8bd8d7b784e04bf8b9d5d76d1a6/LICENSE",
+      "gitBlob": "9aff58236f4e3cc3f3eaf29f262b8607b843fa1a",
+      "sha256": "b1ffc153e2e6c5cc5376f3d078154f28e66969654a3172be4477a5bd2ef39f6f",
+      "bytes": 1076,
+      "modified": false
+    },
+    {
+      "sourceId": "krinj--hanabi-simulator",
+      "upstreamPath": "py_hanabi/interface/widget_board_info.py",
+      "path": "reference/github-visual-sweep/sources/krinj--hanabi-simulator@b77b04aa09ba/py_hanabi/interface/widget_board_info.py",
+      "url": "https://raw.githubusercontent.com/krinj/hanabi-simulator/b77b04aa09bab8bd8d7b784e04bf8b9d5d76d1a6/py_hanabi/interface/widget_board_info.py",
+      "gitBlob": "234f8626b39127dbf2889bb4b06b509f3ae3b9da",
+      "sha256": "2e465c12e3807148929f75213dd7f49daa8cb3fa18224b9267541229dd9d3cea",
+      "bytes": 3171,
+      "modified": false
+    },
+    {
+      "sourceId": "lokkant--gin-rummy",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/lokkant--gin-rummy@58c3c41214d2/LICENSE",
+      "url": "https://raw.githubusercontent.com/lokkant/Gin-Rummy/58c3c41214d2d18e76ada757987daa3d5f80c1f7/LICENSE",
+      "gitBlob": "b4625e9bae14fbb7a0aa11a97bff4e9469289707",
+      "sha256": "241e69f23408edf2b0261ab00a42a51299cb517289712f979e0539a6f38b96f6",
+      "bytes": 1063,
+      "modified": false
+    },
+    {
+      "sourceId": "lokkant--gin-rummy",
+      "upstreamPath": "src/scenes/layoff_scene.lua",
+      "path": "reference/github-visual-sweep/sources/lokkant--gin-rummy@58c3c41214d2/src/scenes/layoff_scene.lua",
+      "url": "https://raw.githubusercontent.com/lokkant/Gin-Rummy/58c3c41214d2d18e76ada757987daa3d5f80c1f7/src/scenes/layoff_scene.lua",
+      "gitBlob": "240429cff91ccdb1806a1b078e6312deb6f757b8",
+      "sha256": "342a941187ec4a216fd2c200d9c73ccda034d79b227687c75bbe1c2180b8ac6a",
+      "bytes": 24678,
+      "modified": false
+    },
+    {
+      "sourceId": "mmousawy--dicebluff",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/mmousawy--dicebluff@e3c7f8181043/LICENSE",
+      "url": "https://raw.githubusercontent.com/mmousawy/dicebluff/e3c7f81810434f513eb34f2eefb7952f33f2ac95/LICENSE",
+      "gitBlob": "fc58638b65322e57977b1e86473c85820602bb7d",
+      "sha256": "2663d12f4d134da2cb70b0fc0c8a5fec0870cf1a6453926a42eeba1f63a1de5d",
+      "bytes": 1075,
+      "modified": false
+    },
+    {
+      "sourceId": "mmousawy--dicebluff",
+      "upstreamPath": "src/dicebluff-client/styles/main.css",
+      "path": "reference/github-visual-sweep/sources/mmousawy--dicebluff@e3c7f8181043/src/dicebluff-client/styles/main.css",
+      "url": "https://raw.githubusercontent.com/mmousawy/dicebluff/e3c7f81810434f513eb34f2eefb7952f33f2ac95/src/dicebluff-client/styles/main.css",
+      "gitBlob": "efa4d38431ebb7b3f10d3c7fa20be442efe15fbb",
+      "sha256": "3620122b7de40a5e9d678fbf5679f9f735aa81deb7236ca623833805b16d3fc6",
+      "bytes": 1094,
+      "modified": false
+    },
+    {
+      "sourceId": "mvichosfm--plakoto",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/mvichosfm--plakoto@08f64fcd95d8/LICENSE",
+      "url": "https://raw.githubusercontent.com/mvichosfm/plakoto/08f64fcd95d8196c23f74e7c6ec706f2add64855/LICENSE",
+      "gitBlob": "f9b074a9fa58793200b4d3e0e21e9f9d4517a393",
+      "sha256": "c7b919752ef946c6d8e0847f6cf0331581d29e210328e9521da2f312a42aae97",
+      "bytes": 1069,
+      "modified": false
+    },
+    {
+      "sourceId": "mvichosfm--plakoto",
+      "upstreamPath": "src/effects.js",
+      "path": "reference/github-visual-sweep/sources/mvichosfm--plakoto@08f64fcd95d8/src/effects.js",
+      "url": "https://raw.githubusercontent.com/mvichosfm/plakoto/08f64fcd95d8196c23f74e7c6ec706f2add64855/src/effects.js",
+      "gitBlob": "7a27dbb7e4709463c14664476d72aa07a5861896",
+      "sha256": "21d469b5a663a4cd492127dce90b899c42658f7d8165a13c8898fe76e874856e",
+      "bytes": 8302,
+      "modified": false
+    },
+    {
+      "sourceId": "nina-cohen--hanabi-ui",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/nina-cohen--hanabi-ui@5273475fc1bb/LICENSE",
+      "url": "https://raw.githubusercontent.com/nina-cohen/hanabi-ui/5273475fc1bb48bd154b44d86bb8071ce22f97d5/LICENSE",
+      "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+      "bytes": 11357,
+      "modified": false
+    },
+    {
+      "sourceId": "nina-cohen--hanabi-ui",
+      "upstreamPath": "scripts/PaintStackManager.js",
+      "path": "reference/github-visual-sweep/sources/nina-cohen--hanabi-ui@5273475fc1bb/scripts/PaintStackManager.js",
+      "url": "https://raw.githubusercontent.com/nina-cohen/hanabi-ui/5273475fc1bb48bd154b44d86bb8071ce22f97d5/scripts/PaintStackManager.js",
+      "gitBlob": "522c522c2dc76735b56412ba57a28562d01f7b97",
+      "sha256": "b30cfd24211ae8514228f92f691807ba0fadec87183d55dba018d45d0665551b",
+      "bytes": 2949,
+      "modified": false
+    },
+    {
+      "sourceId": "pentla--shogi-board",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/pentla--shogi-board@12d74a0a8ddd/LICENSE",
+      "url": "https://raw.githubusercontent.com/pentla/shogi-board/12d74a0a8ddd1ff42ab56e6cb3c8be2345f7f97a/LICENSE",
+      "gitBlob": "f1dcd2960399c100256084bb96cce891b302ca78",
+      "sha256": "9663ec5f96ab9bfe0c3e8ca4ae66a8eb00f0163c2ef7ca76770d8e463ff718da",
+      "bytes": 1065,
+      "modified": false
+    },
+    {
+      "sourceId": "pentla--shogi-board",
+      "upstreamPath": "src/components/Board/CapturedPieceBoard/index.tsx",
+      "path": "reference/github-visual-sweep/sources/pentla--shogi-board@12d74a0a8ddd/src/components/Board/CapturedPieceBoard/index.tsx",
+      "url": "https://raw.githubusercontent.com/pentla/shogi-board/12d74a0a8ddd1ff42ab56e6cb3c8be2345f7f97a/src/components/Board/CapturedPieceBoard/index.tsx",
+      "gitBlob": "a05a288245403516356a5619d46d568088482e1d",
+      "sha256": "21d7783178ebdf7dacb5cfc59a38e7626edf106b0636f8535245d9df7266b346",
+      "bytes": 1020,
+      "modified": false
+    },
+    {
+      "sourceId": "peterblazejewicz--gobanhaus",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/peterblazejewicz--gobanhaus@460341bf469c/LICENSE",
+      "url": "https://raw.githubusercontent.com/peterblazejewicz/gobanhaus/460341bf469ce93c268b7a555160cdeac7a5aa2e/LICENSE",
+      "gitBlob": "a4574573ee095fe94eb5aefeff68a68f551451d5",
+      "sha256": "bc1cbe67d368a5bb7168207b0d0cddf83d8b86c17f0064e1d560925cc45674ea",
+      "bytes": 1079,
+      "modified": false
+    },
+    {
+      "sourceId": "peterblazejewicz--gobanhaus",
+      "upstreamPath": "src/app/components/Board.tsx",
+      "path": "reference/github-visual-sweep/sources/peterblazejewicz--gobanhaus@460341bf469c/src/app/components/Board.tsx",
+      "url": "https://raw.githubusercontent.com/peterblazejewicz/gobanhaus/460341bf469ce93c268b7a555160cdeac7a5aa2e/src/app/components/Board.tsx",
+      "gitBlob": "fc2f309dd33361a0cb95caa41a48048a9f091a4f",
+      "sha256": "b910c256a4801490f73b9071756327965c6c69a066258017c7c2003056c83774",
+      "bytes": 9953,
+      "modified": false
+    },
+    {
+      "sourceId": "popojan--goban",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/popojan--goban@eb52413fcec8/LICENSE",
+      "url": "https://raw.githubusercontent.com/popojan/goban/eb52413fcec8843fc888ccfee1bb28237941b66a/LICENSE",
+      "gitBlob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+      "bytes": 35149,
+      "modified": false
+    },
+    {
+      "sourceId": "popojan--goban",
+      "upstreamPath": "src/main.cpp",
+      "path": "reference/github-visual-sweep/sources/popojan--goban@eb52413fcec8/src/main.cpp",
+      "url": "https://raw.githubusercontent.com/popojan/goban/eb52413fcec8843fc888ccfee1bb28237941b66a/src/main.cpp",
+      "gitBlob": "e853fc0738cdbe20dfb61d44c562b213ab912773",
+      "sha256": "63852199599e436dcefd40415a5f342348fcb2e80305579988b9074794c54c17",
+      "bytes": 38226,
+      "modified": false
+    },
+    {
+      "sourceId": "portnov--hcheckers",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/portnov--hcheckers@511517b9b3cd/LICENSE",
+      "url": "https://raw.githubusercontent.com/portnov/hcheckers/511517b9b3cd2d7b6944688550f3dc5bf941a0a4/LICENSE",
+      "gitBlob": "d9abc075cb11cb5cb057080527345eeb3c341012",
+      "sha256": "cdf39b876c2864b584f01dbf5c883e4c35a46674731f9c91df554b15c46648ec",
+      "bytes": 1525,
+      "modified": false
+    },
+    {
+      "sourceId": "portnov--hcheckers",
+      "upstreamPath": "python/hcheckers/board.py",
+      "path": "reference/github-visual-sweep/sources/portnov--hcheckers@511517b9b3cd/python/hcheckers/board.py",
+      "url": "https://raw.githubusercontent.com/portnov/hcheckers/511517b9b3cd2d7b6944688550f3dc5bf941a0a4/python/hcheckers/board.py",
+      "gitBlob": "b9eeb96bf11ae29f213cd00cd321aa75cda8aaea",
+      "sha256": "a1f3bf95bd5c10fc0d4655ce339ff711417184dcb259d71fc36b1cbb38839d18",
+      "bytes": 39008,
+      "modified": false
+    },
+    {
+      "sourceId": "razvan404--tic-tac-toe-multiplayer",
+      "upstreamPath": "Client/src/main/resources/application/gui/css/style.css",
+      "path": "reference/github-visual-sweep/sources/razvan404--tic-tac-toe-multiplayer@c412047c45f4/Client/src/main/resources/application/gui/css/style.css",
+      "url": "https://raw.githubusercontent.com/razvan404/tic-tac-toe-multiplayer/c412047c45f499de7f6a297a6d8e6ba9a2bdca9c/Client/src/main/resources/application/gui/css/style.css",
+      "gitBlob": "c2fd8f61216928c9e5f1a96d0e0ea4a987c175d4",
+      "sha256": "39f7ebc58cf4219da05f5c71ba30ffb5559275a046de5602f523ce18be517de5",
+      "bytes": 3767,
+      "modified": false
+    },
+    {
+      "sourceId": "razvan404--tic-tac-toe-multiplayer",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/razvan404--tic-tac-toe-multiplayer@c412047c45f4/LICENSE",
+      "url": "https://raw.githubusercontent.com/razvan404/tic-tac-toe-multiplayer/c412047c45f499de7f6a297a6d8e6ba9a2bdca9c/LICENSE",
+      "gitBlob": "a679d8fb7cb8a8d648b08a290950db6223b36579",
+      "sha256": "d6d4e811514dfc9696cb5721ae542f90346fa29b26ce97f1712c4181b5e32daf",
+      "bytes": 1078,
+      "modified": false
+    },
+    {
+      "sourceId": "rheostaticsfan--cribbageboard",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/rheostaticsfan--cribbageboard@400e5751d65b/LICENSE",
+      "url": "https://raw.githubusercontent.com/rheostaticsfan/CribbageBoard/400e5751d65bc04fe137bc54768c2e48d5e0544c/LICENSE",
+      "gitBlob": "b74209e26b3f495ad48064f3bacd65a1e768d6de",
+      "sha256": "6eb4756a5759e1bfea24675ec5c2df83d6d30f17e266beb2892d0152187a1cf1",
+      "bytes": 1068,
+      "modified": false
+    },
+    {
+      "sourceId": "rheostaticsfan--cribbageboard",
+      "upstreamPath": "app/src/main/java/com/moira/cribbage/BoardView.kt",
+      "path": "reference/github-visual-sweep/sources/rheostaticsfan--cribbageboard@400e5751d65b/app/src/main/java/com/moira/cribbage/BoardView.kt",
+      "url": "https://raw.githubusercontent.com/rheostaticsfan/CribbageBoard/400e5751d65bc04fe137bc54768c2e48d5e0544c/app/src/main/java/com/moira/cribbage/BoardView.kt",
+      "gitBlob": "31c2c3fd29cc2c36391ad42e0a7234ac070f1966",
+      "sha256": "54036148ebc61428320f9ad860ef3dda23cbeaf83632d05bf75a1e64f4e9ba9a",
+      "bytes": 13123,
+      "modified": false
+    },
+    {
+      "sourceId": "san-santra--pyboxing",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/san-santra--pyboxing@cbba833d4954/LICENSE",
+      "url": "https://raw.githubusercontent.com/san-santra/pyboxing/cbba833d49546c063c79a8bfb2c79ecccbecc1de/LICENSE",
+      "gitBlob": "9cecc1d4669ee8af2ca727a5d8cde10cd8b2d7cc",
+      "sha256": "589ed823e9a84c56feb95ac58e7cf384626b9cbf4fda2a907bc36e103de1bad2",
+      "bytes": 35141,
+      "modified": false
+    },
+    {
+      "sourceId": "san-santra--pyboxing",
+      "upstreamPath": "main.py",
+      "path": "reference/github-visual-sweep/sources/san-santra--pyboxing@cbba833d4954/main.py",
+      "url": "https://raw.githubusercontent.com/san-santra/pyboxing/cbba833d49546c063c79a8bfb2c79ecccbecc1de/main.py",
+      "gitBlob": "b5497593f76694527bfc2894f19e6706182eb914",
+      "sha256": "b4c6498b89b81bb897ea946e45151c72ab53500f0a43eb7fd225b6a6d1877073",
+      "bytes": 6896,
+      "modified": false
+    },
+    {
+      "sourceId": "scc416--battleship",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/scc416--battleship@add5b7a9cc47/LICENSE",
+      "url": "https://raw.githubusercontent.com/scc416/battleship/add5b7a9cc47f00d436dc91955735408978a4ca6/LICENSE",
+      "gitBlob": "7689c896574abe99779f9dca21c74a0b881140db",
+      "sha256": "f2475eecd71acade1d5872a9f04ec8e8450c39289d630d6c0fae5d41d550237d",
+      "bytes": 1060,
+      "modified": false
+    },
+    {
+      "sourceId": "scc416--battleship",
+      "upstreamPath": "src/Components/Display/Board/index.jsx",
+      "path": "reference/github-visual-sweep/sources/scc416--battleship@add5b7a9cc47/src/Components/Display/Board/index.jsx",
+      "url": "https://raw.githubusercontent.com/scc416/battleship/add5b7a9cc47f00d436dc91955735408978a4ca6/src/Components/Display/Board/index.jsx",
+      "gitBlob": "3ae858e180714e0e6822655c2041bfe0e50bea53",
+      "sha256": "4d037c3301cf405ad97a2c512071bc4d95ae4f0848d97a3c2b138bd3589268bd",
+      "bytes": 1112,
+      "modified": false
+    },
+    {
+      "sourceId": "sruckh--spades-coach",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/sruckh--spades-coach@87ec07008456/LICENSE",
+      "url": "https://raw.githubusercontent.com/sruckh/spades-coach/87ec070084566ef25fc0e899293eef1cfbd37bc0/LICENSE",
+      "gitBlob": "b15dc7e642d6990330b9f849a5ce50240cf192dc",
+      "sha256": "67ec2ccd2ce5092b465d69c1a27b2616180be592db47edab024a9280e85b4f48",
+      "bytes": 11336,
+      "modified": false
+    },
+    {
+      "sourceId": "sruckh--spades-coach",
+      "upstreamPath": "src/ui/Table.tsx",
+      "path": "reference/github-visual-sweep/sources/sruckh--spades-coach@87ec07008456/src/ui/Table.tsx",
+      "url": "https://raw.githubusercontent.com/sruckh/spades-coach/87ec070084566ef25fc0e899293eef1cfbd37bc0/src/ui/Table.tsx",
+      "gitBlob": "ba25fc54903ee8112768742d055bc3f7f19f70b3",
+      "sha256": "9c4e2215fa3ac55da7d61840ba6192388cc86701721f1d1628b053898ec073fb",
+      "bytes": 666,
+      "modified": false
+    },
+    {
+      "sourceId": "togiberlin--kalah_mancala",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/togiberlin--kalah_mancala@4dfe49c9c78f/LICENSE",
+      "url": "https://raw.githubusercontent.com/togiberlin/kalah_mancala/4dfe49c9c78fb4aab572afaf9056070c55cffe91/LICENSE",
+      "gitBlob": "2ff0274c0a5da17dd92f2d8623306b738cc8ca9b",
+      "sha256": "db44df6da4d735826f5934bc616e414237f062bd56848d67a44d478efd5e9064",
+      "bytes": 1078,
+      "modified": false
+    },
+    {
+      "sourceId": "togiberlin--kalah_mancala",
+      "upstreamPath": "static/kalahMancala/gameScreenStyle.css",
+      "path": "reference/github-visual-sweep/sources/togiberlin--kalah_mancala@4dfe49c9c78f/static/kalahMancala/gameScreenStyle.css",
+      "url": "https://raw.githubusercontent.com/togiberlin/kalah_mancala/4dfe49c9c78fb4aab572afaf9056070c55cffe91/static/kalahMancala/gameScreenStyle.css",
+      "gitBlob": "97c4a9da354787ec84b1ad0dfd62427fe890b09a",
+      "sha256": "83f30608bd1655c388cc27d0ecc5ba175a90e154a606fc7dd530ef83fb8644cc",
+      "bytes": 2013,
+      "modified": false
+    },
+    {
+      "sourceId": "tukiains--blackjack-gui",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/tukiains--blackjack-gui@4203d24452ea/LICENSE",
+      "url": "https://raw.githubusercontent.com/tukiains/blackjack-gui/4203d24452ea0f5b6a75789ab56e8c87f51475e0/LICENSE",
+      "gitBlob": "366c95c3f77ac3158949f1dacd385c1e17d54fc3",
+      "sha256": "da692fccb511fc9abbccc3a768a3d04763de5d0781a8663961746899f35d0211",
+      "bytes": 1071,
+      "modified": false
+    },
+    {
+      "sourceId": "tukiains--blackjack-gui",
+      "upstreamPath": "blackjack_gui/table_components.py",
+      "path": "reference/github-visual-sweep/sources/tukiains--blackjack-gui@4203d24452ea/blackjack_gui/table_components.py",
+      "url": "https://raw.githubusercontent.com/tukiains/blackjack-gui/4203d24452ea0f5b6a75789ab56e8c87f51475e0/blackjack_gui/table_components.py",
+      "gitBlob": "2294e6ec276048b914f0e9ff3352216f5cecb11b",
+      "sha256": "49f66f1da32a5aacd4d71769f9cb7ec46fc9b84595fec85265162dd42b3baffa",
+      "bytes": 13411,
+      "modified": false
+    },
+    {
+      "sourceId": "ujjwalkrmfp16-creator--air-boxing-prototype",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/ujjwalkrmfp16-creator--air-boxing-prototype@d60cafa9fcc7/LICENSE",
+      "url": "https://raw.githubusercontent.com/ujjwalkrmfp16-creator/air-boxing-prototype/d60cafa9fcc765390f9a164218ca9073c0a1b5b7/LICENSE",
+      "gitBlob": "84e61e4f26c92c30cee32cceb2588844a202ed59",
+      "sha256": "e90f318aaf2fb0f4da5020ab694810da76ecafb3d09a59ade7b3f3209b702375",
+      "bytes": 1069,
+      "modified": false
+    },
+    {
+      "sourceId": "ujjwalkrmfp16-creator--air-boxing-prototype",
+      "upstreamPath": "air_boxing_vs_fast_stable.py",
+      "path": "reference/github-visual-sweep/sources/ujjwalkrmfp16-creator--air-boxing-prototype@d60cafa9fcc7/air_boxing_vs_fast_stable.py",
+      "url": "https://raw.githubusercontent.com/ujjwalkrmfp16-creator/air-boxing-prototype/d60cafa9fcc765390f9a164218ca9073c0a1b5b7/air_boxing_vs_fast_stable.py",
+      "gitBlob": "f29f1de603ad3b95ce2ad6e6a5e0769ec2ba7e18",
+      "sha256": "5d8510db251ab9482a3a20d006ce11d80392303fbd2eabbea49566f9f644ba33",
+      "bytes": 71298,
+      "modified": false
+    },
+    {
+      "sourceId": "vlokesh7--dynamic-tic-tac-toe-game-with-python-tkinter",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/vlokesh7--dynamic-tic-tac-toe-game-with-python-tkinter@2260d569fbc0/LICENSE",
+      "url": "https://raw.githubusercontent.com/vlokesh7/Dynamic-Tic-Tac-Toe-Game-with-Python-Tkinter/2260d569fbc06ef1c29ea99e37183ba2bb48b986/LICENSE",
+      "gitBlob": "d7f8fcc6e51a7f2660d675c50e54f32873a1956a",
+      "sha256": "95787d5d638807a062959e22703ac3affbed119a57c6e5351ab38e5c99587ab7",
+      "bytes": 1065,
+      "modified": false
+    },
+    {
+      "sourceId": "vlokesh7--dynamic-tic-tac-toe-game-with-python-tkinter",
+      "upstreamPath": "TicTacToe.py",
+      "path": "reference/github-visual-sweep/sources/vlokesh7--dynamic-tic-tac-toe-game-with-python-tkinter@2260d569fbc0/TicTacToe.py",
+      "url": "https://raw.githubusercontent.com/vlokesh7/Dynamic-Tic-Tac-Toe-Game-with-Python-Tkinter/2260d569fbc06ef1c29ea99e37183ba2bb48b986/TicTacToe.py",
+      "gitBlob": "fbb0f3f6b5a6e2ff36d020af5bbb4a569d17a9d8",
+      "sha256": "01f11342d1a81d727def44f9b51daa147395ca7cd41a33ae54a17e30c64eacb7",
+      "bytes": 4667,
+      "modified": false
+    },
+    {
+      "sourceId": "wesmcd6--game-of-hearts",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/wesmcd6--game-of-hearts@4184d8cd23d4/LICENSE",
+      "url": "https://raw.githubusercontent.com/wesmcd6/Game-of-hearts/4184d8cd23d49789ee49769daa894aa83deeddf0/LICENSE",
+      "gitBlob": "8f45c5e4adbfabc875c354cfce433f47bf0fd96a",
+      "sha256": "80eec27e646bb7b2f9d92944bd72c943db279e70423667cd08200725bee23b1e",
+      "bytes": 1064,
+      "modified": false
+    },
+    {
+      "sourceId": "wesmcd6--game-of-hearts",
+      "upstreamPath": "style.css",
+      "path": "reference/github-visual-sweep/sources/wesmcd6--game-of-hearts@4184d8cd23d4/style.css",
+      "url": "https://raw.githubusercontent.com/wesmcd6/Game-of-hearts/4184d8cd23d49789ee49769daa894aa83deeddf0/style.css",
+      "gitBlob": "d73a7cadbad541a8d6de402b1a28f65ea265471d",
+      "sha256": "114f369dc7a7a604df9611a2b661e108d7a506418af42cb2d0058754df14c779",
+      "bytes": 11797,
+      "modified": false
+    },
+    {
+      "sourceId": "whtdrgn101--game-euchre",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/whtdrgn101--game-euchre@c90db152e552/LICENSE",
+      "url": "https://raw.githubusercontent.com/whtdrgn101/game-euchre/c90db152e552b0acdf8c3f60611048c02dd5e4b6/LICENSE",
+      "gitBlob": "49340a86a7fb2c6e8a5c6d560b89a2bdf183e23d",
+      "sha256": "d211a45678fbbc0576515d50319b6856d0595e2302f63223f43681d4f313e24c",
+      "bytes": 1501,
+      "modified": false
+    },
+    {
+      "sourceId": "whtdrgn101--game-euchre",
+      "upstreamPath": "src/client/Board.tsx",
+      "path": "reference/github-visual-sweep/sources/whtdrgn101--game-euchre@c90db152e552/src/client/Board.tsx",
+      "url": "https://raw.githubusercontent.com/whtdrgn101/game-euchre/c90db152e552b0acdf8c3f60611048c02dd5e4b6/src/client/Board.tsx",
+      "gitBlob": "8d561e8276a5198d8e33df9d96e723f351eb8ee0",
+      "sha256": "ff913c0b7a9ea99237858e41760362b75b62aebeb509272df40a9896ce3d0f21",
+      "bytes": 13969,
+      "modified": false
+    },
+    {
+      "sourceId": "xiewang233--xiangqiai",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/xiewang233--xiangqiai@d32f6bdbd557/LICENSE",
+      "url": "https://raw.githubusercontent.com/xiewang233/XiangqiAI/d32f6bdbd55707d45348fa220a829d66f68387f9/LICENSE",
+      "gitBlob": "4172dbd3098d45f5db39f614dc056983e076b7bf",
+      "sha256": "88437b33e676ce7f269f573155cb438c95c800cbcebb3bc5c347cbcb88ecf483",
+      "bytes": 1067,
+      "modified": false
+    },
+    {
+      "sourceId": "xiewang233--xiangqiai",
+      "upstreamPath": "gui/board_view.py",
+      "path": "reference/github-visual-sweep/sources/xiewang233--xiangqiai@d32f6bdbd557/gui/board_view.py",
+      "url": "https://raw.githubusercontent.com/xiewang233/XiangqiAI/d32f6bdbd55707d45348fa220a829d66f68387f9/gui/board_view.py",
+      "gitBlob": "803dd2a5c93c172a215e6ed3b20b247029c3e3e1",
+      "sha256": "7064872fef35c82a0d76da5f07752d5d645f59c23aac1450e9a2a9046ae3eee6",
+      "bytes": 5886,
+      "modified": false
+    },
+    {
+      "sourceId": "yavuzkrm--tavla-online",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/yavuzkrm--tavla-online@c3c991f02765/LICENSE",
+      "url": "https://raw.githubusercontent.com/yavuzkrm/tavla-online/c3c991f027656f510ad4aa459a113d9ade112a5e/LICENSE",
+      "gitBlob": "25ab1436fc30f163fdf7eea43616867d6c0bc8ce",
+      "sha256": "db0fdb15b3e90f78101a2096f5d1b869f15b1f83c65fb756eed13fb2cf8b3253",
+      "bytes": 1074,
+      "modified": false
+    },
+    {
+      "sourceId": "yavuzkrm--tavla-online",
+      "upstreamPath": "client/src/components/Board.tsx",
+      "path": "reference/github-visual-sweep/sources/yavuzkrm--tavla-online@c3c991f02765/client/src/components/Board.tsx",
+      "url": "https://raw.githubusercontent.com/yavuzkrm/tavla-online/c3c991f027656f510ad4aa459a113d9ade112a5e/client/src/components/Board.tsx",
+      "gitBlob": "717e1963b1b9ef35ff1829c5e2d4c1ff88d16aec",
+      "sha256": "c253c57a7a918aa422f690b5292e4239a793789c349b9a9503a09596ec1e35fe",
+      "bytes": 8605,
+      "modified": false
+    },
+    {
+      "sourceId": "zaymonoid--connect4-3d-r3f",
+      "upstreamPath": "LICENSE",
+      "path": "reference/github-visual-sweep/sources/zaymonoid--connect4-3d-r3f@310c919b89c2/LICENSE",
+      "url": "https://raw.githubusercontent.com/zaymonoid/Connect4-3D-R3F/310c919b89c2d14e51de4a7459f4b4b1f1365083/LICENSE",
+      "gitBlob": "2fb74a860034e31620c94e0b42b9c92d9768aa10",
+      "sha256": "c3f571612b01dd18052addf2f9e1d43ac8961bdce1a11d02b5f53c76089abf6e",
+      "bytes": 1071,
+      "modified": false
+    },
+    {
+      "sourceId": "zaymonoid--connect4-3d-r3f",
+      "upstreamPath": "src/App.js",
+      "path": "reference/github-visual-sweep/sources/zaymonoid--connect4-3d-r3f@310c919b89c2/src/App.js",
+      "url": "https://raw.githubusercontent.com/zaymonoid/Connect4-3D-R3F/310c919b89c2d14e51de4a7459f4b4b1f1365083/src/App.js",
+      "gitBlob": "1e08f1ae7390556743129a7209d3695a0b917b8c",
+      "sha256": "367a7a1f92dd476db78ab7abf1924cd50b3ad699817296c0cd15be945ff080e6",
+      "bytes": 11662,
+      "modified": false
+    }
+  ]
+}

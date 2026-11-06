@@ -355,6 +355,7 @@ export type DisplayFrameProjectionOptions = BoardOverlayOptions & {
   readonly cols?: number;
   /** Draw chess letters on a square board. Defaults to `gameSlug === "chess"`. */
   readonly chess?: boolean;
+  readonly variant?: "discs" | "checkers";
   /** Placeholder label (usually the game name). Defaults to the frame's game slug. */
   readonly label?: string;
   /**
@@ -441,6 +442,7 @@ export function boardFrameFromDisplayFrame(frame: DisplayFrameV1, options: Displ
   }
 
   const chess = options.chess ?? gameSlug === "chess";
+  const variant = family === "square_board" && !chess ? options.variant ?? (gameSlug === "checkers" ? "checkers" : undefined) : undefined;
   const vocabulary = options.tokens ?? "board";
   const tokens: (string | undefined)[] = Array.from({ length: rows * cols });
   for (const cell of boardCells) {
@@ -453,9 +455,9 @@ export function boardFrameFromDisplayFrame(frame: DisplayFrameV1, options: Displ
     if (tokens[position] !== undefined) return fail(`Two cells occupy position ${position}; returned a placeholder.`);
     const labelText = typeof cell.label === "string" ? cell.label : cell.label === null || cell.label === undefined ? "" : null;
     if (labelText === null) return fail(`Cell "${String(cell.id)}" label is not a string; returned a placeholder.`);
-    const token = projectCellToken(family, labelText, chess, undefined, vocabulary);
+    const token = projectCellToken(family, labelText, chess, variant, vocabulary);
     if (token === null) {
-      return fail(`Cell "${String(cell.id)}" label ${JSON.stringify(labelText)} is not a recognised ${tokenSetName(family, chess, undefined, vocabulary)} token; returned a placeholder.`);
+      return fail(`Cell "${String(cell.id)}" label ${JSON.stringify(labelText)} is not a recognised ${tokenSetName(family, chess, variant, vocabulary)} token; returned a placeholder.`);
     }
     tokens[position] = token;
   }
@@ -467,6 +469,7 @@ export function boardFrameFromDisplayFrame(frame: DisplayFrameV1, options: Displ
     cols,
     cells: tokens.map((token) => token ?? "."),
     ...(chess ? { chess: true } : {}),
+    ...(variant ? { variant } : {}),
     ...overlay("last", options.last, rows * cols, issues),
     ...overlay("line", options.line, rows * cols, issues),
   };

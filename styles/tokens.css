@@ -278,29 +278,75 @@ input, select, textarea { font-family: inherit; }
 }
 
 /* BEGIN pachisi additive tokens
-   Additions only; every rule above is byte-identical to the Platform source
-   (tests strip this block and compare the remainder with SOURCE_MANIFEST.json).
-   Accessible result-text roles from the typed theme contract
-   (`@electronicslams/pachisi/theme-tokens`, Classic Light/Dark winText,
-   lossText, drawText). Use them for result words on --*-soft fills; the
-   --win/--loss/--draw swatches above are unchanged. */
+   Pack colours. Outcome fills carry identity; the paired text roles keep labels
+   and fine marks legible. The original Platform baseline is preserved above. */
 :root {
-  --win-text: #1c7c44;
-  --loss-text: #c23c33;
-  --draw-text: #8f6216;
+  --brand-blue: #012eb1;
+  --brand-violet: #6620a9;
+  --live: #dc3f4a;
+  --text-on-accent: #ffffff;
+  --accent: #012eb1;
+  --accent-hover: #00258c;
+  --accent-press: #001d70;
+  --accent-soft: rgba(1, 46, 177, 0.08);
+  --accent-softer: rgba(1, 46, 177, 0.045);
+  --accent-line: rgba(1, 46, 177, 0.24);
+  --win: #cde352;
+  --win-text: #4b5909;
+  --win-soft: rgba(205, 227, 82, 0.18);
+  --loss: #dc3f4a;
+  --loss-text: #a92335;
+  --loss-soft: rgba(220, 63, 74, 0.10);
+  --draw: #f6bf32;
+  --draw-text: #795303;
+  --draw-soft: rgba(246, 191, 50, 0.16);
+  --study-text: #6620a9;
+  --study-soft: rgba(102, 32, 169, 0.09);
 }
 
 :root[data-theme="dark"] {
-  --win-text: #3ec97e;
-  --loss-text: #ec6a5f;
-  --draw-text: #e0a94a;
+  --live: #dc3f4a;
+  --text-on-accent: #0b0b0d;
+  --accent: #89a7ff;
+  --accent-hover: #a2baff;
+  --accent-press: #bfd0ff;
+  --accent-soft: rgba(137, 167, 255, 0.14);
+  --accent-softer: rgba(137, 167, 255, 0.07);
+  --accent-line: rgba(137, 167, 255, 0.34);
+  --win: #cde352;
+  --win-text: #cde352;
+  --win-soft: rgba(205, 227, 82, 0.13);
+  --loss: #dc3f4a;
+  --loss-text: #ff8890;
+  --loss-soft: rgba(220, 63, 74, 0.15);
+  --draw: #f6bf32;
+  --draw-text: #f6bf32;
+  --draw-soft: rgba(246, 191, 50, 0.14);
+  --study-text: #cca3ff;
+  --study-soft: rgba(171, 111, 234, 0.14);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --win-text: #3ec97e;
-    --loss-text: #ec6a5f;
-    --draw-text: #e0a94a;
+    --live: #dc3f4a;
+    --text-on-accent: #0b0b0d;
+    --accent: #89a7ff;
+    --accent-hover: #a2baff;
+    --accent-press: #bfd0ff;
+    --accent-soft: rgba(137, 167, 255, 0.14);
+    --accent-softer: rgba(137, 167, 255, 0.07);
+    --accent-line: rgba(137, 167, 255, 0.34);
+    --win: #cde352;
+    --win-text: #cde352;
+    --win-soft: rgba(205, 227, 82, 0.13);
+    --loss: #dc3f4a;
+    --loss-text: #ff8890;
+    --loss-soft: rgba(220, 63, 74, 0.15);
+    --draw: #f6bf32;
+    --draw-text: #f6bf32;
+    --draw-soft: rgba(246, 191, 50, 0.14);
+    --study-text: #cca3ff;
+    --study-soft: rgba(171, 111, 234, 0.14);
   }
 }
 /* END pachisi additive tokens */

@@ -1,0 +1,89 @@
+game	repository	file	relationship	design
+alien-shooter	iandevlin/canvasinvaders	canvasinvaders.js	arcade relative	Browser canvas playfield for the invader formation and moving shots.
+alien-shooter	Amegma/Galaxy-Attack	screens/game.py	arcade relative	Separate Pygame play and score screens for a sprite-based shooter.
+backgammon	eamag/nard	src/components/GameBoard.svelte	game screen	Browser training board with a preview state and a separate coaching panel.
+backgammon	yavuzkrm/tavla-online	client/src/components/Board.tsx	game screen	Two-player tavla board rendered as a React component.
+bargaining	cherylwang2028/Ultimatum-game	public/index.html	related experiment	Browser interface for a dynamic two-player ultimatum experiment.
+battleship	scc416/battleship	src/Components/Display/Board/index.jsx	game screen	Board and coordinate-label components separate the playable grid from its axes.
+battleship	abdullahjamal1/battleshipBoardGame	src/draw.ts	rule variant	Island-edition Battleship drawing code; terrain changes the placement problem.
+bipedal-walker	De-Rosa/PPO-BipedalWalker	Rendering/Renderer.cs	physics relative	A dedicated C# renderer for a biped simulation with an impulse-based physics engine.
+blackjack	tukiains/blackjack-gui	blackjack_gui/table_components.py	game screen	Desktop table components keep dealer information and player controls distinct.
+boxing-style-arena	san-santra/pyboxing	main.py	arcade relative	Atari-style two-fighter boxing in a Pygame ring.
+bridge	frankwallis/redouble	src/ui/table/table.jsx	game screen	Hands and player names live on named seat edges, with separate bidding controls and history.
+bridge	juef17/LibreBridge	src/gui/CardWidget.cpp	game screen	Native desktop card widget from a dedicated contract-bridge client.
+car-racing	juzzlin/DustRacing2D	src/game/scene.cpp	physics relative	Top-down track scene with a minimap, timing overlay and crash overlay.
+cartpole	SensorsINI/CartPoleSimulation	CartPole/cartpole_drawer.py	physics relative	Cart and pendulum drawing inside a desktop control simulator.
+checkers	portnov/hcheckers	python/hcheckers/board.py	game screen	Qt painter-based draughts board, separate from the rule implementation.
+chess	Clariity/react-chessboard	src/Board.tsx	board component	Responsive React board with an independent piece layer and analysis examples.
+chess	enzomanuelmangano/react-native-chessboard	src/components/skia/board-background.tsx	board component	Native Skia board background as an alternative to a DOM checkerboard.
+connect-four	kenrick95/c4	browser/src/board/index.ts	game screen	Dedicated browser board for a red/blue Connect Four implementation.
+connect-four	zaymonoid/Connect4-3D-R3F	src/App.js	rule variant	React Three Fiber implementation of a 4×4×4 board. The extra depth is a rules change.
+crazy-eights	BNAS24/Crazy-Eights-Game	src/pages/gamepage/GameContainer.jsx	game screen	React game container and a separate modal for choosing the effect of a wild eight.
+cribbage	rheostaticsfan/CribbageBoard	app/src/main/java/com/moira/cribbage/BoardView.kt	scoring surface	Colour e-ink pegboard with touch-driven peg movement. This is a scorekeeper surface.
+cribbage	Kinsa/cribbage-board-app	components/CribbageBoard.tsx	scoring surface	A React Native cribbage board for tracking pegging positions.
+dou-dizhu	ConstStar/dou-di-zhu	poker_client.py	game screen	A dedicated landlord-game client using Pygame alongside a Tk interface.
+euchre	whtdrgn101/game-euchre	src/client/Board.tsx	game screen	Partnership trick-taking board with hand, turn and team-results panels.
+gin-rummy	lokkant/Gin-Rummy	src/scenes/layoff_scene.lua	game screen	A separate LÖVE scene for laying cards off after the hand.
+gin-rummy	alexwitting/cardgames	feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt	game screen	Native Android Gin Rummy screen inside a multi-game card application.
+go	peterblazejewicz/gobanhaus	src/app/components/Board.tsx	game screen	A dedicated interactive 9×9 Go board for a single-page browser client.
+gomoku	Hexik/Gomoku_GUI	app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt	board component	An Android board view for a generic Gomoku interface.
+gomoku	guijixzh/Inverse-Gomoku-GUI-vs-AI	web/src/board.ts	rule variant	An inverse-Gomoku board that supports a piece-movement rule absent from standard Gomoku.
+goofspiel	Metta-AI/cogame-goofspiel-oshi-zumo	client/renderer.js	game screen	A dedicated sealed-bid card renderer with a separate replay viewer.
+hanabi	nina-cohen/hanabi-ui	scripts/PaintStackManager.js	game screen	A stack-painting module within a dedicated cooperative Hanabi interface.
+hex	FutaAlice/FutaHex2	src/futahex2/canvas.cpp	game screen	Dedicated native canvas for a Hex connection board.
+ice-hockey-style-arena	ArtisVitols/hockey	src/arena/icePainter.ts	arcade relative	Rink-painting layer in a 3D hockey game; use it for markings and camera study.
+leduc-holdem	acaen007/GameLab	src/poker-app.js	game screen	Shared browser lab for Kuhn and Leduc poker, useful for making the smaller betting tree visible.
+liars-dice	mmousawy/dicebluff	src/dicebluff-client/styles/main.css	game screen	Browser dice-bluff client with a dedicated stylesheet for its game displays.
+limit-texas-holdem	ZoliQua/Texas-Holdem-Game	src/ui/Table.tsx	related table	No-limit tournament table. Its seat layout is relevant to fixed-limit poker, but its betting controls differ.
+lunar-lander	PeiP-2018-Work-Nantes-DUT-INFO/Planet-Lander-Lunar-Lander-with-Pygame	states/game.py	physics relative	Separate Pygame flight state for a planetary landing game.
+mahjong	junosan/Nama	code/glwidget.cpp	game screen	Qt/OpenGL widget from a riichi Mahjong client. Its rules extend beyond the compact bundled game.
+nine-mens-morris	farindk/morris	src/gtkcairo_boardgui.cc	game screen	GTK/Cairo rendering of the mill board and its playing pieces.
+no-limit-texas-holdem	ZoliQua/Texas-Holdem-Game	src/ui/Table.tsx	game screen	React tournament table with its own scoped table stylesheet.
+othello	felipeap92/othello-game	othello-gui/src/components/Board.tsx	game screen	Standalone React board in a Reversi client with multiplayer support.
+paddle-ball	akshatjain02/Breakout	Breakout.css	arcade relative	Breakout playfield presentation; brick destruction differs from the bundled paddle rally.
+pentago	Starfox64/Pentago	src/pentagoGUI.py	game screen	Dedicated Python graphical interface for Pentago.
+first-price-sealed-bid-auction	TiantianFlow/qiju	apps/web/src/pages/Table.tsx	auction relative	Four-seat sealed-bid table with a lot board and a round-by-round event feed. The Core two-bidder payoff is not established here.
+cliff-walking	Sebastian-Griesbach/MonsterCliffWalking	monstercliffwalking.py	rule variant	A rendered cliff grid with an additional moving hazard. Keep monster state separate from the standard cliff.
+frozen-lake	AlecWaumans/ML-FrozenLake	frozen_lake_enhanced.py	physics relative	An enhanced Pygame grid renderer for the stochastic lake environment.
+hearts	wesmcd6/Game-of-hearts	style.css	game screen	Browser reconstruction of the classic desktop Hearts presentation.
+hearts	Rescator7/Hearts2	cardscene.cpp	game screen	A native Qt card scene for Hearts. Its standard table differs from the compact two-player trace.
+mancala	Noah-Vincenz/ProjectCrawl	src/main/java/com/noahvincenz/oware/view/GameBoardView.java	rule variant	Oware board view for the Mancala family. Pit and capture conventions must be checked before reuse.
+mancala	togiberlin/kalah_mancala	static/kalahMancala/gameScreenStyle.css	rule variant	Kalah game-screen styling for a web board and its stores.
+mountain-car	subhamdangar/MountainCar-Reinforcement-Learning	fancy_mountaincar.py	physics relative	Custom Pygame presentation of the mountain-car task, separate from its training loop.
+negotiation	lnwcode2003eiei/the-inner-circle	src/components/TradingCard.tsx	related experiment	An SVG trading-card surface for a multiplayer negotiation game. Core negotiates price and delivery instead.
+prisoners-dilemma	Taku0172/Repeated-Prisoners-Dilemma-Simulator	index.html	rule variant	Interactive repeated-game strategy simulator with implementation errors; useful for a history view.
+rock-paper-scissors	digamjain/Rock-Paper-Scissors-GUI	Stone-Paper-scissors/Rock-Paper-Scissors.py	game screen	A dedicated graphical single-player gesture-selection interface.
+shedding-card-game	NiyiOke/open-shed-card-engine	app/components/GameTableCanvas.tsx	rule variant	Canvas table for an extensible multiplayer shedding game. Compare rank/suit rules before adoption.
+shedding-card-game	intrepion/kata-inspired-by-uno-codex-dot	src/style.css	rule variant	Prism Relay's browser table and card styling for a related shedding game.
+shogi	pentla/shogi-board	src/components/Board/CapturedPieceBoard/index.tsx	board component	Reserve-piece board kept separate from the main grid, useful for representing drops.
+spades	sruckh/spades-coach	src/ui/Table.tsx	game screen	A trick-taking table paired with a coaching view; the coaching information needs a distinct spectator policy.
+taxi	agrawalanshika/Routemind-AI	index.html	physics relative	Interactive browser simulation of Taxi-v3. Treat its presentation separately from the learned policy.
+tic-tac-toe	vlokesh7/Dynamic-Tic-Tac-Toe-Game-with-Python-Tkinter	TicTacToe.py	game screen	A desktop Tkinter noughts-and-crosses interface.
+ultimate-tic-tac-toe	chacestew/u3t	client/src/Components/GameArea/LocalBoard/LocalBoard.tsx	game screen	A local-board component inside the larger multiplayer game area; useful for nested-board feedback.
+ultimate-tic-tac-toe	PhilAldridge/REACT-Ultimate-tic-tac-toe	src/bigBoard.js	game screen	A React macro-board for composing the nine smaller boards.
+xiangqi	xiewang233/XiangqiAI	gui/board_view.py	game screen	Pygame board view separated from the Xiangqi search engine.
+xiangqi	Velithia/JieqiBox	src/components/Chessboard.vue	rule variant	Desktop board for Jieqi, a hidden-piece relative of Xiangqi. Face-down identities need a private-state contract.
+backgammon	mvichosfm/plakoto	src/effects.js	rule variant	A three-dimensional tavli presentation with board effects, lessons and puzzles. Plakoto pins opposing checkers.
+bargaining	IMC-Lab/UG-causation	exp/exp-accept.js	related experiment	An ultimatum-game acceptance interface built from experimental response controls. Participant data are excluded.
+bipedal-walker	andrefkruger/walker-ai	render/renderer.py	physics relative	Pygame visualizer kept separate from the Box2D locomotion training code.
+blackjack	JHoff1/NeonTableGames	src/blackjack/BlackjackTable.tsx	game screen	Browser table with explicit face-down cards, suit marks and visible rank corners.
+boxing-style-arena	ujjwalkrmfp16-creator/air-boxing-prototype	air_boxing_vs_fast_stable.py	interaction relative	Webcam pose feedback is a different input and display treatment from the discrete arena.
+bridge	yurets-16/handviewer	handviewer.html	board component	A single-page deal viewer with a rotate control, useful for comparing seat viewpoints.
+chess	andrew-wilkes/godot-chess	src/Board.gd	board component	Godot Control-based board with its own pieces scene, an alternative to web layout.
+chess	luisfer-cli/gui-dgt-sim	src/board_widget.rs	board component	Rust egui widget that centres piece glyphs on their ink bounds for a digital board.
+crazy-eights	hakon1233/card-games	components/game/table-display-settings.tsx	shared table	Display-settings component shared across several card games including Crazy Eights.
+dou-dizhu	DavidWang1231/doudizhu-online	css/style.css	game screen	A browser landlord-game stylesheet to compare against the Pygame client.
+first-price-sealed-bid-auction	20010208/blind-auction	public/index.html	auction relative	A timed browser bidding interface for a sealed-bid strategy game. Verify the settlement rule independently.
+go	ale64bit/WeiqiHub	lib/board/board_annotation.dart	board component	Flutter board annotations for a Go client with puzzle support.
+go	popojan/goban	src/main.cpp	board component	A three-dimensional goban rendered through a GLSL ray-tracing interface.
+go	cbelsole/easygo	web/src/components/Board.tsx	board component	Browser Go board used alongside KataGo analysis and joseki recognition.
+hanabi	krinj/hanabi-simulator	py_hanabi/interface/widget_board_info.py	game screen	Board-information widget separate from game controls in an agent-assisted Hanabi interface.
+hex	eliaxyzz/HEX	src/ui/background_renderer.cpp	game screen	Desktop Hex client with a separately drawn game background.
+negotiation	issamoham-art/cargo-game	index.html	related experiment	A browser shipping negotiation exercise, useful as an alternative negotiation-room composition.
+nine-mens-morris	LouisRadek/muehle	src/ui/game.rs	game screen	Rust game screen for the mill board, complementing the Cairo implementation.
+othello	batuhanisik751/JavaHexagonalReversi	src/main/java/cs3500/reversi/view/FxReversiCanvas.java	rule variant	JavaFX canvas for hexagonal Reversi. Six neighbour directions change flipping and valid moves.
+pentago	DevJac/gloss-pentago	src/Main.hs	game screen	Haskell/Gloss rendering provides an alternative desktop treatment for the rotating quadrants.
+rock-paper-scissors	doyBrian/RPS-Multiplayer	index.html	game screen	Two-player browser layout for simultaneous gesture choices.
+shogi	OsakiTsukiko/lishogi-client	src/core/main_screen/tabs/play_tab/game.tscn	game screen	Godot play-tab scene for a desktop shogi client.
+spades	indiagames/spade	frontend/src/features/room/Table.tsx	game screen	A dedicated table component in a real-time multiplayer Spades room.
+tic-tac-toe	razvan404/tic-tac-toe-multiplayer	Client/src/main/resources/application/gui/css/style.css	game screen	Desktop client styling for a networked noughts-and-crosses board.

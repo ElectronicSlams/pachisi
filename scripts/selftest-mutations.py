@@ -5,9 +5,10 @@ produce a new, un-allowlisted FAIL or RENDER finding for that game, proving the
 validator would catch it. Stdlib only:
     python3 -I scripts/selftest-mutations.py [--repo PATH]
 """
-import argparse, copy, importlib.util, json, sys, tempfile
+import argparse, copy, importlib.util, json, sys, tempfile, subprocess
 from pathlib import Path
 
+sys.dont_write_bytecode = True
 HERE = Path(__file__).resolve().parent
 _spec = importlib.util.spec_from_file_location("validate_demonstrations", HERE / "validate-demonstrations.py")
 v = importlib.util.module_from_spec(_spec)
@@ -39,6 +40,14 @@ def mutations():
     yield m("mahjong", lambda d: d["frames"][3]["state"].__setitem__("wall_count", 70), "wall grows")
     yield m("goofspiel", lambda d: d["frames"][-1]["state"]["points"].__setitem__("player_1", 9), "points miscount")
     yield m("paddle-ball", lambda d: d["frames"][18]["state"].__setitem__("paddle_x", 0.5), "paddle teleport")
+    yield m("car-racing", lambda d: d["frames"][3]["state"]["car"].__setitem__("lane", 0.3), "lane teleport")
+    yield m("car-racing", lambda d: d["frames"][3]["state"]["car"].__setitem__("speed", 0.17), "throttle mismatch")
+    yield m("car-racing", lambda d: d["frames"][3]["state"]["car"].__setitem__("progress", 0.6), "progress teleport")
+    yield m("bipedal-walker", lambda d: d["frames"][3]["state"]["walker"].__setitem__("torso_angle", 0.1), "torso rotation mismatch")
+    yield m("bipedal-walker", lambda d: d["frames"][3]["state"]["walker"].__setitem__("energy", 95), "wrong energy cost")
+    yield m("bipedal-walker", lambda d: d["frames"][3]["state"]["walker"].__setitem__("velocity", 0.1), "terrain velocity mismatch")
+    yield m("lunar-lander", lambda d: d["frames"][3]["state"]["lander"].__setitem__("vx", 0.04), "unearned lateral thrust")
+    yield m("lunar-lander", lambda d: d["frames"][3]["state"]["lander"].__setitem__("vy", 0.04), "unearned main thrust")
     # Ball dynamics (review F8): each changes only the ball, never the paddle or bounces.
     yield m("paddle-ball", lambda d: d["frames"][20]["state"]["ball"].__setitem__("x", 0.01), "ball x teleport (0.94464 -> 0.01)")
     yield m("paddle-ball", lambda d: d["frames"][30]["state"]["ball"].__setitem__("vx", -0.05), "ball velocity jump")
@@ -61,6 +70,10 @@ def main():
     ok, n = True, 0
     with tempfile.TemporaryDirectory() as tmp:
         t = Path(tmp); (t / "src/game").mkdir(parents=True)
+
+        fixture = Path("scripts/fixtures/synthetic-validation-actions.json")
+        (t / fixture).parent.mkdir(parents=True)
+        (t / fixture).write_bytes((o.repo / fixture).read_bytes())
 
         def write_sources(override=None):
             for name, text in sources.items():
@@ -87,8 +100,10 @@ def main():
             reps, _ = v.run(t, known)
             rep = {s: r for s, _, r in reps}[slug]
             hit = any(lvl in ("FAIL", "RENDER") and (lvl, fr, msg) not in before for lvl, fr, msg, _ in rep.issues)
+            command = subprocess.run([sys.executable, "-I", str(HERE / "validate-demonstrations.py"), "--repo", str(t)], capture_output=True, text=True)
+            hit = hit and command.returncode == 1
             ok &= hit; n += 1
-            print(f"{'caught' if hit else 'MISSED'}  {slug:22s} {label} ({name})")
+            print(f"{'caught' if hit else 'MISSED'}  {slug:22s} {label} ({name}, CLI exit {command.returncode})")
     print(f"selftest: {n} planted errors, {'all caught' if ok else 'SOME MISSED'}")
     sys.exit(0 if ok else 1)
 
