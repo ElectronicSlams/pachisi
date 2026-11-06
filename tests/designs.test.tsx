@@ -76,6 +76,13 @@ test('replayTraceKey follows trace content, not object identity', () => {
   const copy: Demonstration = JSON.parse(JSON.stringify(base));
   assert.equal(replayTraceKey('chess', { ...base }), replayTraceKey('chess', base));
   assert.equal(replayTraceKey('chess', copy), replayTraceKey('chess', base));
+  function reorder(value: unknown): unknown {
+    if (Array.isArray(value)) return value.map(reorder);
+    return value && typeof value === 'object'
+      ? Object.fromEntries(Object.entries(value).reverse().map(([key, item]) => [key, reorder(item)]))
+      : value;
+  }
+  assert.equal(replayTraceKey('chess', reorder(base) as Demonstration), replayTraceKey('chess', base), 'JSON property order does not reset a replay');
   assert.notEqual(replayTraceKey('chess', { ...base, frames: base.frames.slice(0, 4) }), replayTraceKey('chess', base));
   assert.notEqual(replayTraceKey('chess', { ...base, version: base.version + 1 }), replayTraceKey('chess', base));
   const edited = JSON.parse(JSON.stringify(base)) as { frames: { caption: string }[] };

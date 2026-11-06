@@ -127,7 +127,8 @@ window.pachisiStudyProbe = async host => {
 function ReplayHost({ trace }: { readonly trace: Demonstration }) {
  const [tick,setTick]=useState(0);
  useEffect(()=>{const id=setInterval(()=>setTick(t=>t+1),50);return()=>clearInterval(id);},[]);
- return <div data-host-tick={tick}><GameReplay game="chess" gameName="Chess" demonstration={{...trace}}/></div>;
+ const frames=trace.frames.map(frame=>tick%2 ? {...frame} : Object.fromEntries(Object.entries(frame).reverse()) as typeof frame);
+ return <div data-host-tick={tick}><GameReplay game="chess" gameName="Chess" demonstration={{...trace,frames}}/></div>;
 }
 declare global { interface Window { pachisiReplayHostProbe?: (host: HTMLElement) => Promise<{afterNext:string|null;afterRerenders:string|null;ticks:number;afterSwap:string|null}>; } }
 window.pachisiReplayHostProbe = async host => {

@@ -521,7 +521,7 @@
       "target": "src/theme-tokens/snapshot.ts",
       "sourceSha256": "281a8474eff66fa43d5d5c2a396a9b8a5b27ccf13fe1605c73722271914c570c",
       "adapted": true,
-      "targetSha256": "72c39ba627db606d643b963066ff46cc4b56899bf2e8e194fd036ab903d37673"
+      "targetSha256": "5b13c710f2dfec2d17941fe12cd55003406fbf796b32b165b58d81f83ee2d148"
     },
     {
       "source": "packages/theme-tokens/src/index.ts",
@@ -536,7 +536,7 @@
       "target": "tests/contract.test.tsx",
       "sourceSha256": "6ad1b78b5b0af858ac09d3333da3630752b15feaed623d1da3cb53534c9fd0cd",
       "adapted": true,
-      "targetSha256": "d8aed7ec24057520c3d53f819f05f4db7ffad0b1f66691c8b0a89cf3eac645e3"
+      "targetSha256": "2e6c5e85f8442f20dd042f645760dc51f9d655c174c53d0531d928b65528195b"
     },
     {
       "source": "apps/web/tests/arena-interactions.test.ts",
@@ -607,7 +607,9 @@
         "sources": [
           {
             "path": "design-archive/arena-app/eSlams Arena App.html",
-            "sha256": "50c8ea46bf344c3827108ccccaa3743f3a793f429d0d758e3d0aa05217ea733f"
+            "sha256": "09431e0f93f3cf008e5de3e5baa74fd323ad77f119e5bc8963c050fc25af24de",
+            "originalSha256": "50c8ea46bf344c3827108ccccaa3743f3a793f429d0d758e3d0aa05217ea733f",
+            "modification": "Provider SVGs omitted and auth icons replaced with a generic account outline; game art unchanged."
           }
         ]
       },

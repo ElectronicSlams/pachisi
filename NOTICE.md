@@ -18,11 +18,11 @@ Two folders hold historical or verbatim material. Neither is compiled, imported 
 - **Playing cards (56 SVGs)**: generated with the me.uk card generator and released under CC0 1.0 Universal (public domain). No attribution is required. Each vendored `SOURCE.md` records the options and date.
 - **Mahjong tiles (45 SVGs)**: licensed under **Creative Commons Attribution 4.0 International** (https://creativecommons.org/licenses/by/4.0/). The base set is FluffyStuff `riichi-mahjong-tiles` (commit `26e127ba2117f45cdce5ea0225748cc0cfad3169`, CC0). The flower and season faces come from the `xhokir/riichi-mahjong-tiles` fork (commit `19d72ff5cf9ad9c401188734f80cef7e6c8c6140`), which licenses its complete vendored set under CC BY 4.0. Credit: FluffyStuff and xhokir, with files optimized (SVGO) and renamed by eSlams. Keep the vendored `SOURCE.md` with these files, and carry this attribution into any product that ships them.
 
-### Embedded provider logos: open decision
+### Provider artwork policy · 6 November 2026
 
-The `ElectronicSlams/pachisi` repository is public. Two archived Arena prototype files, `design-archive/arena-app/prototype/src/assets.js` and `design-archive/arena-app/eSlams Arena App.html`, embed third-party provider logos as `data:` URIs. They cannot be separated from those files by simple exclusion. Their redistribution basis has not been established. A founder or legal decision on keeping them or stripping the data URIs (or the two files) is pending and has not been recorded here. Whatever is decided, git history retains the bytes of every committed version. Standalone provider-mark folders (the 61-SVG provider marks pack, the Stadium prototype provider marks and the Arena pack's provider logo folders) were deliberately excluded from the repository.
+The repository is public. The 61 inline provider SVGs have been removed from both `design-archive/arena-app/prototype/src/assets.js` and `design-archive/arena-app/eSlams Arena App.html`; provider auth icons now use a generic account outline. The prototype's existing text/initial fallback remains usable. First-party eSlams brand PNG data URIs are retained. Earlier versions of this notice incorrectly described the inline provider SVGs as data URIs. Git history retains prior versions; this change does not rewrite history.
 
-The rule for the supported package is unchanged: nothing in `src/` bundles provider marks. Consumers supply provider marks where they have the appropriate rights. Nothing in the archive grants a trademark licence.
+Provider marks are host-supplied in the supported package and omitted from the current Arena archive. Standalone provider-mark folders remain excluded. Nothing in the archive grants a trademark licence.
 
 JetBrains Mono is distributed under the SIL Open Font License in `assets/fonts/OFL.txt`. Its original filename and bytes are preserved. System sans fonts are referenced but not redistributed.
 
@@ -56,4 +56,4 @@ The copyleft sources are:
 - Public games, GPL-3.0-or-later: `lichess-org--chessground`, `wandererxii--shogiground`, `gbtami--chessgroundx`.
 - Public games, GPL-3.0: `hanabi-live--hanabi-live`.
 
-These files are verbatim snapshots with their licence documents. They are not built, not imported by `src/` or `catalogue/`, and not in the package tarball. Whether to replace the copyleft snapshots with link-only pins (keeping the `SOURCES.json` commits and manifest hashes) is a pending legal decision. This notice describes the current state; it is not a legal ruling.
+These files retain their upstream licence documents and original bytes, except for the explicitly recorded Spades README credential redaction. They are not built, not imported by `src/` or `catalogue/`, and not in the package tarball. Repository decision (6 November 2026): retain these separately attributed research snapshots, including copyleft references, for source inspection and reproducibility. They are not converted to MIT contributions or linked into the supported package. A proposed implementation port must be reviewed separately against its source licence; keeping a reference is not approval to ship it in a product.

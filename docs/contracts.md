@@ -80,7 +80,7 @@ Two fields in `src/game/game-demonstrations.json` are added by Pachisi's generat
 | `MOBILE_MINIMUM_APP_VERSION` | `1.0.0` (carried in `SceneEnvelope.minimumAppVersion`) |
 | `GameRenderSpec.schemaVersion` | `eslams.game.render.v1` |
 
-These match Platform `0fa7dfe`. Change them only alongside the Platform/Core contract.
+These wire-contract constants match Platform `0fa7dfe`. Change them only alongside the Platform/Core contract. The separate visual snapshot constant `THEME_TOKEN_SNAPSHOT_VERSION` is `pachisi.theme-tokens.v2`, identifying Pachisi’s changed palette. It does not change the v1 `themeTokenVersion` in Platform scene envelopes. Consumers comparing visual fixtures must refresh their palette snapshot explicitly.
 
 ## Privacy checks and their limitation
 
@@ -100,3 +100,9 @@ Neon, Club, Arcade and Midnight are archived mobile reference palettes. `THEME_C
 ## Checkers live frames
 
 For `gameSlug: "checkers"` and `rendererFamily: "square_board"`, the live adapter preserves `r` and `b` men, and `R` and `B` kings. The resulting frame has `variant: "checkers"`. Hosts using another slug can pass `variant: "checkers"` explicitly. Unrecognized labels produce a placeholder and issues. Legal moves and multi-jump paths come from the host.
+
+## Ownership decisions · 6 November 2026
+
+Pachisi owns reusable board/table rendering, game design materials, public replay controls and accessible position inspection. Platform keeps authentication, model/provider resolution, live subscriptions, legal-action submission, clocks, routing and public/private state projection. Existing Platform viewer files remain references; port their presentation parts only when a concrete consumer supplies a tested public contract.
+
+A future `TableFrame` must explicitly describe seats, visible/hidden cards, board/discards, pot/commitments and turn/contract metadata. The current cell-oriented `DisplayFrameV1` cannot supply these by inference, so `card_table` continues to fail closed through the adapter. Bridge dummy rendering depends on Core exposing dummy identity/cards after the opening lead, and must never reconstruct them from private hands. This is a separate API change, not a speculative addition to this maintenance PR.

@@ -24,25 +24,26 @@ export type GameReplayProps<G extends string = string> = {
   readonly variantNote?: string | null;
 };
 
-function fnv1a(text: string) {
-  let hash = 0x811c9dc5;
-  for (let i = 0; i < text.length; i += 1) hash = Math.imul(hash ^ text.charCodeAt(i), 0x01000193);
-  return (hash >>> 0).toString(36);
-}
 /**
  * Identity of a replay trace by content, not object identity: a host that re-renders
  * with an equal but new `demonstration` object keeps the viewer's frame; a different
  * trace (game, version, length or any frame) starts again at frame 0.
  */
 export function replayTraceKey(game: string, demo: Demonstration): string {
-  return `${game}:${demo.version}:${demo.frames.length}:${fnv1a(JSON.stringify(demo.frames))}`;
+  // Object property order is not replay content. Keep the canonical serialization
+  // instead of a short hash so distinct traces cannot collide and retain playback.
+  const frames = JSON.stringify(demo.frames, (_key, value: unknown) =>
+    value && typeof value === "object" && !Array.isArray(value)
+      ? Object.fromEntries(Object.entries(value).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0))
+      : value);
+  return JSON.stringify([game, demo.version, frames]);
 }
 
 /** Explicit, paused-by-default transport. Never interpolates or simulates an action. */
 export function GameReplay<G extends string>(props: GameReplayProps<G>) {
   const demo = props.demonstration ?? demonstrationFor(props.game);
-  // Hashing runs only when the host hands over a new object, not on every render.
-  const traceKey = useMemo(() => demo ? replayTraceKey(props.game, demo) : "", [props.game, demo]);
+  // A fresh wrapper around the same immutable frames needs no serialization.
+  const traceKey = useMemo(() => demo ? replayTraceKey(props.game, demo) : "", [props.game, demo?.version, demo?.frames]);
   if (!demo || !demo.frames.length) return <p role="status">Replay unavailable</p>;
   return <ReplaySequence design={resolveGameDesign(props.game, props.design)} key={traceKey} game={props.game} gameName={props.gameName} demonstration={demo} variantNote={props.variantNote} />;
 }

@@ -143,19 +143,19 @@ Goofspiel `committed` is a Pachisi-synthesised spectator field, not Core public 
 generator adds it to the sealed-choice frames (`["player_1"]` after the first bid of a round,
 empty once both bids resolve), and the validator now checks it against that rule.
 
-## Known Core issues to file upstream
+## Tracked Core follow-ups
 
 These come from Core's public state or variants. The renderer cannot fix them, and regenerating
-the traces from the same pin reproduces them. Only Hanabi has an upstream issue so far; filing
-the others on `ElectronicSlams/eSlams` is still to do.
+the traces from the same pin reproduces them. The follow-ups below are filed on `ElectronicSlams/eSlams`. Relevant source was inspected at current Core `c0b17aab8d88567f9e634bc7ecda98db8d9b77c2` on 6 November 2026; execution/reproduction here remains pinned to the artwork commit. Compact-rule questions are requests to enforce or explicitly declare the intended variant.
 
 | Issue | Where | Validator | Upstream |
 |---|---|---|---|
-| Taxi: after dropoff the passenger is reported back at the pickup point `[0,0]` instead of the destination `[4,0]` | `taxi` frame 10 | `KNOWN` (allowlisted). The scene hides the waiting marker on the delivered frame. | Not filed |
-| Hearts: the first trick is led with 3H instead of 2C, and hearts are led before being broken | `hearts` frame 1 | `RULE` | Not filed |
-| Spades: spades are led before being broken while the leader still holds a club | `spades` frame 9 | `RULE` | Not filed |
+| Taxi: after dropoff the passenger is reported back at the pickup point `[0,0]` instead of the destination `[4,0]` | `taxi` frame 10 | `KNOWN` (allowlisted). The scene hides the waiting marker on the delivered frame. | [eSlams#302](https://github.com/ElectronicSlams/eSlams/issues/302) |
+| Hearts: the first trick is led with 3H instead of 2C, and hearts are led before being broken | `hearts` frame 1 | `RULE` | [eSlams#303](https://github.com/ElectronicSlams/eSlams/issues/303) |
+| Spades: spades are led before being broken while the leader still holds a club | `spades` frame 9 | `RULE` | [eSlams#304](https://github.com/ElectronicSlams/eSlams/issues/304) |
 | Hanabi: discards are made while holding 8 clue tokens | `hanabi` frames 4-6 | `RULE` | ElectronicSlams/eSlams#182, closed on 8 October 2026; the trace at the artwork pin still shows the behaviour |
-| Leduc Hold'em is seated 4-handed; it is a 2-player game | `leduc-holdem` | `RULE` | Not filed |
+| Leduc Hold'em is seated 4-handed; it is a 2-player game | `leduc-holdem` | `RULE` | [eSlams#305](https://github.com/ElectronicSlams/eSlams/issues/305) |
+| Bridge: dummy cards are absent from public state after the opening lead | `bridge` | `RENDER`; Core must expose the public hand before a renderer can show it | [eSlams#306](https://github.com/ElectronicSlams/eSlams/issues/306) |
 | Resolved: Limit and No-limit hold'em demos used to be frame-for-frame identical (the generator always picked "check"). Each variant now follows its own scripted betting plan at the same pin | `scripts/generate-demonstrations.py` `POKER_PLANS` | `PASS`; poker checks now cover bet/raise/call/all-in sizes, folds and the pot ledger | Not applicable (Pachisi generator plan, not a Core defect) |
 
 Other variant deviations: Hearts, Spades and Euchre are 2-player; Hanabi uses 2 colours and 12

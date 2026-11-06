@@ -7,12 +7,13 @@ Post-merge hygiene for the November work on `main` (`486aa05`). No export was re
 - Fixed: `GameReplay` no longer resets to the first frame when a host re-renders with an inline `demonstration` object.
 - The physics validator now checks Goofspiel `committed` and Pentago `placement`. Six new planted corruptions bring the self-test to 44 planted errors.
 - Hold'em traces regenerated at the same pin (`7731e2f`) with scripted betting plans: Limit shows bet, call, raise and fold to a showdown, No-limit shows bet:2, raise:4, bet:4, fold, call and all-in, and Leduc shows bet, call, fold and raise, so the Limit and No-limit demos no longer match. The poker validator now checks action sizes, folds, street commitments and the pot ledger, with four new planted corruptions (48 in all), and seats show chips committed on the street. The bundled set is now 745 frames and 695 transitions.
-- `GameReplay`, `GameAnimation` and `Board` validate the `design` prop against the designs registered for the game.
+- `GameReplay`, `GameAnimation` and `LegalDemonstration` validate the `design` prop against the designs registered for the game.
 - The catalogue lazy-loads its census, sweep, source and coverage JSON.
 - The package tarball no longer includes `docs/captures` or `docs/research`.
 - The Connect Four local round has a short accessible label instead of the raw cell list.
 - Docs sweep: current trace and self-test counts, one changelog order, README repository layout, subpath exports and physics readiness restored, inventory exports, physics regeneration instructions and the list of Core issues still to file upstream.
-- `NOTICE.md` states the public repository status as a fact, keeps the provider-logo decision open, and lists the licence families and named copyleft sources in the reference collections.
+- `NOTICE.md` states the public repository status as a fact, records provider artwork removal and retention of separately licensed references, and lists the licence families and named copyleft sources in the reference collections.
+- Review follow-up: replay identity ignores object key order and avoids short-hash collisions; the browser host test now reorders frame fields. Pachisi palette snapshots use `pachisi.theme-tokens.v2`, separately from Platform’s v1 wire reference.
 - Local CI evidence in `docs/validation/` is re-recorded with `pnpm ci:local` after these changes.
 
 ## 0.2.0 working collection · 6 November 2026

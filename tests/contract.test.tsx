@@ -6,7 +6,7 @@ import {
  SCENE_BUILDER_REGISTRY, adaptPublicStateToDisplayFrame, assertBoardSceneSafe, assertPublicReplaySafe, buildSceneEnvelope,
  collectNonRenderableFieldIssues, displayFrameAsLegacyRecord, parseDisplayFrame, parseRendererFamily,
 } from '../dist/contract/index.js';
-import { BRAND_COLORS, CLASSIC_DARK, CLASSIC_LIGHT, THEMES, THEME_IDS, TOKEN_CSS_VARIABLES, TOKEN_NAMES, resolveTheme } from '../dist/theme-tokens/index.js';
+import { createThemeVisualSnapshot, THEME_TOKEN_SNAPSHOT_VERSION, BRAND_COLORS, CLASSIC_DARK, CLASSIC_LIGHT, THEMES, THEME_IDS, TOKEN_CSS_VARIABLES, TOKEN_NAMES, resolveTheme } from '../dist/theme-tokens/index.js';
 
 // Ported from eSlamsPlatform@0fa7dfe packages/game-render-contract/tests/game-render-contract.test.ts.
 const legacyFrame = {
@@ -123,6 +123,8 @@ test('enforces exact action-target and accessibility graph integrity', () => {
 });
 
 test('Classic palette roles agree in typed, manual and system themes', async () => {
+ assert.equal(THEME_TOKEN_SNAPSHOT_VERSION, 'pachisi.theme-tokens.v2');
+ assert.equal(createThemeVisualSnapshot().snapshotVersion, THEME_TOKEN_SNAPSHOT_VERSION);
  assert.deepEqual([...THEME_IDS], ['classic-light', 'classic-dark', 'neon', 'club', 'arcade', 'midnight']);
  for (const id of THEME_IDS) { assert.deepEqual(Object.keys(THEMES[id].color), [...TOKEN_NAMES]); assert.equal(Object.isFrozen(THEMES[id].color), true); }
  assert.equal(resolveTheme('system', 'dark').id, 'classic-dark');
