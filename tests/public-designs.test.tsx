@@ -22,15 +22,26 @@ test('public design library maps exactly all 50 games and preserves coverage bou
  assert.match(collection.games.find(g=>g.slug==='backgammon')!.ruleVariantNote!,/5 checkers/);
 });
 
-test('all imported files match the pinned Git blobs and SHA-256 evidence',async()=>{
+test('all imported files match pinned provenance and declared credential redactions',async()=>{
  assert.equal(manifest.files.length,selection.sources.reduce((n,s)=>n+s.files.length,0));
  assert.equal(collection.summary.files,manifest.files.length);
  for(const entry of manifest.files){
   const bytes=await readFile(entry.path);
   assert.equal(bytes.length,entry.bytes,entry.path);
   assert.equal(createHash('sha256').update(bytes).digest('hex'),entry.sha256,entry.path);
-  assert.equal(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),entry.gitBlob,entry.path);
-  assert.equal(entry.modified,false);
+  const upstream=selection.sources.find(s=>s.id===entry.sourceId)!.files.find(f=>f.path===entry.upstreamPath)!;
+  assert.equal(entry.gitBlob,upstream.gitBlob,entry.path);
+  if(upstream.redaction){
+   assert.equal(entry.sourceId,'mreishus--spades');assert.equal(entry.upstreamPath,'README.md');
+   assert.equal(entry.modified,true);assert.equal(entry.redaction,'mailgun-api-key');
+   assert.equal(entry.sha256,upstream.redaction.sha256);assert.equal(entry.bytes,upstream.redaction.bytes);
+   assert.equal(bytes.toString().split('REDACTED_MAILGUN_API_KEY').length-1,2);
+   assert.equal(upstream.redaction.occurrences,2);
+   assert.doesNotMatch(bytes.toString(),/\b(?:key-[0-9a-fA-F]{32}|[0-9a-fA-F]{32}-[0-9a-fA-F]{8}-[0-9a-fA-F]{8})\b/);
+  }else{
+   assert.equal(createHash('sha1').update(`blob ${bytes.length}\0`).update(bytes).digest('hex'),entry.gitBlob,entry.path);
+   assert.equal(entry.modified,false);
+  }
  }
 });
 

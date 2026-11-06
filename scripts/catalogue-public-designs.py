@@ -9,7 +9,7 @@ search=json.loads((ROOT/'docs/research/github-design-search-2026-11-01.json').re
 sources=[]
 for source in selection['sources']:
     s={k:v for k,v in source.items() if k!='files'}
-    s['fileCount']=len(source['files']);s['bytes']=sum(f['bytes'] for f in source['files'])
+    s['fileCount']=len(source['files']);s['bytes']=sum(f.get('redaction',f)['bytes'] for f in source['files'])
     s['url']=f'https://github.com/{s["repository"]}/tree/{s["commit"]}'
     s['snapshotPath']=f'reference/public-games/sources/{s["id"]}@{s["commit"][:12]}'
     s['licensePaths']=[f['path'] for f in source['files'] if Path(f['path']).name.lower().startswith(('license','licence','copying','notice'))]
@@ -49,7 +49,7 @@ The actual files live in [reference/public-games](../../reference/public-games/R
 - Native, SVG, canvas, DOM, React, Flutter and desktop board renderers; card-table and trick-play layouts; bidding/clue controls; control-task geometry and physics references.
 - 148 SVGs: 80 original CC0 Mahjong tile faces/backs across two styles, 66 shared playing-card designs with upstream MIT/public-domain provenance, and two MIT Go stones.
 - Original licenses, copyright headers, README attribution and applicable NOTICE files accompany the verbatim code/assets. Source code licensed under GPL/AGPL stays visibly identified as copyleft reference material. Nothing is relicensed as MIT merely by being in this repository.
-- No missing-license source, noncommercial audio, Staunty chess art, Minecraft font, ROMs, provider logos, game logs, trained models or credentials were imported. Root licenses were checked against README asset exceptions and nested license paths. The licenses are upstream declarations, not a warranty that every possible downstream use is cleared.
+- No missing-license source, noncommercial audio, Staunty chess art, Minecraft font, ROMs, provider logos, game logs or trained models are included. Two credentials found in the Spades README during release validation were redacted before publication, with the original blob and sanitized hash recorded. Root licenses were checked against README asset exceptions and nested license paths. The licenses are upstream declarations, not a warranty that every possible downstream use is cleared.
 
 ## Every game and its variants
 
@@ -75,7 +75,7 @@ Unlicensed Goofspiel repositories and auction examples remain linked in the sear
 
 ## Local validation and maintenance
 
-Run `pnpm check:design-sources` for offline hash/blob/path/selection verification. It validates original bytes and never executes upstream code. `python3 -I scripts/import-public-designs.py` can fetch missing selected blobs at the recorded commits; it will not silently overwrite existing snapshots. `python3 -I scripts/catalogue-public-designs.py` regenerates the authored catalogue index and this report from the reviewed metadata.
+Run `pnpm check:design-sources` for offline hash/blob/path/selection verification. It validates original bytes and declared credential redactions, and never executes upstream code. `python3 -I scripts/import-public-designs.py` can fetch missing selected blobs at the recorded commits; it will not silently overwrite existing snapshots. `python3 -I scripts/catalogue-public-designs.py` regenerates the authored catalogue index and this report from the reviewed metadata.
 
 The collection is excluded from the package, source compilation and application imports. Full Pachisi local CI verifies catalogue behavior and package boundaries; it does not certify or test upstream applications. Future adoption requires porting a specific design under its own license, updating the source manifest and adding Pachisi behavioral/geometry/accessibility tests.
 '''

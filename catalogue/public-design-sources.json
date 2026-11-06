@@ -9,7 +9,7 @@
     "deepInspections": 49,
     "repositories": 38,
     "files": 443,
-    "bytes": 12953495
+    "bytes": 12953443
   },
   "scope": "57 targeted repository queries across all 50 Pachisi identities, top five candidates by stars, supplemented by known primary renderer projects. Search results are discovery evidence, not endorsements or license clearance. This is not every public GitHub repository.",
   "sources": [
@@ -413,9 +413,9 @@
         "spades"
       ],
       "idea": "Partnership seating, table rotation, card primitives and scoring.",
-      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed. Two Mailgun API key occurrences are redacted from the archived README; original pin and blob metadata are retained.",
       "fileCount": 7,
-      "bytes": 22083,
+      "bytes": 22031,
       "url": "https://github.com/mreishus/spades/tree/095d840ba0084ed3bac57354286eb422b183d108",
       "snapshotPath": "reference/public-games/sources/mreishus--spades@095d840ba008",
       "licensePaths": [
