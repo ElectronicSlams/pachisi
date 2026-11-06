@@ -1,6 +1,6 @@
 {
-  "ranOn": "2026-11-06T10:39:13.560Z",
-  "commit": "a3b6e88ee192d092816e5091fb5f2711036badd5",
+  "ranOn": "2026-11-06T12:07:55.005Z",
+  "commit": "a42e2c9c8a88eacab2ab0e7f97a8e2f1a8531b30",
   "branch": "integrate/october-followups",
   "workingTreeClean": true,
   "host": {
@@ -10,7 +10,7 @@
     "python3": "Python 3.9.6"
   },
   "chromium": {
-    "executable": "~/Library/Caches/ms-playwright/chromium-1248/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing",
+    "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
     "source": "PLAYWRIGHT_CHROMIUM_EXECUTABLE"
   },
   "mirrors": ".github/workflows/ci.yml (library job)",
@@ -18,21 +18,23 @@
     {
       "name": "install",
       "command": "pnpm install --frozen-lockfile --ignore-scripts",
-      "status": "skipped"
+      "status": "passed",
+      "exitCode": 0,
+      "durationMs": 459
     },
     {
       "name": "check",
       "command": "pnpm check",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 15055
+      "durationMs": 15373
     },
     {
       "name": "consumer",
       "command": "pnpm test:consumer",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 17729
+      "durationMs": 17736
     },
     {
       "name": "playwright-install",
@@ -44,7 +46,7 @@
       "command": "pnpm test:browser",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 129097
+      "durationMs": 127930
     }
   ],
   "result": "passed"
