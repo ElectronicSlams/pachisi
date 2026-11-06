@@ -6,7 +6,7 @@ This folder is a **historical, non-canonical** archive of eSlams design work pro
 
 The **live design system is pachisi `src/` and `styles/`**. Where anything in this archive disagrees with them, `src/` and `styles/` win. Nothing here is imported by the build, the tests or the catalogue.
 
-Files were copied verbatim, with three exceptions listed under "Scrub notes": absolute local paths were rewritten to `~/`, six real-looking mock persona emails were replaced, and no file was edited otherwise. Every source folder named below lives under `~/Downloads/eSlams/` on the original author's machine.
+Files retain their original bytes except for the declared scrub notes: local paths, mock persona emails and provider artwork in the Arena prototype. Every source folder named below lives under `~/Downloads/eSlams/` on the original author's machine.
 
 ## Stale facts warning
 
@@ -39,7 +39,7 @@ Facts in the archived prototypes that the live chronology has overridden:
 | `identity-trinity/` | E3, 8 July 2026 | `Profile Design New/{*.html, support.js, docs/, eslams/styles/}` | Sign-in, onboarding, profile and Trinity admin prototypes, the corrected four-role RBAC mock, four design docs, and the identity/trinity CSS (its `tokens.css` differs slightly from the web one). Includes the mock user table. `support.js` is included so the `.dc.html` files can open. | `eSlams Identity.dc.html` `589ef29f91526e5f6c7f75f034cfbdb5cab7dc93da3d92c2496f6c999feb7178` (`eSlams Trinity.dc.html` `6f7fc0650654454515ada22f4e9ad1d4be1b58fb20a2bd7f0256cf0083a7a6af`) |
 | `stadium-prototype/` | E4, 1 October 2026 | `Scoping picks pending (1)/stadium/` (identical to the original `eslams redesign` folder) | The Stadium design prototype against the 30 September brief: chrome and all surfaces, shared `Board.dc.html` renderer, `games.json` (50 games with family, grid and `moveMs` timing), data, locked hero sequences, `BATTLEFIELD_AT_SCALE.md`, README, `support.js`. The `assets/p/` provider marks and the screenshot were not copied. | `eSlams Stadium.dc.html` `2e03811a0c6d7add62c31a031c537e4f90d446af1adbde78525970aea9f946b8` |
 | `stadium-brief-and-assets/` | E4, 30 September 2026 | `claude-design-handoff/eSlams-Stadium-Design-Brief.md` and `claude-design-handoff/assets/{00-brief, 02-tokens, 04-game-art, 05-data, 09-reference-docs, 10-audio, README.md}` | The canonical Stadium design brief; shared tokens and components CSS including `game-motion.css`, `game-shell.css`, `table-games.css`; 56 playing-card and 45 mahjong-tile SVGs; the 50-game catalogue, 90-provider data, opponent roster, hero animation records and a sample chess replay; reference docs (including `TECH_NOTE_battlefield_visualization.md`); 14 move and result audio cues. | `eSlams-Stadium-Design-Brief.md` `cb882abe4e6350f1839cc972516451939df84b57855f33973b81366ded8cca6e` |
-| `arena-app/` | E5, 30 September to 2 October 2026 | `Arena App Design/` (briefs, built HTML, `prototype/{src, research, contracts, build.py, qa scripts}`, selected `assets/`) | The Arena-only Expo app design: brief, final-polish brief ("last design round"), polish handoff, onboarding and themes plan, built single-file prototype, hand-written source (`boards-grid`, `boards-table`, `engines*`, `scene.js` canvas field with parallax and touch repel, onboarding, auth), six-theme research, QA scripts and JSON results, token and catalogue snapshots, old-app handoff spec. | `eSlams Arena App.html` `50c8ea46bf344c3827108ccccaa3743f3a793f429d0d758e3d0aa05217ea733f` (brief `ARENA_APP_DESIGN_BRIEF.md` `4245811929496551bfacbfdd8921795e521768a3a06a551b0c1eae53b46ef0d9`) |
+| `arena-app/` | E5, 30 September to 2 October 2026 | `Arena App Design/` (briefs, built HTML, `prototype/{src, research, contracts, build.py, qa scripts}`, selected `assets/`) | The Arena-only Expo app design: brief, final-polish brief ("last design round"), polish handoff, onboarding and themes plan, built single-file prototype, hand-written source (`boards-grid`, `boards-table`, `engines*`, `scene.js` canvas field with parallax and touch repel, onboarding, auth), six-theme research, QA scripts and JSON results, token and catalogue snapshots, old-app handoff spec. | `eSlams Arena App.html` `09431e0f93f3cf008e5de3e5baa74fd323ad77f119e5bc8963c050fc25af24de` (brief `ARENA_APP_DESIGN_BRIEF.md` `4245811929496551bfacbfdd8921795e521768a3a06a551b0c1eae53b46ef0d9`) |
 
 Within `arena-app/`, the QA harness (`prototype/qa/*.js`) has its Playwright path rewritten to a `~/` placeholder; it will not run unchanged. `prototype/qa/last-*.json` are recorded results from the original machine.
 
@@ -57,9 +57,9 @@ Within `arena-app/`, the QA harness (`prototype/qa/*.js`) has its Playwright pat
 | `.DS_Store`, `.thumbnail`, `__MACOSX`, `node_modules` | Junk. |
 | Arena `rebuild-zip.sh`, `qa/final-polish/capture.js` and `capture-log.txt` | Not requested; packaging and capture helpers. |
 
-## Open decision: embedded provider logos
+## Provider artwork removal · 6 November 2026
 
-`arena-app/prototype/src/assets.js` and `arena-app/eSlams Arena App.html` embed provider logos (and brand data) as `data:` URIs inside a historical prototype. These are third-party trademarks sitting inside files that cannot be separated by simple exclusion. **A founder or legal decision is needed** before this archive is made public: keep them, strip them, or drop those two files.
+The public archive omits the 61 inline provider SVGs from both `arena-app/prototype/src/assets.js` and the built `arena-app/eSlams Arena App.html`. The provider API returns `null`, preserving the existing text/initial fallback; provider auth icons use a generic account outline. First-party eSlams brand PNG data URIs remain. The earlier description incorrectly called the provider SVGs data URIs. These edits change the current tree, not historical commits.
 
 ## Scrub notes
 

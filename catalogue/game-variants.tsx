@@ -6,7 +6,7 @@ import { LegalDemonstration, supportsTablePresentation } from '../src/game/scene
 import { GAME_DEMONSTRATIONS, type Demonstration } from '../src/game/demos';
 import { GAME_ANIMATIONS } from '../src/game/catalogue';
 import { studiesFor } from './studies';
-import coverage from '../docs/game-coverage.json';
+import { useGameCoverage } from './lazy-data';
 
 const presentations = [
  ['card','Card','Compact preview'], ['arena','Arena','Board in a match'],
@@ -20,20 +20,20 @@ function Still({game,demo,presentation='feature',authored=false,design}:{game:st
  </div>;
 }
 export function GameVariants({game,onGameChange,onStudyChange,controls}:{controls?:DesignControls;game:string;onGameChange:(game:string)=>void;onStudyChange:(study:string)=>void}) {
- const info=GAME_ANIMATIONS[game]!, demo=GAME_DEMONSTRATIONS[game]!, studies=studiesFor(game), contract=coverage.games.find(g=>g.slug===game)!;
+ const info=GAME_ANIMATIONS[game]!, demo=GAME_DEMONSTRATIONS[game]!, studies=studiesFor(game), contract=useGameCoverage().data?.games.find(g=>g.slug===game);
  function inspect(id:string){onStudyChange(id);document.getElementById('game-replay')?.scrollIntoView({block:'start',behavior:'instant'});}
  return <section id="game-variants" className="catalogue-variants" aria-label={`All variants for ${info.name}`}>
   <div className="catalogue-variants-heading"><div><div className="eyebrow">One game, every available view</div><h3>All variants for {info.name}</h3></div>
    <label className="catalogue-study-select">Game to inspect<select className="input" value={game} onChange={e=>onGameChange(e.target.value)}>{Object.entries(GAME_ANIMATIONS).map(([slug,g])=><option value={slug} key={slug}>{g.name}</option>)}</select></label>
   </div>
-  <p className="catalogue-study-note">Synthetic spectator replay · {contract.actualStateSupport === 'frame-view' ? 'Live board frames supported' : contract.actualStateSupport === 'partial-frame-view' ? 'Partial live-frame support' : 'Demonstration renderer only'}{game === 'connect-four' ? ' · Local two-player round' : ''}</p>
+  <p className="catalogue-study-note">Synthetic spectator replay{contract ? ` · ${contract.actualStateSupport === 'frame-view' ? 'Live board frames supported' : contract.actualStateSupport === 'partial-frame-view' ? 'Partial live-frame support' : 'Demonstration renderer only'}` : ''}{game === 'connect-four' ? ' · Local two-player round' : ''}</p>
   <a className="census-jump" href="#github-sweep">Explore {info.name} designs found on GitHub ↓</a>{" · "}
   <a className="census-jump" href="#game-census">See archived designs and sources for {info.name} ↓</a>
   {controls && (game==='connect-four' ? <ConnectFourGallery {...controls}/> : <DesignGallery key={game} game={game} {...controls}/>)}
   {!controls && <p className="catalogue-study-note">Compare the implemented rule and position studies below, then the presentation layouts. Imported GitHub sources are linked in the replay notes; they are not runnable variants here.</p>}
   <h4>Rule and position studies · {studies.length+1}</h4>
   <div className="catalogue-variant-grid">
-   <article className="catalogue-variant-card" data-study-preview="bundled"><h4>Bundled variant</h4><Still design={controls?.design} game={game} demo={demo}/><p>{contract.variant}{contract.ruleVariantNote?` · ${contract.ruleVariantNote}`:''}</p><button onClick={()=>inspect('bundled')}>Inspect bundled replay</button></article>
+   <article className="catalogue-variant-card" data-study-preview="bundled"><h4>Bundled variant</h4><Still design={controls?.design} game={game} demo={demo}/><p>{contract ? <>{contract.variant}{contract.ruleVariantNote?` · ${contract.ruleVariantNote}`:''}</> : 'Bundled Core trace'}</p><button onClick={()=>inspect('bundled')}>Inspect bundled replay</button></article>
    {studies.map(s=><article key={s.id} className="catalogue-variant-card" data-study-preview={s.id}><h4>{s.name}</h4><Still design={controls?.design} game={game} demo={s.demo} authored/><p>{s.note}</p><button onClick={()=>inspect(s.id)}>Inspect {s.name}</button></article>)}
   </div>
   {!studies.length&&<p className="catalogue-study-note">This game currently has one bundled variant. No additional authored position studies are implemented yet.</p>}

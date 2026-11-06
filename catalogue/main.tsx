@@ -9,7 +9,8 @@ import { LegalDemonstration, supportsTablePresentation } from "../src/game/scene
 import { createRoot } from "react-dom/client";
 import { Button, Callout, Card, EmptyState, ErrorState, GameGlyph, GameTile, Icon, LiveDot, ModelChip, Matchup, RoleBadge, SectionHead, SettingRow, StadiumDate, StatusStrip, Tag } from "../src/index";
 import { Avatar, CopyField, Dialog, Field, PasswordField, Sheet, Tabs, Terminal, MatchPoster } from "../src/client";
-import { GameAnimation } from "../src/game/demo";
+import { GameAnimation, GameReplay } from "../src/game/demo";
+import type { Demonstration } from "../src/game/demos";
 import { GAME_ANIMATIONS } from "../src/game/catalogue";
 import { GAME_DEMONSTRATIONS } from "../src/game/demos";
 import { GrandSlamsStage } from "../src/stadium/grand-slams-stage";
@@ -119,6 +120,29 @@ window.pachisiStudyProbe = async host => {
   if(failed)invalid.push(`${study.id}:${index}`);frames++;
  }
  root.unmount();host.remove();return {studies:GAME_STUDIES.length,frames,bad:invalid.length,invalid};
+};
+
+// GameReplay host regression (review 2026-11-06 #1): a host that re-renders every 50 ms with
+// an equal but new demonstration object must keep the viewer's frame; a different trace resets.
+function ReplayHost({ trace }: { readonly trace: Demonstration }) {
+ const [tick,setTick]=useState(0);
+ useEffect(()=>{const id=setInterval(()=>setTick(t=>t+1),50);return()=>clearInterval(id);},[]);
+ const frames=trace.frames.map(frame=>tick%2 ? {...frame} : Object.fromEntries(Object.entries(frame).reverse()) as typeof frame);
+ return <div data-host-tick={tick}><GameReplay game="chess" gameName="Chess" demonstration={{...trace,frames}}/></div>;
+}
+declare global { interface Window { pachisiReplayHostProbe?: (host: HTMLElement) => Promise<{afterNext:string|null;afterRerenders:string|null;ticks:number;afterSwap:string|null}>; } }
+window.pachisiReplayHostProbe = async host => {
+ const base=GAME_DEMONSTRATIONS.chess!,root=createRoot(host),wait=(ms:number)=>new Promise(r=>setTimeout(r,ms));
+ const frame=()=>host.querySelector('.st-game-replay')?.getAttribute('data-replay-frame') ?? null;
+ flushSync(()=>root.render(<ReplayHost trace={base}/>));
+ const next=()=>[...host.querySelectorAll('button')].find(b=>b.textContent==='Next')!;
+ next().click();await wait(0);next().click();await wait(0);
+ const afterNext=frame(),startTick=Number(host.firstElementChild?.getAttribute('data-host-tick'));
+ await wait(600);
+ const afterRerenders=frame(),ticks=Number(host.firstElementChild?.getAttribute('data-host-tick'))-startTick;
+ flushSync(()=>root.render(<ReplayHost trace={{...base,frames:base.frames.slice(0,4)}}/>));await wait(0);
+ const afterSwap=frame();
+ root.unmount();host.remove();return {afterNext,afterRerenders,ticks,afterSwap};
 };
 
 // Contact sheet for local visual review; not shipped as a library API.

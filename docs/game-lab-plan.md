@@ -8,7 +8,7 @@
 
 | Area | Decision |
 |---|---|
-| Evidence | Keep the 722 pinned frames and 672 actions unchanged; record authored edge cases separately. |
+| Evidence | Keep the 722 pinned frames and 672 actions unchanged; record authored edge cases separately. (Historical for this series. The later 6 November work re-recorded Car Racing and Pentago at the same pin, so the bundled set is now 740 frames and 690 transitions.) |
 | Catalogue expansion | Add a game lab for all 50 games, category filters, exact-frame playback, searchable variant descriptions, and explicitly labelled geometry/state studies. |
 | Gameplay | Improve observable state, contact geometry, seat/hidden-information clarity and action inspection. Legal actions and match simulation remain host owned. |
 | Motion | Explicit playback starts paused, steps are deterministic, seeks do not invent intermediate physics, reduced motion disables autoplay. Existing decorative preview scheduling survives. |

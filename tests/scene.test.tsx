@@ -260,6 +260,33 @@ test("scene: four-seat tables sit N/E/S/W with partners opposite, folded and dea
   assert.match(holdem, /P2 · 19 chips · D/u);
 });
 
+test("scene: hold'em traces show real betting, folded seats and street commitments", () => {
+  const actions = (slug: string) => demo(slug).actions.map((a) => String(a.action));
+  for (const slug of ["leduc-holdem", "limit-texas-holdem", "no-limit-texas-holdem"]) {
+    const d = demo(slug);
+    let foldedSeen = false, inSeen = false;
+    d.frames.forEach((f, i) => {
+      const html = render(<LegalDemonstration game={slug} frame={f} previous={i ? d.frames[i - 1]! : null} />);
+      assert.doesNotMatch(html, /data-scene-state=/u, `${slug} frame ${i} must not fall back to the placeholder`);
+      foldedSeen ||= /data-folded="true"/u.test(html) && /chips · folded/u.test(html);
+      inSeen ||= /chips · \d+ in/u.test(html);
+    });
+    assert.ok(foldedSeen, `${slug} dims and labels a folded seat`);
+    assert.ok(inSeen, `${slug} labels chips committed this street`);
+    assert.equal(d.frames[0]!.caption, "Opening position");
+    assert.ok(actions(slug).some((a) => a.startsWith("bet")), `${slug} shows a bet`);
+    assert.ok(actions(slug).includes("call") && actions(slug).includes("fold"), `${slug} shows a call and a fold`);
+  }
+  for (const slug of ["limit-texas-holdem", "no-limit-texas-holdem"]) {
+    const captions = demo(slug).frames.map((f) => f.caption).join("\n");
+    for (const word of ["bet", "raise", "fold", "call"]) assert.match(captions, new RegExp(`· ${word}`, "u"), `${slug} caption shows ${word}`);
+  }
+  assert.ok(actions("no-limit-texas-holdem").some((a) => /^(bet:[24]|raise:4|all-in)$/u.test(a)), "No-limit uses profiled sizes");
+  assert.ok(actions("no-limit-texas-holdem").includes("all-in"));
+  assert.notDeepEqual(actions("limit-texas-holdem"), actions("no-limit-texas-holdem"), "Limit and No-limit traces differ");
+  assert.notDeepEqual(demo("limit-texas-holdem").frames.map((f) => f.state), demo("no-limit-texas-holdem").frames.map((f) => f.state));
+});
+
 test("scene: captions carry the rules variant where the bundled trace deviates from standard rules", () => {
   for (const slug of ["hearts", "spades", "euchre", "hanabi", "gin-rummy", "mahjong", "backgammon", "leduc-holdem", "cribbage"]) {
     const note = VARIANT_NOTES[slug]!;
@@ -270,4 +297,18 @@ test("scene: captions carry the rules variant where the bundled trace deviates f
     assert.match(render(<LegalDemonstration game={slug} frame={d.frames[1]!} externalSeats />), new RegExp(note, "u"), `${slug} arena table`);
   }
   assert.doesNotMatch(render(<LegalDemonstration game="bridge" frame={demo("bridge").frames[1]!} />), /variant/u);
+});
+
+test("goofspiel: a host frame without the synthesised `committed` field is never shown as a reveal", () => {
+  const g = demo("goofspiel");
+  // Frame 3 is mid-round (P1 has bid on prize 2); the previous round sits in round_history.
+  const { committed: _ignored, ...withoutCommitted } = g.frames[3]!.state as Record<string, unknown>;
+  const midRound = render(<LegalDemonstration game="goofspiel" frame={frame(withoutCommitted)} />);
+  assert.doesNotMatch(midRound, /Revealed/);
+  assert.match(midRound, /Prize · 2/);
+  assert.match(midRound, /Sealed bids/);
+  assert.doesNotMatch(midRound, /Committed|Awaiting bid/, "no claim about who has bid when the field is absent");
+  // With the field present the bundled frames still read as before.
+  assert.match(render(<LegalDemonstration game="goofspiel" frame={g.frames[3]!} />), /Committed/);
+  assert.match(render(<LegalDemonstration game="goofspiel" frame={g.frames[4]!} />), /Revealed prize · 2/);
 });

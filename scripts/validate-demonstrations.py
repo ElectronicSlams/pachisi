@@ -442,10 +442,22 @@ def check_othello(demo, r):
     alternate(actions, r)
 
 
+def pentago_settled(y, x, q, d):
+    """Where the stone placed at (y, x) ends up after quadrant q turns in direction d."""
+    oy, ox = (0 if q in (0, 1) else 3), (0 if q in (0, 2) else 3)
+    if not (oy <= y < oy + 3 and ox <= x < ox + 3):
+        return y, x
+    yy, xx = y - oy, x - ox
+    return (oy + xx, ox + 2 - yy) if d == "cw" else (oy + 2 - xx, ox + yy)
+
+
 def check_pentago(demo, r):
-    r.ran("6x6", "place-on-empty", "quadrant-rotation(cw/ccw)", "no-five-before-terminal")
+    r.ran("6x6", "place-on-empty", "quadrant-rotation(cw/ccw)", "no-five-before-terminal",
+          "placement == action", "placement cell empty before", "settled placement cell == actor")
     frames, actions = demo["frames"], demo["actions"]
     alternate(actions, r)
+    if frames and "placement" in frames[0]:
+        r.fail(0, "placement on the opening frame")
     for i, a in enumerate(actions, 1):
         b = [list(row) for row in frames[i - 1]["state"]["board"]]
         cell, q, d = a["action"].split(":")
@@ -453,7 +465,18 @@ def check_pentago(demo, r):
         y, x = divmod(cell, 6)
         if b[y][x] is not None:
             r.fail(i, "occupied")
-        b[y][x] = "B" if a["player"] == "player_1" else "W"
+        me = "B" if a["player"] == "player_1" else "W"
+        # The scene draws the move ring from frame.placement, so it must agree with the action.
+        pl = frames[i].get("placement")
+        if not isinstance(pl, dict) or pl.get("cell") != cell or pl.get("quadrant") != q or pl.get("direction") != d:
+            r.fail(i, f"placement {pl} != action {a['action']}")
+        elif b[y][x] is not None:
+            r.fail(i, "placement cell occupied before the move")
+        else:
+            sy, sx = pentago_settled(y, x, q, d)
+            if frames[i]["state"]["board"][sy][sx] != me:
+                r.fail(i, f"settled placement cell ({sy},{sx}) is not {me}")
+        b[y][x] = me
         oy, ox = (0 if q in (0, 1) else 3), (0 if q in (0, 2) else 3)
         sub = [[b[oy + yy][ox + xx] for xx in range(3)] for yy in range(3)]
         for yy in range(3):
@@ -1088,16 +1111,20 @@ def check_blackjack(demo, r):
 
 
 def check_poker(slug, demo, r):
-    r.ran("chip conservation(stacks+pot)", "pot==sum(contributions)", "committed resets per street", "board size per street", "no duplicate board cards", "card syntax", "actor rotation over non-folded", "check only when matched")
+    r.ran("chip conservation(stacks+pot)", "pot==opening pot+sum(contributions)", "committed resets per street", "board size per street", "no duplicate board cards", "card syntax", "actor rotation over non-folded", "check only when matched", "bet/raise/call/all-in sizes", "fold moves no chips", "folded seats never act again", "folded list only grows")
     frames, actions = demo["frames"], demo["actions"]
     leduc = slug == "leduc-holdem"
+    no_limit = slug == "no-limit-texas-holdem"
     sizes = {"preflop": 0, "board": 1, "showdown": None} if leduc else {"preflop": 0, "flop": 3, "turn": 4, "river": 5, "showdown": None}
     total0 = sum(frames[0]["state"]["stacks"].values()) + frames[0]["state"]["pot"]
+    stacks0, pot0 = frames[0]["state"]["stacks"], frames[0]["state"]["pot"]
     players = sorted(frames[0]["state"]["stacks"])
     for i, f in enumerate(frames):
         s = f["state"]
         if sum(s["stacks"].values()) + s["pot"] != total0:
             r.fail(i, "chips not conserved")
+        if s["pot"] != pot0 + sum(stacks0[p] - s["stacks"][p] for p in players):
+            r.fail(i, f"pot {s['pot']} != opening pot + contributions")
         want = sizes.get(s["street"], -1)
         if want == -1:
             r.fail(i, f"unknown street {s['street']}")
@@ -1108,13 +1135,61 @@ def check_poker(slug, demo, r):
         if leduc and any(rank_of(c) not in ("J", "Q", "K") for c in s["board"]):
             r.fail(i, "Leduc deck is J/Q/K only")
     for i, a in enumerate(actions, 1):
-        s0 = frames[i - 1]["state"]
-        if a["action"] == "check" and s0["committed"][a["player"]] != max(s0["committed"].values()):
-            r.fail(i, "check while facing a bet")
-    live = [p for p in players]
+        s0, s1 = frames[i - 1]["state"], frames[i]["state"]
+        actor, act = a["player"], a["action"]
+        folded0, folded1 = s0.get("folded", []), s1.get("folded", [])
+        live = [p for p in players if p not in folded0]
+        to_call = max(s0["committed"][p] for p in live) - s0["committed"][actor] if live else 0
+        paid = s0["stacks"][actor] - s1["stacks"][actor]
+        if folded1[:len(folded0)] != folded0:
+            r.fail(i, "folded seat returned to the hand")
+        if actor in folded0:
+            r.fail(i, f"{actor} acted after folding")
+        if any(s1["stacks"][p] != s0["stacks"][p] for p in players if p != actor):
+            r.fail(i, "a seat other than the actor moved chips")
+        if s1["pot"] - s0["pot"] != paid:
+            r.fail(i, f"pot moved {s1['pot'] - s0['pot']} but {actor} paid {paid}")
+        if act == "fold":
+            want = 0
+            if folded1 != folded0 + [actor]:
+                r.fail(i, f"fold did not add {actor} to folded")
+        else:
+            if folded1 != folded0:
+                r.fail(i, f"{act} changed the folded list")
+            if act == "check":
+                want = 0
+                if to_call:
+                    r.fail(i, "check while facing a bet")
+            elif act == "call":
+                want = min(to_call, s0["stacks"][actor])
+                if not to_call:
+                    r.fail(i, "call with nothing to call")
+            elif act == "all-in" and no_limit:
+                want = s0["stacks"][actor]
+            elif no_limit and act in ("bet:2", "bet:4", "raise:4"):
+                want = min(s0["stacks"][actor], to_call + int(act.split(":")[1]))
+                if act.startswith("bet") == bool(to_call):
+                    r.fail(i, f"{act} {'facing' if to_call else 'without'} a bet")
+            elif not no_limit and act in ("bet", "raise"):
+                want = min(s0["stacks"][actor], to_call + 2)
+                if (act == "bet") == bool(to_call):
+                    r.fail(i, f"{act} {'facing' if to_call else 'without'} a bet")
+            else:
+                r.fail(i, f"unknown action {act!r} for {slug}")
+                want = paid
+        if paid != want:
+            r.fail(i, f"{act} moved {paid} chips; expected {want}")
+        if s1["street"] == s0["street"]:
+            expect = {p: s0["committed"][p] + (paid if p == actor else 0) for p in players}
+            if s1["committed"] != expect:
+                r.fail(i, f"committed {s1['committed']} != {expect}")
+        elif any(s1["committed"].values()):
+            r.fail(i, "committed did not reset on a new street")
     for i in range(1, len(actions)):
         prev, cur = actions[i - 1]["player"], actions[i]["player"]
-        if live.index(cur) != (live.index(prev) + 1) % len(live):
+        live = [p for p in players if p not in frames[i]["state"].get("folded", [])]
+        nxt = next((players[(players.index(prev) + k) % len(players)] for k in range(1, len(players) + 1) if players[(players.index(prev) + k) % len(players)] in live), None)
+        if cur != nxt:
             r.fail(i + 1, f"actor rotation {prev}->{cur}")
     if leduc and len(players) != 2:
         r.fail(None, f"Leduc Hold'em is a 2-player game; trace has {len(players)} seats", "RULE")
@@ -1371,9 +1446,19 @@ def check_sealed(slug, demo, r):
 
 
 def check_goofspiel(demo, r):
-    r.ran("each bid card used once", "prizes each once", "higher bid wins prize", "points conservation", "bids hidden until both")
+    r.ran("each bid card used once", "prizes each once", "higher bid wins prize", "points conservation", "bids hidden until both",
+          "committed: P1 after P1 bid, empty after resolution")
     frames, actions = demo["frames"], demo["actions"]
     alternate(actions, r)
+    # `committed` is synthesised by Pachisi's generator (not Core public_state), and the
+    # scene reads it to choose between "Committed" and "Revealed prize".
+    if frames and frames[0]["state"].get("committed", []) != []:
+        r.fail(0, "committed before any bid")
+    for i, a in enumerate(actions, 1):
+        got = frames[i]["state"].get("committed")
+        want = [a["player"]] if a["player"] == "player_1" else []
+        if got != want:
+            r.fail(i, f"committed {got} != {want} after {a['player']} bid")
     rounds = []
     for f in frames:
         h = f["state"]["round_history"]
@@ -1701,7 +1786,7 @@ def check_simple_control(slug, demo, r):
             if a["action"] == "step-in" and s1["distance"] != s0["distance"] - 1:
                 r.fail(i, "step-in distance")
     elif slug == "ice-hockey-style-arena":
-        r.ran("positions within rink", "x moves ≤1", "goals monotone", "puck owner is a player", "renderer: two skaters on one cell")
+        r.ran("positions within rink", "x moves ≤1", "goals monotone", "puck owner is a player", "shared skater cells legal (two visible skaters are checked by renderer and browser tests, not here)")
         alternate(actions, r)
         for i, f in enumerate(frames):
             s = f["state"]

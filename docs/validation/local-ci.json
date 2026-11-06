@@ -1,13 +1,13 @@
 {
-  "ranOn": "2026-11-06T09:41:40.225Z",
-  "commit": "c83e26035a1fd450228b258802cca15fd0b0b004",
-  "branch": "consolidate/all-eslams-work-and-physics-review",
-  "workingTreeClean": false,
+  "ranOn": "2026-11-06T12:07:55.005Z",
+  "commit": "a42e2c9c8a88eacab2ab0e7f97a8e2f1a8531b30",
+  "branch": "integrate/october-followups",
+  "workingTreeClean": true,
   "host": {
     "platform": "darwin 25.6.0 arm64",
     "node": "v26.4.0",
     "pnpm": "11.13.0",
-    "python3": "Python 3.14.7"
+    "python3": "Python 3.9.6"
   },
   "chromium": {
     "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
@@ -20,21 +20,21 @@
       "command": "pnpm install --frozen-lockfile --ignore-scripts",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 2228
+      "durationMs": 459
     },
     {
       "name": "check",
       "command": "pnpm check",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 16467
+      "durationMs": 15373
     },
     {
       "name": "consumer",
       "command": "pnpm test:consumer",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 19920
+      "durationMs": 17736
     },
     {
       "name": "playwright-install",
@@ -46,7 +46,7 @@
       "command": "pnpm test:browser",
       "status": "passed",
       "exitCode": 0,
-      "durationMs": 139490
+      "durationMs": 127930
     }
   ],
   "result": "passed"

@@ -33,3 +33,17 @@ export function drop(round: Round, column: number): Round {
     finished:line.size > 0 || !cells.includes('.'),
   };
 }
+
+export function roundMoves(round: Round): number {
+  return round.frame.cells.filter(cell => cell !== '.').length;
+}
+export function roundStatus(round: Round): string {
+  const seat = round.next === 'R' ? 1 : 2;
+  if (!round.finished) return `Player ${seat} to drop`;
+  return round.frame.line?.length ? `Player ${3 - seat} wins` : 'Draw';
+}
+/** Short accessible name for the local round board; the cells themselves stay out of it. */
+export function roundLabel(round: Round): string {
+  const moves = roundMoves(round);
+  return `Connect Four, ${roundStatus(round)}, ${moves} ${moves === 1 ? 'move' : 'moves'}`;
+}

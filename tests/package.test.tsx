@@ -71,7 +71,7 @@ test('every bundled demonstration frame renders with finite geometry',()=>{
  for(const [game,demo] of Object.entries(GAME_DEMONSTRATIONS))for(const frame of demo.frames){
   const html=render(<LegalDemonstration game={game} frame={frame}/>);assert.ok(html.length>0,game);assert.doesNotMatch(html,/NaN|Infinity/,`${game} turn ${frame.turn}`); count++;
  }
- assert.equal(count,740);
+ assert.equal(count,745);
 });
 test('actual Board never mutates, advances or substitutes a demo for supplied state',()=>{
  const frame:CellBoardFrame=Object.freeze({kind:'cells',family:'grid_3x3',rows:3,cols:3,cells:Object.freeze(['O','.','.','.','X','.','.','.','.']),last:Object.freeze([4])});
@@ -98,4 +98,15 @@ test('per-game documentation stays synchronized with the shipped dataset',async(
  assert.deepEqual(coverage.games.map((x:{slug:string})=>x.slug).sort(),[...GAME_ICON_SLUGS].sort());
  for(const game of coverage.games){const demo=GAME_DEMONSTRATIONS[game.slug]!;assert.equal(game.demoFrames,demo.frames.length);assert.equal(game.demoActions,demo.actions.length);assert.equal(game.artworkArenaVersion,demo.version);}
  const bytes=await readFile(new URL('../src/game/game-demonstrations.json',import.meta.url));assert.equal(createHash('sha256').update(bytes).digest('hex'),coverage.artworkSource.dataSha256);
+});
+test('the packed tarball ships docs prose and validation but not captures or research ledgers',async()=>{
+ const {execFileSync}=await import('node:child_process');
+ const pkg=JSON.parse(await readFile(new URL('../package.json',import.meta.url),'utf8'));
+ for(const pattern of ['docs','!docs/captures','!docs/research'])assert.ok(pkg.files.includes(pattern),pattern);
+ let packed:string;
+ try{packed=execFileSync('pnpm',['pack','--dry-run','--json'],{cwd:new URL('..',import.meta.url),encoding:'utf8',stdio:['ignore','pipe','pipe']});}
+ catch(error){if((error as NodeJS.ErrnoException).code==='ENOENT'){console.warn('pnpm not on PATH; tarball listing skipped');return;}throw error;}
+ const paths:string[]=JSON.parse(packed).files.map((f:{path:string})=>f.path);
+ assert.deepEqual(paths.filter(p=>/^docs\/(captures|research)\//.test(p)),[]);
+ for(const required of ['docs/physics.md','docs/games.md','docs/game-coverage.json','docs/validation/local-ci.json','dist/index.js','README.md'])assert.ok(paths.includes(required),required);
 });

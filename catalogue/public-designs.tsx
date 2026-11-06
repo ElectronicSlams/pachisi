@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import collection from './public-design-sources.json';
+import { usePublicDesignSources } from './lazy-data';
 
 const categoryNames: Record<string,string> = {board:'Board',card:'Card',gametheory:'Strategy',rl:'Control & arcade'};
 const kindNames: Record<string,string> = {renderer:'Renderer',assets:'Vector assets',interaction:'Interaction',physics:'Physics & rendering',rules:'Rules & information'};
 const reuseNames: Record<string,string> = {permissive:'Permissive',copyleft:'Copyleft', 'public-domain':'Public domain'};
 export function PublicGameSources({game}:{readonly game:string}) {
- const entry=collection.games.find(g=>g.slug===game);
- if(!entry)return null;
+ const {data:collection}=usePublicDesignSources();
+ const entry=collection?.games.find(g=>g.slug===game);
+ if(!collection||!entry)return null;
  const sources=collection.sources.filter(s=>entry.sourceIds.includes(s.id));
  return <details className="catalogue-game-sources"><summary>Public GitHub designs · {sources.length} sources</summary>
   <p>{entry.coverageNote}</p>
@@ -17,6 +18,8 @@ export function PublicGameSources({game}:{readonly game:string}) {
 }
 export function PublicDesignLibrary() {
  const [query,setQuery]=useState(''),[category,setCategory]=useState('all'),[reuse,setReuse]=useState('all');
+ const {data:collection,failed}=usePublicDesignSources();
+ if(!collection) return <section id="public-designs" className="catalogue-section catalogue-public-designs" aria-label="Public GitHub design library" aria-busy={!failed}><div className="eyebrow">05 · Study the craft</div><h2>Public game design library</h2><p role="status">{failed?'The source collection could not be loaded.':'Loading the source collection…'}</p></section>;
  const shown=collection.sources.filter(s=>(reuse==='all'||s.reuse===reuse)&&(category==='all'||s.games.some(slug=>collection.games.find(g=>g.slug===slug)?.category===category))&&`${s.repository} ${s.idea} ${s.games.join(' ')}`.toLowerCase().includes(query.trim().toLowerCase()));
  const totals=collection.summary;
  return <section id="public-designs" className="catalogue-section catalogue-public-designs" aria-label="Public GitHub design library">

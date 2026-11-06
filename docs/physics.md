@@ -54,9 +54,9 @@ A demonstration is physically sound when all four of these hold:
   artwork pin. An entry matches on slug, frame and check id, and turns that FAIL into `KNOWN`.
   The validator prints `KNOWN` entries and exits 0 when they are the only failures. It exits 1
   on any other FAIL, or on a stale entry that no longer matches anything. The only baselined renderer limitation is Bridge’s missing dummy hand. Each additional renderer finding and a stale baseline fail the default command.
-- `scripts/selftest-mutations.py` plants 38 errors and requires each one to be caught:
-  - 36 trace corruptions: a teleported stone, a ball teleport, a ball velocity jump, a missing side-wall and top-wall reflection, speed gained at a wall, a missing flip, an illegal jump, a phantom hand
-    piece, created chips, a wrong trick winner, a pole teleport, a paddle teleport, and so on;
+- `scripts/selftest-mutations.py` plants 48 errors and requires each one to be caught:
+  - 46 trace corruptions: a teleported stone, a Goofspiel commitment on the wrong seat, a Pentago placement on the wrong cell, a raw Rock Paper Scissors action, an early reveal in a sealed game, leaked cribbage discards, a raw auction bid, a ball teleport, a ball velocity jump, a missing side-wall and top-wall reflection, speed gained at a wall, a missing flip, an illegal jump, a phantom hand
+    piece, created chips (also on a raise), a fold that still moves chips, a street commitment that does not match the raise, a folded seat acting again, a wrong trick winner, a pole teleport, a paddle teleport, and so on;
   - 2 renderer-source corruptions: `CellScene` stops passing cues, or the cue rule version
     changes without the mirror.
 
@@ -70,7 +70,7 @@ python3 -I scripts/validate-demonstrations.py --strict   # also fail on KNOWN/RU
 
 `pnpm check` runs it after the tests. `pnpm ci:local` is the local release gate; hosted CI is currently disabled.
 
-## Results (50 games, 690 transitions, artwork pin `7731e2f3`)
+## Results (50 games, 695 transitions, artwork pin `7731e2f3`)
 
 Summary: 39 PASS, 9 PASS-with-RULE, 1 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 
@@ -106,24 +106,24 @@ Summary: 39 PASS, 9 PASS-with-RULE, 1 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | gin-rummy | scene/cards | 13 | generic + draw->discard phase, hand 7<->8, card conservation(52) | **PASS*(RULE)** — RULE@- Core deals 7 cards; standard gin rummy deals 10 |
 | go | Board go 9x9 | 13 | generic + 9x9 square, place-on-empty, B=P1/W=P2, capture-removes-dead-groups-only, no-suicide, stone-count-conservation, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** · NC: ko / superko not checked (no repeated positions in trace) |
 | gomoku | Board go 15x15 | 13 | generic + 15x15, place-on-empty, B=P1/W=P2, no-five-before-terminal, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
-| goofspiel | scene/social | 11 | generic + each bid card used once, prizes each once, higher bid wins prize, points conservation, bids hidden until both, turn-order | **PASS** |
+| goofspiel | scene/social | 11 | generic + each bid card used once, prizes each once, higher bid wins prize, points conservation, bids hidden until both, committed: P1 after P1 bid, empty after resolution, turn-order | **PASS** |
 | hanabi | scene/cards | 7 | generic + fireworks +1 on successful play, clues 0..8, lives 0..3, deck-1 per draw, hand refills while deck>0, discard grows by one, turn-order | **PASS*(RULE)** — RULE@4 discarded with 8 clue tokens (forbidden in standard Hanabi); RULE@5 discarded with 8 clue tokens (forbidden in standard Hanabi); RULE@6 discarded with 8 clue tokens (forbidden in standard Hanabi); RULE@- Core variant: 2 colours, 12-card deck; standard Hanabi has 5 colours/50 cards |
 | hearts | scene/cards | 13 | generic + trick winner per led suit/trump, winner leads next, rotation within trick, hand counts -1, no card played twice, provable revoke (failed to follow then later played led suit), tricks tally | **PASS*(RULE)** — RULE@1 first trick led with 3H; standard Hearts requires 2C lead; RULE@1 player_1 led 3H before H broken while holding 5C; RULE@- Core variant is 2-player; standard hearts is 4-player |
 | hex | Board hex 11x11 | 13 | generic + 11x11 rhombus, place-on-empty, B=P1/W=P2, no-connection-before-terminal, renderer-adjacency==rule-adjacency, edge-colour==goal-axis, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
-| ice-hockey-style-arena | scene/control | 13 | generic + positions within rink, x moves ≤1, goals monotone, puck owner is a player, renderer: two skaters on one cell, turn-order | **PASS** |
-| leduc-holdem | scene/cards | 9 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS*(RULE)** — RULE@- Leduc Hold'em is a 2-player game; trace has 4 seats · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
+| ice-hockey-style-arena | scene/control | 13 | generic + positions within rink, x moves ≤1, goals monotone, puck owner is a player, shared skater cells legal (two visible skaters are checked by renderer and browser tests, not here), turn-order | **PASS** |
+| leduc-holdem | scene/cards | 10 | generic + chip conservation(stacks+pot), pot==opening pot+sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched, bet/raise/call/all-in sizes, fold moves no chips, folded seats never act again, folded list only grows | **PASS*(RULE)** — RULE@- Leduc Hold'em is a 2-player game; trace has 4 seats · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
 | liars-dice | scene/social | 4 | generic + bids strictly increase, 5 dice/player values 1-6, challenge resolution count, turn-order | **PASS** · NC: bid 3x5, actual 2 (ones-wild variant would be 2); winner not in state |
-| limit-texas-holdem | scene/cards | 13 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
+| limit-texas-holdem | scene/cards | 17 | generic + chip conservation(stacks+pot), pot==opening pot+sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched, bet/raise/call/all-in sizes, fold moves no chips, folded seats never act again, folded list only grows | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
 | lunar-lander | scene/control | 18 | generic + y += vy (semi-implicit), x += vx, idle: vy -= .028 gravity, main burns fuel, fuel monotone, landing inside pad, renderer pad == state pad, main/side thrust integrates vx/vy with exact fuel cost | **PASS** |
 | mahjong | scene/cards | 13 | generic + tile conservation(wall+hands+discards), discarder -1 / next draws +1, rotation 1-4, discard_pile matches action, turn-order | **PASS*(RULE)** — RULE@- Core variant: 108 tiles (no honours), 10-tile hands; standard mahjong uses 136/144 tiles and 13-tile hands · NC: calls (pung/chow/kong) not present in trace |
 | mancala | scene/board | 13 | generic + 2x6 pits + 2 stores, sowing CCW skip opp store, capture(opposite non-empty), extra-turn on store, seed-conservation(48), renderer-ccw-layout | **PASS** |
 | mountain-car | scene/control | 61 | generic + Gym MountainCar dynamics (v+=.001a-.0025cos3x), |v|<=.07, x>=-1.2 | **PASS** |
 | negotiation | scene/social | 4 | generic + alternating offers, share/price bounds, accept terminates with last offer, turn-order | **PASS** |
 | nine-mens-morris | scene/board | 13 | generic + 24 points, renderer-points/lines collinear, renderer-adjacency==rule-adjacency, placement-on-empty, reserves-decrement, mill=>removal, turn-order | **PASS** |
-| no-limit-texas-holdem | scene/cards | 13 | generic + chip conservation(stacks+pot), pot==sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
+| no-limit-texas-holdem | scene/cards | 13 | generic + chip conservation(stacks+pot), pot==opening pot+sum(contributions), committed resets per street, board size per street, no duplicate board cards, card syntax, actor rotation over non-folded, check only when matched, bet/raise/call/all-in sizes, fold moves no chips, folded seats never act again, folded list only grows | **PASS** · NC: hole cards are private; hand strength/showdown winner not checkable (no winner in frame) |
 | othello | Board square 8x8 | 13 | generic + 8x8, standard-opening, move-must-flip, exact-flip-set, B=P1/W=P2, pass-only-when-no-move, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | paddle-ball | scene/control | 61 | generic + paddle ±.12 clipped [0,1], ball x/y += v (pre-step velocity), side-wall reflection: x clamped to 0/1, vx negated, top-wall reflection: y clamped to 1, vy negated, |v| conserved on wall reflection, v unchanged off walls and paddle, paddle bounce only when |ball-paddle|<=.16 (=renderer half-width), at y=.08, vy>0, bounces counter | **PASS** |
-| pentago | Board square 6x6 | 28 | generic + 6x6, place-on-empty, quadrant-rotation(cw/ccw), no-five-before-terminal, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
+| pentago | Board square 6x6 | 28 | generic + 6x6, place-on-empty, quadrant-rotation(cw/ccw), no-five-before-terminal, placement == action, placement cell empty before, settled placement cell == actor, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | prisoners-dilemma | scene/social | 3 | generic + hidden until both chose, revealed == actions, valid action set, turn-order | **PASS** · NC: winner / payoff values are not in frame state (only outcomeReason); renderer cannot show who won |
 | rock-paper-scissors | scene/social | 3 | generic + hidden until both chose, revealed == actions, valid action set, turn-order | **PASS** · NC: winner / payoff values are not in frame state (only outcomeReason); renderer cannot show who won |
 | shedding-card-game | scene/cards | 13 | generic + match rank or suit, play: hand-1, draw: hand+1 & deck-1, card conservation(52), no card played twice, turn-order | **PASS** |
@@ -134,19 +134,29 @@ Summary: 39 PASS, 9 PASS-with-RULE, 1 PASS-with-RENDER, 1 KNOWN (taxi), 0 FAIL.
 | ultimate-tic-tac-toe | Board grid_3x3 9x9 | 13 | generic + 9x(3x3), action=board*9+cell, must-play-in-next_board, next_board=cell-or-free, local_status, turn-order, cues: last==move cells, cues: win line on terminal frame | **PASS** |
 | xiangqi | scene/board | 13 | generic + 10x9 intersections, file-letter/row-digit coords, piece-geometry(R,H-leg,E-eye+river,A/G-palace,C-screen,S-river), flying-general, piece-conservation, turn-order | **PASS** · NC: check/checkmate not checked |
 
-## Known Core issues to file upstream
+Regenerate this table with `python3 -I scripts/validate-demonstrations.py --markdown`. Keep it
+in sync when the traces or rules change. The hockey row is worded for this page: the validator
+treats two skaters on one cell as legal, and the half-disc drawing of a shared cell is covered by
+the renderer and browser regressions rather than by the validator.
+
+Goofspiel `committed` is a Pachisi-synthesised spectator field, not Core public state. The
+generator adds it to the sealed-choice frames (`["player_1"]` after the first bid of a round,
+empty once both bids resolve), and the validator now checks it against that rule.
+
+## Tracked Core follow-ups
 
 These come from Core's public state or variants. The renderer cannot fix them, and regenerating
-the traces from the same pin reproduces them.
+the traces from the same pin reproduces them. The follow-ups below are filed on `ElectronicSlams/eSlams`. Relevant source was inspected at current Core `c0b17aab8d88567f9e634bc7ecda98db8d9b77c2` on 6 November 2026; execution/reproduction here remains pinned to the artwork commit. Compact-rule questions are requests to enforce or explicitly declare the intended variant.
 
-| Issue | Where | Status |
-|---|---|---|
-| Taxi: after dropoff the passenger is reported back at the pickup point `[0,0]` instead of the destination `[4,0]` | `taxi` frame 10 | `KNOWN` (allowlisted). The scene hides the waiting marker on the delivered frame. |
-| Hearts: the first trick is led with 3H instead of 2C, and hearts are led before being broken | `hearts` frame 1 | `RULE` |
-| Spades: spades are led before being broken while the leader still holds a club | `spades` frame 9 | `RULE` |
-| Hanabi: discards are made while holding 8 clue tokens | `hanabi` frames 4-6 | `RULE` |
-| Limit and No-limit hold'em demos are frame-for-frame identical: the generator always picks "check", so no bet, raise or fold is ever shown | `scripts/generate-demonstrations.py` plan | generator plan, needs a regeneration |
-| Leduc Hold'em is seated 4-handed; it is a 2-player game | `leduc-holdem` | `RULE` |
+| Issue | Where | Validator | Upstream |
+|---|---|---|---|
+| Taxi: after dropoff the passenger is reported back at the pickup point `[0,0]` instead of the destination `[4,0]` | `taxi` frame 10 | `KNOWN` (allowlisted). The scene hides the waiting marker on the delivered frame. | [eSlams#302](https://github.com/ElectronicSlams/eSlams/issues/302) |
+| Hearts: the first trick is led with 3H instead of 2C, and hearts are led before being broken | `hearts` frame 1 | `RULE` | [eSlams#303](https://github.com/ElectronicSlams/eSlams/issues/303) |
+| Spades: spades are led before being broken while the leader still holds a club | `spades` frame 9 | `RULE` | [eSlams#304](https://github.com/ElectronicSlams/eSlams/issues/304) |
+| Hanabi: discards are made while holding 8 clue tokens | `hanabi` frames 4-6 | `RULE` | ElectronicSlams/eSlams#182, closed on 8 October 2026; the trace at the artwork pin still shows the behaviour |
+| Leduc Hold'em is seated 4-handed; it is a 2-player game | `leduc-holdem` | `RULE` | [eSlams#305](https://github.com/ElectronicSlams/eSlams/issues/305) |
+| Bridge: dummy cards are absent from public state after the opening lead | `bridge` | `RENDER`; Core must expose the public hand before a renderer can show it | [eSlams#306](https://github.com/ElectronicSlams/eSlams/issues/306) |
+| Resolved: Limit and No-limit hold'em demos used to be frame-for-frame identical (the generator always picked "check"). Each variant now follows its own scripted betting plan at the same pin | `scripts/generate-demonstrations.py` `POKER_PLANS` | `PASS`; poker checks now cover bet/raise/call/all-in sizes, folds and the pot ledger | Not applicable (Pachisi generator plan, not a Core defect) |
 
 Other variant deviations: Hearts, Spades and Euchre are 2-player; Hanabi uses 2 colours and 12
 cards; Gin rummy deals 7; Mahjong uses 108 tiles and 10-tile hands; Backgammon has 5 checkers a
@@ -162,7 +172,7 @@ self-test and the rules code, not by real data:
 - Go capture (and ko or superko);
 - a Nine Men's Morris mill and removal;
 - a Backgammon hit (checker to the bar) or bearing off;
-- poker bet, raise and fold;
+- a poker raise war (Core allows one raise per street) or a split pot;
 - chess castling, promotion and en passant;
 - calls in Mahjong (pung, chow, kong); Shogi and Xiangqi check and checkmate.
 
@@ -185,6 +195,6 @@ The new replay inspector is paused by default and shows exact supplied snapshots
 
 Car Racing now checks throttle/braking, steering, lane integration, heading damping, off-track speed and progress. Bipedal Walker checks action-specific energy, terrain-dependent velocity/torso integration and foot order. Lander-lite checks main/side thrust, vx/vy integration and exact fuel use. These equations are independently evaluated against the six-decimal pinned public snapshots with a 2e-6 tolerance; they are not Box2D or continuous-control certification. Eight new mutations prove that the added checks reject motion/fuel/energy corruption.
 
-Renderer regressions separately check tall-map fit, shooter edges, terrain contact, shared hockey cells, concealed dealer cards, card overflow, table crop scope, and special chess moves. Browser geometry checks cover all 33 authored studies (47 frames) as well as the original 722 frames. Blackjack and hockey no longer carry their old renderer findings. Bridge still lacks public dummy identity/cards in the pinned trace; the renderer cannot manufacture that data.
+Renderer regressions separately check tall-map fit, shooter edges, terrain contact, shared hockey cells, concealed dealer cards, card overflow, table crop scope, and special chess moves. Browser geometry checks cover all 33 authored studies (47 frames) as well as the bundled traces: 722 frames when this pass ran on 1 November, 740 frames after the Car Racing and Pentago re-recordings at the same pin, and 745 frames since the hold'em betting plans. Blackjack and hockey no longer carry their old renderer findings. Bridge still lacks public dummy identity/cards in the pinned trace; the renderer cannot manufacture that data.
 
 See [the individual game review](reviews/2026-11-01-game-design-lab.md) for declared variants, inspection priorities, evidence and remaining limits.

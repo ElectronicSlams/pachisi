@@ -255,14 +255,14 @@
       "target": "src/game/demo.tsx",
       "sourceSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202",
       "adapted": true,
-      "targetSha256": "63c7337600d8997c03336a0ba185ededc6d0b341655049b26bbeaaaaa48a6750"
+      "targetSha256": "1a60004d6dc3104f97881617396f97331657a94e291d0d49c91d2d115d0bf266"
     },
     {
       "source": "packages/game-visuals/src/game-demonstrations.json",
       "target": "src/game/game-demonstrations.json",
       "sourceSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322",
       "adapted": true,
-      "targetSha256": "cba9149a86543aa620cb661213eecf7bb25f3b6d2e57ec9d3007b012ea517a1f"
+      "targetSha256": "127b688b56addefdf835a0ec00506fdada0f8b49056da6888ade431ce8bf6f3f"
     },
     {
       "source": "packages/game-visuals/src/ui-icons.tsx",
@@ -318,14 +318,14 @@
       "target": "src/game/scene.tsx",
       "sourceSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
       "adapted": true,
-      "targetSha256": "9a8942e3dd3f4d03a35fc0e2cb810688262653f9c0f760333a72308bd13a07c2"
+      "targetSha256": "805c2c78a906a5a8f167951d84c81a7b0d229926ef6984b424b1c982ec44c468"
     },
     {
       "source": "packages/game-visuals/scripts/generate-demonstrations.py",
       "target": "scripts/generate-demonstrations.py",
       "sourceSha256": "9935d3f27463ebbe30d59bcd1012b6c79d93fc69f95f72fab9aee1aca33b670e",
       "adapted": true,
-      "targetSha256": "3944eccab0231b479c2c8f9333fd3efdc64f10178ae350d8e81909401ea4b9ad"
+      "targetSha256": "b889ab2d86f080dbd3ae78320e4eb244a27af147ddf5e172d187c202e9a81f13"
     },
     {
       "source": "packages/game-visuals/assets/logo-dark.png",
@@ -521,7 +521,7 @@
       "target": "src/theme-tokens/snapshot.ts",
       "sourceSha256": "281a8474eff66fa43d5d5c2a396a9b8a5b27ccf13fe1605c73722271914c570c",
       "adapted": true,
-      "targetSha256": "72c39ba627db606d643b963066ff46cc4b56899bf2e8e194fd036ab903d37673"
+      "targetSha256": "5b13c710f2dfec2d17941fe12cd55003406fbf796b32b165b58d81f83ee2d148"
     },
     {
       "source": "packages/theme-tokens/src/index.ts",
@@ -536,7 +536,7 @@
       "target": "tests/contract.test.tsx",
       "sourceSha256": "6ad1b78b5b0af858ac09d3333da3630752b15feaed623d1da3cb53534c9fd0cd",
       "adapted": true,
-      "targetSha256": "d8aed7ec24057520c3d53f819f05f4db7ffad0b1f66691c8b0a89cf3eac645e3"
+      "targetSha256": "2e6c5e85f8442f20dd042f645760dc51f9d655c174c53d0531d928b65528195b"
     },
     {
       "source": "apps/web/tests/arena-interactions.test.ts",
@@ -607,7 +607,9 @@
         "sources": [
           {
             "path": "design-archive/arena-app/eSlams Arena App.html",
-            "sha256": "50c8ea46bf344c3827108ccccaa3743f3a793f429d0d758e3d0aa05217ea733f"
+            "sha256": "09431e0f93f3cf008e5de3e5baa74fd323ad77f119e5bc8963c050fc25af24de",
+            "originalSha256": "50c8ea46bf344c3827108ccccaa3743f3a793f429d0d758e3d0aa05217ea733f",
+            "modification": "Provider SVGs omitted and auth icons replaced with a generic account outline; game art unchanged."
           }
         ]
       },

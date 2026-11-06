@@ -69,6 +69,10 @@ import { GameReplay } from '@electronicslams/pachisi/game/demo';
 
 Supply `demonstration` for an already-redacted public sequence. The host owns legality and privacy. `version` identifies the sequence; changing game or sequence resets playback. `variantNote` overrides the bundled variant caption (`null` suppresses it for a clearly labelled authored study). `LegalDemonstration` accepts the same optional caption override. No rules, collision simulation or hidden-state reconstruction occur in the player. CSS is included by the existing `styles.css` import.
 
+## Design selection
+
+`design` accepts a design the game offers (`DesignIdFor<G>` narrows it per game: twenty Connect Four looks, four for Go, Gomoku and Pentago, three for the rest). An id the game does not offer falls back to the game's default look and logs one development-time warning through `resolveGameDesign`; `GameDesignId` stays exported for hosts that keep a wide string.
+
 ## Connect Four board designs
 
 Open the catalogue at `?game=connect-four&design=design-2&presentation=arena#game-variants` for Gumball. Compare all 20 boards on a shared eight-frame trace. Use **Board design** to switch the stage, replay, authored study and local two-player board together. The local round preserves moves across material changes. **Copy variant ID** gives the stable key, and **Copy design link** restores its layout and design. The six native appearances are historical captures.

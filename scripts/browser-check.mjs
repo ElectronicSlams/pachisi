@@ -199,7 +199,7 @@ try{
   assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),bg,`saved ${saved} colours after reload`);
   reports.push({themePersistence:{os,saved,bg}});await context.close();
  }
- // Normal-motion scheduling, plus actual browser geometry for all 740 demo frames.
+ // Normal-motion scheduling, plus actual browser geometry for all 745 demo frames.
  const context=await browser.newContext({viewport:{width:1280,height:900},colorScheme:'light'});const page=await context.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.goto(origin,{waitUntil:'networkidle'});await page.locator('#games').scrollIntoViewIfNeeded();
  await page.locator('.catalogue-stage').scrollIntoViewIfNeeded();await page.mouse.move(0,0);
  const animated=page.locator('.catalogue-stage [data-game-animation]');
@@ -212,7 +212,7 @@ try{
   // Consumer-side probe modules are part of the development-only catalogue bundle.
   return window.pachisiProbe ? await window.pachisiProbe(host) : {missing:true};
  });
- assert.equal(geometry.frames,740);assert.equal(geometry.bad,0,JSON.stringify(geometry));assert.deepEqual(errors,[]);
+ assert.equal(geometry.frames,745);assert.equal(geometry.bad,0,JSON.stringify(geometry));assert.deepEqual(errors,[]);
  // Connect Four drop (review F5): the disc starts above the board's top edge and travels exactly
  // --drop row pitches (row index + 1) into its cell, at two board widths; 320 ms with a 4% overshoot.
  const drops=await page.evaluate(async()=>{
@@ -245,7 +245,17 @@ try{
   return window.pachisiStudyProbe ? await window.pachisiStudyProbe(host) : null;
  });
  assert.ok(studies?.studies>=30);assert.equal(studies.bad,0,JSON.stringify(studies));
- reports.push({geometry,drops,studies,replayPlayback:true});await context.close();
+ // A host re-rendering with an equal but new demonstration object keeps the frame (review 2026-11-06 #1).
+ const replayHost=await page.evaluate(async()=>{
+  const host=document.createElement('div');host.style.cssText='position:fixed;left:0;top:0;width:500px;z-index:10000';document.body.append(host);
+  return window.pachisiReplayHostProbe ? await window.pachisiReplayHostProbe(host) : null;
+ });
+ assert.ok(replayHost,'replay host probe missing');
+ assert.equal(replayHost.afterNext,'2',JSON.stringify(replayHost));
+ assert.ok(replayHost.ticks>=5,'host did not re-render: '+JSON.stringify(replayHost));
+ assert.equal(replayHost.afterRerenders,'2','equal trace re-sent by the host reset the replay: '+JSON.stringify(replayHost));
+ assert.equal(replayHost.afterSwap,'0','a different trace must start at frame 0: '+JSON.stringify(replayHost));
+ reports.push({geometry,drops,studies,replayHost,replayPlayback:true});await context.close();
  reports.push({review:await reviewGameSurfaces(browser,origin)});
  await writeFile('artifacts/browser/report.json',JSON.stringify({reports},null,2)+'\n');console.log(JSON.stringify({browserCases:reports.filter(r=>r.viewport).length,themePersistence:reports.filter(r=>r.themePersistence).length,dropCases:drops.length,galleryScenes:200,geometryFrames:geometry.frames,results:'passed'}));
 }finally{await browser?.close();server.kill('SIGTERM');}
