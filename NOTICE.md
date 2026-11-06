@@ -20,7 +20,7 @@ Two folders hold historical or verbatim material. Neither is compiled, imported 
 
 ### Embedded provider logos: open decision
 
-`design-archive/arena-app/prototype/src/assets.js` and `design-archive/arena-app/eSlams Arena App.html` embed third-party provider logos as `data:` URIs inside a historical prototype. They cannot be separated from those files by simple exclusion. Their redistribution basis has not been established, and a founder or legal decision is pending (keep, strip, or drop those two files). Until that decision is recorded, treat the archive as not cleared for public release. Standalone provider-mark folders (the 61-SVG provider marks pack, the Stadium prototype provider marks and the Arena pack's provider logo folders) were deliberately excluded from the repository.
+The `ElectronicSlams/pachisi` repository is public. Two archived Arena prototype files, `design-archive/arena-app/prototype/src/assets.js` and `design-archive/arena-app/eSlams Arena App.html`, embed third-party provider logos as `data:` URIs. They cannot be separated from those files by simple exclusion. Their redistribution basis has not been established. A founder or legal decision on keeping them or stripping the data URIs (or the two files) is pending and has not been recorded here. Whatever is decided, git history retains the bytes of every committed version. Standalone provider-mark folders (the 61-SVG provider marks pack, the Stadium prototype provider marks and the Arena pack's provider logo folders) were deliberately excluded from the repository.
 
 The rule for the supported package is unchanged: nothing in `src/` bundles provider marks. Consumers supply provider marks where they have the appropriate rights. Nothing in the archive grants a trademark licence.
 
@@ -39,3 +39,21 @@ Connect Four web designs 2 and 3 adapt first-party Home v1/v2 and Arena App visu
 The Porcelain web edition uses two original MIT-licensed stone SVGs by SabakiHQ/Shudan at `bf2be30c568338c77294a782742036c1b3167c72`. Verbatim copies and the original license are packaged together under `assets/go-stones-shudan/`. The wood, print, felt and instrument materials are Pachisi-authored. Native active-turn previews under `catalogue/public/design-census/` are byte-identical copies of first-party mobile Skia goldens from `8dd06c12`. SOURCE_MANIFEST.json identifies each source, digest and destination.
 
 The additional public GitHub source selections under `reference/github-visual-sweep/` retain their own original license texts, notices and repository/commit provenance. The root license does not relicense them. See the [snapshot manifest](reference/github-visual-sweep/MANIFEST.json) and [per-game findings](docs/research/github-visual-sweep/README.md). Reviewed third-party screenshots are linked to their original repositories.
+
+### Licence families in the reference collections
+
+These counts are the root licence declared for each source in `SOURCES.json`; every source directory also keeps its upstream licence texts.
+
+- `reference/github-visual-sweep/` (77 sources): MIT 60, Apache-2.0 6, GPL-3.0 6, BSD-3-Clause 3, GPL-2.0 1, CC0-1.0 1. `junosan--nama` is declared Apache-2.0, and its upstream `NOTICE` also carries LGPL-2.1 text (for Qt) and a BSD notice (for the Mersenne Twister).
+- `reference/public-games/` (38 sources, the November public-games collection): MIT 21, Apache-2.0 7, GPL-3.0-or-later 3, AGPL-3.0 2, CC0-1.0 2, GPL-3.0 1, BSD-3-Clause 1, BSD-2-Clause 1.
+
+The copyleft sources are:
+
+- Sweep, GPL-2.0: `futaalice--futahex2`.
+- Sweep, GPL-3.0: `abdullahjamal1--battleshipboardgame`, `farindk--morris`, `juef17--librebridge`, `juzzlin--dustracing2d`, `popojan--goban`, `san-santra--pyboxing`.
+- Sweep, mixed notice: `junosan--nama` (LGPL-2.1 and BSD notices under an Apache-2.0 root).
+- Public games, AGPL-3.0: `calcitem--sanmill`, `playhex--playhex`.
+- Public games, GPL-3.0-or-later: `lichess-org--chessground`, `wandererxii--shogiground`, `gbtami--chessgroundx`.
+- Public games, GPL-3.0: `hanabi-live--hanabi-live`.
+
+These files are verbatim snapshots with their licence documents. They are not built, not imported by `src/` or `catalogue/`, and not in the package tarball. Whether to replace the copyleft snapshots with link-only pins (keeping the `SOURCES.json` commits and manifest hashes) is a pending legal decision. This notice describes the current state; it is not a legal ruling.

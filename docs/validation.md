@@ -1,10 +1,16 @@
 # Validation — current evidence and history
 
+## October follow-ups integration · 6 November 2026
+
+| Check | Record |
+|---|---|
+| Branch `integrate/october-followups`, based on `main` `486aa05` | The code changes in the [changelog](../CHANGELOG.md#unreleased) are followed by a recording run of `pnpm ci:local`, the last step on this branch. Its results are the evidence for this branch and are written to [local-ci.json](validation/local-ci.json), [browser.json](validation/browser.json) and [consumer.json](validation/consumer.json). This page does not restate them; read the recorded commit and working-tree state in `local-ci.json` before relying on them. |
+
 ## Adversarial review resolution · 6 November 2026
 
 Full local CI passed with 106 tests, the packed ESM/TypeScript/Next consumers, and browser checks across desktop/phone and light/dark. The browser also compared the actual painted scenes for 170 game/design selections, checked four settled Connect Four placements under both motion preferences, and inspected seven replays with keyboard and touch controls. The [review resolution](reviews/2026-11-05-adversarial-design-review.md#resolution--6-november-2026) maps every finding to its fix.
 
-Pinned Core regeneration produced 690 legal transitions in 740 frames and reproduced byte-for-byte with the generator’s check mode. All 38 planted faults were caught, including a failing validator CLI exit for renderer-source mutations. The existing Taxi state issue and missing Bridge dummy data remain explicit exceptions. [CI](validation/local-ci.json) · [Browser](validation/browser.json) · [Consumer](validation/consumer.json) · [Physics](physics.md).
+Pinned Core regeneration produced 690 legal transitions in 740 frames and reproduced byte-for-byte with the generator’s check mode. All 38 planted faults were caught at that time (44 after the Goofspiel and Pentago checks added on the October follow-ups branch), including a failing validator CLI exit for renderer-source mutations. The existing Taxi state issue and missing Bridge dummy data remain explicit exceptions. [CI](validation/local-ci.json) · [Browser](validation/browser.json) · [Consumer](validation/consumer.json) · [Physics](physics.md).
 
 ## Public GitHub visual-design sweep — 4 November 2026
 
@@ -55,10 +61,10 @@ The full `pnpm ci:local` release gate passed on the working tree based on `c83e2
 |---|---|
 | Frozen dependency install, TypeScript, ESM/declarations, catalogue build, public payload check | Passed |
 | Unit/regression tests | 92 passed, zero failures |
-| Independent game/physics validation | All 50 games, 722 frames and 672 transitions; 39 PASS, 9 PASS-with-RULE, 1 PASS-with-RENDER (Bridge dummy data), 1 known upstream taxi defect; no unexpected failures |
+| Independent game/physics validation | All 50 games, 722 frames and 672 transitions as bundled on that date (the current traces have 740 frames and 690 transitions; see the 6 November record); 39 PASS, 9 PASS-with-RULE, 1 PASS-with-RENDER (Bridge dummy data), 1 known upstream taxi defect; no unexpected failures |
 | Mutation self-test | All 38 planted errors caught, including eight new lander/racing/walker corruptions |
 | Browser game and study selection | 200 game cases plus 132 study cases: desktop/phone × light/dark; replay controls, keyboard seeking, playback/pause, reduced motion, theme persistence and no horizontal page overflow |
-| Browser geometry | 722 original frames finite; 33 authored studies / 47 frames fit their viewports; six Connect Four start/settle/overshoot cases passed |
+| Browser geometry | 722 original frames finite (all frames bundled on that date); 33 authored studies / 47 frames fit their viewports; six Connect Four start/settle/overshoot cases passed |
 | Packed consumers | ESM render, strict NodeNext types and Next server/client production build, including the new GameReplay export |
 | Visual review | Every game's final bundled frame inspected in category contact sheets; desktop light and phone dark lab captures checked |
 

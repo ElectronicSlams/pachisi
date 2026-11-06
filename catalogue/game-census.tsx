@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import census from './local-game-design-census.json';
+import { useCensus } from './lazy-data';
 
 type RecordGroup = readonly {name:string;kind:string;note:string;evidence:readonly {path:string;line?:number}[]}[];
 function EvidenceList({rows}:{rows:RecordGroup}) {
@@ -11,8 +11,10 @@ function EvidenceList({rows}:{rows:RecordGroup}) {
 }
 
 export function GameCensus({slug,onGameChange}:{slug:string;onGameChange:(game:string)=>void}) {
-  const game=census.games.find(entry=>entry.slug===slug)!;
+  const {data:census,failed}=useCensus();
   const [group,setGroup]=useState('screens');
+  const game=census?.games.find(entry=>entry.slug===slug);
+  if(!census||!game) return <section id="game-census" className="game-census" aria-busy={!failed}><p role="status">{failed?'The local design census could not be loaded.':'Loading the local design census…'}</p></section>;
   const sections=[
     {id:'screens',title:'Screen sources',rows:game.archive.filter(row=>['Prototype','Archived renderer'].includes(row.kind))},
     {id:'shared',title:'Shared layouts',rows:game.archive.filter(row=>row.kind==='Shared layout')},

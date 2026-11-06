@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { observePreviewVisibility } from "./motion";
+import { useEffect, useId, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { demonstrationFor, type Demonstration } from "./demos";
+import { resolveGameDesign, type DesignIdFor, type GameDesignId } from "./designs";
 import { PositionDetails } from "./position-details";
 import { LegalDemonstration } from "./scene";
 
@@ -11,11 +13,10 @@ function subscribeMotion(notify: () => void) {
   return () => query.removeEventListener("change", notify);
 }
 
-import type { GameDesignId } from "./designs";
-
-export type GameReplayProps = {
-  readonly design?: GameDesignId;
-  readonly game: string;
+export type GameReplayProps<G extends string = string> = {
+  /** A design the game offers; anything else warns once in development and renders the game's default. */
+  readonly design?: DesignIdFor<G>;
+  readonly game: G;
   readonly gameName: string;
   /** Public, already redacted frames only. Omit to inspect the bundled demonstration. */
   readonly demonstration?: Demonstration;
@@ -23,14 +24,31 @@ export type GameReplayProps = {
   readonly variantNote?: string | null;
 };
 
-/** Explicit, paused-by-default transport. Never interpolates or simulates an action. */
-export function GameReplay(props: GameReplayProps) {
-  const demo = props.demonstration ?? demonstrationFor(props.game);
-  if (!demo || !demo.frames.length) return <p role="status">Replay unavailable</p>;
-  return <ReplaySequence design={props.design} key={`${props.game}:${demo.version}`} game={props.game} gameName={props.gameName} demonstration={demo} variantNote={props.variantNote} />;
+function fnv1a(text: string) {
+  let hash = 0x811c9dc5;
+  for (let i = 0; i < text.length; i += 1) hash = Math.imul(hash ^ text.charCodeAt(i), 0x01000193);
+  return (hash >>> 0).toString(36);
+}
+/**
+ * Identity of a replay trace by content, not object identity: a host that re-renders
+ * with an equal but new `demonstration` object keeps the viewer's frame; a different
+ * trace (game, version, length or any frame) starts again at frame 0.
+ */
+export function replayTraceKey(game: string, demo: Demonstration): string {
+  return `${game}:${demo.version}:${demo.frames.length}:${fnv1a(JSON.stringify(demo.frames))}`;
 }
 
-function ReplaySequence({ game, gameName, demonstration: demo, variantNote, design }: GameReplayProps & { readonly demonstration: Demonstration }) {
+/** Explicit, paused-by-default transport. Never interpolates or simulates an action. */
+export function GameReplay<G extends string>(props: GameReplayProps<G>) {
+  const demo = props.demonstration ?? demonstrationFor(props.game);
+  // Hashing runs only when the host hands over a new object, not on every render.
+  const traceKey = useMemo(() => demo ? replayTraceKey(props.game, demo) : "", [props.game, demo]);
+  if (!demo || !demo.frames.length) return <p role="status">Replay unavailable</p>;
+  return <ReplaySequence design={resolveGameDesign(props.game, props.design)} key={traceKey} game={props.game} gameName={props.gameName} demonstration={demo} variantNote={props.variantNote} />;
+}
+
+type SequenceProps = Omit<GameReplayProps, "design" | "demonstration"> & { readonly design: GameDesignId | undefined; readonly demonstration: Demonstration };
+function ReplaySequence({ game, gameName, demonstration: demo, variantNote, design }: SequenceProps) {
   const [index, setIndex] = useState(0);
   const [playing, setPlaying] = useState(false);
   const [speed, setSpeed] = useState(1);
@@ -41,14 +59,14 @@ function ReplaySequence({ game, gameName, demonstration: demo, variantNote, desi
   const last = demo.frames.length - 1;
   const shown = Math.min(index, last);
   const frame = demo.frames[shown]!;
-  useEffect(() => { setIndex(0); setPlaying(false); }, [demo]);
+  // No reset effect on `demo`: the parent keys this component by replayTraceKey, so a
+  // different trace remounts at frame 0 and an equal re-sent trace keeps its frame.
   useEffect(() => { if (reduced) setPlaying(false); }, [reduced]);
   useEffect(() => {
     const hide = () => { if (document.hidden) setPlaying(false); };
     document.addEventListener("visibilitychange", hide);
-    const observer = new IntersectionObserver(([entry]) => setVisible(entry?.isIntersecting ?? false));
-    if (host.current) observer.observe(host.current);
-    return () => { document.removeEventListener("visibilitychange", hide); observer.disconnect(); };
+    const stopObserving = host.current ? observePreviewVisibility(host.current, setVisible) : () => {};
+    return () => { document.removeEventListener("visibilitychange", hide); stopObserving(); };
   }, []);
   useEffect(() => {
     if (!playing || reduced || !visible) return;

@@ -1,6 +1,6 @@
 import React from "react";
 import { EditionField } from "./edition-materials";
-import { hasTableCentre } from "./designs";
+import { hasTableCentre, resolveGameDesign } from "./designs";
 import type { GameDesignId } from "./designs";
 import type { ReactNode } from "react";
 import { Board } from "./board";
@@ -84,7 +84,8 @@ function Unavailable({ game, caption, label = STATE_UNAVAILABLE_LABEL, reason = 
  * it (when there is one); cell boards use it for the last-move and win-line
  * cues (see cues.ts) and the lunar lander for engine thrust.
  */
-export function LegalDemonstration({ game, frame, previous = null, externalSeats = false, variantNote, design }: { readonly game: string; readonly frame: DemonstrationFrame; readonly previous?: DemonstrationFrame | null; readonly externalSeats?: boolean; readonly design?: GameDesignId; readonly variantNote?: string | null }) {
+export function LegalDemonstration({ game, frame, previous = null, externalSeats = false, variantNote, design: requestedDesign }: { readonly game: string; readonly frame: DemonstrationFrame; readonly previous?: DemonstrationFrame | null; readonly externalSeats?: boolean; readonly design?: GameDesignId; readonly variantNote?: string | null }) {
+  const design = resolveGameDesign(game, requestedDesign);
   // Only the generic card table has external seat chrome. Other families need their full viewport.
   externalSeats = externalSeats && supportsTablePresentation(game);
   const caption = isRecord(frame) && isStr(frame.caption) ? frame.caption : "";
@@ -608,10 +609,14 @@ function socialScene(game: string, s: State): ReactNode {
     const rounds = list(s, "round_history"), points = numRecord(s.points), prize = s.current_prize;
     if (!rounds || !points || !(prize === null || isNum(prize)) || !rounds.every(isRecord)) return null;
     const last = rounds.at(-1) as { bids?: Record<string, number>; prize?: number; winner?: string | null } | undefined;
-    const committed = strings(s.committed) ?? [];
-    const reveal = last && committed.length === 0;
+    // `committed` is synthesised by Pachisi's demonstration generator; it is not part of
+    // Core's public_state. A host frame without it gives no way to tell a resolved round
+    // from a mid-round position, so a missing field never counts as a reveal.
+    const known = strings(s.committed);
+    const committed = known ?? [];
+    const reveal = last && known !== undefined && committed.length === 0;
     return <g><Label y={36}>{reveal ? `Revealed prize · ${last.prize}` : `Prize · ${prize ?? "complete"}`}</Label>
-      {PLAYERS.map((p,i)=><g key={p}><Label x={95+i*130} y={66}>{seat(p)} · {points[p] ?? "—"} points</Label><Card x={78+i*130} y={78} value={reveal ? last.bids?.[p] : undefined} back={!reveal}/><Label x={95+i*130} y={150}>{reveal ? "Revealed" : committed.includes(p) ? "Committed" : "Awaiting bid"}</Label></g>)}
+      {PLAYERS.map((p,i)=><g key={p}><Label x={95+i*130} y={66}>{seat(p)} · {points[p] ?? "—"} points</Label><Card x={78+i*130} y={78} value={reveal ? last.bids?.[p] : undefined} back={!reveal}/><Label x={95+i*130} y={150}>{reveal ? "Revealed" : committed.includes(p) ? "Committed" : known ? "Awaiting bid" : "Sealed"}</Label></g>)}
       <Label y={192}>{reveal ? `${last.winner ? seat(last.winner) + " wins" : "Tied"} · ${prize === null ? "Complete" : "Next prize " + prize}` : "Sealed bids"}</Label></g>;
   }
   const reveals = rec(s, game === "first-price-sealed-bid-auction" ? "revealed_bids" : "revealed_actions");

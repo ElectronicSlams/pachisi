@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import type { GameDesignId } from "./designs";
+import { resolveGameDesign, type DesignIdFor, type GameDesignId } from "./designs";
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties } from "react";
 import { LegalDemonstration, supportsTablePresentation } from "./scene";
 import { GameGlyph } from "./icons";
@@ -19,12 +19,14 @@ function subscribeReducedMotion(notify: () => void) {
 export type GamePresentation = "card" | "arena" | "arena-table" | "feature" | "event";
 export type GameTypography = { readonly labels?: string; readonly pieces?: string };
 
-export function GameAnimation({ game, gameName, size = "full", group = "game-detail", presentation = size === "mini" ? "card" : "feature", typography, design }: {
-  readonly game: string; readonly gameName: string; readonly size?: "full" | "mini"; readonly group?: string; readonly presentation?: GamePresentation; readonly typography?: GameTypography; readonly design?: GameDesignId;
+export function GameAnimation<G extends string>({ game, gameName, size = "full", group = "game-detail", presentation = size === "mini" ? "card" : "feature", typography, design }: {
+  readonly game: G; readonly gameName: string; readonly size?: "full" | "mini"; readonly group?: string; readonly presentation?: GamePresentation; readonly typography?: GameTypography;
+  /** A design the game offers; anything else warns once in development and renders the game's default. */
+  readonly design?: DesignIdFor<G>;
 }) {
   // Reset only this demonstration when the game changes, not the motion group.
   const fittedPresentation = presentation === "arena-table" && !supportsTablePresentation(game) ? "arena" : presentation;
-  return <AnimationSequence design={design} key={game} game={game} gameName={gameName} size={size} group={group} presentation={fittedPresentation} {...(typography ? { typography } : {})} />;
+  return <AnimationSequence design={resolveGameDesign(game, design)} key={game} game={game} gameName={gameName} size={size} group={group} presentation={fittedPresentation} {...(typography ? { typography } : {})} />;
 }
 
 function AnimationSequence({ game, gameName, size, group, presentation, typography, design }: {

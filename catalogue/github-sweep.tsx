@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import data from './github-visual-sweep.json';
+import { useGitHubSweep } from './lazy-data';
 
 export function GitHubSweep({game,onGameChange}:{game:string;onGameChange:(slug:string)=>void}) {
-  const entry=data.games.find(item=>item.slug===game)!;
+  const {data,failed}=useGitHubSweep();
   const [mode,setMode]=useState('all');
+  const entry=data?.games.find(item=>item.slug===game);
+  if(!data||!entry) return <section id="github-sweep" className="game-census" aria-busy={!failed}><p role="status">{failed?'The GitHub design sweep could not be loaded.':'Loading the GitHub design sweep…'}</p></section>;
   const rows=entry.findings.filter(item=>mode==='all'||(mode==='local'?item.localPath:item.previewUrl));
   return <section id="github-sweep" className="game-census" aria-label={`GitHub design sweep for ${entry.name}`}>
     <div className="eyebrow">Public GitHub research · {data.completedOn}</div>

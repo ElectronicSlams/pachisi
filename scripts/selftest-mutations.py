@@ -54,6 +54,13 @@ def mutations():
     yield m("paddle-ball", lambda d: d["frames"][18]["state"]["ball"].__setitem__("vx", 0.02768), "missing side-wall reflection")
     yield m("paddle-ball", lambda d: d["frames"][39]["state"]["ball"].__setitem__("vy", 0.042), "missing top-wall reflection")
     yield m("paddle-ball", lambda d: d["frames"][55]["state"]["ball"].__setitem__("vx", 0.04), "speed gained at a wall")
+    # Rendered-but-derived fields and sealed-privacy checks (review 2026-11-06 #2).
+    yield m("goofspiel", lambda d: d["frames"][1]["state"].__setitem__("committed", ["player_2"]), "committed names the wrong seat")
+    yield m("pentago", lambda d: d["frames"][1]["placement"].__setitem__("cell", 35), "placement ring on the wrong cell")
+    yield m("rock-paper-scissors", lambda d: d["actions"][0].__setitem__("action", "rock"), "raw sealed action in spectator event")
+    yield m("rock-paper-scissors", lambda d: d["frames"][1]["state"]["revealed_actions"].__setitem__("player_1", "rock"), "choice revealed before resolution")
+    yield m("cribbage", lambda d: d["frames"][1]["state"].__setitem__("discards", {"player_1": ["AC", "10D"]}), "raw crib discards leaked")
+    yield m("first-price-sealed-bid-auction", lambda d: d["actions"][1].__setitem__("action", 5), "raw sealed bid in spectator event")
 
 
 # Renderer-source corruptions: (slug, file under src/game, old, new, label).

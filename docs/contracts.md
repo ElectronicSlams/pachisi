@@ -63,6 +63,10 @@ Per-game notation:
 
 Legality and move generation, session/turn clocks, submission and optimistic state, public/private projection, per-game catalogue facts (sizes, variants, seat layouts, hidden information), FEN or other key/value decoding, card-seat assignment, selection state and hit-testing, replay transport, and every non-cell family's renderer (dice, auction, payoff matrix, control benchmark, economic panel, custom boards). The Platform's DOM viewers (`replay-board.tsx`, `arena-card-table.tsx`) and the native plan layer (`board-skia`) were not ported.
 
+## Synthesised spectator fields in the bundled traces
+
+Two fields in `src/game/game-demonstrations.json` are added by Pachisi's generator, not copied from Core public state. Goofspiel `committed` lists the players whose sealed bid for the current round is in (`["player_1"]` after the first bid, empty once both bids resolve); it carries player identifiers only, never the bid. Pentago `placement` (`{cell, quadrant, direction}`) restates the action for the renderer. A live host that wants the same cues must supply equivalent fields from its own public projection. The physics validator checks both against the trace.
+
 ## Versions
 
 | Constant | Value |

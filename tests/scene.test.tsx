@@ -271,3 +271,17 @@ test("scene: captions carry the rules variant where the bundled trace deviates f
   }
   assert.doesNotMatch(render(<LegalDemonstration game="bridge" frame={demo("bridge").frames[1]!} />), /variant/u);
 });
+
+test("goofspiel: a host frame without the synthesised `committed` field is never shown as a reveal", () => {
+  const g = demo("goofspiel");
+  // Frame 3 is mid-round (P1 has bid on prize 2); the previous round sits in round_history.
+  const { committed: _ignored, ...withoutCommitted } = g.frames[3]!.state as Record<string, unknown>;
+  const midRound = render(<LegalDemonstration game="goofspiel" frame={frame(withoutCommitted)} />);
+  assert.doesNotMatch(midRound, /Revealed/);
+  assert.match(midRound, /Prize · 2/);
+  assert.match(midRound, /Sealed bids/);
+  assert.doesNotMatch(midRound, /Committed|Awaiting bid/, "no claim about who has bid when the field is absent");
+  // With the field present the bundled frames still read as before.
+  assert.match(render(<LegalDemonstration game="goofspiel" frame={g.frames[3]!} />), /Committed/);
+  assert.match(render(<LegalDemonstration game="goofspiel" frame={g.frames[4]!} />), /Revealed prize · 2/);
+});

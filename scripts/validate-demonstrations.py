@@ -442,10 +442,22 @@ def check_othello(demo, r):
     alternate(actions, r)
 
 
+def pentago_settled(y, x, q, d):
+    """Where the stone placed at (y, x) ends up after quadrant q turns in direction d."""
+    oy, ox = (0 if q in (0, 1) else 3), (0 if q in (0, 2) else 3)
+    if not (oy <= y < oy + 3 and ox <= x < ox + 3):
+        return y, x
+    yy, xx = y - oy, x - ox
+    return (oy + xx, ox + 2 - yy) if d == "cw" else (oy + 2 - xx, ox + yy)
+
+
 def check_pentago(demo, r):
-    r.ran("6x6", "place-on-empty", "quadrant-rotation(cw/ccw)", "no-five-before-terminal")
+    r.ran("6x6", "place-on-empty", "quadrant-rotation(cw/ccw)", "no-five-before-terminal",
+          "placement == action", "placement cell empty before", "settled placement cell == actor")
     frames, actions = demo["frames"], demo["actions"]
     alternate(actions, r)
+    if frames and "placement" in frames[0]:
+        r.fail(0, "placement on the opening frame")
     for i, a in enumerate(actions, 1):
         b = [list(row) for row in frames[i - 1]["state"]["board"]]
         cell, q, d = a["action"].split(":")
@@ -453,7 +465,18 @@ def check_pentago(demo, r):
         y, x = divmod(cell, 6)
         if b[y][x] is not None:
             r.fail(i, "occupied")
-        b[y][x] = "B" if a["player"] == "player_1" else "W"
+        me = "B" if a["player"] == "player_1" else "W"
+        # The scene draws the move ring from frame.placement, so it must agree with the action.
+        pl = frames[i].get("placement")
+        if not isinstance(pl, dict) or pl.get("cell") != cell or pl.get("quadrant") != q or pl.get("direction") != d:
+            r.fail(i, f"placement {pl} != action {a['action']}")
+        elif b[y][x] is not None:
+            r.fail(i, "placement cell occupied before the move")
+        else:
+            sy, sx = pentago_settled(y, x, q, d)
+            if frames[i]["state"]["board"][sy][sx] != me:
+                r.fail(i, f"settled placement cell ({sy},{sx}) is not {me}")
+        b[y][x] = me
         oy, ox = (0 if q in (0, 1) else 3), (0 if q in (0, 2) else 3)
         sub = [[b[oy + yy][ox + xx] for xx in range(3)] for yy in range(3)]
         for yy in range(3):
@@ -1371,9 +1394,19 @@ def check_sealed(slug, demo, r):
 
 
 def check_goofspiel(demo, r):
-    r.ran("each bid card used once", "prizes each once", "higher bid wins prize", "points conservation", "bids hidden until both")
+    r.ran("each bid card used once", "prizes each once", "higher bid wins prize", "points conservation", "bids hidden until both",
+          "committed: P1 after P1 bid, empty after resolution")
     frames, actions = demo["frames"], demo["actions"]
     alternate(actions, r)
+    # `committed` is synthesised by Pachisi's generator (not Core public_state), and the
+    # scene reads it to choose between "Committed" and "Revealed prize".
+    if frames and frames[0]["state"].get("committed", []) != []:
+        r.fail(0, "committed before any bid")
+    for i, a in enumerate(actions, 1):
+        got = frames[i]["state"].get("committed")
+        want = [a["player"]] if a["player"] == "player_1" else []
+        if got != want:
+            r.fail(i, f"committed {got} != {want} after {a['player']} bid")
     rounds = []
     for f in frames:
         h = f["state"]["round_history"]
@@ -1701,7 +1734,7 @@ def check_simple_control(slug, demo, r):
             if a["action"] == "step-in" and s1["distance"] != s0["distance"] - 1:
                 r.fail(i, "step-in distance")
     elif slug == "ice-hockey-style-arena":
-        r.ran("positions within rink", "x moves ≤1", "goals monotone", "puck owner is a player", "renderer: two skaters on one cell")
+        r.ran("positions within rink", "x moves ≤1", "goals monotone", "puck owner is a player", "shared skater cells legal (two visible skaters are checked by renderer and browser tests, not here)")
         alternate(actions, r)
         for i, f in enumerate(frames):
             s = f["state"]

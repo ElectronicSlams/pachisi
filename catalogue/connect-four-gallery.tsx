@@ -4,7 +4,7 @@ import { Board } from '../src/game/board';
 import { LegalDemonstration } from '../src/game/scene';
 import { GAME_DEMONSTRATIONS } from '../src/game/demos';
 import { CONNECT_FOUR_DESIGNS, CONNECT_FOUR_LAYOUTS, connectFourVariantId, findConnectFourDesign, type ConnectFourDesignId, type ConnectFourLayout } from '../src/game/connect-four-designs';
-import { drop, newRound } from './connect-four-round';
+import { drop, newRound, roundLabel, roundStatus } from './connect-four-round';
 
 export type DesignControls = {
   design: ConnectFourDesignId;
@@ -18,8 +18,7 @@ const nativeThemes = ['classic-light','classic-dark','neon','club','arcade','mid
 function PlayRound({design}: {design: ConnectFourDesignId}) {
   const [history, setHistory] = useState(() => [newRound()]);
   const round = history[history.length - 1]!;
-  const seat = round.next === 'R' ? 1 : 2;
-  const status = round.finished ? round.frame.line?.length ? `Player ${3-seat} wins` : 'Draw' : `Player ${seat} to drop`;
+  const status = roundStatus(round);
   function play(column:number) {
     setHistory(previous => {
       const current = previous[previous.length - 1]!;
@@ -31,7 +30,7 @@ function PlayRound({design}: {design: ConnectFourDesignId}) {
     <p aria-live="polite">{status} · {history.length - 1} moves</p>
     <div className="c4-playfield"><div className="c4-columns">{Array.from({length:7},(_,i)=>
       <button key={i} aria-label={`Drop in column ${i+1}`} disabled={round.finished || round.frame.cells[i]!=='.'} onClick={()=>play(i)}>{i+1} ↓</button>)}</div>
-      <Board frame={round.frame} design={design} label={`Connect Four. ${status}. ${round.frame.cells.join(' ')}`}/>
+      <Board frame={round.frame} design={design} label={roundLabel(round)}/>
     </div>
     <div className="c4-actions"><button disabled={history.length===1} onClick={()=>setHistory(previous=>previous.slice(0,-1))}>Undo move</button>
       <button disabled={history.length===1} onClick={()=>setHistory([newRound()])}>New round</button></div>

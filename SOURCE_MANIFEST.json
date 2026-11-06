@@ -255,7 +255,7 @@
       "target": "src/game/demo.tsx",
       "sourceSha256": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202",
       "adapted": true,
-      "targetSha256": "63c7337600d8997c03336a0ba185ededc6d0b341655049b26bbeaaaaa48a6750"
+      "targetSha256": "1a60004d6dc3104f97881617396f97331657a94e291d0d49c91d2d115d0bf266"
     },
     {
       "source": "packages/game-visuals/src/game-demonstrations.json",
@@ -318,7 +318,7 @@
       "target": "src/game/scene.tsx",
       "sourceSha256": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
       "adapted": true,
-      "targetSha256": "9a8942e3dd3f4d03a35fc0e2cb810688262653f9c0f760333a72308bd13a07c2"
+      "targetSha256": "87c9ab73b9874ad531528418fb2512b3b5952ed38fe671605dda79d4d70341eb"
     },
     {
       "source": "packages/game-visuals/scripts/generate-demonstrations.py",

@@ -26,6 +26,8 @@
     "NOTICE.md",
     "SOURCE_MANIFEST.json",
     "docs",
+    "!docs/captures",
+    "!docs/research",
     "CHANGELOG.md",
     "CONTRIBUTING.md"
   ],

@@ -1,12 +1,40 @@
 # Changelog
 
+## Unreleased
+
+Post-merge hygiene for the November work on `main` (`486aa05`). No export was removed and the bundled traces are unchanged.
+
+- Fixed: `GameReplay` no longer resets to the first frame when a host re-renders with an inline `demonstration` object.
+- The physics validator now checks Goofspiel `committed` and Pentago `placement`. Six new planted corruptions bring the self-test to 44 planted errors.
+- `GameReplay`, `GameAnimation` and `Board` validate the `design` prop against the designs registered for the game.
+- The catalogue lazy-loads its census, sweep, source and coverage JSON.
+- The package tarball no longer includes `docs/captures` or `docs/research`.
+- The Connect Four local round has a short accessible label instead of the raw cell list.
+- Docs sweep: current trace and self-test counts, one changelog order, README repository layout, subpath exports and physics readiness restored, inventory exports, physics regeneration instructions and the list of Core issues still to file upstream.
+- `NOTICE.md` states the public repository status as a fact, keeps the provider-logo decision open, and lists the licence families and named copyleft sources in the reference collections.
+- Local CI evidence in `docs/validation/` is re-recorded with `pnpm ci:local` after these changes.
+
 ## 0.2.0 working collection · 6 November 2026
+
+Work merged to `main` between 1 and 6 November. The pinned Core commit is unchanged (`7731e2f`). Car Racing and Pentago were re-recorded as longer demonstrations, which brings the bundled set from 722 frames and 672 transitions to 740 frames and 690 transitions. Goofspiel frames gained the `committed` field, and the five sealed or discard games now publish neutral action labels.
 
 - Add all-game design selection, local and public GitHub research, and the blue/violet/lime/red/gold pack palette.
 - Fix sealed replay disclosure, live Checkers ranks, settled Connect Four stills, Pentago Porcelain and game-specific card-table labels.
 - Add public position inspection, stable design IDs and explicit input capabilities.
 - Record complete Pentago, Goofspiel and Racing demonstrations. Expand browser and packed-consumer regressions and fail on new physics-renderer findings.
 - Rewrite the README around catalogue discovery, consuming real frames, public replay boundaries and reproducible local validation.
+
+### Game design lab
+
+- Fix clipped catalogue boards: restrict the short arena-table layout to supported card tables, reserve caption space in arena/event boards and remove the preview's conflicting height cap. Keep filtered selections consistent and add a per-game comparison of implemented studies/presentations, replay links and shareable game URLs.
+- Research 270 distinct GitHub candidates through 57 searches; inspect 49 repositories and archive 443 selected original files from 38, including 148 SVG assets. Map all 50 games and declared variants to sources with explicit gaps; preserve full commits, original licenses, Git blob IDs and SHA-256 hashes. Add searchable catalogue sources and offline integrity checks; verify reference sources are excluded from the packed library.
+- Review all 50 games and their declared variants in an interactive catalogue lab; add 33 authored studies with 47 frames, category filtering, primary-source inspiration and explicit coverage boundaries.
+- Export paused-by-default `GameReplay` from `game/demo`, with deterministic frame controls, speed, reduced-motion handling and outcome text.
+- Correct tall-map/shooter clipping, terrain foot contacts, road-relative alignment/camera fit, shared hockey cells, Blackjack conceal/reveal, long-card-row disclosure and external-seat crop scope. Improve mobile inspection, Go stone edges and wrapping captions.
+- Strengthen lander/racing/walker equation checks and add eight corruption tests, bringing the self-test to 38 planted errors at the time. The original 722 pinned frames and the canonical theme assets were preserved; the later Car Racing and Pentago recordings described above added frames on top of them.
+- Ship 20 Connect Four board designs on four surfaces, including Gumball and Bullseye from first-party prototypes. Add a shared comparison slider, local two-player board, copyable IDs, design links, six native reference captures and optional design selection for Board, GameAnimation, GameReplay and LegalDemonstration.
+- Census all 50 games across first-party prototypes, archived Platform renderers, native captures and 38 local public-source selections. Extend the per-game design chooser, shared-frame comparison, replay selection and share links across the catalogue. Include package registry lookup, new family materials and Shudan's attributed Go stones.
+- Add a second public GitHub design sweep across all 50 games, with per-game findings, pinned source links, visual observations, offline-verifiable snapshots and explicit variant relationships in the catalogue.
 
 ## 0.2.0 — 2026-10-29
 
@@ -72,16 +100,3 @@ Minor release: additive exports, new tests and docs, renderer fixes. No existing
 - Reuse the established controlled-modal focus loop in Dialog and Sheet; protect nested modal events.
 - Namespace tab IDs for multiple instances. Adapt the demonstration generator's relocated paths.
 - Registry publication remains disabled; Platform consumption is prepared but not activated.
-
-## Unreleased — game design lab
-
-- Fix clipped catalogue boards: restrict the short arena-table layout to supported card tables, reserve caption space in arena/event boards and remove the preview's conflicting height cap. Keep filtered selections consistent and add a per-game comparison of implemented studies/presentations, replay links and shareable game URLs.
-- Research 270 distinct GitHub candidates through 57 searches; inspect 49 repositories and archive 443 selected original files from 38, including 148 SVG assets. Map all 50 games and declared variants to sources with explicit gaps; preserve full commits, original licenses, Git blob IDs and SHA-256 hashes. Add searchable catalogue sources and offline integrity checks; verify reference sources are excluded from the packed library.
-- Review all 50 games and their declared variants in an interactive catalogue lab; add 33 authored studies with 47 frames, category filtering, primary-source inspiration and explicit coverage boundaries.
-- Export paused-by-default `GameReplay` from `game/demo`, with deterministic frame controls, speed, reduced-motion handling and outcome text.
-- Correct tall-map/shooter clipping, terrain foot contacts, road-relative alignment/camera fit, shared hockey cells, Blackjack conceal/reveal, long-card-row disclosure and external-seat crop scope. Improve mobile inspection, Go stone edges and wrapping captions.
-- Strengthen lander/racing/walker equation checks and add eight corruption tests (38 total). Preserve the pinned 722-frame trace data and canonical theme assets.
-
-- Ship 20 Connect Four board designs on four surfaces, including Gumball and Bullseye from first-party prototypes. Add a shared comparison slider, local two-player board, copyable IDs, design links, six native reference captures and optional design selection for Board, GameAnimation, GameReplay and LegalDemonstration.
-- Census all 50 games across first-party prototypes, archived Platform renderers, native captures and 38 local public-source selections. Extend the per-game design chooser, shared-frame comparison, replay selection and share links across the catalogue. Include package registry lookup, new family materials and Shudan's attributed Go stones.
-- Add a second public GitHub design sweep across all 50 games, with per-game findings, pinned source links, visual observations, offline-verifiable snapshots and explicit variant relationships in the catalogue.
