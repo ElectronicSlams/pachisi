@@ -1,0 +1,355 @@
+/* =====================================================================
+   eSlams Arena prototype | src/onboard.css  [agent G]
+   First run: Welcome, Profile setup, Theme pick (brief 7.0 to 7.0c), the
+   Desktop frame, and the six-theme hooks that live outside the boards
+   (mark tint, active-seat glow, thin-spot promotions). Prefix .ob-.
+   Tokens only: every colour is a var(); no hex here.
+   ===================================================================== */
+
+/* ---------- The layer: above the screen stack, below sheets (60) ---------- */
+#phone .ob-layer {
+  position: absolute; inset: 0; z-index: 50; overflow: hidden;
+  background: var(--bg); color: var(--text); font-family: var(--font-sans); font-size: 14px; line-height: 1.5;
+}
+#phone .ob-layer.is-enter { opacity: 0; transition: opacity var(--motion-push) var(--ease); }
+#phone .ob-layer.is-enter.is-in { opacity: 1; }
+#phone .ob-layer.is-leave { opacity: 0; pointer-events: none; transition: opacity var(--motion-push) var(--ease); }
+#phone .ob-ic { display: inline-flex; align-items: center; justify-content: center; flex: none; }
+#phone .ob-ic svg { display: block; }
+
+/* ---------- Brand: the mark and the wordmark text ---------- */
+#phone .ob-mark { position: relative; display: inline-block; flex: none; width: var(--ob-mark-size, 56px); height: var(--ob-mark-size, 56px); }
+#phone .ob-mark img { width: 100%; height: 100%; display: block; }
+/* Material themes tint the in-app mark to the theme ink, one flat colour, same geometry */
+#phone[data-theme="neon"] .ob-mark, #phone[data-theme="club"] .ob-mark,
+#phone[data-theme="arcade"] .ob-mark, #phone[data-theme="midnight"] .ob-mark {
+  background: var(--mark-ink);
+  -webkit-mask: var(--ob-mark-src) center / contain no-repeat;
+  mask: var(--ob-mark-src) center / contain no-repeat;
+}
+#phone[data-theme="neon"] .ob-mark img, #phone[data-theme="club"] .ob-mark img,
+#phone[data-theme="arcade"] .ob-mark img, #phone[data-theme="midnight"] .ob-mark img { visibility: hidden; }
+/* Wordmark text, cropped from the brand PNG (same geometry as .ap-wm--text) */
+#phone .ob-wm { --wm-h: 30px; position: relative; display: inline-block; flex: none; overflow: hidden; height: var(--wm-h); width: calc(var(--wm-h) * 3.7841); }
+#phone .ob-wm img { position: absolute; max-width: none; height: calc(var(--wm-h) * 1.8068); width: auto; top: calc(var(--wm-h) * -0.5227); left: calc(var(--wm-h) * -1.4773); }
+#phone .ob-wm .ob-wm-d { display: none; }
+#phone[data-theme="dark"] .ob-wm .ob-wm-l, #phone[data-theme="neon"] .ob-wm .ob-wm-l,
+#phone[data-theme="arcade"] .ob-wm .ob-wm-l, #phone[data-theme="midnight"] .ob-wm .ob-wm-l { display: none; }
+#phone[data-theme="dark"] .ob-wm .ob-wm-d, #phone[data-theme="neon"] .ob-wm .ob-wm-d,
+#phone[data-theme="arcade"] .ob-wm .ob-wm-d, #phone[data-theme="midnight"] .ob-wm .ob-wm-d { display: block; }
+#phone .ob-wm-txt { font: 650 calc(var(--wm-h) * 0.9)/1 var(--font-sans); color: var(--text); }
+
+/* Home header wordmark in the material themes (theme-materials.md 7): onboard.js
+   sets data-ink and --wm-src; the whole wordmark becomes one flat --mark-ink. */
+#phone .ap-wm[data-ink] {
+  background: var(--mark-ink);
+  -webkit-mask-image: var(--wm-src); mask-image: var(--wm-src);
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-size: auto calc(var(--wm-h) * 1.8068); mask-size: auto calc(var(--wm-h) * 1.8068);
+  -webkit-mask-position: calc(var(--wm-h) * -0.3068) calc(var(--wm-h) * -0.5227);
+  mask-position: calc(var(--wm-h) * -0.3068) calc(var(--wm-h) * -0.5227);
+}
+#phone .ap-wm--text[data-ink] {
+  -webkit-mask-position: calc(var(--wm-h) * -1.4773) calc(var(--wm-h) * -0.5227);
+  mask-position: calc(var(--wm-h) * -1.4773) calc(var(--wm-h) * -0.5227);
+}
+#phone .ap-wm[data-ink] img { visibility: hidden; }
+
+/* ---------- Buttons local to first run ---------- */
+#phone .ob-btn-outline {
+  width: 100%; min-height: var(--tap); display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 0 18px; border-radius: var(--r-lg); border: 1px solid var(--border-strong); background: transparent;
+  color: var(--text); font: 600 15px/1.2 var(--font-sans);
+}
+#phone .ob-btn-outline:hover { border-color: var(--text-3); }
+#phone .ob-btn-outline:disabled { color: var(--text-2); border-color: var(--border); cursor: default; }
+/* disabled primary inside first run: --text-2, never --text-3 on --surface-3 (thin spot) */
+#phone .ob-layer .ap-btn--primary:disabled { color: var(--text-2); }
+
+/* =====================================================================
+   1. The world shell (Welcome, Auth, Setup) and Welcome
+   One .ob-layer.ob-shell holds the scene (.ob-world), the shared brand
+   (.ob-brand) and the screens as .ob-pane children. Without ESScene the
+   shell's own --bg is the plain fallback plane.
+   ===================================================================== */
+#phone .ob-shell { --ob-brand-top: calc(var(--safe-top) + 17%); --ob-ms: 700ms; }
+#phone .ob-world { position: absolute; inset: 0; z-index: 0; }
+#phone .ob-pane {
+  position: absolute; inset: 0; z-index: 1;
+  transition: opacity var(--ob-ms) var(--ease), transform var(--ob-ms) var(--ease);
+}
+#phone .ob-pane.is-enter { opacity: 0; transform: translateY(14px); }
+#phone .ob-pane.is-enter.is-in { opacity: 1; transform: none; transition-delay: 120ms; }
+#phone .ob-pane.is-out { opacity: 0; pointer-events: none; transition-duration: 360ms; }
+#phone .ob-pane[data-ob-pane="welcome"].is-out { transform: translateY(-10px); }
+
+/* The shared brand: the hero of the upper third on Welcome; it shrinks and
+   rises to a small top-centre mark on Auth; it steps aside on Setup. */
+#phone .ob-brand {
+  position: absolute; z-index: 2; left: 50%; top: var(--ob-brand-top);
+  display: inline-flex; align-items: center; gap: 12px; pointer-events: none;
+  transform: translateX(-50%); transform-origin: 50% 0;
+  transition: top var(--ob-ms) var(--ease), transform var(--ob-ms) var(--ease), opacity 360ms var(--ease);
+}
+#phone .ob-shell[data-ob-screen="auth"] .ob-brand { top: calc(var(--safe-top) + 12px); transform: translateX(-50%) scale(0.56); }
+#phone .ob-shell[data-ob-screen="setup"] .ob-brand { top: calc(var(--safe-top) + 4px); transform: translateX(-50%) scale(0.46); opacity: 0; }
+
+#phone .ob-wel { position: absolute; inset: 0; pointer-events: none; }   /* drags reach the canvas */
+#phone .ob-wel button { pointer-events: auto; }
+#phone .ob-wel-copy {
+  position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 0 24px calc(var(--safe-bottom) + 20px);
+}
+/* top-anchored to the same line as the shared brand (a % top resolves against height, padding would not) */
+#phone .ob-wel-top { position: absolute; left: 24px; right: 24px; top: var(--ob-brand-top); display: flex; flex-direction: column; align-items: center; text-align: center; }
+#phone .ob-wel-slot { height: 52px; flex: none; }
+#phone .ob-wel-title { margin-top: 28px; font-size: 28px; font-weight: 650; line-height: 1.15; letter-spacing: -0.025em; color: var(--text); }
+#phone .ob-wel-foot { display: flex; flex-direction: column; }
+#phone .ob-wel-go { width: 100%; min-height: 56px; font-size: 17px; }
+
+/* Entry choreography (< 1.2 s; a tap adds .is-settled and skips it) */
+#phone .ob-shell.is-cold .ob-brand .ob-mark { animation: obSettle 600ms var(--ease) both; }
+#phone .ob-shell.is-cold .ob-brand .ob-wm { animation: obFadeIn 500ms var(--ease) 300ms both; }
+#phone .ob-shell.is-cold .ob-wel-title { animation: obFadeIn 500ms var(--ease) 420ms both; }
+#phone .ob-shell.is-cold .ob-wel-foot { animation: obRise 420ms var(--ease) 700ms both; }
+#phone .ob-shell.is-settled .ob-brand .ob-mark, #phone .ob-shell.is-settled .ob-brand .ob-wm,
+#phone .ob-shell.is-settled .ob-wel-title, #phone .ob-shell.is-settled .ob-wel-foot { animation: none; }
+@keyframes obSettle { from { opacity: 0; transform: scale(0.84) translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes obRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@keyframes obFadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Reduced motion: the forward move is a 150 ms crossfade, nothing travels */
+html.reduced-motion #phone .ob-shell { --ob-ms: 150ms; }
+html.reduced-motion #phone .ob-pane, html.reduced-motion #phone .ob-pane.is-enter { transform: none; }
+html.reduced-motion #phone .ob-brand { transition: opacity 150ms linear; }
+@media (prefers-reduced-motion: reduce) {
+  #phone .ob-shell { --ob-ms: 150ms; }
+  #phone .ob-pane, #phone .ob-pane.is-enter { transform: none; }
+  #phone .ob-brand { transition: opacity 150ms linear; }
+}
+
+/* =====================================================================
+   2. Profile setup
+   ===================================================================== */
+#phone .ob-setup { position: absolute; inset: 0; background: var(--bg); }
+#phone .ob-setup-form { display: flex; flex-direction: column; height: 100%; }
+#phone .ob-setup-scroll {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: calc(var(--safe-top) + 16px) var(--gutter) 28px;
+}
+#phone .ob-setup-head { margin-bottom: 6px; }
+#phone .ob-setup-title { font-size: 22px; font-weight: 650; line-height: 1.2; letter-spacing: -0.02em; }
+#phone .ob-field { margin-top: 20px; }
+#phone .ob-label { display: block; margin: 0 0 8px; font-size: 13.5px; font-weight: 600; color: var(--text); }
+#phone .ob-label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+#phone .ob-label-row .ob-label { margin-bottom: 8px; }
+#phone .ob-hint { margin-top: 8px; font-size: 12.5px; line-height: 1.4; color: var(--text-3); }
+#phone .ob-field-fav .ob-hint { margin-top: -2px; }
+#phone .ob-input {
+  width: 100%; min-height: 48px; padding: 12px 14px; border-radius: var(--r-lg);
+  border: 1px solid var(--border-strong); background: var(--surface); color: var(--text);
+  font-size: 15px; line-height: 1.35; outline: none; -webkit-appearance: none; appearance: none;
+}
+#phone .ob-input::placeholder { color: var(--text-3); opacity: 1; }
+#phone .ob-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+#phone .ob-input[aria-invalid="true"], #phone .ob-input[aria-invalid="true"]:focus { border-color: var(--loss); }
+#phone .ob-handle-row { position: relative; }
+#phone .ob-handle-input { padding-right: 54px; font-size: 15px; letter-spacing: 0; }
+#phone .ob-shuffle {
+  position: absolute; right: 2px; top: 50%; transform: translateY(-50%);
+  width: var(--tap); height: var(--tap); display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: var(--r-md); background: transparent; color: var(--text-2);
+}
+#phone .ob-shuffle:hover { color: var(--accent); background: var(--accent-softer); }
+#phone .ob-shuffle:active { transform: translateY(-50%) rotate(-12deg); }
+/* one slot, fixed height: the preview, or the error that replaces it (no layout jump) */
+#phone .ob-handle-line { margin-top: 8px; min-height: 34px; font-size: 12.5px; line-height: 1.35; overflow-wrap: anywhere; }
+#phone .ob-handle-line.mono { font-size: 12.5px; }
+#phone .ob-handle-dom { color: var(--text-3); }
+#phone .ob-handle-h { color: var(--text); }
+#phone .ob-handle-line.is-bad { font-family: var(--font-sans); color: var(--loss-text); }
+#phone .ob-handle-line.is-warn { font-family: var(--font-sans); color: var(--text); font-weight: 600; }
+
+/* visibility: two chips, Public preselected */
+#phone .ob-vis-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#phone .ob-vis {
+  position: relative; min-height: 64px; display: flex; flex-direction: column; justify-content: center; gap: 2px;
+  padding: 11px 14px; border-radius: var(--r-lg); border: 1px solid var(--border-strong);
+  background: var(--surface); color: var(--text); text-align: left;
+}
+#phone .ob-vis.is-on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: var(--accent-softer); }
+#phone .ob-vis-name { font-size: 15px; font-weight: 650; }
+#phone .ob-vis-desc { font-size: 12.5px; line-height: 1.35; color: var(--text-2); }
+
+/* optional block */
+#phone .ob-optional { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--border); }
+#phone .ob-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-3); }
+#phone .ob-optional .ob-field:first-of-type { margin-top: 12px; }
+#phone .ob-eyebrow-b { display: none; }
+#phone .ob-col-b .ob-field-fav { margin-top: 20px; }
+#phone .ob-count { font-size: 11px; color: var(--text-3); }
+#phone .ob-bio { min-height: 72px; resize: none; display: block; }
+#phone .ob-loc-wrap { position: relative; }
+#phone .ob-loc-list {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 6; margin: 0; padding: 6px; list-style: none;
+  border: 1px solid var(--border-strong); border-radius: var(--r-lg); background: var(--surface); box-shadow: var(--shadow-pop);
+}
+#phone .ob-loc-list[hidden] { display: none; }
+#phone .ob-loc-opt { min-height: var(--tap); display: flex; align-items: center; padding: 0 10px; border-radius: var(--r-md); font-size: 14px; color: var(--text); cursor: pointer; }
+#phone .ob-loc-opt:hover, #phone .ob-loc-opt.is-active { background: var(--accent-soft); }
+
+/* favourite games: compact game tiles, 2 columns, multi-select with order badges */
+#phone .ob-ggrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+#phone .ob-gtile {
+  position: relative; display: flex; align-items: center; gap: 10px; min-height: 64px; min-width: 0;
+  padding: 10px 30px 10px 10px; border-radius: var(--r-lg); border: 1px solid var(--border);
+  background: var(--surface); color: var(--text); text-align: left; font: inherit;
+}
+#phone .ob-gtile:hover { border-color: var(--border-strong); }
+#phone .ob-gtile.is-on { border-color: var(--accent); box-shadow: inset 0 0 0 1px var(--accent); background: var(--accent-softer); }
+#phone .ob-gtile-glyph { flex: none; display: flex; }
+#phone .ob-gtile-txt { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#phone .ob-gtile-name {
+  font-size: 14px; font-weight: 600; line-height: 1.25; color: var(--text);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+}
+#phone .ob-gtile-table { font-size: 11px; line-height: 1.3; color: var(--text-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#phone .ob-gtile.is-on .ob-gtile-table { color: var(--text-2); }
+#phone .ob-gtile-check {
+  position: absolute; top: 7px; right: 7px; width: 18px; height: 18px; display: flex; align-items: center; justify-content: center;
+  border-radius: var(--r-pill); background: var(--accent-fill); color: var(--text-on-accent);
+}
+#phone .ob-gtile-badge { position: absolute; right: 9px; bottom: 7px; font-size: 11px; font-weight: 600; line-height: 1; color: var(--accent); }
+#phone .ob-more {
+  width: 100%; min-height: var(--tap); margin-top: 10px; border-radius: var(--r-lg);
+  border: 1px solid var(--border); background: transparent; color: var(--text); font: 600 14px/1.2 var(--font-sans);
+}
+#phone .ob-more:hover { border-color: var(--border-strong); }
+#phone .ob-more[hidden] { display: none; }
+
+/* sticky footer in the thumb zone */
+#phone .ob-setup-foot {
+  flex: none; padding: 12px var(--gutter) calc(var(--safe-bottom) + 4px);
+  border-top: 1px solid var(--border-faint); background: var(--bg);
+}
+#phone .ob-foot-err { margin-bottom: 8px; font-size: 13px; text-align: center; color: var(--loss-text); }
+#phone .ob-foot-err[hidden] { display: none; }
+
+/* =====================================================================
+   3. Theme pick and the reusable theme tiles (Settings > Appearance)
+   ===================================================================== */
+#phone .ob-look { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); }
+#phone .ob-look-scroll { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: calc(var(--safe-top) + 16px) var(--gutter) 20px; }
+#phone .ob-look-title { font-size: 22px; font-weight: 650; line-height: 1.2; letter-spacing: -0.02em; }
+#phone .ob-look-sub { margin-top: 6px; font-size: 14px; line-height: 1.45; color: var(--text-2); }
+#phone .ob-look-foot { flex: none; padding: 12px var(--gutter) calc(var(--safe-bottom) + 8px); border-top: 1px solid var(--border-faint); background: var(--bg); }
+#phone .ob-th { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+#phone .ob-th--settings { margin-top: 0; }
+#phone .ob-th-opt {
+  position: relative; display: block; width: 100%; min-height: var(--tap); padding: 0; overflow: hidden;
+  border: 2px solid var(--border); border-radius: var(--r-lg); background: transparent; color: inherit; font: inherit; text-align: left;
+}
+#phone .ob-th-opt.is-on { border-color: var(--accent); }
+#phone .ob-th-check {
+  position: absolute; top: 7px; right: 7px; width: 20px; height: 20px; display: none; align-items: center; justify-content: center;
+  border-radius: var(--r-pill); background: var(--accent-fill); color: var(--text-on-accent);
+}
+#phone .ob-th-opt.is-on .ob-th-check { display: flex; }
+#phone .ob-th-follow-in { display: flex; align-items: center; gap: 12px; padding: 12px 40px 12px 14px; color: var(--text-2); background: var(--surface); }
+#phone .ob-th-follow-txt { display: flex; flex-direction: column; gap: 1px; }
+#phone .ob-th-follow-t { font-size: 15px; font-weight: 600; color: var(--text); }
+#phone .ob-th-follow-s { font-size: 12.5px; line-height: 1.35; color: var(--text-2); }
+#phone .ob-th-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#phone .ob-th-skin {
+  display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 12px 8px 10px;
+  background: var(--bg); color: var(--text); font-size: 13px; line-height: 1.3;
+}
+#phone .ob-th-board { display: block; width: 120px; pointer-events: none; }
+#phone .ob-th-name { font: 600 12.5px/1.2 var(--font-sans); color: var(--text); }
+
+/* =====================================================================
+   4. Six themes outside the boards
+   ===================================================================== */
+/* Glow budget: the Stage's active seat underline, Neon and Arcade only (static) */
+#phone[data-theme="neon"] .st-seat, #phone[data-theme="arcade"] .st-seat { position: relative; }
+#phone[data-theme="neon"] .st-seat.is-active::after,
+#phone[data-theme="arcade"] .st-seat.is-active::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  background: var(--accent); box-shadow: var(--glow); pointer-events: none;
+}
+/* Thin spots (brief 6.1): --text-3 on --surface-3 is under 4.5 in Neon, Club and
+   Midnight, and on --surface-2 in Midnight; promote that copy to --text-2. */
+#phone[data-theme="neon"] .ap-btn--primary:disabled, #phone[data-theme="club"] .ap-btn--primary:disabled,
+#phone[data-theme="midnight"] .ap-btn--primary:disabled, #phone[data-theme="arcade"] .ap-btn--primary:disabled { color: var(--text-2); }
+/* --text-3 on --surface-2 (Midnight): the receded seat on the result chips */
+#phone[data-theme="midnight"] .rs-chip.is-neutral, #phone[data-theme="midnight"] .rs-chip-you { color: var(--text-2); }
+/* Club: brass accent text on the --bg page measures 4.36; links take the deeper brass (6.1) */
+#phone[data-theme="club"] .ap-link { color: var(--accent-hover); }
+
+/* =====================================================================
+   5. Desktop frame (canvas Controls > Desktop): #phone at 1024 x 720
+   ===================================================================== */
+.cv-device.ob-desktop { width: 1048px; height: 744px; border-radius: 30px; }
+.cv-device.ob-desktop #phone { width: 1024px; height: 720px; border-radius: 18px; }
+.cv-device.ob-desktop .cv-island { display: none; }
+#phone.ob-desktop { --safe-top: 18px; --safe-bottom: 14px; --gutter: 32px; }
+#phone.ob-desktop .ap-status, #phone.ob-desktop .ap-homeind { display: none; }
+
+/* Welcome: the scene stays full-bleed; the copy column is centred, at most 480px */
+#phone.ob-desktop .ob-wel-copy { left: 50%; right: auto; width: min(480px, 100%); transform: translateX(-50%); }
+#phone.ob-desktop .ob-shell { --ob-brand-top: 24%; }
+
+/* Profile setup: identity left, favourites right (scrolls in its column), footer bar */
+#phone.ob-desktop .ob-setup-scroll { display: flex; flex-direction: column; overflow: hidden; padding: 36px 48px 0; }
+#phone.ob-desktop .ob-setup-head { flex: none; margin-bottom: 4px; }
+#phone.ob-desktop .ob-setup-title { font-size: 26px; }
+#phone.ob-desktop .ob-setup-cols { flex: 1 1 auto; min-height: 0; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 44px; }
+#phone.ob-desktop .ob-col { min-height: 0; overflow-y: auto; padding: 0 4px 24px; }
+#phone.ob-desktop .ob-col-b .ob-eyebrow-b { display: block; margin-top: 20px; }
+#phone.ob-desktop .ob-col-b .ob-field-fav { margin-top: 12px; }
+#phone.ob-desktop .ob-ggrid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#phone.ob-desktop .ob-setup-foot { display: grid; grid-template-columns: 1fr 300px; grid-template-areas: "err err" ". btn"; align-items: center; column-gap: 20px; padding: 14px 48px 18px; }
+#phone.ob-desktop .ob-foot-err { grid-area: err; text-align: right; }
+#phone.ob-desktop .ob-submit { grid-area: btn; }
+
+/* Theme pick at desktop width: three tiles a row */
+#phone.ob-desktop .ob-look-scroll { width: 100%; max-width: 760px; margin: 0 auto; padding-top: 40px; }
+#phone.ob-desktop .ob-th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+#phone.ob-desktop .ob-look-foot { display: flex; justify-content: center; }
+#phone.ob-desktop .ob-look-go { max-width: 360px; }
+
+
+/* Status-bar band: scrolling content passes under a --bg fade, never under the clock */
+#phone .ob-setup::before, #phone .ob-look::before {
+  content: ""; position: absolute; top: 0; left: 0; right: 0; height: calc(var(--safe-top) + 6px); z-index: 4; pointer-events: none;
+  background: linear-gradient(var(--bg) 82%, transparent);
+}
+#phone.ob-desktop .ob-setup::before, #phone.ob-desktop .ob-look::before { display: none; }
+
+/* While a first-run screen covers the phone, Home underneath is not painted (its preview is paused in app.js) */
+#phone .ap-root:has(> .ob-layer:not(.is-leave)) > .ap-stack { visibility: hidden; }
+
+/* Setup and Auth over the world: the plane is the scene, form surfaces stay legible */
+#phone .ob-shell .ob-setup { background: transparent; }
+#phone .ob-shell .ob-input, #phone .ob-shell .ob-vis:not(.is-on) { background: color-mix(in srgb, var(--surface) 92%, transparent); border-color: var(--border); }
+#phone .ob-shell .ob-input:focus { border-color: var(--accent); }
+#phone .ob-shell .ob-setup-foot { background: color-mix(in srgb, var(--bg) 90%, transparent); }
+@media (prefers-reduced-transparency: reduce) {
+  #phone .ob-shell .ob-input, #phone .ob-shell .ob-vis:not(.is-on) { background: var(--surface); }
+  #phone .ob-shell .ob-setup-foot { background: var(--bg); }
+}
+#phone .ob-shell .ob-input[aria-invalid="true"], #phone .ob-shell .ob-input[aria-invalid="true"]:focus { border-color: var(--loss); }
+
+/* Scrims between the world and the form: Setup full-pane, Auth behind the column only */
+#phone .ob-scrim { position: absolute; z-index: 0; pointer-events: none; }
+#phone .ob-scrim--setup { inset: 0; background: color-mix(in srgb, var(--bg) 82%, transparent); }
+#phone .ob-scrim--auth { border-radius: var(--r-lg); background: color-mix(in srgb, var(--bg) 45%, transparent); transition: top 200ms var(--ease), height 200ms var(--ease); }
+#phone .ob-pane > .ob-setup, #phone .ob-pane > .au-page { z-index: 1; }
+@media (prefers-reduced-transparency: reduce) {
+  #phone .ob-scrim--setup, #phone .ob-scrim--auth { background: var(--bg); }
+}
+/* the handle slot: one line by default, grows to two only for a long error */
+#phone .ob-handle-line { min-height: 17px; }
+#phone .ob-handle-line.is-bad { white-space: normal; overflow: visible; }
+#phone .ob-handle-line.is-bad, #phone .ob-handle-line.is-warn { overflow-wrap: normal; }
+#phone .ob-handle-rm { white-space: nowrap; }

@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="eslams/styles/tokens.css">
+  <link rel="stylesheet" href="eslams/styles/components.css">
+  <link rel="stylesheet" href="eslams/styles/chrome-v2.css">
+  <link rel="stylesheet" href="eslams/styles/pages4.css">
+  <link rel="stylesheet" href="eslams/styles/identity.css">
+  <link rel="stylesheet" href="eslams/styles/trinity.css">
+  <style>
+    html, body { height: 100%; }
+    a { color: inherit; }
+    a:hover { color: var(--accent); }
+    @keyframes protoIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</helmet>
+
+<div style="display:flex; height:100vh; background:var(--bg); overflow:hidden;">
+
+  <!-- ============ PROTOTYPE RAIL ============ -->
+  <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+    <aside data-screen-label="Prototype rail" style="width:236px; flex:none; background:var(--surface-inset); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow-y:auto;">
+      <div style="padding:16px 16px 8px; display:flex; align-items:center; gap:10px;">
+        <img src="eslams/assets/mark.png" alt="" style="width:26px; height:26px; border-radius:6px;">
+        <div>
+          <div style="font-weight:650; font-size:13px; letter-spacing:-0.01em;">Trinity console</div>
+          <div class="eyebrow" style="font-size:9.5px;">Interactive prototype</div>
+        </div>
+      </div>
+      <nav style="flex:1; padding:8px 10px 14px; display:flex; flex-direction:column; gap:14px;">
+        <sc-for list="{{ railGroups }}" as="grp" hint-placeholder-count="3">
+          <div>
+            <div class="eyebrow" style="padding:4px 8px 6px; font-size:9.5px;">{{ grp.label }}</div>
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <sc-for list="{{ grp.items }}" as="it" hint-placeholder-count="3">
+                <button class="btn btn-sm {{ it.cls }}" onClick="{{ it.go }}" style="width:100%; justify-content:flex-start; font-size:13px;">{{ it.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <div>
+          <div class="eyebrow" style="padding:4px 8px 6px; font-size:9.5px;">Main platform</div>
+          <a class="btn btn-ghost btn-sm" href="eSlams Identity.dc.html" style="width:100%; justify-content:flex-start; font-size:13px; display:flex;">Identity surfaces ↗</a>
+        </div>
+      </nav>
+      <div style="padding:12px 14px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:10px;">
+        <label style="display:flex; flex-direction:column; gap:5px;">
+          <span class="eyebrow" style="font-size:9px;">Acting role</span>
+          <select class="tr-select" value="{{ actingRole }}" onChange="{{ pickRole }}" style="width:100%;">
+            <option value="super_admin">super_admin</option>
+            <option value="admin">admin</option>
+            <option value="manager">manager</option>
+            <option value="developer">developer</option>
+            <option value="researcher">researcher</option>
+          </select>
+        </label>
+        <div class="seg" style="width:100%;">
+          <button class="{{ themeLightCls }}" onClick="{{ pickLight }}" style="flex:1;">Light</button>
+          <button class="{{ themeDarkCls }}" onClick="{{ pickDark }}" style="flex:1;">Dark</button>
+        </div>
+        <div class="seg" style="width:100%;">
+          <button class="{{ vpDeskCls }}" onClick="{{ pickDesktop }}" style="flex:1;">Desktop</button>
+          <button class="{{ vpMobCls }}" onClick="{{ pickMobile }}" style="flex:1;">390px</button>
+        </div>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- ============ STAGE ============ -->
+  <div class="proto-stage {{ mobileCls }}" style="flex:1; min-width:0; overflow-y:auto; position:relative;">
+
+    <sc-if value="{{ hasSims }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; align-items:center; gap:12px; padding:7px 18px; border-bottom:1px solid var(--border); background:var(--surface-inset); flex-wrap:wrap; position:sticky; top:0; z-index:10;">
+        <span class="eyebrow" style="font-size:9.5px;">{{ screenTitle }} · states</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <sc-for list="{{ simChips }}" as="ch" hint-placeholder-count="3">
+            <button class="chip {{ ch.cls }}" onClick="{{ ch.pick }}" style="padding:4px 11px; font-size:12px;">{{ ch.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ TRINITY AUTH (own chrome, never public header) ============ -->
+    <sc-if value="{{ isAuth }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Trinity auth" class="tr-authwrap">
+        <div style="display:flex; align-items:center; gap:11px;">
+          <img src="eslams/assets/mark.png" alt="" style="width:32px; height:32px; border-radius:8px;">
+          <div>
+            <div style="font-weight:650; font-size:16px; letter-spacing:-0.01em; line-height:1.2;">Trinity</div>
+            <div class="eyebrow" style="font-size:9px;">eSlams operator console</div>
+          </div>
+        </div>
+
+        <!-- Sign in -->
+        <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+          <div class="auth-card" style="max-width:400px; width:100%; animation:protoIn .25s ease;">
+            <div class="auth-head">
+              <h1 class="auth-title">Sign in to Trinity</h1>
+              <p class="auth-sub">Operator access only. Approved accounts sign in here directly.</p>
+            </div>
+            <sc-if value="{{ lg.hasErr }}" hint-placeholder-val="{{ false }}">
+              <div role="alert" style="display:flex; flex-direction:column; gap:6px; background:var(--loss-soft); color:var(--loss); border:1px solid color-mix(in oklch, var(--loss) 30%, transparent); border-radius:var(--r-md); padding:10px 13px; font-size:13px; margin-bottom:16px; line-height:1.45;">
+                <span>{{ lg.err }}</span>
+                <sc-if value="{{ lg.showRequestLink }}" hint-placeholder-val="{{ false }}"><a onClick="{{ goInfo }}" style="color:var(--loss); text-decoration:underline; cursor:pointer; font-weight:550;">Request Trinity access →</a></sc-if>
+              </div>
+            </sc-if>
+            <div class="auth-sso">
+              <button class="auth-ssobtn" onClick="{{ lgSSO }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="icn"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"></path></svg> Continue with GitHub</button>
+              <button class="auth-ssobtn" onClick="{{ lgSSO }}"><svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.6-.05-1.2-.16-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1z"></path><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"></path><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"></path></svg> Continue with Google</button>
+            </div>
+            <div class="auth-divider"><span>or with Trinity email</span></div>
+            <form class="auth-form" onSubmit="{{ lgSubmit }}" noValidate="{{ true }}">
+              <label class="auth-field" for="tr-email">
+                <span class="auth-label">Email</span>
+                <input id="tr-email" class="input auth-input" type="email" value="{{ lg.email }}" onChange="{{ lgSetEmail }}" placeholder="operator@eslams.com" autoComplete="email">
+              </label>
+              <label class="auth-field" for="tr-pw">
+                <span class="auth-label" style="display:flex; justify-content:space-between; align-items:baseline;">Password <a onClick="{{ goRecovery }}" style="font-size:12.5px; color:var(--accent); cursor:pointer; font-weight:530; text-transform:none; letter-spacing:0;">Forgot password?</a></span>
+                <input id="tr-pw" class="input auth-input" type="password" value="{{ lg.pw }}" onChange="{{ lgSetPw }}" placeholder="Your password" autoComplete="current-password">
+              </label>
+              <button class="btn btn-primary btn-lg" type="submit" disabled="{{ lg.busy }}" style="width:100%; justify-content:center;">
+                <sc-if value="{{ lg.busy }}" hint-placeholder-val="{{ false }}"><span class="spinner" style="width:15px; height:15px; border-top-color:#fff; border-color:rgba(255,255,255,0.35);"></span></sc-if>
+                {{ lg.submitLabel }}
+              </button>
+            </form>
+            <div class="auth-switch">Not an operator? <a onClick="{{ goInfo }}" style="color:var(--accent); cursor:pointer; font-weight:550;">Request access</a></div>
+          </div>
+        </sc-if>
+
+        <!-- Set password (invite claim) -->
+        <sc-if value="{{ isSetup }}" hint-placeholder-val="{{ false }}">
+          <div class="auth-card" style="max-width:400px; width:100%; animation:protoIn .25s ease;">
+            <sc-if value="{{ sp2.isForm }}" hint-placeholder-val="{{ true }}">
+              <div class="auth-head">
+                <h1 class="auth-title">Set your Trinity password</h1>
+                <p class="auth-sub">You were invited as <span class="rb rb-{{ sp2.roleCls }}" style="vertical-align:1px;">{{ sp2.role }}</span> — <b class="mono" style="color:var(--text); font-size:13px;">{{ sp2.email }}</b></p>
+              </div>
+              <form class="auth-form" onSubmit="{{ sp2Submit }}" noValidate="{{ true }}">
+                <label class="auth-field" for="sp-pw">
+                  <span class="auth-label">Password</span>
+                  <input id="sp-pw" class="input auth-input" type="password" value="{{ sp2.pw }}" onChange="{{ sp2SetPw }}" placeholder="12+ characters" autoComplete="new-password">
+                  <sc-if value="{{ sp2.showMeter }}" hint-placeholder-val="{{ false }}">
+                    <span style="display:block;">
+                      <span style="display:flex; gap:4px; margin:2px 0 5px;">
+                        <sc-for list="{{ sp2.segs }}" as="sg" hint-placeholder-count="4"><span style="{{ sg.style }}"></span></sc-for>
+                      </span>
+                      <span class="mono" style="font-size:11px; color:var(--text-3);">{{ sp2.strengthLabel }} · 12+ characters</span>
+                    </span>
+                  </sc-if>
+                </label>
+                <label class="auth-field" for="sp-pw2">
+                  <span class="auth-label">Confirm password</span>
+                  <input id="sp-pw2" class="input auth-input" type="password" value="{{ sp2.pw2 }}" onChange="{{ sp2SetPw2 }}" placeholder="Repeat it" autoComplete="new-password">
+                  <sc-if value="{{ sp2.err }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ sp2.err }}</span></sc-if>
+                </label>
+                <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Set password &amp; sign in</button>
+              </form>
+            </sc-if>
+            <sc-if value="{{ sp2.isInvalid }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--loss-soft); color:var(--loss); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">This invite link isn't valid</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">It may have been revoked, or already used. Ask the admin who invited you to send a new one.</p>
+                <button class="btn btn-secondary btn-md" onClick="{{ goLogin }}" style="margin-top:22px;">Go to sign in</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sp2.isExpired }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--draw-soft); color:var(--draw); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">This invite expired</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">Invites work for 7 days. We can notify the inviting admin to resend it.</p>
+                <button class="btn btn-primary btn-md" onClick="{{ sp2NotifyAdmin }}" style="margin-top:22px;">Ask for a new invite</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ sp2.isSuccess }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">You're in</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">Password set. Next: enable two-factor — it's required for admin roles.</p>
+                <button class="btn btn-primary btn-md" onClick="{{ goOverviewFromSetup }}" style="justify-content:center; width:100%; margin-top:22px;">Open the console</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <!-- Forgot / reset -->
+        <sc-if value="{{ isRecovery }}" hint-placeholder-val="{{ false }}">
+          <div class="auth-card" style="max-width:400px; width:100%; animation:protoIn .25s ease;">
+            <sc-if value="{{ rc.isForgot }}" hint-placeholder-val="{{ true }}">
+              <div class="auth-head">
+                <h1 class="auth-title">Reset your Trinity password</h1>
+                <p class="auth-sub">Enter your operator email and we'll send a reset link.</p>
+              </div>
+              <form class="auth-form" onSubmit="{{ rcSubmit }}" noValidate="{{ true }}">
+                <label class="auth-field" for="rc-email">
+                  <span class="auth-label">Email</span>
+                  <input id="rc-email" class="input auth-input" type="email" value="{{ rc.email }}" onChange="{{ rcSetEmail }}" placeholder="operator@eslams.com" autoComplete="email">
+                  <sc-if value="{{ rc.err }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ rc.err }}</span></sc-if>
+                </label>
+                <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Send reset link</button>
+              </form>
+              <div class="auth-switch"><a onClick="{{ goLogin }}" style="color:var(--accent); cursor:pointer; font-weight:550;">← Back to sign in</a></div>
+            </sc-if>
+            <sc-if value="{{ rc.isSent }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">On its way</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">If an operator account exists for that email, a reset link is on its way.</p>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:22px;">
+                  <button class="btn btn-soft btn-md" onClick="{{ rcOpenLink }}" style="justify-content:center;">Open the emailed link → <span class="mono" style="font-size:11px; opacity:0.7;">demo</span></button>
+                  <button class="btn btn-ghost btn-sm" onClick="{{ goLogin }}" style="justify-content:center;">Back to sign in</button>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ rc.isReset }}" hint-placeholder-val="{{ false }}">
+              <div class="auth-head">
+                <h1 class="auth-title">Choose a new password</h1>
+                <p class="auth-sub">For <b class="mono" style="color:var(--text); font-size:13px;">{{ rc.email2 }}</b></p>
+              </div>
+              <form class="auth-form" onSubmit="{{ rcResetSubmit }}" noValidate="{{ true }}">
+                <label class="auth-field" for="rc-pw">
+                  <span class="auth-label">New password</span>
+                  <input id="rc-pw" class="input auth-input" type="password" value="{{ rc.pw }}" onChange="{{ rcSetPw }}" placeholder="12+ characters" autoComplete="new-password">
+                </label>
+                <label class="auth-field" for="rc-pw2">
+                  <span class="auth-label">Confirm password</span>
+                  <input id="rc-pw2" class="input auth-input" type="password" value="{{ rc.pw2 }}" onChange="{{ rcSetPw2 }}" placeholder="Repeat it" autoComplete="new-password">
+                  <sc-if value="{{ rc.err }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ rc.err }}</span></sc-if>
+                </label>
+                <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Update password</button>
+              </form>
+            </sc-if>
+            <sc-if value="{{ rc.isExpired }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--draw-soft); color:var(--draw); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">This link expired</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">Reset links work for 30 minutes. Request a fresh one.</p>
+                <button class="btn btn-primary btn-md" onClick="{{ rcBackToForgot }}" style="margin-top:22px;">Request a new link</button>
+              </div>
+            </sc-if>
+            <sc-if value="{{ rc.isSuccess }}" hint-placeholder-val="{{ false }}">
+              <div style="text-align:center;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">Password updated</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">For safety, we signed you out of other sessions.</p>
+                <button class="btn btn-primary btn-md" onClick="{{ goLogin }}" style="justify-content:center; width:100%; margin-top:22px;">Sign in</button>
+              </div>
+            </sc-if>
+          </div>
+        </sc-if>
+        <div class="mono" style="font-size:11px; color:var(--text-3);">trinity.eslams.com · operators only</div>
+      </section>
+    </sc-if>
+
+    <!-- ============ /trinity-info — PUBLIC access request ============ -->
+    <sc-if value="{{ isInfo }}" hint-placeholder-val="{{ false }}">
+      <header class="nv nv-scrolled" data-screen-label="Public header">
+        <div class="nv-inner wrap">
+          <div class="nv-left">
+            <a class="nv-logo" onClick="{{ navOut }}" aria-label="eSlams home"><img src="{{ logoSrc }}" alt="eSlams" class="nv-logo-img"></a>
+            <nav class="nv-links">
+              <a class="nv-link" onClick="{{ navOut }}">Leaderboard</a>
+              <a class="nv-link" onClick="{{ navOut }}">Battlefield</a>
+              <a class="nv-link" onClick="{{ navOut }}">Arena</a>
+            </nav>
+          </div>
+          <div class="nv-right">
+            <button class="nv-icon" onClick="{{ toggleTheme }}" aria-label="Toggle theme"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></button>
+            <button class="btn btn-secondary btn-sm" onClick="{{ navOut }}">Sign in</button>
+          </div>
+        </div>
+      </header>
+      <section data-screen-label="Access request" class="page" style="display:flex; justify-content:center; padding:56px 24px 80px;">
+        <div style="max-width:560px; width:100%;">
+          <div class="eyebrow" style="margin-bottom:12px;">Trinity · operator console</div>
+          <h1 style="font-size:28px; margin-bottom:10px;">Request Trinity access</h1>
+          <p style="color:var(--text-2); font-size:14.5px; line-height:1.6; max-width:52ch;">Trinity is the console for approved eSlams operators &amp; researchers — run management, model catalog, evaluation data. Requests are reviewed by an admin; approvals arrive as an email invite.</p>
+          <sc-if value="{{ inf.isForm }}" hint-placeholder-val="{{ true }}">
+            <div class="card" style="padding:24px; margin-top:26px;">
+              <form class="auth-form" onSubmit="{{ infSubmit }}" noValidate="{{ true }}">
+                <label class="auth-field" for="inf-org">
+                  <span class="auth-label">Organization</span>
+                  <input id="inf-org" class="input auth-input" value="{{ inf.org }}" onChange="{{ infSetOrg }}" placeholder="Lab, university, or company">
+                </label>
+                <label class="auth-field" for="inf-email">
+                  <span class="auth-label">Work email</span>
+                  <input id="inf-email" class="input auth-input" type="email" value="{{ inf.email }}" onChange="{{ infSetEmail }}" placeholder="you@lab.ai">
+                  <sc-if value="{{ inf.emailErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ inf.emailErr }}</span></sc-if>
+                </label>
+                <div class="auth-field">
+                  <span class="auth-label">Requested role</span>
+                  <div class="seg">
+                    <button type="button" class="{{ inf.roleResCls }}" onClick="{{ infRoleRes }}">Researcher</button>
+                    <button type="button" class="{{ inf.roleDevCls }}" onClick="{{ infRoleDev }}">Developer</button>
+                  </div>
+                  <span style="font-size:12px; color:var(--text-3); line-height:1.5;">{{ inf.roleDesc }}</span>
+                </div>
+                <label class="auth-field" for="inf-why">
+                  <span class="auth-label">What will you use Trinity for?</span>
+                  <textarea id="inf-why" class="input auth-input" value="{{ inf.reason }}" onChange="{{ infSetReason }}" rows="{{ 3 }}" placeholder="A sentence or two — research goal, integration, evaluation…" style="resize:vertical; min-height:74px;"></textarea>
+                  <sc-if value="{{ inf.reasonErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ inf.reasonErr }}</span></sc-if>
+                </label>
+                <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Submit request</button>
+              </form>
+            </div>
+          </sc-if>
+          <sc-if value="{{ inf.isSent }}" hint-placeholder-val="{{ false }}">
+            <div class="card" style="padding:36px 28px; margin-top:26px; text-align:center;">
+              <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:16px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+              </span>
+              <h2 style="font-size:19px; margin-bottom:8px;">Request received</h2>
+              <p style="color:var(--text-2); font-size:14px; line-height:1.55;">An admin will review it — most requests hear back within a few days. If approved, your invite goes to <b class="mono" style="color:var(--text); font-size:13px;">{{ inf.email }}</b>.</p>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ CONSOLE (shell + pages) ============ -->
+    <sc-if value="{{ isConsole }}" hint-placeholder-val="{{ true }}">
+      <div class="tr-shell">
+        <aside class="tr-side" data-screen-label="Trinity sidebar">
+          <div class="tr-brand">
+            <img src="eslams/assets/mark.png" alt="" style="width:26px; height:26px; border-radius:6px;">
+            <div>
+              <div style="font-weight:650; font-size:14px; letter-spacing:-0.01em; line-height:1.2;">Trinity</div>
+              <div class="eyebrow" style="font-size:8.5px;">operator console</div>
+            </div>
+          </div>
+          <nav style="flex:1; padding-bottom:12px;">
+            <sc-for list="{{ trNav }}" as="g" hint-placeholder-count="3">
+              <div class="tr-navgroup">
+                <div class="tr-navlabel">{{ g.label }}</div>
+                <sc-for list="{{ g.items }}" as="n" hint-placeholder-count="3">
+                  <button class="tr-navitem {{ n.cls }}" onClick="{{ n.go }}">
+                    {{ n.label }}
+                    <sc-if value="{{ n.count }}" hint-placeholder-val="{{ false }}"><span class="tr-count">{{ n.count }}</span></sc-if>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-for>
+          </nav>
+          <div style="padding:12px 14px; border-top:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+            <span style="{{ meAvStyle }}">{{ meInitial }}</span>
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:12.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ meName }}</div>
+              <span class="rb rb-{{ actingRole }}" style="margin-top:2px;">{{ actingRole }}</span>
+            </div>
+            <button class="nv-icon" onClick="{{ goLogin }}" aria-label="Sign out" title="Sign out" style="flex:none;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"></path></svg></button>
+          </div>
+        </aside>
+
+        <main class="tr-main">
+
+          <!-- Overview -->
+          <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+            <div data-screen-label="Trinity overview">
+              <div class="tr-pagehead">
+                <div><div class="tr-title">Overview</div><div class="tr-sub mono">trinity.eslams.com · {{ nowLabel }}</div></div>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr)); gap:12px; margin-bottom:16px;">
+                <sc-for list="{{ ov.stats }}" as="stt" hint-placeholder-count="4">
+                  <div class="tr-stat">
+                    <div class="tr-statnum">{{ stt.num }}</div>
+                    <div class="tr-statlbl">{{ stt.label }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:14px;">
+                <div class="card" style="padding:16px 18px;">
+                  <div style="font-size:13.5px; font-weight:600; margin-bottom:8px;">Queues &amp; health</div>
+                  <sc-for list="{{ ov.health }}" as="h" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--border-faint);">
+                      <span class="tr-status {{ h.cls }}">{{ h.name }}</span>
+                      <span class="mono" style="font-size:12px; color:var(--text-3);">{{ h.detail }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div class="card" style="padding:16px 18px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                    <div style="font-size:13.5px; font-weight:600;">Recent audit</div>
+                    <button class="btn btn-ghost btn-sm" onClick="{{ patternToast }}">View all</button>
+                  </div>
+                  <sc-for list="{{ ov.audit }}" as="a" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--border-faint);">
+                      <span style="font-size:12.5px; color:var(--text-2); min-width:0;"><span class="mono" style="color:var(--text); font-size:12px;">{{ a.event }}</span> — {{ a.detail }}</span>
+                      <span class="mono" style="font-size:11px; color:var(--text-3); flex:none;">{{ a.when }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- Users -->
+          <sc-if value="{{ isUsers }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Trinity users">
+              <div class="tr-pagehead">
+                <div><div class="tr-title">Users</div><div class="tr-sub">{{ us.countLabel }}</div></div>
+                <sc-if value="{{ canManage }}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary btn-md" onClick="{{ usInvite }}">Invite operator</button></sc-if>
+              </div>
+              <sc-if value="{{ readOnlyNote }}" hint-placeholder-val="{{ false }}">
+                <div role="note" style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-md); padding:9px 13px; font-size:12.5px; color:var(--text-2); margin-bottom:12px;">{{ readOnlyNote }}</div>
+              </sc-if>
+              <div class="tr-toolbar">
+                <div class="tr-search">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+                  <input value="{{ us.q }}" onChange="{{ usSetQ }}" placeholder="Search name or email" aria-label="Search users">
+                </div>
+                <select class="tr-select" value="{{ us.roleFilter }}" onChange="{{ usSetRole }}" aria-label="Filter by role">
+                  <option value="all">All roles</option>
+                  <option value="super_admin">super_admin</option>
+                  <option value="admin">admin</option>
+                  <option value="manager">manager</option>
+                  <option value="developer">developer</option>
+                  <option value="researcher">researcher</option>
+                </select>
+                <div class="seg">
+                  <button class="{{ us.stAllCls }}" onClick="{{ usStAll }}">All</button>
+                  <button class="{{ us.stActiveCls }}" onClick="{{ usStActive }}">Active</button>
+                  <button class="{{ us.stDisabledCls }}" onClick="{{ usStDisabled }}">Disabled</button>
+                </div>
+              </div>
+              <sc-if value="{{ us.loading }}" hint-placeholder-val="{{ false }}">
+                <div class="tr-table">
+                  <div class="tr-thead tr-grid-users"><span>Operator</span><span>Email</span><span>Role</span><span>Status</span><span class="tr-hide-md">Source</span><span class="tr-hide-md">Last login</span></div>
+                  <sc-for list="{{ us.skels }}" as="k" hint-placeholder-count="5">
+                    <div class="tr-row tr-grid-users">
+                      <span style="display:flex; align-items:center; gap:10px;"><span class="tr-skel" style="width:26px; height:26px; border-radius:50%;"></span><span class="tr-skel" style="width:110px;"></span></span>
+                      <span class="tr-skel" style="width:150px;"></span>
+                      <span class="tr-skel" style="width:70px;"></span>
+                      <span class="tr-skel" style="width:52px;"></span>
+                      <span class="tr-skel tr-hide-md" style="width:64px;"></span>
+                      <span class="tr-skel tr-hide-md" style="width:48px;"></span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+              <sc-if value="{{ us.empty }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:48px 28px; text-align:center;">
+                  <h3 style="font-size:16px; margin-bottom:6px;">No operators match</h3>
+                  <p style="color:var(--text-2); font-size:13px;">Try a different search or clear the filters.</p>
+                  <button class="btn btn-secondary btn-sm" onClick="{{ usClear }}" style="margin-top:14px;">Clear filters</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ us.showTable }}" hint-placeholder-val="{{ true }}">
+                <div class="tr-table">
+                  <div class="tr-thead tr-grid-users"><span>Operator</span><span>Email</span><span>Role</span><span>Status</span><span class="tr-hide-md">Source</span><span class="tr-hide-md">Last login</span></div>
+                  <sc-for list="{{ us.rows }}" as="u" hint-placeholder-count="6">
+                    <div class="tr-row tr-grid-users tr-click" onClick="{{ u.open }}">
+                      <span style="display:flex; align-items:center; gap:10px; min-width:0;"><span style="{{ u.avStyle }}">{{ u.initial }}</span><span style="font-weight:560; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ u.name }}</span></span>
+                      <span class="mono" style="font-size:12px; color:var(--text-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ u.email }}</span>
+                      <span><span class="rb rb-{{ u.role }}">{{ u.role }}</span></span>
+                      <span class="tr-status {{ u.stCls }}">{{ u.status }}</span>
+                      <span class="tr-hide-md" style="font-size:12.5px; color:var(--text-3);">{{ u.source }}</span>
+                      <span class="tr-hide-md mono" style="font-size:12px; color:var(--text-3);">{{ u.last }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- Access requests -->
+          <sc-if value="{{ isRequests }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Access requests">
+              <div class="tr-pagehead">
+                <div><div class="tr-title">Access requests</div><div class="tr-sub">Approving sends an email invite with the chosen role.</div></div>
+                <div class="seg">
+                  <button class="{{ rq.pendCls }}" onClick="{{ rqPend }}">Pending</button>
+                  <button class="{{ rq.apprCls }}" onClick="{{ rqAppr }}">Approved</button>
+                  <button class="{{ rq.rejCls }}" onClick="{{ rqRej }}">Rejected</button>
+                </div>
+              </div>
+              <sc-if value="{{ rq.empty }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:48px 28px; text-align:center;">
+                  <h3 style="font-size:16px; margin-bottom:6px;">Queue is clear</h3>
+                  <p style="color:var(--text-2); font-size:13px;">No {{ rq.filter }} requests right now.</p>
+                </div>
+              </sc-if>
+              <sc-if value="{{ rq.showTable }}" hint-placeholder-val="{{ true }}">
+                <div class="tr-table">
+                  <div class="tr-thead tr-grid-req"><span>Email</span><span>Organization</span><span>Requested</span><span class="tr-hide-md">Reason</span><span class="tr-hide-md">Age</span><span></span></div>
+                  <sc-for list="{{ rq.rows }}" as="r" hint-placeholder-count="3">
+                    <div class="tr-row tr-grid-req">
+                      <span class="mono" style="font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.email }}</span>
+                      <span style="font-size:12.5px; color:var(--text-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ r.org }}</span>
+                      <span><span class="rb rb-{{ r.role }}">{{ r.role }}</span></span>
+                      <span class="tr-hide-md" style="font-size:12.5px; color:var(--text-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;" title="{{ r.reason }}">{{ r.reason }}</span>
+                      <span class="tr-hide-md mono" style="font-size:12px; color:var(--text-3);">{{ r.age }}</span>
+                      <span style="display:flex; gap:6px; justify-content:flex-end;">
+                        <sc-if value="{{ r.pending }}" hint-placeholder-val="{{ true }}">
+                          <button class="btn btn-primary btn-sm" onClick="{{ r.approve }}" disabled="{{ cantManage }}">Approve</button>
+                          <button class="btn btn-ghost btn-sm" onClick="{{ r.reject }}" disabled="{{ cantManage }}">Reject</button>
+                        </sc-if>
+                        <sc-if value="{{ r.resolved }}" hint-placeholder-val="{{ false }}"><span class="mono" style="font-size:11.5px; color:var(--text-3);">{{ r.resolvedLabel }}</span></sc-if>
+                      </span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- Resource pattern (Models sample) -->
+          <sc-if value="{{ isModels }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Resource pattern">
+              <div class="tr-pagehead">
+                <div><div class="tr-title">Models</div><div class="tr-sub">Resource pattern — the same table + detail drawer serves providers, games, variants, runs, matches, artifacts, leaderboards, audit…</div></div>
+                <sc-if value="{{ canManage }}" hint-placeholder-val="{{ true }}"><button class="btn btn-primary btn-md" onClick="{{ patternToast }}">Add model</button></sc-if>
+              </div>
+              <div class="tr-toolbar">
+                <div class="tr-search">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+                  <input value="{{ md.q }}" onChange="{{ mdSetQ }}" placeholder="Search models" aria-label="Search models">
+                </div>
+                <select class="tr-select" value="{{ md.prov }}" onChange="{{ mdSetProv }}" aria-label="Filter by provider">
+                  <option value="all">All providers</option>
+                  <option value="anthropic">anthropic</option>
+                  <option value="openai">openai</option>
+                  <option value="google">google</option>
+                  <option value="deepseek">deepseek</option>
+                </select>
+              </div>
+              <div class="tr-table">
+                <div class="tr-thead tr-grid-models"><span>Model</span><span>Provider</span><span>Status</span><span class="tr-hide-md ta-r">Elo</span><span class="tr-hide-md ta-r">Runs</span><span class="ta-r">Updated</span></div>
+                <sc-for list="{{ md.rows }}" as="m" hint-placeholder-count="5">
+                  <div class="tr-row tr-grid-models tr-click" onClick="{{ m.open }}">
+                    <span class="mono" style="font-size:12.5px; font-weight:560; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ m.name }}</span>
+                    <span style="font-size:12.5px; color:var(--text-2);">{{ m.provider }}</span>
+                    <span class="tr-status {{ m.stCls }}">{{ m.status }}</span>
+                    <span class="tr-hide-md mono ta-r" style="font-size:12.5px;">{{ m.elo }}</span>
+                    <span class="tr-hide-md mono ta-r" style="font-size:12.5px; color:var(--text-2);">{{ m.runs }}</span>
+                    <span class="mono ta-r" style="font-size:12px; color:var(--text-3);">{{ m.updated }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+          <!-- Audit log (resource pattern) -->
+          <sc-if value="{{ isAudit }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Audit log">
+              <div class="tr-pagehead">
+                <div><div class="tr-title">Audit log</div><div class="tr-sub">Every sensitive action, immutably recorded. Read-only.</div></div>
+              </div>
+              <div class="tr-toolbar">
+                <div class="tr-search">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg>
+                  <input value="{{ au.q }}" onChange="{{ auSetQ }}" placeholder="Search actor or detail" aria-label="Search audit log">
+                </div>
+                <select class="tr-select" value="{{ au.type }}" onChange="{{ auSetType }}" aria-label="Filter by event type">
+                  <option value="all">All events</option>
+                  <option value="roles">Roles</option>
+                  <option value="invites">Invites</option>
+                  <option value="users">Users</option>
+                  <option value="keys">API keys</option>
+                  <option value="requests">Access requests</option>
+                  <option value="catalog">Catalog</option>
+                </select>
+              </div>
+              <sc-if value="{{ au.empty }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:48px 28px; text-align:center;">
+                  <h3 style="font-size:16px; margin-bottom:6px;">No events match</h3>
+                  <p style="color:var(--text-2); font-size:13px;">Try a different search or event type.</p>
+                </div>
+              </sc-if>
+              <sc-if value="{{ au.showTable }}" hint-placeholder-val="{{ true }}">
+                <div class="tr-table">
+                  <div class="tr-thead tr-grid-audit"><span>Event</span><span>Actor</span><span class="tr-au-detail">Detail</span><span class="ta-r">When</span></div>
+                  <sc-for list="{{ au.rows }}" as="a" hint-placeholder-count="6">
+                    <div class="tr-row tr-grid-audit">
+                      <span class="mono" style="font-size:12px; font-weight:560; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ a.ev }}</span>
+                      <span class="mono" style="font-size:12px; color:var(--text-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ a.actor }}</span>
+                      <span class="tr-au-detail" style="font-size:12.5px; color:var(--text-2); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" title="{{ a.detail }}">{{ a.detail }}</span>
+                      <span class="mono ta-r" style="font-size:12px; color:var(--text-3);">{{ a.when }}</span>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+
+          <!-- Your account -->
+          <sc-if value="{{ isAccount }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Trinity account" style="max-width:720px;">
+              <div class="tr-pagehead">
+                <div><div class="tr-title">Your account</div><div class="tr-sub">Your own Trinity login — password, sessions, two-factor.</div></div>
+              </div>
+              <sc-if value="{{ ac.needs2fa }}" hint-placeholder-val="{{ false }}">
+                <div role="alert" style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--draw-soft); color:var(--draw); border:1px solid color-mix(in oklch, var(--draw) 30%, transparent); border-radius:var(--r-md); padding:11px 14px; font-size:13px; margin-bottom:14px;">
+                  <span>Two-factor is <b>required for {{ actingRole }}</b> — enable it to keep full console access.</span>
+                  <button class="btn btn-secondary btn-sm" onClick="{{ acEnable2fa }}">Enable 2FA</button>
+                </div>
+              </sc-if>
+              <div class="card" style="padding:6px 22px; margin-bottom:14px;">
+                <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                  <div style="padding-top:2px;"><div style="font-size:13.5px; font-weight:560;">Password</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">Last changed Feb 2026.</div></div>
+                  <sc-if value="{{ ac.pwStatic }}" hint-placeholder-val="{{ true }}">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <sc-if value="{{ ac.pwSaved }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px; color:var(--win); font-weight:550;">✓ Updated</span></sc-if>
+                      <button class="btn btn-secondary btn-sm" onClick="{{ acEditPw }}">Change password</button>
+                    </div>
+                  </sc-if>
+                  <sc-if value="{{ ac.pwEditing }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex; flex-direction:column; gap:8px; width:min(360px, 60%);">
+                      <input class="input" type="password" value="{{ ac.pw }}" onChange="{{ acSetPw }}" placeholder="New password (12+ characters)" autoComplete="new-password" style="font-size:13px;">
+                      <input class="input" type="password" value="{{ ac.pw2 }}" onChange="{{ acSetPw2 }}" placeholder="Confirm new password" autoComplete="new-password" style="font-size:13px;">
+                      <sc-if value="{{ ac.pwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--loss);">{{ ac.pwErr }}</span></sc-if>
+                      <div style="display:flex; gap:8px;">
+                        <button class="btn btn-primary btn-sm" onClick="{{ acSavePw }}">Update password</button>
+                        <button class="btn btn-ghost btn-sm" onClick="{{ acCancelPw }}">Cancel</button>
+                      </div>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0;">
+                  <div><div style="font-size:13.5px; font-weight:560;">Two-factor authentication</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">{{ ac.twofaDesc }}</div></div>
+                  <sc-if value="{{ ac.twofaOff }}" hint-placeholder-val="{{ true }}"><button class="btn btn-secondary btn-sm" onClick="{{ acEnable2fa }}">Enable 2FA</button></sc-if>
+                  <sc-if value="{{ ac.twofaOn }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <span class="tag" style="background:var(--win-soft); color:var(--win); border-color:color-mix(in oklch, var(--win) 30%, transparent);">Enabled · TOTP</span>
+                      <button class="btn btn-ghost btn-sm" onClick="{{ acDisable2fa }}" disabled="{{ ac.twofaLocked }}" title="{{ ac.twofaLockTitle }}">Disable</button>
+                    </div>
+                  </sc-if>
+                </div>
+              </div>
+              <div class="card" style="padding:18px 22px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                  <div style="font-size:13.5px; font-weight:600;">Active sessions</div>
+                  <button class="btn btn-secondary btn-sm" onClick="{{ acRevokeAll }}">Log out everywhere</button>
+                </div>
+                <sc-for list="{{ ac.sessions }}" as="s" hint-placeholder-count="2">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0; border-top:1px solid var(--border-faint);">
+                    <div style="display:flex; align-items:center; gap:12px;">
+                      <span style="width:34px; height:34px; border-radius:var(--r-md); background:var(--surface-2); border:1px solid var(--border); display:inline-flex; align-items:center; justify-content:center; color:var(--text-2);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
+                      </span>
+                      <div>
+                        <div style="font-size:13px; font-weight:550;">{{ s.device }} <sc-if value="{{ s.current }}" hint-placeholder-val="{{ false }}"><span class="tag tag-accent" style="margin-left:6px;">This device</span></sc-if></div>
+                        <div class="mono" style="font-size:11.5px; color:var(--text-3);">{{ s.loc }} · last seen {{ s.last }}</div>
+                      </div>
+                    </div>
+                    <sc-if value="{{ s.revocable }}" hint-placeholder-val="{{ true }}"><button class="btn btn-ghost btn-sm" onClick="{{ s.revoke }}">Revoke</button></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+
+        </main>
+      </div>
+    </sc-if>
+  </div>
+
+  <!-- ============ OPERATOR DETAIL DRAWER ============ -->
+  <sc-if value="{{ drawerUser }}" hint-placeholder-val="{{ false }}">
+    <div class="tr-scrim" onMouseDown="{{ drawerClose }}"></div>
+    <aside class="tr-drawer" data-screen-label="Operator drawer" role="dialog" aria-modal="{{ true }}" aria-label="Operator details">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 20px 14px; border-bottom:1px solid var(--border);">
+        <div style="display:flex; align-items:center; gap:12px; min-width:0;">
+          <span style="{{ du.avStyle }}">{{ du.initial }}</span>
+          <div style="min-width:0;">
+            <div style="font-weight:650; font-size:15px; letter-spacing:-0.01em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ du.name }}</div>
+            <div style="display:flex; align-items:center; gap:8px; margin-top:3px;">
+              <span class="rb rb-{{ du.role }}">{{ du.role }}</span>
+              <span class="tr-status {{ du.stCls }}" style="font-size:12px;">{{ du.status }}</span>
+            </div>
+          </div>
+        </div>
+        <button class="modal-x" onClick="{{ drawerClose }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div style="padding:16px 20px; display:flex; flex-direction:column; gap:2px;">
+        <sc-for list="{{ du.meta }}" as="mm" hint-placeholder-count="6">
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:8px 0; border-bottom:1px solid var(--border-faint); font-size:12.5px;">
+            <span style="color:var(--text-3);">{{ mm.k }}</span>
+            <span class="mono" style="color:var(--text-2); font-size:12px; text-align:right;">{{ mm.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:4px 20px 24px;">
+        <div class="eyebrow" style="font-size:9px; margin-bottom:10px;">Actions</div>
+        <sc-if value="{{ du.readOnly }}" hint-placeholder-val="{{ false }}">
+          <div style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-md); padding:9px 13px; font-size:12.5px; color:var(--text-2);">{{ du.readOnlyMsg }}</div>
+        </sc-if>
+        <sc-if value="{{ du.canAct }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <sc-if value="{{ du.isInvited }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-secondary btn-md" onClick="{{ duResend }}" style="justify-content:center;">Resend invite</button>
+            </sc-if>
+            <button class="btn btn-secondary btn-md" onClick="{{ duChangeRole }}" style="justify-content:center;">Change role…</button>
+            <button class="btn btn-secondary btn-md" onClick="{{ duForceLogout }}" style="justify-content:center;">Force logout ({{ du.sessions }} sessions)</button>
+            <button class="btn btn-secondary btn-md" onClick="{{ duRevokeKeys }}" style="justify-content:center;">Revoke API keys ({{ du.keys }})</button>
+            <sc-if value="{{ du.isActive }}" hint-placeholder-val="{{ true }}">
+              <button class="btn btn-md" onClick="{{ duDeactivate }}" style="justify-content:center; background:transparent; color:var(--loss); border:1px solid color-mix(in oklch, var(--loss) 40%, transparent);" style-hover="background:var(--loss-soft);">Deactivate operator</button>
+            </sc-if>
+            <sc-if value="{{ du.isDisabled }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-primary btn-md" onClick="{{ duReactivate }}" style="justify-content:center;">Reactivate operator</button>
+            </sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- ============ MODEL DETAIL DRAWER (resource pattern) ============ -->
+  <sc-if value="{{ drawerModel }}" hint-placeholder-val="{{ false }}">
+    <div class="tr-scrim" onMouseDown="{{ drawerClose }}"></div>
+    <aside class="tr-drawer" data-screen-label="Model drawer" role="dialog" aria-modal="{{ true }}" aria-label="Model details">
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:18px 20px 14px; border-bottom:1px solid var(--border);">
+        <div style="min-width:0;">
+          <div class="mono" style="font-weight:650; font-size:14.5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ dm.name }}</div>
+          <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+            <span class="tag">{{ dm.provider }}</span>
+            <span class="tr-status {{ dm.stCls }}" style="font-size:12px;">{{ dm.status }}</span>
+          </div>
+        </div>
+        <button class="modal-x" onClick="{{ drawerClose }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+      </div>
+      <div style="padding:16px 20px; display:flex; flex-direction:column; gap:2px;">
+        <sc-for list="{{ dm.meta }}" as="mm" hint-placeholder-count="6">
+          <div style="display:flex; justify-content:space-between; gap:14px; padding:8px 0; border-bottom:1px solid var(--border-faint); font-size:12.5px;">
+            <span style="color:var(--text-3);">{{ mm.k }}</span>
+            <span class="mono" style="color:var(--text-2); font-size:12px; text-align:right;">{{ mm.v }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:4px 20px 24px; display:flex; flex-direction:column; gap:8px;">
+        <div class="eyebrow" style="font-size:9px; margin-bottom:2px;">Actions</div>
+        <button class="btn btn-secondary btn-md" onClick="{{ patternToast }}" style="justify-content:center;" disabled="{{ cantManage }}">Edit metadata</button>
+        <button class="btn btn-secondary btn-md" onClick="{{ patternToast }}" style="justify-content:center;" disabled="{{ cantManage }}">{{ dm.toggleLabel }}</button>
+        <p class="mono" style="font-size:10.5px; color:var(--text-3); line-height:1.6; margin-top:6px;">Same drawer pattern for providers, games, variants, runs, matches, artifacts, leaderboards, audit.</p>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- ============ DIALOGS ============ -->
+  <sc-if value="{{ dlgInvite }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Invite dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:420px;">
+        <div class="modal-head"><span class="modal-title">Invite operator</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">They'll get an email invite to set a Trinity password. Invites expire in 7 days.</p>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <input class="input" type="email" value="{{ iv.email }}" onChange="{{ ivSetEmail }}" placeholder="operator@lab.ai">
+          <select class="tr-select" value="{{ iv.role }}" onChange="{{ ivSetRole }}" style="width:100%; padding:9px 10px;">
+            <option value="researcher">researcher</option>
+            <option value="developer">developer</option>
+            <option value="manager">manager</option>
+            <sc-if value="{{ isSuperAdmin }}" hint-placeholder-val="{{ false }}"><option value="admin">admin</option></sc-if>
+          </select>
+          <sc-if value="{{ iv.roleNote }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--text-3);">{{ iv.roleNote }}</span></sc-if>
+          <button class="btn btn-primary btn-md" onClick="{{ ivSend }}" disabled="{{ iv.disabled }}" style="justify-content:center;">Send invite</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgRole }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Change role dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:420px;">
+        <div class="modal-head"><span class="modal-title">Change role — {{ du.name }}</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">Currently <span class="rb rb-{{ du.role }}">{{ du.role }}</span> — takes effect on their next request; active sessions keep the old role for up to 60s.</p>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <select class="tr-select" value="{{ rl.role }}" onChange="{{ rlSetRole }}" style="width:100%; padding:9px 10px;">
+            <option value="researcher">researcher</option>
+            <option value="developer">developer</option>
+            <option value="manager">manager</option>
+            <sc-if value="{{ isSuperAdmin }}" hint-placeholder-val="{{ false }}"><option value="admin">admin</option><option value="super_admin">super_admin</option></sc-if>
+          </select>
+          <sc-if value="{{ rl.note }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--draw);">{{ rl.note }}</span></sc-if>
+          <button class="btn btn-primary btn-md" onClick="{{ rlSave }}" disabled="{{ rl.disabled }}" style="justify-content:center;">Change role</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgConfirm }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Confirm dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:440px;">
+        <div class="modal-head"><span class="modal-title" style="color:{{ cf.titleColor }};">{{ cf.title }}</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">{{ cf.body }}</p>
+        <sc-if value="{{ cf.needReason }}" hint-placeholder-val="{{ false }}">
+          <label style="display:block; margin-bottom:14px;">
+            <span style="display:block; font-size:12.5px; color:var(--text-2); margin-bottom:7px;">Reason (sent to the requester)</span>
+            <textarea class="input" value="{{ cf.reason }}" onChange="{{ cfSetReason }}" rows="{{ 2 }}" placeholder="e.g. Can't verify the organization" style="resize:vertical; font-size:13px;"></textarea>
+          </label>
+        </sc-if>
+        <sc-if value="{{ cf.needRole }}" hint-placeholder-val="{{ false }}">
+          <label style="display:block; margin-bottom:14px;">
+            <span style="display:block; font-size:12.5px; color:var(--text-2); margin-bottom:7px;">Grant role</span>
+            <select class="tr-select" value="{{ cf.role }}" onChange="{{ cfSetRole }}" style="width:100%; padding:9px 10px;">
+              <option value="researcher">researcher</option>
+              <option value="developer">developer</option>
+              <option value="manager">manager</option>
+            </select>
+          </label>
+        </sc-if>
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button class="btn btn-ghost btn-md" onClick="{{ dlgCancel }}">Cancel</button>
+          <button class="btn btn-md" onClick="{{ cfGo }}" disabled="{{ cf.disabled }}" style="{{ cf.btnStyle }}">{{ cf.btnLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- 2FA setup dialog -->
+  <sc-if value="{{ dlg2fa }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="2FA dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:440px;">
+        <div class="modal-head"><span class="modal-title">Set up two-factor</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <sc-if value="{{ tf.setup }}" hint-placeholder-val="{{ true }}">
+          <p class="modal-sub">Scan with your authenticator app, then enter the 6-digit code. Required for admin roles.</p>
+          <div style="display:flex; gap:18px; align-items:flex-start;">
+            <span style="width:132px; height:132px; flex:none; border-radius:var(--r-md); border:1px solid var(--border); background:repeating-linear-gradient(45deg, var(--surface-3) 0 7px, var(--surface-2) 7px 14px); display:flex; align-items:center; justify-content:center;"><span class="mono" style="font-size:10px; color:var(--text-3); text-align:center; padding:0 10px;">TOTP QR<br>placeholder</span></span>
+            <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+              <input class="input mono" value="{{ tf.code }}" onChange="{{ tfSetCode }}" placeholder="000000" maxLength="{{ 6 }}" inputMode="numeric" style="letter-spacing:0.3em; text-align:center; font-size:16px;">
+              <sc-if value="{{ tf.err }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--loss);">{{ tf.err }}</span></sc-if>
+              <button class="btn btn-primary btn-md" onClick="{{ tfVerify }}" style="justify-content:center;">Verify &amp; enable</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ tf.done }}" hint-placeholder-val="{{ false }}">
+          <p class="modal-sub">2FA is on. Save these recovery codes — <b>you won't see them again</b>.</p>
+          <div class="mono" style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-md); padding:14px 16px; font-size:12.5px; line-height:2; column-count:2;">
+            <sc-for list="{{ tf.codes }}" as="c" hint-placeholder-count="6"><div>{{ c }}</div></sc-for>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:16px; justify-content:flex-end;">
+            <button class="btn btn-secondary btn-sm" onClick="{{ tfCopy }}">{{ tf.copyLabel }}</button>
+            <button class="btn btn-primary btn-sm" onClick="{{ dlgCancel }}">Done</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- toast -->
+  <sc-if value="{{ toastMsg }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:900; background:var(--term-bg); color:var(--term-text); border:1px solid rgba(255,255,255,0.1); border-radius:var(--r-pill); padding:9px 18px; font-size:13px; box-shadow:var(--shadow-pop); animation:protoIn .2s ease;">{{ toastMsg }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {},
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;tsType&quot;: &quot;'light' | 'dark'&quot;, &quot;section&quot;: &quot;Prototype&quot; },
+  &quot;startScreen&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;login&quot;, &quot;setup&quot;, &quot;recovery&quot;, &quot;info&quot;, &quot;overview&quot;, &quot;users&quot;, &quot;requests&quot;, &quot;models&quot;, &quot;account&quot;], &quot;default&quot;: &quot;overview&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Prototype&quot; },
+  &quot;actingRole&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;super_admin&quot;, &quot;admin&quot;, &quot;manager&quot;, &quot;developer&quot;, &quot;researcher&quot;], &quot;default&quot;: &quot;admin&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Prototype&quot; },
+  &quot;showRail&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Prototype&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    theme: 'light', themeChoice: 'light', screen: 'overview', actingRole: 'admin', mobile: false,
+    tf: { stage: 'setup', code: '', err: null, copied: false },
+    auditRows: [
+      { ev: 'role_changed', actor: 'priya@eslams.com', detail: 'mei@example.org → manager', when: '2h ago', type: 'roles' },
+      { ev: 'invite_sent', actor: 'dan@eslams.com', detail: 'tomas@eslams.com as developer', when: '5h ago', type: 'invites' },
+      { ev: 'key_rotated', actor: 'sofia@eslams.com', detail: 'esl_live_9d… rotated', when: '1d ago', type: 'keys' },
+      { ev: 'user_disabled', actor: 'dan@eslams.com', detail: 'alex@example.org', when: '3d ago', type: 'users' },
+      { ev: 'request_rejected', actor: 'mei@example.org', detail: 'promo@growthzz.io — org unverifiable', when: '1w ago', type: 'requests' },
+      { ev: 'session_revoked', actor: 'priya@eslams.com', detail: 'jonas@example.org · 2 sessions', when: '2w ago', type: 'users' },
+      { ev: 'model_added', actor: 'sofia@eslams.com', detail: 'deepseek-r2 · deepseek', when: 'Oct 2025', type: 'catalog' },
+    ],
+    auQ: '', auType: 'all',
+    lg: { email: '', pw: '', busy: false, err: null },
+    sp2: { sim: 'form', pw: '', pw2: '', err: null },
+    rc: { sim: 'forgot', email: '', pw: '', pw2: '', err: null },
+    inf: { stage: 'form', org: '', email: '', role: 'researcher', reason: '', emailErr: null, reasonErr: null },
+    users: [
+      { id: 1, name: 'Priya Natarajan', email: 'priya@eslams.com', role: 'super_admin', status: 'active', source: 'Founding', last: '2m ago', created: 'Jan 2025', sessions: 3, keys: 2 },
+      { id: 2, name: 'Dan Okafor', email: 'dan@eslams.com', role: 'admin', status: 'active', source: 'Invite', last: '1h ago', created: 'Feb 2025', sessions: 2, keys: 1 },
+      { id: 3, name: 'Sofia Reyes', email: 'sofia@eslams.com', role: 'developer', status: 'active', source: 'Invite', last: '20m ago', created: 'Mar 2025', sessions: 1, keys: 3 },
+      { id: 4, name: 'Mei Chen', email: 'mei@example.org', role: 'manager', status: 'active', source: 'Access request', last: 'yesterday', created: 'Jun 2025', sessions: 1, keys: 0 },
+      { id: 5, name: 'Jonas Weber', email: 'jonas@example.org', role: 'researcher', status: 'active', source: 'Access request', last: '3d ago', created: 'Sep 2025', sessions: 0, keys: 1 },
+      { id: 6, name: 'Alex Kim', email: 'alex@example.org', role: 'researcher', status: 'disabled', source: 'Access request', last: 'Mar 2026', created: 'Nov 2025', sessions: 0, keys: 0 },
+      { id: 7, name: 'Tomás Ferreira', email: 'tomas@eslams.com', role: 'developer', status: 'invited', source: 'Invite', last: '—', created: 'just now', sessions: 0, keys: 0 },
+    ],
+    usQ: '', usRole: 'all', usStatus: 'all', usSim: 'default',
+    requests: [
+      { id: 1, email: 'l.zhou@example.org', org: 'University of Oxford', role: 'researcher', reason: 'Benchmarking LLM game play for a NeurIPS submission.', age: '2d', status: 'pending' },
+      { id: 2, email: 'sam@example.org', org: 'Harmonic Capital', role: 'developer', reason: 'Integrate leaderboard data into internal research tooling.', age: '5d', status: 'pending' },
+      { id: 3, email: 'kt@example.org', org: 'MIT CSAIL', role: 'researcher', reason: 'Multi-agent evaluation coursework.', age: '3w', status: 'approved' },
+      { id: 4, email: 'promo@growthzz.io', org: 'GrowthZZ', role: 'developer', reason: 'Marketing partnership opportunity.', age: '1mo', status: 'rejected' },
+    ],
+    rqFilter: 'pending',
+    models: [
+      { id: 1, name: 'claude-opus-4.1', provider: 'anthropic', status: 'active', elo: 1642, runs: '12.4k', updated: '2d ago', added: 'Aug 2025', ctx: '200k', games: 41 },
+      { id: 2, name: 'gpt-5-mini', provider: 'openai', status: 'active', elo: 1518, runs: '9.1k', updated: '5d ago', added: 'Sep 2025', ctx: '128k', games: 38 },
+      { id: 3, name: 'gemini-2.5-pro', provider: 'google', status: 'active', elo: 1587, runs: '10.8k', updated: '1d ago', added: 'Jul 2025', ctx: '1M', games: 40 },
+      { id: 4, name: 'deepseek-r2', provider: 'deepseek', status: 'active', elo: 1560, runs: '7.7k', updated: '3d ago', added: 'Oct 2025', ctx: '128k', games: 35 },
+      { id: 5, name: 'claude-sonnet-4', provider: 'anthropic', status: 'retired', elo: 1495, runs: '18.2k', updated: 'Feb 2026', added: 'May 2025', ctx: '200k', games: 41 },
+    ],
+    mdQ: '', mdProv: 'all',
+    drawer: null, drawerId: null,
+    ac: { pwEditing: false, pw: '', pw2: '', pwErr: null, pwSaved: false, twofa: false },
+    acSessions: [
+      { id: 1, device: 'Chrome · macOS', loc: 'London, UK', last: 'now', current: true },
+      { id: 2, device: 'Firefox · Linux', loc: 'London, UK', last: '2d ago', current: false },
+    ],
+    dlg: null,
+    iv: { email: '', role: 'researcher' },
+    rl: { role: 'researcher' },
+    cf: { kind: null, targetId: null, reason: '', role: 'researcher' },
+    toast: null,
+  };
+
+  componentDidMount() {
+    const t = this.props.theme;
+    if (t === 'dark' || t === 'light') { this.applyTheme(t); this.setState({ theme: t, themeChoice: t }); }
+    else this.applyTheme(this.state.theme);
+    const r = this.props.actingRole;
+    if (r) this.setState({ actingRole: r });
+    const sc = this.props.startScreen;
+    if (sc) this.setState({ screen: sc });
+    this._esc = (e) => { if (e.key === 'Escape') { if (this.state.dlg) this.setState({ dlg: null }); else if (this.state.drawer) this.setState({ drawer: null }); } };
+    document.addEventListener('keydown', this._esc);
+    this._trap = (e) => {
+      if (e.key !== 'Tab') return;
+      const m = this.state.dlg ? document.querySelector('.modal') : (this.state.drawer ? document.querySelector('.tr-drawer') : null);
+      if (!m) return;
+      const f = [...m.querySelectorAll('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])')].filter((el) => !el.disabled && el.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!m.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', this._trap, true);
+    this.timers = {};
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState) return;
+    const openedKey = (this.state.dlg && prevState.dlg !== this.state.dlg) ? '.modal' : ((this.state.drawer && prevState.drawer !== this.state.drawer) ? '.tr-drawer' : null);
+    if (openedKey) {
+      this._invoker = document.activeElement;
+      setTimeout(() => {
+        const m = document.querySelector(openedKey);
+        if (!m) return;
+        const f = m.querySelector('input, textarea, select') || [...m.querySelectorAll('button')].find((b) => !b.classList.contains('modal-x') && !b.disabled) || m.querySelector('button');
+        if (f) f.focus();
+      }, 60);
+    } else if (((prevState.dlg && !this.state.dlg) || (prevState.drawer && !this.state.drawer)) && this._invoker && this._invoker.focus && document.contains(this._invoker)) {
+      this._invoker.focus();
+      this._invoker = null;
+    }
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._esc);
+    document.removeEventListener('keydown', this._trap, true);
+    Object.values(this.timers || {}).forEach((t) => { clearTimeout(t); clearInterval(t); });
+  }
+  t(key, fn, ms) { this.timers = this.timers || {}; clearTimeout(this.timers[key]); this.timers[key] = setTimeout(fn, ms); }
+  applyTheme(t) { const r = document.documentElement; if (t) r.setAttribute('data-theme', t); else r.removeAttribute('data-theme'); }
+  setTheme(choice) { this.applyTheme(choice); this.setState({ theme: choice, themeChoice: choice }); }
+  showToast(msg) { this.setState({ toast: msg }); this.t('toast', () => this.setState({ toast: null }), 2800); }
+  goScreen(sc) { this.setState({ screen: sc, toast: null, dlg: null, drawer: null }); }
+  strength(pw) {
+    let n = 0;
+    if (pw.length >= 12) n++;
+    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) n++;
+    if (/\d/.test(pw)) n++;
+    if (/[^A-Za-z0-9]/.test(pw) || pw.length >= 16) n++;
+    return Math.min(4, n);
+  }
+  segStyle(i, score) { return { flex: 1, height: '4px', borderRadius: '99px', background: i < score ? 'var(--accent)' : 'var(--surface-3)', display: 'block', transition: 'background .2s' }; }
+  strengthLabel(score) { return ['Too short', 'Weak', 'Okay', 'Strong', 'Very strong'][score]; }
+  validEmail(e) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e); }
+
+  renderVals() {
+    const s = this.state;
+    const S = (patch) => this.setState(patch);
+    const acting = s.actingRole;
+    const isSuperAdmin = acting === 'super_admin';
+    const canManage = acting === 'super_admin' || acting === 'admin';
+    const roleNames = { super_admin: 'Priya Natarajan', admin: 'Dan Okafor', manager: 'Mei Chen', developer: 'Sofia Reyes', researcher: 'Jonas Weber' };
+    const meName = roleNames[acting];
+    const avTint = (name) => `oklch(0.58 0.11 ${([...name].reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 3600, 7) / 10).toFixed(0)})`;
+    const avStyle = (name, sz, fs) => ({ width: sz + 'px', height: sz + 'px', borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 680, fontSize: fs + 'px', flex: 'none', background: avTint(name) });
+
+    // rail
+    const railItem = (key, label) => ({ label, cls: s.screen === key ? 'btn-soft' : 'btn-ghost', go: () => this.goScreen(key) });
+    const railGroups = [
+      { label: 'Auth (Trinity chrome)', items: [railItem('login', 'Sign in'), railItem('setup', 'Set password · invite'), railItem('recovery', 'Forgot / reset')] },
+      { label: 'Public touchpoint', items: [railItem('info', '/trinity-info · access request')] },
+      { label: 'Console', items: [railItem('overview', 'Overview'), railItem('users', 'Users'), railItem('requests', 'Access requests'), railItem('models', 'Resource pattern · Models'), railItem('audit', 'Audit log'), railItem('account', 'Your account')] },
+    ];
+
+    // sim chips
+    const chip = (label, active, pick) => ({ label, cls: active ? 'active' : '', pick });
+    let simChips = [], screenTitle = '';
+    if (s.screen === 'login') {
+      screenTitle = 'Trinity sign in';
+      const set = (err) => () => S({ lg: { ...s.lg, busy: false, err } });
+      simChips = [
+        chip('Default', !s.lg.err && !s.lg.busy, set(null)),
+        chip('Wrong password', s.lg.err === 'Email or password is incorrect.', set('Email or password is incorrect.')),
+        chip('Not enabled', (s.lg.err || '').startsWith('This account'), set('This account isn\u2019t enabled for Trinity. Ask an admin, or request access.')),
+        chip('Rate-limited', (s.lg.err || '').startsWith('Too many'), set('Too many attempts — try again in a moment.')),
+      ];
+    } else if (s.screen === 'setup') {
+      screenTitle = 'Set password';
+      const set = (sim) => () => S({ sp2: { ...s.sp2, sim } });
+      simChips = [chip('Invite form', s.sp2.sim === 'form', set('form')), chip('Invalid token', s.sp2.sim === 'invalid', set('invalid')), chip('Expired', s.sp2.sim === 'expired', set('expired')), chip('Success', s.sp2.sim === 'success', set('success'))];
+    } else if (s.screen === 'recovery') {
+      screenTitle = 'Forgot / reset';
+      const set = (sim) => () => S({ rc: { ...s.rc, sim, err: null } });
+      simChips = [chip('Forgot · form', s.rc.sim === 'forgot', set('forgot')), chip('Forgot · sent', s.rc.sim === 'sent', set('sent')), chip('Reset · form', s.rc.sim === 'reset', set('reset')), chip('Reset · expired', s.rc.sim === 'expired', set('expired')), chip('Reset · success', s.rc.sim === 'success', set('success'))];
+    } else if (s.screen === 'info') {
+      screenTitle = '/trinity-info';
+      simChips = [chip('Form', s.inf.stage === 'form', () => S({ inf: { ...s.inf, stage: 'form' } })), chip('Submitted', s.inf.stage === 'sent', () => S({ inf: { ...s.inf, stage: 'sent', email: s.inf.email || 'you@lab.ai' } }))];
+    } else if (s.screen === 'users') {
+      screenTitle = 'Users';
+      const set = (sim) => () => S({ usSim: sim });
+      simChips = [chip('Default', s.usSim === 'default', set('default')), chip('Loading', s.usSim === 'loading', set('loading')), chip('Empty result', s.usSim === 'empty', set('empty'))];
+    } else if (s.screen === 'requests') {
+      screenTitle = 'Access requests';
+      simChips = [chip('Queue', true, () => S({ rqFilter: 'pending' }))];
+    }
+
+    // trinity nav (role-gated)
+    const notBuilt = () => this.showToast('Not in this prototype — uses the Models resource pattern.');
+    const navItem = (key, label, count) => ({ label, count: count || null, cls: s.screen === key ? 'active' : '', go: () => this.goScreen(key) });
+    const patternItem = (label) => ({ label, count: null, cls: '', go: notBuilt });
+    const pendingCount = s.requests.filter((r) => r.status === 'pending').length;
+    const trNav = [
+      { label: 'Console', items: [navItem('overview', 'Overview')] },
+      { label: 'Operations', items: [patternItem('Runs'), patternItem('Matches'), patternItem('Queues'), patternItem('Artifacts')] },
+      { label: 'Catalog', items: [patternItem('Providers'), navItem('models', 'Models'), patternItem('Games'), patternItem('Variants')] },
+    ];
+    if (canManage || acting === 'manager') {
+      const adminItems = [];
+      adminItems.push(navItem('users', 'Users'));
+      adminItems.push(navItem('requests', 'Access requests', pendingCount ? String(pendingCount) : null));
+      if (canManage) adminItems.push(navItem('audit', 'Audit log'));
+      trNav.push({ label: 'Admin', items: adminItems });
+    }
+    trNav.push({ label: 'You', items: [navItem('account', 'Your account')] });
+
+    // users
+    const q = s.usQ.trim().toLowerCase();
+    const filtered = s.users.filter((u) =>
+      (!q || u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q)) &&
+      (s.usRole === 'all' || u.role === s.usRole) &&
+      (s.usStatus === 'all' || (s.usStatus === 'active' ? u.status !== 'disabled' : u.status === 'disabled')));
+    const usEmpty = s.usSim === 'empty' || (s.usSim === 'default' && filtered.length === 0);
+    const usRows = filtered.map((u) => ({
+      ...u, initial: u.name[0].toUpperCase(), avStyle: avStyle(u.name, 26, 11),
+      stCls: 'tr-st-' + u.status,
+      open: () => S({ drawer: 'user', drawerId: u.id }),
+    }));
+
+    // requests
+    const rqRows = s.requests.filter((r) => r.status === s.rqFilter).map((r) => ({
+      ...r,
+      pending: r.status === 'pending', resolved: r.status !== 'pending',
+      resolvedLabel: r.status === 'approved' ? '✓ approved · invite sent' : '✕ rejected',
+      approve: () => S({ dlg: 'confirm', cf: { kind: 'approve', targetId: r.id, reason: '', role: r.role } }),
+      reject: () => S({ dlg: 'confirm', cf: { kind: 'reject', targetId: r.id, reason: '', role: r.role } }),
+    }));
+
+    // models
+    const mq = s.mdQ.trim().toLowerCase();
+    const mdRows = s.models.filter((m) => (!mq || m.name.includes(mq)) && (s.mdProv === 'all' || m.provider === s.mdProv)).map((m) => ({
+      ...m, stCls: m.status === 'active' ? 'tr-st-active' : 'tr-st-disabled',
+      open: () => S({ drawer: 'model', drawerId: m.id }),
+    }));
+
+    // drawer targets
+    const duU = s.users.find((u) => u.id === s.drawerId) || s.users[0];
+    const targetIsSuper = duU.role === 'super_admin';
+    const duCanAct = canManage && (!targetIsSuper || isSuperAdmin) && duU.name !== meName;
+    const dmM = s.models.find((m) => m.id === s.drawerId) || s.models[0];
+
+    const updUser = (id, patch) => S({ users: s.users.map((u) => (u.id === id ? { ...u, ...patch } : u)) });
+
+    // confirm dialog config
+    const req = s.requests.find((r) => r.id === s.cf.targetId);
+    const cfCfg = {
+      deactivate: { title: 'Deactivate ' + duU.name + '?', body: 'They\u2019re signed out everywhere and lose console access immediately. Their history stays in the audit log. You can reactivate later.', btnLabel: 'Deactivate', danger: true },
+      forcelogout: { title: 'Force logout?', body: 'Ends all ' + duU.sessions + ' active sessions for ' + duU.name + '. They can sign back in immediately.', btnLabel: 'Force logout', danger: false },
+      revokekeys: { title: 'Revoke API keys?', body: 'All ' + duU.keys + ' keys for ' + duU.name + ' stop working immediately. This cannot be undone.', btnLabel: 'Revoke keys', danger: true },
+      approve: { title: 'Approve request?', body: (req ? req.email + ' (' + req.org + ')' : '') + ' — an invite email is sent with the role you grant.', btnLabel: 'Approve & send invite', danger: false, needRole: true },
+      reject: { title: 'Reject request?', body: (req ? req.email + ' (' + req.org + ')' : '') + ' — they\u2019ll be notified with your reason.', btnLabel: 'Reject', danger: true, needReason: true },
+    };
+    const cfg = cfCfg[s.cf.kind] || {};
+    const cfGo = () => {
+      const k = s.cf.kind;
+      this.setState({ dlg: null });
+      if (k === 'deactivate') { updUser(duU.id, { status: 'disabled', sessions: 0 }); this.showToast(duU.name + ' deactivated.'); }
+      else if (k === 'forcelogout') { updUser(duU.id, { sessions: 0 }); this.showToast('All sessions ended for ' + duU.name + '.'); }
+      else if (k === 'revokekeys') { updUser(duU.id, { keys: 0 }); this.showToast('API keys revoked.'); }
+      else if (k === 'approve' && req) {
+        this.setState({ requests: s.requests.map((r) => (r.id === req.id ? { ...r, status: 'approved' } : r)), dlg: null });
+        this.showToast('Approved — invite sent to ' + req.email + ' as ' + s.cf.role + '.');
+      }
+      else if (k === 'reject' && req) {
+        this.setState({ requests: s.requests.map((r) => (r.id === req.id ? { ...r, status: 'rejected' } : r)), dlg: null });
+        this.showToast('Request rejected.');
+      }
+    };
+
+    const needs2fa = (acting === 'admin' || acting === 'super_admin') && !s.ac.twofa;
+
+    return {
+      showRail: this.props.showRail !== false,
+      railGroups, screenTitle, simChips, hasSims: simChips.length > 0,
+      themeLightCls: s.themeChoice === 'light' ? 'active' : '', themeDarkCls: s.themeChoice === 'dark' ? 'active' : '',
+      pickLight: () => this.setTheme('light'), pickDark: () => this.setTheme('dark'),
+      toggleTheme: () => this.setTheme(s.theme === 'dark' ? 'light' : 'dark'),
+      logoSrc: s.theme === 'dark' ? 'eslams/assets/logo-dark.png' : 'eslams/assets/logo-light.png',
+      actingRole: acting, pickRole: (e) => S({ actingRole: e.target.value, drawer: null, dlg: null }),
+      isSuperAdmin, canManage, cantManage: !canManage,
+      readOnlyNote: canManage ? null : 'Your role (' + acting + ') has read-only access here — actions are managed by admins.',
+      meName, meInitial: meName[0], meAvStyle: avStyle(meName, 30, 12),
+      nowLabel: 'Wed 08 Jul 2026',
+      toastMsg: s.toast,
+      stopProp: (e) => e.stopPropagation(),
+      navOut: () => this.showToast('Outside this prototype — Trinity surfaces only.'),
+      patternToast: () => this.showToast('Not in this prototype — same resource pattern.'),
+
+      // screens
+      isAuth: s.screen === 'login' || s.screen === 'setup' || s.screen === 'recovery',
+      isLogin: s.screen === 'login', isSetup: s.screen === 'setup', isRecovery: s.screen === 'recovery',
+      isInfo: s.screen === 'info',
+      isConsole: ['overview', 'users', 'requests', 'models', 'audit', 'account'].includes(s.screen),
+      isOverview: s.screen === 'overview', isUsers: s.screen === 'users', isRequests: s.screen === 'requests',
+      isModels: s.screen === 'models', isAudit: s.screen === 'audit', isAccount: s.screen === 'account',
+      goLogin: () => this.goScreen('login'), goInfo: () => this.goScreen('info'),
+      goRecovery: () => { S({ rc: { ...s.rc, sim: 'forgot' } }); this.goScreen('recovery'); },
+      goOverviewFromSetup: () => { this.goScreen('account'); this.showToast('Welcome to Trinity — enable 2FA below.'); },
+
+      // login
+      lg: { email: s.lg.email, pw: s.lg.pw, busy: s.lg.busy, err: s.lg.err, hasErr: !!s.lg.err, showRequestLink: (s.lg.err || '').startsWith('This account'), submitLabel: s.lg.busy ? 'Working…' : 'Sign in' },
+      lgSetEmail: (e) => S({ lg: { ...s.lg, email: e.target.value, err: null } }),
+      lgSetPw: (e) => S({ lg: { ...s.lg, pw: e.target.value, err: null } }),
+      lgSSO: () => { S({ lg: { ...s.lg, busy: true } }); this.t('lg', () => { S({ lg: { ...s.lg, busy: false } }); this.goScreen('overview'); }, 900); },
+      lgSubmit: (e) => {
+        e.preventDefault();
+        if (!this.validEmail(s.lg.email) || !s.lg.pw) { S({ lg: { ...s.lg, err: 'Enter your operator email and password.' } }); return; }
+        S({ lg: { ...s.lg, busy: true, err: null } });
+        this.t('lg', () => { S({ lg: { ...s.lg, busy: false } }); this.goScreen('overview'); }, 900);
+      },
+
+      // setup password
+      sp2: {
+        isForm: s.sp2.sim === 'form', isInvalid: s.sp2.sim === 'invalid', isExpired: s.sp2.sim === 'expired', isSuccess: s.sp2.sim === 'success',
+        pw: s.sp2.pw, pw2: s.sp2.pw2, err: s.sp2.err,
+        email: 'tomas@eslams.com', role: 'developer', roleCls: 'developer',
+        showMeter: s.sp2.pw.length > 0,
+        segs: [0, 1, 2, 3].map((i) => ({ style: this.segStyle(i, this.strength(s.sp2.pw)) })),
+        strengthLabel: this.strengthLabel(this.strength(s.sp2.pw)),
+      },
+      sp2SetPw: (e) => S({ sp2: { ...s.sp2, pw: e.target.value, err: null } }),
+      sp2SetPw2: (e) => S({ sp2: { ...s.sp2, pw2: e.target.value, err: null } }),
+      sp2Submit: (e) => {
+        e.preventDefault();
+        if (this.strength(s.sp2.pw) < 1) { S({ sp2: { ...s.sp2, err: 'Use at least 12 characters.' } }); return; }
+        if (s.sp2.pw !== s.sp2.pw2) { S({ sp2: { ...s.sp2, err: 'Passwords don\u2019t match.' } }); return; }
+        S({ sp2: { ...s.sp2, sim: 'success' } });
+      },
+      sp2NotifyAdmin: () => this.showToast('The inviting admin was notified.'),
+
+      // recovery
+      rc: {
+        isForgot: s.rc.sim === 'forgot', isSent: s.rc.sim === 'sent', isReset: s.rc.sim === 'reset',
+        isExpired: s.rc.sim === 'expired', isSuccess: s.rc.sim === 'success',
+        email: s.rc.email, email2: s.rc.email || 'operator@eslams.com', pw: s.rc.pw, pw2: s.rc.pw2, err: s.rc.err,
+      },
+      rcSetEmail: (e) => S({ rc: { ...s.rc, email: e.target.value, err: null } }),
+      rcSetPw: (e) => S({ rc: { ...s.rc, pw: e.target.value, err: null } }),
+      rcSetPw2: (e) => S({ rc: { ...s.rc, pw2: e.target.value, err: null } }),
+      rcSubmit: (e) => { e.preventDefault(); if (!this.validEmail(s.rc.email)) { S({ rc: { ...s.rc, err: 'Enter a valid email.' } }); return; } S({ rc: { ...s.rc, sim: 'sent' } }); },
+      rcOpenLink: () => S({ rc: { ...s.rc, sim: 'reset' } }),
+      rcBackToForgot: () => S({ rc: { ...s.rc, sim: 'forgot' } }),
+      rcResetSubmit: (e) => {
+        e.preventDefault();
+        if (this.strength(s.rc.pw) < 1) { S({ rc: { ...s.rc, err: 'Use at least 12 characters.' } }); return; }
+        if (s.rc.pw !== s.rc.pw2) { S({ rc: { ...s.rc, err: 'Passwords don\u2019t match.' } }); return; }
+        S({ rc: { ...s.rc, sim: 'success' } });
+      },
+
+      // trinity-info
+      inf: {
+        isForm: s.inf.stage === 'form', isSent: s.inf.stage === 'sent',
+        org: s.inf.org, email: s.inf.email, reason: s.inf.reason,
+        emailErr: s.inf.emailErr, reasonErr: s.inf.reasonErr,
+        roleResCls: s.inf.role === 'researcher' ? 'active' : '', roleDevCls: s.inf.role === 'developer' ? 'active' : '',
+        roleDesc: s.inf.role === 'researcher' ? 'Read access to runs, matches, and evaluation data.' : 'Read access plus API integration endpoints.',
+      },
+      infSetOrg: (e) => S({ inf: { ...s.inf, org: e.target.value } }),
+      infSetEmail: (e) => S({ inf: { ...s.inf, email: e.target.value, emailErr: null } }),
+      infSetReason: (e) => S({ inf: { ...s.inf, reason: e.target.value, reasonErr: null } }),
+      infRoleRes: () => S({ inf: { ...s.inf, role: 'researcher' } }),
+      infRoleDev: () => S({ inf: { ...s.inf, role: 'developer' } }),
+      infSubmit: (e) => {
+        e.preventDefault();
+        const errs = {};
+        if (!this.validEmail(s.inf.email)) errs.emailErr = 'Enter a valid work email.';
+        if (s.inf.reason.trim().length < 12) errs.reasonErr = 'A sentence helps the reviewer — a few more words.';
+        if (Object.keys(errs).length) { S({ inf: { ...s.inf, ...errs } }); return; }
+        S({ inf: { ...s.inf, stage: 'sent' } });
+      },
+
+      // console nav + overview
+      trNav,
+      ov: {
+        stats: [
+          { num: String(s.users.filter((u) => u.status !== 'disabled').length), label: 'Active operators' },
+          { num: String(pendingCount), label: 'Pending access requests' },
+          { num: '3,412', label: 'Runs today' },
+          { num: '0.4%', label: 'Match error rate · 24h' },
+        ],
+        health: [
+          { name: 'API', cls: 'tr-st-active', detail: 'operational' },
+          { name: 'Runner queue', cls: 'tr-st-invited', detail: '12 waiting · 4m p95' },
+          { name: 'Artifact store', cls: 'tr-st-active', detail: 'operational' },
+          { name: 'Webhooks', cls: 'tr-st-degraded', detail: 'degraded · retrying' },
+        ],
+        audit: [
+          { event: 'role_changed', detail: 'mei@example.org → manager', when: '2h ago' },
+          { event: 'invite_sent', detail: 'tomas@eslams.com as developer', when: '5h ago' },
+          { event: 'key_rotated', detail: 'sofia@eslams.com · esl_live_9d…', when: '1d ago' },
+          { event: 'user_disabled', detail: 'alex@example.org', when: '3d ago' },
+        ],
+      },
+
+      // users page
+      us: {
+        countLabel: filtered.length + ' of ' + s.users.length + ' operators',
+        q: s.usQ, roleFilter: s.usRole,
+        stAllCls: s.usStatus === 'all' ? 'active' : '', stActiveCls: s.usStatus === 'active' ? 'active' : '', stDisabledCls: s.usStatus === 'disabled' ? 'active' : '',
+        loading: s.usSim === 'loading', empty: usEmpty, showTable: s.usSim === 'default' && !usEmpty,
+        rows: usRows, skels: [1, 2, 3, 4, 5].map((i) => ({ i })),
+      },
+      usSetQ: (e) => S({ usQ: e.target.value, usSim: 'default' }),
+      usSetRole: (e) => S({ usRole: e.target.value, usSim: 'default' }),
+      usStAll: () => S({ usStatus: 'all', usSim: 'default' }),
+      usStActive: () => S({ usStatus: 'active', usSim: 'default' }),
+      usStDisabled: () => S({ usStatus: 'disabled', usSim: 'default' }),
+      usClear: () => S({ usQ: '', usRole: 'all', usStatus: 'all', usSim: 'default' }),
+      usInvite: () => S({ dlg: 'invite', iv: { email: '', role: 'researcher' } }),
+
+      // requests page
+      rq: {
+        filter: s.rqFilter,
+        pendCls: s.rqFilter === 'pending' ? 'active' : '', apprCls: s.rqFilter === 'approved' ? 'active' : '', rejCls: s.rqFilter === 'rejected' ? 'active' : '',
+        rows: rqRows, empty: rqRows.length === 0, showTable: rqRows.length > 0,
+      },
+      rqPend: () => S({ rqFilter: 'pending' }), rqAppr: () => S({ rqFilter: 'approved' }), rqRej: () => S({ rqFilter: 'rejected' }),
+
+      // models page
+      md: { q: s.mdQ, prov: s.mdProv, rows: mdRows },
+      mdSetQ: (e) => S({ mdQ: e.target.value }),
+      mdSetProv: (e) => S({ mdProv: e.target.value }),
+
+      // audit page
+      au: (() => {
+        const aq = s.auQ.trim().toLowerCase();
+        const rows = s.auditRows.filter((a) => (s.auType === 'all' || a.type === s.auType) && (!aq || a.actor.toLowerCase().includes(aq) || a.detail.toLowerCase().includes(aq) || a.ev.includes(aq)));
+        return { q: s.auQ, type: s.auType, rows, empty: rows.length === 0, showTable: rows.length > 0 };
+      })(),
+      auSetQ: (e) => S({ auQ: e.target.value }),
+      auSetType: (e) => S({ auType: e.target.value }),
+
+      // account page
+      ac: {
+        needs2fa,
+        pwStatic: !s.ac.pwEditing, pwEditing: s.ac.pwEditing, pw: s.ac.pw, pw2: s.ac.pw2, pwErr: s.ac.pwErr, pwSaved: s.ac.pwSaved,
+        twofaOff: !s.ac.twofa, twofaOn: s.ac.twofa,
+        twofaDesc: (acting === 'admin' || acting === 'super_admin') ? 'Required for admin and super_admin roles.' : 'Strongly recommended for all operators.',
+        twofaLocked: acting === 'admin' || acting === 'super_admin',
+        twofaLockTitle: (acting === 'admin' || acting === 'super_admin') ? 'Required for your role' : '',
+        sessions: s.acSessions.map((x) => ({ ...x, revocable: !x.current, revoke: () => { S({ acSessions: s.acSessions.filter((y) => y.id !== x.id) }); this.showToast('Session revoked.'); } })),
+      },
+      acEditPw: () => S({ ac: { ...s.ac, pwEditing: true, pw: '', pw2: '', pwErr: null } }),
+      acCancelPw: () => S({ ac: { ...s.ac, pwEditing: false, pwErr: null } }),
+      acSetPw: (e) => S({ ac: { ...s.ac, pw: e.target.value, pwErr: null } }),
+      acSetPw2: (e) => S({ ac: { ...s.ac, pw2: e.target.value, pwErr: null } }),
+      acSavePw: () => {
+        if (this.strength(s.ac.pw) < 1) { S({ ac: { ...s.ac, pwErr: 'Use at least 12 characters.' } }); return; }
+        if (s.ac.pw !== s.ac.pw2) { S({ ac: { ...s.ac, pwErr: 'Passwords don\u2019t match.' } }); return; }
+        S({ ac: { ...s.ac, pwEditing: false, pwSaved: true } });
+        this.t('acpw', () => this.setState({ ac: { ...this.state.ac, pwSaved: false } }), 1800);
+      },
+      acEnable2fa: () => S({ dlg: '2fa', tf: { stage: 'setup', code: '', err: null, copied: false } }),
+      acDisable2fa: () => { S({ ac: { ...s.ac, twofa: false } }); this.showToast('Two-factor disabled.'); },
+      acRevokeAll: () => { S({ acSessions: s.acSessions.filter((x) => x.current) }); this.showToast('Signed out everywhere else.'); },
+
+      // drawers
+      drawerUser: s.drawer === 'user', drawerModel: s.drawer === 'model',
+      drawerClose: () => S({ drawer: null }),
+      du: {
+        name: duU.name, role: duU.role, status: duU.status, stCls: 'tr-st-' + duU.status,
+        initial: duU.name[0].toUpperCase(), avStyle: avStyle(duU.name, 42, 17),
+        sessions: duU.sessions, keys: duU.keys,
+        isActive: duU.status === 'active', isDisabled: duU.status === 'disabled', isInvited: duU.status === 'invited',
+        canAct: duCanAct, readOnly: !duCanAct,
+        readOnlyMsg: duU.name === meName ? 'This is you — manage your own login under Your account.' : (targetIsSuper && !isSuperAdmin ? 'Only a super_admin can act on a super_admin.' : 'Your role (' + acting + ') has read-only access.'),
+        meta: [
+          { k: 'Email', v: duU.email },
+          { k: 'Source', v: duU.source },
+          { k: 'Created', v: duU.created },
+          { k: 'Last login', v: duU.last },
+          { k: 'Active sessions', v: String(duU.sessions) },
+          { k: 'API keys', v: String(duU.keys) },
+        ],
+      },
+      duChangeRole: () => S({ dlg: 'role', rl: { role: duU.role === 'super_admin' ? 'admin' : duU.role } }),
+      duForceLogout: () => S({ dlg: 'confirm', cf: { kind: 'forcelogout', targetId: duU.id, reason: '', role: 'researcher' } }),
+      duRevokeKeys: () => S({ dlg: 'confirm', cf: { kind: 'revokekeys', targetId: duU.id, reason: '', role: 'researcher' } }),
+      duDeactivate: () => S({ dlg: 'confirm', cf: { kind: 'deactivate', targetId: duU.id, reason: '', role: 'researcher' } }),
+      duReactivate: () => { updUser(duU.id, { status: 'active' }); this.showToast(duU.name + ' reactivated.'); },
+      duResend: () => this.showToast('Invite re-sent to ' + duU.email + '.'),
+      dm: {
+        name: dmM.name, provider: dmM.provider, status: dmM.status,
+        stCls: dmM.status === 'active' ? 'tr-st-active' : 'tr-st-disabled',
+        toggleLabel: dmM.status === 'active' ? 'Retire model' : 'Reactivate model',
+        meta: [
+          { k: 'Provider', v: dmM.provider },
+          { k: 'Elo', v: String(dmM.elo) },
+          { k: 'Total runs', v: dmM.runs },
+          { k: 'Games covered', v: String(dmM.games) },
+          { k: 'Context window', v: dmM.ctx },
+          { k: 'Added', v: dmM.added },
+          { k: 'Last updated', v: dmM.updated },
+        ],
+      },
+
+      // mobile demo
+      mobileCls: s.mobile ? 'proto-mobile' : '',
+      vpDeskCls: s.mobile ? '' : 'active', vpMobCls: s.mobile ? 'active' : '',
+      pickDesktop: () => S({ mobile: false }), pickMobile: () => S({ mobile: true }),
+
+      // 2FA dialog
+      dlg2fa: s.dlg === '2fa',
+      tf: {
+        setup: s.tf.stage === 'setup', done: s.tf.stage === 'done', code: s.tf.code, err: s.tf.err,
+        codes: ['t7q2-4mfk', 'b9x1-8jwz', 'n2d5-0mrt', 'k4s9-6bvc', 'w8f3-1lgd', 'y0t6-5xph'],
+        copyLabel: s.tf.copied ? 'Copied' : 'Copy codes',
+      },
+      tfSetCode: (e) => S({ tf: { ...s.tf, code: e.target.value.replace(/\D/g, '').slice(0, 6), err: null } }),
+      tfVerify: () => {
+        if (s.tf.code.length < 6) { S({ tf: { ...s.tf, err: 'Enter the 6-digit code from your app.' } }); return; }
+        this.setState({ tf: { ...s.tf, stage: 'done' }, ac: { ...s.ac, twofa: true } });
+      },
+      tfCopy: () => { try { navigator.clipboard && navigator.clipboard.writeText('t7q2-4mfk b9x1-8jwz n2d5-0mrt k4s9-6bvc w8f3-1lgd y0t6-5xph'); } catch (e) {} S({ tf: { ...s.tf, copied: true } }); },
+
+      // dialogs
+      dlgInvite: s.dlg === 'invite', dlgRole: s.dlg === 'role', dlgConfirm: s.dlg === 'confirm',
+      dlgCancel: () => S({ dlg: null }),
+      iv: {
+        email: s.iv.email, role: s.iv.role,
+        disabled: !this.validEmail(s.iv.email),
+        roleNote: s.iv.role === 'manager' ? 'Managers can review access requests and view users.' : null,
+      },
+      ivSetEmail: (e) => S({ iv: { ...s.iv, email: e.target.value } }),
+      ivSetRole: (e) => S({ iv: { ...s.iv, role: e.target.value } }),
+      ivSend: () => {
+        const email = s.iv.email.trim();
+        this.setState({
+          users: [...s.users, { id: Date.now(), name: email.split('@')[0], email, role: s.iv.role, status: 'invited', source: 'Invite', last: '—', created: 'just now', sessions: 0, keys: 0 }],
+          dlg: null,
+        });
+        this.showToast('Invite sent to ' + email + ' as ' + s.iv.role + '.');
+      },
+      rl: {
+        role: s.rl.role, disabled: s.rl.role === duU.role,
+        note: (s.rl.role === 'admin' || s.rl.role === 'super_admin') ? 'Granting an admin role requires 2FA on the target account.' : null,
+      },
+      rlSetRole: (e) => S({ rl: { role: e.target.value } }),
+      rlSave: () => { updUser(duU.id, { role: s.rl.role }); this.setState({ dlg: null }); this.showToast(duU.name + ' is now ' + s.rl.role + '.'); },
+      cf: {
+        title: cfg.title || '', body: cfg.body || '', btnLabel: cfg.btnLabel || 'Confirm',
+        titleColor: cfg.danger ? 'var(--loss)' : 'var(--text)',
+        btnStyle: cfg.danger
+          ? { background: 'var(--loss)', color: 'var(--text-on-accent)', border: '1px solid var(--loss)' }
+          : { background: 'var(--accent)', color: 'var(--text-on-accent)', border: '1px solid var(--accent)' },
+        needReason: !!cfg.needReason, needRole: !!cfg.needRole,
+        reason: s.cf.reason, role: s.cf.role,
+        disabled: !!cfg.needReason && s.cf.reason.trim().length < 4,
+      },
+      cfSetReason: (e) => S({ cf: { ...s.cf, reason: e.target.value } }),
+      cfSetRole: (e) => S({ cf: { ...s.cf, role: e.target.value } }),
+      cfGo,
+    };
+  }
+}
+</script>
+</body>
+</html>

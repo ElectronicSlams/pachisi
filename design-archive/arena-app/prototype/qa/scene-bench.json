@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-02T21:53:38.600Z",
+  "viewport": "390x844@2",
+  "results": {
+    "light": {
+      "depth0": {
+        "sprites": 23,
+        "fps": 60,
+        "layer": {
+          "far": 11,
+          "mid": 9,
+          "near": 3
+        }
+      },
+      "depth1": {
+        "sprites": 21,
+        "fps": 59,
+        "layer": {
+          "far": 11,
+          "mid": 8,
+          "near": 2
+        }
+      },
+      "errors": [],
+      "version": "1.0.0"
+    },
+    "dark": {
+      "depth0": {
+        "sprites": 23,
+        "fps": 60,
+        "layer": {
+          "far": 11,
+          "mid": 9,
+          "near": 3
+        }
+      },
+      "depth1": {
+        "sprites": 21,
+        "fps": 59,
+        "layer": {
+          "far": 11,
+          "mid": 8,
+          "near": 2
+        }
+      },
+      "errors": [],
+      "version": "1.0.0"
+    }
+  }
+}

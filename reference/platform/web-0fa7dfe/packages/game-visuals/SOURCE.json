@@ -1,0 +1,30 @@
+{
+  "repository": "eslams-game-visuals",
+  "version": "0.1.0",
+  "commit": "35e44a7033ef1240c86c3b815afb05115d897cb2",
+  "files": {
+    "LICENSE": "8e74e7f4e9f2c0caa171be10318e4dd5e57ed0e7fc4c59275a32cc13fead5104",
+    "README.md": "a15fede0247a0eb41059782aa2e100a38fe68efeb9ce34effa23f5b7ca203ccb",
+    "assets/logo-dark.png": "0cea2d0109a42ed56f83209a5beede244cbca840aee80ea944252150b4b0dde1",
+    "assets/logo-light.png": "953f926b59c13305ed16ca1dbd9e09172734dff833d890c35ad17e2b943af8c0",
+    "assets/mark.png": "a8b856f5d91e3dc08395cd9b125585b2e28a909dc9410d2456b8ef364477e0b4",
+    "eslint.config.mjs": "8c794201e1df5abfdc66a245467ef3ccd2809b86de4a34dc1ca82bfc64564cce",
+    "package.json": "9438ea5e540fb5764ebfe18a366a8055193bc6c13db1f59d65ab540860abacd3",
+    "scripts/generate-demonstrations.py": "9935d3f27463ebbe30d59bcd1012b6c79d93fc69f95f72fab9aee1aca33b670e",
+    "src/board-types.ts": "e102b7cae18c5ad606b1e0e6d07134a7d8bb330151ffa700e5467676ea390848",
+    "src/board.tsx": "8dfdc86703f5a7af6ad7b9e674ab0fce024393c6fb0256523940b359e750c33f",
+    "src/catalogue.ts": "21d7229ccff24e5f4f84e6451c9e9b714261303b51759b2a221dded6327bb223",
+    "src/demo.tsx": "756f7db9dfda6dd3433fcdc97e57b312a54c576cc58cd0f8265ed319dd3f6202",
+    "src/demos.ts": "1310e228b0c055cfb887b28fb3e61049356c9a0026a7cde0fc5e3603d3ec1a61",
+    "src/game-demonstrations-source.json": "0f5a706b0851e786dd7c7c4b097cf05efcdb5f8007f39c8cbfe13ee3517f4bda",
+    "src/game-demonstrations.json": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322",
+    "src/icon-catalogue.ts": "da226a48cb6ed531fa1bcda4335044bae52bfa1f075e09049a4e95d04782b4c3",
+    "src/icons.tsx": "72d48bef16dbe8d9a1bd35574eeb8d8ce54f658432f8e1ec598cac14a95ae766",
+    "src/motion.ts": "0c0bb98206d32cc217162b5007c45157b56a157f3236f3e81bd484e5b11d445e",
+    "src/scene.tsx": "519ad7fe55bc8cf41099c11c07de7d4b09f58ca616ec0e9dcb649892d80d8db8",
+    "src/styles.css": "279cd649b9a6077f4a0b91b2694d6caa2fd85a3cafc3b5f2609e2ed33fe45dcf",
+    "src/ui-icons.tsx": "cf5bf29509a56bb3753d08d82bab32b156df8e2a9df14a4c2822a1e31073dc17",
+    "tests/board-contract.test.ts": "37791c346edf3900a358ee0c8269e5e6b4a45b356770940f66bce2eeea7c31e7",
+    "tsconfig.json": "8a945250f08d83e5b4f88c3f711f39e8f8d1f620cb2a5e3ef91f185e1a3313be"
+  }
+}

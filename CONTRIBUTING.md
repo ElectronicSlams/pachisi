@@ -10,8 +10,13 @@ The initial extraction is pinned in `SOURCE_MANIFEST.json`. Do not silently sync
 
 ## Checks
 
+While hosted CI is unavailable, `pnpm ci:local` is the release gate. It mirrors the workflow job, records `docs/validation/local-ci.json` with the commit, host versions and per-step result, and refreshes the browser and consumer records. Commit that evidence with the change it verifies; a push without a matching `local-ci.json` is unverified.
+
 ```sh
+pnpm ci:local
+# or the individual steps:
 pnpm check
+pnpm check:physics
 pnpm exec playwright install chromium
 pnpm test:browser
 ```
@@ -19,6 +24,20 @@ pnpm test:browser
 Keep source ESM exports, declaration files and React client boundaries intact. Test multiple component instances, keyboard navigation, failure/empty/disabled states, light/dark/system themes, blocked persistence, reduced motion and narrow viewports. Tests should verify consumer behavior and package boundaries rather than only matching source strings.
 
 Update the catalogue for every public component/state. Keep game coverage metadata synchronized with actual variants and artwork Core pins. New actual-state renderers require typed inputs, hidden-information projection review, paused/deterministic state checks, coordinate/geometry tests and browser coverage; a passing decorative demo is insufficient.
+
+## Archive and reference folders
+
+`design-archive/` and `reference/platform/` are history, not source.
+
+- Append-only. Add new material; do not rewrite existing files. Never edit an archived or vendored file to make it look right, run or typecheck. If something is wrong, note it in `ARCHIVE_INDEX.md` or the folder README.
+- Never import from either folder in `src/`, `catalogue/`, `tests/` or `scripts/`. To use an idea, port it into `src/` with types, tests and a `SOURCE_MANIFEST.json` entry.
+- Every new vendored file goes into `reference/platform/MANIFEST.json` (or the archive index, with its hash) with its source, commit and sha256. Record any scrub, such as rewritten paths or replaced addresses.
+- Do not add provider marks, logos, customer screenshots or production captures. Check licence and attribution first, and update `NOTICE.md`.
+- Where the archive disagrees with `src/` and `styles/`, `src/` and `styles/` win.
+
+## Physics checks
+
+Every change to a demonstration trace, the generator or a game renderer (`Board`, `LegalDemonstration`, the board adapter or the cue derivation) runs `pnpm check:physics` as well as `pnpm check`. A renderer must never guess a side for an unknown token and must never draw an empty token (`""`, whitespace, `null`) as a piece; unknown tokens, a wrong cell count or a missing field produce a placeholder or a stated issue, not a plausible default. When a rule variant differs from the standard game, say so in `docs/games.md` and the coverage `ruleVariantNote` rather than relying on the game name. A passing physics check proves the bundled public traces obey the rules listed in `docs/physics.md`; it does not certify live Platform rules.
 
 ## Versioning and delivery
 
@@ -29,3 +48,7 @@ Changes intended for production consumers need their own review and visual/perfo
 ## Public review
 
 Run `pnpm check:public` and inspect `git diff --cached` before every public push. Include only reusable source, synthetic fixtures, docs/tests and appropriately licensed assets. Exclude credentials, customer data, private screenshots, logs, operator evidence, hidden suites and production database material. Preserve MIT/OFL notices and brand identity restrictions. No third-party provider marks should be added without a documented redistribution basis.
+
+## Public game-design references
+
+`reference/public-games/` is also non-canonical, immutable reference material, independently licensed per source. Keep every imported byte, license and notice with its full commit and hashes in its own manifest. Do not import or execute these modules in Pachisi. The catalogue may use the separate authored metadata index; it must keep dedicated renderers, related variants, shared assets and rules-only references distinct. Run `pnpm check:design-sources` after changes. Missing-license or separately restricted assets remain links until their redistribution basis is established; never infer an artwork license from a repository's code license.

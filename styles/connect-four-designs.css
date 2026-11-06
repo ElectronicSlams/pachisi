@@ -1,0 +1,154 @@
+/* Draw only the materials here. Board owns cell pitch, gravity, seats and win detection. */
+.st-board-c4[data-c4-design]:not([data-c4-design="design-1"]) {
+  background:var(--rack); border-color:var(--edge,#30323b); border-radius:var(--rim,8px);
+  box-shadow:var(--rack-shadow,none);
+}
+.st-board-c4[data-c4-design]:not([data-c4-design="design-1"]) .st-cell {
+  background:var(--well,transparent); border-radius:var(--socket,50%);
+  box-shadow:var(--well-shadow,inset 0 0 0 1px #0003);
+}
+.st-board-c4[data-c4-design]:not([data-c4-design="design-1"]) .st-disc {
+  position:relative; width:var(--piece,86%); height:var(--piece,86%);
+  background:var(--counter); border-radius:var(--shape,50%);
+  clip-path:var(--cut,none); box-shadow:var(--relief,inset 0 0 0 1px #0004);
+}
+.st-disc-a { --counter:var(--first); }.st-disc-b { --counter:var(--second); }
+
+/* Gumball · Home v1/v2. The radial highlight sits above the centre of each piece. */
+[data-c4-design="design-2"] {
+  --rack:linear-gradient(155deg,#2949d3,#192e95); --edge:#142887; --rim:12px;
+  --well:var(--bg); --well-shadow:inset 0 2px 5px #0005; --piece:90%;
+  --first:radial-gradient(circle at 35% 30%,#ff8a7a,#e0463a 78%);
+  --second:radial-gradient(circle at 35% 30%,#ffe08a,#e8b21f 78%);
+}
+/* Bullseye · the eSlams Arena prototype used a ring and a pip to distinguish seats. */
+[data-c4-design="design-3"] {
+  --rack:#374352; --well:#19212a; --well-shadow:inset 0 2px 2px #0009;
+  --first:radial-gradient(circle,#c65043 34%,#ffd0af 35% 45%,#b8433b 46%);
+  --second:radial-gradient(circle,#744e19 19%,#edbd59 21%); --piece:88%;
+}
+/* Plotter · diagram study of PGX's open channels, side rails and bottom stop. */
+[data-c4-design="design-4"] {
+  --rack:repeating-linear-gradient(90deg,transparent 0 calc(100% / var(--cols) - 1px),#82949c 0 calc(100% / var(--cols))),#f3f5ed;
+  --rim:0; --rack-shadow:inset 3px 0 #354952,inset -3px 0 #354952,inset 0 -5px #354952;
+  --socket:0; --well-shadow:none; --piece:72%; --first:#163747; --second:#faf8e9;
+  --relief:inset 0 0 0 1.5px #32434a;
+}
+/* Redline · an independent red/black material study of the PettingZoo renderer. */
+[data-c4-design="design-5"] {
+  --rack:linear-gradient(#e7e0cc,#c4bdab); --rim:3px; --well:#6a6a60;
+  --well-shadow:inset 1px 2px 2px #0007; --first:repeating-radial-gradient(circle,#e33631 0 13%,#a11720 14% 18%);
+  --second:repeating-radial-gradient(circle,#33383a 0 13%,#111416 14% 18%);
+}
+/* Each original below changes the construction of the rack, wells or pieces. */
+[data-c4-design="design-6"] {
+  --rack:repeating-linear-gradient(3deg,#663b24 0 3px,#794b2e 4px 6px,#57341e 7px 8px);
+  --well:#382719; --rim:4px; --edge:#8d693e;
+  --first:repeating-linear-gradient(36deg,#f3e2b8 0 3px,#dbc49d 4px 5px);
+  --second:repeating-linear-gradient(-36deg,#262522 0 3px,#494033 4px 5px);
+  --relief:inset 0 0 0 2px #c9a774,0 1px 2px #000b;
+}
+[data-c4-design="design-7"] {
+  --rack:repeating-linear-gradient(0deg,#191a36 0 2px,#222448 3px 4px); --rim:0; --socket:0; --well:#090f24;
+  --shape:0; --cut:polygon(22% 0,78% 0,78% 12%,90% 12%,90% 24%,100% 24%,100% 76%,90% 76%,90% 88%,78% 88%,78% 100%,22% 100%,22% 88%,10% 88%,10% 76%,0 76%,0 24%,10% 24%,10% 12%,22% 12%);
+  --first:linear-gradient(#fff2ae 0 17%,#ffb844 18% 72%,#cf712e 73%);
+  --second:linear-gradient(#d0fffb 0 17%,#58dfdd 18% 72%,#239ab2 73%);
+}
+[data-c4-design="design-8"] {
+  --rack:radial-gradient(ellipse at 20% 0,#c9efe6,transparent 70%),linear-gradient(130deg,#83c4b9,#287a86);
+  --well:#286e7440; --socket:43% 55% 49% 40%; --shape:43% 57% 40% 54%;
+  --first:radial-gradient(ellipse at 30% 22%,#fff8,#fff0 38%),linear-gradient(140deg,#78ffd2,#007a61);
+  --second:radial-gradient(ellipse at 30% 22%,#fff8,#fff0 38%),linear-gradient(140deg,#f4ddfa,#9c65a6);
+  --relief:inset -2px -3px 4px #244c5960,inset 1px 1px 1px #fff9;
+}
+[data-c4-design="design-9"] {
+  --rack:repeating-linear-gradient(0deg,#683b2322 0 1px,transparent 1px 3px),repeating-linear-gradient(90deg,#c5ad87 0 1px,#ebd6b6 1px 3px);
+  --well:transparent; --well-shadow:inset 0 0 0 1px #73533c33; --socket:0; --shape:0; --relief:none;
+  --first:linear-gradient(45deg,transparent 40%,#a32642 41% 56%,transparent 57%),linear-gradient(-45deg,transparent 40%,#a32642 41% 56%,transparent 57%);
+  --second:repeating-conic-gradient(from 45deg,#13594c 0 25%,transparent 0 50%) center/48% 48%;
+}
+[data-c4-design="design-10"] {
+  --rack:repeating-linear-gradient(45deg,transparent 0 17px,#68997455 18px 19px),#164d3c;
+  --well:#123e33; --socket:3px; --well-shadow:inset 0 0 0 1px #bbce8850;
+  --shape:2px; --first:repeating-linear-gradient(90deg,#efd497 0 2px,#8b632a 2px 4px);
+  --second:repeating-linear-gradient(0deg,#99ccd3 0 2px,#507f89 2px 4px);
+}
+[data-c4-design="design-10"] .st-disc::after { content:""; position:absolute; inset:17%; border:1px solid #fff7; background:#292e2c; }
+[data-c4-design="design-10"] .st-disc-b::after { background:#dce8d2; }
+[data-c4-design="design-11"] {
+  --rack:repeating-linear-gradient(125deg,#533371 0 12px,#67327c 13px 16px,#502b68 17px 32px);
+  --well:#2d1c41; --well-shadow:inset 0 0 0 2px #e7a94d77;
+  --first:radial-gradient(circle at 35% 23%,#fff 0 10%,#a6c8d6 20%,#485d71 45%,#e4f4ff 58%,#4d5a67 82%);
+  --second:repeating-linear-gradient(42deg,#ffe6a3 0 17%,#e14d48 18% 36%);
+}
+[data-c4-design="design-12"] {
+  --rack:repeating-linear-gradient(90deg,#d7cbb3 0 3px,transparent 3px 12px) top left/100% 3px no-repeat,#29282b;
+  --rim:2px; --well:#171819; --socket:3px; --well-shadow:inset 0 0 0 1px #867766;
+  --first:repeating-conic-gradient(from 12deg,#adc3c8 0 27deg,#4b616b 28deg 60deg);
+  --second:linear-gradient(145deg,#ffdc84,#bc611e); --relief:inset 0 0 0 2px #2c2827;
+}
+[data-c4-design="design-12"] .st-disc-a::after { content:""; position:absolute; inset:33%; border-radius:50%; background:#182028; }
+[data-c4-design="design-13"] {
+  --rack:repeating-conic-gradient(#d9d2bf 0 25%,#eee7d6 0 50%) center/18px 18px;
+  --well:#fff5dc; --socket:12%; --well-shadow:inset 0 0 0 1px #82796066; --shape:12%;
+  --first:repeating-conic-gradient(#1b5092 0 30deg,#fff8d9 31deg 60deg);
+  --second:repeating-conic-gradient(from 45deg,#c15b38 0 25%,#f5bc87 0 50%) center/56% 56%;
+}
+[data-c4-design="design-14"] {
+  --rack:radial-gradient(#aaa08b 0.7px,transparent 1px) 0 0/5px 5px,#f1e7d7; --rim:0;
+  --socket:0; --well-shadow:inset -1px -1px #aaa295;
+  --first:radial-gradient(#772665 19%,transparent 22%) 0 0/4px 4px,#eb6390;
+  --second:repeating-linear-gradient(-45deg,#327bb0 0 2px,#81d7db 2px 4px);
+  --relief:2px 2px 0 #39373d; --piece:79%;
+}
+[data-c4-design="design-15"] {
+  --rack:repeating-linear-gradient(0deg,#46505a 0 1px,#505b65 1px 3px);
+  --well:#273039; --first:repeating-conic-gradient(#d78b56 0 15deg,#a56340 16deg 30deg);
+  --second:repeating-conic-gradient(#dee3e4 0 15deg,#9eafb7 16deg 30deg);
+  --cut:polygon(40% 0,60% 0,62% 12%,74% 17%,85% 10%,96% 25%,89% 35%,89% 43%,100% 48%,98% 63%,85% 65%,78% 75%,80% 88%,64% 96%,57% 86%,45% 87%,38% 100%,22% 93%,23% 80%,14% 71%,2% 68%,0 50%,12% 45%,14% 32%,6% 22%,20% 10%,31% 16%,40% 12%);
+}
+[data-c4-design="design-15"] .st-disc::after { content:""; position:absolute; inset:33%; border-radius:50%; background:#29323a; box-shadow:0 0 0 2px #ffffff52; }
+[data-c4-design="design-16"] {
+  --rack:radial-gradient(ellipse at center,#276f54,#133f36); --edge:#c3a16c;
+  --well:transparent; --well-shadow:inset 0 0 0 1px #dbcba36b;
+  --first:repeating-conic-gradient(#e2d8bc 0 13deg,#9f2739 14deg 45deg);
+  --second:repeating-conic-gradient(#eee8d4 0 13deg,#263955 14deg 45deg);
+}
+[data-c4-design="design-16"] .st-disc::after { content:""; position:absolute; inset:17%; background:#aa3848; border-radius:50%; border:1px dashed #efe7cd; }
+[data-c4-design="design-16"] .st-disc-b::after { background:#253753; }
+[data-c4-design="design-17"] {
+  --rack:repeating-linear-gradient(45deg,transparent 0 19px,#a99d8d55 20px 21px),#ded8c9;
+  --well-shadow:none; --shape:0; --cut:polygon(50% 0,100% 50%,50% 100%,0 50%);
+  --first:conic-gradient(from 45deg,#da593d 0 25%,#f7a36e 0 50%,#b93e39 0 75%,#ea7652 0);
+  --second:conic-gradient(from 45deg,#315288 0 25%,#6f92c7 0 50%,#364470 0 75%,#a0b7ce 0);
+}
+[data-c4-design="design-17"] .st-disc-b { --cut:polygon(0 75%,12% 30%,38% 8%,72% 9%,98% 34%,83% 80%,48% 96%); }
+[data-c4-design="design-18"] {
+  --rack:linear-gradient(145deg,#f3e0bf,#c9ae89); --well:#ad8e6526; --well-shadow:none;
+  --shape:45% 53% 47% 39%; --first:radial-gradient(circle,#a32940 0 48%,#741a32 49% 55%,#c84e53 57% 72%,#7b2032 90%);
+  --second:radial-gradient(circle,#79437a 0 48%,#502e59 49% 55%,#a16c99 57% 72%,#56345b 90%);
+}
+[data-c4-design="design-18"] .st-disc::after { content:""; position:absolute; inset:33%; border:2px solid #f7c0a199; border-radius:50% 0 50% 0; }
+[data-c4-design="design-18"] .st-disc-b::after { border-radius:0 50% 0 50%; }
+[data-c4-design="design-19"] {
+  --rack:radial-gradient(1px 1px at 8px 7px,#b0becb 65%,transparent) 0 0/29px 23px,#1e2638;
+  --well:#12192980; --well-shadow:inset 0 0 0 1px #9cacc63b;
+  --first:radial-gradient(circle at 32% 35%,#9da2a5 0 11%,transparent 13%),radial-gradient(circle at 66% 66%,#92989d 0 15%,transparent 17%),radial-gradient(circle at 33% 25%,#f0ece3,#9da6ae);
+  --second:conic-gradient(from 18deg,#da9537,#fff1b2,#d79641,#fff1b2,#da9537);
+}
+[data-c4-design="design-19"] .st-disc-b { --cut:polygon(50% 0,62% 34%,99% 35%,70% 58%,81% 95%,50% 74%,19% 95%,30% 58%,1% 35%,38% 34%); }
+[data-c4-design="design-20"] {
+  --rack:repeating-linear-gradient(90deg,#56616a 0 2px,#b6c0c4 2px 4px,transparent 4px calc(100% / var(--cols))),#303a41;
+  --socket:16%; --well:#192328; --rim:3px;
+  --first:radial-gradient(circle at 40% 30%,#ffe17d,#f09c2e 55%,#8d4c24);
+  --second:repeating-linear-gradient(-45deg,#f5e5bf 0 20%,#333e41 21% 40%);
+}
+[data-c4-design="design-20"] .st-disc-b { --shape:2px; height:45% !important; align-self:center; }
+
+/* Double outlines stay legible over both bright and dark racks. */
+.st-board-c4[data-c4-design]:not([data-c4-design="design-1"]) .st-cell[data-last] {
+  outline:2px dashed #fff; outline-offset:-2px; box-shadow:0 0 0 1px #161923;
+}
+.st-board-c4[data-c4-design]:not([data-c4-design="design-1"]) .st-cell[data-line] {
+  outline:2px solid var(--win); outline-offset:-1px; box-shadow:0 0 0 2px #303909,inset 0 0 0 3px #303909;
+}

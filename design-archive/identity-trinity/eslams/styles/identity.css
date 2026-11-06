@@ -1,0 +1,47 @@
+/* ============================================================
+   eSlams — Identity surfaces: additions & responsive
+   (merge target: pages4.css auth / pages2.css profile+settings)
+   ============================================================ */
+
+/* Settings layout (was inline) */
+.id-settings-grid { display: grid; grid-template-columns: 200px 1fr; gap: 32px; align-items: start; }
+.id-settings-nav { display: flex; flex-direction: column; gap: 2px; position: sticky; top: 80px; }
+
+/* Header account button — tap target ≥40px */
+.nv-avatar { min-width: 40px; min-height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+
+/* Split-screen auth collapses <820px: aside hidden, card full-width */
+@media (max-width: 820px) {
+  .auth-aside { display: none !important; }
+  .auth-split { display: block !important; grid-template-columns: 1fr !important; }
+  .auth-main { padding: 36px 18px !important; }
+}
+
+/* Settings + profile stack <720px */
+@media (max-width: 720px) {
+  .id-settings-grid { grid-template-columns: 1fr; gap: 16px; }
+  .id-settings-nav { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .id-settings-nav::-webkit-scrollbar { display: none; }
+  .id-settings-nav .btn { flex: none; white-space: nowrap; }
+  .pf-header { flex-direction: column !important; align-items: flex-start !important; gap: 18px; }
+  .pf-id { flex-wrap: wrap; }
+  .pf-metrics { width: 100%; justify-content: space-between; }
+}
+
+/* ---- Prototype mobile-viewport demo (390px) ---- */
+.proto-mobile { container-type: inline-size; max-width: 390px; margin: 0 auto; border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+
+/* Container-query mirrors of the media rules, so the 390px demo reflows */
+@container (max-width: 820px) {
+  .auth-aside { display: none !important; }
+  .auth-split { display: block !important; grid-template-columns: 1fr !important; }
+  .auth-main { padding: 36px 18px !important; }
+}
+@container (max-width: 720px) {
+  .id-settings-grid { grid-template-columns: 1fr; gap: 16px; }
+  .id-settings-nav { position: static; flex-direction: row; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .id-settings-nav .btn { flex: none; white-space: nowrap; }
+  .pf-header { flex-direction: column !important; align-items: flex-start !important; gap: 18px; }
+  .pf-id { flex-wrap: wrap; }
+  .pf-metrics { width: 100%; justify-content: space-between; }
+}

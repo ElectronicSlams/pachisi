@@ -1,0 +1,16 @@
+{
+  "$comment": "Allowlist for scripts/validate-demonstrations.py. Each entry downgrades one FAIL (matched on slug + frame + check id) to KNOWN. Only upstream Core engine bugs at the artwork pin belong here, never renderer bugs. An entry that stops matching makes the validator exit 1, so remove it once the traces are regenerated from a fixed Core. See docs/physics.md.",
+  "issues": [
+    {
+      "slug": "taxi",
+      "frame": 10,
+      "check": "taxi.passenger-after-dropoff",
+      "description": "After dropoff Core's public state reports the passenger back at the pickup point [0, 0] instead of the destination [4, 0].",
+      "owner": "core-engine",
+      "notRendererBug": true,
+      "corePin": "7731e2f3d712e5f4714d640df670fc0224feede1",
+      "rendererNote": "LegalDemonstration hides the waiting-passenger marker on the passenger_delivered terminal frame, so the teleport is not drawn; the data is still wrong and must be fixed in Core.",
+      "upstream": "File against ElectronicSlams/eSlams Core (taxi arena public_state after dropoff)."
+    }
+  ]
+}

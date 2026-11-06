@@ -1,0 +1,4136 @@
+[
+  {
+    "slug": "chess",
+    "name": "Chess",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "square_board",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 8,
+      "cols": 8
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "chess_piece_move",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Chess by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Chess Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "go",
+    "name": "Go",
+    "category": "board",
+    "variant": "board_9x9",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "go_board",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 9,
+      "cols": 9
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "go_stone_place",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Go by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Go Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "connect-four",
+    "name": "Connect Four",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "connect_four",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 6,
+      "cols": 7
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "connect_four_drop",
+      "moveMs": 320,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Connect four discs in a row before the opponent does.",
+      "turnRules": [
+        "Players alternate dropping one disc into a non-full column."
+      ],
+      "legalActionSummary": "Choose a column where a disc can fall.",
+      "scoringSummary": "First four-in-a-row wins; a full board without four is a draw.",
+      "winLossDrawSummary": "The result is a win, loss, or draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Center columns usually create more threats.",
+      "exampleActions": [
+        {
+          "token": "3",
+          "label": "Drop in column 4",
+          "explanation": "Drops a disc into the fourth column."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Connect Four Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "tic-tac-toe",
+    "name": "Tic-Tac-Toe",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "grid_3x3",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 3,
+      "cols": 3
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "tic_tac_toe_mark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Place three marks in a row before the opponent does.",
+      "turnRules": [
+        "Players alternate placing one mark in an empty cell."
+      ],
+      "legalActionSummary": "Choose any empty cell.",
+      "scoringSummary": "Three in a row wins; a full board without three is a draw.",
+      "winLossDrawSummary": "The result is a win, loss, or draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "The center and corners give the most future lines.",
+      "exampleActions": [
+        {
+          "token": "4",
+          "label": "Center cell",
+          "explanation": "Places your mark in the center cell."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Tic-Tac-Toe Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "othello",
+    "name": "Othello",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "square_board",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 8,
+      "cols": 8
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "othello_flip",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Othello by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Othello Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "checkers",
+    "name": "Checkers",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "square_board",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 8,
+      "cols": 8
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "square-board",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Checkers by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Checkers Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "shogi",
+    "name": "Shogi",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "custom",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 9,
+      "cols": 9
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "custom",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Shogi by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Shogi Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "xiangqi",
+    "name": "Xiangqi",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "custom",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 10,
+      "cols": 9
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "custom",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Xiangqi by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Xiangqi Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "gomoku",
+    "name": "Gomoku",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "go_board",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 15,
+      "cols": 15
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "gomoku_line",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Gomoku by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Gomoku Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "hex",
+    "name": "Hex",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "hex_board",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "hex_path",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Hex by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": false
+    },
+    "description": "Hex Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "mancala",
+    "name": "Mancala",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "custom",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "custom",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Mancala by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Mancala Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "nine-mens-morris",
+    "name": "Nine Men's Morris",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "custom",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "custom",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Nine Men's Morris by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Nine Men's Morris Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "pentago",
+    "name": "Pentago",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "custom",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "custom",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Pentago by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Pentago Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "ultimate-tic-tac-toe",
+    "name": "Ultimate Tic-Tac-Toe",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "grid_3x3",
+    "seatLayout": "two_sides",
+    "boardSize": {
+      "rows": 9,
+      "cols": 9
+    },
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "ultimate_tic_tac_toe_board",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Ultimate Tic-Tac-Toe by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Ultimate Tic-Tac-Toe Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "battleship",
+    "name": "Battleship",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "square_board",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "battleship_shot",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Sink all opponent ships before yours are sunk.",
+      "turnRules": [
+        "Players alternate firing at an unshot target cell."
+      ],
+      "legalActionSummary": "Choose a target coordinate that has not been fired on.",
+      "scoringSummary": "The first player to sink every enemy ship wins.",
+      "winLossDrawSummary": "The result names the surviving fleet or terminal reason.",
+      "hiddenInfoSummary": "Ship locations are hidden until hits reveal them.",
+      "firstMoveTip": "After a hit, probe neighboring cells.",
+      "exampleActions": [
+        {
+          "token": "fire:B4",
+          "label": "Fire at B4",
+          "explanation": "Attacks the B4 target cell."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Battleship Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "backgammon",
+    "name": "Backgammon",
+    "category": "board",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "custom",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "custom",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Backgammon by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Backgammon Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "blackjack",
+    "name": "Blackjack",
+    "category": "card",
+    "variant": "core_hit_stand_s17",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Blackjack to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Blackjack Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "leduc-holdem",
+    "name": "Leduc Hold'em",
+    "category": "card",
+    "variant": "core_compact_leduc_fixed_menu",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "table_mode_pending",
+      "battlefield": "multi_seat",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "multi_seat",
+      "controlledPlayers": [
+        "player_1",
+        "player_2",
+        "player_3",
+        "player_4"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 4,
+      "maxPlayers": 4,
+      "defaultPlayers": 4,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true,
+      "scoreType": "chips"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "table_ring",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Play Leduc Hold'em from an explicit table seat and finish with the best placement or score.",
+      "turnRules": [
+        "Seats act in table order according to the variant rules."
+      ],
+      "legalActionSummary": "Choose a legal table action for the active seat.",
+      "scoringSummary": "Final placements, points, chips, or role results are reported by the result contract.",
+      "winLossDrawSummary": "Multi-seat results name the winning seat and placement order when available.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Check your seat, role, and visible table state before choosing an action.",
+      "exampleActions": [
+        {
+          "token": "pass",
+          "label": "Pass",
+          "explanation": "Declines the current opportunity when the rules allow it."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "multi_seat",
+      "resultTypes": [
+        "winner",
+        "placement",
+        "points",
+        "chips"
+      ],
+      "scoreType": "chips",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true
+    },
+    "description": "Leduc Hold'em Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "limit-texas-holdem",
+    "name": "Limit Texas Hold'em",
+    "category": "card",
+    "variant": "core_compact_holdem_fixed_menu_limit",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "table_mode_pending",
+      "battlefield": "multi_seat",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "multi_seat",
+      "controlledPlayers": [
+        "player_1",
+        "player_2",
+        "player_3",
+        "player_4"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 4,
+      "maxPlayers": 4,
+      "defaultPlayers": 4,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true,
+      "scoreType": "chips"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "table_ring",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Play Limit Texas Hold'em from an explicit table seat and finish with the best placement or score.",
+      "turnRules": [
+        "Seats act in table order according to the variant rules."
+      ],
+      "legalActionSummary": "Choose a legal table action for the active seat.",
+      "scoringSummary": "Final placements, points, chips, or role results are reported by the result contract.",
+      "winLossDrawSummary": "Multi-seat results name the winning seat and placement order when available.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Check your seat, role, and visible table state before choosing an action.",
+      "exampleActions": [
+        {
+          "token": "pass",
+          "label": "Pass",
+          "explanation": "Declines the current opportunity when the rules allow it."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "multi_seat",
+      "resultTypes": [
+        "winner",
+        "placement",
+        "points",
+        "chips"
+      ],
+      "scoreType": "chips",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true
+    },
+    "description": "Limit Texas Hold'em Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "no-limit-texas-holdem",
+    "name": "No-Limit Texas Hold'em",
+    "category": "card",
+    "variant": "core_compact_holdem_fixed_menu_no_limit",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "table_mode_pending",
+      "battlefield": "multi_seat",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "multi_seat",
+      "controlledPlayers": [
+        "player_1",
+        "player_2",
+        "player_3",
+        "player_4"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 4,
+      "maxPlayers": 4,
+      "defaultPlayers": 4,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true,
+      "scoreType": "chips"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "table_ring",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Play No-Limit Texas Hold'em from an explicit table seat and finish with the best placement or score.",
+      "turnRules": [
+        "Seats act in table order according to the variant rules."
+      ],
+      "legalActionSummary": "Choose a legal table action for the active seat.",
+      "scoringSummary": "Final placements, points, chips, or role results are reported by the result contract.",
+      "winLossDrawSummary": "Multi-seat results name the winning seat and placement order when available.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Check your seat, role, and visible table state before choosing an action.",
+      "exampleActions": [
+        {
+          "token": "pass",
+          "label": "Pass",
+          "explanation": "Declines the current opportunity when the rules allow it."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "multi_seat",
+      "resultTypes": [
+        "winner",
+        "placement",
+        "points",
+        "chips"
+      ],
+      "scoreType": "chips",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true
+    },
+    "description": "No-Limit Texas Hold'em Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "shedding-card-game",
+    "name": "Shedding Card Game",
+    "category": "card",
+    "variant": "core_rank_suit_shedding",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Shedding Card Game by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Shedding Card Game Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "gin-rummy",
+    "name": "Gin Rummy",
+    "category": "card",
+    "variant": "core_compact_gin",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Gin Rummy by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Gin Rummy Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "mahjong",
+    "name": "Mahjong",
+    "category": "card",
+    "variant": "core_compact_draw_discard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "table_mode_pending",
+      "battlefield": "multi_seat",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "multi_seat",
+      "controlledPlayers": [
+        "player_1",
+        "player_2",
+        "player_3",
+        "player_4"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 4,
+      "maxPlayers": 4,
+      "defaultPlayers": 4,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true,
+      "scoreType": "placement"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "table_ring",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Play Mahjong from an explicit table seat and finish with the best placement or score.",
+      "turnRules": [
+        "Seats act in table order according to the variant rules."
+      ],
+      "legalActionSummary": "Choose a legal table action for the active seat.",
+      "scoringSummary": "Final placements, points, chips, or role results are reported by the result contract.",
+      "winLossDrawSummary": "Multi-seat results name the winning seat and placement order when available.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Check your seat, role, and visible table state before choosing an action.",
+      "exampleActions": [
+        {
+          "token": "pass",
+          "label": "Pass",
+          "explanation": "Declines the current opportunity when the rules allow it."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "multi_seat",
+      "resultTypes": [
+        "winner",
+        "placement",
+        "points",
+        "chips"
+      ],
+      "scoreType": "placement",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true
+    },
+    "description": "Mahjong Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "dou-dizhu",
+    "name": "Dou Dizhu",
+    "category": "card",
+    "variant": "core_landlord_shedding",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "table_mode_pending",
+      "battlefield": "multi_seat",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "multi_seat",
+      "controlledPlayers": [
+        "player_1",
+        "player_2",
+        "player_3"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 3,
+      "maxPlayers": 3,
+      "defaultPlayers": 3,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true,
+      "scoreType": "placement"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "table_ring",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Play Dou Dizhu from an explicit table seat and finish with the best placement or score.",
+      "turnRules": [
+        "Seats act in table order according to the variant rules."
+      ],
+      "legalActionSummary": "Choose a legal table action for the active seat.",
+      "scoringSummary": "Final placements, points, chips, or role results are reported by the result contract.",
+      "winLossDrawSummary": "Multi-seat results name the winning seat and placement order when available.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Check your seat, role, and visible table state before choosing an action.",
+      "exampleActions": [
+        {
+          "token": "pass",
+          "label": "Pass",
+          "explanation": "Declines the current opportunity when the rules allow it."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "multi_seat",
+      "resultTypes": [
+        "winner",
+        "placement",
+        "points",
+        "chips"
+      ],
+      "scoreType": "placement",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true
+    },
+    "description": "Dou Dizhu Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "bridge",
+    "name": "Bridge",
+    "category": "card",
+    "variant": "core_compact_bridge_play_phase",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "table_mode_pending",
+      "battlefield": "multi_seat",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "multi_seat",
+      "controlledPlayers": [
+        "player_1",
+        "player_2",
+        "player_3",
+        "player_4"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 4,
+      "maxPlayers": 4,
+      "defaultPlayers": 4,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true,
+      "scoreType": "points"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "compass",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Play Bridge from an explicit table seat and finish with the best placement or score.",
+      "turnRules": [
+        "Seats act in table order according to the variant rules."
+      ],
+      "legalActionSummary": "Choose a legal table action for the active seat.",
+      "scoringSummary": "Final placements, points, chips, or role results are reported by the result contract.",
+      "winLossDrawSummary": "Multi-seat results name the winning seat and placement order when available.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Check your seat, role, and visible table state before choosing an action.",
+      "exampleActions": [
+        {
+          "token": "pass",
+          "label": "Pass",
+          "explanation": "Declines the current opportunity when the rules allow it."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "multi_seat",
+      "resultTypes": [
+        "winner",
+        "placement",
+        "points",
+        "chips"
+      ],
+      "scoreType": "points",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": true
+    },
+    "description": "Bridge Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "hearts",
+    "name": "Hearts",
+    "category": "card",
+    "variant": "core_penalty_tricks",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Hearts by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Hearts Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "spades",
+    "name": "Spades",
+    "category": "card",
+    "variant": "core_trump_tricks",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Spades by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Spades Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "euchre",
+    "name": "Euchre",
+    "category": "card",
+    "variant": "core_call_and_play",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Euchre by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Euchre Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "cribbage",
+    "name": "Cribbage",
+    "category": "card",
+    "variant": "core_discard_showdown",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Cribbage by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Cribbage Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "crazy-eights",
+    "name": "Crazy Eights",
+    "category": "card",
+    "variant": "core_wild_eight_shedding",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Crazy Eights by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Crazy Eights Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "hanabi",
+    "name": "Hanabi",
+    "category": "card",
+    "variant": "core_compact_hanabi",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "card-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Hanabi by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Hanabi Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "prisoners-dilemma",
+    "name": "Prisoner's Dilemma",
+    "category": "gametheory",
+    "variant": "core_one_shot_matrix",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "payoff_matrix",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "payoff_matrix_reveal",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Prisoner's Dilemma by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Prisoner's Dilemma Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "bargaining",
+    "name": "Bargaining",
+    "category": "gametheory",
+    "variant": "core_bilateral_split",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "points"
+    },
+    "rendererFamily": "economic_panel",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "economic-panel",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Bargaining by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "points",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Bargaining Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "negotiation",
+    "name": "Negotiation",
+    "category": "gametheory",
+    "variant": "core_price_delivery_grid",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "points"
+    },
+    "rendererFamily": "economic_panel",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "economic-panel",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Negotiation by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "points",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Negotiation Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "first-price-sealed-bid-auction",
+    "name": "First-Price Sealed-Bid Auction",
+    "category": "gametheory",
+    "variant": "core_two_bidder_private_values",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "points"
+    },
+    "rendererFamily": "auction_panel",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "sealed_bid_reveal",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win First-Price Sealed-Bid Auction by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "points",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": false
+    },
+    "description": "First-Price Sealed-Bid Auction Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "liars-dice",
+    "name": "Liar's Dice",
+    "category": "card",
+    "variant": "core_single_round",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "advanced_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": "Advanced Arena game; rules and interaction polish are required before default placement."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "dice_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "dice-table",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Liar's Dice by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Liar's Dice Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "goofspiel",
+    "name": "Goofspiel",
+    "category": "card",
+    "variant": "core_five_card_goofspiel",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "points"
+    },
+    "rendererFamily": "card_table",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "goofspiel_reveal",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Goofspiel by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "points",
+      "winnerRequired": true,
+      "drawAllowed": false,
+      "placementsAllowed": false
+    },
+    "description": "Goofspiel Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "rock-paper-scissors",
+    "name": "Rock Paper Scissors",
+    "category": "gametheory",
+    "variant": "core_one_shot_hidden_commit",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "main_arena",
+      "battlefield": "head_to_head",
+      "benchmark": "disabled",
+      "official": "eligible",
+      "publicReason": null
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "head_to_head",
+      "controlledPlayers": [
+        "player_1",
+        "player_2"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 2,
+      "maxPlayers": 2,
+      "defaultPlayers": 2,
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false,
+      "scoreType": "win_loss_draw"
+    },
+    "rendererFamily": "payoff_matrix",
+    "seatLayout": "two_sides",
+    "boardSize": null,
+    "hiddenInfo": true,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "simultaneous_reveal",
+      "moveMs": 220,
+      "revealMs": 300,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Win Rock Paper Scissors by making legal moves that satisfy the game objective.",
+      "turnRules": [
+        "Player 1 and Player 2 alternate or commit actions according to the variant rules."
+      ],
+      "legalActionSummary": "Choose one legal action shown by the current game state.",
+      "scoringSummary": "The result contract reports winner, draw, points, and final scores.",
+      "winLossDrawSummary": "A winner is reported unless the game rules allow a draw.",
+      "hiddenInfoSummary": "Some information is hidden until actions reveal it.",
+      "firstMoveTip": "Start with a central, flexible, or information-gathering action when available.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "First legal action",
+          "explanation": "Applies a legal action token from the current state."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "head_to_head",
+      "resultTypes": [
+        "winner",
+        "draw",
+        "points"
+      ],
+      "scoreType": "win_loss_draw",
+      "winnerRequired": true,
+      "drawAllowed": true,
+      "placementsAllowed": false
+    },
+    "description": "Rock Paper Scissors Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "taxi",
+    "name": "Taxi",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Taxi to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Taxi Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "frozen-lake",
+    "name": "Frozen Lake",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Frozen Lake to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Frozen Lake Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "cliff-walking",
+    "name": "Cliff Walking",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Cliff Walking to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Cliff Walking Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "cartpole",
+    "name": "CartPole",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "survival"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in CartPole to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "survival",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "CartPole Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "mountain-car",
+    "name": "Mountain Car",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "survival"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Mountain Car to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "survival",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Mountain Car Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "lunar-lander",
+    "name": "Lunar Lander",
+    "category": "rl",
+    "variant": "lander-lite",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Lunar Lander to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Lunar Lander Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "car-racing",
+    "name": "Car Racing",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Car Racing to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Car Racing Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "bipedal-walker",
+    "name": "Bipedal Walker",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "survival"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Bipedal Walker to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "survival",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Bipedal Walker Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "paddle-ball",
+    "name": "Paddle Ball",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Paddle Ball to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Paddle Ball Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "alien-shooter",
+    "name": "Alien Shooter",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Alien Shooter to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Alien Shooter Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "boxing-style-arena",
+    "name": "Boxing Style Arena",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Boxing Style Arena to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Boxing Style Arena Arena game for public play, replay review, and evaluation planning."
+  },
+  {
+    "slug": "ice-hockey-style-arena",
+    "name": "Ice Hockey Style Arena",
+    "category": "rl",
+    "variant": "standard",
+    "maturity": "playable",
+    "surface": {
+      "schemaVersion": "eslams.game.surface.v1",
+      "arena": "disabled",
+      "battlefield": "solo_benchmark",
+      "benchmark": "enabled",
+      "official": "eligible",
+      "publicReason": "This game is a solo score benchmark, not a human-vs-model Arena match."
+    },
+    "topology": {
+      "schemaVersion": "eslams.game.topology.v1",
+      "mode": "solo_score",
+      "evaluatedPlayer": "player_1",
+      "controlledPlayers": [
+        "player_1"
+      ],
+      "environmentPlayers": [],
+      "minPlayers": 1,
+      "maxPlayers": 1,
+      "defaultPlayers": 1,
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "scoreType": "reward"
+    },
+    "rendererFamily": "control_benchmark",
+    "seatLayout": "solo_panel",
+    "boardSize": null,
+    "hiddenInfo": false,
+    "supportsReplay": true,
+    "supportsLiveFrame": true,
+    "animation": {
+      "family": "control-benchmark",
+      "moveMs": 220,
+      "revealMs": 180,
+      "resultMs": 520,
+      "reducedMotion": "static_final_state",
+      "events": [
+        "move",
+        "result"
+      ]
+    },
+    "help": {
+      "schemaVersion": "eslams.game.help.v1",
+      "objective": "Control the agent in Ice Hockey Style Arena to maximize the benchmark score.",
+      "turnRules": [
+        "One evaluated player chooses actions against the environment."
+      ],
+      "legalActionSummary": "Choose one legal control action from the current state.",
+      "scoringSummary": "The primary score is the episode reward or task completion score.",
+      "winLossDrawSummary": "There is no opponent and no winner; results are reported as scores.",
+      "hiddenInfoSummary": null,
+      "firstMoveTip": "Prefer actions that keep the episode stable and gather reward.",
+      "exampleActions": [
+        {
+          "token": "0",
+          "label": "Action 0",
+          "explanation": "Applies the first legal environment control action."
+        }
+      ],
+      "detailSections": []
+    },
+    "resultContract": {
+      "schemaVersion": "eslams.game.result.v1",
+      "mode": "solo_score",
+      "resultTypes": [
+        "score"
+      ],
+      "scoreType": "reward",
+      "winnerRequired": false,
+      "drawAllowed": false,
+      "placementsAllowed": false,
+      "evaluatedPlayer": "player_1"
+    },
+    "description": "Ice Hockey Style Arena Arena game for public play, replay review, and evaluation planning."
+  }
+]

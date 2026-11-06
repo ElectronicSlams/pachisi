@@ -1,0 +1,2829 @@
+{
+  "reviewedOn": "2026-11-01",
+  "sources": [
+    {
+      "id": "shaack--cm-chessboard",
+      "repository": "shaack/cm-chessboard",
+      "commit": "2069b9ef3c10f1e2f005dad9eb9a2c35ee60a865",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Accessible SVG boards, responsive sizing, promotion controls and piece animation.",
+      "limits": "Code only. Staunty pieces have separate CC BY-NC-SA terms and are excluded, along with all other piece art.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "922cdaf9ff1e88c552e5c6a8c72c0b441aa7ca4a",
+          "bytes": 1108
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "79b26cce9d08617bead19711f84970a7bacaf2d0",
+          "bytes": 21104
+        },
+        {
+          "path": "assets/chessboard.css",
+          "gitBlob": "2ff16ee900b3437f80ea39b23ab3fcc0104abc65",
+          "bytes": 8417
+        },
+        {
+          "path": "assets/extensions/promotion-dialog/promotion-dialog.css",
+          "gitBlob": "7c9887979e43c15c1339e19a0aa2e38f140e38e0",
+          "bytes": 967
+        },
+        {
+          "path": "src/extensions/accessibility/Accessibility.js",
+          "gitBlob": "a7fa0d775832ee0336d4b1da5612befb401b2617",
+          "bytes": 23208
+        },
+        {
+          "path": "src/extensions/accessibility/I18n.js",
+          "gitBlob": "22583ba83aff63848f2bfe67122b2f7235a87236",
+          "bytes": 1128
+        },
+        {
+          "path": "src/extensions/promotion-dialog/PromotionDialog.js",
+          "gitBlob": "5ae632e44660e6985c930a6855853a8499a80df2",
+          "bytes": 16138
+        },
+        {
+          "path": "src/view/ChessboardView.js",
+          "gitBlob": "815ebe714fb39f76754f59cb2e9e05afd9323a33",
+          "bytes": 20948
+        },
+        {
+          "path": "src/view/PositionAnimationsQueue.js",
+          "gitBlob": "e0e62bf178cf5663a61b6346882a67c77cc6a872",
+          "bytes": 11142
+        },
+        {
+          "path": "src/view/VisualMoveInput.js",
+          "gitBlob": "fcdf8d501ef13c3b4a0b63ea4f29bb1c88c8af03",
+          "bytes": 22630
+        }
+      ]
+    },
+    {
+      "id": "lichess-org--chessground",
+      "repository": "lichess-org/chessground",
+      "commit": "b4f605018e1043640c917e82a74b214cb58e4a05",
+      "license": "GPL-3.0-or-later",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Drag targets, animation plans, highlights and board-layer composition.",
+      "limits": "GPL reference; do not copy into the MIT library without a compatible licensing decision. No piece artwork.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+          "bytes": 35147
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "f4d8737924604b5c2474504655569ab1a4407188",
+          "bytes": 4657
+        },
+        {
+          "path": "assets/chessground.base.css",
+          "gitBlob": "0191ff5ffe06ab8b7d52dc03524d524abbb51b88",
+          "bytes": 3537
+        },
+        {
+          "path": "src/anim.ts",
+          "gitBlob": "85421ab838846732bef59ef0aad293494a43ec8e",
+          "bytes": 4031
+        },
+        {
+          "path": "src/drag.ts",
+          "gitBlob": "0fbe74abfe6ee502f4a7f1390cc25ca66c8a67a6",
+          "bytes": 8750
+        },
+        {
+          "path": "src/draw.ts",
+          "gitBlob": "1fe7d4f6898747df7809048ae10dd869185cd6c2",
+          "bytes": 4724
+        },
+        {
+          "path": "src/render.ts",
+          "gitBlob": "2f46bf276e2c31561ed1efba31d6fc19da3b3c0d",
+          "bytes": 10192
+        }
+      ]
+    },
+    {
+      "id": "wandererxii--shogiground",
+      "repository": "WandererXII/shogiground",
+      "commit": "661ed8ca0c2ccb84679376ac523b5742e6235aee",
+      "license": "GPL-3.0-or-later",
+      "kind": "renderer",
+      "games": [
+        "shogi"
+      ],
+      "idea": "Shogi reserve hands, promotion choices, keyboard targets and movement.",
+      "limits": "GPL reference; no lishogi piece art or brand assets.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+          "bytes": 35147
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "41d3fd9776bec9a0b460898379db0658d8a6a2f9",
+          "bytes": 2231
+        },
+        {
+          "path": "src/anim.ts",
+          "gitBlob": "3d9656305f1ba2673c0f1be3972e0c798a2a8268",
+          "bytes": 6216
+        },
+        {
+          "path": "src/hands.ts",
+          "gitBlob": "ee786608ff784648c41d7e11bc13d53397cb7ee8",
+          "bytes": 2560
+        },
+        {
+          "path": "src/keyboard.ts",
+          "gitBlob": "b269c740a442b6daf6630801c6c6a9d81eaa82c8",
+          "bytes": 10524
+        },
+        {
+          "path": "src/promotion.ts",
+          "gitBlob": "01b2105a1c5ecb6c02873237d1876d2e0adb333e",
+          "bytes": 938
+        },
+        {
+          "path": "src/render.ts",
+          "gitBlob": "f2136abfd322fdb5f329be2d3ef447a30fc2589a",
+          "bytes": 11040
+        }
+      ]
+    },
+    {
+      "id": "gbtami--chessgroundx",
+      "repository": "gbtami/chessgroundx",
+      "commit": "b898e080dfa2d9d2ef9d8f87c2ac9bd19071e053",
+      "license": "GPL-3.0-or-later",
+      "kind": "renderer",
+      "games": [
+        "chess",
+        "shogi",
+        "xiangqi"
+      ],
+      "idea": "Variant-aware dimensions, reserve pockets and piece roles.",
+      "limits": "GPL variant renderer; geometry support is not a rules engine or artwork license.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2",
+          "bytes": 35147
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "ef600996624ca4b0d8ecac03347f378f6a66fc67",
+          "bytes": 4359
+        },
+        {
+          "path": "src/anim.ts",
+          "gitBlob": "ab2bb7a37afd475e35c08facb9ae6481942cd118",
+          "bytes": 4096
+        },
+        {
+          "path": "src/pocket.ts",
+          "gitBlob": "dda00f7a0dae5a509ebd3febe1071111dcedfc6c",
+          "bytes": 4519
+        },
+        {
+          "path": "src/render.ts",
+          "gitBlob": "d67aeed10417e9e0e8b004232025ab696b900676",
+          "bytes": 10380
+        },
+        {
+          "path": "src/types.ts",
+          "gitBlob": "f50b3f08285dc98281a5f37a3534f61cac270f77",
+          "bytes": 4452
+        }
+      ]
+    },
+    {
+      "id": "sabakihq--shudan",
+      "repository": "SabakiHQ/Shudan",
+      "commit": "bf2be30c568338c77294a782742036c1b3167c72",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "go",
+        "gomoku"
+      ],
+      "idea": "Go intersections, coordinates, markers, bounded views and simple vector stones.",
+      "limits": "Go is exact; Gomoku shares the intersection geometry only. Board texture is excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "fda652ad29f8f98d8b0f985b7bb18ef76f7968b1",
+          "bytes": 1095
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "29798065f9df0b6f6194cae83f0fc055023538c9",
+          "bytes": 1058
+        },
+        {
+          "path": "css/goban.css",
+          "gitBlob": "f4ef4ddaba1a9fd58c65ca9ed67bcbab12671eec",
+          "bytes": 11246
+        },
+        {
+          "path": "css/stone_-1.svg",
+          "gitBlob": "108862e67fc48c46f4119d1ebd7054efc8d6b41c",
+          "bytes": 825
+        },
+        {
+          "path": "css/stone_1.svg",
+          "gitBlob": "7cf4e680e5912fac6142fe280b5b422b5306cbf7",
+          "bytes": 829
+        },
+        {
+          "path": "src/BoundedGoban.js",
+          "gitBlob": "9e986f93b9b28788a74ced1a94bd913d0695b7db",
+          "bytes": 1960
+        },
+        {
+          "path": "src/Coord.js",
+          "gitBlob": "a2b612a47b4d54a729c732e74b7d14598a375bad",
+          "bytes": 910
+        },
+        {
+          "path": "src/Goban.js",
+          "gitBlob": "008d5e1e57a7d529f2e38b0c8b763c969455e2da",
+          "bytes": 8849
+        },
+        {
+          "path": "src/Grid.js",
+          "gitBlob": "edbded9fbfd221d7883bedc4917520c942dc1af1",
+          "bytes": 2132
+        },
+        {
+          "path": "src/Line.js",
+          "gitBlob": "8333f44ddb1dce34a33f0ca15aae9efd4a8d371c",
+          "bytes": 1017
+        },
+        {
+          "path": "src/Marker.js",
+          "gitBlob": "706d198b8e582846ce7897df3613e90d9ae18d5f",
+          "bytes": 1602
+        },
+        {
+          "path": "src/Vertex.js",
+          "gitBlob": "3714853c0b0bc1bab46a72bd8968b4ae4fd1343e",
+          "bytes": 5438
+        },
+        {
+          "path": "src/helper.js",
+          "gitBlob": "3c47aad4f320237bbdd1a504b91fec30393930bc",
+          "bytes": 3012
+        },
+        {
+          "path": "src/main.js",
+          "gitBlob": "1c3e532c5079970bafa3690e9dd6eaa7ce479f34",
+          "bytes": 111
+        }
+      ]
+    },
+    {
+      "id": "online-go--goban",
+      "repository": "online-go/goban",
+      "commit": "d139d00134dff1bce099f2acfafe827b2a5be6e6",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "Canvas/SVG board parity and procedural plain-board themes.",
+      "limits": "Third-party goscorer, image-stone payloads, textures and networking are excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "bytes": 11358
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "ccd4aca0b8b365803a2d60364d3a9b9bc0fb9652",
+          "bytes": 2990
+        },
+        {
+          "path": "src/Goban.css",
+          "gitBlob": "96bc49995a320b42afeefa4cea18a2ca10e4d1f7",
+          "bytes": 3491
+        },
+        {
+          "path": "src/Goban/CanvasRenderer.ts",
+          "gitBlob": "8577a35db60f6e253b140139c13455cc49860b3f",
+          "bytes": 129479
+        },
+        {
+          "path": "src/Goban/SVGRenderer.ts",
+          "gitBlob": "44a3c293e1e0ca1362ff9afe5a3dcbf141b9eda2",
+          "bytes": 229039
+        },
+        {
+          "path": "src/Goban/themes/board_plain.ts",
+          "gitBlob": "56ea7e7cc5045781a47b96bc27c16e9e309697f2",
+          "bytes": 8640
+        },
+        {
+          "path": "src/Goban/themes/plain_stones.ts",
+          "gitBlob": "11137d3a19d3be1da3ec19a8197e9bafb60b3d70",
+          "bytes": 6241
+        }
+      ]
+    },
+    {
+      "id": "boris-em--goban",
+      "repository": "Boris-Em/Goban",
+      "commit": "44fcbe90a4f8e78c761e9d3992af93a49cc5c88f",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "Native view geometry and annotations independent of rules.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "files": [
+        {
+          "path": "Goban/GobanView.swift",
+          "gitBlob": "a05d7d4b10b778bed459053e10cf812c68d0a4c0",
+          "bytes": 20493
+        },
+        {
+          "path": "Goban/Markup.swift",
+          "gitBlob": "df365c01d9e7fbd7917e781f84af64017bf36e71",
+          "bytes": 1433
+        },
+        {
+          "path": "Goban/Stone.swift",
+          "gitBlob": "73f1ddbba4a530034927d22554627d469494caac",
+          "bytes": 2347
+        },
+        {
+          "path": "LICENSE",
+          "gitBlob": "853b46db127831eb9f8e8a7a8576e41c98619be4",
+          "bytes": 1067
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "66228313d32ed949af15cd95337db9a70166f5b2",
+          "bytes": 1284
+        }
+      ]
+    },
+    {
+      "id": "sotetsuk--pgx",
+      "repository": "sotetsuk/pgx",
+      "commit": "87278d2d6e677fd87248c457207b59cfa42e578d",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "backgammon",
+        "bridge",
+        "chess",
+        "connect-four",
+        "go",
+        "hex",
+        "leduc-holdem",
+        "mahjong",
+        "othello",
+        "shogi",
+        "tic-tac-toe"
+      ],
+      "idea": "Compact state-to-SVG renderers and game-specific board/seat geometry.",
+      "limits": "Bridge reference covers bidding, not play-phase dummy. Image assets are excluded because they have separate provenance.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "bytes": 11357
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "2f76742f7a282fb02fad1c0c68a9d3c8c82cdfe7",
+          "bytes": 17542
+        },
+        {
+          "path": "pgx/_src/dwg/backgammon.py",
+          "gitBlob": "efeba63827e617f15ead189477bc8b88e66bf235",
+          "bytes": 6990
+        },
+        {
+          "path": "pgx/_src/dwg/bridge_bidding.py",
+          "gitBlob": "4285607fef8f756b779cd98dcb150fcc2f0842a1",
+          "bytes": 8326
+        },
+        {
+          "path": "pgx/_src/dwg/chess.py",
+          "gitBlob": "8609556371cb3f56eeafc0f42cc7ed802069933d",
+          "bytes": 4093
+        },
+        {
+          "path": "pgx/_src/dwg/connect_four.py",
+          "gitBlob": "8503c12fec181d2f8e5d5d86e27d27e0268c2fe4",
+          "bytes": 2731
+        },
+        {
+          "path": "pgx/_src/dwg/go.py",
+          "gitBlob": "6c710794400083cce98bb521e2b595c0ca72b1ca",
+          "bytes": 2903
+        },
+        {
+          "path": "pgx/_src/dwg/hex.py",
+          "gitBlob": "6c94f4aee2976665e5117cc3fcbba97ff9c939f8",
+          "bytes": 4814
+        },
+        {
+          "path": "pgx/_src/dwg/leduc_holdem.py",
+          "gitBlob": "fe41d22ff76099539101b66096a63c59a0f9d858",
+          "bytes": 3228
+        },
+        {
+          "path": "pgx/_src/dwg/mahjong.py",
+          "gitBlob": "8d2238fdd5289a58dd1ecd50aab4e1c88c91e8cb",
+          "bytes": 14812
+        },
+        {
+          "path": "pgx/_src/dwg/mahjong_tile.py",
+          "gitBlob": "6a475e6280f104865cb9d4099dfaad043164e118",
+          "bytes": 521809
+        },
+        {
+          "path": "pgx/_src/dwg/othello.py",
+          "gitBlob": "5b1044357b38627aede5fc6cce7affcd044ea563",
+          "bytes": 2848
+        },
+        {
+          "path": "pgx/_src/dwg/shogi.py",
+          "gitBlob": "1e338f40816d9b8e28cce02969b1b523a697a495",
+          "bytes": 7262
+        },
+        {
+          "path": "pgx/_src/dwg/tictactoe.py",
+          "gitBlob": "4b40f0006194ec8bc987a053a42e7c6c3edfcbfd",
+          "bytes": 3554
+        }
+      ]
+    },
+    {
+      "id": "bb4--bb4-games",
+      "repository": "bb4/bb4-games",
+      "commit": "2afbe944caad6c45d956d2b3d382bd74db09dec7",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "checkers",
+        "gomoku",
+        "hex",
+        "mancala",
+        "tic-tac-toe",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem"
+      ],
+      "idea": "Board/piece separation, Mancala pits and poker chip/hand/seat composition.",
+      "limits": "Generic poker layouts are shared design references, not certification of Pachisi betting variants.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "763df681c9b2312986ac860180a844f900203fcc",
+          "bytes": 1060
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "d6644570616f9e50d3317af7195c6bd4d8d1130a",
+          "bytes": 4014
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/multiplayer/poker/ui/render/ChipRenderer.scala",
+          "gitBlob": "08a2b538cde0cf56628ffbbe1e93440f4fba84eb",
+          "bytes": 2071
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/multiplayer/poker/ui/render/HandRenderer.scala",
+          "gitBlob": "07c074095aa7be0bd1f648612896b3362ced80aa",
+          "bytes": 3325
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/multiplayer/poker/ui/render/PokerGameRenderer.scala",
+          "gitBlob": "09d72d0de85411490c3f9c683c57fdabcb66ea94",
+          "bytes": 2237
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/multiplayer/poker/ui/render/PokerPlayerRenderer.scala",
+          "gitBlob": "483ad86b6924eaf385f559cb8cd0f4cc37970f2c",
+          "bytes": 3844
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/checkers/ui/CheckersBoardRenderer.scala",
+          "gitBlob": "1565a2ee7cc54e6886ec1c804832335b693a123d",
+          "bytes": 1886
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/checkers/ui/CheckersPieceRenderer.scala",
+          "gitBlob": "722c052bbdec8a3ae5dcb40fa379c38b80c0f3fc",
+          "bytes": 1217
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/gomoku/ui/GoMokuBoardRenderer.scala",
+          "gitBlob": "3a817202db5312fb01251ea897353b7582b20775",
+          "bytes": 948
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/hex/ui/HexBoardRenderer.scala",
+          "gitBlob": "c98d25fd0dcd30fe1b1036e6b87610dd4dd15ff0",
+          "bytes": 5734
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/hex/ui/HexPieceRenderer.scala",
+          "gitBlob": "5c9b21033de7178445858914be096c4a6c776ad7",
+          "bytes": 2325
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/hex/ui/HexagonRenderer.scala",
+          "gitBlob": "907e801c476c0e9bbc074567dcce0ed1168f33ce",
+          "bytes": 1111
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/mancala/ui/MancalaBinRenderer.scala",
+          "gitBlob": "02c3a428faa465c27257afa27629bd73c74906f7",
+          "bytes": 2782
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/mancala/ui/MancalaBoardRenderer.scala",
+          "gitBlob": "d9b1001785f0439c8f63a164d8b233d6286c0f02",
+          "bytes": 2230
+        },
+        {
+          "path": "scala-source/com/barrybecker4/game/twoplayer/tictactoe/ui/TicTacToeBoardRenderer.scala",
+          "gitBlob": "d1acd6c2ca33954e903bc83f66aca4aa649b1bad",
+          "bytes": 860
+        }
+      ]
+    },
+    {
+      "id": "lengyanyu258--xiangqiboardjs",
+      "repository": "lengyanyu258/xiangqiboardjs",
+      "commit": "c36e1046c424e7abf1405904006043f6426b8ee8",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "xiangqi"
+      ],
+      "idea": "Xiangqi board interactions and board-specific geometry.",
+      "limits": "Piece images and site assets excluded.",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "gitBlob": "efe9c15387274d4baa31c089b6da8774bb34779e",
+          "bytes": 1122
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "7e7f715816c002b7c220f951305e5ac466073fe4",
+          "bytes": 2838
+        },
+        {
+          "path": "src/xiangqiboard.css",
+          "gitBlob": "d100d84b0b10b3afc0c8b0af9a82f5cb4f9af903",
+          "bytes": 950
+        },
+        {
+          "path": "src/xiangqiboard.js",
+          "gitBlob": "0ef8521c51b57fa611a4f2c1b9a310304d241c44",
+          "bytes": 54551
+        }
+      ]
+    },
+    {
+      "id": "calcitem--sanmill",
+      "repository": "calcitem/Sanmill",
+      "commit": "8901a06f088bf49a1602fee8686ed25ac5a33925",
+      "license": "AGPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "nine-mens-morris"
+      ],
+      "idea": "Mill board geometry, piece paint, turn highlights and animation coordination.",
+      "limits": "AGPL reference only; native engine, app branding, downloaded imagery and services excluded.",
+      "files": [
+        {
+          "path": "Copying.txt",
+          "gitBlob": "be3f7b28e564e7dd05eaf59d64adba1a4065ac0e",
+          "bytes": 34523
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "d1b46bb87caa0d0584655ae6fbbefa7d642c49ff",
+          "bytes": 11302
+        },
+        {
+          "path": "src/ui/flutter_app/lib/game_page/services/animation/animation_manager.dart",
+          "gitBlob": "3f9d4b1b06cc59f4d9601d05c991cfb3881a7c96",
+          "bytes": 20722
+        },
+        {
+          "path": "src/ui/flutter_app/lib/game_page/services/painters/board_painter.dart",
+          "gitBlob": "bd042ceafa99d47ad318edb9f345e3f0eab8d0fb",
+          "bytes": 21942
+        },
+        {
+          "path": "src/ui/flutter_app/lib/game_page/services/painters/board_utils.dart",
+          "gitBlob": "cdaeae1e1f631bc48d1a3b42d94469c221fc10d0",
+          "bytes": 7731
+        },
+        {
+          "path": "src/ui/flutter_app/lib/game_page/services/painters/piece_painter.dart",
+          "gitBlob": "420489af63457f58b8476875a590607a9d7518ab",
+          "bytes": 30134
+        },
+        {
+          "path": "src/ui/flutter_app/lib/game_page/services/painters/turn_highlight_painter.dart",
+          "gitBlob": "b22d3fb80effdbdebad288782ca78148b2f84dff",
+          "bytes": 8262
+        }
+      ]
+    },
+    {
+      "id": "girving--pentago",
+      "repository": "girving/pentago",
+      "commit": "d8ae9b10d407da2dfccc644b2f56cc59958772e1",
+      "license": "BSD-3-Clause",
+      "kind": "renderer",
+      "games": [
+        "pentago"
+      ],
+      "idea": "Quadrant rotation, board transforms and board SVG construction.",
+      "limits": "Source subset only; solver databases and Wasm are excluded. LICENSE text is BSD-3-Clause despite GitHub NOASSERTION.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "fdcabf4a6f2a7533746a55a6d2015f7f6bc66f39",
+          "bytes": 1383
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "ce4807acd8464f096480c88ec71a0886ea3b0a29",
+          "bytes": 9994
+        },
+        {
+          "path": "ios/js/board.js",
+          "gitBlob": "9f5307ce1ef8821531c6ad65a7151df9c553587b",
+          "bytes": 6543
+        },
+        {
+          "path": "web/client/cc/svgs.cc",
+          "gitBlob": "5a8cc3aa86b7a9ff1963cb5fa5ad216228fd4166",
+          "bytes": 8086
+        },
+        {
+          "path": "web/client/src/board.js",
+          "gitBlob": "0b932337ec6c6f3463aefe26b9fb3d93d54a87f2",
+          "bytes": 2461
+        }
+      ]
+    },
+    {
+      "id": "arnowaczynski--utttai",
+      "repository": "arnowaczynski/utttai",
+      "commit": "622dae66b18198f6f12aef0a0bccd5bd40de2d8e",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "ultimate-tic-tac-toe"
+      ],
+      "idea": "Nested-board status, forced target, move history and analysis dashboard.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64",
+          "bytes": 11357
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "1c1cc2053d664dd53094b97f3ef759b88e8ae2ba",
+          "bytes": 5726
+        },
+        {
+          "path": "website/src/game/Dashboard.js",
+          "gitBlob": "870e3a825d5e024333d6952ac0c885a49e5eae9c",
+          "bytes": 2227
+        },
+        {
+          "path": "website/src/game/Gameline.js",
+          "gitBlob": "a5659e2ff5e1969371bfb3f7aeb2140aac8d9b3b",
+          "bytes": 1208
+        },
+        {
+          "path": "website/src/game/Square.js",
+          "gitBlob": "7d729318462465e9d2b70cc379c48f9c706f0d7e",
+          "bytes": 3356
+        },
+        {
+          "path": "website/src/game/Subgame.js",
+          "gitBlob": "e21ba40c3966768464e5fee3a49eb51d9dc07848",
+          "bytes": 2610
+        },
+        {
+          "path": "website/src/game/Supergame.js",
+          "gitBlob": "39fc5dd3cb1c18f623ef3bd69358bc3be6fa255b",
+          "bytes": 1567
+        }
+      ]
+    },
+    {
+      "id": "bigardone--phoenix-battleship",
+      "repository": "bigardone/phoenix-battleship",
+      "commit": "1077e13eb871ab4fd52eef09c1b42cabd44f4d8f",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "battleship"
+      ],
+      "idea": "Own versus opponent board separation and fleet-placement controls.",
+      "limits": "Chat, sessions, logo components and service integration excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "dd1c13ce84b61ba96b4ea74e07b3918920158b2c",
+          "bytes": 1082
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "a4494e789c003b8da56626cc4ccf645dcab5280b",
+          "bytes": 1263
+        },
+        {
+          "path": "web/static/js/components/game/board.js",
+          "gitBlob": "dadff7805b0810852feb760cdfe4394ddece974f",
+          "bytes": 1706
+        },
+        {
+          "path": "web/static/js/components/game/my_board.js",
+          "gitBlob": "1ccd5d31fd96c083540669a5004e7fd93f7c0dc8",
+          "bytes": 2694
+        },
+        {
+          "path": "web/static/js/components/game/opponent_board.js",
+          "gitBlob": "19b93a9160fe2536b499e7c426ca05f8b0185e37",
+          "bytes": 1307
+        },
+        {
+          "path": "web/static/js/components/game/ship_selector.js",
+          "gitBlob": "a42cba9b87eb8792e3fd7510d723b0d1ccb65949",
+          "bytes": 1424
+        }
+      ]
+    },
+    {
+      "id": "quasoft--backgammonjs",
+      "repository": "quasoft/backgammonjs",
+      "commit": "f85f6ff0b0af9efcc5ef98a6d7bf7fc140090782",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "backgammon"
+      ],
+      "idea": "Point stacks, bar/off areas and board CSS.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "16c3420048cfe1dbc245f9c4d9f6f6874641c385",
+          "bytes": 1097
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "df441b521995b2ee7978800bc99e1ad7ba9f3807",
+          "bytes": 3408
+        },
+        {
+          "path": "app/browser/js/SimpleBoardUI.js",
+          "gitBlob": "d660d59e1f7d58989aadab0e8d311f8eee5e45a2",
+          "bytes": 23853
+        },
+        {
+          "path": "app/browser/style/backgammon.css",
+          "gitBlob": "9ef08e02db8a51de23a5808590259eb9acc3d5c3",
+          "bytes": 10645
+        }
+      ]
+    },
+    {
+      "id": "farama-foundation--pettingzoo",
+      "repository": "Farama-Foundation/PettingZoo",
+      "commit": "6b3f4950d23da03a0061a6225ab493a47aace3e3",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess",
+        "connect-four",
+        "go",
+        "hanabi",
+        "leduc-holdem",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem",
+        "rock-paper-scissors",
+        "tic-tac-toe"
+      ],
+      "idea": "Public observation rendering, turn cues, poker seats and simultaneous reveals.",
+      "limits": "Code only. Minecraft font, images, Atari ROMs and third-party dependencies excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "ab161e2957698a097cc09ad06054321856ef04ed",
+          "bytes": 1073
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "7c0e2aef40d6ccb532e68d6f4b59251188370ffc",
+          "bytes": 5763
+        },
+        {
+          "path": "pettingzoo/classic/chess/chess.py",
+          "gitBlob": "0230ac3f9afaf39b15f65e747d961a0a99194a88",
+          "bytes": 15066
+        },
+        {
+          "path": "pettingzoo/classic/connect_four/connect_four.py",
+          "gitBlob": "cc850316b222a040f45e2277f318498cbb57529a",
+          "bytes": 13103
+        },
+        {
+          "path": "pettingzoo/classic/go/go.py",
+          "gitBlob": "a20c9a07d45c9f059cddacd9f4874cafc2f69f82",
+          "bytes": 17431
+        },
+        {
+          "path": "pettingzoo/classic/hanabi/rendering.py",
+          "gitBlob": "7f78ef2a1792d419ae9a4d848d628b42cbb7bafc",
+          "bytes": 12492
+        },
+        {
+          "path": "pettingzoo/classic/rlcard_envs/leduc_holdem.py",
+          "gitBlob": "862cbd5a106f56bc4fd836111b2dff02d0fd6219",
+          "bytes": 14925
+        },
+        {
+          "path": "pettingzoo/classic/rlcard_envs/texas_holdem.py",
+          "gitBlob": "d0c24242c1ff7aee2207ac9316575c9605855e5b",
+          "bytes": 18075
+        },
+        {
+          "path": "pettingzoo/classic/rlcard_envs/texas_holdem_no_limit.py",
+          "gitBlob": "378da9cf0c8b4d16ae838e0423d6c14960354953",
+          "bytes": 6863
+        },
+        {
+          "path": "pettingzoo/classic/rps/rps.py",
+          "gitBlob": "0b10ea713fcf729b9a818f139d2868f9f10d38fe",
+          "bytes": 19312
+        },
+        {
+          "path": "pettingzoo/classic/tictactoe/tictactoe.py",
+          "gitBlob": "b5f3c38c4138c93ee93a8a0577eee9d81e4d9abb",
+          "bytes": 11765
+        }
+      ]
+    },
+    {
+      "id": "datamllab--rlcard",
+      "repository": "datamllab/rlcard",
+      "commit": "d7d0a957baf4cc7225a50522adb0164bf130a9d0",
+      "license": "MIT",
+      "kind": "interaction",
+      "games": [
+        "gin-rummy",
+        "blackjack",
+        "dou-dizhu",
+        "shedding-card-game"
+      ],
+      "idea": "Gin Rummy GUI layout and input zones; terminal card presentation utilities.",
+      "limits": "Only Gin Rummy has a dedicated graphical GUI in this selection; other mapped games use shared/terminal card presentation. No card images or pretrained agents.",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "gitBlob": "9120d476c142199faa5c7b0bb9e087ed3b75ffc5",
+          "bytes": 1075
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "3f53c7a8b4e50af4212e36bd2c40210af48a4ac7",
+          "bytes": 23665
+        },
+        {
+          "path": "examples/human/blackjack_human.py",
+          "gitBlob": "46f3f2b7257cd275e94cbdd9bec92a746f5247a9",
+          "bytes": 1983
+        },
+        {
+          "path": "examples/human/gin_rummy_human.py",
+          "gitBlob": "230e3640f70db88c571986fcdf2f1e00c5f8a806",
+          "bytes": 1946
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/Gin-Rummy-GUI-Design.md",
+          "gitBlob": "7ca44e02a457be1f5de506ce5ecb96f733b3e270",
+          "bytes": 14857
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/__init__.py",
+          "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "bytes": 0
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/canvas_item.py",
+          "gitBlob": "711a4e1fa47fd28fb63989b7141cbd3f88c8a0d5",
+          "bytes": 1846
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/configurations.py",
+          "gitBlob": "bc3ad3287c1adafb14fa97c8a5702ea4ed53fbd8",
+          "bytes": 2185
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/env_thread.py",
+          "gitBlob": "6b286cff2e6ec5e616d9630b6bf70031d3471f6e",
+          "bytes": 3603
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_app.py",
+          "gitBlob": "f44750558cc055a7eb63fff31d22466c0c78a7a6",
+          "bytes": 1250
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_canvas.py",
+          "gitBlob": "6a35f002ba1bdaf4d79c3096bad063c2e36ae1b4",
+          "bytes": 15888
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_canvas_debug.py",
+          "gitBlob": "cfa16a4e9fdadf5b18d1dfb9fb45e4da98213276",
+          "bytes": 2017
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_canvas_getter.py",
+          "gitBlob": "0060b41afcd86cd4674171ba07d5b96b42294698",
+          "bytes": 9991
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_canvas_post_doing_action.py",
+          "gitBlob": "befde76b358b87eaef2855cf6086659fa3e7cfa0",
+          "bytes": 15591
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_canvas_query.py",
+          "gitBlob": "59b000afb618ed190d5707bce4e7cedc69e416e0",
+          "bytes": 4462
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_canvas_updater.py",
+          "gitBlob": "97822153be2a9d86d5b23ca191806e6ba812f824",
+          "bytes": 13965
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/game_frame.py",
+          "gitBlob": "001b1a23714b5062700b369d5a6734e9613bb640",
+          "bytes": 4110
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/handling_tap.py",
+          "gitBlob": "07ec23184e89633c0728b418986221d2781f3331",
+          "bytes": 2804
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/handling_tap_discard_pile.py",
+          "gitBlob": "5fc8fc61167a705f8c104cea491d271a6063e17a",
+          "bytes": 3514
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/handling_tap_held_pile.py",
+          "gitBlob": "f6616794b84e22ce500f6708e84374bf52c836f5",
+          "bytes": 3292
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/handling_tap_player_pane.py",
+          "gitBlob": "1b35d0c3e76146cd6250340ce6f10cc1912a1fe7",
+          "bytes": 1041
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/handling_tap_stock_pile.py",
+          "gitBlob": "811d0d0e23882dccdd215bf9460dfdf8e632a362",
+          "bytes": 2654
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/handling_tap_to_arrange_held_pile.py",
+          "gitBlob": "19d7c312c5bfcffc85326d49cb29ed0838be1c04",
+          "bytes": 3374
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/info_messaging.py",
+          "gitBlob": "f7402800d6e71d8a4bc10bfbe970233f01d441b7",
+          "bytes": 4159
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/menu_bar.py",
+          "gitBlob": "bd342e2e0adf3ff790ca1b8a7819db448c190b23",
+          "bytes": 1519
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/player_type.py",
+          "gitBlob": "7757ad15d946e2e049ee73bdc29e42da4783ca59",
+          "bytes": 233
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/preferences_window.py",
+          "gitBlob": "e07bd0c222417ce764399032200a3f69303bd4a2",
+          "bytes": 7565
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/starting_new_game.py",
+          "gitBlob": "734cc9432b7619f3826cb2ee6cfac7485b5d071b",
+          "bytes": 6579
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/status_messaging.py",
+          "gitBlob": "2709f93e783fcde7babc4729c9c41f6f72e1860c",
+          "bytes": 6673
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/utils.py",
+          "gitBlob": "4c82ac6df6eff3cff87e507874d2cb9003df8526",
+          "bytes": 11181
+        },
+        {
+          "path": "rlcard/agents/human_agents/gin_rummy_human_agent/gui_gin_rummy/utils_extra.py",
+          "gitBlob": "cb738450eae1a5917043fd56a56b016e4e3b9b07",
+          "bytes": 2363
+        },
+        {
+          "path": "rlcard/utils/utils.py",
+          "gitBlob": "0bfebb031c88e5783f5cd19c02c61363be2b44dc",
+          "bytes": 7740
+        }
+      ]
+    },
+    {
+      "id": "yyjhao--html5-hearts",
+      "repository": "yyjhao/html5-hearts",
+      "commit": "501fffd98964ff1a543020be09e7efe4cc7c8f6a",
+      "license": "BSD-2-Clause",
+      "kind": "renderer",
+      "games": [
+        "hearts"
+      ],
+      "idea": "Trick area, hand arrangement, played-card collection and DOM interactions.",
+      "limits": "BSD-2-Clause text with an additional FreeBSD views disclaimer; retain the full original LICENSE. AI and card art excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "27c987cb11ee4f8640d64e5b515150e957850acc",
+          "bytes": 1600
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "c2e9670065175e21f7b61134dd2bcbc5d84383cc",
+          "bytes": 976
+        },
+        {
+          "path": "js/Card.js",
+          "gitBlob": "3ca849fd9bdd5978b2de022ca86a068a36ce1e03",
+          "bytes": 1257
+        },
+        {
+          "path": "js/Row.js",
+          "gitBlob": "e67c014512a0ec3597306da2ddbd6a821d9d98d2",
+          "bytes": 3511
+        },
+        {
+          "path": "js/Waste.js",
+          "gitBlob": "d0af8e0e494a51a2117d24e1a40613608e471c7e",
+          "bytes": 1876
+        },
+        {
+          "path": "js/board.js",
+          "gitBlob": "fd82b5656ab3305b7b54b0028491ae8c49410d86",
+          "bytes": 3453
+        },
+        {
+          "path": "js/domBinding.js",
+          "gitBlob": "0842742dab91a8ba60fe7de7b4e361304fb0b52d",
+          "bytes": 4938
+        }
+      ]
+    },
+    {
+      "id": "mreishus--spades",
+      "repository": "mreishus/spades",
+      "commit": "095d840ba0084ed3bac57354286eb422b183d108",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "spades"
+      ],
+      "idea": "Partnership seating, table rotation, card primitives and scoring.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed. Two Mailgun API key occurrences are redacted from the archived README; original pin and blob metadata are retained.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "25e7f5ace49a299fb2faff45b5b094a03fc6f893",
+          "bytes": 1072
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "6b2126f2db79d392043e8da7c414c678836e686d",
+          "bytes": 7179,
+          "redaction": {
+            "kind": "mailgun-api-key",
+            "occurrences": 2,
+            "sha256": "cc3b8a76f1c9b4ab6253402949651e736ff8a6d191e0106fb1424ab44826e891",
+            "bytes": 7127
+          }
+        },
+        {
+          "path": "frontend/src/components/basic/Card.tsx",
+          "gitBlob": "aa2a66a1cb68e7d6644742fd0c20f5ea64dcad7c",
+          "bytes": 354
+        },
+        {
+          "path": "frontend/src/features/room/GameTeam.tsx",
+          "gitBlob": "bc330a2929d6e81bfbf7b6745763c88c7c3a91c3",
+          "bytes": 1837
+        },
+        {
+          "path": "frontend/src/features/room/SmartTable.tsx",
+          "gitBlob": "ad59698589e2f3406bacb21f6e31d1bdd903c579",
+          "bytes": 2017
+        },
+        {
+          "path": "frontend/src/features/room/Table.tsx",
+          "gitBlob": "06fd07780c271b3a39dc61a037e7082d54f2ed70",
+          "bytes": 4795
+        },
+        {
+          "path": "frontend/src/features/score/ScoreTable.tsx",
+          "gitBlob": "fb00a7bbd5ab1da1990e8d661c1e84998a993043",
+          "bytes": 4829
+        }
+      ]
+    },
+    {
+      "id": "ahuth--euchre",
+      "repository": "ahuth/euchre",
+      "commit": "57bee8016b38557e531e546b6e1d562775877056",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "euchre"
+      ],
+      "idea": "Trump selection, discard and trick-play phases as separate controls.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "28c29226c8df118684a7471c94ddee4088041e2d",
+          "bytes": 1051
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "6d4075c276ce561e8a577f766744270d3b7fe96b",
+          "bytes": 153
+        },
+        {
+          "path": "src/components/Card.tsx",
+          "gitBlob": "eb0018936ac4a3ae43c08b409383cc5f9851ed64",
+          "bytes": 571
+        },
+        {
+          "path": "src/components/Discarding.tsx",
+          "gitBlob": "9e2424053beef24bfb49077cf0e2e567b8e206c2",
+          "bytes": 654
+        },
+        {
+          "path": "src/components/Hand.tsx",
+          "gitBlob": "c0b2ae421b9ab5da35ab9225d0855c9a4904fc61",
+          "bytes": 1028
+        },
+        {
+          "path": "src/components/Ordering.tsx",
+          "gitBlob": "9efccb9000534753c5dee8b9f56b16bc6e3958b8",
+          "bytes": 809
+        },
+        {
+          "path": "src/components/Picking.tsx",
+          "gitBlob": "637b32c744aca68d6db79ef00e4f15ee707c4843",
+          "bytes": 1633
+        },
+        {
+          "path": "src/components/Playing.tsx",
+          "gitBlob": "f1168f776380a39a829937f811faead81bf78616",
+          "bytes": 675
+        },
+        {
+          "path": "src/index.css",
+          "gitBlob": "b5c61c956711f981a41e95f7fcf0038436cfbb22",
+          "bytes": 59
+        }
+      ]
+    },
+    {
+      "id": "lpaulger--cribbage-the-game",
+      "repository": "lpaulger/cribbage-the-game",
+      "commit": "26b1657b7a3735dfa7f773a9a5d9651d82533e99",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "cribbage"
+      ],
+      "idea": "Pegboard/scoreboard, count/play phases and visible-hand composition.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "18e1796ec6d19f1bc800ea3b07589c06450980f3",
+          "bytes": 11310
+        },
+        {
+          "path": "app/scripts/gameStates/CountState.js",
+          "gitBlob": "eff5007628b69d60651ce186b3111a2f1feb0cc8",
+          "bytes": 4852
+        },
+        {
+          "path": "app/scripts/gameStates/PlayState.js",
+          "gitBlob": "eda7746a9dfb65afe551cb1c26623151534cfb66",
+          "bytes": 5585
+        },
+        {
+          "path": "app/scripts/modules/BoardModule.js",
+          "gitBlob": "ea0e403abb9ca6a1921fff3e53666125cd9c0cbd",
+          "bytes": 1304
+        },
+        {
+          "path": "app/scripts/modules/CardModule.js",
+          "gitBlob": "5ccf5146b5078ea1f0f22dcac05987ab2d24ae33",
+          "bytes": 517
+        },
+        {
+          "path": "app/scripts/templates/game.play.html",
+          "gitBlob": "9625b16f82f23da5957fadb96c0b1fb7984db9a5",
+          "bytes": 186
+        },
+        {
+          "path": "app/scripts/templates/game.scoreboard.html",
+          "gitBlob": "1126d551eb54cc0f30e3fbd47f9826c6794762d8",
+          "bytes": 742
+        },
+        {
+          "path": "app/scripts/templates/game.visibleHand.html",
+          "gitBlob": "31a2f80e3313a74ccf8507a41cfea24cfd131712",
+          "bytes": 153
+        },
+        {
+          "path": "readme.md",
+          "gitBlob": "7f136dd1726f0fa6e8506eef1844a235301080a1",
+          "bytes": 2910
+        }
+      ]
+    },
+    {
+      "id": "cezarbulancea--crazyeights",
+      "repository": "cezarbulancea/CrazyEights",
+      "commit": "5952844c828980c457d69c981802df944a453c4a",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "crazy-eights",
+        "shedding-card-game"
+      ],
+      "idea": "Desktop hand areas, card selection and draw/discard interaction.",
+      "limits": "Card PNGs excluded; rank/suit shedding is related, not the exact Core ruleset.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "9ea204a0dd119a70a2a232ad9dd7a52a7ae6a293",
+          "bytes": 1071
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "ebb0a5ea97a58339d3e80d90a7cce93877c97592",
+          "bytes": 2229
+        },
+        {
+          "path": "main/src/game/controller/ComputerPane.java",
+          "gitBlob": "4833245bcf8a4b07447f7a5a2093d1e1a21b4fc2",
+          "bytes": 4330
+        },
+        {
+          "path": "main/src/game/controller/GamePane.java",
+          "gitBlob": "98ca66a05d5a7531529a4476955ddb562eee3b6b",
+          "bytes": 2698
+        },
+        {
+          "path": "main/src/game/controller/PlayerPane.java",
+          "gitBlob": "830397296ddb0f1313b7c1374b7824fa6588980e",
+          "bytes": 7793
+        },
+        {
+          "path": "main/src/game/view/CrazyEightsView.java",
+          "gitBlob": "be069cbeff673a5f3ae36babf5f9e9472293e109",
+          "bytes": 5145
+        }
+      ]
+    },
+    {
+      "id": "bstnfrmry--hanabi",
+      "repository": "bstnfrmry/hanabi",
+      "commit": "9a9ce26ab14680cc48f7a105c32faec0cf002804",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "hanabi"
+      ],
+      "idea": "Cooperative hand information, fireworks, discard zones and clue-oriented layout.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "files": [
+        {
+          "path": "README.md",
+          "gitBlob": "d538b69bda05626f0470179a76c1c98161fc42aa",
+          "bytes": 6947
+        },
+        {
+          "path": "licence",
+          "gitBlob": "273c698632986a9755aae92f3c3560578c044555",
+          "bytes": 1072
+        },
+        {
+          "path": "src/components/card.tsx",
+          "gitBlob": "c14a3f695fc28c1ffaaaa3c5edd8394c5120abbc",
+          "bytes": 8100
+        },
+        {
+          "path": "src/components/discardArea.tsx",
+          "gitBlob": "8a953b6686988279b21271c93f7ebf645d2b6a87",
+          "bytes": 1641
+        },
+        {
+          "path": "src/components/gameBoard.tsx",
+          "gitBlob": "4f3dc965659b5a5db470683e3bc8f518ff6acf1d",
+          "bytes": 3332
+        },
+        {
+          "path": "src/components/playedCards.tsx",
+          "gitBlob": "aa59ae004fd4e562bb9ee22a79288fa591eceb73",
+          "bytes": 1519
+        },
+        {
+          "path": "src/components/playersBoard.tsx",
+          "gitBlob": "4bb3a61a496f4c8a68000042cbb4044f178a5aae",
+          "bytes": 3109
+        },
+        {
+          "path": "src/styles/animations.css",
+          "gitBlob": "333d1394cb665f53fa2f5ec59e36f5d23790d498",
+          "bytes": 243
+        },
+        {
+          "path": "src/styles/variables.css",
+          "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "id": "hanabi-live--hanabi-live",
+      "repository": "Hanabi-Live/hanabi-live",
+      "commit": "1844d6db553f346f1b64f8a1cd68868f76ec0430",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "hanabi"
+      ],
+      "idea": "Advanced card layout, clues and collaborative replay-oriented controls.",
+      "limits": "GPL source references; no artwork, audio, fonts or production game logs.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7",
+          "bytes": 35149
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "babac21372cce0b453f0e2b1accfc6cec1987c9e",
+          "bytes": 2475
+        },
+        {
+          "path": "packages/client/src/game/ui/CardLayout.ts",
+          "gitBlob": "6a932b671dca326ed4c371ba3ca7a1f95dba159a",
+          "bytes": 7046
+        },
+        {
+          "path": "packages/client/src/game/ui/ClueEntry.ts",
+          "gitBlob": "6474ca66d81bc96bdcca2c95bf3da48af0eb7c51",
+          "bytes": 3998
+        },
+        {
+          "path": "packages/client/src/game/ui/ClueLog.ts",
+          "gitBlob": "6db31b73d3d298aece174bd2d7fa9f1ac0db280c",
+          "bytes": 1735
+        },
+        {
+          "path": "packages/client/src/game/ui/Deck.ts",
+          "gitBlob": "b5bd48726a8bb692e124a12a148b28aec28baba6",
+          "bytes": 11988
+        },
+        {
+          "path": "packages/client/src/game/ui/HanabiCard.ts",
+          "gitBlob": "9b79f983e9dee5c7d8aff928a50db28da13b11d1",
+          "bytes": 41833
+        }
+      ]
+    },
+    {
+      "id": "kryha--boloney",
+      "repository": "Kryha/boloney",
+      "commit": "17e9e6236413bbb5ef982f92a5737f1e82686893",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "liars-dice"
+      ],
+      "idea": "Dice face/roll presentation, bid quantities and opponent dice summaries.",
+      "limits": "Related Liar\u2019s Dice variant. Wallet, backend, branding, icons and remote model assets excluded; retain NOTICE.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "bytes": 11358
+        },
+        {
+          "path": "NOTICE",
+          "gitBlob": "0f4a19671f61280b14e24186dc482defd3e9889a",
+          "bytes": 21
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "6e2e25461147b4a6e07904d47c434aeb494c3c3d",
+          "bytes": 4287
+        },
+        {
+          "path": "frontend/src/components/dice-animation/dice.ts",
+          "gitBlob": "d25253dc4080940eebf1a2d8ea2d325d2c91caee",
+          "bytes": 28650
+        },
+        {
+          "path": "frontend/src/components/dice-animation/roll-dice.ts",
+          "gitBlob": "7b416b13d095dfadcf58cc16f3190be3a33bb5c1",
+          "bytes": 8467
+        },
+        {
+          "path": "frontend/src/components/dice-animation/rolling-dice.tsx",
+          "gitBlob": "14c0038946f803b6c489a154c74ccab71e82d443",
+          "bytes": 993
+        },
+        {
+          "path": "frontend/src/components/dice-overview/dice-overview.tsx",
+          "gitBlob": "a321e823fc8c1d839143278ad0e6e3f6da7a8fd6",
+          "bytes": 1815
+        },
+        {
+          "path": "frontend/src/components/place-bid/amount-slider.tsx",
+          "gitBlob": "c2e0801033d0941c7a702f6294149b2c1f45123f",
+          "bytes": 4005
+        },
+        {
+          "path": "frontend/src/components/place-bid/dice-faces.tsx",
+          "gitBlob": "57722ae3a5b9a7f49bb02e509d4f396bf7f3f9f9",
+          "bytes": 1722
+        }
+      ]
+    },
+    {
+      "id": "ncase--trust",
+      "repository": "ncase/trust",
+      "commit": "6ec45d73befdb922bd40654dd1c1c903a953562f",
+      "license": "CC0-1.0",
+      "kind": "interaction",
+      "games": [
+        "prisoners-dilemma"
+      ],
+      "idea": "Payoff matrix explanation, repeated-round teaching and interactive parameter controls.",
+      "limits": "Only original simulation/control source is copied. CC BY-NC audio, third-party libraries, characters and music excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "3bbbc1ee92562e6a2eebfc6a366f4309d06c7d54",
+          "bytes": 6554
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "c645ab11865b56b408e53d23446d201279bda8b5",
+          "bytes": 5626
+        },
+        {
+          "path": "js/core/PayoffsUI.js",
+          "gitBlob": "09810fe48cc63eb333675a85d084a0945d08af83",
+          "bytes": 2129
+        },
+        {
+          "path": "js/core/Slider.js",
+          "gitBlob": "0d01983c3835d613d7ca05262af29bfd8ced0713",
+          "bytes": 3494
+        },
+        {
+          "path": "js/sims/Iterated.js",
+          "gitBlob": "68c347dee42b2d43717588c0fc0327332a2789c6",
+          "bytes": 15454
+        },
+        {
+          "path": "js/sims/PD.js",
+          "gitBlob": "26ce05875c26a96b565a9697a840cfe29bcdecea",
+          "bytes": 5863
+        },
+        {
+          "path": "js/sims/SandboxUI.js",
+          "gitBlob": "a225b931131f7dcd02b2191d9b6ef2c35d8e70f1",
+          "bytes": 11531
+        }
+      ]
+    },
+    {
+      "id": "stanmart--unstructured-bargaining-experiment",
+      "repository": "stanmart/unstructured-bargaining-experiment",
+      "commit": "b79d3dedff04d70555aedf022735118eb4c76ad6",
+      "license": "MIT",
+      "kind": "interaction",
+      "games": [
+        "bargaining",
+        "negotiation"
+      ],
+      "idea": "Offer, acceptance, coalition/status and results interfaces.",
+      "limits": "Different experimental bargaining rules; not the exact Core price/delivery grid. Participant data, settings and backend excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "f7257cbd80dff76a241416797c961ddf8b3e8a54",
+          "bytes": 1073
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "efdb20fc5fbdc7ba42742f43a147c319c9519aba",
+          "bytes": 3509
+        },
+        {
+          "path": "_static/accept.js",
+          "gitBlob": "2e0c83c948ff3500f622b0ab959af71f5906490c",
+          "bytes": 2256
+        },
+        {
+          "path": "_static/live_bargaining.css",
+          "gitBlob": "a2a0f591e904101eeabf9595ac9d31b0e5041f29",
+          "bytes": 4384
+        },
+        {
+          "path": "_static/live_bargaining.js",
+          "gitBlob": "bc993aec93d8b777ce38a73f1435a290a8b3261e",
+          "bytes": 11613
+        },
+        {
+          "path": "live_bargaining/Bargain.html",
+          "gitBlob": "1eaee01f8e0a2d99a9bcfbaf839907d9115fd05e",
+          "bytes": 7994
+        },
+        {
+          "path": "live_bargaining/BargainingResults.html",
+          "gitBlob": "4cf5b939f18da626ad0c60effabccc695ba6f05d",
+          "bytes": 2391
+        }
+      ]
+    },
+    {
+      "id": "google-deepmind--open_spiel",
+      "repository": "google-deepmind/open_spiel",
+      "commit": "8eb13ab561c4fac6829a5fa03635d3e1658bbb60",
+      "license": "Apache-2.0",
+      "kind": "rules",
+      "games": [
+        "bargaining",
+        "negotiation",
+        "first-price-sealed-bid-auction",
+        "goofspiel"
+      ],
+      "idea": "Information phases, outcome semantics and game-tree visualization.",
+      "limits": "Primarily rules/information reference, not ready-made game screens. Exact dedicated licensed visual sources remain gaps for Goofspiel and first-price sealed bidding.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+          "bytes": 11358
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "cdd5ee49e8756873e6b94d6fcc53ab1377b1b9ba",
+          "bytes": 5022
+        },
+        {
+          "path": "open_spiel/games/bargaining/bargaining.cc",
+          "gitBlob": "793276e67bad78d45e08d9e78fd2310d4871feb6",
+          "bytes": 19665
+        },
+        {
+          "path": "open_spiel/games/first_sealed_auction/first_sealed_auction.cc",
+          "gitBlob": "432212448d2b552ad8c9c1d0e17667ad84656ba5",
+          "bytes": 7344
+        },
+        {
+          "path": "open_spiel/games/goofspiel/goofspiel.cc",
+          "gitBlob": "49a78a50f53c8ffe6862cc9c97a90279af5826f3",
+          "bytes": 31435
+        },
+        {
+          "path": "open_spiel/games/negotiation/negotiation.cc",
+          "gitBlob": "73b02cb02f2508d0cdf7acdff4e10c3a5ccd303d",
+          "bytes": 20964
+        },
+        {
+          "path": "open_spiel/python/visualizations/treeviz.py",
+          "gitBlob": "1e41813a6471a8c8ee078f29dd0bee13f3842dd6",
+          "bytes": 8316
+        }
+      ]
+    },
+    {
+      "id": "farama-foundation--gymnasium",
+      "repository": "Farama-Foundation/Gymnasium",
+      "commit": "c08564bb8edd741ff20430d3b500b2e76966772d",
+      "license": "MIT",
+      "kind": "physics",
+      "games": [
+        "cartpole",
+        "mountain-car",
+        "lunar-lander",
+        "car-racing",
+        "bipedal-walker",
+        "taxi",
+        "frozen-lake",
+        "cliff-walking",
+        "blackjack"
+      ],
+      "idea": "Reference state units, integration, control variants and rendering coordinate transforms.",
+      "limits": "Blackjack is rules-only here. Box2D scenes differ from Core lite models. Sprites, fonts, binaries and external dependencies excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "ac10bf443756cdc02724943ac09021092ce9e737",
+          "bytes": 1104
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "bd408058e8bf3ea72c102be72d3e8ff40ee65c9a",
+          "bytes": 6540
+        },
+        {
+          "path": "gymnasium/envs/box2d/bipedal_walker.py",
+          "gitBlob": "ab831ede8425545423f35cf3743c304448579610",
+          "bytes": 32600
+        },
+        {
+          "path": "gymnasium/envs/box2d/car_racing.py",
+          "gitBlob": "f3c5db13f5399f0f409e90307f61175ed0674d90",
+          "bytes": 30613
+        },
+        {
+          "path": "gymnasium/envs/box2d/lunar_lander.py",
+          "gitBlob": "da5580fdf6883e3e21393cf4db97491c1b11209a",
+          "bytes": 34939
+        },
+        {
+          "path": "gymnasium/envs/classic_control/cartpole.py",
+          "gitBlob": "4fab48a4930e0897b3b2f19c5ef4c4253d7330df",
+          "bytes": 23209
+        },
+        {
+          "path": "gymnasium/envs/classic_control/continuous_mountain_car.py",
+          "gitBlob": "96dbb0d31a17d144468562f4bc68fce902e2a69f",
+          "bytes": 11418
+        },
+        {
+          "path": "gymnasium/envs/classic_control/mountain_car.py",
+          "gitBlob": "5f9199360ab20fda093956f91c28d0af069d555f",
+          "bytes": 10430
+        },
+        {
+          "path": "gymnasium/envs/toy_text/blackjack.py",
+          "gitBlob": "5ebcc009eb0c2e316f7bfa19881c1be37eafbcb9",
+          "bytes": 12162
+        },
+        {
+          "path": "gymnasium/envs/toy_text/cliffwalking.py",
+          "gitBlob": "54a766653796748465f4f029cf2c0b9aea0ff483",
+          "bytes": 13237
+        },
+        {
+          "path": "gymnasium/envs/toy_text/frozen_lake.py",
+          "gitBlob": "94b2083200fa1d488b55a5d05b9a9765cccb3b89",
+          "bytes": 18289
+        },
+        {
+          "path": "gymnasium/envs/toy_text/taxi.py",
+          "gitBlob": "db8c2f327e410833aa1f789ea09a9d30fead71fb",
+          "bytes": 25366
+        }
+      ]
+    },
+    {
+      "id": "maryrosecook--retro-games",
+      "repository": "maryrosecook/retro-games",
+      "commit": "2c9a82216cd4a97bd4bb2b9c40f95dbb0a6d2222",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "lunar-lander",
+        "alien-shooter"
+      ],
+      "idea": "Small canvas arcade render loops and readable collision/motion feedback.",
+      "limits": "Original source subset; no sound assets.",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "gitBlob": "a795a5c964d0af66dc013ae467662c25715db664",
+          "bytes": 1103
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "0eea78e19cc6db0fe5afbb9219cf7939038c3af6",
+          "bytes": 463
+        },
+        {
+          "path": "lunar-lander/lunar-lander.js",
+          "gitBlob": "2dbf9f080110c1177b2d20d1cc8ae9c3a312e3f8",
+          "bytes": 8565
+        },
+        {
+          "path": "space-invaders/space-invaders.js",
+          "gitBlob": "b0f2d33fa60463530598ac23851a32b3ec89174a",
+          "bytes": 5841
+        }
+      ]
+    },
+    {
+      "id": "leerob--space-invaders",
+      "repository": "leerob/space-invaders",
+      "commit": "ccb37ac159e8528b41b96c4e6f65c30ed9e421fb",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "alien-shooter"
+      ],
+      "idea": "Arcade enemy formation, projectiles and player/collision presentation.",
+      "limits": "Sprites, sound effects and font assets excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "56d2ab2dcb513742176569e63459ac39baf6e20f",
+          "bytes": 1084
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "bfc5c0cb48c3c40d4c88a1fbf62315fa10908da6",
+          "bytes": 2664
+        },
+        {
+          "path": "spaceinvaders.py",
+          "gitBlob": "96d43ec7fa9b615222c1ad9251e39387b034724b",
+          "bytes": 24713
+        }
+      ]
+    },
+    {
+      "id": "jatinmandav--gaming-in-python",
+      "repository": "jatinmandav/Gaming-in-Python",
+      "commit": "f51b9e1e0f8a2d5ac03285de7b37a66340216657",
+      "license": "MIT",
+      "kind": "physics",
+      "games": [
+        "paddle-ball"
+      ],
+      "idea": "Pong paddle/ball collision and presentation reference.",
+      "limits": "Two-sided Pong differs from the bundled bottom-paddle rally; no unrelated branded games are included.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "ca33d55c22a4e4718ed82b3df31621d3a1627cb5",
+          "bytes": 1069
+        },
+        {
+          "path": "Pong/Pong.py",
+          "gitBlob": "5070978ad1801fb5274ad08b19242700054de8a8",
+          "bytes": 9369
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "5b51ea282bfeae5109dafcd8cca1334c00203cf1",
+          "bytes": 2540
+        }
+      ]
+    },
+    {
+      "id": "mknsri--hockeyslam",
+      "repository": "Mknsri/HockeySlam",
+      "commit": "0776bc00b2a454c9ab67bcf4c14627301d10811d",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "ice-hockey-style-arena"
+      ],
+      "idea": "Hockey camera and animation-system reference.",
+      "limits": "Related real-time hockey, not Core\u2019s discrete rink. Models, textures, fonts and bundled third-party C++ headers excluded.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "b4cdb8e0f06bf64bd38e82918d6faedb455b7723",
+          "bytes": 1074
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "249c2185dbe94517e629f077118d063773ba8e44",
+          "bytes": 1544
+        },
+        {
+          "path": "game/anim_system.cpp",
+          "gitBlob": "304919e5f04c1f17dd2626b0d69432d5e716eac2",
+          "bytes": 14119
+        },
+        {
+          "path": "game/game_camera.cpp",
+          "gitBlob": "204986df4a5c3a898b1ab4b490ab363d5d3f650f",
+          "bytes": 5719
+        }
+      ]
+    },
+    {
+      "id": "erfansn--boxingwithml",
+      "repository": "erfansn/BoxingWithML",
+      "commit": "254ac35a44649c0ea9f341d69db284a42170e43b",
+      "license": "Apache-2.0",
+      "kind": "interaction",
+      "games": [
+        "boxing-style-arena"
+      ],
+      "idea": "Pose-feedback overlay and boxing interaction presentation.",
+      "limits": "Camera/pose game differs from the discrete Core arena. No models, camera data or video imported.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "b98e42f04e720a9f0b7e84cee4e661a54ef15108",
+          "bytes": 11337
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "e109b110e628be401fb209de38d7ed87b555474e",
+          "bytes": 1274
+        },
+        {
+          "path": "main.py",
+          "gitBlob": "8c2cccaeb935889f1ba6c49515c1256e9983159a",
+          "bytes": 3891
+        }
+      ]
+    },
+    {
+      "id": "fluffystuff--riichi-mahjong-tiles",
+      "repository": "FluffyStuff/riichi-mahjong-tiles",
+      "commit": "26e127ba2117f45cdce5ea0225748cc0cfad3169",
+      "license": "CC0-1.0",
+      "kind": "assets",
+      "games": [
+        "mahjong"
+      ],
+      "idea": "Two complete vector tile styles, including backs, honors and red fives.",
+      "limits": "Upstream LICENSE.md explicitly dedicates all assets to the public domain via CC0. No flower/season fork mixed into this set.",
+      "files": [
+        {
+          "path": "Black/Back.svg",
+          "gitBlob": "2a79d5be44c283c92cb3d9736f09fd31ced5990d",
+          "bytes": 11906
+        },
+        {
+          "path": "Black/Blank.svg",
+          "gitBlob": "7ad92a98c7e5946c116ed5b01e73ebba0b70053d",
+          "bytes": 8550
+        },
+        {
+          "path": "Black/Chun.svg",
+          "gitBlob": "1781cdac6b92a7a74daeb5f67c6f469383100ead",
+          "bytes": 9507
+        },
+        {
+          "path": "Black/Front.svg",
+          "gitBlob": "7ffd7094f6dbf1754ea9b3f36825d58f5ceeb558",
+          "bytes": 11917
+        },
+        {
+          "path": "Black/Haku.svg",
+          "gitBlob": "12a4010b79f38d51b734ff8b791918cf8231e76c",
+          "bytes": 7132
+        },
+        {
+          "path": "Black/Hatsu.svg",
+          "gitBlob": "737a504f13e3286951180b32f5f386d366028868",
+          "bytes": 16056
+        },
+        {
+          "path": "Black/Man1.svg",
+          "gitBlob": "0f8d0ca82f8458d6bcd70ccf1ebc62b6fdbb6731",
+          "bytes": 13735
+        },
+        {
+          "path": "Black/Man2.svg",
+          "gitBlob": "add5e4a2291012bfef1e403b47040edd2969b895",
+          "bytes": 14255
+        },
+        {
+          "path": "Black/Man3.svg",
+          "gitBlob": "9c4710059bdb9e84e16b0ed2fbb4c827746ab69c",
+          "bytes": 14839
+        },
+        {
+          "path": "Black/Man4.svg",
+          "gitBlob": "57caadef0ee923e288cf3537f32ae34ac5a0c23f",
+          "bytes": 15263
+        },
+        {
+          "path": "Black/Man5-Dora.svg",
+          "gitBlob": "f4ca292fa82ba33a2a9bfcce25a634ebfc2dcfa8",
+          "bytes": 17289
+        },
+        {
+          "path": "Black/Man5.svg",
+          "gitBlob": "24737b6f8dfb9f619958c67e3c3f924c2f13ac5f",
+          "bytes": 16952
+        },
+        {
+          "path": "Black/Man6.svg",
+          "gitBlob": "5936727c01ad8a40084ab9448709258f55077438",
+          "bytes": 15511
+        },
+        {
+          "path": "Black/Man7.svg",
+          "gitBlob": "8e4d757e3870dc423e502e8963741d1fc34bd9a4",
+          "bytes": 14373
+        },
+        {
+          "path": "Black/Man8.svg",
+          "gitBlob": "b3e60f229c0216b39dda2c48ae742c622df492f1",
+          "bytes": 14296
+        },
+        {
+          "path": "Black/Man9.svg",
+          "gitBlob": "ac99edf7d0ddf58efc96db4434e0c8e11a46673b",
+          "bytes": 14984
+        },
+        {
+          "path": "Black/Nan.svg",
+          "gitBlob": "7f911c872ababc7e3ee6cae6d32e18e2f92b086f",
+          "bytes": 12668
+        },
+        {
+          "path": "Black/Pei.svg",
+          "gitBlob": "7de880a3eb38a9d428c51884a44d1e82b8c89e35",
+          "bytes": 10220
+        },
+        {
+          "path": "Black/Pin1.svg",
+          "gitBlob": "8cdd0e53dc1b97de9e1f75f4bd50770940f8271c",
+          "bytes": 20988
+        },
+        {
+          "path": "Black/Pin2.svg",
+          "gitBlob": "87058f07280bc309bbf32182ba3eca88725a6784",
+          "bytes": 14497
+        },
+        {
+          "path": "Black/Pin3.svg",
+          "gitBlob": "8f1c949d3021cb02e1c34e29a67872b129e50cdc",
+          "bytes": 15025
+        },
+        {
+          "path": "Black/Pin4.svg",
+          "gitBlob": "3a022b37be6be27a86df6f24e8ee2456853042a3",
+          "bytes": 17647
+        },
+        {
+          "path": "Black/Pin5-Dora.svg",
+          "gitBlob": "d380375607ecb6f7b81af37a51362f9de38a493d",
+          "bytes": 20802
+        },
+        {
+          "path": "Black/Pin5.svg",
+          "gitBlob": "938d06c7728afd933437a578642b9441ebe9e2df",
+          "bytes": 20277
+        },
+        {
+          "path": "Black/Pin6.svg",
+          "gitBlob": "6700aa0e0cae0b743463859defcab595ac2fcc67",
+          "bytes": 21826
+        },
+        {
+          "path": "Black/Pin7.svg",
+          "gitBlob": "a3a1a2aa85e63059d4626ee2ec129327afe519c7",
+          "bytes": 24281
+        },
+        {
+          "path": "Black/Pin8.svg",
+          "gitBlob": "40f707f019a9101242b7f6c954eb7b5114f3ce14",
+          "bytes": 26873
+        },
+        {
+          "path": "Black/Pin9.svg",
+          "gitBlob": "c25e7cabc2d9dfacc61c1105be1bad1a5f6bff2b",
+          "bytes": 29316
+        },
+        {
+          "path": "Black/Shaa.svg",
+          "gitBlob": "eae5e496fd02f8f4cf8a5957f74687627a761a82",
+          "bytes": 10813
+        },
+        {
+          "path": "Black/Sou1.svg",
+          "gitBlob": "00d7745db52cb6c7b63f7fb53e746a131e5101c0",
+          "bytes": 60116
+        },
+        {
+          "path": "Black/Sou2.svg",
+          "gitBlob": "af681235ebf1efcb358dad40b7ace0cab0c37477",
+          "bytes": 15742
+        },
+        {
+          "path": "Black/Sou3.svg",
+          "gitBlob": "8e334cf63858b9c7d959687f70e15f5aecc4259f",
+          "bytes": 20346
+        },
+        {
+          "path": "Black/Sou4.svg",
+          "gitBlob": "68fb7b86067a3e3cc4ea397665b7b6d5cd38e05d",
+          "bytes": 25392
+        },
+        {
+          "path": "Black/Sou5-Dora.svg",
+          "gitBlob": "b61697db1df53c132031975d617a9728fe8fcf37",
+          "bytes": 29122
+        },
+        {
+          "path": "Black/Sou5.svg",
+          "gitBlob": "bed66cd4c25fcc410eee6e52d122234d9aa33bee",
+          "bytes": 28792
+        },
+        {
+          "path": "Black/Sou6.svg",
+          "gitBlob": "e41a724f60e66ffb70448638be912318a50f2305",
+          "bytes": 33293
+        },
+        {
+          "path": "Black/Sou7.svg",
+          "gitBlob": "a38f794efd26e8d77d247652ca9b7432b82948cd",
+          "bytes": 30558
+        },
+        {
+          "path": "Black/Sou8.svg",
+          "gitBlob": "36ab5c4cacadb41fb214dc20466f8ae0ffc5ee46",
+          "bytes": 34706
+        },
+        {
+          "path": "Black/Sou9.svg",
+          "gitBlob": "eb4eff1f9312518e39e8d5a436118f31ea89be54",
+          "bytes": 37572
+        },
+        {
+          "path": "Black/Ton.svg",
+          "gitBlob": "fd2fb97d35f4c9e925b36e0f241e4ff7873fdc0f",
+          "bytes": 11289
+        },
+        {
+          "path": "LICENSE.md",
+          "gitBlob": "93ede9986519cd0a7e2c755a5d77056bec67eb1d",
+          "bytes": 114
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "c5c5ba6ed8d6047d15d2667e697b4a0efe4a0c96",
+          "bytes": 564
+        },
+        {
+          "path": "Regular/Back.svg",
+          "gitBlob": "4620342bd01540b7e575b7fed9186c844e9f7946",
+          "bytes": 10165
+        },
+        {
+          "path": "Regular/Blank.svg",
+          "gitBlob": "503a47ba1ff64bb0fcc490354c9f9612e077ec0e",
+          "bytes": 8499
+        },
+        {
+          "path": "Regular/Chun.svg",
+          "gitBlob": "831b9c0a089553b3a0b88ce3f1e7e0abd3825227",
+          "bytes": 9497
+        },
+        {
+          "path": "Regular/Front.svg",
+          "gitBlob": "034879030ad4bb22078da8c47619bd762d3fa0ea",
+          "bytes": 11906
+        },
+        {
+          "path": "Regular/Haku.svg",
+          "gitBlob": "12d1d75a188818b7c298574fb612d974f8d9c865",
+          "bytes": 7122
+        },
+        {
+          "path": "Regular/Hatsu.svg",
+          "gitBlob": "4d7f37d6d95b1b1dc61889c466bf97501862ae94",
+          "bytes": 16047
+        },
+        {
+          "path": "Regular/Man1.svg",
+          "gitBlob": "1673e3630dcc664943883ebe5b0735bee5abede9",
+          "bytes": 13877
+        },
+        {
+          "path": "Regular/Man2.svg",
+          "gitBlob": "bb9e3cda2039db1f4f56d5227ec9f4f41e0fcb8e",
+          "bytes": 14414
+        },
+        {
+          "path": "Regular/Man3.svg",
+          "gitBlob": "544ae471994b9c4ff216ec477b1a7fed2d50abbd",
+          "bytes": 15014
+        },
+        {
+          "path": "Regular/Man4.svg",
+          "gitBlob": "1facb4736da8863a4314fd49b0b2d6f7d40f7fdf",
+          "bytes": 15436
+        },
+        {
+          "path": "Regular/Man5-Dora.svg",
+          "gitBlob": "af337270cdd6733bf8dba58e646e76fbe86449ab",
+          "bytes": 17291
+        },
+        {
+          "path": "Regular/Man5.svg",
+          "gitBlob": "ac99fee9ba6a92b607d3b69181101cf68975025a",
+          "bytes": 16943
+        },
+        {
+          "path": "Regular/Man6.svg",
+          "gitBlob": "4b611e312bcb0446c161335d758bb2c25baac028",
+          "bytes": 15694
+        },
+        {
+          "path": "Regular/Man7.svg",
+          "gitBlob": "714afea73e9151a79d5229c6de376df82382528c",
+          "bytes": 14365
+        },
+        {
+          "path": "Regular/Man8.svg",
+          "gitBlob": "6dcdf8946bf248838f5505420033bcd907935057",
+          "bytes": 14459
+        },
+        {
+          "path": "Regular/Man9.svg",
+          "gitBlob": "9ad115d6d2f68cd3b1b466d1b0739e7763324802",
+          "bytes": 15159
+        },
+        {
+          "path": "Regular/Nan.svg",
+          "gitBlob": "c8e247a979f020d6602d2cdd742f4986885e3249",
+          "bytes": 12658
+        },
+        {
+          "path": "Regular/Pei.svg",
+          "gitBlob": "65176e16f80c027c3c6296742808e9d5ece4477b",
+          "bytes": 10212
+        },
+        {
+          "path": "Regular/Pin1.svg",
+          "gitBlob": "2dfebb470ad50688f5824405d0beeef8b15151c4",
+          "bytes": 20624
+        },
+        {
+          "path": "Regular/Pin2.svg",
+          "gitBlob": "8edba73642e68a63b68e2ac0960ae362a2d2174d",
+          "bytes": 14939
+        },
+        {
+          "path": "Regular/Pin3.svg",
+          "gitBlob": "dc48dfbcb6048aa62356106a4e46726d76fe6a87",
+          "bytes": 15486
+        },
+        {
+          "path": "Regular/Pin4.svg",
+          "gitBlob": "8f5551f1a46074694d3a5f88afec6ddaf15345eb",
+          "bytes": 18108
+        },
+        {
+          "path": "Regular/Pin5-Dora.svg",
+          "gitBlob": "8a7b30fa39bc13e06b2c6c64242c220d9d0e3457",
+          "bytes": 21179
+        },
+        {
+          "path": "Regular/Pin5.svg",
+          "gitBlob": "3255fd6c696104c044425caf764e1f50adce2750",
+          "bytes": 20828
+        },
+        {
+          "path": "Regular/Pin6.svg",
+          "gitBlob": "f0df00d6b7c9fe77744b238a512f02b12d1016c9",
+          "bytes": 22365
+        },
+        {
+          "path": "Regular/Pin7.svg",
+          "gitBlob": "92f8a393aa946393ee1127a6da107378533f742f",
+          "bytes": 27573
+        },
+        {
+          "path": "Regular/Pin8.svg",
+          "gitBlob": "f435bf298f072ee4356bb3f721037cff3b60a99a",
+          "bytes": 27566
+        },
+        {
+          "path": "Regular/Pin9.svg",
+          "gitBlob": "91ec6bf79934928f908aff86eeb05f9b2ca94c17",
+          "bytes": 31026
+        },
+        {
+          "path": "Regular/Shaa.svg",
+          "gitBlob": "393b3eeb92b5195176a57f170e28d2ffa42c7bb5",
+          "bytes": 10805
+        },
+        {
+          "path": "Regular/Sou1.svg",
+          "gitBlob": "9986c1a032f930f1a2d0150cb96bbe492a6c3545",
+          "bytes": 60121
+        },
+        {
+          "path": "Regular/Sou2.svg",
+          "gitBlob": "d8e9d2042b907f9a4cf24968c187b702f8f39976",
+          "bytes": 16093
+        },
+        {
+          "path": "Regular/Sou3.svg",
+          "gitBlob": "a620c3a6c661033488bbbad73a92b7ca05fdc403",
+          "bytes": 20338
+        },
+        {
+          "path": "Regular/Sou4.svg",
+          "gitBlob": "64488aea3f2744c3f0ff4795d40c1fe497e80d7c",
+          "bytes": 25945
+        },
+        {
+          "path": "Regular/Sou5-Dora.svg",
+          "gitBlob": "3c98457c320c8fa0d8b73ae2621e296e9cfba2df",
+          "bytes": 29124
+        },
+        {
+          "path": "Regular/Sou5.svg",
+          "gitBlob": "ae87331f9c9940876e94778f4e3c584e1d777567",
+          "bytes": 28759
+        },
+        {
+          "path": "Regular/Sou6.svg",
+          "gitBlob": "f6d32e73fa193f6c0b5a70354700396d734645ff",
+          "bytes": 33117
+        },
+        {
+          "path": "Regular/Sou7.svg",
+          "gitBlob": "4e6ce61b761d31812c66c72eb3c9c644068ca8e1",
+          "bytes": 30548
+        },
+        {
+          "path": "Regular/Sou8.svg",
+          "gitBlob": "cc76f3655424499a3f85010c6364d82f3f45e07b",
+          "bytes": 34696
+        },
+        {
+          "path": "Regular/Sou9.svg",
+          "gitBlob": "6632ebe1aa74c56b256f943212a71bd0300c587a",
+          "bytes": 37279
+        },
+        {
+          "path": "Regular/Ton.svg",
+          "gitBlob": "13a0cf4610d0d63b0a0a53a9e0e85011f003d6d9",
+          "bytes": 11281
+        }
+      ]
+    },
+    {
+      "id": "hayeah--playing-cards-assets",
+      "repository": "hayeah/playing-cards-assets",
+      "commit": "1e4497c05c3da9956c9f517bd386e9a7090ff7fa",
+      "license": "MIT",
+      "kind": "assets",
+      "games": [
+        "blackjack",
+        "leduc-holdem",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem",
+        "shedding-card-game",
+        "gin-rummy",
+        "dou-dizhu",
+        "bridge",
+        "hearts",
+        "spades",
+        "euchre",
+        "cribbage",
+        "crazy-eights",
+        "goofspiel"
+      ],
+      "idea": "Shared SVG card faces and alternative court designs.",
+      "limits": "Repository MIT license retained. README attributes underlying vector-playing-cards artwork to a public-domain source; retain that provenance. These assets do not establish game-rule coverage.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "4d2ff446b4f5abdeb2478a2807de9c1cc4f49a55",
+          "bytes": 1095
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "2c4c61a7d5e18544a0721b4676f5e4a0e0dc07ed",
+          "bytes": 423
+        },
+        {
+          "path": "svg-cards/10_of_clubs.svg",
+          "gitBlob": "2e7788c1cd685986248acdfa16faed60ce78fc8c",
+          "bytes": 15307
+        },
+        {
+          "path": "svg-cards/10_of_diamonds.svg",
+          "gitBlob": "3d0b1c0d2b27eac435840cb68c3dc8c586cebda1",
+          "bytes": 17492
+        },
+        {
+          "path": "svg-cards/10_of_hearts.svg",
+          "gitBlob": "c57575e288ced148f05fe1aad6ed635f97106789",
+          "bytes": 15988
+        },
+        {
+          "path": "svg-cards/10_of_spades.svg",
+          "gitBlob": "a14767c64e93ae73f5438fc993829e532cc51e64",
+          "bytes": 11475
+        },
+        {
+          "path": "svg-cards/2_of_clubs.svg",
+          "gitBlob": "0334dece55b762f1f7bea91cb569b10690b92de1",
+          "bytes": 8621
+        },
+        {
+          "path": "svg-cards/2_of_diamonds.svg",
+          "gitBlob": "49562342dd2b67700811d2800649b2b871a62db9",
+          "bytes": 11852
+        },
+        {
+          "path": "svg-cards/2_of_hearts.svg",
+          "gitBlob": "f6c95407dc30d94c267f9d05a738396d4cfc22f5",
+          "bytes": 10900
+        },
+        {
+          "path": "svg-cards/2_of_spades.svg",
+          "gitBlob": "759abf6bcc0a23e7e2519f4cafd2e1a4080eb613",
+          "bytes": 5884
+        },
+        {
+          "path": "svg-cards/3_of_clubs.svg",
+          "gitBlob": "0fb95b388be4f573d64a3c2a8081c9918268a294",
+          "bytes": 9264
+        },
+        {
+          "path": "svg-cards/3_of_diamonds.svg",
+          "gitBlob": "a562f1f3c12d4b7add62b480ddf82768d1d21c6a",
+          "bytes": 12122
+        },
+        {
+          "path": "svg-cards/3_of_hearts.svg",
+          "gitBlob": "aecd1ff5ce19a3d0ef90c71ea03f40843139d1a3",
+          "bytes": 11381
+        },
+        {
+          "path": "svg-cards/3_of_spades.svg",
+          "gitBlob": "8963195352e82aaa3f34da110be4ac2adcbc3429",
+          "bytes": 6471
+        },
+        {
+          "path": "svg-cards/4_of_clubs.svg",
+          "gitBlob": "70f89044cc8cd43b642032a5cb511f05a36e9e46",
+          "bytes": 9912
+        },
+        {
+          "path": "svg-cards/4_of_diamonds.svg",
+          "gitBlob": "86777378127a8650e8179089c36401753451a7cf",
+          "bytes": 12702
+        },
+        {
+          "path": "svg-cards/4_of_hearts.svg",
+          "gitBlob": "9b7f0a74a34b5ab27796a23202e626d1dc2f5541",
+          "bytes": 12231
+        },
+        {
+          "path": "svg-cards/4_of_spades.svg",
+          "gitBlob": "01e27e493f2ea392d8037ddb1a938245cf630cc2",
+          "bytes": 7063
+        },
+        {
+          "path": "svg-cards/5_of_clubs.svg",
+          "gitBlob": "864d2f2844239584a45baa46e88520637cf88dab",
+          "bytes": 10557
+        },
+        {
+          "path": "svg-cards/5_of_diamonds.svg",
+          "gitBlob": "a8cb2b50d5e1212bec4b1a78fd24976b89cc7f5a",
+          "bytes": 13294
+        },
+        {
+          "path": "svg-cards/5_of_hearts.svg",
+          "gitBlob": "af7415abc90bbead9b9cb54af6070ee0a884e62f",
+          "bytes": 12345
+        },
+        {
+          "path": "svg-cards/5_of_spades.svg",
+          "gitBlob": "d9492ba4f3b95cef13cfdd6c4534a74deff42657",
+          "bytes": 7653
+        },
+        {
+          "path": "svg-cards/6_of_clubs.svg",
+          "gitBlob": "306754eabfce862a08ddcefd8d4a2b7ce9f8ab4b",
+          "bytes": 11196
+        },
+        {
+          "path": "svg-cards/6_of_diamonds.svg",
+          "gitBlob": "6f12a53c6ecf6b8d1770bc08d4ed74787b4157fb",
+          "bytes": 13880
+        },
+        {
+          "path": "svg-cards/6_of_hearts.svg",
+          "gitBlob": "9c319ad1d143e7ac5d657e7b7d4f4985dc532f6b",
+          "bytes": 12828
+        },
+        {
+          "path": "svg-cards/6_of_spades.svg",
+          "gitBlob": "83e8feb0d5d373c47879c421f93a5fc0b4ed51d4",
+          "bytes": 8246
+        },
+        {
+          "path": "svg-cards/7_of_clubs.svg",
+          "gitBlob": "11329b171ae152641121cb1af015794703181ddb",
+          "bytes": 11839
+        },
+        {
+          "path": "svg-cards/7_of_diamonds.svg",
+          "gitBlob": "d8483a72918ac52fc4194442031f264b3421d17d",
+          "bytes": 14471
+        },
+        {
+          "path": "svg-cards/7_of_hearts.svg",
+          "gitBlob": "8d5fd98a203a39775be01c24e3a7af2ee40465ca",
+          "bytes": 13313
+        },
+        {
+          "path": "svg-cards/7_of_spades.svg",
+          "gitBlob": "3146b440a825ae9046393993a58b3b980f58d19d",
+          "bytes": 8837
+        },
+        {
+          "path": "svg-cards/8_of_clubs.svg",
+          "gitBlob": "28ae6fb6f063dc7119ccd9d0ad21bf12ecded494",
+          "bytes": 12486
+        },
+        {
+          "path": "svg-cards/8_of_diamonds.svg",
+          "gitBlob": "d6d1b0ebbca7521d018e31e06c63ab06c14a4f8d",
+          "bytes": 15058
+        },
+        {
+          "path": "svg-cards/8_of_hearts.svg",
+          "gitBlob": "ac8d5ba2bf2b6da88101e40ee17ca16f0c603201",
+          "bytes": 13800
+        },
+        {
+          "path": "svg-cards/8_of_spades.svg",
+          "gitBlob": "0e5bd890bdb3f35f46e602507fdbadeb2f069b35",
+          "bytes": 9434
+        },
+        {
+          "path": "svg-cards/9_of_clubs.svg",
+          "gitBlob": "85cde356aa2e487cbb8cfd7798201c15f56e8c47",
+          "bytes": 13775
+        },
+        {
+          "path": "svg-cards/9_of_diamonds.svg",
+          "gitBlob": "05292f2e9fbfac64fb570f0e274190cec3074ec9",
+          "bytes": 15692
+        },
+        {
+          "path": "svg-cards/9_of_hearts.svg",
+          "gitBlob": "0f6a21159ad371c8fa29edec3c7545022be33d5c",
+          "bytes": 14307
+        },
+        {
+          "path": "svg-cards/9_of_spades.svg",
+          "gitBlob": "2359db59af3744e3a43cb8933993bf071096bdbd",
+          "bytes": 10022
+        },
+        {
+          "path": "svg-cards/ace_of_clubs.svg",
+          "gitBlob": "be74fe02d0ae244228af057f675182d6a590337a",
+          "bytes": 11382
+        },
+        {
+          "path": "svg-cards/ace_of_diamonds.svg",
+          "gitBlob": "e5636a4ad77449895991310b0737e99d2b450164",
+          "bytes": 11897
+        },
+        {
+          "path": "svg-cards/ace_of_hearts.svg",
+          "gitBlob": "24702e279568cee0cf8df1c665e61a8432847bcb",
+          "bytes": 12149
+        },
+        {
+          "path": "svg-cards/ace_of_spades.svg",
+          "gitBlob": "db32c065bab991df5a478343c3252cb5aae1b0f1",
+          "bytes": 24279
+        },
+        {
+          "path": "svg-cards/black_joker.svg",
+          "gitBlob": "f4ebef43b5f22ffae968528aa88fc6ae77ded2d7",
+          "bytes": 10858
+        },
+        {
+          "path": "svg-cards/jack_of_clubs.svg",
+          "gitBlob": "a35030590b2e24568d2d881df0290b1d43d07e81",
+          "bytes": 460477
+        },
+        {
+          "path": "svg-cards/jack_of_diamonds.svg",
+          "gitBlob": "d53154136019ca9d101f746495c7e52c806e265c",
+          "bytes": 404218
+        },
+        {
+          "path": "svg-cards/jack_of_hearts.svg",
+          "gitBlob": "dc95ce1d413cd6789ade8b4447b277be22358b44",
+          "bytes": 630767
+        },
+        {
+          "path": "svg-cards/jack_of_spades.svg",
+          "gitBlob": "281113fbfd522ecfda460fa4f0b9bd9120be4f26",
+          "bytes": 702466
+        },
+        {
+          "path": "svg-cards/king_of_clubs.svg",
+          "gitBlob": "fe6e67699b89cb63d342bf45f8711393a3c27c30",
+          "bytes": 1135499
+        },
+        {
+          "path": "svg-cards/king_of_diamonds.svg",
+          "gitBlob": "f983c6a35cb49409fb62a872bace57c3960367ac",
+          "bytes": 665644
+        },
+        {
+          "path": "svg-cards/king_of_hearts.svg",
+          "gitBlob": "7250745d445ff60d3905a04dedd0c4635d198943",
+          "bytes": 775176
+        },
+        {
+          "path": "svg-cards/king_of_spades.svg",
+          "gitBlob": "ac4338d96d405ed9998fce65f9adfa5c180f0e5f",
+          "bytes": 410382
+        },
+        {
+          "path": "svg-cards/queen_of_clubs.svg",
+          "gitBlob": "6a636f7445de46158fa7605a78fbce3c433dd07b",
+          "bytes": 1116945
+        },
+        {
+          "path": "svg-cards/queen_of_diamonds.svg",
+          "gitBlob": "76b62db08f7a289cb88597c379dc7419753afca8",
+          "bytes": 373498
+        },
+        {
+          "path": "svg-cards/queen_of_hearts.svg",
+          "gitBlob": "90ede7848be59faf93a15527881e740252c63774",
+          "bytes": 622378
+        },
+        {
+          "path": "svg-cards/queen_of_spades.svg",
+          "gitBlob": "8dc5540bdc93a37d094e9fe5a6777992ff8f35af",
+          "bytes": 435695
+        },
+        {
+          "path": "svg-cards/red_joker.svg",
+          "gitBlob": "f9492277c56670f1badcc469ec7efe1c6fef82a6",
+          "bytes": 11216
+        },
+        {
+          "path": "svg-cards/simple/jack_of_clubs.svg",
+          "gitBlob": "c209fa5b09f10773cc4adff9282855ad4c38cca1",
+          "bytes": 11384
+        },
+        {
+          "path": "svg-cards/simple/jack_of_diamonds.svg",
+          "gitBlob": "d339a4e3032309ad0d991835360c2615bbc125d4",
+          "bytes": 11905
+        },
+        {
+          "path": "svg-cards/simple/jack_of_hearts.svg",
+          "gitBlob": "d556d2c7ef067bf356876359ca3deb120cf880fd",
+          "bytes": 12161
+        },
+        {
+          "path": "svg-cards/simple/jack_of_spades.svg",
+          "gitBlob": "cec94ac43ee0379ec3567ad7be5043f9cb137ac0",
+          "bytes": 13054
+        },
+        {
+          "path": "svg-cards/simple/king_of_clubs.svg",
+          "gitBlob": "613eec7b65c2cfd5b23daa114935e983d99154d3",
+          "bytes": 11384
+        },
+        {
+          "path": "svg-cards/simple/king_of_diamonds.svg",
+          "gitBlob": "49662867a9ae5ce3539e6bf2a992c190fd0749b2",
+          "bytes": 11901
+        },
+        {
+          "path": "svg-cards/simple/king_of_hearts.svg",
+          "gitBlob": "476e6d5650395254e4a393c789f5f21ef5a18da8",
+          "bytes": 12154
+        },
+        {
+          "path": "svg-cards/simple/king_of_spades.svg",
+          "gitBlob": "4a4e90dea94742349712299059cf21f60d21a40c",
+          "bytes": 13048
+        },
+        {
+          "path": "svg-cards/simple/queen_of_clubs.svg",
+          "gitBlob": "512383d1dd438caca25da4a4b37b5eab3a4f39ac",
+          "bytes": 11384
+        },
+        {
+          "path": "svg-cards/simple/queen_of_diamonds.svg",
+          "gitBlob": "9f63d1be9a66cebabd7fb3669b3ced443c0b61cc",
+          "bytes": 11905
+        },
+        {
+          "path": "svg-cards/simple/queen_of_hearts.svg",
+          "gitBlob": "1c8dd1b109926c45f697da3557f99c05d2d7c557",
+          "bytes": 12161
+        },
+        {
+          "path": "svg-cards/simple/queen_of_spades.svg",
+          "gitBlob": "5d2fbe92f69723b79786d7dd80d977ee6ba7efef",
+          "bytes": 13052
+        }
+      ]
+    },
+    {
+      "id": "playhex--playhex",
+      "repository": "playhex/playhex",
+      "commit": "5750af48f8c3c9250f31c45d89a4b38d512bddc2",
+      "license": "AGPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "hex"
+      ],
+      "idea": "Pixi Hex geometry, camera fit, edge goals, coordinates and last-move marks.",
+      "limits": "AGPL source reference. Sound packs have separate noncommercial licenses and are excluded; no texture or image assets.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "2b2b39324234024091f63a8dc7296018aac68c6b",
+          "bytes": 34477
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "9d010707417ceb7262d33e73114f8908d586ad7c",
+          "bytes": 9608
+        },
+        {
+          "path": "src/packages/pixi-board/GameView.ts",
+          "gitBlob": "948d5ab1b3ad4b85f5e7927d6eccdad4b9c5a531",
+          "bytes": 31343
+        },
+        {
+          "path": "src/packages/pixi-board/Hex.ts",
+          "gitBlob": "db32e1d9867e3a9cfaf74c258b1f1e133f17eda8",
+          "bytes": 1745
+        },
+        {
+          "path": "src/packages/pixi-board/LICENSE",
+          "gitBlob": "2b2b39324234024091f63a8dc7296018aac68c6b",
+          "bytes": 34477
+        },
+        {
+          "path": "src/packages/pixi-board/boardFit.ts",
+          "gitBlob": "5ce31eecb6c974e6c5c0d4ceddeceaeb4f214070",
+          "bytes": 1592
+        },
+        {
+          "path": "src/packages/pixi-board/entities/LastMoveMark.ts",
+          "gitBlob": "32fd52ccbfae5b76e29a543c3e43a077e033f523",
+          "bytes": 703
+        },
+        {
+          "path": "src/packages/pixi-board/entities/Stone.ts",
+          "gitBlob": "edf4ddf859c8dd0099c3d5b5c769c1e962d17f8e",
+          "bytes": 2370
+        },
+        {
+          "path": "src/packages/pixi-board/theming/renderers/hexBoard.ts",
+          "gitBlob": "79553f2ae9e8fcf57deaf401f7641125a22560bd",
+          "bytes": 9472
+        },
+        {
+          "path": "src/packages/pixi-board/theming/renderers/hexStone.ts",
+          "gitBlob": "c055f9ed0139f8a81844ae498ec70e734a56e809",
+          "bytes": 1007
+        },
+        {
+          "path": "src/packages/pixi-board/theming/renderers/textCoords.ts",
+          "gitBlob": "1301c525cd3c24c9a7413f3816659e1edc81ffe1",
+          "bytes": 996
+        }
+      ]
+    },
+    {
+      "id": "boardgameio--boardgame.io",
+      "repository": "boardgameio/boardgame.io",
+      "commit": "47adef2b46e375999931209ba7b41e9654c506e1",
+      "license": "MIT",
+      "kind": "interaction",
+      "games": [
+        "battleship",
+        "blackjack",
+        "leduc-holdem",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem",
+        "gin-rummy",
+        "mahjong",
+        "dou-dizhu",
+        "bridge",
+        "hanabi",
+        "liars-dice",
+        "goofspiel",
+        "first-price-sealed-bid-auction",
+        "prisoners-dilemma",
+        "rock-paper-scissors"
+      ],
+      "idea": "Separate player views and redacted move history for hidden-information interfaces.",
+      "limits": "Shared interaction examples only, not implementations or rule certifications of the mapped games. No upstream networking or dependencies are run.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlob": "73286ca8024e1227fc045294fdc1022e449fcb25",
+          "bytes": 1082
+        },
+        {
+          "path": "README.md",
+          "gitBlob": "c58742c439b1cffae1dcc5887a86a47a12041a30",
+          "bytes": 4019
+        },
+        {
+          "path": "examples/react-web/src/redacted-move/board.css",
+          "gitBlob": "a15c774e72af6686aaedf8bd1719cbeb09eb7a44",
+          "bytes": 309
+        },
+        {
+          "path": "examples/react-web/src/redacted-move/board.js",
+          "gitBlob": "0f89866315533e7bcdf7404c409af5b8081c96d3",
+          "bytes": 930
+        },
+        {
+          "path": "examples/react-web/src/redacted-move/multiview.js",
+          "gitBlob": "87ee851212b0ec5ba1ae2e3e3ad9e564644410f7",
+          "bytes": 1386
+        },
+        {
+          "path": "examples/react-web/src/secret-state/board.css",
+          "gitBlob": "a15c774e72af6686aaedf8bd1719cbeb09eb7a44",
+          "bytes": 309
+        },
+        {
+          "path": "examples/react-web/src/secret-state/board.js",
+          "gitBlob": "8ab1896e6f68dd79bb8e4ccad784a11d70f76f6f",
+          "bytes": 632
+        },
+        {
+          "path": "examples/react-web/src/secret-state/multiview.js",
+          "gitBlob": "ffaa847f9adfbcb37eb5add7120c792a0fb1a263",
+          "bytes": 1170
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@eslams/theme-tokens",
+  "version": "0.5.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./css": "./src/css.ts",
+    "./themes.css": "./themes.css",
+    "./visual-snapshot.json": "./visual-snapshot.json"
+  },
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "lint": "pnpm --dir ../.. exec eslint \"packages/theme-tokens/{src,tests}/**/*.ts\"",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}

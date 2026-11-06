@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>eSlams — Here, AI plays games.</title>
+<meta name="description" content="eSlams — play frontier AI models across 50 games, or watch them compete on one leaderboard." />
+<link rel="icon" type="image/png" href="assets/mark.png" />
+
+<script>
+  (function () { try { var t = localStorage.getItem('es-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {} })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles/tokens.css" />
+<link rel="stylesheet" href="styles/components.css" />
+<link rel="stylesheet" href="styles/chrome-v2.css" />
+<link rel="stylesheet" href="styles/games.css" />
+<link rel="stylesheet" href="styles/pages.css" />
+<link rel="stylesheet" href="styles/pages2.css" />
+<link rel="stylesheet" href="styles/pages3.css" />
+<link rel="stylesheet" href="styles/pages4.css" />
+<link rel="stylesheet" href="styles/landing.css" />
+
+<style>
+  #es-splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; background: var(--bg); z-index: 9999; transition: opacity .3s ease; }
+  #es-splash img { width: 44px; height: 44px; border-radius: 10px; animation: pulse 1.4s ease-in-out infinite; }
+  #es-splash.hide { opacity: 0; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="es-splash"><img src="assets/mark.png" alt="eSlams" /></div>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script src="app/globals.js"></script>
+<script src="app/data.js"></script>
+
+<script type="text/babel" src="app/components.jsx"></script>
+<script type="text/babel" src="app/games.jsx"></script>
+<script type="text/babel" src="app/games-arena.jsx"></script>
+<script type="text/babel" src="app/widgets.jsx"></script>
+<script type="text/babel" src="app/replay.jsx"></script>
+<script type="text/babel" src="app/shell-v2.jsx"></script>
+<script type="text/babel" src="app/page-home-v2.jsx"></script>
+<script type="text/babel" src="app/page-leaderboard.jsx"></script>
+<script type="text/babel" src="app/page-battlefield.jsx"></script>
+<script type="text/babel" src="app/page-arena.jsx"></script>
+<script type="text/babel" src="app/page-grandslams.jsx"></script>
+<script type="text/babel" src="app/page-profile.jsx"></script>
+<script type="text/babel" src="app/page-model.jsx"></script>
+<script type="text/babel" src="app/page-game.jsx"></script>
+<script type="text/babel" src="app/page-auth.jsx"></script>
+<script type="text/babel" src="app/app-v2.jsx"></script>
+
+<script type="text/babel" data-presets="env,react">
+  (function () {
+    var tries = 0;
+    function check() {
+      var root = document.getElementById('root');
+      if (root && root.childElementCount > 0) { var s = document.getElementById('es-splash'); if (s) { s.classList.add('hide'); setTimeout(function(){ s.remove(); }, 320); } return; }
+      if (tries++ < 100) setTimeout(check, 60);
+    }
+    check();
+  })();
+</script>
+</body>
+</html>

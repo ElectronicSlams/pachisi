@@ -1,0 +1,302 @@
+[
+  {
+    "slug": "ai21-labs",
+    "name": "AI21 Labs",
+    "hue": 218,
+    "logoUrl": "/assets/providers/ai21-labs.svg"
+  },
+  {
+    "slug": "aion-labs",
+    "name": "Aion Labs",
+    "hue": 68,
+    "logoUrl": "/assets/providers/aion-labs.svg"
+  },
+  {
+    "slug": "qwen",
+    "name": "Alibaba / Qwen",
+    "hue": 243,
+    "logoUrl": "/assets/providers/qwen.svg"
+  },
+  {
+    "slug": "ai2",
+    "name": "Allen Institute for AI, AI2",
+    "hue": 161,
+    "logoUrl": "/assets/providers/ai2.svg"
+  },
+  {
+    "slug": "amazon-aws",
+    "name": "Amazon / AWS",
+    "hue": 250,
+    "logoUrl": "/assets/providers/amazon-aws.svg"
+  },
+  {
+    "slug": "anthracite-org",
+    "name": "Anthracite Org",
+    "hue": 30,
+    "logoUrl": "/assets/providers/anthracite-org.svg"
+  },
+  {
+    "slug": "anthropic",
+    "name": "Anthropic",
+    "hue": 138,
+    "logoUrl": "/assets/providers/anthropic.svg"
+  },
+  {
+    "slug": "arcee-ai",
+    "name": "Arcee AI",
+    "hue": 343,
+    "logoUrl": "/assets/providers/arcee-ai.svg"
+  },
+  {
+    "slug": "baidu",
+    "name": "Baidu",
+    "hue": 20,
+    "logoUrl": "/assets/providers/baidu.svg"
+  },
+  {
+    "slug": "bytedance",
+    "name": "ByteDance / Seed",
+    "hue": 295,
+    "logoUrl": "/assets/providers/bytedance.svg"
+  },
+  {
+    "slug": "cognitivecomputations",
+    "name": "Cognitive Computations",
+    "hue": 46,
+    "logoUrl": "/assets/providers/cognitivecomputations.svg"
+  },
+  {
+    "slug": "cohere",
+    "name": "Cohere",
+    "hue": 80,
+    "logoUrl": "/assets/providers/cohere.svg"
+  },
+  {
+    "slug": "core42",
+    "name": "Core42 / Inception / G42",
+    "hue": 258,
+    "logoUrl": "/assets/providers/core42.svg"
+  },
+  {
+    "slug": "deepcogito",
+    "name": "DeepCogito",
+    "hue": 77,
+    "logoUrl": "/assets/providers/deepcogito.svg"
+  },
+  {
+    "slug": "deepseek",
+    "name": "DeepSeek",
+    "hue": 105,
+    "logoUrl": "/assets/providers/deepseek.svg"
+  },
+  {
+    "slug": "google",
+    "name": "Google / DeepMind",
+    "hue": 275,
+    "logoUrl": "/assets/providers/google.svg"
+  },
+  {
+    "slug": "gryphe",
+    "name": "Gryphe",
+    "hue": 295,
+    "logoUrl": "/assets/providers/gryphe.svg"
+  },
+  {
+    "slug": "ibm-granite",
+    "name": "IBM Granite",
+    "hue": 193,
+    "logoUrl": "/assets/providers/ibm-granite.svg"
+  },
+  {
+    "slug": "inclusionai",
+    "name": "InclusionAI",
+    "hue": 100,
+    "logoUrl": "/assets/providers/inclusionai.svg"
+  },
+  {
+    "slug": "inflection-ai",
+    "name": "Inflection AI",
+    "hue": 270,
+    "logoUrl": "/assets/providers/inflection-ai.svg"
+  },
+  {
+    "slug": "kwaipilot",
+    "name": "KwaiPilot",
+    "hue": 204,
+    "logoUrl": "/assets/providers/kwaipilot.svg"
+  },
+  {
+    "slug": "mancer",
+    "name": "Mancer",
+    "hue": 150,
+    "logoUrl": "/assets/providers/mancer.svg"
+  },
+  {
+    "slug": "meta",
+    "name": "Meta AI",
+    "hue": 53,
+    "logoUrl": "/assets/providers/meta.svg"
+  },
+  {
+    "slug": "microsoft",
+    "name": "Microsoft",
+    "hue": 28,
+    "logoUrl": "/assets/providers/microsoft.svg"
+  },
+  {
+    "slug": "minimax",
+    "name": "MiniMax",
+    "hue": 125,
+    "logoUrl": "/assets/providers/minimax.svg"
+  },
+  {
+    "slug": "mistral-ai",
+    "name": "Mistral AI",
+    "hue": 328,
+    "logoUrl": "/assets/providers/mistral-ai.svg"
+  },
+  {
+    "slug": "moonshot-ai",
+    "name": "Moonshot AI",
+    "hue": 348,
+    "logoUrl": "/assets/providers/moonshot-ai.svg"
+  },
+  {
+    "slug": "morph",
+    "name": "Morph",
+    "hue": 160,
+    "logoUrl": "/assets/providers/morph.svg"
+  },
+  {
+    "slug": "nex-agi",
+    "name": "Nex AGI",
+    "hue": 223,
+    "logoUrl": "/assets/providers/nex-agi.svg"
+  },
+  {
+    "slug": "nous-research",
+    "name": "Nous Research",
+    "hue": 205,
+    "logoUrl": "/assets/providers/nous-research.svg"
+  },
+  {
+    "slug": "nvidia",
+    "name": "NVIDIA",
+    "hue": 165,
+    "logoUrl": "/assets/providers/nvidia.svg"
+  },
+  {
+    "slug": "openai",
+    "name": "OpenAI",
+    "hue": 0,
+    "logoUrl": "/assets/providers/openai.svg"
+  },
+  {
+    "slug": "openrouter",
+    "name": "OpenRouter",
+    "hue": 35,
+    "logoUrl": "/assets/providers/openrouter.svg"
+  },
+  {
+    "slug": "perceptron",
+    "name": "Perceptron",
+    "hue": 286,
+    "logoUrl": "/assets/providers/perceptron.svg"
+  },
+  {
+    "slug": "perplexity",
+    "name": "Perplexity",
+    "hue": 48,
+    "logoUrl": "/assets/providers/perplexity.svg"
+  },
+  {
+    "slug": "poolside",
+    "name": "Poolside",
+    "hue": 227,
+    "logoUrl": "/assets/providers/poolside.svg"
+  },
+  {
+    "slug": "reka-ai",
+    "name": "Reka AI",
+    "hue": 355,
+    "logoUrl": "/assets/providers/reka-ai.svg"
+  },
+  {
+    "slug": "relace",
+    "name": "Relace",
+    "hue": 290,
+    "logoUrl": "/assets/providers/relace.svg"
+  },
+  {
+    "slug": "sakana",
+    "name": "Sakana AI",
+    "hue": 23,
+    "logoUrl": "/assets/providers/sakana.svg"
+  },
+  {
+    "slug": "sao10k",
+    "name": "Sao10K",
+    "hue": 227,
+    "logoUrl": "/assets/providers/sao10k.svg"
+  },
+  {
+    "slug": "stepfun",
+    "name": "StepFun",
+    "hue": 40,
+    "logoUrl": "/assets/providers/stepfun.svg"
+  },
+  {
+    "slug": "tencent",
+    "name": "Tencent",
+    "hue": 158,
+    "logoUrl": "/assets/providers/tencent.svg"
+  },
+  {
+    "slug": "thedrummer",
+    "name": "TheDrummer",
+    "hue": 59,
+    "logoUrl": "/assets/providers/thedrummer.svg"
+  },
+  {
+    "slug": "thinkingmachines",
+    "name": "Thinking Machines",
+    "hue": 116,
+    "logoUrl": "/assets/providers/thinkingmachines.svg"
+  },
+  {
+    "slug": "undi95",
+    "name": "Undi95",
+    "hue": 242,
+    "logoUrl": "/assets/providers/undi95.svg"
+  },
+  {
+    "slug": "upstage",
+    "name": "Upstage",
+    "hue": 278,
+    "logoUrl": "/assets/providers/upstage.svg"
+  },
+  {
+    "slug": "writer",
+    "name": "Writer",
+    "hue": 133,
+    "logoUrl": "/assets/providers/writer.svg"
+  },
+  {
+    "slug": "xai",
+    "name": "xAI",
+    "hue": 190,
+    "logoUrl": "/assets/providers/xai.svg"
+  },
+  {
+    "slug": "xiaomi",
+    "name": "Xiaomi",
+    "hue": 60,
+    "logoUrl": "/assets/providers/xiaomi.svg"
+  },
+  {
+    "slug": "zhipu",
+    "name": "Zhipu AI / Z.ai",
+    "hue": 210,
+    "logoUrl": "/assets/providers/zhipu.svg"
+  }
+]

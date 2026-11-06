@@ -1,0 +1,92 @@
+/* =====================================================================
+   eSlams Arena app prototype  |  src/canvas.css  [D]
+   The page around the phone: dark canvas, header, device frame, side
+   panels. Prefix .cv-. Page chrome only, so hex values are allowed here.
+   The phone itself is themed by tokens.css; the share card and app icon
+   fragments use .es-theme wrappers.
+   ===================================================================== */
+html, body { margin: 0; padding: 0; background: #101014; }
+body.cv-page { min-height: 100vh; color: #ededf0; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+.cv-page *, .cv-page *::before, .cv-page *::after { box-sizing: border-box; }
+.cv-main { padding: 44px 48px 80px; max-width: 1280px; }
+.cv-head { max-width: 680px; margin-bottom: 36px; display: flex; flex-direction: column; gap: 14px; }
+.cv-eyebrow-row { display: flex; align-items: center; gap: 12px; }
+.cv-head-mark { width: 34px; height: 34px; object-fit: contain; }
+.cv-eyebrow { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8a95; }
+.cv-title { margin: 0; font-size: 28px; font-weight: 650; letter-spacing: -0.02em; color: #ededf0; }
+.cv-lede { margin: 0; font-size: 14px; line-height: 1.65; color: #a2a2ad; text-wrap: pretty; }
+.cv-lede strong { color: #ededf0; font-weight: 600; }
+.cv-row { display: flex; gap: 44px; align-items: flex-start; flex-wrap: wrap; }
+
+/* ---------- Device frame ---------- */
+.cv-device-col { flex: none; display: flex; flex-direction: column; align-items: center; gap: 14px; position: sticky; top: 24px; }
+.cv-device { position: relative; width: 414px; height: 868px; padding: 12px; border-radius: 64px; background: #08080a; box-shadow: 0 30px 80px rgba(5, 5, 12, 0.6), inset 0 0 0 2px #2a2a31, inset 0 0 0 5px #121216; }
+.cv-device #phone { position: relative; width: 390px; height: 844px; border-radius: 52px; overflow: hidden; isolation: isolate; }
+.cv-island { position: absolute; top: 23px; left: 50%; width: 120px; height: 34px; margin-left: -60px; border-radius: 20px; background: #000; z-index: 5; pointer-events: none; }
+.cv-device-note { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; letter-spacing: 0.06em; color: #6b6b76; }
+
+/* ---------- Panels ---------- */
+.cv-panels { flex: 1; min-width: 340px; max-width: 520px; display: flex; flex-direction: column; gap: 18px; }
+.cv-panel { padding: 18px 18px 16px; border-radius: 18px; background: #16161a; border: 1px solid #26262c; }
+.cv-panel-h { margin: 0 0 14px; font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #8a8a95; }
+.cv-note { margin: 12px 0 0; font-size: 12.5px; line-height: 1.55; color: #9a9aa5; }
+.cv-mono { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 11px; color: #9a9aa5; margin-left: 6px; }
+.cv-hint { font-size: 11.5px; color: #7a7a85; font-weight: 400; margin-left: 6px; }
+.cv-stage-note { margin: 8px 0 0; min-height: 16px; }
+
+.cv-ctl { display: flex; flex-direction: column; gap: 8px; padding: 10px 0; border-bottom: 1px solid #222228; }
+.cv-ctl:last-child { border-bottom: 0; }
+.cv-ctl--toggle { flex-direction: row; align-items: center; justify-content: space-between; cursor: pointer; }
+.cv-ctl--end { align-items: flex-start; }
+.cv-ctl-label { font-size: 13px; font-weight: 550; color: #d6d6dc; }
+.cv-ctl--toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.cv-switch { position: relative; width: 40px; height: 24px; border-radius: 999px; background: #2a2a31; flex: none; transition: background 160ms ease; }
+.cv-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #ededf0; transition: transform 160ms ease; }
+.cv-ctl--toggle input:checked + .cv-switch { background: #647cff; }
+.cv-ctl--toggle input:checked + .cv-switch::after { transform: translateX(16px); }
+.cv-ctl--toggle input:focus-visible + .cv-switch { outline: 2px solid #647cff; outline-offset: 2px; }
+
+.cv-seg, .cv-btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.cv-seg button, .cv-btns button, .cv-reset { min-height: 34px; padding: 0 12px; border-radius: 10px; border: 1px solid #2c2c33; background: #1d1d22; color: #d6d6dc; font: 550 12.5px/1 "Inter", system-ui, sans-serif; cursor: pointer; }
+.cv-seg button:hover, .cv-btns button:hover, .cv-reset:hover { border-color: #44444d; color: #ffffff; }
+.cv-seg button.is-on, .cv-btns button.is-on { background: rgba(100, 124, 255, 0.16); border-color: rgba(100, 124, 255, 0.5); color: #a9b6ff; }
+.cv-seg button:focus-visible, .cv-btns button:focus-visible, .cv-reset:focus-visible, .cv-panel input[type="range"]:focus-visible { outline: 2px solid #647cff; outline-offset: 2px; }
+.cv-btns--sm button { min-height: 28px; padding: 0 10px; font-size: 11.5px; }
+.cv-reset { color: #ec6a5f; }
+.cv-panel input[type="range"] { width: 100%; accent-color: #647cff; }
+
+/* App icon */
+.cv-icons { display: flex; gap: 16px; align-items: center; }
+.cv-icon { width: 96px; height: 96px; border-radius: 22.5%; display: flex; align-items: center; justify-content: center; }
+.cv-icon img { width: 64%; height: 64%; object-fit: contain; }
+.cv-icon--dark { background: #0c0c0e; box-shadow: inset 0 0 0 1px #2a2a31; }
+.cv-icon--light { background: #ffffff; box-shadow: inset 0 0 0 1px #e8e8ec; }
+
+/* Share card (two themed fragments) */
+.cv-share-row { display: flex; gap: 12px; align-items: flex-start; overflow-x: auto; padding-bottom: 4px; }
+.cv-share { flex: none; width: 222px; height: 278px; border-radius: 16px; overflow: hidden; background: transparent; }
+.cv-share > .rs-share { transform: scale(0.6727); transform-origin: top left; }
+.cv-share-empty { margin: 0; padding: 18px; font-size: 12.5px; color: #9a9aa5; }
+
+/* States */
+.cv-states { display: flex; flex-direction: column; }
+.cv-state { padding: 10px 0; border-bottom: 1px solid #222228; display: flex; flex-direction: column; gap: 4px; }
+.cv-state:last-child { border-bottom: 0; }
+.cv-state-title { font-size: 13px; font-weight: 600; color: #ededf0; }
+.cv-state-how { font-size: 12px; line-height: 1.5; color: #9a9aa5; }
+.cv-state .cv-btns { margin-top: 4px; }
+
+/* Copy deck */
+.cv-copy { max-height: 520px; overflow-y: auto; display: flex; flex-direction: column; padding-right: 4px; scrollbar-width: thin; scrollbar-color: #33333a transparent; }
+.cv-copy-row { display: grid; grid-template-columns: 150px 1fr; gap: 10px; padding: 6px 0; border-bottom: 1px solid #1f1f25; }
+.cv-copy-key { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; font-size: 10.5px; color: #7a7a85; word-break: break-all; }
+.cv-copy-val { font-size: 12.5px; line-height: 1.45; color: #d6d6dc; }
+
+@media (max-width: 960px) {
+  .cv-main { padding: 28px 16px 60px; }
+  .cv-device-col { position: static; }
+  .cv-panels { min-width: 0; max-width: none; width: 100%; }
+}
+@media (max-width: 460px) {
+  .cv-device { transform: scale(0.86); transform-origin: top center; margin-bottom: -120px; }
+}

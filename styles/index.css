@@ -5,4 +5,6 @@
 @import "./stadium-board.css";
 @import "./stadium-match-preview.css";
 @import "../src/game/styles.css";
+@import "./connect-four-designs.css";
+@import "./game-editions.css";
 @import "./portable.css";

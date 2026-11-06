@@ -1,0 +1,30 @@
+{
+  "cribbage": [
+    "discard:AC,10D",
+    "discard:3C,JC"
+  ],
+  "first-price-sealed-bid-auction": [
+    7,
+    5
+  ],
+  "goofspiel": [
+    1,
+    5,
+    2,
+    4,
+    3,
+    3,
+    4,
+    2,
+    5,
+    1
+  ],
+  "prisoners-dilemma": [
+    "cooperate",
+    "cooperate"
+  ],
+  "rock-paper-scissors": [
+    "rock",
+    "scissors"
+  ]
+}

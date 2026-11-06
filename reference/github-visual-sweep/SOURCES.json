@@ -1,0 +1,1865 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-04",
+  "sources": [
+    {
+      "id": "20010208--blind-auction",
+      "repository": "20010208/blind-auction",
+      "commit": "adb8377e3fd49c1ab6ed5266d59909cc2f1b8317",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "first-price-sealed-bid-auction"
+      ],
+      "idea": "A timed browser bidding interface for a sealed-bid strategy game. Verify the settlement rule independently.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1078,
+          "gitBlob": "b4d2bd7a8fc6205c7f5d83b0c9fa730193322051"
+        },
+        {
+          "path": "public/index.html",
+          "bytes": 2714,
+          "gitBlob": "ff7e8d209b55619943867120bb5ec8b2fb61ef20"
+        }
+      ]
+    },
+    {
+      "id": "alecwaumans--ml-frozenlake",
+      "repository": "AlecWaumans/ML-FrozenLake",
+      "commit": "4000e0316564ee3fede2fd916f2a598f2c59af24",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "frozen-lake"
+      ],
+      "idea": "An enhanced Pygame grid renderer for the stochastic lake environment.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "License",
+          "bytes": 1078,
+          "gitBlob": "b5babedce342f13bc6e1f90dbdb0f3d767040aa7"
+        },
+        {
+          "path": "frozen_lake_enhanced.py",
+          "bytes": 22786,
+          "gitBlob": "c7ce0a3a67a70b03301f009d68e7c13ca1e995f3"
+        }
+      ]
+    },
+    {
+      "id": "amegma--galaxy-attack",
+      "repository": "Amegma/Galaxy-Attack",
+      "commit": "ecc2de618cc11d12ae55e906f3b3ba3689088f5a",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "alien-shooter"
+      ],
+      "idea": "Separate Pygame play and score screens for a sprite-based shooter.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "gitBlob": "53b15156e0f1dc944fde1fca43888a47fb6a2cf0"
+        },
+        {
+          "path": "screens/game.py",
+          "bytes": 10096,
+          "gitBlob": "e235110fb99a9a552877660fb8a99d7d66a9a141"
+        }
+      ]
+    },
+    {
+      "id": "bnas24--crazy-eights-game",
+      "repository": "BNAS24/Crazy-Eights-Game",
+      "commit": "1fded5412b338032c5de3084015d1520abc4d564",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "crazy-eights"
+      ],
+      "idea": "React game container and a separate modal for choosing the effect of a wild eight.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1063,
+          "gitBlob": "fac6e630f9dd7bd883579ffc3feb526a6cbab3f7"
+        },
+        {
+          "path": "src/pages/gamepage/GameContainer.jsx",
+          "bytes": 4954,
+          "gitBlob": "9114e570b93830ece7bf8282216fb8be13b75c7b"
+        }
+      ]
+    },
+    {
+      "id": "clariity--react-chessboard",
+      "repository": "Clariity/react-chessboard",
+      "commit": "5f99614dabadfcad6f78eaa5d7822e42b28179e6",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Responsive React board with an independent piece layer and analysis examples.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1069,
+          "gitBlob": "1fe9fea399cc137160548b3e22af1558e8cd5190"
+        },
+        {
+          "path": "src/Board.tsx",
+          "bytes": 2091,
+          "gitBlob": "4f631999335e48cbb45a12dc66d65c2d19e32668"
+        }
+      ]
+    },
+    {
+      "id": "conststar--dou-di-zhu",
+      "repository": "ConstStar/dou-di-zhu",
+      "commit": "3e29202ffd5c29d4fc2b7c17b83ef3b34396dda9",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "dou-dizhu"
+      ],
+      "idea": "A dedicated landlord-game client using Pygame alongside a Tk interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1066,
+          "gitBlob": "afd14bcdc2cc4c990a719c6957fc5e36dc74b275"
+        },
+        {
+          "path": "poker_client.py",
+          "bytes": 40018,
+          "gitBlob": "9329222e984849cc7975151e982e9076d6573c43"
+        }
+      ]
+    },
+    {
+      "id": "davidwang1231--doudizhu-online",
+      "repository": "DavidWang1231/doudizhu-online",
+      "commit": "8d750b58ea17667573709401d6c882a8d2392da7",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "dou-dizhu"
+      ],
+      "idea": "A browser landlord-game stylesheet to compare against the Pygame client.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "6a0e5a5553a34d7d329dda7f4f1b28b27cc9358d"
+        },
+        {
+          "path": "css/style.css",
+          "bytes": 14944,
+          "gitBlob": "406fee6bd64906b5445db413c1b08f45c6c84772"
+        }
+      ]
+    },
+    {
+      "id": "de-rosa--ppo-bipedalwalker",
+      "repository": "De-Rosa/PPO-BipedalWalker",
+      "commit": "4080f451b5588d0d90bda58a29d8d2c6308dd208",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "bipedal-walker"
+      ],
+      "idea": "A dedicated C# renderer for a biped simulation with an impulse-based physics engine.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1064,
+          "gitBlob": "2f331e18a2b9dcd96f2f5a60045d967033a75674"
+        },
+        {
+          "path": "Rendering/Renderer.cs",
+          "bytes": 4596,
+          "gitBlob": "d7d44f9bc85a775f148240bb92d2a971d03d0eab"
+        }
+      ]
+    },
+    {
+      "id": "devjac--gloss-pentago",
+      "repository": "DevJac/gloss-pentago",
+      "commit": "ec7e9b0206fee1c142400ca063fee7dca1955826",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "pentago"
+      ],
+      "idea": "Haskell/Gloss rendering provides an alternative desktop treatment for the rotating quadrants.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1056,
+          "gitBlob": "5171a453d836c132bd32756ea5144b95ee0826c1"
+        },
+        {
+          "path": "src/Main.hs",
+          "bytes": 6940,
+          "gitBlob": "a7ca649c4aaec29d13b4813bb81b36e0a107d5b7"
+        }
+      ]
+    },
+    {
+      "id": "futaalice--futahex2",
+      "repository": "FutaAlice/FutaHex2",
+      "commit": "2786e2e291b6de171d74b1dbbe76c013478f925e",
+      "license": "GPL-2.0",
+      "kind": "renderer",
+      "games": [
+        "hex"
+      ],
+      "idea": "Dedicated native canvas for a Hex connection board.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 18045,
+          "gitBlob": "1b8a5cdd20283d6673d4fcc0c0cbbce7eb919d8d"
+        },
+        {
+          "path": "src/futahex2/canvas.cpp",
+          "bytes": 8336,
+          "gitBlob": "820a30809f50f428eba3fc20eb4ec2f7f3e4a25a"
+        }
+      ]
+    },
+    {
+      "id": "hexik--gomoku_gui",
+      "repository": "Hexik/Gomoku_GUI",
+      "commit": "36940e0d5390cc8ca91370535993ee278ec6a288",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "gomoku"
+      ],
+      "idea": "An Android board view for a generic Gomoku interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "gitBlob": "001519af51a9b1b0144a7ccecf137c5e5dbde42c"
+        },
+        {
+          "path": "app/src/main/java/cz/fontan/gomoku_gui/BoardView.kt",
+          "bytes": 10084,
+          "gitBlob": "5aa4b0c45a13339a302e77e42d8e8b03558ed12a"
+        }
+      ]
+    },
+    {
+      "id": "imc-lab--ug-causation",
+      "repository": "IMC-Lab/UG-causation",
+      "commit": "40890ce3feaa94316cfd28fb576f9a7acf9ee2d9",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "bargaining"
+      ],
+      "idea": "An ultimatum-game acceptance interface built from experimental response controls. Participant data are excluded.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1092,
+          "gitBlob": "0ca59c3c1316bbb137ad510886ad316d036717e0"
+        },
+        {
+          "path": "exp/exp-accept.js",
+          "bytes": 17261,
+          "gitBlob": "88a2a152973c32cd170a26ccd67ef87cd194af86"
+        }
+      ]
+    },
+    {
+      "id": "jhoff1--neontablegames",
+      "repository": "JHoff1/NeonTableGames",
+      "commit": "af8b7b5fd8f53e7ff967326e8512654dc56838c7",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "blackjack"
+      ],
+      "idea": "Browser table with explicit face-down cards, suit marks and visible rank corners.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11357,
+          "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        },
+        {
+          "path": "src/blackjack/BlackjackTable.tsx",
+          "bytes": 4714,
+          "gitBlob": "4ec630aa000eccf07df2c1950e790517fdf63d4e"
+        }
+      ]
+    },
+    {
+      "id": "kinsa--cribbage-board-app",
+      "repository": "Kinsa/cribbage-board-app",
+      "commit": "8c17210d088fce0bf90c28be7391578dba029a7b",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "cribbage"
+      ],
+      "idea": "A React Native cribbage board for tracking pegging positions.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11357,
+          "gitBlob": "26b7f89ccd19464a6de7675106a84ef5c9e70b9c"
+        },
+        {
+          "path": "components/CribbageBoard.tsx",
+          "bytes": 5169,
+          "gitBlob": "6c6c66385a683960dc98e3342731772888309f3a"
+        }
+      ]
+    },
+    {
+      "id": "louisradek--muehle",
+      "repository": "LouisRadek/muehle",
+      "commit": "d7f6f4cd3fc93e2d1c638493947efae747a10be3",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "nine-mens-morris"
+      ],
+      "idea": "Rust game screen for the mill board, complementing the Cairo implementation.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "gitBlob": "4c9f0c2256a2ee5205730da4d877b5a74c17e487"
+        },
+        {
+          "path": "src/ui/game.rs",
+          "bytes": 8499,
+          "gitBlob": "65ce602f8b68854f0f80070750bd8b286c8ea04f"
+        }
+      ]
+    },
+    {
+      "id": "metta-ai--cogame-goofspiel-oshi-zumo",
+      "repository": "Metta-AI/cogame-goofspiel-oshi-zumo",
+      "commit": "6cf155196fcf8aebd5cac24b218b62425e5f821f",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "goofspiel"
+      ],
+      "idea": "A dedicated sealed-bid card renderer with a separate replay viewer.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1064,
+          "gitBlob": "16eecf55b7d2a4255d8e7fbd27b581515e667a24"
+        },
+        {
+          "path": "client/renderer.js",
+          "bytes": 41847,
+          "gitBlob": "6022c4b7681e11133653813c731ed5ccc4c3f942"
+        }
+      ]
+    },
+    {
+      "id": "niyioke--open-shed-card-engine",
+      "repository": "NiyiOke/open-shed-card-engine",
+      "commit": "f20a5c15bfb2b1aa943f61f8b17bcbd27f185c40",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "shedding-card-game"
+      ],
+      "idea": "Canvas table for an extensible multiplayer shedding game. Compare rank/suit rules before adoption.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11352,
+          "gitBlob": "41960a3af181b97a703c013a08b1e3c1fe301289"
+        },
+        {
+          "path": "app/components/GameTableCanvas.tsx",
+          "bytes": 4298,
+          "gitBlob": "a0e16c9b074a347a8c217ebcc9aca5ea70a8e1aa"
+        }
+      ]
+    },
+    {
+      "id": "noah-vincenz--projectcrawl",
+      "repository": "Noah-Vincenz/ProjectCrawl",
+      "commit": "c6c789f2d354e5f04bb1df7391e4d5ba950c0d1c",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "mancala"
+      ],
+      "idea": "Oware board view for the Mancala family. Pit and capture conventions must be checked before reuse.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1074,
+          "gitBlob": "d828206268dbf9a39c4e38afbf5d2367b624c536"
+        },
+        {
+          "path": "src/main/java/com/noahvincenz/oware/view/GameBoardView.java",
+          "bytes": 11727,
+          "gitBlob": "ceafef63ad2e42d88de3a80504691032a1b838f4"
+        }
+      ]
+    },
+    {
+      "id": "peip-2018-work-nantes-dut-info--planet-lander-lunar-lander-with-pygame",
+      "repository": "PeiP-2018-Work-Nantes-DUT-INFO/Planet-Lander-Lunar-Lander-with-Pygame",
+      "commit": "cc694785ea0587e1edb0546a306e1162be76f4fc",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "lunar-lander"
+      ],
+      "idea": "Separate Pygame flight state for a planetary landing game.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1081,
+          "gitBlob": "fd1784c4fdc8e4f627b23eb9bfbf184452de7884"
+        },
+        {
+          "path": "states/game.py",
+          "bytes": 12289,
+          "gitBlob": "660041d749c669e78dc7f275842ad06ba16b2d04"
+        }
+      ]
+    },
+    {
+      "id": "philaldridge--react-ultimate-tic-tac-toe",
+      "repository": "PhilAldridge/REACT-Ultimate-tic-tac-toe",
+      "commit": "816d0f81d8ff1d0720290d0b59b323d990b99330",
+      "license": "CC0-1.0",
+      "kind": "renderer",
+      "games": [
+        "ultimate-tic-tac-toe"
+      ],
+      "idea": "A React macro-board for composing the nine smaller boards.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 7048,
+          "gitBlob": "0e259d42c996742e9e3cba14c677129b2c1b6311"
+        },
+        {
+          "path": "src/bigBoard.js",
+          "bytes": 3597,
+          "gitBlob": "d084a39d1fc9113732ef3d048d49f81b66a1cc08"
+        }
+      ]
+    },
+    {
+      "id": "rescator7--hearts2",
+      "repository": "Rescator7/Hearts2",
+      "commit": "d4f533dad693e87736121861c9c6eb6147faf535",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "hearts"
+      ],
+      "idea": "A native Qt card scene for Hearts. Its standard table differs from the compact two-player trace.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1066,
+          "gitBlob": "3d4951770a94a53efe28b3dbc9f4f77f120dca86"
+        },
+        {
+          "path": "cardscene.cpp",
+          "bytes": 2647,
+          "gitBlob": "3dd41dbcbfc6bfe34389d849f3063ae7c5921ffe"
+        }
+      ]
+    },
+    {
+      "id": "sebastian-griesbach--monstercliffwalking",
+      "repository": "Sebastian-Griesbach/MonsterCliffWalking",
+      "commit": "704112ea619365fae18acc6bc3fecf25d6edd765",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "cliff-walking"
+      ],
+      "idea": "A rendered cliff grid with an additional moving hazard. Keep monster state separate from the standard cliff.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1076,
+          "gitBlob": "48255159a7004d680470ee68d1be06cb539be21c"
+        },
+        {
+          "path": "monstercliffwalking.py",
+          "bytes": 20974,
+          "gitBlob": "39bff34da78d7c8456390ab8f589c4f7636b4f24"
+        }
+      ]
+    },
+    {
+      "id": "sensorsini--cartpolesimulation",
+      "repository": "SensorsINI/CartPoleSimulation",
+      "commit": "50402405912f199f5cfaf76efeb67a8e32a982fe",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "cartpole"
+      ],
+      "idea": "Cart and pendulum drawing inside a desktop control simulator.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "CartPole/cartpole_drawer.py",
+          "bytes": 13511,
+          "gitBlob": "88c1beb23958357428f5cb45fec24abb635bb250"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1113,
+          "gitBlob": "78caa56741a8d56077e5ad03b2c334e486a4ee3a"
+        }
+      ]
+    },
+    {
+      "id": "starfox64--pentago",
+      "repository": "Starfox64/Pentago",
+      "commit": "82b215aaba3a0ff17593c281fd9d853c72eae91e",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "pentago"
+      ],
+      "idea": "Dedicated Python graphical interface for Pentago.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1081,
+          "gitBlob": "8fe392322473daac25136b646612f4b61ae012a3"
+        },
+        {
+          "path": "src/pentagoGUI.py",
+          "bytes": 8456,
+          "gitBlob": "01bfab018b9062f2566945c0b6b2d224f3ff62f8"
+        }
+      ]
+    },
+    {
+      "id": "taku0172--repeated-prisoners-dilemma-simulator",
+      "repository": "Taku0172/Repeated-Prisoners-Dilemma-Simulator",
+      "commit": "50d784640f2ce667bac40046b128cac0195a3b12",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "prisoners-dilemma"
+      ],
+      "idea": "Interactive repeated-game strategy simulator with implementation errors; useful for a history view.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "gitBlob": "45c223148df6f7aafb2052803d46b847ed550404"
+        },
+        {
+          "path": "index.html",
+          "bytes": 9864,
+          "gitBlob": "884946d6b64b0b4481d745e32acb16a80b733ee3"
+        }
+      ]
+    },
+    {
+      "id": "tiantianflow--qiju",
+      "repository": "TiantianFlow/qiju",
+      "commit": "683845fb4540c482f7dad9f79382611f5f9334b9",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "first-price-sealed-bid-auction"
+      ],
+      "idea": "Four-seat sealed-bid table with a lot board and a round-by-round event feed. The Core two-bidder payoff is not established here.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1074,
+          "gitBlob": "44c4aa369e84f45ccacd1c669957aa69373b0eea"
+        },
+        {
+          "path": "apps/web/src/pages/Table.tsx",
+          "bytes": 16975,
+          "gitBlob": "3200d5ac64e8cb63ee3369f82e29b6f5069f2a49"
+        }
+      ]
+    },
+    {
+      "id": "velithia--jieqibox",
+      "repository": "Velithia/JieqiBox",
+      "commit": "3958989feda0164ec09e34d13c0e090c053fa5d9",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "xiangqi"
+      ],
+      "idea": "Desktop board for Jieqi, a hidden-piece relative of Xiangqi. Face-down identities need a private-state contract.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "gitBlob": "0a15330e5e8f3380688e3b325ce857fdc1a58241"
+        },
+        {
+          "path": "src/components/Chessboard.vue",
+          "bytes": 47239,
+          "gitBlob": "fcf36d3871e81fb321943fe2b5dcea1339a9688f"
+        }
+      ]
+    },
+    {
+      "id": "zoliqua--texas-holdem-game",
+      "repository": "ZoliQua/Texas-Holdem-Game",
+      "commit": "18a7ce1539a18ac9666a6b6d34c3f1d9d78b8905",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "limit-texas-holdem",
+        "no-limit-texas-holdem"
+      ],
+      "idea": "No-limit tournament table. Its seat layout is relevant to fixed-limit poker, but its betting controls differ. React tournament table with its own scoped table stylesheet.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "gitBlob": "666bcabccaf3b199a4fcb583dad49330683f4a0e"
+        },
+        {
+          "path": "src/ui/Table.tsx",
+          "bytes": 16663,
+          "gitBlob": "4c58152129abe9bc93910ac32b24800ecc6574e7"
+        }
+      ]
+    },
+    {
+      "id": "abdullahjamal1--battleshipboardgame",
+      "repository": "abdullahjamal1/battleshipBoardGame",
+      "commit": "c4f09f09f0a92be89034137ca2d80889c1c2d02c",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "battleship"
+      ],
+      "idea": "Island-edition Battleship drawing code; terrain changes the placement problem.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "bytes": 35148,
+          "gitBlob": "e72bfddabc15be5718a7cc061ac10e47741d8219"
+        },
+        {
+          "path": "src/draw.ts",
+          "bytes": 2170,
+          "gitBlob": "b60daf2d3e31aeb785ad0bb028cac0b6e1ca8800"
+        }
+      ]
+    },
+    {
+      "id": "akshatjain02--breakout",
+      "repository": "akshatjain02/Breakout",
+      "commit": "4acd4fb33ea8e6da74eba53a6e7a4490d267ccf5",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "paddle-ball"
+      ],
+      "idea": "Breakout playfield presentation; brick destruction differs from the bundled paddle rally.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "Breakout.css",
+          "bytes": 637,
+          "gitBlob": "6a14edd33faf2c7a26b5156056f7b8cc538f12d4"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "gitBlob": "fb2e294b2c8df92f90e411551b0367b62c4ef4c0"
+        }
+      ]
+    },
+    {
+      "id": "ale64bit--weiqihub",
+      "repository": "ale64bit/WeiqiHub",
+      "commit": "cd1997863d7e2e6d6105c4b6f0580f607170ba19",
+      "license": "BSD-3-Clause",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "Flutter board annotations for a Go client with puzzle support.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE.md",
+          "bytes": 1512,
+          "gitBlob": "b4874a4cc9ffa8bdb3cba2e3b94407af29774961"
+        },
+        {
+          "path": "lib/board/board_annotation.dart",
+          "bytes": 12119,
+          "gitBlob": "28a2c47028da17aaf4e2117a63397c4e08685faf"
+        }
+      ]
+    },
+    {
+      "id": "alexwitting--cardgames",
+      "repository": "alexwitting/cardgames",
+      "commit": "c895605c5672dd72919bcfe17c8b65e7c53cb6e5",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "gin-rummy"
+      ],
+      "idea": "Native Android Gin Rummy screen inside a multi-game card application.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1069,
+          "gitBlob": "bff8dfc4ae22c5c809ffde8632bb75ddb9720781"
+        },
+        {
+          "path": "feature/ginrummy/src/main/kotlin/com/cardgames/feature/ginrummy/GinScreen.kt",
+          "bytes": 17863,
+          "gitBlob": "b7814c2a30dc8613bb0c45ed02e59408cb1d0c9e"
+        }
+      ]
+    },
+    {
+      "id": "andrefkruger--walker-ai",
+      "repository": "andrefkruger/walker-ai",
+      "commit": "42c704ae883e4df03c05376b9d72922f8881d176",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "bipedal-walker"
+      ],
+      "idea": "Pygame visualizer kept separate from the Box2D locomotion training code.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1062,
+          "gitBlob": "c136a2a6a87d595d057ae2c261a0e59c31b83ec3"
+        },
+        {
+          "path": "render/renderer.py",
+          "bytes": 14004,
+          "gitBlob": "1c8404bae4f4795d8e9233da50f3c4944e01f2f3"
+        }
+      ]
+    },
+    {
+      "id": "andrew-wilkes--godot-chess",
+      "repository": "andrew-wilkes/godot-chess",
+      "commit": "e16a2423e8425f04c04807be874f54e252655fc8",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Godot Control-based board with its own pieces scene, an alternative to web layout.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "6c7ce43040fadce05cd1e840f8f3ad97e0f15011"
+        },
+        {
+          "path": "src/Board.gd",
+          "bytes": 17375,
+          "gitBlob": "4a6ebe72ef205fec3bce5a739567e9aa925e88b9"
+        }
+      ]
+    },
+    {
+      "id": "batuhanisik751--javahexagonalreversi",
+      "repository": "batuhanisik751/JavaHexagonalReversi",
+      "commit": "79a35eb7a78d68a9f5c786e34e89e9157d4c4dcf",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "othello"
+      ],
+      "idea": "JavaFX canvas for hexagonal Reversi. Six neighbour directions change flipping and valid moves.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1071,
+          "gitBlob": "233e7c91c28f07f1178f2129bdeaa56706e31b4d"
+        },
+        {
+          "path": "src/main/java/cs3500/reversi/view/FxReversiCanvas.java",
+          "bytes": 10543,
+          "gitBlob": "69e78a567261863470ce47200e031df56490f434"
+        }
+      ]
+    },
+    {
+      "id": "cbelsole--easygo",
+      "repository": "cbelsole/easygo",
+      "commit": "20293034c781d3c64eab63d4a4dccbada7cd9b12",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "Browser Go board used alongside KataGo analysis and joseki recognition.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "23df198458e0f7d599894fad2a49364d0be0669b"
+        },
+        {
+          "path": "web/src/components/Board.tsx",
+          "bytes": 12335,
+          "gitBlob": "23bf27d5350eae8235df069e3f53b079d0ac96fd"
+        }
+      ]
+    },
+    {
+      "id": "chacestew--u3t",
+      "repository": "chacestew/u3t",
+      "commit": "743c7cd70cfae431695a34af153aa28f214942e0",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "ultimate-tic-tac-toe"
+      ],
+      "idea": "A local-board component inside the larger multiplayer game area; useful for nested-board feedback.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "8fa517d852b5c1966c2c2ece250ac934ffabefbf"
+        },
+        {
+          "path": "client/src/Components/GameArea/LocalBoard/LocalBoard.tsx",
+          "bytes": 2603,
+          "gitBlob": "248b37d89e44384229ae07d44c89f8d03c48ac5d"
+        }
+      ]
+    },
+    {
+      "id": "digamjain--rock-paper-scissors-gui",
+      "repository": "digamjain/Rock-Paper-Scissors-GUI",
+      "commit": "76f4a54555a4502dd281ad7b00d1d565a9819ffb",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "rock-paper-scissors"
+      ],
+      "idea": "A dedicated graphical single-player gesture-selection interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "gitBlob": "aae0a1751671c8965d01220a61ea5a22a5d74bdb"
+        },
+        {
+          "path": "Stone-Paper-scissors/Rock-Paper-Scissors.py",
+          "bytes": 10052,
+          "gitBlob": "551dafd16567b93bfa2d0ddeb32c5b768389d694"
+        }
+      ]
+    },
+    {
+      "id": "doybrian--rps-multiplayer",
+      "repository": "doyBrian/RPS-Multiplayer",
+      "commit": "c37b0888b87c5b9084351083fee5977628ed2d35",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "rock-paper-scissors"
+      ],
+      "idea": "Two-player browser layout for simultaneous gesture choices.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "gitBlob": "947f4cf222ea15d2e327652f255fa9fcf077b063"
+        },
+        {
+          "path": "index.html",
+          "bytes": 3556,
+          "gitBlob": "acce9e469929c54300cdc597ead57942e3d54c80"
+        }
+      ]
+    },
+    {
+      "id": "eamag--nard",
+      "repository": "eamag/nard",
+      "commit": "6468c949a9f631368ae5e1690781ca5b7d9a015d",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "backgammon"
+      ],
+      "idea": "Browser training board with a preview state and a separate coaching panel.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "3b40e7c3863fe5c2ba5cfbefb8c2aeb970f7ca6a"
+        },
+        {
+          "path": "src/components/GameBoard.svelte",
+          "bytes": 24497,
+          "gitBlob": "de287838ab5426596dc51f95888a8aa8c6dd5654"
+        }
+      ]
+    },
+    {
+      "id": "eliaxyzz--hex",
+      "repository": "eliaxyzz/HEX",
+      "commit": "fadf672b8a61035c83c28206b57b3a359656a8f6",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "hex"
+      ],
+      "idea": "Desktop Hex client with a separately drawn game background.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1071,
+          "gitBlob": "3f8128c6a22659228ab88b7a4e3c92672f942185"
+        },
+        {
+          "path": "src/ui/background_renderer.cpp",
+          "bytes": 3056,
+          "gitBlob": "d549e286ae18da2069ea8b1f31c96cebd5701024"
+        }
+      ]
+    },
+    {
+      "id": "enzomanuelmangano--react-native-chessboard",
+      "repository": "enzomanuelmangano/react-native-chessboard",
+      "commit": "d1c3e0aa9372b2b78c07f50412b09a50ad31d4ae",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Native Skia board background as an alternative to a DOM checkerboard.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1076,
+          "gitBlob": "e634a689ab59f945505b7fb7902f14b21d232e95"
+        },
+        {
+          "path": "src/components/skia/board-background.tsx",
+          "bytes": 4505,
+          "gitBlob": "dd331803808cd490545686a8c2333468f3db0210"
+        }
+      ]
+    },
+    {
+      "id": "farindk--morris",
+      "repository": "farindk/morris",
+      "commit": "60ac099eb02b82e9f9a9e7add577f296ddc1bd2d",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "nine-mens-morris"
+      ],
+      "idea": "GTK/Cairo rendering of the mill board and its playing pieces.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "COPYING",
+          "bytes": 35147,
+          "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 35149,
+          "gitBlob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+        },
+        {
+          "path": "src/gtkcairo_boardgui.cc",
+          "bytes": 29857,
+          "gitBlob": "2f3c53259587276a3e13d74595213b000de1d92b"
+        }
+      ]
+    },
+    {
+      "id": "felipeap92--othello-game",
+      "repository": "felipeap92/othello-game",
+      "commit": "aa9dd2bd3d2ebc101405c3fabf24b27810c7086b",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "othello"
+      ],
+      "idea": "Standalone React board in a Reversi client with multiplayer support.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1078,
+          "gitBlob": "372669839b396eb6935bf5ceb0920bce73dbff87"
+        },
+        {
+          "path": "othello-gui/src/components/Board.tsx",
+          "bytes": 1478,
+          "gitBlob": "a8531c16cd5b8832c50de5f6c3571bb8b6cd33f1"
+        }
+      ]
+    },
+    {
+      "id": "frankwallis--redouble",
+      "repository": "frankwallis/redouble",
+      "commit": "22487e6e51d00b34668f97f94f96c2eef4d1dd95",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "bridge"
+      ],
+      "idea": "Hands and player names live on named seat edges, with separate bidding controls and history.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1079,
+          "gitBlob": "c54f15316e43130a24f0e1c4d698d343a72d49ea"
+        },
+        {
+          "path": "src/ui/table/table.jsx",
+          "bytes": 2782,
+          "gitBlob": "0ee02157c01ef4231ea633e1ff12b50ee4fbed54"
+        }
+      ]
+    },
+    {
+      "id": "guijixzh--inverse-gomoku-gui-vs-ai",
+      "repository": "guijixzh/Inverse-Gomoku-GUI-vs-AI",
+      "commit": "49470d3cf1916ac1671fbbc2b54cba84b36d3b6d",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "gomoku"
+      ],
+      "idea": "An inverse-Gomoku board that supports a piece-movement rule absent from standard Gomoku.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1086,
+          "gitBlob": "74ad2c4df8d176e0aeb49c7b5249b2eceb4f44d0"
+        },
+        {
+          "path": "web/src/board.ts",
+          "bytes": 15488,
+          "gitBlob": "615f100d913e09b2c94cccb3f34a2c2002e80c6f"
+        }
+      ]
+    },
+    {
+      "id": "hakon1233--card-games",
+      "repository": "hakon1233/card-games",
+      "commit": "0d85e1195238c35daa9557bf2057b4fd6ac6e742",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "crazy-eights"
+      ],
+      "idea": "Display-settings component shared across several card games including Crazy Eights.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "33522ef9a1952bb776fdbe7eb4ad8e3467c06357"
+        },
+        {
+          "path": "components/game/table-display-settings.tsx",
+          "bytes": 3410,
+          "gitBlob": "abaf1354e33f06c52bf18a1f95f17c05f08604b3"
+        }
+      ]
+    },
+    {
+      "id": "iandevlin--canvasinvaders",
+      "repository": "iandevlin/canvasinvaders",
+      "commit": "25dedf94b7f5c21ba1f003459b388c7f998d4f90",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "alien-shooter"
+      ],
+      "idea": "Browser canvas playfield for the invader formation and moving shots.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1078,
+          "gitBlob": "7a35842d21888248020365a7a252ee06fef309c9"
+        },
+        {
+          "path": "canvasinvaders.js",
+          "bytes": 9405,
+          "gitBlob": "e8d23c3a6e0bcd11bfc08497569f9854602a5ad5"
+        }
+      ]
+    },
+    {
+      "id": "indiagames--spade",
+      "repository": "indiagames/spade",
+      "commit": "095d840ba0084ed3bac57354286eb422b183d108",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "spades"
+      ],
+      "idea": "A dedicated table component in a real-time multiplayer Spades room.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1072,
+          "gitBlob": "25e7f5ace49a299fb2faff45b5b094a03fc6f893"
+        },
+        {
+          "path": "frontend/src/features/room/Table.tsx",
+          "bytes": 4795,
+          "gitBlob": "06fd07780c271b3a39dc61a037e7082d54f2ed70"
+        }
+      ]
+    },
+    {
+      "id": "intrepion--kata-inspired-by-uno-codex-dot",
+      "repository": "intrepion/kata-inspired-by-uno-codex-dot",
+      "commit": "42ea008d13c2bea37a0ffcd5976f01fbf6372958",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "shedding-card-game"
+      ],
+      "idea": "Prism Relay's browser table and card styling for a related shedding game.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1070,
+          "gitBlob": "311635ee156324bd8d003e1f05df037551706881"
+        },
+        {
+          "path": "src/style.css",
+          "bytes": 11488,
+          "gitBlob": "0b931cd75f33b77773d5214fe35512a05d5b9f49"
+        }
+      ]
+    },
+    {
+      "id": "juef17--librebridge",
+      "repository": "juef17/LibreBridge",
+      "commit": "38e344a2fab649c1cce9189b92dadbe7bdb63f31",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "bridge"
+      ],
+      "idea": "Native desktop card widget from a dedicated contract-bridge client.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 35141,
+          "gitBlob": "9cecc1d4669ee8af2ca727a5d8cde10cd8b2d7cc"
+        },
+        {
+          "path": "src/gui/CardWidget.cpp",
+          "bytes": 2469,
+          "gitBlob": "14ee093cff993530a25fa20686886a13406ed799"
+        }
+      ]
+    },
+    {
+      "id": "junosan--nama",
+      "repository": "junosan/Nama",
+      "commit": "6ace0bb25a986d71b8e08d74334481eadb96650e",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "mahjong"
+      ],
+      "idea": "Qt/OpenGL widget from a riichi Mahjong client. Its rules extend beyond the compact bundled game.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11357,
+          "gitBlob": "8dada3edaf50dbc082c9a125058f25def75e625a"
+        },
+        {
+          "path": "NOTICE",
+          "bytes": 28758,
+          "gitBlob": "1ee365ea4aaed1dd6dd6d6841da3f3ef3e1204c5"
+        },
+        {
+          "path": "code/glwidget.cpp",
+          "bytes": 37578,
+          "gitBlob": "32334f04396c32d23e50e09399c9c3bbca2928d6"
+        }
+      ]
+    },
+    {
+      "id": "juzzlin--dustracing2d",
+      "repository": "juzzlin/DustRacing2D",
+      "commit": "06da67229775ddb57fcb7c4d0763e97a70a21f70",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "car-racing"
+      ],
+      "idea": "Top-down track scene with a minimap, timing overlay and crash overlay.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "COPYING",
+          "bytes": 35147,
+          "gitBlob": "94a9ed024d3859793618152ea559a168bbcbb5e2"
+        },
+        {
+          "path": "src/game/scene.cpp",
+          "bytes": 22659,
+          "gitBlob": "e9d0c5b42f8c78fe05c4ec4c23281936959278fa"
+        }
+      ]
+    },
+    {
+      "id": "kenrick95--c4",
+      "repository": "kenrick95/c4",
+      "commit": "5f0b141806decad56a70f691413165091f7849a1",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "connect-four"
+      ],
+      "idea": "Dedicated browser board for a red/blue Connect Four implementation.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1069,
+          "gitBlob": "a23f70a5f320c5d2dfde06be133fa8c42236df60"
+        },
+        {
+          "path": "browser/src/board/index.ts",
+          "bytes": 4620,
+          "gitBlob": "08740c055de1cb51b8b7b9649d42a5462c2c3230"
+        }
+      ]
+    },
+    {
+      "id": "krinj--hanabi-simulator",
+      "repository": "krinj/hanabi-simulator",
+      "commit": "b77b04aa09bab8bd8d7b784e04bf8b9d5d76d1a6",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "hanabi"
+      ],
+      "idea": "Board-information widget separate from game controls in an agent-assisted Hanabi interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1076,
+          "gitBlob": "9aff58236f4e3cc3f3eaf29f262b8607b843fa1a"
+        },
+        {
+          "path": "py_hanabi/interface/widget_board_info.py",
+          "bytes": 3171,
+          "gitBlob": "234f8626b39127dbf2889bb4b06b509f3ae3b9da"
+        }
+      ]
+    },
+    {
+      "id": "lokkant--gin-rummy",
+      "repository": "lokkant/Gin-Rummy",
+      "commit": "58c3c41214d2d18e76ada757987daa3d5f80c1f7",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "gin-rummy"
+      ],
+      "idea": "A separate L\u00d6VE scene for laying cards off after the hand.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1063,
+          "gitBlob": "b4625e9bae14fbb7a0aa11a97bff4e9469289707"
+        },
+        {
+          "path": "src/scenes/layoff_scene.lua",
+          "bytes": 24678,
+          "gitBlob": "240429cff91ccdb1806a1b078e6312deb6f757b8"
+        }
+      ]
+    },
+    {
+      "id": "mmousawy--dicebluff",
+      "repository": "mmousawy/dicebluff",
+      "commit": "e3c7f81810434f513eb34f2eefb7952f33f2ac95",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "liars-dice"
+      ],
+      "idea": "Browser dice-bluff client with a dedicated stylesheet for its game displays.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1075,
+          "gitBlob": "fc58638b65322e57977b1e86473c85820602bb7d"
+        },
+        {
+          "path": "src/dicebluff-client/styles/main.css",
+          "bytes": 1094,
+          "gitBlob": "efa4d38431ebb7b3f10d3c7fa20be442efe15fbb"
+        }
+      ]
+    },
+    {
+      "id": "mvichosfm--plakoto",
+      "repository": "mvichosfm/plakoto",
+      "commit": "08f64fcd95d8196c23f74e7c6ec706f2add64855",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "backgammon"
+      ],
+      "idea": "A three-dimensional tavli presentation with board effects, lessons and puzzles. Plakoto pins opposing checkers.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1069,
+          "gitBlob": "f9b074a9fa58793200b4d3e0e21e9f9d4517a393"
+        },
+        {
+          "path": "src/effects.js",
+          "bytes": 8302,
+          "gitBlob": "7a27dbb7e4709463c14664476d72aa07a5861896"
+        }
+      ]
+    },
+    {
+      "id": "nina-cohen--hanabi-ui",
+      "repository": "nina-cohen/hanabi-ui",
+      "commit": "5273475fc1bb48bd154b44d86bb8071ce22f97d5",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "hanabi"
+      ],
+      "idea": "A stack-painting module within a dedicated cooperative Hanabi interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11357,
+          "gitBlob": "261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+        },
+        {
+          "path": "scripts/PaintStackManager.js",
+          "bytes": 2949,
+          "gitBlob": "522c522c2dc76735b56412ba57a28562d01f7b97"
+        }
+      ]
+    },
+    {
+      "id": "pentla--shogi-board",
+      "repository": "pentla/shogi-board",
+      "commit": "12d74a0a8ddd1ff42ab56e6cb3c8be2345f7f97a",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "shogi"
+      ],
+      "idea": "Reserve-piece board kept separate from the main grid, useful for representing drops.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "gitBlob": "f1dcd2960399c100256084bb96cce891b302ca78"
+        },
+        {
+          "path": "src/components/Board/CapturedPieceBoard/index.tsx",
+          "bytes": 1020,
+          "gitBlob": "a05a288245403516356a5619d46d568088482e1d"
+        }
+      ]
+    },
+    {
+      "id": "peterblazejewicz--gobanhaus",
+      "repository": "peterblazejewicz/gobanhaus",
+      "commit": "460341bf469ce93c268b7a555160cdeac7a5aa2e",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "A dedicated interactive 9\u00d79 Go board for a single-page browser client.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1079,
+          "gitBlob": "a4574573ee095fe94eb5aefeff68a68f551451d5"
+        },
+        {
+          "path": "src/app/components/Board.tsx",
+          "bytes": 9953,
+          "gitBlob": "fc2f309dd33361a0cb95caa41a48048a9f091a4f"
+        }
+      ]
+    },
+    {
+      "id": "popojan--goban",
+      "repository": "popojan/goban",
+      "commit": "eb52413fcec8843fc888ccfee1bb28237941b66a",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "A three-dimensional goban rendered through a GLSL ray-tracing interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 35149,
+          "gitBlob": "f288702d2fa16d3cdf0035b15a9fcbc552cd88e7"
+        },
+        {
+          "path": "src/main.cpp",
+          "bytes": 38226,
+          "gitBlob": "e853fc0738cdbe20dfb61d44c562b213ab912773"
+        }
+      ]
+    },
+    {
+      "id": "portnov--hcheckers",
+      "repository": "portnov/hcheckers",
+      "commit": "511517b9b3cd2d7b6944688550f3dc5bf941a0a4",
+      "license": "BSD-3-Clause",
+      "kind": "renderer",
+      "games": [
+        "checkers"
+      ],
+      "idea": "Qt painter-based draughts board, separate from the rule implementation.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1525,
+          "gitBlob": "d9abc075cb11cb5cb057080527345eeb3c341012"
+        },
+        {
+          "path": "python/hcheckers/board.py",
+          "bytes": 39008,
+          "gitBlob": "b9eeb96bf11ae29f213cd00cd321aa75cda8aaea"
+        }
+      ]
+    },
+    {
+      "id": "razvan404--tic-tac-toe-multiplayer",
+      "repository": "razvan404/tic-tac-toe-multiplayer",
+      "commit": "c412047c45f499de7f6a297a6d8e6ba9a2bdca9c",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "tic-tac-toe"
+      ],
+      "idea": "Desktop client styling for a networked noughts-and-crosses board.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "Client/src/main/resources/application/gui/css/style.css",
+          "bytes": 3767,
+          "gitBlob": "c2fd8f61216928c9e5f1a96d0e0ea4a987c175d4"
+        },
+        {
+          "path": "LICENSE",
+          "bytes": 1078,
+          "gitBlob": "a679d8fb7cb8a8d648b08a290950db6223b36579"
+        }
+      ]
+    },
+    {
+      "id": "rheostaticsfan--cribbageboard",
+      "repository": "rheostaticsfan/CribbageBoard",
+      "commit": "400e5751d65bc04fe137bc54768c2e48d5e0544c",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "cribbage"
+      ],
+      "idea": "Colour e-ink pegboard with touch-driven peg movement. This is a scorekeeper surface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1068,
+          "gitBlob": "b74209e26b3f495ad48064f3bacd65a1e768d6de"
+        },
+        {
+          "path": "app/src/main/java/com/moira/cribbage/BoardView.kt",
+          "bytes": 13123,
+          "gitBlob": "31c2c3fd29cc2c36391ad42e0a7234ac070f1966"
+        }
+      ]
+    },
+    {
+      "id": "san-santra--pyboxing",
+      "repository": "san-santra/pyboxing",
+      "commit": "cbba833d49546c063c79a8bfb2c79ecccbecc1de",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "boxing-style-arena"
+      ],
+      "idea": "Atari-style two-fighter boxing in a Pygame ring.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 35141,
+          "gitBlob": "9cecc1d4669ee8af2ca727a5d8cde10cd8b2d7cc"
+        },
+        {
+          "path": "main.py",
+          "bytes": 6896,
+          "gitBlob": "b5497593f76694527bfc2894f19e6706182eb914"
+        }
+      ]
+    },
+    {
+      "id": "scc416--battleship",
+      "repository": "scc416/battleship",
+      "commit": "add5b7a9cc47f00d436dc91955735408978a4ca6",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "battleship"
+      ],
+      "idea": "Board and coordinate-label components separate the playable grid from its axes.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1060,
+          "gitBlob": "7689c896574abe99779f9dca21c74a0b881140db"
+        },
+        {
+          "path": "src/Components/Display/Board/index.jsx",
+          "bytes": 1112,
+          "gitBlob": "3ae858e180714e0e6822655c2041bfe0e50bea53"
+        }
+      ]
+    },
+    {
+      "id": "sruckh--spades-coach",
+      "repository": "sruckh/spades-coach",
+      "commit": "87ec070084566ef25fc0e899293eef1cfbd37bc0",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "spades"
+      ],
+      "idea": "A trick-taking table paired with a coaching view; the coaching information needs a distinct spectator policy.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 11336,
+          "gitBlob": "b15dc7e642d6990330b9f849a5ce50240cf192dc"
+        },
+        {
+          "path": "src/ui/Table.tsx",
+          "bytes": 666,
+          "gitBlob": "ba25fc54903ee8112768742d055bc3f7f19f70b3"
+        }
+      ]
+    },
+    {
+      "id": "togiberlin--kalah_mancala",
+      "repository": "togiberlin/kalah_mancala",
+      "commit": "4dfe49c9c78fb4aab572afaf9056070c55cffe91",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "mancala"
+      ],
+      "idea": "Kalah game-screen styling for a web board and its stores.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1078,
+          "gitBlob": "2ff0274c0a5da17dd92f2d8623306b738cc8ca9b"
+        },
+        {
+          "path": "static/kalahMancala/gameScreenStyle.css",
+          "bytes": 2013,
+          "gitBlob": "97c4a9da354787ec84b1ad0dfd62427fe890b09a"
+        }
+      ]
+    },
+    {
+      "id": "tukiains--blackjack-gui",
+      "repository": "tukiains/blackjack-gui",
+      "commit": "4203d24452ea0f5b6a75789ab56e8c87f51475e0",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "blackjack"
+      ],
+      "idea": "Desktop table components keep dealer information and player controls distinct.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1071,
+          "gitBlob": "366c95c3f77ac3158949f1dacd385c1e17d54fc3"
+        },
+        {
+          "path": "blackjack_gui/table_components.py",
+          "bytes": 13411,
+          "gitBlob": "2294e6ec276048b914f0e9ff3352216f5cecb11b"
+        }
+      ]
+    },
+    {
+      "id": "ujjwalkrmfp16-creator--air-boxing-prototype",
+      "repository": "ujjwalkrmfp16-creator/air-boxing-prototype",
+      "commit": "d60cafa9fcc765390f9a164218ca9073c0a1b5b7",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "boxing-style-arena"
+      ],
+      "idea": "Webcam pose feedback is a different input and display treatment from the discrete arena.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1069,
+          "gitBlob": "84e61e4f26c92c30cee32cceb2588844a202ed59"
+        },
+        {
+          "path": "air_boxing_vs_fast_stable.py",
+          "bytes": 71298,
+          "gitBlob": "f29f1de603ad3b95ce2ad6e6a5e0769ec2ba7e18"
+        }
+      ]
+    },
+    {
+      "id": "vlokesh7--dynamic-tic-tac-toe-game-with-python-tkinter",
+      "repository": "vlokesh7/Dynamic-Tic-Tac-Toe-Game-with-Python-Tkinter",
+      "commit": "2260d569fbc06ef1c29ea99e37183ba2bb48b986",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "tic-tac-toe"
+      ],
+      "idea": "A desktop Tkinter noughts-and-crosses interface.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1065,
+          "gitBlob": "d7f8fcc6e51a7f2660d675c50e54f32873a1956a"
+        },
+        {
+          "path": "TicTacToe.py",
+          "bytes": 4667,
+          "gitBlob": "fbb0f3f6b5a6e2ff36d020af5bbb4a569d17a9d8"
+        }
+      ]
+    },
+    {
+      "id": "wesmcd6--game-of-hearts",
+      "repository": "wesmcd6/Game-of-hearts",
+      "commit": "4184d8cd23d49789ee49769daa894aa83deeddf0",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "hearts"
+      ],
+      "idea": "Browser reconstruction of the classic desktop Hearts presentation.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1064,
+          "gitBlob": "8f45c5e4adbfabc875c354cfce433f47bf0fd96a"
+        },
+        {
+          "path": "style.css",
+          "bytes": 11797,
+          "gitBlob": "d73a7cadbad541a8d6de402b1a28f65ea265471d"
+        }
+      ]
+    },
+    {
+      "id": "whtdrgn101--game-euchre",
+      "repository": "whtdrgn101/game-euchre",
+      "commit": "c90db152e552b0acdf8c3f60611048c02dd5e4b6",
+      "license": "BSD-3-Clause",
+      "kind": "renderer",
+      "games": [
+        "euchre"
+      ],
+      "idea": "Partnership trick-taking board with hand, turn and team-results panels.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1501,
+          "gitBlob": "49340a86a7fb2c6e8a5c6d560b89a2bdf183e23d"
+        },
+        {
+          "path": "src/client/Board.tsx",
+          "bytes": 13969,
+          "gitBlob": "8d561e8276a5198d8e33df9d96e723f351eb8ee0"
+        }
+      ]
+    },
+    {
+      "id": "xiewang233--xiangqiai",
+      "repository": "xiewang233/XiangqiAI",
+      "commit": "d32f6bdbd55707d45348fa220a829d66f68387f9",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "xiangqi"
+      ],
+      "idea": "Pygame board view separated from the Xiangqi search engine.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1067,
+          "gitBlob": "4172dbd3098d45f5db39f614dc056983e076b7bf"
+        },
+        {
+          "path": "gui/board_view.py",
+          "bytes": 5886,
+          "gitBlob": "803dd2a5c93c172a215e6ed3b20b247029c3e3e1"
+        }
+      ]
+    },
+    {
+      "id": "yavuzkrm--tavla-online",
+      "repository": "yavuzkrm/tavla-online",
+      "commit": "c3c991f027656f510ad4aa459a113d9ade112a5e",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "backgammon"
+      ],
+      "idea": "Two-player tavla board rendered as a React component.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1074,
+          "gitBlob": "25ab1436fc30f163fdf7eea43616867d6c0bc8ce"
+        },
+        {
+          "path": "client/src/components/Board.tsx",
+          "bytes": 8605,
+          "gitBlob": "717e1963b1b9ef35ff1829c5e2d4c1ff88d16aec"
+        }
+      ]
+    },
+    {
+      "id": "zaymonoid--connect4-3d-r3f",
+      "repository": "zaymonoid/Connect4-3D-R3F",
+      "commit": "310c919b89c2d14e51de4a7459f4b4b1f1365083",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "connect-four"
+      ],
+      "idea": "React Three Fiber implementation of a 4\u00d74\u00d74 board. The extra depth is a rules change.",
+      "limits": "Selected presentation source only. Original license and applicable notices retained. Dependencies and media omitted.",
+      "files": [
+        {
+          "path": "LICENSE",
+          "bytes": 1071,
+          "gitBlob": "2fb74a860034e31620c94e0b42b9c92d9768aa10"
+        },
+        {
+          "path": "src/App.js",
+          "bytes": 11662,
+          "gitBlob": "1e08f1ae7390556743129a7209d3695a0b917b8c"
+        }
+      ]
+    }
+  ]
+}

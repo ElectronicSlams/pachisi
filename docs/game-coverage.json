@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "reviewedOn": "2026-10-29",
+  "reviewedOn": "2026-11-01",
   "scope": "Pachisi extracted web presentation; not tournament-rule certification or a claim of live/native parity.",
   "platformSource": {
     "repository": "https://github.com/makriman/eSlamsPlatform",
@@ -17,10 +17,21 @@
     "repository": "https://github.com/ElectronicSlams/eSlams",
     "commit": "7731e2f3d712e5f4714d640df670fc0224feede1",
     "publicArtworkSeed": 112,
-    "dataSha256": "c59f8d8d48d5255485c0900bae13f162205f09a580ffdaa496a615868e360322",
-    "legalTransitionsRecorded": 672,
-    "frameCount": 722,
+    "dataSha256": "cba9149a86543aa620cb661213eecf7bb25f3b6d2e57ec9d3007b012ea517a1f",
+    "legalTransitionsRecorded": 690,
+    "frameCount": 740,
     "regeneratedInThisDocumentationPass": true
+  },
+  "physicsValidation": {
+    "validatedOn": "2026-11-05",
+    "script": "scripts/validate-demonstrations.py",
+    "transitions": 690,
+    "frames": 740,
+    "pass": 49,
+    "knownCoreIssues": [
+      "taxi: frame 10 passenger position after dropoff"
+    ],
+    "mutationChecks": 38
   },
   "actualStateSupportLegend": {
     "frame-view": "The pure Board can depict the basic canonical public cell frame supplied by a validated host adapter. This does not include input controls, a Core state parser, rule execution, legal moves, scores or complete replay UX.",
@@ -74,7 +85,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "backgammon",
@@ -114,8 +127,9 @@
         ]
       },
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "The demo draws all 24 points and dice from public state. It does not fully depict bar/borne_off counts even though those are bundled. A complete actual adapter must add those zones and precise point indexing.",
+      "adaptationNotes": "The demo draws all 24 points, the bar and the borne-off trays from public state (0.2.0). Stacks above five checkers show a count badge; the dice owner is shown only when the state names one. A complete actual adapter still needs precise point indexing, the cube and used-dice marking.",
       "motionNotes": "Drive die consumption, capture-to-bar and bearing-off from Core events; preserve per-player checker conservation. Never substitute a familiar 15-checker ruleset for the compact variant.",
+      "ruleVariantNote": "Core variant uses 5 checkers a side; standard backgammon uses 15.",
       "hiddenInformationNotes": "Public board/dice; pending hidden randomness must be resolved by Core.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -125,7 +139,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "bargaining",
@@ -170,7 +186,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "battleship",
@@ -193,7 +211,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "special-board/attack-grids",
-      "geometry": "two public 5 \u00d7 5 shot grids in the demo",
+      "geometry": "two public 5 × 5 shot grids in the demo",
       "stateFields": [
         "grid_size",
         "hits",
@@ -215,7 +233,7 @@
         ]
       },
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "The demo displays public shots, hits and remaining-ship summaries without fleets. It currently draws a fixed 5 \u00d7 5 scene; validate grid_size before adapting another variant. Generic square Board is not a private fleet renderer.",
+      "adaptationNotes": "The demo displays public shots, hits and remaining-ship summaries without fleets. Since 0.2.0 the grid is sized from grid_size and a shot outside the grid renders the unavailable scene instead of being dropped. Generic square Board is not a private fleet renderer.",
       "motionNotes": "A shot mark appears only after the server hit/miss result. Do not animate a ship under concealed cells or infer locations from hidden engine data.",
       "hiddenInformationNotes": "Fleet locations remain concealed; use public attack history or the authorized player perspective, never raw internal state.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -226,7 +244,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "bipedal-walker",
@@ -280,7 +300,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "blackjack",
@@ -324,7 +346,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "boxing-style-arena",
@@ -388,7 +412,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "bridge",
@@ -447,7 +473,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "car-racing",
@@ -470,8 +498,8 @@
         "description": "Control throttle, braking, or steering on a profiled track."
       },
       "sameArenaVersion": false,
-      "demoFrames": 8,
-      "demoActions": 7,
+      "demoFrames": 11,
+      "demoActions": 10,
       "demoDelayMs": 100,
       "demoEndsTerminal": true,
       "terminalReason": "lap_complete",
@@ -501,7 +529,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "cartpole",
@@ -554,7 +584,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "checkers",
@@ -577,13 +609,13 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "special-board/checkers",
-      "geometry": "8 \u00d7 8, dark-square play",
+      "geometry": "8 × 8, dark-square play",
       "stateFields": [
         "board"
       ],
       "nestedObjectFields": {},
-      "actualStateSupport": "partial-frame-view",
-      "adaptationNotes": "The demo BoardScene draws ordinary men and king crowns from the case-sensitive state board. Generic Board can draw discs but cannot faithfully distinguish checkers kings or multi-jump paths; retain a specialized actual-state renderer until typed adaptation is added.",
+      "actualStateSupport": "frame-view",
+      "adaptationNotes": "The live square-board adapter preserves r/b men and R/B kings from Checkers display frames. Supply legal multi-jump paths and player input from the host.",
       "motionNotes": "Show Core capture removals and promotion in the next frame. Do not infer a single jump from a from/to pair when the action may be a capture sequence.",
       "hiddenInformationNotes": "Public board.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -594,7 +626,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "chess",
@@ -617,7 +651,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cell/chess",
-      "geometry": "8 \u00d7 8, FEN rank order",
+      "geometry": "8 × 8, FEN rank order",
       "stateFields": [
         "fen",
         "last_move_san"
@@ -635,7 +669,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "cliff-walking",
@@ -663,7 +699,7 @@
       "demoEndsTerminal": true,
       "terminalReason": "reached_goal",
       "scene": "grid/navigation",
-      "geometry": "4 \u00d7 12 map",
+      "geometry": "4 × 12 map",
       "stateFields": [
         "cliff",
         "cols",
@@ -673,8 +709,8 @@
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "Use rows/cols, position, goal and cliff coordinates. Preserve the long board\u2019s aspect ratio; a square crop can hide the cliff or goal.",
-      "motionNotes": "Advance through actual states only; a cliff reset/reward is the host\u2019s resolved event, not decorative camera motion.",
+      "adaptationNotes": "Use rows/cols, position, goal and cliff coordinates. Preserve the long board’s aspect ratio; a square crop can hide the cliff or goal.",
+      "motionNotes": "Advance through actual states only; a cliff reset/reward is the host’s resolved event, not decorative camera motion.",
       "hiddenInformationNotes": "Public grid/state.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -684,10 +720,21 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "connect-four",
+      "visualDesignRegistry": "src/game/connect-four-designs.ts",
+      "visualDesignCount": 20,
+      "designPresentations": [
+        "card",
+        "arena",
+        "feature",
+        "event"
+      ],
+      "archivedNativePreviews": 6,
       "name": "Connect Four",
       "category": "board",
       "variant": "standard",
@@ -708,14 +755,14 @@
       "demoEndsTerminal": true,
       "terminalReason": "four_in_a_row",
       "scene": "cell/gravity",
-      "geometry": "6 rows \u00d7 7 columns",
+      "geometry": "6 rows × 7 columns",
       "stateFields": [
         "board"
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "frame-view",
       "adaptationNotes": "Use family:connect_four; map first seat to R, second to Y, empty to .. The host selects a column and receives the final occupied cell from Core; the renderer does not find legal columns.",
-      "motionNotes": "Use last for the landed disc, line for actual winning cells and the existing 320 ms drop token. Do not add a disc to a full column or advance the board during thinking.",
+      "motionNotes": "Use last for the landed disc, line for actual winning cells and the existing 320 ms drop token; Board sets --drop to the rows the disc actually fell. The demo derives both cues from consecutive frames (src/game/cues.ts). Do not add a disc to a full column or advance the board during thinking.",
       "hiddenInformationNotes": "Public board.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -771,7 +818,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "cribbage",
@@ -796,7 +845,6 @@
       "geometry": "compact discard/showdown plus starter",
       "stateFields": [
         "discard_counts",
-        "discards",
         "hand_counts",
         "starter"
       ],
@@ -817,6 +865,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "The example shows starter and hand counts; discards/discard_counts are bundled but not fully visualized. This variant does not justify an invented animated pegboard. A full actual adapter must add eligible discard/showdown information explicitly.",
       "motionNotes": "Use the resolved discard/showdown transition; do not animate pegging rounds or count points under unimplemented standard rules.",
+      "ruleVariantNote": "Core variant ends at the showdown after the crib discard; no pegging or counting is shown.",
       "hiddenInformationNotes": "Discard identities and showdown details must follow the current Core reveal policy, not assumptions from synthetic data.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -826,7 +875,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "dou-dizhu",
@@ -880,7 +931,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "euchre",
@@ -925,6 +978,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "Use phase, trump, upcard, current_trick/history and hand counts. Preserve bower/trump identity and the call phase. The demo does not establish a full standard four-player Euchre interface.",
       "motionNotes": "Calling trump and playing a trick are different phases; reveal the supplied upcard/trump and actual trick winner.",
+      "ruleVariantNote": "Core variant is 2-player; standard euchre is 4-player.",
       "hiddenInformationNotes": "Public upcard and played cards are visible; private hands remain host-controlled.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -934,7 +988,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "first-price-sealed-bid-auction",
@@ -980,7 +1036,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "frozen-lake",
@@ -1008,7 +1066,7 @@
       "demoEndsTerminal": true,
       "terminalReason": "reached_goal",
       "scene": "grid/navigation",
-      "geometry": "4 \u00d7 4 map with H holes",
+      "geometry": "4 × 4 map with H holes",
       "stateFields": [
         "goal",
         "grid",
@@ -1016,7 +1074,7 @@
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "Use grid, position and goal. Render the actual map, not a random ice pattern. The current action schema describes deterministic movement; the renderer still consumes Core\u2019s returned position instead of guessing a transition.",
+      "adaptationNotes": "Use grid, position and goal. Render the actual map, not a random ice pattern. The current action schema describes deterministic movement; the renderer still consumes Core’s returned position instead of guessing a transition.",
       "motionNotes": "Update to the returned position after each action. A falling/goal animation must agree with terminal state.",
       "hiddenInformationNotes": "Public map; do not synthesize hidden terrain or moves.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -1027,7 +1085,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "gin-rummy",
@@ -1065,6 +1125,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "The demo shows phase, discard_top and deck/hand counts. It does not present full private melds/deadwood or an actual owner hand. A typed adapter must distinguish draw/discard/knock result phases.",
       "motionNotes": "Show the accepted draw/discard phase; do not deal visual extra cards or animate a private draw face into a public preview.",
+      "ruleVariantNote": "Core deals 7 cards; standard gin rummy deals 10.",
       "hiddenInformationNotes": "Public discard is visible; hidden hands/meld choices require authorized projection.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -1074,7 +1135,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "go",
@@ -1109,13 +1172,13 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cell/intersections",
-      "geometry": "9 \u00d7 9 intersections",
+      "geometry": "9 × 9 intersections",
       "stateFields": [
         "board"
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "frame-view",
-      "adaptationNotes": "Map the 9 \u00d7 9 public board to B/W/. with family:go_board. Captures must already be removed by Core; the renderer does not calculate groups, liberties, ko, territory or score.",
+      "adaptationNotes": "Map the 9 × 9 public board to B/W/. with family:go_board. Captures must already be removed by Core; the renderer does not calculate groups, liberties, ko, territory or score.",
       "motionNotes": "Replace the captured position from the authoritative next frame and supply the placed intersection as last. A pass is a caption/turn event with no invented stone.",
       "hiddenInformationNotes": "Public board; scoring and ko state remain host-owned.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -1126,7 +1189,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 4
     },
     {
       "slug": "gomoku",
@@ -1150,13 +1215,13 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cell/intersections",
-      "geometry": "15 \u00d7 15 intersections",
+      "geometry": "15 × 15 intersections",
       "stateFields": [
         "board"
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "frame-view",
-      "adaptationNotes": "Use family:go_board with 225 B/W/. tokens. The old 9 \u00d7 9 preview is superseded. Supply any actual five-in-a-row separately; generic GoBoard currently highlights last, not a certified winning-line path.",
+      "adaptationNotes": "Use family:go_board with 225 B/W/. tokens. The old 9 × 9 preview is superseded. Supply any actual five-in-a-row separately; generic GoBoard currently highlights last, not a certified winning-line path.",
       "motionNotes": "One placement per authoritative turn. Do not use a fading trail that implies several moves happened together.",
       "hiddenInformationNotes": "Public board.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -1167,7 +1232,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 4
     },
     {
       "slug": "goofspiel",
@@ -1193,6 +1260,7 @@
       "scene": "social/sealed-cards",
       "geometry": "five-card simultaneous bidding",
       "stateFields": [
+        "committed",
         "current_prize",
         "points",
         "round_history"
@@ -1206,7 +1274,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "The scene uses current_prize, points and round_history. The latest public round bids are shown after reveal. Generic CardBoardFrame supports a simple two-hand picture but does not adapt the sealed bid lifecycle.",
       "motionNotes": "Both commitments remain sealed until resolution. Show actual prior prize, bids and points after Core resolves the round.",
-      "hiddenInformationNotes": "Never reveal one side\u2019s pending bid before the other commits.",
+      "hiddenInformationNotes": "Never reveal one side’s pending bid before the other commits.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
       "nativeAdapter": "deferred",
@@ -1215,7 +1283,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "hanabi",
@@ -1259,6 +1329,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "The compact Hanabi demo renders fireworks/clues/lives and concealed hand counts. It does not model a full viewer-specific cooperative hand display. Real adaptation must preserve who can see whose cards and final-round state.",
       "motionNotes": "Firework/life/clue changes must be engine-resolved; no preview-only successful play where the move actually failed.",
+      "ruleVariantNote": "Core variant has 2 colours and a 12-card deck (standard: 5 colours, 50 cards); the trace discards while holding 8 clue tokens, which standard Hanabi forbids.",
       "hiddenInformationNotes": "Hanabi visibility differs from adversarial poker; use explicit perspective projections, not a blanket show-own-hand rule.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -1268,7 +1339,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "hearts",
@@ -1310,6 +1383,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "Use current_trick, trick_history, penalties and hand_counts. The demo shows the latest trick, while a full replay needs host-selected history and score context. Do not assume four-player standard Hearts.",
       "motionNotes": "Accepted plays, trick completion and penalties come from Core; no decorative hearts scored before a resolved trick.",
+      "ruleVariantNote": "Core variant is 2-player (standard is 4-player); the first trick is led with 3 of hearts rather than 2 of clubs, and a heart is led before hearts are broken while the leader holds a club.",
       "hiddenInformationNotes": "Public played cards only; keep remaining hands hidden outside owner perspective.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -1319,7 +1393,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "hex",
@@ -1343,7 +1419,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cell/hex",
-      "geometry": "11 \u00d7 11 skewed hex grid",
+      "geometry": "11 × 11 skewed hex grid",
       "stateFields": [
         "board"
       ],
@@ -1360,7 +1436,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "ice-hockey-style-arena",
@@ -1424,7 +1502,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "leduc-holdem",
@@ -1477,8 +1557,9 @@
         ]
       },
       "actualStateSupport": "partial-frame-view",
-      "adaptationNotes": "The demo renders street, public board, pot/stacks and card backs. Current compact fixed-menu Leduc state is distinct from Texas Hold\u2019em. Actual multi-seat/owner-hand adaptation is not exported by generic CardBoardFrame.",
+      "adaptationNotes": "The demo renders street, public board, pot/stacks and card backs. Current compact fixed-menu Leduc state is distinct from Texas Hold’em. Actual multi-seat/owner-hand adaptation is not exported by generic CardBoardFrame.",
       "motionNotes": "Betting and street changes come from Core. Do not invent hole cards, bet sizes or an extra flop/turn/river.",
+      "ruleVariantNote": "Leduc Hold'em is a 2-player game; the bundled trace seats 4 players.",
       "hiddenInformationNotes": "Keep private hands behind authorized owner projection. Public stack counts do not authorize private card faces.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -1488,7 +1569,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "liars-dice",
@@ -1539,7 +1622,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "limit-texas-holdem",
@@ -1568,7 +1653,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cards/poker",
-      "geometry": "four-seat compact Hold\u2019em",
+      "geometry": "four-seat compact Hold’em",
       "stateFields": [
         "board",
         "committed",
@@ -1594,7 +1679,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "Render only public community board, street, pot and stack data. The generic card Board has only top/bottom seats, so a full four-seat actual stage requires a dedicated adapter.",
       "motionNotes": "Use the limit betting action set, authoritative committed/folded state and reveal order; no random pot increments.",
-      "hiddenInformationNotes": "Never include opponents\u2019 hole cards until publicly revealed under the match policy.",
+      "hiddenInformationNotes": "Never include opponents’ hole cards until publicly revealed under the match policy.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
       "nativeAdapter": "deferred",
@@ -1603,7 +1688,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "lunar-lander",
@@ -1663,7 +1750,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "mahjong",
@@ -1702,6 +1791,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "The demo draws recent discard tiles and wall/hand counts; it is the shipped compact draw/discard variant, not a complete traditional Mahjong table. The generic two-row card frame is insufficient for a real four-seat tile layout.",
       "motionNotes": "Wall decrease, discards and terminal changes come from Core. Do not invent calls, melds or scoring forms absent from the variant.",
+      "ruleVariantNote": "Core variant uses 108 tiles with no honours and 10-tile hands (standard: 136 or 144 tiles, 13-tile hands); no calls occur in the trace.",
       "hiddenInformationNotes": "Concealed tile hands stay concealed; the example uses public discard history.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -1711,7 +1801,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "mancala",
@@ -1735,7 +1827,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "special-board/pits",
-      "geometry": "2 \u00d7 6 pits plus 2 stores",
+      "geometry": "2 × 6 pits plus 2 stores",
       "stateFields": [
         "pits",
         "stores"
@@ -1762,7 +1854,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "mountain-car",
@@ -1797,7 +1891,7 @@
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "The demo maps position from approximately \u22121.2\u20260.6 onto a sinusoidal track and rotates the car to its tangent. Velocity remains an engine field; actual unit mapping needs a typed adapter.",
+      "adaptationNotes": "The demo maps position from approximately −1.2…0.6 onto a sinusoidal track and rotates the car to its tangent. Velocity remains an engine field; actual unit mapping needs a typed adapter.",
       "motionNotes": "Use real position/velocity and host clock. Do not change position merely to keep the art moving or report the goal from decoration.",
       "hiddenInformationNotes": "Public numeric state; no invented physics.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -1808,7 +1902,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "negotiation",
@@ -1854,7 +1950,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "nine-mens-morris",
@@ -1889,7 +1987,7 @@
         ]
       },
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "Use the explicit 24-node graph and reserves/phase. A 7 \u00d7 7 coordinate canvas locates nodes; it is not a 49-cell playable grid. Preserve placement, movement and capture phases.",
+      "adaptationNotes": "Use the explicit 24-node graph and reserves/phase. A 7 × 7 coordinate canvas locates nodes; it is not a 49-cell playable grid. Preserve placement, movement and capture phases.",
       "motionNotes": "Use node identifiers for selection and captured-node removal; show reserve changes and mills only when validated by Core.",
       "hiddenInformationNotes": "Public board and reserves.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -1900,7 +1998,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "no-limit-texas-holdem",
@@ -1931,7 +2031,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cards/poker",
-      "geometry": "four-seat compact no-limit Hold\u2019em",
+      "geometry": "four-seat compact no-limit Hold’em",
       "stateFields": [
         "board",
         "committed",
@@ -1966,7 +2066,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "othello",
@@ -2010,7 +2112,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cell/discs",
-      "geometry": "8 \u00d7 8",
+      "geometry": "8 × 8",
       "stateFields": [
         "board"
       ],
@@ -2027,7 +2129,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "paddle-ball",
@@ -2080,7 +2184,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "pentago",
@@ -2097,13 +2203,13 @@
         "description": "Place at cell then rotate a quadrant, e.g. '14:2:cw'."
       },
       "sameArenaVersion": false,
-      "demoFrames": 13,
-      "demoActions": 12,
+      "demoFrames": 28,
+      "demoActions": 27,
       "demoDelayMs": 900,
-      "demoEndsTerminal": false,
-      "terminalReason": null,
+      "demoEndsTerminal": true,
+      "terminalReason": "five_in_a_row",
       "scene": "cell/quadrants",
-      "geometry": "6 \u00d7 6 with four 3 \u00d7 3 quadrants",
+      "geometry": "6 × 6 with four 3 × 3 quadrants",
       "stateFields": [
         "board"
       ],
@@ -2120,7 +2226,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 4
     },
     {
       "slug": "prisoners-dilemma",
@@ -2168,7 +2276,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "rock-paper-scissors",
@@ -2208,7 +2318,7 @@
       "actualStateSupport": "not-adapted",
       "adaptationNotes": "Render the two revealed_actions panels. A standard loop cycling all hand signs would misrepresent a match; use a named bundled demonstration only for artwork.",
       "motionNotes": "Commitments stay concealed and reveal together. Result and rematch remain host-owned.",
-      "hiddenInformationNotes": "Never leak the first player\u2019s pending action while waiting for the second.",
+      "hiddenInformationNotes": "Never leak the first player’s pending action while waiting for the second.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
       "nativeAdapter": "deferred",
@@ -2217,7 +2327,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "shedding-card-game",
@@ -2263,7 +2375,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "shogi",
@@ -2285,7 +2399,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "special-board/shogi",
-      "geometry": "9 \u00d7 9 and captured-piece hands",
+      "geometry": "9 × 9 and captured-piece hands",
       "stateFields": [
         "board",
         "hands"
@@ -2308,7 +2422,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "spades",
@@ -2350,6 +2466,7 @@
       "actualStateSupport": "partial-frame-view",
       "adaptationNotes": "Use current_trick, trick_history, tricks and counts. A future actual stage must preserve spade-trump and follow-suit semantics from the variant; the renderer does not enforce them.",
       "motionNotes": "Show real trick sequence/winner and only update trick totals from authoritative state.",
+      "ruleVariantNote": "Core variant is 2-player (standard is 4-player); a spade is led before spades are broken while the leader still holds a club.",
       "hiddenInformationNotes": "Public trick history; hidden hand faces require authorization.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
       "accessibilityNotes": "Use the shared accessible-state contract; supply game-specific position/turn/outcome text and host-owned keyboard action controls. Decorative artwork must be labelled as a demonstration.",
@@ -2359,7 +2476,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "taxi",
@@ -2389,7 +2508,7 @@
       "demoEndsTerminal": true,
       "terminalReason": "passenger_delivered",
       "scene": "grid/navigation",
-      "geometry": "5 \u00d7 5 grid",
+      "geometry": "5 × 5 grid",
       "stateFields": [
         "cols",
         "destination",
@@ -2411,7 +2530,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "tic-tac-toe",
@@ -2435,7 +2556,7 @@
       "demoEndsTerminal": true,
       "terminalReason": "draw",
       "scene": "cell/marks",
-      "geometry": "3 \u00d7 3",
+      "geometry": "3 × 3",
       "stateFields": [
         "board"
       ],
@@ -2452,7 +2573,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "ultimate-tic-tac-toe",
@@ -2476,7 +2599,7 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "cell/nested-marks",
-      "geometry": "9 local 3 \u00d7 3 boards on a 9 \u00d7 9 canvas",
+      "geometry": "9 local 3 × 3 boards on a 9 × 9 canvas",
       "stateFields": [
         "boards",
         "local_status",
@@ -2484,7 +2607,7 @@
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "partial-frame-view",
-      "adaptationNotes": "The demo flattens boards into a 9 \u00d7 9 X/O view and overlays local boundaries/next_board. Generic Board alone lacks local_status and forced-board constraints.",
+      "adaptationNotes": "The demo flattens boards into a 9 × 9 X/O view and overlays local boundaries/next_board. Generic Board alone lacks local_status and forced-board constraints.",
       "motionNotes": "Preserve local win/draw state and the forced next board from Core. Do not highlight an arbitrary local board or advertise every empty square as legal.",
       "hiddenInformationNotes": "Public local boards, local status and next-board constraint.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -2495,7 +2618,9 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     },
     {
       "slug": "xiangqi",
@@ -2518,13 +2643,13 @@
       "demoEndsTerminal": false,
       "terminalReason": null,
       "scene": "special-board/xiangqi",
-      "geometry": "10 rows \u00d7 9 intersections",
+      "geometry": "10 rows × 9 intersections",
       "stateFields": [
         "board"
       ],
       "nestedObjectFields": {},
       "actualStateSupport": "not-adapted",
-      "adaptationNotes": "The demo uses intersections, river, palaces and side-specific Chinese labels. Current catalogue variant is core_compact_xiangqi. Do not force pieces into an 8 \u00d7 8 chess board or flatten horse/cannon/king identity.",
+      "adaptationNotes": "The demo uses intersections, river, palaces and side-specific Chinese labels. Current catalogue variant is core_compact_xiangqi. Do not force pieces into an 8 × 8 chess board or flatten horse/cannon/king identity.",
       "motionNotes": "Apply the full authoritative board; animate only the supplied action. Preserve the river and palace geometry while scaling.",
       "hiddenInformationNotes": "Public board; glyph availability and opposite-side labels must be checked for the chosen font.",
       "responsiveNotes": "Use the shared responsive contract; preserve this game geometry and expose a larger view when compact labels become illegible. Do not crop meaningful state.",
@@ -2535,7 +2660,16 @@
         "src/game/scene.tsx",
         "src/game/board.tsx",
         "src/game/game-demonstrations.json"
-      ]
+      ],
+      "visualDesignRegistry": "src/game/visual-editions.json",
+      "visualDesignCount": 3
     }
-  ]
+  ],
+  "designLab": {
+    "review": "docs/reviews/2026-11-01-game-design-lab.md",
+    "gamesReviewed": 50,
+    "authoredStudies": 33,
+    "authoredFrames": 47,
+    "scope": "Presentation and pinned public-trace validation; authored studies are not engine certification."
+  }
 }

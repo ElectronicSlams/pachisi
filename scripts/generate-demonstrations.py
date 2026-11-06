@@ -1,8 +1,13 @@
 """Build synthetic public preview frames with the preview's pinned Core.
 
-Run using the Core checkout's Python: generate-game-demonstrations.py
---core-root /path/to/core [--check]. No match data, services or hidden suites.
-Only allowlisted public fields are exported; action plans are reproducible.
+Run using the Core checkout's Python:
+    python scripts/generate-demonstrations.py --core-root /path/to/core [--check]
+No match data, services or hidden suites. Only allowlisted public fields are
+exported; action plans are reproducible. The output JSON is pinned by sha256 in
+docs/game-coverage.json and must stay byte-for-byte reproducible, so frames carry
+no presentation-only fields: last-move and win-line cues are derived at render
+time (src/game/cues.ts). Every transition is re-checked without Core by
+scripts/validate-demonstrations.py (`pnpm check:physics`, docs/physics.md).
 """
 import argparse
 import json
@@ -13,47 +18,9 @@ import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 SEED = 112  # Public artwork seed, unrelated to any evaluation or match.
-FIELDS = {
-    "chess": "fen last_move_san", "go": "board", "hex": "board",
-    "connect-four": "board", "tic-tac-toe": "board", "othello": "board",
-    "checkers": "board", "shogi": "board hands", "xiangqi": "board",
-    "gomoku": "board", "pentago": "board",
-    "ultimate-tic-tac-toe": "boards local_status next_board",
-    "nine-mens-morris": "board reserves phase", "mancala": "pits stores",
-    "backgammon": "board dice bar borne_off",
-    "battleship": "grid_size shots hits remaining_ship_counts",
-    "blackjack": "player_hand dealer_hand",
-    "leduc-holdem": "street board pot stacks committed folded",
-    "limit-texas-holdem": "street board pot stacks committed folded",
-    "no-limit-texas-holdem": "street board pot stacks committed folded",
-    "shedding-card-game": "discard deck_count hand_counts",
-    "crazy-eights": "discard deck_count hand_counts",
-    "gin-rummy": "phase discard_top deck_count hand_counts",
-    "mahjong": "wall_count discard_pile hand_counts",
-    "dou-dizhu": "landlord hand_counts last_play passes",
-    "bridge": "contract current_trick trick_history tricks hand_counts",
-    "hearts": "current_trick trick_history penalties hand_counts",
-    "spades": "current_trick trick_history tricks hand_counts",
-    "euchre": "phase trump upcard current_trick history tricks hand_counts",
-    "cribbage": "starter discards discard_counts hand_counts",
-    "hanabi": "fireworks discard clues lives deck_count hand_counts",
-    "liars-dice": "current_bid revealed_dice",
-    "goofspiel": "current_prize points round_history",
-    "rock-paper-scissors": "revealed_actions",
-    "prisoners-dilemma": "revealed_actions",
-    "bargaining": "last_offer", "negotiation": "last_offer",
-    "first-price-sealed-bid-auction": "revealed_bids",
-    "taxi": "rows cols taxi passenger destination onboard",
-    "frozen-lake": "grid position goal",
-    "cliff-walking": "rows cols position goal cliff",
-    "cartpole": "cart pole", "mountain-car": "position velocity goal_position",
-    "lunar-lander": "lander fuel landing_pad",
-    "car-racing": "car track_window", "bipedal-walker": "walker terrain_window",
-    "paddle-ball": "paddle_x ball bounces", "alien-shooter": "player_x aliens bullets destroyed",
-    "boxing-style-arena": "health stamina stances distance",
-    "ice-hockey-style-arena": "positions puck_owner goals rink",
-}
+FIELDS = json.loads((ROOT / "src/game/public-fields.json").read_text())
 PLANS = {
+    "car-racing": "accelerate left right brake accelerate right left accelerate accelerate accelerate accelerate accelerate accelerate accelerate".split(),
     "chess": "e2e4 e7e5 g1f3 b8c6 f1c4 g8f6 d2d3 f8c5 c2c3 d7d6".split(),
     "connect-four": [3, 2, 3, 2, 3, 2, 3],
     "tic-tac-toe": [4, 0, 2, 6, 3, 5, 8, 1, 7],
@@ -104,6 +71,9 @@ def choose(slug, state, legal, step):
     elif slug == "euchre":
         preferred = "call:D" if p["phase"] == "call" else None
     elif slug in {"leduc-holdem", "limit-texas-holdem", "no-limit-texas-holdem"}:
+        # Always checking keeps the plan deterministic, but it means the Limit and
+        # No-limit demos are identical and no bet/raise/fold is ever shown
+        # (docs/physics.md, "What the traces never exercise").
         preferred = "check" if "check" in legal else "call"
     elif slug in {"go", "gomoku", "hex"}:
         n = len(p["board"]); target = n * (n // 2) + n // 2
@@ -112,6 +82,8 @@ def choose(slug, state, legal, step):
         return min(legal, key=lambda a: (abs(a % 9 - 4), abs(a // 9 - 4)))
     elif slug == "mancala":
         return legal[(step * 2) % len(legal)]
+    elif slug == "pentago" and step == 1:
+        return next(move for move in legal if move.endswith(":ccw"))
     elif slug == "goofspiel":
         return legal[-1] if state.active_player == "player_2" else legal[0]
     if slug in CONTROL or slug == "boxing-style-arena":
@@ -120,6 +92,8 @@ def choose(slug, state, legal, step):
 
 
 def invariants(slug, p):
+    # These mirror Core's variants at the artwork pin (e.g. 5 checkers a side), not
+    # the standard published rules; scripts/validate-demonstrations.py reports both.
     if slug == "mancala":
         assert sum(sum(v) for v in p["pits"].values()) + sum(p["stores"].values()) == 48
     if slug == "backgammon":
@@ -145,9 +119,9 @@ def finite(value):
 
 def frame(slug, state, actor=None, action=None):
     p = state.public_state
-    public = {k: p[k] for k in FIELDS[slug].split() if k in p}
+    public = {k: p[k] for k in FIELDS[slug] if k in p}
     for key in ("history", "trick_history", "round_history", "discard_pile"):
-        if key in public: public[key] = public[key][-1:]
+        if key in public: public[key] = public[key][-1:]  # last entry only: a frame never shows older tricks/rounds
     caption = "Opening position" if actor is None else actor.replace("player_", "P") + " · " + str(action)
     if slug in SEALED and actor and not state.terminal:
         caption = actor.replace("player_", "P") + " · sealed choice"
@@ -167,10 +141,11 @@ def main():
     from eslams.arenas import registry
     assert set(registry.list()) == set(FIELDS)
     games = {}; actions_count = 0
+    validation_inputs = {}
     for slug in registry.list():
         arena = registry.create(slug); state = arena.initial_state(SEED)
         frames = [frame(slug, state)]; actions = []
-        length = len(PLANS[slug]) if slug in PLANS else 60 if slug in CONTROL else 12
+        length = len(PLANS[slug]) if slug in PLANS else 60 if slug in CONTROL or slug == "pentago" else 12
         for step in range(length):
             if state.terminal: break
             legal = arena.legal_actions_for(state, state.active_player)
@@ -178,15 +153,35 @@ def main():
             assert arena.is_legal(state, actor, action), (slug, step, action)
             state = arena.apply_action(state, actor, action)
             invariants(slug, state.public_state)
-            actions.append({"player": actor, "action": action})
-            frames.append(frame(slug, state, actor, action))
+            current = frame(slug, state, actor, action)
+            public_action = action
+            if slug in SEALED or slug == "cribbage":
+                validation_inputs.setdefault(slug, []).append(action)
+                public_action = "sealed choice" if slug in SEALED else "discard two"
+                if slug == "cribbage":
+                    if not state.terminal:
+                        current["caption"] = actor.replace("player_", "P") + " · discarded two"
+                elif slug == "goofspiel":
+                    current["state"]["committed"] = [actor] if actor == "player_1" else []
+                    if actor == "player_2" and not state.terminal:
+                        current["caption"] = "Both bids revealed"
+            if slug == "pentago":
+                cell, quadrant, direction = action.split(":")
+                current["placement"] = {"cell": int(cell), "quadrant": int(quadrant), "direction": direction}
+            actions.append({"player": actor, "action": public_action})
+            frames.append(current)
         assert len(frames) > 1
         actions_count += len(actions)
         games[slug] = {"version": arena.version, "delay": 100 if slug in CONTROL else 900, "frames": frames, "actions": actions}
     content = json.dumps({"coreCommit": pin, "publicArtworkSeed": SEED, "validatedActions": actions_count, "games": games}, ensure_ascii=False, separators=(",", ":")) + "\n"
     target = ROOT / "src/game/game-demonstrations.json"
-    if opts.check: assert target.read_text() == content, "Generated demonstrations drifted; regenerate and review"
-    else: target.write_text(content)
+    inputs = ROOT / "scripts/fixtures/synthetic-validation-actions.json"
+    for path, payload in [(target, content), (inputs, json.dumps(validation_inputs, indent=2) + "\n")]:
+        if opts.check:
+            assert path.read_text() == payload, f"{path.name} drifted; regenerate and review"
+        else:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(payload)
     print(f"{'Verified' if opts.check else 'Generated'} {len(games)} games; {actions_count} legal transitions; pinned Core {pin}")
 
 

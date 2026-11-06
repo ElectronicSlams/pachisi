@@ -1,0 +1,248 @@
+/* ============================================================
+   eSlams — Design Tokens
+   Light default · Dark via [data-theme="dark"] or system preference
+   ============================================================ */
+
+/* ---------- LIGHT (default) ---------- */
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg:          #ffffff;
+  --surface:     #ffffff;
+  --surface-2:   #f7f7f9;
+  --surface-3:   #f0f0f3;
+  --surface-inset:#fafafb;
+
+  /* Borders */
+  --border:        #e8e8ec;
+  --border-strong: #d6d6dd;
+  --border-faint:  #f0f0f3;
+
+  /* Text */
+  --text:   #0b0b0d;
+  --text-2: #56565f;
+  --text-3: #8a8a94;
+  --text-on-accent: #ffffff;
+
+  /* Accent — eSlams logo blue */
+  --accent:        #1b32c4;
+  --accent-hover:  #16299f;
+  --accent-press:  #112184;
+  --accent-soft:   rgba(27, 50, 196, 0.08);
+  --accent-softer: rgba(27, 50, 196, 0.045);
+  --accent-line:   rgba(27, 50, 196, 0.22);
+
+  /* Status — muted */
+  --win:  #1f8a4c;
+  --win-soft: rgba(31, 138, 76, 0.10);
+  --loss: #c43d33;
+  --loss-soft: rgba(196, 61, 51, 0.10);
+  --draw: #b0791b;
+  --draw-soft: rgba(176, 121, 27, 0.12);
+
+  /* Medals */
+  --gold:   #c79a2e;
+  --silver: #9aa0aa;
+  --bronze: #b07440;
+
+  /* Board (Arena / Battlefield) */
+  --board-light: #efe9dd;
+  --board-dark:  #b9a888;
+  --board-line:  #9c9486;
+  --board-bg:    #f4f1ea;
+  --stone-black: #16161a;
+  --stone-white: #f6f5f2;
+
+  /* Terminal (always dark) */
+  --term-bg:   #16161a;
+  --term-bar:  #1f1f25;
+  --term-text: #e8e8ec;
+  --term-dim:  #8b8b96;
+  --term-green:#7ee0a8;
+  --term-blue: #8fa6ff;
+  --term-amber:#f1c277;
+  --term-pink: #f59ec0;
+
+  /* Elevation — subtle, no heavy shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 15, 20, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 15, 20, 0.06), 0 1px 3px rgba(15, 15, 20, 0.05);
+  --shadow-lg: 0 12px 40px rgba(15, 15, 20, 0.10), 0 2px 8px rgba(15, 15, 20, 0.05);
+  --shadow-pop: 0 8px 28px rgba(15, 15, 20, 0.12);
+
+  /* Radii */
+  --r-xs: 5px;
+  --r-sm: 7px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", "SF Mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  /* Layout */
+  --maxw: 1240px;
+  --nav-h: 60px;
+  --filter-h: 56px;
+}
+
+/* ---------- DARK token values (shared) ---------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:          #0c0c0e;
+  --surface:     #121215;
+  --surface-2:   #18181c;
+  --surface-3:   #1f1f24;
+  --surface-inset:#101013;
+
+  --border:        rgba(255,255,255,0.085);
+  --border-strong: rgba(255,255,255,0.16);
+  --border-faint:  rgba(255,255,255,0.05);
+
+  --text:   #ededf0;
+  --text-2: #a2a2ad;
+  --text-3: #6b6b76;
+  --text-on-accent: #ffffff;
+
+  --accent:        #647cff;
+  --accent-hover:  #7a8dff;
+  --accent-press:  #8f9eff;
+  --accent-soft:   rgba(100, 124, 255, 0.14);
+  --accent-softer: rgba(100, 124, 255, 0.07);
+  --accent-line:   rgba(100, 124, 255, 0.30);
+
+  --win:  #3ec97e;
+  --win-soft: rgba(62, 201, 126, 0.13);
+  --loss: #ec6a5f;
+  --loss-soft: rgba(236, 106, 95, 0.14);
+  --draw: #e0a94a;
+  --draw-soft: rgba(224, 169, 74, 0.14);
+
+  --gold:   #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  --board-light: #2b2b33;
+  --board-dark:  #3a3a45;
+  --board-line:  #4a4a56;
+  --board-bg:    #1c1c21;
+  --stone-black: #0b0b0d;
+  --stone-white: #e9e9ee;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- DARK via system preference (when no manual override) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --bg:          #0c0c0e;
+    --surface:     #121215;
+    --surface-2:   #18181c;
+    --surface-3:   #1f1f24;
+    --surface-inset:#101013;
+
+    --border:        rgba(255,255,255,0.085);
+    --border-strong: rgba(255,255,255,0.16);
+    --border-faint:  rgba(255,255,255,0.05);
+
+    --text:   #ededf0;
+    --text-2: #a2a2ad;
+    --text-3: #6b6b76;
+    --text-on-accent: #ffffff;
+
+    --accent:        #647cff;
+    --accent-hover:  #7a8dff;
+    --accent-press:  #8f9eff;
+    --accent-soft:   rgba(100, 124, 255, 0.14);
+    --accent-softer: rgba(100, 124, 255, 0.07);
+    --accent-line:   rgba(100, 124, 255, 0.30);
+
+    --win:  #3ec97e;
+    --win-soft: rgba(62, 201, 126, 0.13);
+    --loss: #ec6a5f;
+    --loss-soft: rgba(236, 106, 95, 0.14);
+    --draw: #e0a94a;
+    --draw-soft: rgba(224, 169, 74, 0.14);
+
+    --gold:   #e3b94a;
+    --silver: #b6bcc6;
+    --bronze: #cd8b54;
+
+    --board-light: #2b2b33;
+    --board-dark:  #3a3a45;
+    --board-line:  #4a4a56;
+    --board-bg:    #1c1c21;
+    --stone-black: #0b0b0d;
+    --stone-white: #e9e9ee;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv01","ss01","tnum" 0;
+  transition: background-color 0.22s ease, color 0.22s ease;
+}
+::selection { background: var(--accent-soft); }
+
+h1,h2,h3,h4 { margin: 0; font-weight: 650; letter-spacing: -0.02em; color: var(--text); }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+img { display: block; }
+input, select, textarea { font-family: inherit; }
+
+.mono { font-family: var(--font-mono); font-feature-settings: "tnum"; }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* Scrollbars */
+* { scrollbar-width: thin; scrollbar-color: var(--border-strong) transparent; }
+*::-webkit-scrollbar { width: 9px; height: 9px; }
+*::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; border: 2px solid transparent; background-clip: padding-box; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+/* Shared layout helpers */
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 28px; }
+@media (max-width: 720px){ .wrap { padding: 0 18px; } }
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+/* Focus */
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+@keyframes fadeUp { from { opacity:0; transform: translateY(10px);} to {opacity:1; transform:none;} }
+@keyframes fadeIn { from { opacity:0;} to {opacity:1;} }
+@keyframes popIn { from { transform: scale(0.35);} to { transform: scale(1);} }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.45;} }
+@keyframes spin { to { transform: rotate(360deg);} }

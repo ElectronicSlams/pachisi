@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2R366BN88N"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-2R366BN88N');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>
+        Repeated Prisoner's Dilemma Simulator
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css">
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/chart.js">
+    </script>
+</head>
+
+<body>
+
+<h1>
+    Repeated Prisoner's Dilemma Simulator
+</h1>
+
+<p class="description">
+    同じ2人が囚人のジレンマを繰り返す中で、
+    戦略や実装ミスによって協力関係が
+    どのように維持・崩壊・回復するかを観察します。
+</p>
+
+<section class="game-structure">
+
+    <h2>ゲームの構造</h2>
+
+    <div class="structure-grid">
+
+        <div class="structure-card">
+            <h3>Players</h3>
+            <p>
+                Player AとPlayer Bの2人が、
+                同じ相手と繰り返しゲームを行います。
+            </p>
+        </div>
+
+        <div class="structure-card">
+            <h3>Actions</h3>
+            <p>
+                各プレイヤーは毎期、
+                協力 C または 裏切り D を選択します。
+            </p>
+        </div>
+
+        <div class="structure-card">
+            <h3>Repetition</h3>
+            <p>
+                同じゲームを指定したラウンド数だけ繰り返します。
+                各戦略は過去の行動や利得を参照して次の行動を決めます。
+            </p>
+        </div>
+
+        <div class="structure-card">
+            <h3>Error</h3>
+            <p>
+                実装ミスが発生すると、
+                戦略が意図した行動とは逆の行動を取ります。
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="payoff-structure">
+
+    <h2>利得構造</h2>
+
+    <table class="payoff-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Player B：C</th>
+                <th>Player B：D</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Player A：C</th>
+                <td>3, 3</td>
+                <td>0, 5</td>
+            </tr>
+
+            <tr>
+                <th>Player A：D</th>
+                <td>5, 0</td>
+                <td>1, 1</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p class="payoff-note">
+        各セルは「Player Aの利得, Player Bの利得」を表します。
+    </p>
+
+</section>
+
+<section class="strategy-guide">
+
+    <h2>戦略</h2>
+
+    <div class="strategy-grid">
+
+        <div class="strategy-card">
+            <h3>Tit for Tat</h3>
+            <p>
+                最初は協力し、その後は相手の前回行動をそのまま返します。
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <h3>Forgiving TFT</h3>
+            <p>
+                Tit for Tatを基本としつつ、
+                相手が裏切っても一定確率で協力を返します。
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <h3>Grim Trigger</h3>
+            <p>
+                最初は協力しますが、
+                相手が一度でも裏切ると以後ずっと裏切ります。
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <h3>Win-Stay Lose-Shift</h3>
+            <p>
+                前回の結果に満足すれば同じ行動を続け、
+                不満なら行動を切り替えます。
+            </p>
+        </div>
+
+        <div class="strategy-card">
+            <h3>Random</h3>
+            <p>
+                毎期、協力か裏切りをランダムに選択します。
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="simulation-settings">
+
+    <h2>シミュレーション設定</h2>
+
+    <p class="settings-description">
+        2人の戦略、繰り返し回数、実装ミスの確率を設定してください。
+    </p>
+
+    <div class="controls">
+
+        <div>
+            <label for="strategyA">
+                Player A の戦略
+            </label>
+
+            <select id="strategyA">
+                <option value="TIT_FOR_TAT">Tit for Tat</option>
+                <option value="FORGIVING_TIT_FOR_TAT">Forgiving TFT</option>
+                <option value="GRIM_TRIGGER">Grim Trigger</option>
+                <option value="WIN_STAY_LOSE_SHIFT">Win-Stay Lose-Shift</option>
+                <option value="RANDOM">Random</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="strategyB">
+                Player B の戦略
+            </label>
+
+            <select id="strategyB">
+                <option value="TIT_FOR_TAT">Tit for Tat</option>
+                <option value="FORGIVING_TIT_FOR_TAT">Forgiving TFT</option>
+                <option value="GRIM_TRIGGER">Grim Trigger</option>
+                <option value="WIN_STAY_LOSE_SHIFT">Win-Stay Lose-Shift</option>
+                <option value="RANDOM">Random</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="rounds">
+                繰り返し回数
+            </label>
+
+            <input
+                id="rounds"
+                type="number"
+                value="100"
+                min="1"
+                max="10000"
+            >
+
+            <small>
+                ゲームを繰り返すラウンド数
+            </small>
+        </div>
+
+        <div>
+            <label for="errorRate">
+                実装ミス確率
+            </label>
+
+            <input
+                id="errorRate"
+                type="number"
+                step="0.01"
+                value="0"
+                min="0"
+                max="1"
+            >
+
+            <small>
+                0〜1で指定（例：0.05 = 5%）
+            </small>
+        </div>
+
+    </div>
+
+    <button id="runButton" class="run-button">
+        シミュレーション開始
+    </button>
+
+</section>
+
+<section class="round-flow">
+
+    <h2>1ラウンドの流れ</h2>
+
+    <div class="flow-row">
+
+        <div class="flow-step">
+            <span class="flow-number">1</span>
+            <h3>戦略から行動を決定</h3>
+            <p>
+                各プレイヤーが自身の戦略と
+                これまでの履歴から、
+                CまたはDを選びます。
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-step">
+            <span class="flow-number">2</span>
+            <h3>実装ミス</h3>
+            <p>
+                設定した確率で、
+                意図した行動が
+                CからD、またはDからCへ反転します。
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-step">
+            <span class="flow-number">3</span>
+            <h3>利得を決定</h3>
+            <p>
+                実際に選ばれたC・Dの組合せから、
+                利得表に従って両者の利得が決まります。
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-step">
+            <span class="flow-number">4</span>
+            <h3>履歴を更新</h3>
+            <p>
+                実際の行動と利得を記録し、
+                次のラウンドの戦略判断に利用します。
+            </p>
+        </div>
+
+        <div class="flow-arrow">→</div>
+
+        <div class="flow-step">
+            <span class="flow-number">5</span>
+            <h3>次のラウンドへ</h3>
+            <p>
+                指定したラウンド数まで
+                同じ2人でゲームを繰り返します。
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="results-section">
+
+    <h2>シミュレーション結果</h2>
+
+    <div class="results-grid">
+
+        <div class="result-card">
+            <h3>Statistics</h3>
+
+            <div id="statistics">
+                <p class="placeholder-text">
+                    シミュレーションを実行すると、
+                    協力率や平均利得が表示されます。
+                </p>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <h3>累積利得の推移</h3>
+
+            <p class="result-description">
+                各ラウンドまでに獲得した利得の合計を表示します。
+                線の傾きが大きいほど、その期間に高い利得を獲得しています。
+            </p>
+
+            <canvas id="payoffChart"></canvas>
+
+            <div class="chart-guide">
+                <p>
+                    <strong>見方：</strong>
+                    2本の線が近い場合は両者が同程度の利得を獲得し、
+                    線の差が広がる場合は一方がより高い利得を得ています。
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="event-section">
+
+    <h2>Event Log</h2>
+
+    <p class="result-description">
+        実装ミスや協力関係の崩壊・回復など、
+        ゲーム中に起きた重要な出来事を記録します。
+    </p>
+
+    <div id="eventLog">
+        <p class="placeholder-text">
+            シミュレーションを実行するとイベントが表示されます。
+        </p>
+    </div>
+
+</section>
+
+<script
+    type="module"
+    src="script.js">
+</script>
+
+</body>
+
+</html>

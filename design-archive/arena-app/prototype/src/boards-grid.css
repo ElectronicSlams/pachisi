@@ -1,0 +1,361 @@
+/* =====================================================================
+   eSlams Arena app prototype · boards-grid.css  [C1]
+   Shared board language (.bd- prefix, tokens only) + grid families.
+   Board plane --board-bg, hairline --board-line, cells one step off the
+   plane, faint desaturated-accent dots on empty cells. Pieces are content
+   (--stone-*); accent only for last move, legal targets, active, result.
+   Last move: arrive -> one 1px accent ring pulse (bdRing) -> thin
+   --accent-line outline. Reduced motion snaps every beat to its end.
+   ===================================================================== */
+
+/* ---------- host + sizes ---------- */
+.bd-host {
+  --bd-move: var(--motion-move, 220ms);
+  --bd-drop: var(--motion-drop, 320ms);
+  --bd-reveal: var(--motion-reveal, 300ms);
+  --bd-fast: var(--motion-reveal-fast, 180ms);
+  --bd-result: var(--motion-result, 520ms);
+  --bd-ease: var(--ease, cubic-bezier(.2, .8, .2, 1));
+  --bd-cell: var(--board-light);
+  --bd-dotc: color-mix(in oklab, var(--accent) 38%, var(--board-line));
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+/* light theme: cells sit lighter than the warm plane */
+#phone .bd-host, .es-theme .bd-host { --bd-cell: var(--surface); }
+#phone[data-theme="dark"] .bd-host, .es-theme[data-theme="dark"] .bd-host { --bd-cell: var(--board-light); }
+@media (prefers-color-scheme: dark) {
+  #phone:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+  .es-theme:not([data-theme="light"]):not([data-theme="dark"]) .bd-host { --bd-cell: var(--board-light); }
+}
+
+.bd-size-stage   { --bd-w: 354px; --bd-pad: 10px; --bd-r: var(--r-lg); }
+.bd-size-share   { --bd-w: 300px; --bd-pad: 9px;  --bd-r: var(--r-lg); }
+.bd-size-preview { --bd-w: clamp(160px, 100%, 220px); --bd-pad: 7px; --bd-r: var(--r-md); }
+.bd-size-poster  { --bd-w: 120px; --bd-pad: 4px;  --bd-r: var(--r-sm); }
+
+.bd-board {
+  position: relative;
+  width: min(var(--bd-w), 100%);
+  padding: var(--bd-pad);
+  background: var(--board-bg);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--bd-r);
+  box-sizing: border-box;
+}
+.bd-board > svg, .bd-svg { display: block; width: 100%; height: auto; overflow: visible; }
+.bd-board-bare { background: transparent; border-color: transparent; padding: 0; }
+
+/* ---------- cells, dots, grid ---------- */
+.bd-cell { fill: var(--bd-cell); }
+.bd-cell-dark { fill: var(--board-dark); }
+.bd-cell-light { fill: var(--board-light); }
+.bd-line { stroke: var(--board-line); stroke-width: 1; fill: none; vector-effect: non-scaling-stroke; opacity: .7; }
+.bd-dot { fill: var(--bd-dotc); opacity: .5; transition: opacity var(--bd-fast) var(--bd-ease); }
+.bd-star { fill: var(--board-line); }
+
+/* ---------- pieces ---------- */
+.bd-piece { transform-box: fill-box; transform-origin: center; }
+.bd-stone-b { fill: var(--stone-black); }
+.bd-stone-w { fill: var(--stone-white); stroke: var(--board-line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.bd-ink { fill: none; stroke: var(--text); stroke-linecap: round; stroke-linejoin: round; }
+.bd-arrive { animation: bdArrive var(--bd-move) var(--bd-ease) both; }
+.bd-leave { animation: bdLeave var(--bd-move) var(--bd-ease) both; pointer-events: none; }
+.bd-write { stroke-dasharray: 1; stroke-dashoffset: 0; animation: bdWrite var(--bd-move) var(--bd-ease) both; }
+.bd-dim { opacity: .38; transition: opacity var(--bd-reveal) var(--bd-ease); }
+
+/* ---------- last move: arrive -> ring pulse -> thin outline ---------- */
+.bd-last { pointer-events: none; }
+.bd-last-line {
+  fill: none; stroke: var(--accent-line); stroke-width: 2; vector-effect: non-scaling-stroke;
+  animation: bdFade var(--bd-fast) var(--bd-ease) var(--bd-arrive, 220ms) both;
+}
+.bd-last-ring {
+  fill: none; stroke: var(--accent); stroke-width: 1; vector-effect: non-scaling-stroke;
+  transform-box: fill-box; transform-origin: center; opacity: 0;
+  animation: bdRing var(--bd-result) var(--bd-ease) var(--bd-arrive, 220ms) both;
+}
+
+/* ---------- result line ---------- */
+.bd-winline {
+  fill: none; stroke: var(--accent); stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 1; stroke-dashoffset: 0;
+  animation: bdWrite var(--bd-result) var(--bd-ease) both;
+}
+.bd-wincell { fill: var(--accent-soft); }
+
+/* ---------- input affordances ---------- */
+.bd-legal { fill: var(--accent); fill-opacity: .4; pointer-events: none; animation: bdFade var(--bd-fast) var(--bd-ease) both; }
+.bd-target { fill: var(--accent); fill-opacity: .55; pointer-events: none; animation: bdArrive var(--bd-fast) var(--bd-ease) both; transform-box: fill-box; transform-origin: center; }
+.bd-target-ring { fill: none; stroke: var(--accent); stroke-width: 2; opacity: .7; vector-effect: non-scaling-stroke; pointer-events: none; }
+.bd-sel { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: none; }
+.bd-hit { fill: transparent; cursor: pointer; }
+.bd-interactive .bd-hit:hover + .bd-legal, .bd-hit:focus-visible + .bd-legal { fill-opacity: .75; }
+.bd-ghost { opacity: .35; pointer-events: none; }
+.bd-hl { fill: var(--accent-softer); pointer-events: none; }
+
+/* ---------- unsupported (honest) ---------- */
+.bd-unsupported {
+  width: min(var(--bd-w), 100%); box-sizing: border-box; padding: 18px 16px;
+  border: 1px dashed var(--border-strong); border-radius: var(--bd-r, var(--r-lg));
+  background: var(--surface-2); text-align: center;
+}
+.bd-unsupported-k { font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--text-3); }
+.bd-unsupported-t { margin-top: 6px; font-size: 13px; color: var(--text-2); }
+.bd-size-poster .bd-unsupported { padding: 8px; }
+.bd-size-poster .bd-unsupported-t { display: none; }
+
+/* ---------- identity tiles ---------- */
+.bd-ptile, .bd-you, .bd-glyph {
+  display: inline-flex; align-items: center; justify-content: center; flex: none;
+  box-sizing: border-box; overflow: hidden; vertical-align: middle; line-height: 1;
+}
+.bd-ptile { background: var(--bd-tint, var(--surface-3)); color: var(--text-on-accent); }
+.bd-ptile-badge { background: var(--surface-2); box-shadow: inset 0 0 0 1px var(--border); }
+.bd-ptile-mark { display: inline-flex; align-items: center; justify-content: center; }
+.bd-ptile-mark > svg { width: 100%; height: 100%; display: block; }
+.bd-ptile-badge .bd-ptile-mark > svg { border-radius: 22%; }
+.bd-ptile-txt { font-weight: 650; letter-spacing: -0.01em; color: var(--text-on-accent); }
+.bd-you { background: var(--accent-fill, var(--accent)); color: var(--text-on-accent); font-weight: 650; letter-spacing: -0.01em; }
+.bd-glyph { background: var(--surface-2); color: var(--text-2); box-shadow: inset 0 0 0 1px var(--border-faint); }
+.bd-glyph > svg { display: block; }
+
+/* ---------- flat card ---------- */
+.bd-card {
+  --card-w: 46px;
+  position: relative; display: inline-block; flex: none; box-sizing: border-box;
+  width: var(--card-w); height: calc(var(--card-w) * 1.4);
+  border-radius: calc(var(--card-w) * 0.13);
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-mono); line-height: 1;
+  vertical-align: top;
+}
+.bd-card-red { color: var(--loss); }
+.bd-card-corner {
+  position: absolute; left: calc(var(--card-w) * 0.1); top: calc(var(--card-w) * 0.1);
+  display: flex; flex-direction: column; align-items: center; gap: calc(var(--card-w) * 0.03);
+}
+.bd-card-rank { font-size: calc(var(--card-w) * 0.3); font-weight: 600; letter-spacing: -0.04em; font-feature-settings: "tnum"; }
+.bd-card-csuit { font-size: calc(var(--card-w) * 0.22); font-family: var(--font-sans); }
+.bd-card-suit {
+  position: absolute; right: calc(var(--card-w) * 0.1); bottom: calc(var(--card-w) * 0.08);
+  font-size: calc(var(--card-w) * 0.5); font-family: var(--font-sans); line-height: 1;
+}
+.bd-card-back { background: var(--surface-3); border-color: var(--border); }
+.bd-card-inset {
+  position: absolute; inset: calc(var(--card-w) * 0.09);
+  border-radius: calc(var(--card-w) * 0.07);
+  border: 1px solid var(--border-strong);
+  background: var(--surface-2);
+}
+
+/* ---------- keyframes ---------- */
+@keyframes bdFade   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes bdArrive { from { opacity: 0; transform: scale(.82); } to { opacity: 1; transform: none; } }
+@keyframes bdLeave  { from { opacity: 1; transform: none; } to { opacity: 0; transform: scale(.88); } }
+@keyframes bdWrite  { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes bdRing {
+  0%   { opacity: 0; transform: scale(.94); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: scale(1.32); }
+}
+/* Connect Four: gravity drop with one small settle */
+@keyframes bdDrop {
+  0%   { transform: translateY(var(--bd-fall, -200px)); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+  70%  { transform: translateY(0); animation-timing-function: cubic-bezier(.2, .8, .2, 1); }
+  84%  { transform: translateY(var(--bd-bounce, -4px)); animation-timing-function: cubic-bezier(.55, 0, 1, .45); }
+  100% { transform: translateY(0); }
+}
+/* Othello flip: crossfade + scale-settle, no spin */
+@keyframes bdFlipIn  { 0% { opacity: 0; transform: scale(.8); } 55% { opacity: 1; } 100% { opacity: 1; transform: none; } }
+@keyframes bdFlipOut { from { opacity: 1; } to { opacity: 0; } }
+@keyframes bdLift { from { opacity: .4; transform: translateY(2px); } to { opacity: 1; transform: none; } }
+
+/* ---------- reduced motion: every beat snaps to its end state ---------- */
+html.reduced-motion .bd-host *, html.reduced-motion .bd-host *::before, html.reduced-motion .bd-host *::after,
+.bd-rm *, .bd-rm *::before, .bd-rm *::after {
+  animation-duration: 1ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+  transition-delay: 0ms !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bd-host *, .bd-host *::before, .bd-host *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+  }
+}
+
+/* ---------- static marker (first mount, scrubbing) ---------- */
+.bd-static .bd-last-line { animation: none; }
+.bd-static .bd-last-ring { animation: none; opacity: 0; }
+
+/* ---------- grid_3x3 ---------- */
+.bd-g3 .bd-ink { stroke: var(--text); }
+.bd-g3-local { transition: opacity var(--bd-reveal) var(--bd-ease); }
+.bd-g3-recede { opacity: .55; }
+.bd-g3-won { opacity: .3; }
+.bd-g3-liftbg {
+  fill: var(--surface-2); stroke: var(--border-strong); stroke-width: 1; vector-effect: non-scaling-stroke;
+  animation: bdLift var(--bd-move) var(--bd-ease) both;
+}
+.bd-g3-underline {
+  fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; vector-effect: non-scaling-stroke;
+  animation: bdFade var(--bd-move) var(--bd-ease) both;
+}
+.bd-bigmark .bd-ink { stroke: var(--text); }
+.bd-g3-ult .bd-dot { opacity: .4; }
+
+/* ---------- connect_four ---------- */
+.bd-c4-well { fill: var(--board-dark); }
+.bd-c4-hole { fill: var(--board-bg); }
+.bd-c4-disc { transform-box: view-box; }
+.bd-c4-r .bd-c4-body { fill: var(--loss); stroke: color-mix(in oklab, var(--loss) 70%, var(--stone-black)); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.bd-c4-r .bd-c4-ring { fill: none; stroke: color-mix(in oklab, var(--loss) 55%, var(--stone-white)); }
+.bd-c4-y .bd-c4-body { fill: color-mix(in oklab, var(--draw) 86%, var(--stone-white)); stroke: color-mix(in oklab, var(--draw) 70%, var(--stone-black)); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.bd-c4-y .bd-c4-pip { fill: color-mix(in oklab, var(--draw) 55%, var(--stone-black)); }
+.bd-c4-drop { animation: bdDrop var(--bd-drop) linear both; }
+.bd-c4-disc.bd-ghost { opacity: .4; }
+.bd-c4 .bd-legal { fill-opacity: .5; }
+.bd-c4 .bd-last-line { stroke: var(--accent); stroke-opacity: .55; }
+.bd-c4-winline { stroke: var(--accent); }
+.bd-c4 .bd-hit:focus-visible { outline: none; stroke: var(--accent); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+
+/* ---------- square_board ---------- */
+.bd-sq-chess .bd-board, .bd-sq-checkers .bd-board { padding: var(--bd-pad); }
+.bd-chess-body { stroke-width: 1.25; stroke-linejoin: round; }
+.bd-chess-w .bd-chess-body { fill: var(--stone-white); stroke: var(--stone-black); }
+.bd-chess-b .bd-chess-body { fill: var(--stone-black); stroke: var(--chess-b-edge, var(--stone-black)); }
+.bd-chess-det { fill: none; stroke-width: 1.25; stroke-linecap: round; stroke-linejoin: round; }
+.bd-chess-w .bd-chess-det { stroke: var(--stone-black); }
+.bd-chess-b .bd-chess-det { stroke: var(--stone-white); opacity: .85; }
+.bd-disc-body { stroke-width: 1; vector-effect: non-scaling-stroke; }
+.bd-disc-w .bd-disc-body { fill: var(--stone-white); stroke: color-mix(in oklab, var(--stone-white) 70%, var(--stone-black)); }
+.bd-disc-b .bd-disc-body { fill: var(--stone-black); stroke: color-mix(in oklab, var(--stone-black) 80%, var(--stone-white)); }
+.bd-disc-groove { fill: none; stroke-width: 1.4; }
+.bd-disc-w .bd-disc-groove { stroke: color-mix(in oklab, var(--stone-white) 80%, var(--stone-black)); }
+.bd-disc-b .bd-disc-groove { stroke: color-mix(in oklab, var(--stone-black) 72%, var(--stone-white)); }
+.bd-disc-crown { stroke-linejoin: round; stroke-width: 1; }
+.bd-disc-w .bd-disc-crown { fill: var(--stone-black); stroke: var(--stone-black); }
+.bd-disc-b .bd-disc-crown { fill: var(--stone-white); stroke: var(--stone-white); }
+.bd-glide { animation: bdGlide var(--bd-move) var(--bd-ease) both; }
+.bd-flip-in { animation: bdFlipIn var(--bd-move) var(--bd-ease) both; }
+.bd-flip-out { animation: bdFlipOut var(--bd-move) var(--bd-ease) both; }
+.bd-from { fill: var(--accent-soft); pointer-events: none; }
+.bd-coord { font-family: var(--font-mono); font-size: 7.5px; font-weight: 600; pointer-events: none; }
+.bd-coord-l, .bd-coord-d { fill: var(--text-3); opacity: .8; }
+.bd-size-poster .bd-coord, .bd-size-preview .bd-coord { display: none; }
+.bd-sq .bd-target { fill-opacity: .5; }
+.bd-sq-othello .bd-cell { fill: var(--board-light); }
+@keyframes bdGlide { from { transform: translate(var(--bd-dx, 0), var(--bd-dy, 0)); } to { transform: none; } }
+
+/* ---------- battleship (square_board, fog) ---------- */
+.bd-bs { display: flex; flex-direction: row; align-items: flex-start; gap: 10px; }
+.bd-bs-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.bd-bs-side { width: 29%; flex: none; display: flex; flex-direction: column; gap: 6px; }
+.bd-bs-label {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text-3); font-weight: 500; line-height: 1.2; padding: 0 1px; white-space: nowrap;
+}
+.bd-bs-legend { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; padding: 0 1px; }
+.bd-bs-key { display: flex; align-items: center; gap: 7px; font-size: 12px; line-height: 1.2; color: var(--text-2); }
+.bd-bs-kt { flex: 1; }
+.bd-bs-kn { font-family: var(--font-mono); font-feature-settings: "tnum"; color: var(--text); font-size: 12px; }
+.bd-bs-sw { width: 14px; height: 14px; border-radius: 50%; flex: none; box-sizing: border-box; }
+.bd-bs-key-hit { background: var(--loss); box-shadow: 0 0 0 2px var(--board-bg), 0 0 0 3px var(--loss); transform: scale(.7); }
+.bd-bs-key-miss { background: var(--text-3); transform: scale(.36); }
+.bd-bs-cell { fill: var(--board-light); }
+.bd-bs-ship { fill: color-mix(in oklab, var(--board-dark) 55%, var(--text-3)); }
+.bd-bs-hit { fill: var(--loss); }
+.bd-bs-hitring { fill: none; stroke: var(--loss); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.bd-bs-miss { fill: var(--text-3); }
+/* sunk: the ship's cells fill solid, the ring closes (shape cue, not colour alone) */
+.bd-bs-mark.is-sunk .bd-bs-hit { r: 0; }
+.bd-bs-mark.is-sunk .bd-bs-hitring { fill: var(--loss); fill-opacity: .9; stroke-width: 2.5; }
+.bd-bs-key-sunk { background: var(--loss); }
+.bd-bs .bd-dot { display: none; }
+.bd-bs-legal { fill-opacity: .22; }
+.bd-size-preview .bd-bs-side, .bd-size-poster .bd-bs-side { width: 46%; }
+.bd-size-preview .bd-bs, .bd-size-poster .bd-bs { gap: 6px; }
+.bd-size-poster .bd-bs { gap: 4px; }
+.bd-size-poster .bd-bs-label, .bd-size-poster .bd-bs-legend, .bd-size-preview .bd-bs-legend { display: none; }
+.bd-size-preview .bd-bs-label { font-size: 7.5px; letter-spacing: .06em; }
+.bd-size-preview .bd-bs-main, .bd-size-preview .bd-bs-side { gap: 4px; }
+
+/* black stones keep a hairline rim so they read on dark fields */
+.bd-stone-b { stroke: color-mix(in oklab, var(--stone-black) 74%, var(--stone-white)); stroke-width: 1; vector-effect: non-scaling-stroke; }
+
+/* ---------- go_board ---------- */
+.bd-board.bd-go { background: var(--board-light); }
+.bd-go-wood { fill: var(--board-light); }
+.bd-go-line { fill: none; stroke: var(--text-3); stroke-width: 1; vector-effect: non-scaling-stroke; opacity: .55; }
+.bd-go .bd-star { fill: var(--text-3); opacity: .85; }
+.bd-go-stone.bd-stone-w { stroke: color-mix(in oklab, var(--stone-white) 65%, var(--stone-black)); }
+.bd-go-ghost { fill-opacity: .35; stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 3 2.5; vector-effect: non-scaling-stroke; pointer-events: none; }
+.bd-go .bd-legal { fill-opacity: .38; }
+
+/* ---------- hex_board ---------- */
+.bd-hex-band-you { fill: var(--accent-soft); }
+.bd-hex-band-them { fill: var(--surface-3); }
+.bd-hex-rim-under { fill: none; stroke: var(--board-line); stroke-width: 4.2; stroke-linecap: round; opacity: .8; }
+.bd-hex-rim-b { fill: none; stroke: var(--stone-black); stroke-width: 2.6; stroke-linecap: round; }
+.bd-hex-rim-w { fill: none; stroke: var(--stone-white); stroke-width: 2.6; stroke-linecap: round; }
+.bd-hex-cell { stroke: none; }
+.bd-hex .bd-stone-w { stroke: color-mix(in oklab, var(--stone-white) 65%, var(--stone-black)); }
+.bd-hex-win { stroke-linejoin: round; }
+
+/* =====================================================================
+   Six-theme hooks [agent G, research/theme-materials.md]. Tokens only.
+   Classic resolves to exactly what the renderers drew before (plane =
+   --board-bg, card = --surface, back = --surface-3), so no Classic pixel moves.
+   ===================================================================== */
+/* Cell tone: the system-dark :not() chain above would also match the material
+   themes, so re-state it per theme; nested .es-theme wrappers (picker tiles)
+   double the class to win over the phone-level rule. */
+#phone[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+#phone[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+#phone[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+#phone[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host,
+.es-theme[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]) .bd-host { --bd-cell: var(--board-light); }
+#phone .es-theme.es-theme[data-theme="light"] .bd-host { --bd-cell: var(--surface); }
+#phone .es-theme.es-theme[data-theme="dark"] .bd-host,
+#phone .es-theme.es-theme[data-theme="neon"] .bd-host,
+#phone .es-theme.es-theme[data-theme="club"] .bd-host,
+#phone .es-theme.es-theme[data-theme="arcade"] .bd-host,
+#phone .es-theme.es-theme[data-theme="midnight"] .bd-host { --bd-cell: var(--board-light); }
+
+/* Plane (glass, wood, phosphor, void) and cards */
+#phone .bd-board:not(.bd-board-bare):not(.bd-go),
+.es-theme .bd-board:not(.bd-board-bare):not(.bd-go) { background: var(--theme-plane, var(--board-bg)); }
+#phone .bd-card, .es-theme .bd-card { background: var(--theme-card-face, var(--surface)); }
+#phone .bd-card.bd-card-back, .es-theme .bd-card.bd-card-back { background: var(--theme-card-back, var(--surface-3)); }
+[data-theme="club"] .bd-card-back .bd-card-inset {
+  background: transparent;
+  border-color: color-mix(in srgb, var(--theme-card-face) 45%, transparent);
+}
+
+/* Ink: only Club adds lacquer (--theme-ink-filter is undefined, so inert, elsewhere) */
+#phone .bd-stone-b, #phone .bd-stone-w, #phone .bd-c4-body, #phone .bd-disc-body,
+.es-theme .bd-stone-b, .es-theme .bd-stone-w, .es-theme .bd-c4-body, .es-theme .bd-disc-body { filter: var(--theme-ink-filter, none); }
+
+/* Glow budget: Neon and Arcade, the last-move marker only (static, never pulses) */
+[data-theme="neon"] .bd-last-line,
+[data-theme="arcade"] .bd-last-line,
+[data-theme="neon"] .bd-last-ring,
+[data-theme="arcade"] .bd-last-ring { filter: drop-shadow(var(--glow)); }

@@ -1,0 +1,35 @@
+/* Materials are scoped to the playing surface. Captions and host UI follow
+   the active page theme; hidden-state markers remain in the original scene. */
+.st-ed-corners { display:none; }.st-ed-field .st-ed-corners { display:inline; }
+.st-ed-field { --text:#e1fff3; --text-2:#d8f4e9; --text-3:#acd7ca; --border-strong:#77b8ad; --surface:#f4efdd; --surface-2:#14515a; --surface-3:#20616a; --accent:#ffe68a; --accent-soft:#407573; --loss:#ff987c; --loss-soft:#753e38; --board-line:#7fb6a7; }
+.st-ed-field.st-ed-wood { --text:#201c17; --text-2:#372517; --text-3:#534333; --surface-2:#cf9b60; --surface-3:#80502c; --border-strong:#735232; --accent:#762d28; --accent-soft:#d4a375; }
+.st-ed-field.st-ed-print { --text:#202f3a; --text-2:#27333a; --text-3:#50493e; --surface:#fffaf1; --surface-2:#eadbb9; --surface-3:#c7b99e; --border-strong:#695d4a; --accent:#932f29; --accent-soft:#ebb88e; --loss-soft:#e7b5a5; --loss:#9c3835; --board-line:#695d4a; }
+.st-legal-scene .st-ed-field { stroke:var(--border-strong); fill:var(--text-2); }
+.st-legal-scene .st-ed-field .st-legal-square { fill:var(--ed-tile); }
+.st-legal-scene .st-ed-field .st-legal-piece-a,.st-legal-scene .st-ed-field .st-legal-agent { fill:var(--ed-piece); stroke:var(--text); }
+.st-legal-scene .st-ed-field .st-legal-piece-b { fill:#f9edcd; stroke:#4e514b; }
+.st-legal-scene .st-ed-field .st-legal-label { fill:var(--text-2); font-family:Georgia,serif; font-weight:600; }
+.st-legal-scene .st-ed-crafted .st-legal-label { letter-spacing:.15px; }
+.st-legal-scene .st-ed-field .st-legal-card { fill:#fff6de; stroke:#5c503d; }
+.st-legal-scene .st-ed-field .st-legal-card-back { fill:var(--ed-tile); stroke:var(--text-2); }
+.st-ed-field .st-legal-card ~ text,.st-ed-field .st-ed-corners text { fill:#322821; font-family:Georgia,serif; font-weight:bold; }
+.st-ed-field .st-legal-card ~ text.st-legal-accent { fill:#a42c2c; }
+.st-ed-field.st-ed-print .st-legal-limb { stroke-linecap:square; }
+.st-ed-field.st-ed-crafted:not(.st-ed-wood):not(.st-ed-felt) .st-legal-label { font-family:var(--font-mono); }
+.st-ed-board-design-2 { --board-bg:#deb778; --board-line:#674320; --board-light:#edca8d; --board-dark:#936238; --surface:#f0d299; --surface-2:#b2834d; --accent:#96352c; --accent-line:#785327; --text:#2b241c; --text-3:#4c4337; --win:#246248; --win-text:#154c36; }
+.st-ed-board-design-3 { --board-bg:#f7efdd; --board-line:#544d42; --board-light:#f6edcf; --board-dark:#ad9e81; --surface:#fcf4e5; --surface-2:#e8dcc0; --accent:#983c32; --accent-line:#7f7264; --text:#26262b; --text-3:#494036; --win:#26705b; --win-text:#1b4e40; }
+.st-ed-board-design-4 { --board-line:#475062; --text:#232730; --text-3:#303443; --accent:#b13545; }
+.st-board-grid3.st-ed-board-design-2 { background:repeating-linear-gradient(4deg,#be925f 0 3px,#d4a974 4px 7px); padding:2%; }
+.st-board-grid3.st-ed-board-design-2 .st-cell { box-shadow:inset 0 2px 3px #66452a66; }
+.st-board-grid3.st-ed-board-design-3 { gap:0; border:2px solid var(--board-line); }
+.st-board-grid3.st-ed-board-design-3 .st-cell { border-radius:0; background:repeating-linear-gradient(40deg,#fcf4e4 0 4px,#e9dfc9 5px); }
+.st-board-grid3:is(.st-ed-board-design-2,.st-ed-board-design-3) .st-cell[data-line] { box-shadow:inset 0 0 0 2px var(--win-text); }
+.st-board-chess.st-ed-board-design-2 .st-cell,.st-board-discs.st-ed-board-design-2 .st-cell { background-image:repeating-linear-gradient(7deg,transparent 0 4px,#633b241a 5px 6px); }
+.st-board-chess.st-ed-board-design-3 .st-cell,.st-board-discs.st-ed-board-design-3 .st-cell { background-image:repeating-linear-gradient(45deg,transparent 0 3px,#523d2726 4px); }
+.st-ed-board-design-2 .st-stone-black { background:radial-gradient(circle at 35% 22%,#6b5a49,#27221d 70%); }.st-ed-board-design-2 .st-stone-white { background:radial-gradient(circle at 35% 22%,white,#dbc7a2 78%); }
+.st-ed-board-design-3 .st-chess { text-shadow:.025em .025em #c5ad87; }.st-ed-board-design-3 .st-go-black { fill:#242527; }.st-ed-board-design-3 .st-go-white { fill:#fffdf6; stroke:#292929; }
+.st-ed-board-design-2 .st-hex-inlay-a,.st-ed-board-design-3 .st-hex-inlay-a { fill:#e5b175; stroke:#5a3e30; stroke-width:.07; }
+.st-ed-board-design-2 .st-hex-inlay-b,.st-ed-board-design-3 .st-hex-inlay-b { fill:#36373a; stroke:#d3cbb5; stroke-width:.07; }
+
+.st-ed-board-design-3 .st-go-stone[data-last],.st-ed-board-design-4 .st-go-stone[data-last] { stroke:var(--accent); stroke-width:.11; }
+.st-ed-board-design-3 .st-go-stone[data-line],.st-ed-board-design-4 .st-go-stone[data-line] { stroke:var(--win-text); stroke-width:.14; }

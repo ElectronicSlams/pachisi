@@ -1,0 +1,3 @@
+/* eSlams Arena  |  scene.css  [S]  weightless field canvas */
+.sc-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: auto; touch-action: none; }
+@media (prefers-reduced-transparency: reduce) { .sc-canvas { filter: none; } }

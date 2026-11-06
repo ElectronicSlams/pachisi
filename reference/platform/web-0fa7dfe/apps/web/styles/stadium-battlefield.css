@@ -1,0 +1,138 @@
+/* Founder-reviewed Stadium stage. Arena's controller and board styles are independent. */
+.battlefield-redesign { gap:var(--space-6); }
+.battlefield-redesign .bf-page-head { padding-top:36px; align-items:end; }
+.battlefield-redesign .page-title { font-size:34px; font-weight:650; letter-spacing:-.03em; }
+.battlefield-redesign .bf-head-actions { flex-wrap:wrap; gap:var(--space-3); font-size:13px; }
+.battlefield-redesign .bf-stage-section.wrap { width:100%; max-width:none; padding:0; }
+.battlefield-redesign .bf-broadcast-layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:14px; align-items:start; }
+.battlefield-redesign .bf-stage-shell { display:flex; flex-direction:column; padding:var(--space-5); gap:14px; border:1px solid var(--border); border-radius:var(--r-xl); background:var(--surface); box-shadow:none; }
+.battlefield-redesign .bf-stadium-match-head { display:flex; align-items:center; justify-content:space-between; gap:var(--space-3); font-size:14px; }
+.battlefield-redesign .bf-stadium-match-head > span { display:flex; align-items:center; gap:var(--space-1); color:var(--text-3); font:12px var(--font-mono); }
+.battlefield-redesign .bf-seat-rail { display:block; padding:0; border:0; background:none; }
+.battlefield-redesign .bf-stage-center { display:none; }
+.battlefield-redesign .bf-participant-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-6); padding:0; }
+.battlefield-redesign .bf-seat-rail-solo_benchmark .bf-participant-list { grid-template-columns:1fr; padding:0; }
+.battlefield-redesign .bf-seat-rail-multi_seat .bf-participant-list { grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); padding:0; }
+.battlefield-redesign .bf-seat-rail .bf-participant-list > .bf-seat { grid-column:auto; }
+.battlefield-redesign .bf-seat.vw-rail { display:flex; flex-direction:column; align-items:start; min-height:0; padding:0 0 var(--space-2); gap:var(--space-2); border-radius:0; border:0; border-bottom:2px solid transparent; background:none; text-align:left; color:var(--text); cursor:pointer; }
+.battlefield-redesign .bf-seat.vw-rail[aria-pressed=true], .battlefield-redesign .bf-seat.vw-rail.bf-seat-active { border-bottom-color:var(--accent); box-shadow:none; }
+.battlefield-redesign .bf-seat-b.vw-rail { align-items:start; text-align:left; }
+.battlefield-redesign .bf-seat-avatar-wrap { width:18px; height:18px; border:0; }
+.battlefield-redesign .bf-seat-avatar { width:18px; height:18px; background:none; box-shadow:none; }
+.battlefield-redesign .bf-seat-avatar .provdot { width:16px!important; height:16px!important; }
+.battlefield-redesign .bf-seat-arc { display:none; }
+.battlefield-redesign .bf-seat-main { display:grid; gap:var(--space-1); }
+.battlefield-redesign .bf-seat-main .bf-seat-model-name { font-family:var(--font-sans); font-size:14px!important; font-weight:600; }
+.battlefield-redesign .bf-seat-main > .mono { color:var(--text-3); font-size:11px; }
+.battlefield-redesign .bf-seat-score { display:none; }
+.battlefield-redesign .bf-stage-main.vw-replay-stage { display:block; }
+.battlefield-redesign .bf-stage-left { padding:0; gap:var(--space-3); }
+.battlefield-redesign .bf-board-panel { border:1px solid var(--accent-line); border-radius:var(--r-lg); background:var(--surface); }
+.battlefield-redesign .bf-frame-head { font-size:11px; color:var(--text-3); background:var(--surface); }
+.battlefield-redesign .bf-board.vw-board { min-height:0; padding:var(--space-4) 12%; background:var(--surface); }
+.battlefield-redesign .bf-board.vw-board > * { max-width:560px; max-height:none; }
+.battlefield-redesign .bf-transport { border:1px solid var(--border); border-radius:var(--r-lg); background:var(--surface); box-shadow:none; }
+.battlefield-redesign .bf-match-panel { border:0; padding:0; background:none; }
+.battlefield-redesign .bf-match-panel summary { cursor:pointer; color:var(--text-3); padding:var(--space-2) 0; font-size:12px; }
+.battlefield-redesign .bf-match-panel-title { margin-top:var(--space-3); }
+.battlefield-redesign .bf-stage-share-actions { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:var(--space-2); }
+.battlefield-redesign .bf-stage-share-actions button,.battlefield-redesign .bf-side-head button { display:inline-flex; align-items:center; gap:var(--space-2); padding:var(--space-2) var(--space-3); border:1px solid var(--border-strong); border-radius:var(--r-md); color:var(--text-2); background:var(--surface); cursor:pointer; }
+.battlefield-redesign .bf-stadium-side { min-width:0; max-height:800px; overflow:auto; scrollbar-width:thin; }
+.battlefield-redesign .bf-side-head { display:flex; align-items:center; gap:var(--space-2); padding:var(--space-3) 0; font-size:13px; }
+.battlefield-redesign .bf-side-head strong { overflow:hidden; text-overflow:ellipsis; }
+.battlefield-redesign .bf-side-head button { flex:none; padding:var(--space-2); }
+.battlefield-redesign .bf-ledger { border:0; margin-top:var(--space-3); background:var(--surface); border-radius:var(--r-lg); }
+.battlefield-redesign .bf-ledger-scroll { max-height:620px; }
+.battlefield-redesign .bf-marquee { margin:0; width:100%; padding:0; }
+.battlefield-redesign .bf-marquee .bf-section-title { display:none; }
+.battlefield-redesign .bf-poster-grid { display:grid; grid-template-columns:1fr; gap:10px; margin:0; }
+.battlefield-redesign .bf-poster.matchcard { display:grid; grid-template-columns:72px minmax(0,1fr); gap:12px; padding:12px; border:1px solid var(--border); border-radius:var(--r-lg); align-items:center; background:var(--surface); box-shadow:none; text-align:left; }
+.battlefield-redesign .bf-poster.matchcard:hover,.battlefield-redesign .bf-poster.matchcard.bf-poster-active { border-color:var(--accent); box-shadow:none; }
+.battlefield-redesign .bf-poster-art { min-height:0; aspect-ratio:1; padding:0; background:none; border:0; }
+.battlefield-redesign .bf-poster-art .st-board { width:100%; max-height:100%; }
+.battlefield-redesign .bf-poster-copy { display:grid; gap:var(--space-1); min-width:0; }
+.battlefield-redesign .bf-poster strong { font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.battlefield-redesign .bf-poster p { font-size:12px; margin:0; color:var(--text-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.battlefield-redesign .bf-poster-status { font-size:11px; color:var(--text-3); }
+.battlefield-redesign .bf-programme-card { border:0; background:none; box-shadow:none; }
+.battlefield-redesign .bf-programme-head { padding:0 0 var(--space-4); font-size:22px; background:none; border:0; }
+.battlefield-redesign .bf-programme-body { padding:0; }
+.battlefield-redesign .bf-programme-day { margin-top:var(--space-5); }
+.battlefield-redesign .bf-programme-day h3 { margin:0 0 var(--space-3); font-family:var(--font-sans); font-size:14px; }
+.battlefield-redesign .bf-programme-row.matchcard { display:grid; grid-template-columns:54px minmax(100px,1fr) minmax(0,2fr) minmax(0,1fr) auto; gap:14px; padding:12px 16px; border-radius:0; border:1px solid var(--border); border-top:0; background:var(--surface); box-shadow:none; }
+.battlefield-redesign .bf-programme-day > button:first-of-type { border-top:1px solid var(--border); border-radius:var(--r-lg) var(--r-lg) 0 0; }
+.battlefield-redesign .bf-programme-day > button:last-of-type { border-radius:0 0 var(--r-lg) var(--r-lg); }
+.battlefield-redesign .bf-programme-row:hover { background:var(--surface-2); }
+.battlefield-redesign .bf-solo-runs { padding-top:var(--space-6); }
+.battlefield-redesign .bf-boxoffice { border:1px solid var(--border); border-radius:var(--r-lg); box-shadow:none; }
+.battlefield-redesign .st-sheet .bf-boxoffice-label { display:grid; gap:var(--space-2); }
+.battlefield-redesign .st-sheet .bf-boxoffice-error { color:var(--loss); }
+@media(max-width:1100px){ .battlefield-redesign .bf-broadcast-layout { grid-template-columns:minmax(0,1fr) 280px; } }
+@media(max-width:860px){ .battlefield-redesign .bf-broadcast-layout { grid-template-columns:1fr; } .battlefield-redesign .bf-stadium-side { max-height:440px; } .battlefield-redesign .bf-poster-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .battlefield-redesign .bf-programme-row.matchcard { grid-template-columns:48px minmax(0,1fr) auto; gap:var(--space-2); } .battlefield-redesign .bf-programme-row > span:nth-child(3),.battlefield-redesign .bf-programme-row > span:nth-child(4) { grid-column:2; } .battlefield-redesign .bf-programme-row > span:last-child { grid-column:3; grid-row:1 / 4; } }
+@media(max-width:620px){ .battlefield-redesign .bf-page-head { padding-top:var(--space-6); align-items:start; } .battlefield-redesign .bf-head-actions { justify-content:start; font-size:12px; } .battlefield-redesign .bf-stage-shell { padding:var(--space-3); } .battlefield-redesign .bf-board.vw-board { padding:var(--space-3); } .battlefield-redesign .bf-poster-grid { grid-template-columns:1fr; } .battlefield-redesign .bf-programme-tools { display:grid; grid-template-columns:1fr; } .battlefield-redesign .bf-status-tabs { flex-wrap:wrap; } }
+@media(prefers-reduced-motion:reduce){ .battlefield-redesign *, .battlefield-redesign *::before, .battlefield-redesign *::after { animation:none!important; transition:none!important; } }
+
+/* The Stadium replay palette is deliberately independent of Arena's familiar game colours. */
+.battlefield-redesign .c4board,.battlefield-redesign .replay-c4board { padding:0; gap:var(--space-3); border-radius:0; background:none!important; box-shadow:none; }
+.battlefield-redesign .c4cell,.battlefield-redesign .replay-c4slot { border:1px solid var(--board-line); background:var(--board-bg); box-shadow:none; }
+.battlefield-redesign .c4disc { inset:10%; animation:st-replay-drop .28s ease-out; box-shadow:none; }
+.battlefield-redesign .c4-R,.battlefield-redesign .replay-c4slot.replay-token-a span { background:var(--accent); }
+.battlefield-redesign .c4-Y,.battlefield-redesign .replay-c4slot.replay-token-b span { background:var(--surface); border:3px solid var(--text-2); }
+.battlefield-redesign .tttboard { gap:var(--space-2); background:none; }
+.battlefield-redesign .tttcell { border:1px solid var(--border-strong); border-radius:var(--r-md); background:var(--surface); box-shadow:none; }
+.battlefield-redesign .ttt-mark { color:var(--text); }
+.battlefield-redesign .bf-seat-main { min-width:0; max-width:100%; }
+.battlefield-redesign .bf-seat-main > * { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+@keyframes st-replay-drop { from { transform:translateY(-25%); opacity:.3; } to { transform:translateY(0); opacity:1; } }
+.battlefield-redesign .bf-poster-top { display:flex; gap:var(--space-2); align-items:center; justify-content:space-between; }
+.battlefield-redesign .bf-poster-top .bf-poster-status { flex:none; font-size:10px; }
+.battlefield-redesign .bf-poster.matchcard { min-height:96px; }
+.battlefield-redesign .bf-seat-b.vw-rail { align-items:end; text-align:right; }
+.battlefield-redesign .bf-stadium-board-shell { width:100%; display:flex; justify-content:center; }
+.battlefield-redesign .bf-stadium-board-shell .st-board { width:100%; }
+
+.battlefield-redesign .bf-programme-secondary-tools { display:flex; align-items:end; flex-wrap:wrap; gap:var(--space-3); margin-top:var(--space-3); }
+.battlefield-redesign .bf-programme-secondary-tools label { display:grid; gap:var(--space-1); color:var(--text-3); font-size:12px; }
+.battlefield-redesign .bf-programme-secondary-tools input,.battlefield-redesign .bf-programme-secondary-tools button { padding:var(--space-2) var(--space-3); border:1px solid var(--border); border-radius:var(--r-md); background:var(--surface); color:var(--text); }
+
+.battlefield-redesign .bf-viewer-wrap.wrap { width:100%; max-width:1240px; padding:0; }
+.battlefield-redesign .bf-poster-status { text-transform:none; font-family:var(--font-sans); }
+
+.battlefield-redesign .bf-boxoffice { display:flex; justify-content:flex-end; padding:var(--space-4); }
+.battlefield-redesign .bf-earlier-days { border:1px solid var(--border); border-radius:var(--r-md); background:var(--surface); color:var(--text); padding:var(--space-3); margin-top:var(--space-3); cursor:pointer; }
+@media(max-width:860px){
+  .battlefield-redesign .bf-programme-row.matchcard { grid-template-columns:minmax(0,1fr) auto; }
+  .battlefield-redesign .bf-programme-row.matchcard > span { display:block; order:0; grid-column:auto; grid-row:auto; }
+  .battlefield-redesign .bf-programme-row.matchcard > span:first-child { grid-column:1; grid-row:1; }
+  .battlefield-redesign .bf-programme-row.matchcard > span:nth-child(2) { grid-column:1; grid-row:2; }
+  .battlefield-redesign .bf-programme-row.matchcard > span:nth-child(3) { grid-column:1 / -1; grid-row:3; white-space:normal; }
+  .battlefield-redesign .bf-programme-row.matchcard > span:nth-child(4) { display:block; grid-column:1; grid-row:4; font-size:11px; color:var(--text-3); }
+  .battlefield-redesign .bf-programme-row.matchcard > span:nth-child(5) { display:block; grid-column:2; grid-row:1 / 3; align-self:center; }
+}
+
+.battlefield-redesign .bf-filmstrip { display:flex; overflow:auto; max-width:100%; gap:var(--space-1); border-top:0; }
+.battlefield-redesign .bf-filmstrip button { flex:0 0 var(--space-2); width:var(--space-2); border-radius:var(--r-sm); }
+.battlefield-redesign .bf-filmstrip button.bf-tick-seen { background:var(--text-3); }
+.battlefield-redesign .bf-filmstrip button.bf-tick-current { background:var(--accent); }
+
+/* One consistent action group; reasoning has both explicit and board access. */
+.battlefield-redesign .bf-stage-share-actions button { justify-content:center; min-width:0; min-height:40px; padding-inline:var(--space-2); font-size:12px; }
+.battlefield-redesign .bf-stage-share-actions button[aria-pressed=true],.battlefield-redesign .bf-stage-share-actions button[aria-expanded=true] { border-color:var(--accent-line); color:var(--accent); background:var(--accent-softer); }
+.battlefield-redesign .bf-board { position:relative; }
+.battlefield-redesign .bf-board-reasoning-target { position:absolute; inset:35%; z-index:2; background:transparent; border:0; border-radius:var(--r-md); cursor:pointer; }
+.battlefield-redesign .bf-board-reasoning-target:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.battlefield-redesign .bf-poster-art .st-match-preview { height:100%; }
+.battlefield-redesign .st-sheet .bf-boxoffice-card { display:grid; width:100%; min-width:0; padding:0; gap:var(--space-4); border:0; border-radius:0; background:none; box-shadow:none; }
+.battlefield-redesign .st-sheet .bf-boxoffice-fields { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--space-4); min-width:0; }
+.battlefield-redesign .st-sheet .bf-boxoffice-fields > button { grid-column:1/-1; width:100%; min-height:40px; }
+.battlefield-redesign .st-sheet .bf-select-labelled { display:grid; gap:var(--space-2); min-width:0; }
+.battlefield-redesign .st-sheet .bf-select-label { font-size:13px; color:var(--text-2); }
+.battlefield-redesign .st-sheet .bf-select-labelled select { min-width:0; width:100%; padding-right:var(--space-6); text-overflow:ellipsis; }
+.battlefield-redesign .st-sheet .bf-select-labelled > svg { top:auto; bottom:12px; transform:none; }
+.battlefield-redesign .st-sheet .bf-boxoffice-status { white-space:normal; overflow-wrap:anywhere; line-height:1.5; }
+@media(max-width:1100px) { .battlefield-redesign .bf-stage-share-actions { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:600px) { .battlefield-redesign .bf-stage-share-actions { grid-template-columns:repeat(2,minmax(0,1fr)); } .battlefield-redesign .bf-stage-share-actions > :last-child { grid-column:1/-1; } .battlefield-redesign .st-sheet .bf-boxoffice-fields { grid-template-columns:1fr; } }
+
+/* Names the current replay step; boards for hidden or simultaneous moves do not change between steps. */
+.battlefield-redesign .bf-step-note { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; color:var(--text-2); }
+.battlefield-redesign .vw-ctl:disabled { opacity:.4; cursor:default; }

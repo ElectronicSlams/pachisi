@@ -1,0 +1,97 @@
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/online-go/goban)
+
+# Usage:
+
+To import into an application targeting the web:
+
+```
+import { ... } from "goban";
+```
+
+To import into an application targeting node, use the [goban-engine](https://www.npmjs.com/package/goban-engine) package:
+
+```
+import { ... } from "goban-engine";
+```
+
+`goban` provides two DOM renderers, `GobanCanvas` and `SVGRenderer`, selected via `setGobanRenderer()` and constructed with `createGoban()`.
+
+### GobanNativeRenderer
+
+A third renderer for native mobile shells. It draws nothing itself: it
+computes a `NativeBoardSpec` (stones, per-intersection overlays, ghost,
+pen marks, labels, bounds) and pre-rendered stone bitmaps and pushes them
+through the `GobanNativeTransport` you inject via
+`config.native_transport`; the platform's draw layer reports `intentPlace`
+and `intentPen` events back. See `src/Goban/NativeTransport.ts` for the
+contract and `test/unit_tests/NativeParity.test.ts` for the guard that keeps
+it in step with the canvas renderer.
+
+# Documentation
+
+https://docs.online-go.com/goban/
+
+# Dev setup
+
+## 1. Building `goban`
+
+If you have `make` installed you can simply run
+
+```
+make
+```
+
+Or, you can build and run manually using
+
+```
+yarn install
+yarn run dev
+```
+
+(`yarn install` is only necessary the first time you start working on the project,
+or whenever dependencies are updated)
+
+## 2. Using local fork of `goban` while working on online-go.com
+
+The online-go.com repo uses a goban submodule (in `submodules/goban`). To configure this to use your fork/branch, you can do the following from within your online-go.com repo clone root:
+```
+cd submodules/goban
+git remote add myFork https://github.com/<your_username>/goban.git
+git fetch myFork
+git checkout -b <local_branch_name> myFork/<remote_branch_name>
+```
+
+Once done, your online-go.com development environment will use your goban fork's `goban` code.
+
+To reset the submodule, run from online-go.com repo clone root:
+```
+git submodule update --force --checkout submodules/goban
+```
+
+# Before PR
+
+Be ready for CI check on PR:
+
+-   run tests `npm test`
+-   run prettify `npm run prettier`
+
+When you open the PR, make sure **Allow edits and access to secrets by maintainers** is selected. This lets the maintainers push fixes to your branch. The "Allow edits by maintainers" check fails on pull requests that do not allow it.
+
+-   If you forgot, select it in the sidebar of the pull request, then push a commit.
+-   GitHub does not show this option when your fork belongs to an organization. Fork the repository to your personal account instead.
+
+[Optional] You can also set up a pre-commit to run checks locally before you commit:
+
+```
+npx husky install
+```
+
+# Running & Writing tests
+
+Tests live in `src/__tests__` directory, check it out & add Your own!
+To run tests:
+
+```
+npm test
+```

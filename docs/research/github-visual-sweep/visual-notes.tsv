@@ -1,0 +1,30 @@
+repository	image	observation
+AlecWaumans/ML-FrozenLake	docs/img/environment.jpeg	The four-column snowfield uses textured ice, blue holes, a character token and a wrapped goal.
+Amegma/Galaxy-Attack	images/game2.png	A small ship and enemy sprites sit on a black field with score, lives and weapon status in the top band.
+Clariity/react-chessboard	docs/assets/chessboard.png	Flat brown/cream squares carry black and white figurative pieces without an enclosing console.
+ConstStar/dou-di-zhu	docs/images/gui.png	The landlord table uses a pale blue field, a tightly overlapped hand along the bottom and opponent counts at its top corners.
+DevJac/gloss-pentago	screenshot.png	Four separated red 3×3 trays make the rotation units visible around black and white counters.
+FutaAlice/FutaHex2	doc/image/preview.png	A large slanted hex lattice has coloured goal edges and two smaller analysis lattices alongside it.
+JHoff1/NeonTableGames	docs/images/blackjack-desktop.png	Dealer and player hands sit inside an oval marking on dark green felt with controls below.
+NiyiOke/open-shed-card-engine	public/og.png	The project illustration uses vivid rectangular seat hands around a square central play area.
+Rescator7/Hearts2	screenshot/Hearts2.png	Four hands frame the green table, with blue-backed side hands and the current trick in the centre.
+Sebastian-Griesbach/MonsterCliffWalking	img/demonstration.gif	The grid has grass squares, a continuous cliff edge and a character hazard separate from the agent.
+TiantianFlow/qiju	docs/screenshot.png	The board occupies the left of a dark dashboard while a vertically stacked round/event feed fills the right.
+Velithia/JieqiBox	linux_screenshot.png	A wood-coloured river board supports both blank discs and revealed marked pieces beside a desktop analysis panel.
+akshatjain02/Breakout	Screenshot1.png	The spare blue playfield puts score and lives in opposite corners above a four-row brick wall.
+ale64bit/WeiqiHub	doc/screenshot/iPad/2.png	A close-up gold intersection board places large contrasting stones beneath the mobile toolbar.
+alexwitting/cardgames	app/src/main/assets/themes/green_felt_classic/preview.webp	The theme specimen pairs an ornate burgundy card back with green felt; the contemporary specimen uses a geometric blue back.
+andrew-wilkes/godot-chess	social/board.png	The charcoal-and-silver board uses strongly silhouetted pieces, small capture markers and a narrow move strip.
+farindk/morris	doc/screenshot.png	Three concentric square tracks sit between vertical reserves of white and black pieces.
+guijixzh/Inverse-Gomoku-GUI-vs-AI	docs/prevpic.png	A tan intersection board places move markers beside the stones and a vertical command strip along the right.
+intrepion/kata-inspired-by-uno-codex-dot	docs/screenshots/fresh-table.jpg	A dark inset table holds two prominent central cards above action controls and a horizontal numbered hand.
+junosan/Nama	images/readme/rich.png	Four tile walls surround the central discard area on green felt, with the visible hand at the bottom and chat to the side.
+krinj/hanabi-simulator	images/pyhanabi_gui.png	Rows of numbered colour cards sit beside an action log; a concealed row uses uniform grey backs.
+lokkant/Gin-Rummy	media/cards.gif	The card hand forms one continuous, overlapping strip above a narrow score edge.
+luisfer-cli/gui-dgt-sim	docs/screenshot.png	An olive-and-ivory grid carries large chess glyphs on a compact desktop board.
+mvichosfm/plakoto	docs/screenshot.jpg	An angled wooden table and triangular points occupy the centre, with controls kept outside the playfield.
+popojan/goban	res/screenshot.png	The perspective goban has reflective stones, a visible tabletop edge and separate stone bowls.
+rheostaticsfan/CribbageBoard	docs/light.png	A tall U-shaped peg track is paired with a narrow player/score legend on the left.
+sruckh/spades-coach	preview.png	A portrait trick table keeps the viewer’s fanned hand at the lower edge and played cards inside the central trick.
+ujjwalkrmfp16-creator/air-boxing-prototype	gameplay.png	Ring ropes and fighter targets occupy the playfield, with a separate camera inset and health bars.
+vlokesh7/Dynamic-Tic-Tac-Toe-Game-with-Python-Tkinter	tie.png	Blue glyphs on a dark three-by-three grid leave the result above and restart control below.

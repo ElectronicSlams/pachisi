@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="eslams/styles/tokens.css">
+  <link rel="stylesheet" href="eslams/styles/components.css">
+  <link rel="stylesheet" href="eslams/styles/chrome-v2.css">
+  <link rel="stylesheet" href="eslams/styles/pages2.css">
+  <link rel="stylesheet" href="eslams/styles/pages3.css">
+  <link rel="stylesheet" href="eslams/styles/pages4.css">
+  <link rel="stylesheet" href="eslams/styles/identity.css">
+  <style>
+    html, body { height: 100%; }
+    a { color: inherit; }
+    a:hover { color: var(--accent); }
+    @keyframes protoIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</helmet>
+
+<div style="display:flex; height:100vh; background:var(--bg); overflow:hidden;">
+
+  <!-- ============ PROTOTYPE RAIL ============ -->
+  <sc-if value="{{ showRail }}" hint-placeholder-val="{{ true }}">
+    <aside data-screen-label="Prototype rail" style="width:236px; flex:none; background:var(--surface-inset); border-right:1px solid var(--border); display:flex; flex-direction:column; overflow-y:auto;">
+      <div style="padding:16px 16px 8px; display:flex; align-items:center; gap:10px;">
+        <img src="eslams/assets/mark.png" alt="" style="width:26px; height:26px; border-radius:6px;">
+        <div>
+          <div style="font-weight:650; font-size:13px; letter-spacing:-0.01em;">Identity surfaces</div>
+          <div class="eyebrow" style="font-size:9.5px;">Interactive prototype</div>
+        </div>
+      </div>
+      <nav style="flex:1; padding:8px 10px 14px; display:flex; flex-direction:column; gap:14px;">
+        <sc-for list="{{ railGroups }}" as="grp" hint-placeholder-count="3">
+          <div>
+            <div class="eyebrow" style="padding:4px 8px 6px; font-size:9.5px;">{{ grp.label }}</div>
+            <div style="display:flex; flex-direction:column; gap:2px;">
+              <sc-for list="{{ grp.items }}" as="it" hint-placeholder-count="3">
+                <button class="btn btn-sm {{ it.cls }}" onClick="{{ it.go }}" style="width:100%; justify-content:flex-start; font-size:13px;">{{ it.label }}</button>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+        <div>
+          <div class="eyebrow" style="padding:4px 8px 6px; font-size:9.5px;">Trinity</div>
+          <a class="btn btn-ghost btn-sm" href="eSlams Trinity.dc.html" style="width:100%; justify-content:flex-start; font-size:13px; display:flex;">Trinity console ↗</a>
+        </div>
+      </nav>
+      <div style="padding:12px 14px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:10px;">
+        <sc-if value="{{ freshBadge }}" hint-placeholder-val="{{ false }}">
+          <span class="tag tag-accent" style="align-self:flex-start;">Session verified · fresh</span>
+        </sc-if>
+        <div class="seg" style="width:100%;">
+          <button class="{{ themeLightCls }}" onClick="{{ pickLight }}" style="flex:1;">Light</button>
+          <button class="{{ themeDarkCls }}" onClick="{{ pickDark }}" style="flex:1;">Dark</button>
+        </div>
+        <div class="seg" style="width:100%;">
+          <button class="{{ vpDeskCls }}" onClick="{{ pickDesktop }}" style="flex:1;">Desktop</button>
+          <button class="{{ vpMobCls }}" onClick="{{ pickMobile }}" style="flex:1;">390px</button>
+        </div>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- ============ STAGE ============ -->
+  <div class="proto-stage {{ mobileCls }}" style="flex:1; min-width:0; overflow-y:auto; position:relative;">
+
+    <!-- proto state bar -->
+    <sc-if value="{{ hasSims }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex; align-items:center; gap:12px; padding:7px 18px; border-bottom:1px solid var(--border); background:var(--surface-inset); flex-wrap:wrap;">
+        <span class="eyebrow" style="font-size:9.5px;">{{ screenTitle }} · states</span>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <sc-for list="{{ simChips }}" as="ch" hint-placeholder-count="3">
+            <button class="chip {{ ch.cls }}" onClick="{{ ch.pick }}" style="padding:4px 11px; font-size:12px;">{{ ch.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </sc-if>
+
+    <!-- ============ PRODUCT HEADER ============ -->
+    <header class="nv nv-scrolled" data-screen-label="Header">
+      <div class="nv-inner wrap">
+        <div class="nv-left">
+          <a class="nv-logo" onClick="{{ navOut }}" aria-label="eSlams home"><img src="{{ logoSrc }}" alt="eSlams" class="nv-logo-img"></a>
+          <nav class="nv-links">
+            <a class="nv-link" onClick="{{ navOut }}">Leaderboard</a>
+            <a class="nv-link" onClick="{{ navOut }}">Battlefield</a>
+            <a class="nv-link" onClick="{{ navOut }}">Arena</a>
+          </nav>
+        </div>
+        <div class="nv-right">
+          <div class="nv-search"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.3-4.3"></path></svg><input class="nv-search-in" placeholder="Search models &amp; games" aria-label="Search"><kbd class="nv-kbd mono">/</kbd></div>
+          <button class="nv-icon" onClick="{{ toggleTheme }}" aria-label="Toggle theme" title="Toggle theme">
+            <sc-if value="{{ isDark }}" hint-placeholder-val="{{ false }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></sc-if>
+            <sc-if value="{{ isLight }}" hint-placeholder-val="{{ true }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg></sc-if>
+          </button>
+          <sc-if value="{{ signedIn }}" hint-placeholder-val="{{ true }}">
+            <a class="nv-avatar" onClick="{{ openProfile }}" aria-label="Your profile">
+              <sc-if value="{{ avatarIsPhoto }}" hint-placeholder-val="{{ false }}"><span class="nv-av" style="{{ photoStyleNav }}"></span></sc-if>
+              <sc-if value="{{ avatarIsInitial }}" hint-placeholder-val="{{ true }}"><span class="nv-av" style="{{ avStyleNav }}">{{ avInitial }}</span></sc-if>
+            </a>
+          </sc-if>
+          <sc-if value="{{ signedOut }}" hint-placeholder-val="{{ false }}">
+            <button class="btn btn-secondary btn-sm" onClick="{{ goLogin }}">Sign in</button>
+          </sc-if>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ SIGN IN ============ -->
+    <sc-if value="{{ isLogin }}" hint-placeholder-val="{{ true }}">
+      <section data-screen-label="Sign in" class="page authpage">
+        <div class="auth-split">
+          <aside class="auth-aside">
+            <a class="auth-mark" onClick="{{ navOut }}"><img src="eslams/assets/mark.png" alt="" style="width:34px; height:34px; border-radius:8px;"><span class="mono">eSlams</span></a>
+            <div class="auth-asidebody">
+              <h2 class="auth-asidetitle">Welcome back.</h2>
+              <p class="auth-asidesub">Watch frontier models compete, play the Arena, and keep every match on your profile.</p>
+              <ul class="auth-points">
+                <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> Secure sign-in</li>
+                <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> Public profile after onboarding</li>
+                <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> GitHub, Google, or email</li>
+              </ul>
+            </div>
+            <div class="auth-asidefoot mono">Open source · MIT</div>
+          </aside>
+          <main class="auth-main">
+            <div class="auth-card" style="animation:protoIn .25s ease;">
+              <div class="auth-head">
+                <h1 class="auth-title">Sign in to eSlams</h1>
+                <p class="auth-sub">Continue with GitHub, Google, or email.</p>
+              </div>
+              <sc-if value="{{ li.hasErr }}" hint-placeholder-val="{{ false }}">
+                <div role="alert" style="display:flex; gap:9px; align-items:flex-start; background:var(--loss-soft); color:var(--loss); border:1px solid color-mix(in oklch, var(--loss) 30%, transparent); border-radius:var(--r-md); padding:10px 13px; font-size:13px; margin-bottom:16px; line-height:1.45;">{{ li.err }}</div>
+              </sc-if>
+              <div class="auth-sso">
+                <button class="auth-ssobtn" onClick="{{ liSSO }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="icn"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"></path></svg> Continue with GitHub</button>
+                <button class="auth-ssobtn" onClick="{{ liSSO }}"><svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.6-.05-1.2-.16-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1z"></path><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"></path><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"></path></svg> Continue with Google</button>
+              </div>
+              <div class="auth-divider"><span>or continue with email</span></div>
+              <form class="auth-form" onSubmit="{{ liSubmit }}" noValidate="{{ true }}">
+                <label class="auth-field" for="li-email">
+                  <span class="auth-label">Email</span>
+                  <input id="li-email" class="input auth-input {{ li.emailCls }}" type="email" value="{{ li.email }}" onChange="{{ liSetEmail }}" placeholder="you@lab.ai" autoComplete="email">
+                  <sc-if value="{{ li.emailErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ li.emailErr }}</span></sc-if>
+                </label>
+                <label class="auth-field" for="li-pw">
+                  <span class="auth-label" style="display:flex; justify-content:space-between; align-items:baseline;">Password <a onClick="{{ goForgot }}" style="font-size:12.5px; color:var(--accent); cursor:pointer; font-weight:530; text-transform:none; letter-spacing:0;">Forgot password?</a></span>
+                  <span style="position:relative; display:block;">
+                    <input id="li-pw" class="input auth-input {{ li.pwCls }}" type="{{ li.pwType }}" value="{{ li.pw }}" onChange="{{ liSetPw }}" placeholder="Your password" autoComplete="current-password" style="padding-right:40px;">
+                    <button type="button" onClick="{{ liToggleShow }}" aria-label="{{ li.pwAria }}" style="position:absolute; right:6px; top:50%; transform:translateY(-50%); width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--text-3); border-radius:var(--r-sm);" style-hover="color:var(--text); background:var(--surface-2);">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                    </button>
+                  </span>
+                  <sc-if value="{{ li.pwErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ li.pwErr }}</span></sc-if>
+                </label>
+                <button class="btn btn-primary btn-lg auth-submit" type="submit" disabled="{{ li.busy }}" style="width:100%; justify-content:center;">
+                  <sc-if value="{{ li.busy }}" hint-placeholder-val="{{ false }}"><span class="spinner" style="width:15px; height:15px; border-top-color:#fff; border-color:rgba(255,255,255,0.35);"></span></sc-if>
+                  {{ li.submitLabel }}
+                </button>
+              </form>
+              <div class="auth-switch">New to eSlams? <a onClick="{{ goSignup }}" style="color:var(--accent); cursor:pointer; font-weight:550;">Create an account</a></div>
+            </div>
+          </main>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ CREATE ACCOUNT ============ -->
+    <sc-if value="{{ isSignup }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Create account" class="page authpage">
+        <div class="auth-split">
+          <aside class="auth-aside">
+            <a class="auth-mark" onClick="{{ navOut }}"><img src="eslams/assets/mark.png" alt="" style="width:34px; height:34px; border-radius:8px;"><span class="mono">eSlams</span></a>
+            <div class="auth-asidebody">
+              <h2 class="auth-asidetitle">Join the arena.</h2>
+              <p class="auth-asidesub">Play a frontier model, head-to-head. No signup to watch — an account keeps your record.</p>
+              <ul class="auth-points">
+                <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> Arena games on your profile</li>
+                <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> Public profile after onboarding</li>
+                <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> Private-by-default replay uploads</li>
+              </ul>
+            </div>
+            <div class="auth-asidefoot mono">Open source · MIT</div>
+          </aside>
+          <main class="auth-main">
+            <sc-if value="{{ su.formStage }}" hint-placeholder-val="{{ true }}">
+              <div class="auth-card" style="animation:protoIn .25s ease;">
+                <div class="auth-head">
+                  <h1 class="auth-title">Create your account</h1>
+                  <p class="auth-sub">Use GitHub, Google, or email. You'll pick a username next.</p>
+                </div>
+                <sc-if value="{{ su.hasErr }}" hint-placeholder-val="{{ false }}">
+                  <div role="alert" style="display:flex; gap:9px; background:var(--loss-soft); color:var(--loss); border:1px solid color-mix(in oklch, var(--loss) 30%, transparent); border-radius:var(--r-md); padding:10px 13px; font-size:13px; margin-bottom:16px; line-height:1.45;">{{ su.err }}</div>
+                </sc-if>
+                <div class="auth-sso">
+                  <button class="auth-ssobtn" onClick="{{ suSSO }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="icn"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"></path></svg> Continue with GitHub</button>
+                  <button class="auth-ssobtn" onClick="{{ suSSO }}"><svg width="17" height="17" viewBox="0 0 24 24"><path fill="#4285F4" d="M21.6 12.2c0-.6-.05-1.2-.16-1.8H12v3.4h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.1z"></path><path fill="#34A853" d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 .9-3.4.9-2.6 0-4.8-1.7-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22z"></path><path fill="#FBBC05" d="M6.4 13.9a6 6 0 0 1 0-3.8V7.5H3.1a10 10 0 0 0 0 9z"></path><path fill="#EA4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.8-2.8A10 10 0 0 0 3.1 7.5l3.3 2.6C7.2 7.8 9.4 6.1 12 6.1z"></path></svg> Continue with Google</button>
+                </div>
+                <div class="auth-divider"><span>or sign up with email</span></div>
+                <form class="auth-form" onSubmit="{{ suSubmit }}" noValidate="{{ true }}">
+                  <label class="auth-field" for="su-email">
+                    <span class="auth-label">Email</span>
+                    <input id="su-email" class="input auth-input {{ su.emailCls }}" type="email" value="{{ su.email }}" onChange="{{ suSetEmail }}" placeholder="you@lab.ai" autoComplete="email">
+                    <sc-if value="{{ su.emailErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ su.emailErr }}</span></sc-if>
+                  </label>
+                  <label class="auth-field" for="su-pw">
+                    <span class="auth-label">Password</span>
+                    <span style="position:relative; display:block;">
+                      <input id="su-pw" class="input auth-input {{ su.pwCls }}" type="{{ su.pwType }}" value="{{ su.pw }}" onChange="{{ suSetPw }}" placeholder="12+ characters" autoComplete="new-password" style="padding-right:40px;">
+                      <button type="button" onClick="{{ suToggleShow }}" aria-label="{{ su.pwAria }}" style="position:absolute; right:6px; top:50%; transform:translateY(-50%); width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center; background:transparent; border:none; color:var(--text-3); border-radius:var(--r-sm);" style-hover="color:var(--text);">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                      </button>
+                    </span>
+                    <sc-if value="{{ su.showMeter }}" hint-placeholder-val="{{ false }}">
+                      <span style="display:block;">
+                        <span style="display:flex; gap:4px; margin:2px 0 5px;">
+                          <sc-for list="{{ su.segs }}" as="sg" hint-placeholder-count="4"><span style="{{ sg.style }}"></span></sc-for>
+                        </span>
+                        <span class="mono" style="font-size:11px; color:var(--text-3);">{{ su.strengthLabel }} · 12+ characters</span>
+                      </span>
+                    </sc-if>
+                    <sc-if value="{{ su.pwErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ su.pwErr }}</span></sc-if>
+                  </label>
+                  <button class="btn btn-primary btn-lg auth-submit" type="submit" disabled="{{ su.busy }}" style="width:100%; justify-content:center;">
+                    <sc-if value="{{ su.busy }}" hint-placeholder-val="{{ false }}"><span class="spinner" style="width:15px; height:15px; border-top-color:#fff; border-color:rgba(255,255,255,0.35);"></span></sc-if>
+                    {{ su.submitLabel }}
+                  </button>
+                </form>
+                <p class="auth-legal mono" style="margin-top:16px;">By creating an account you agree to the eSlams Terms. Your profile is public only after you choose a username.</p>
+                <div class="auth-switch">Already have an account? <a onClick="{{ goLogin }}" style="color:var(--accent); cursor:pointer; font-weight:550;">Sign in</a></div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ su.checkStage }}" hint-placeholder-val="{{ false }}">
+              <div class="auth-card" style="text-align:center; animation:protoIn .25s ease;">
+                <span style="width:56px; height:56px; border-radius:50%; background:var(--accent-soft); color:var(--accent); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+                </span>
+                <h1 class="auth-title" style="margin-bottom:8px;">Check your email</h1>
+                <p style="color:var(--text-2); font-size:14px; line-height:1.55;">We sent a verification link to<br><b class="mono" style="color:var(--text); font-size:13.5px;">{{ su.email }}</b></p>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:22px;">
+                  <button class="btn btn-soft btn-md" onClick="{{ suOpenLink }}" style="justify-content:center;">Open the emailed link → <span class="mono" style="font-size:11px; opacity:0.7;">demo</span></button>
+                  <button class="btn btn-secondary btn-md" onClick="{{ suResend }}" disabled="{{ su.resendDisabled }}" style="justify-content:center;">{{ su.resendLabel }}</button>
+                  <button class="btn btn-ghost btn-sm" onClick="{{ suStartOver }}" style="justify-content:center;">Wrong address? Start over</button>
+                </div>
+              </div>
+            </sc-if>
+          </main>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ FORGOT PASSWORD ============ -->
+    <sc-if value="{{ isForgot }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Forgot password" class="page authpage" style="display:flex; align-items:center; justify-content:center; padding:40px 24px;">
+        <div class="auth-card" style="max-width:400px; width:100%; animation:protoIn .25s ease;">
+          <sc-if value="{{ fg.formStage }}" hint-placeholder-val="{{ true }}">
+            <div class="auth-head">
+              <h1 class="auth-title">Reset your password</h1>
+              <p class="auth-sub">Enter your email and we'll send a reset link.</p>
+            </div>
+            <form class="auth-form" onSubmit="{{ fgSubmit }}" noValidate="{{ true }}">
+              <label class="auth-field" for="fg-email">
+                <span class="auth-label">Email</span>
+                <input id="fg-email" class="input auth-input {{ fg.emailCls }}" type="email" value="{{ fg.email }}" onChange="{{ fgSetEmail }}" placeholder="you@lab.ai" autoComplete="email">
+                <sc-if value="{{ fg.err }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ fg.err }}</span></sc-if>
+              </label>
+              <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Send reset link</button>
+            </form>
+            <div class="auth-switch"><a onClick="{{ goLogin }}" style="color:var(--accent); cursor:pointer; font-weight:550;">← Back to sign in</a></div>
+          </sc-if>
+          <sc-if value="{{ fg.sentStage }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;">
+              <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+              </span>
+              <h1 class="auth-title" style="margin-bottom:8px;">On its way</h1>
+              <p style="color:var(--text-2); font-size:14px; line-height:1.55;">If an account exists for that email, a reset link is on its way.</p>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:22px;">
+                <button class="btn btn-soft btn-md" onClick="{{ goReset }}" style="justify-content:center;">Open the emailed link → <span class="mono" style="font-size:11px; opacity:0.7;">demo</span></button>
+                <button class="btn btn-secondary btn-md" onClick="{{ fgResend }}" disabled="{{ fg.resendDisabled }}" style="justify-content:center;">{{ fg.resendLabel }}</button>
+                <button class="btn btn-ghost btn-sm" onClick="{{ goLogin }}" style="justify-content:center;">Back to sign in</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ RESET PASSWORD ============ -->
+    <sc-if value="{{ isReset }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Reset password" class="page authpage" style="display:flex; align-items:center; justify-content:center; padding:40px 24px;">
+        <div class="auth-card" style="max-width:400px; width:100%; animation:protoIn .25s ease;">
+          <sc-if value="{{ rs.isForm }}" hint-placeholder-val="{{ true }}">
+            <div class="auth-head">
+              <h1 class="auth-title">Choose a new password</h1>
+              <p class="auth-sub">For <b class="mono" style="color:var(--text); font-size:13px;">{{ demoEmail }}</b></p>
+            </div>
+            <form class="auth-form" onSubmit="{{ rsSubmit }}" noValidate="{{ true }}">
+              <label class="auth-field" for="rs-pw">
+                <span class="auth-label">New password</span>
+                <input id="rs-pw" class="input auth-input" type="password" value="{{ rs.pw }}" onChange="{{ rsSetPw }}" placeholder="12+ characters" autoComplete="new-password">
+                <sc-if value="{{ rs.showMeter }}" hint-placeholder-val="{{ false }}">
+                  <span style="display:block;">
+                    <span style="display:flex; gap:4px; margin:2px 0 5px;">
+                      <sc-for list="{{ rs.segs }}" as="sg" hint-placeholder-count="4"><span style="{{ sg.style }}"></span></sc-for>
+                    </span>
+                    <span class="mono" style="font-size:11px; color:var(--text-3);">{{ rs.strengthLabel }} · 12+ characters</span>
+                  </span>
+                </sc-if>
+              </label>
+              <label class="auth-field" for="rs-pw2">
+                <span class="auth-label">Confirm password</span>
+                <input id="rs-pw2" class="input auth-input {{ rs.pw2Cls }}" type="password" value="{{ rs.pw2 }}" onChange="{{ rsSetPw2 }}" placeholder="Repeat it" autoComplete="new-password">
+                <sc-if value="{{ rs.err }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ rs.err }}</span></sc-if>
+              </label>
+              <button class="btn btn-primary btn-lg" type="submit" style="width:100%; justify-content:center;">Update password</button>
+            </form>
+          </sc-if>
+          <sc-if value="{{ rs.isExpired }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;">
+              <span style="width:56px; height:56px; border-radius:50%; background:var(--draw-soft); color:var(--draw); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+              </span>
+              <h1 class="auth-title" style="margin-bottom:8px;">This link expired</h1>
+              <p style="color:var(--text-2); font-size:14px; line-height:1.55;">Reset links work for 30 minutes. Request a fresh one and try again.</p>
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:22px;">
+                <button class="btn btn-primary btn-md" onClick="{{ goForgot }}" style="justify-content:center;">Request a new link</button>
+                <button class="btn btn-ghost btn-sm" onClick="{{ goLogin }}" style="justify-content:center;">Back to sign in</button>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ rs.isSuccess }}" hint-placeholder-val="{{ false }}">
+            <div style="text-align:center;">
+              <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+              </span>
+              <h1 class="auth-title" style="margin-bottom:8px;">Password updated</h1>
+              <p style="color:var(--text-2); font-size:14px; line-height:1.55;">For safety, we signed you out everywhere else.</p>
+              <button class="btn btn-primary btn-md" onClick="{{ goLogin }}" style="justify-content:center; width:100%; margin-top:22px;">Sign in</button>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ VERIFY EMAIL ============ -->
+    <sc-if value="{{ isVerify }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Verify email" class="page authpage" style="display:flex; align-items:center; justify-content:center; padding:40px 24px;">
+        <div class="auth-card" style="max-width:400px; width:100%; text-align:center; animation:protoIn .25s ease;">
+          <sc-if value="{{ vf.verifying }}" hint-placeholder-val="{{ true }}">
+            <span class="spinner" style="width:28px; height:28px; margin-bottom:18px;"></span>
+            <h1 class="auth-title" style="margin-bottom:8px;">Verifying your email…</h1>
+            <p style="color:var(--text-2); font-size:14px;">One moment.</p>
+          </sc-if>
+          <sc-if value="{{ vf.success }}" hint-placeholder-val="{{ false }}">
+            <span style="width:56px; height:56px; border-radius:50%; background:var(--win-soft); color:var(--win); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+            </span>
+            <h1 class="auth-title" style="margin-bottom:8px;">Email verified</h1>
+            <p style="color:var(--text-2); font-size:14px; line-height:1.55;">You're one step from the Arena — claim your username.</p>
+            <button class="btn btn-primary btn-lg" onClick="{{ vfContinue }}" style="justify-content:center; width:100%; margin-top:22px;">Continue to onboarding</button>
+          </sc-if>
+          <sc-if value="{{ vf.expired }}" hint-placeholder-val="{{ false }}">
+            <span style="width:56px; height:56px; border-radius:50%; background:var(--draw-soft); color:var(--draw); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+            </span>
+            <h1 class="auth-title" style="margin-bottom:8px;">This link expired</h1>
+            <p style="color:var(--text-2); font-size:14px; line-height:1.55;">We can send a fresh verification link to <b class="mono" style="color:var(--text); font-size:13px;">{{ demoEmail }}</b>.</p>
+            <div style="display:flex; flex-direction:column; gap:10px; margin-top:22px;">
+              <button class="btn btn-primary btn-md" onClick="{{ vfResend }}" disabled="{{ vf.resendDisabled }}" style="justify-content:center;">{{ vf.resendLabel }}</button>
+              <button class="btn btn-ghost btn-sm" onClick="{{ goLogin }}" style="justify-content:center;">Back to sign in</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{ vf.already }}" hint-placeholder-val="{{ false }}">
+            <span style="width:56px; height:56px; border-radius:50%; background:var(--accent-soft); color:var(--accent); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg>
+            </span>
+            <h1 class="auth-title" style="margin-bottom:8px;">Already verified</h1>
+            <p style="color:var(--text-2); font-size:14px; line-height:1.55;">This email is good to go — sign in to continue.</p>
+            <button class="btn btn-primary btn-md" onClick="{{ goLogin }}" style="justify-content:center; width:100%; margin-top:22px;">Sign in</button>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ ONBOARDING ============ -->
+    <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Onboarding" class="page authpage">
+        <div class="auth-split">
+          <aside class="auth-aside">
+            <a class="auth-mark" onClick="{{ navOut }}"><img src="eslams/assets/mark.png" alt="" style="width:34px; height:34px; border-radius:8px;"><span class="mono">eSlams</span></a>
+            <div class="auth-asidebody">
+              <h2 class="auth-asidetitle">{{ ob.asideTitle }}</h2>
+              <p class="auth-asidesub">{{ ob.asideSub }}</p>
+              <div style="display:flex; flex-direction:column; gap:14px; margin-top:28px;">
+                <sc-for list="{{ ob.steps }}" as="stp" hint-placeholder-count="3">
+                  <div style="display:flex; align-items:center; gap:11px;">
+                    <span style="{{ stp.dotStyle }}">{{ stp.dotLabel }}</span>
+                    <span class="mono" style="{{ stp.txtStyle }}">{{ stp.label }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+            <div class="auth-asidefoot mono">Open source · MIT</div>
+          </aside>
+          <main class="auth-main">
+            <!-- Step 1 · Your profile -->
+            <sc-if value="{{ ob.step1 }}" hint-placeholder-val="{{ true }}">
+              <div class="auth-card" style="animation:protoIn .25s ease;">
+                <div class="auth-head">
+                  <div class="eyebrow" style="margin-bottom:10px;">1 · Your profile</div>
+                  <h1 class="auth-title">{{ ob.title1 }}</h1>
+                  <p class="auth-sub">{{ ob.sub1 }}</p>
+                </div>
+                <div class="auth-form">
+                  <div class="auth-field">
+                    <span class="auth-label">Profile photo</span>
+                    <div style="display:flex; align-items:center; gap:14px;">
+                      <sc-if value="{{ ob.hasPhoto }}" hint-placeholder-val="{{ true }}"><span style="{{ photoStyleXl }}"></span></sc-if>
+                      <sc-if value="{{ ob.noPhoto }}" hint-placeholder-val="{{ false }}"><span style="{{ avStyleXl }}">{{ avInitial }}</span></sc-if>
+                      <div style="display:flex; flex-direction:column; gap:7px; align-items:flex-start;">
+                        <sc-if value="{{ ob.showSourceChip }}" hint-placeholder-val="{{ true }}">
+                          <span class="tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icn"><path d="M20 6L9 17l-5-5"></path></svg> From GitHub</span>
+                        </sc-if>
+                        <div style="display:flex; gap:8px;">
+                          <button class="btn btn-secondary btn-sm" onClick="{{ obUpload }}">{{ ob.photoBtnLabel }}</button>
+                          <sc-if value="{{ ob.hasPhoto }}" hint-placeholder-val="{{ true }}"><button class="btn btn-ghost btn-sm" onClick="{{ obRemovePhoto }}">Remove</button></sc-if>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <label class="auth-field" for="ob-dn">
+                    <span class="auth-label" style="display:flex; justify-content:space-between; align-items:baseline;">Display name <sc-if value="{{ ob.isOauth }}" hint-placeholder-val="{{ true }}"><span class="mono" style="text-transform:none; letter-spacing:0; font-size:10.5px; color:var(--text-3);">from GitHub</span></sc-if></span>
+                    <input id="ob-dn" class="input auth-input" value="{{ ob.display }}" onChange="{{ obSetDisplay }}" placeholder="Your name" autoComplete="name" maxLength="{{ 50 }}">
+                  </label>
+                  <label class="auth-field" for="ob-un">
+                    <span class="auth-label">Username</span>
+                    <div class="auth-inputwrap"><span class="auth-prefix mono">eslams.com/</span><input id="ob-un" class="input auth-input auth-input-prefixed mono" value="{{ ob.username }}" onChange="{{ obSetU }}" placeholder="player-1" autoComplete="off" spellCheck="{{ false }}"></div>
+                    <sc-if value="{{ ob.availChecking }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex; align-items:center; gap:7px; font-size:12.5px; color:var(--text-3);"><span class="spinner" style="width:12px; height:12px;"></span> Checking…</span></sc-if>
+                    <sc-if value="{{ ob.availOk }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex; align-items:center; gap:6px; font-size:12.5px; color:var(--win); font-weight:550;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"></path></svg> Available — <span class="mono" style="font-size:12px;">eslams.com/{{ ob.urlName }}</span></span></sc-if>
+                    <sc-if value="{{ ob.availTaken }}" hint-placeholder-val="{{ false }}">
+                      <span style="display:block;">
+                        <span class="auth-errmsg">{{ ob.availMsg }}</span>
+                        <sc-if value="{{ ob.hasSugg }}" hint-placeholder-val="{{ false }}">
+                          <span style="display:inline-flex; gap:6px; margin-top:7px;">
+                            <sc-for list="{{ ob.sugg }}" as="sg" hint-placeholder-count="2"><button class="chip mono" onClick="{{ sg.pick }}" style="padding:3px 10px; font-size:12px;">{{ sg.name }}</button></sc-for>
+                          </span>
+                        </sc-if>
+                      </span>
+                    </sc-if>
+                    <span style="font-size:12px; color:var(--text-3); line-height:1.5;">Your profile URL. Lowercase letters, numbers, hyphens; some names are reserved.</span>
+                  </label>
+                  <div class="auth-field">
+                    <span class="auth-label">Email</span>
+                    <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                      <span class="mono" style="font-size:13px; color:var(--text-2);">{{ demoEmail }}</span>
+                      <sc-if value="{{ ob.emailVerified }}" hint-placeholder-val="{{ true }}"><span class="tag" style="background:var(--win-soft); color:var(--win); border-color:color-mix(in oklch, var(--win) 30%, transparent);">✓ Verified</span></sc-if>
+                      <sc-if value="{{ ob.emailPending }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background:var(--draw-soft); color:var(--draw); border-color:color-mix(in oklch, var(--draw) 30%, transparent);">Verification pending</span></sc-if>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary btn-lg" onClick="{{ obCont1 }}" disabled="{{ ob.cont1Disabled }}" style="width:100%; justify-content:center;">Continue</button>
+                </div>
+              </div>
+            </sc-if>
+            <!-- Step 2 · About you -->
+            <sc-if value="{{ ob.step2 }}" hint-placeholder-val="{{ false }}">
+              <div class="auth-card" style="animation:protoIn .25s ease;">
+                <div class="auth-head">
+                  <div class="eyebrow" style="margin-bottom:10px;">2 · About you</div>
+                  <h1 class="auth-title">A little about you.</h1>
+                  <p class="auth-sub">All optional — you can add or change any of this later in Settings.</p>
+                </div>
+                <div class="auth-form">
+                  <label class="auth-field" for="ob-bio">
+                    <span class="auth-label" style="display:flex; justify-content:space-between;">Bio <span class="mono" style="text-transform:none; letter-spacing:0; font-size:11px; color:var(--text-3);">{{ ob.bioCount }}/160</span></span>
+                    <textarea id="ob-bio" class="input auth-input" value="{{ ob.bio }}" onChange="{{ obSetBio }}" placeholder="A line about how you play" rows="{{ 2 }}" style="resize:vertical; min-height:58px;"></textarea>
+                  </label>
+                  <label class="auth-field" for="ob-loc">
+                    <span class="auth-label">Location</span>
+                    <input id="ob-loc" class="input auth-input" value="{{ ob.location }}" onChange="{{ obSetLocation }}" placeholder="City, Country" maxLength="{{ 60 }}">
+                  </label>
+                  <label class="auth-field" for="ob-web">
+                    <span class="auth-label">Website</span>
+                    <input id="ob-web" class="input auth-input mono" value="{{ ob.website }}" onChange="{{ obSetWebsite }}" placeholder="https://you.dev" inputMode="url" spellCheck="{{ false }}" style="font-size:13.5px;">
+                    <sc-if value="{{ ob.err2 }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ ob.err2 }}</span></sc-if>
+                  </label>
+                  <div class="auth-field">
+                    <span class="auth-label">Profile visibility</span>
+                    <div class="seg">
+                      <button class="{{ ob.visPubCls }}" onClick="{{ obVisPub }}">Public</button>
+                      <button class="{{ ob.visUnlCls }}" onClick="{{ obVisUnl }}">Unlisted</button>
+                      <button class="{{ ob.visPrivCls }}" onClick="{{ obVisPriv }}">Private</button>
+                    </div>
+                    <span style="font-size:12px; color:var(--text-3); line-height:1.5;">{{ ob.visDesc }}</span>
+                  </div>
+                  <div style="display:flex; gap:10px;">
+                    <button class="btn btn-ghost btn-lg" onClick="{{ obSkip2 }}" style="flex:1; justify-content:center;">Skip for now</button>
+                    <button class="btn btn-primary btn-lg" onClick="{{ obCont2 }}" style="flex:1.4; justify-content:center;">Continue</button>
+                  </div>
+                  <button class="btn btn-ghost btn-sm" onClick="{{ obBack1 }}" style="align-self:flex-start;">← Back</button>
+                </div>
+              </div>
+            </sc-if>
+            <!-- Step 3 · Confirm & go -->
+            <sc-if value="{{ ob.step3 }}" hint-placeholder-val="{{ false }}">
+              <div class="auth-card" style="animation:protoIn .25s ease;">
+                <div class="auth-head">
+                  <div class="eyebrow" style="margin-bottom:10px;">3 · Confirm &amp; go</div>
+                  <h1 class="auth-title">{{ ob.title3 }}</h1>
+                  <p class="auth-sub">This is your public profile as others will see it — edit anything inline.</p>
+                </div>
+                <div class="card" style="padding:16px 18px; margin-bottom:20px;">
+                  <div style="display:flex; align-items:center; gap:14px; padding-bottom:12px;">
+                    <sc-if value="{{ ob.hasPhoto }}" hint-placeholder-val="{{ true }}"><span style="{{ photoStyleLg }}"></span></sc-if>
+                    <sc-if value="{{ ob.noPhoto }}" hint-placeholder-val="{{ false }}"><span style="{{ avStyleLg }}">{{ avInitial }}</span></sc-if>
+                    <div style="flex:1; min-width:0;">
+                      <div style="font-weight:650; font-size:16px; letter-spacing:-0.01em;">{{ ob.recapDisplay }}</div>
+                      <div class="mono" style="font-size:12.5px; color:var(--text-2);">eslams.com/{{ ob.username }}</div>
+                    </div>
+                    <span class="tag" style="flex:none;">
+                      <sc-if value="{{ ob.recapVisIsPublic }}" hint-placeholder-val="{{ true }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg></sc-if>
+                      <sc-if value="{{ ob.recapVisNotPublic }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></sc-if>
+                      {{ ob.recapVis }}
+                    </span>
+                  </div>
+                  <sc-for list="{{ ob.recapRows }}" as="rr" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:9px 0; border-top:1px solid var(--border-faint);">
+                      <span class="eyebrow" style="font-size:9px; padding-top:4px; flex:none; width:86px;">{{ rr.label }}</span>
+                      <sc-if value="{{ rr.static }}" hint-placeholder-val="{{ true }}">
+                        <span class="{{ rr.valCls }}" style="flex:1; font-size:13px; color:var(--text-2); line-height:1.5; word-break:break-word;">{{ rr.shown }}</span>
+                        <button class="btn btn-ghost btn-sm" onClick="{{ rr.edit }}" aria-label="Edit {{ rr.label }}" style="padding:2px 8px; font-size:11.5px; flex:none;">Edit</button>
+                      </sc-if>
+                      <sc-if value="{{ rr.editing }}" hint-placeholder-val="{{ false }}">
+                        <span style="flex:1; display:flex; flex-direction:column; gap:7px;">
+                          <sc-if value="{{ rr.isTextarea }}" hint-placeholder-val="{{ false }}"><textarea class="input" value="{{ ob.editDraft }}" onChange="{{ obEdSet }}" rows="{{ 2 }}" maxLength="{{ 160 }}" style="resize:vertical; font-size:13px;"></textarea></sc-if>
+                          <sc-if value="{{ rr.isInput }}" hint-placeholder-val="{{ true }}"><input class="input" value="{{ ob.editDraft }}" onChange="{{ obEdSet }}" style="font-size:13px;"></sc-if>
+                          <sc-if value="{{ ob.editErr }}" hint-placeholder-val="{{ false }}"><span class="auth-errmsg">{{ ob.editErr }}</span></sc-if>
+                          <span style="display:flex; gap:8px;">
+                            <button class="btn btn-primary btn-sm" onClick="{{ obEdSave }}">Save</button>
+                            <button class="btn btn-ghost btn-sm" onClick="{{ obEdCancel }}">Cancel</button>
+                          </span>
+                        </span>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0 2px; border-top:1px solid var(--border-faint);">
+                    <span class="eyebrow" style="font-size:9px; flex:none; width:86px;">Visibility</span>
+                    <div class="seg" style="flex:none;">
+                      <button class="{{ ob.visPubCls }}" onClick="{{ obVisPub }}">Public</button>
+                      <button class="{{ ob.visUnlCls }}" onClick="{{ obVisUnl }}">Unlisted</button>
+                      <button class="{{ ob.visPrivCls }}" onClick="{{ obVisPriv }}">Private</button>
+                    </div>
+                  </div>
+                </div>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <button class="btn btn-primary btn-lg" onClick="{{ obLaunch }}" style="width:100%; justify-content:center;">Play a frontier model</button>
+                  <button class="btn btn-secondary btn-md" onClick="{{ obLeaderboard }}" style="width:100%; justify-content:center;">Explore the leaderboard</button>
+                  <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <button class="btn btn-ghost btn-sm" onClick="{{ obBack2 }}">← Back</button>
+                    <button class="btn btn-ghost btn-sm" onClick="{{ obFinishProfile }}">Finish to profile</button>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+          </main>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ PUBLIC PROFILE ============ -->
+    <sc-if value="{{ isProfile }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Public profile" class="page profile">
+        <div class="wrap page-pad">
+          <!-- private state -->
+          <sc-if value="{{ pf.priv }}" hint-placeholder-val="{{ false }}">
+            <div class="card" style="max-width:480px; margin:60px auto; padding:44px 32px; text-align:center;">
+              <span style="width:56px; height:56px; border-radius:50%; background:var(--surface-3); color:var(--text-2); display:inline-flex; align-items:center; justify-content:center; margin-bottom:18px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg>
+              </span>
+              <h1 style="font-size:22px; margin-bottom:8px;">This profile is private</h1>
+              <p style="color:var(--text-2); font-size:14px; line-height:1.55;">The player has chosen to keep their record to themselves.</p>
+              <button class="btn btn-secondary btn-md" onClick="{{ navOut }}" style="margin-top:22px;">Browse the leaderboard</button>
+            </div>
+          </sc-if>
+          <!-- normal profile -->
+          <sc-if value="{{ pf.showBody }}" hint-placeholder-val="{{ true }}">
+            <div class="pf-header card">
+              <div class="pf-id">
+                <span style="position:relative; display:inline-flex; flex:none;">
+                  <sc-if value="{{ avatarIsPhoto }}" hint-placeholder-val="{{ false }}"><span style="{{ photoStyleHero }}"></span></sc-if>
+                  <sc-if value="{{ avatarIsInitial }}" hint-placeholder-val="{{ true }}"><span class="pf-avatar" style="{{ avStyleHero }}">{{ avInitial }}</span></sc-if>
+                  <sc-if value="{{ pf.owner }}" hint-placeholder-val="{{ true }}">
+                    <button onClick="{{ avatarOpen }}" aria-label="Change photo" style="position:absolute; inset:0; border-radius:50%; border:none; background:transparent; color:transparent; font-size:10.5px; font-weight:600; cursor:pointer; display:flex; align-items:center; justify-content:center;" style-hover="background:rgba(10,10,14,0.55); color:#fff;">Change</button>
+                  </sc-if>
+                </span>
+                <div class="pf-idtext">
+                  <div class="pf-namerow">
+                    <h1 class="pf-name">{{ pf.display }}</h1>
+                    <sc-if value="{{ pf.owner }}" hint-placeholder-val="{{ true }}">
+                      <button class="pf2-vis {{ pf.visCls }}" onClick="{{ visBadgeGo }}" title="Change visibility in Settings">
+                        <sc-if value="{{ pf.visIsPublic }}" hint-placeholder-val="{{ true }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"></path></svg></sc-if>
+                        <sc-if value="{{ pf.visNotPublic }}" hint-placeholder-val="{{ false }}"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg></sc-if>
+                        {{ pf.vis }}
+                      </button>
+                    </sc-if>
+                  </div>
+                  <div class="pf-sub mono" style="margin-top:2px;">@{{ pf.username }}</div>
+                  <sc-if value="{{ pf.bioShown }}" hint-placeholder-val="{{ true }}">
+                    <sc-if value="{{ pf.bioStatic }}" hint-placeholder-val="{{ true }}">
+                      <div style="font-size:13.5px; color:var(--text-2); margin-top:8px; max-width:52ch; line-height:1.5; display:flex; align-items:baseline; gap:8px;">
+                        <span>{{ pf.bio }}</span>
+                        <sc-if value="{{ pf.owner }}" hint-placeholder-val="{{ true }}">
+                          <button class="btn btn-ghost btn-sm" onClick="{{ startBioEdit }}" aria-label="Edit bio" style="padding:2px 7px; font-size:11.5px;">Edit</button>
+                        </sc-if>
+                        <sc-if value="{{ pf.bioSaved }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px; color:var(--win); font-weight:550;">✓ Saved</span></sc-if>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ pf.bioEditing }}" hint-placeholder-val="{{ false }}">
+                      <div style="margin-top:8px; display:flex; flex-direction:column; gap:8px; max-width:440px;">
+                        <textarea class="input" value="{{ pf.bioDraft }}" onChange="{{ bioSet }}" rows="{{ 2 }}" style="resize:vertical; font-size:13px;"></textarea>
+                        <div style="display:flex; gap:8px;">
+                          <button class="btn btn-primary btn-sm" onClick="{{ bioSave }}">Save</button>
+                          <button class="btn btn-ghost btn-sm" onClick="{{ bioCancel }}">Cancel</button>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </sc-if>
+                  <div style="display:flex; align-items:center; gap:16px; margin-top:9px; flex-wrap:wrap; font-size:12.5px; color:var(--text-3);">
+                    <span style="display:inline-flex; align-items:center; gap:5px;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {{ pf.location }}</span>
+                    <a href="https://rama.dev" target="_blank" rel="noopener noreferrer" style="display:inline-flex; align-items:center; gap:5px; color:var(--accent);"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7 0l2-2a5 5 0 0 0-7-7l-1 1M14 11a5 5 0 0 0-7 0l-2 2a5 5 0 0 0 7 7l1-1"></path></svg> {{ pf.website }}</a>
+                    <span class="mono">joined {{ pf.joined }}</span>
+                  </div>
+                </div>
+              </div>
+              <div style="display:flex; align-items:center; gap:18px; flex-wrap:wrap;">
+                <div class="pf-metrics">
+                  <div class="pf-metric"><span class="pf-mn mono">{{ pf.games }}</span><span class="pf-ml">Games</span></div>
+                  <div class="pf-metric"><span class="pf-mn mono">{{ pf.winRate }}</span><span class="pf-ml">Win rate</span></div>
+                  <div class="pf-metric pf-wld">
+                    <span class="pf-wldrow mono"><b class="pf-w">{{ pf.w }}</b><span>–</span><b class="pf-l">{{ pf.l }}</b><span>–</span><b class="pf-d">{{ pf.d }}</b></span>
+                    <span class="pf-ml">W · L · D</span>
+                  </div>
+                </div>
+                <sc-if value="{{ pf.owner }}" hint-placeholder-val="{{ true }}">
+                  <button class="btn btn-secondary btn-sm" onClick="{{ editProfileGo }}">Edit profile</button>
+                </sc-if>
+              </div>
+            </div>
+
+            <sc-if value="{{ pf.hasRecord }}" hint-placeholder-val="{{ true }}">
+              <div class="pf2-overview">
+                <div class="pf2-ocard">
+                  <div class="pf2-ohead">Win rate by category</div>
+                  <div class="pf2-catbars">
+                    <sc-for list="{{ pf.catBars }}" as="cb" hint-placeholder-count="4">
+                      <div class="pf2-catbar">
+                        <span class="pf2-catname">{{ cb.name }}</span>
+                        <span class="pf2-cattrack"><span class="pf2-catfill" style="{{ cb.style }}"></span></span>
+                        <span class="pf2-catpct">{{ cb.pct }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div class="pf2-ocard pf2-bigstat">
+                  <div class="pf2-ohead">Recent form</div>
+                  <div class="pf2-form">
+                    <sc-for list="{{ pf.form }}" as="fm" hint-placeholder-count="5"><span class="pf2-formchip {{ fm.cls }}">{{ fm.label }}</span></sc-for>
+                  </div>
+                  <div class="pf2-biglbl" style="margin-top:14px;">Last 5 games in Arena</div>
+                </div>
+                <div class="pf2-ocard pf2-bigstat">
+                  <div class="pf2-ohead">Favorite arena</div>
+                  <div class="pf2-bignum" style="font-size:20px;">{{ pf.favGame }}</div>
+                  <div class="pf2-biglbl">Most-played this month</div>
+                </div>
+              </div>
+            </sc-if>
+
+            <div class="pf-tabs tabs">
+              <button class="{{ pf.tabGamesCls }}" onClick="{{ pfTabGames }}">Games</button>
+              <button class="{{ pf.tabArtsCls }}" onClick="{{ pfTabArts }}">Replays</button>
+            </div>
+            <div class="pf-content">
+              <sc-if value="{{ pf.tabGames }}" hint-placeholder-val="{{ true }}">
+                <sc-if value="{{ pf.emptyHistory }}" hint-placeholder-val="{{ false }}">
+                  <div class="card" style="padding:52px 32px; text-align:center;">
+                    <h3 style="font-size:17px; margin-bottom:6px;">No matches yet</h3>
+                    <p style="color:var(--text-2); font-size:13.5px;">Play a frontier model, head-to-head — every match lands here.</p>
+                    <button class="btn btn-primary btn-md" onClick="{{ navOut }}" style="margin-top:18px;">Play a model</button>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ pf.showHistory }}" hint-placeholder-val="{{ true }}">
+                  <div class="gh card">
+                    <div class="gh-head">
+                      <span class="gh-th">Game</span><span class="gh-th lh-hide">Model</span><span class="gh-th ta-r">Result</span><span class="gh-th ta-r">Date</span><span class="gh-th"></span>
+                    </div>
+                    <sc-for list="{{ pf.history }}" as="h" hint-placeholder-count="6">
+                      <div class="gh-row gh-click" onClick="{{ h.open }}">
+                        <span class="gh-game"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" style="color:var(--text-3);"><rect x="4" y="4" width="16" height="16" rx="1.5"></rect><path d="M4 9h16M4 14h16M9 4v16M14 4v16"></path></svg> {{ h.name }}</span>
+                        <span class="gh-model lh-hide"><span class="modelbadge"><span class="provdot" style="{{ h.provStyle }}">{{ h.provInit }}</span><span class="mono modelname" style="font-size:12.5px;"><span class="mb-prov">{{ h.prov }}/</span>{{ h.model }}</span></span></span>
+                        <span class="ta-r"><span class="reschip {{ h.resCls }}">{{ h.resLabel }}</span></span>
+                        <span class="ta-r gh-date mono">{{ h.date }}</span>
+                        <span class="ta-r gh-watch"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5l12 7-12 7z"></path></svg> Replay</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </sc-if>
+              <sc-if value="{{ pf.tabArts }}" hint-placeholder-val="{{ false }}">
+                <div class="arts">
+                  <div class="arts-head">
+                    <div><div class="arts-title">Replays &amp; artifacts</div><div class="arts-sub mono">{{ pf.username }}/&lt;artifact-name&gt; · portable .eslams proofs</div></div>
+                    <sc-if value="{{ pf.owner }}" hint-placeholder-val="{{ true }}"><button class="btn btn-secondary btn-md" onClick="{{ artUpload }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"></path></svg> Upload .eslams</button></sc-if>
+                  </div>
+                  <div class="arts-grid">
+                    <sc-for list="{{ pf.artifacts }}" as="a" hint-placeholder-count="3">
+                      <div class="artcard">
+                        <div class="art-top">
+                          <span class="art-name mono"><span class="art-user">{{ pf.username }}/</span>{{ a.name }}</span>
+                          <sc-if value="{{ a.canToggle }}" hint-placeholder-val="{{ true }}">
+                            <button class="art-vis art-vis-btn {{ a.visCls }}" onClick="{{ a.toggle }}" title="Toggle visibility">{{ a.vis }}</button>
+                          </sc-if>
+                          <sc-if value="{{ a.readOnly }}" hint-placeholder-val="{{ false }}"><span class="art-vis {{ a.visCls }}">{{ a.vis }}</span></sc-if>
+                        </div>
+                        <div class="art-meta">
+                          <span class="art-tag">{{ a.game }}</span>
+                          <span class="art-date mono">{{ a.date }}</span>
+                          <span class="art-size mono">{{ a.size }}</span>
+                        </div>
+                        <div class="art-foot">
+                          <span class="art-ext mono">.eslams</span>
+                          <button class="art-share" onClick="{{ a.share }}">{{ a.shareLabel }}</button>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+            </div>
+          </sc-if>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ SETTINGS ============ -->
+    <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+      <section data-screen-label="Settings" class="page">
+        <div class="wrap page-pad" style="padding-top:32px;">
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:26px;">
+            <sc-if value="{{ avatarIsPhoto }}" hint-placeholder-val="{{ false }}"><span style="{{ photoStyleSm }}"></span></sc-if>
+            <sc-if value="{{ avatarIsInitial }}" hint-placeholder-val="{{ true }}"><span style="{{ avStyleSm }}">{{ avInitial }}</span></sc-if>
+            <div style="flex:1;">
+              <div style="font-weight:650; font-size:15px; letter-spacing:-0.01em;">{{ pf.display }}</div>
+              <div class="mono" style="font-size:12px; color:var(--text-3);">@{{ pf.username }}</div>
+            </div>
+            <a onClick="{{ goProfileOwner }}" style="font-size:13px; color:var(--accent); cursor:pointer; font-weight:540;">View public profile →</a>
+          </div>
+          <sc-if value="{{ st.deactivated }}" hint-placeholder-val="{{ false }}">
+            <div role="alert" style="display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--draw-soft); color:var(--draw); border:1px solid color-mix(in oklch, var(--draw) 30%, transparent); border-radius:var(--r-md); padding:11px 14px; font-size:13px; margin-bottom:18px;">
+              <span>Your account is deactivated — your profile is hidden and other sessions are signed out. Sign back in anytime to reactivate.</span>
+              <button class="btn btn-secondary btn-sm" onClick="{{ stReactivate }}">Reactivate</button>
+            </div>
+          </sc-if>
+          <div class="id-settings-grid">
+            <nav class="id-settings-nav">
+              <sc-for list="{{ st.nav }}" as="nvv" hint-placeholder-count="7">
+                <button class="btn btn-sm {{ nvv.cls }}" onClick="{{ nvv.go }}" style="width:100%; justify-content:flex-start; font-size:13.5px;">{{ nvv.label }}</button>
+              </sc-for>
+            </nav>
+            <div style="min-width:0; display:flex; flex-direction:column; gap:16px;">
+
+              <!-- Profile section (Tier A) -->
+              <sc-if value="{{ st.secProfile }}" hint-placeholder-val="{{ true }}">
+                <div class="card" style="padding:6px 22px;">
+                  <!-- Avatar row -->
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                    <div><div style="font-size:13.5px; font-weight:560;">Profile photo</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">Shown on your profile and in the Arena.</div></div>
+                    <div style="display:flex; align-items:center; gap:12px;">
+                      <sc-if value="{{ avatarIsPhoto }}" hint-placeholder-val="{{ false }}"><span style="{{ photoStyleMd }}"></span></sc-if>
+                      <sc-if value="{{ avatarIsInitial }}" hint-placeholder-val="{{ true }}"><span style="{{ avStyleMd }}">{{ avInitial }}</span></sc-if>
+                      <button class="btn btn-secondary btn-sm" onClick="{{ avatarOpen }}">Change</button>
+                      <sc-if value="{{ avatarIsPhoto }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost btn-sm" onClick="{{ avRemove }}">Remove</button></sc-if>
+                    </div>
+                  </div>
+                  <sc-for list="{{ st.tierARows }}" as="r" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                      <div style="padding-top:2px;"><div style="font-size:13.5px; font-weight:560;">{{ r.label }}</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">{{ r.desc }}</div></div>
+                      <sc-if value="{{ r.static }}" hint-placeholder-val="{{ true }}">
+                        <div style="display:flex; align-items:center; gap:10px;">
+                          <span style="font-size:13.5px; color:var(--text); text-align:right; max-width:34ch;" class="{{ r.valCls }}">{{ r.value }}</span>
+                          <sc-if value="{{ r.saved }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px; color:var(--win); font-weight:550; white-space:nowrap;">✓ Saved</span></sc-if>
+                          <button class="btn btn-ghost btn-sm" onClick="{{ r.edit }}">Edit</button>
+                        </div>
+                      </sc-if>
+                      <sc-if value="{{ r.editing }}" hint-placeholder-val="{{ false }}">
+                        <div style="display:flex; flex-direction:column; gap:8px; width:min(360px, 60%);">
+                          <sc-if value="{{ r.isTextarea }}" hint-placeholder-val="{{ false }}"><textarea class="input" value="{{ st.edDraft }}" onChange="{{ stEdSet }}" rows="{{ 2 }}" maxLength="{{ 160 }}" style="resize:vertical; font-size:13px;"></textarea></sc-if>
+                          <sc-if value="{{ r.isInput }}" hint-placeholder-val="{{ true }}"><input class="input" value="{{ st.edDraft }}" onChange="{{ stEdSet }}" style="font-size:13px;"></sc-if>
+                          <sc-if value="{{ r.err }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--loss);">{{ r.err }}</span></sc-if>
+                          <div style="display:flex; gap:8px;">
+                            <button class="btn btn-primary btn-sm" onClick="{{ stEdSave }}">Save</button>
+                            <button class="btn btn-ghost btn-sm" onClick="{{ stEdCancel }}">Cancel</button>
+                          </div>
+                        </div>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                  <!-- Visibility row -->
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 0;">
+                    <div style="padding-top:2px;"><div style="font-size:13.5px; font-weight:560;">Profile visibility</div><div style="font-size:12px; color:var(--text-3); margin-top:2px; max-width:38ch;">{{ st.visDesc }}</div></div>
+                    <div style="display:flex; align-items:center; gap:10px;">
+                      <sc-if value="{{ st.visSaved }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px; color:var(--win); font-weight:550; white-space:nowrap;">✓ Saved</span></sc-if>
+                      <div class="seg">
+                        <button class="{{ st.visPubCls }}" onClick="{{ stVisPub }}">Public</button>
+                        <button class="{{ st.visUnlCls }}" onClick="{{ stVisUnl }}">Unlisted</button>
+                        <button class="{{ st.visPrivCls }}" onClick="{{ stVisPriv }}">Private</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </sc-if>
+
+              <!-- Account section (Tier B) -->
+              <sc-if value="{{ st.secAccount }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:6px 22px;">
+                  <!-- Email -->
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                    <div style="padding-top:2px;"><div style="font-size:13.5px; font-weight:560;">Email</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">Changing it requires verification of the new address.</div></div>
+                    <sc-if value="{{ st.emailStatic }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+                        <span class="mono" style="font-size:13px;">{{ st.email }}</span>
+                        <sc-if value="{{ st.hasPending }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background:var(--draw-soft); color:var(--draw); border-color:color-mix(in oklch, var(--draw) 30%, transparent);">{{ st.pendingEmail }} · pending verification</span></sc-if>
+                        <button class="btn btn-ghost btn-sm" onClick="{{ stEditEmail }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg> Edit</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ st.emailEditing }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex; flex-direction:column; gap:8px; width:min(360px, 60%);">
+                        <input class="input" type="email" value="{{ st.edDraft }}" onChange="{{ stEdSet }}" placeholder="new@address.com" style="font-size:13px;">
+                        <span style="font-size:12px; color:var(--text-3);">We'll email a confirmation link to the new address.</span>
+                        <div style="display:flex; gap:8px;">
+                          <button class="btn btn-primary btn-sm" onClick="{{ stEmailSave }}">Send verification</button>
+                          <button class="btn btn-ghost btn-sm" onClick="{{ stEdCancel }}">Cancel</button>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                  <!-- Username -->
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                    <div style="padding-top:2px;"><div style="font-size:13.5px; font-weight:560;">Username</div><div style="font-size:12px; color:var(--text-3); margin-top:2px; max-width:38ch;">Your profile URL. The old address stops working after a change.</div></div>
+                    <sc-if value="{{ st.usernameStatic }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <span class="mono" style="font-size:13px;">{{ pf.username }}</span>
+                        <sc-if value="{{ st.usernameSaved }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px; color:var(--win); font-weight:550;">✓ Saved</span></sc-if>
+                        <button class="btn btn-ghost btn-sm" onClick="{{ stEditUsername }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg> Edit</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ st.usernameEditing }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex; flex-direction:column; gap:8px; width:min(360px, 60%);">
+                        <div class="auth-inputwrap"><span class="auth-prefix mono">eslams.com/</span><input class="input auth-input auth-input-prefixed mono" value="{{ st.edDraft }}" onChange="{{ stEdSetU }}" spellCheck="{{ false }}" style="font-size:13px;"></div>
+                        <sc-if value="{{ st.unChecking }}" hint-placeholder-val="{{ false }}"><span style="display:inline-flex; align-items:center; gap:7px; font-size:12px; color:var(--text-3);"><span class="spinner" style="width:11px; height:11px;"></span> Checking…</span></sc-if>
+                        <sc-if value="{{ st.unOk }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--win); font-weight:550;">✓ Available</span></sc-if>
+                        <sc-if value="{{ st.unTaken }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--loss);">{{ st.unMsg }}</span></sc-if>
+                        <span style="font-size:12px; color:var(--text-3);">You can change your username once every 30 days.</span>
+                        <div style="display:flex; gap:8px;">
+                          <button class="btn btn-primary btn-sm" onClick="{{ stUsernameSave }}" disabled="{{ st.unSaveDisabled }}">Change username</button>
+                          <button class="btn btn-ghost btn-sm" onClick="{{ stEdCancel }}">Cancel</button>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                    <div><div style="font-size:13.5px; font-weight:560;">Account created</div></div>
+                    <span class="mono" style="font-size:13px; color:var(--text-2);">Mar 2025</span>
+                  </div>
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0;">
+                    <div><div style="font-size:13.5px; font-weight:560;">Sign-in methods</div></div>
+                    <span style="font-size:13px; color:var(--text-2);">{{ st.methodsSummary }} · <a onClick="{{ stGoSecurity }}" style="color:var(--accent); cursor:pointer;">manage in Security</a></span>
+                  </div>
+                </div>
+              </sc-if>
+
+              <!-- Security section -->
+              <sc-if value="{{ st.secSecurity }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:6px 22px;">
+                  <!-- Password -->
+                  <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                    <div style="padding-top:2px;"><div style="font-size:13.5px; font-weight:560;">Password</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">{{ st.pwDesc }}</div></div>
+                    <sc-if value="{{ st.pwStatic }}" hint-placeholder-val="{{ true }}">
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <sc-if value="{{ st.pwSaved }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px; color:var(--win); font-weight:550;">✓ Updated</span></sc-if>
+                        <button class="btn btn-secondary btn-sm" onClick="{{ stEditPassword }}">{{ st.pwBtnLabel }}</button>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ st.pwEditing }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex; flex-direction:column; gap:8px; width:min(360px, 60%);">
+                        <input class="input" type="password" value="{{ st.edDraft }}" onChange="{{ stEdSet }}" placeholder="New password (12+ characters)" autoComplete="new-password" style="font-size:13px;">
+                        <input class="input" type="password" value="{{ st.edDraft2 }}" onChange="{{ stEdSet2 }}" placeholder="Confirm new password" autoComplete="new-password" style="font-size:13px;">
+                        <sc-if value="{{ st.pwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--loss);">{{ st.pwErr }}</span></sc-if>
+                        <div style="display:flex; gap:8px;">
+                          <button class="btn btn-primary btn-sm" onClick="{{ stPwSave }}">Update password</button>
+                          <button class="btn btn-ghost btn-sm" onClick="{{ stEdCancel }}">Cancel</button>
+                        </div>
+                      </div>
+                    </sc-if>
+                  </div>
+                  <!-- 2FA -->
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0;">
+                    <div><div style="font-size:13.5px; font-weight:560;">Two-factor authentication</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">An authenticator code alongside your password.</div></div>
+                    <sc-if value="{{ st.twoFAOff }}" hint-placeholder-val="{{ true }}"><button class="btn btn-secondary btn-sm" onClick="{{ stEnable2FA }}">Enable 2FA</button></sc-if>
+                    <sc-if value="{{ st.twoFAOn }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex; align-items:center; gap:10px;">
+                        <span class="tag" style="background:var(--win-soft); color:var(--win); border-color:color-mix(in oklch, var(--win) 30%, transparent);">Enabled · TOTP</span>
+                        <button class="btn btn-ghost btn-sm" onClick="{{ stDisable2FA }}">Disable</button>
+                      </div>
+                    </sc-if>
+                  </div>
+                </div>
+                <!-- Sessions -->
+                <div class="card" style="padding:18px 22px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <div style="font-size:13.5px; font-weight:600;">Active sessions</div>
+                    <button class="btn btn-secondary btn-sm" onClick="{{ stRevokeAll }}">Log out everywhere</button>
+                  </div>
+                  <sc-for list="{{ st.sessions }}" as="s" hint-placeholder-count="3">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0; border-top:1px solid var(--border-faint);">
+                      <div style="display:flex; align-items:center; gap:12px;">
+                        <span style="width:34px; height:34px; border-radius:var(--r-md); background:var(--surface-2); border:1px solid var(--border); display:inline-flex; align-items:center; justify-content:center; color:var(--text-2);">
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3" y="5" width="18" height="12" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg>
+                        </span>
+                        <div>
+                          <div style="font-size:13px; font-weight:550;">{{ s.device }} <sc-if value="{{ s.current }}" hint-placeholder-val="{{ false }}"><span class="tag tag-accent" style="margin-left:6px;">This device</span></sc-if></div>
+                          <div class="mono" style="font-size:11.5px; color:var(--text-3);">{{ s.loc }} · last seen {{ s.last }}</div>
+                        </div>
+                      </div>
+                      <sc-if value="{{ s.revocable }}" hint-placeholder-val="{{ true }}"><button class="btn btn-ghost btn-sm" onClick="{{ s.revoke }}">Revoke</button></sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+                <!-- Linked accounts -->
+                <div class="card" style="padding:18px 22px;">
+                  <div style="font-size:13.5px; font-weight:600; margin-bottom:6px;">Linked accounts</div>
+                  <sc-if value="{{ st.linkGuardMsg }}" hint-placeholder-val="{{ false }}">
+                    <div role="alert" style="background:var(--draw-soft); color:var(--draw); border:1px solid color-mix(in oklch, var(--draw) 30%, transparent); border-radius:var(--r-md); padding:9px 12px; font-size:12.5px; margin:8px 0;">{{ st.linkGuardMsg }}</div>
+                  </sc-if>
+                  <sc-for list="{{ st.providers }}" as="pv" hint-placeholder-count="3">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0; border-top:1px solid var(--border-faint);">
+                      <div style="display:flex; align-items:center; gap:12px;">
+                        <span style="width:34px; height:34px; border-radius:var(--r-md); background:var(--surface-2); border:1px solid var(--border); display:inline-flex; align-items:center; justify-content:center; color:var(--text);">
+                          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="8" r="4"></circle><path d="M4 21a8 8 0 0 1 16 0"></path></svg>
+                        </span>
+                        <div>
+                          <div style="font-size:13px; font-weight:550;">{{ pv.name }}</div>
+                          <div class="mono" style="font-size:11.5px; color:var(--text-3);">{{ pv.sub }}</div>
+                        </div>
+                      </div>
+                      <sc-if value="{{ pv.linked }}" hint-placeholder-val="{{ true }}"><button class="btn btn-ghost btn-sm" onClick="{{ pv.action }}">Disconnect</button></sc-if>
+                      <sc-if value="{{ pv.unlinked }}" hint-placeholder-val="{{ false }}"><button class="btn btn-secondary btn-sm" onClick="{{ pv.action }}">Connect</button></sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <!-- API keys -->
+              <sc-if value="{{ st.secKeys }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:18px 22px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <div><div style="font-size:13.5px; font-weight:600;">API keys</div><div class="mono" style="font-size:11.5px; color:var(--text-3); margin-top:2px;">eslams auth login --key esl_live_…</div></div>
+                    <button class="btn btn-primary btn-sm" onClick="{{ stNewKey }}">New key</button>
+                  </div>
+                  <sc-if value="{{ st.noKeys }}" hint-placeholder-val="{{ false }}">
+                    <div style="padding:28px 0 16px; text-align:center; color:var(--text-3); font-size:13px;">No API keys yet — create one for the CLI.</div>
+                  </sc-if>
+                  <sc-for list="{{ st.keys }}" as="k" hint-placeholder-count="1">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:14px; padding:12px 0; border-top:1px solid var(--border-faint); flex-wrap:wrap;">
+                      <div>
+                        <div style="font-size:13px; font-weight:550;">{{ k.name }}</div>
+                        <div class="mono" style="font-size:11.5px; color:var(--text-3);">{{ k.prefix }}… · created {{ k.created }} · last used {{ k.last }}</div>
+                      </div>
+                      <div style="display:flex; gap:8px;">
+                        <button class="btn btn-ghost btn-sm" onClick="{{ k.rotate }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" class="icn"><path d="M21 12a9 9 0 1 1-3-6.7L21 8M21 3v5h-5"></path></svg> Rotate</button>
+                        <button class="btn btn-ghost btn-sm" onClick="{{ k.revoke }}" style="color:var(--loss);">Revoke</button>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <!-- Notifications -->
+              <sc-if value="{{ st.secNotif }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:6px 22px;">
+                  <sc-for list="{{ st.notifRows }}" as="n" hint-placeholder-count="4">
+                    <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:15px 0; border-bottom:1px solid var(--border-faint);">
+                      <div><div style="font-size:13.5px; font-weight:560;">{{ n.label }}</div><div style="font-size:12px; color:var(--text-3); margin-top:2px;">{{ n.desc }}</div></div>
+                      <sc-if value="{{ n.locked }}" hint-placeholder-val="{{ false }}"><span class="tag">Always on</span></sc-if>
+                      <sc-if value="{{ n.toggleable }}" hint-placeholder-val="{{ true }}">
+                        <button class="toggle {{ n.cls }}" onClick="{{ n.toggle }}" role="switch" aria-checked="{{ n.on }}" aria-label="{{ n.label }}"><span class="toggle-knob"></span></button>
+                      </sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-if>
+
+              <!-- Appearance -->
+              <sc-if value="{{ st.secAppearance }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:18px 22px;">
+                  <div style="font-size:13.5px; font-weight:600; margin-bottom:14px;">Theme</div>
+                  <div class="set-theme">
+                    <button class="set-themeopt {{ st.thLightCls }}" onClick="{{ stThLight }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg> Light</button>
+                    <button class="set-themeopt {{ st.thDarkCls }}" onClick="{{ stThDark }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg> Dark</button>
+                    <button class="set-themeopt {{ st.thSysCls }}" onClick="{{ stThSys }}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"></rect><path d="M9 2v2M15 2v2M9 20v2M15 20v2M2 9h2M2 15h2M20 9h2M20 15h2"></path></svg> System</button>
+                  </div>
+                  <div style="font-size:12px; color:var(--text-3); margin-top:12px;">Applies immediately, on this device.</div>
+                </div>
+              </sc-if>
+
+              <!-- Danger zone -->
+              <sc-if value="{{ st.secDanger }}" hint-placeholder-val="{{ false }}">
+                <div class="card" style="padding:6px 22px; border-color:color-mix(in oklch, var(--loss) 32%, transparent);">
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0; border-bottom:1px solid var(--border-faint);">
+                    <div><div style="font-size:13.5px; font-weight:560;">Deactivate account</div><div style="font-size:12px; color:var(--text-3); margin-top:2px; max-width:44ch;">Your profile disappears from eSlams and you're signed out everywhere. You can reactivate by signing back in.</div></div>
+                    <button class="btn btn-secondary btn-sm" onClick="{{ stDeactivate }}" disabled="{{ st.deactivated }}">Deactivate</button>
+                  </div>
+                  <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:16px 0;">
+                    <div><div style="font-size:13.5px; font-weight:560;">Request account deletion</div><div style="font-size:12px; color:var(--text-3); margin-top:2px; max-width:44ch;">Queues permanent deletion of your account and data. This cannot be undone.</div></div>
+                    <sc-if value="{{ st.delRequested }}" hint-placeholder-val="{{ false }}"><span class="tag" style="background:var(--draw-soft); color:var(--draw); border-color:color-mix(in oklch, var(--draw) 30%, transparent);">Request received · queued</span></sc-if>
+                    <sc-if value="{{ st.delNotRequested }}" hint-placeholder-val="{{ true }}"><button class="btn btn-sm" onClick="{{ stDelete }}" style="background:var(--loss); color:var(--text-on-accent); border:1px solid var(--loss);" style-hover="background:color-mix(in oklch, var(--loss) 88%, black);">Request deletion</button></sc-if>
+                  </div>
+                </div>
+              </sc-if>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+  </div>
+
+  <!-- ============ DIALOGS ============ -->
+  <sc-if value="{{ dlgStepup }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Step-up dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:420px;">
+        <div class="modal-head"><span class="modal-title"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path></svg> Confirm it's you</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">{{ sp.sub }} <b>{{ sp.actionLabel }}</b>.</p>
+        <sc-if value="{{ sp.pwMode }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <input class="input" type="password" value="{{ sp.pw }}" onChange="{{ spSetPw }}" placeholder="Current password" autoComplete="current-password">
+            <button class="btn btn-primary btn-md" onClick="{{ spConfirm }}" disabled="{{ sp.confirmDisabled }}" style="justify-content:center;">
+              <sc-if value="{{ sp.busy }}" hint-placeholder-val="{{ false }}"><span class="spinner" style="width:14px; height:14px; border-top-color:#fff; border-color:rgba(255,255,255,0.35);"></span></sc-if>
+              Confirm
+            </button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sp.chooseMode }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button class="auth-ssobtn" onClick="{{ spProvider }}"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" class="icn"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.36 1.09 2.94.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"></path></svg> Re-authenticate with GitHub</button>
+            <div class="auth-divider" style="margin:6px 0;"><span>or</span></div>
+            <button class="btn btn-secondary btn-md" onClick="{{ spSendCode }}" style="justify-content:center;">Email me a one-time code</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ sp.otpMode }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <p style="font-size:12.5px; color:var(--text-2);">We emailed a 6-digit code to <b class="mono" style="font-size:12px;">{{ st.email }}</b>.</p>
+            <input class="input mono" value="{{ sp.code }}" onChange="{{ spSetCode }}" placeholder="000000" maxLength="{{ 6 }}" inputMode="numeric" style="letter-spacing:0.3em; text-align:center; font-size:16px;">
+            <button class="btn btn-primary btn-md" onClick="{{ spConfirm }}" disabled="{{ sp.confirmDisabled }}" style="justify-content:center;">
+              <sc-if value="{{ sp.busy }}" hint-placeholder-val="{{ false }}"><span class="spinner" style="width:14px; height:14px; border-top-color:#fff; border-color:rgba(255,255,255,0.35);"></span></sc-if>
+              Confirm
+            </button>
+          </div>
+        </sc-if>
+        <p class="mono" style="font-size:11px; color:var(--text-3); margin-top:16px;">You won't be asked again for a few minutes.</p>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgConfirm }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Confirm dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:440px;">
+        <div class="modal-head"><span class="modal-title" style="color:var(--loss);">{{ cf.title }}</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">{{ cf.body }}</p>
+        <sc-if value="{{ cf.needType }}" hint-placeholder-val="{{ false }}">
+          <label style="display:block; margin-bottom:14px;">
+            <span style="display:block; font-size:12.5px; color:var(--text-2); margin-bottom:7px;">Type <b class="mono" style="color:var(--text);">{{ pf.username }}</b> to confirm</span>
+            <input class="input mono" value="{{ cf.typed }}" onChange="{{ cfSetTyped }}" spellCheck="{{ false }}" autoComplete="off">
+          </label>
+        </sc-if>
+        <div style="display:flex; gap:10px; justify-content:flex-end;">
+          <button class="btn btn-ghost btn-md" onClick="{{ dlgCancel }}">Cancel</button>
+          <button class="btn btn-md" onClick="{{ cfGo }}" disabled="{{ cf.disabled }}" style="background:var(--loss); color:var(--text-on-accent); border:1px solid var(--loss);" style-hover="background:color-mix(in oklch, var(--loss) 88%, black);">{{ cf.btnLabel }}</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgAvatar }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Avatar dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:420px;">
+        <div class="modal-head"><span class="modal-title">Profile photo</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">PNG or JPG, up to 4 MB. We'll crop it square.</p>
+        <sc-if value="{{ av.idle }}" hint-placeholder-val="{{ true }}">
+          <button onClick="{{ avStart }}" style="width:100%; border:1.5px dashed var(--border-strong); border-radius:var(--r-lg); background:var(--surface-inset); padding:34px 20px; display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--text-2); cursor:pointer;" style-hover="border-color:var(--accent); color:var(--text);">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 16V4M7 9l5-5 5 5M5 20h14"></path></svg>
+            <span style="font-size:13.5px; font-weight:550;">Drop an image, or click to browse</span>
+            <span class="mono" style="font-size:11px; color:var(--text-3);">demo: click simulates an upload</span>
+          </button>
+        </sc-if>
+        <sc-if value="{{ av.uploading }}" hint-placeholder-val="{{ false }}">
+          <div style="padding:24px 8px; display:flex; flex-direction:column; gap:12px; align-items:center;">
+            <span class="mono" style="font-size:12.5px; color:var(--text-2);">Uploading… {{ av.pctLabel }}</span>
+            <span style="width:100%; height:6px; border-radius:99px; background:var(--surface-3); overflow:hidden; display:block;"><span style="{{ av.pctStyle }}"></span></span>
+          </div>
+        </sc-if>
+        <sc-if value="{{ av.done }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:center; gap:16px; padding:8px 0 4px;">
+            <span style="{{ photoStyleXl }}"></span>
+            <div style="display:flex; flex-direction:column; gap:9px; align-items:flex-start;">
+              <span style="font-size:13px; color:var(--win); font-weight:550;">✓ Looks good</span>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-primary btn-sm" onClick="{{ avUse }}">Use photo</button>
+                <button class="btn btn-ghost btn-sm" onClick="{{ avStart }}">Re-upload</button>
+              </div>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlg2fa }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="2FA dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:440px;">
+        <div class="modal-head"><span class="modal-title">Set up two-factor</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <sc-if value="{{ tf.setup }}" hint-placeholder-val="{{ true }}">
+          <p class="modal-sub">Scan with your authenticator app, then enter the 6-digit code.</p>
+          <div style="display:flex; gap:18px; align-items:flex-start;">
+            <span style="width:132px; height:132px; flex:none; border-radius:var(--r-md); border:1px solid var(--border); background:repeating-linear-gradient(45deg, var(--surface-3) 0 7px, var(--surface-2) 7px 14px); display:flex; align-items:center; justify-content:center;"><span class="mono" style="font-size:10px; color:var(--text-3); text-align:center; padding:0 10px;">TOTP QR<br>placeholder</span></span>
+            <div style="flex:1; display:flex; flex-direction:column; gap:10px;">
+              <input class="input mono" value="{{ tf.code }}" onChange="{{ tfSetCode }}" placeholder="000000" maxLength="{{ 6 }}" inputMode="numeric" style="letter-spacing:0.3em; text-align:center; font-size:16px;">
+              <sc-if value="{{ tf.err }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px; color:var(--loss);">{{ tf.err }}</span></sc-if>
+              <button class="btn btn-primary btn-md" onClick="{{ tfVerify }}" style="justify-content:center;">Verify &amp; enable</button>
+            </div>
+          </div>
+        </sc-if>
+        <sc-if value="{{ tf.done }}" hint-placeholder-val="{{ false }}">
+          <p class="modal-sub">2FA is on. Save these recovery codes — <b>you won't see them again</b>.</p>
+          <div class="mono" style="background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-md); padding:14px 16px; font-size:12.5px; line-height:2; column-count:2;">
+            <sc-for list="{{ tf.codes }}" as="c" hint-placeholder-count="6"><div>{{ c }}</div></sc-for>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:16px; justify-content:flex-end;">
+            <button class="btn btn-secondary btn-sm" onClick="{{ tfCopy }}">{{ tf.copyLabel }}</button>
+            <button class="btn btn-primary btn-sm" onClick="{{ dlgCancel }}">Done</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgCreateKey }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Create key dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:400px;">
+        <div class="modal-head"><span class="modal-title">New API key</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <p class="modal-sub">Name it after where it's used — you'll see the key once.</p>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <input class="input" value="{{ ck.name }}" onChange="{{ ckSetName }}" placeholder="e.g. laptop CLI">
+          <button class="btn btn-primary btn-md" onClick="{{ ckCreate }}" disabled="{{ ck.disabled }}" style="justify-content:center;">Create key</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgNewKey }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" data-screen-label="Reveal key dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:460px;">
+        <div class="modal-head"><span class="modal-title">Your new key</span></div>
+        <p class="modal-sub">Copy it now — <b>it won't be shown again</b>.</p>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <code class="mono" style="flex:1; background:var(--surface-2); border:1px solid var(--border); border-radius:var(--r-sm); padding:10px 12px; font-size:12.5px; overflow-x:auto; white-space:nowrap;">{{ nk.full }}</code>
+          <button class="btn btn-secondary btn-sm" onClick="{{ nkCopy }}">{{ nk.copyLabel }}</button>
+        </div>
+        <div style="display:flex; justify-content:flex-end; margin-top:16px;">
+          <button class="btn btn-primary btn-sm" onClick="{{ dlgCancel }}">I've saved it</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ dlgReplay }}" hint-placeholder-val="{{ false }}">
+    <div class="modal-overlay" onMouseDown="{{ dlgCancel }}" data-screen-label="Replay dialog">
+      <div class="modal" onMouseDown="{{ stopProp }}" role="dialog" aria-modal="{{ true }}" style="max-width:520px;">
+        <div class="modal-head"><span class="modal-title">{{ rp.game }}</span><button class="modal-x" onClick="{{ dlgCancel }}" aria-label="Close"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></button></div>
+        <div style="height:220px; border-radius:var(--r-md); border:1px solid var(--border); background:repeating-linear-gradient(45deg, var(--surface-2) 0 10px, var(--surface-inset) 10px 20px); display:flex; align-items:center; justify-content:center; margin-bottom:14px;">
+          <span class="mono" style="font-size:11.5px; color:var(--text-3);">board replay renders from the .eslams artifact</span>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+          <span class="mono" style="font-size:12.5px; color:var(--text-2);">You <span style="color:var(--text-3);">vs</span> {{ rp.model }}</span>
+          <span style="display:inline-flex; align-items:center; gap:10px;">
+            <span class="reschip {{ rp.resCls }}">{{ rp.resLabel }}</span>
+            <span class="mono" style="font-size:12px; color:var(--text-3);">{{ rp.date }}</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- toast -->
+  <sc-if value="{{ toastMsg }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:900; background:var(--term-bg); color:var(--term-text); border:1px solid rgba(255,255,255,0.1); border-radius:var(--r-pill); padding:9px 18px; font-size:13px; box-shadow:var(--shadow-pop); animation:protoIn .2s ease;">{{ toastMsg }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: {},
+  &quot;theme&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;tsType&quot;: &quot;'light' | 'dark'&quot;, &quot;section&quot;: &quot;Prototype&quot; },
+  &quot;startScreen&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;login&quot;, &quot;signup&quot;, &quot;forgot&quot;, &quot;reset&quot;, &quot;verify&quot;, &quot;onboarding&quot;, &quot;profile&quot;, &quot;settings&quot;], &quot;default&quot;: &quot;login&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Prototype&quot; },
+  &quot;showRail&quot;: { &quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Prototype&quot; }
+}">
+class Component extends DCLogic {
+  state = {
+    theme: 'light', themeChoice: 'light', screen: 'login', mobile: false,
+    li: { email: '', pw: '', show: false, busy: false, err: null, emailErr: null, pwErr: null },
+    su: { email: '', pw: '', show: false, stage: 'form', busy: false, err: null, emailErr: null, pwErr: null, cooldown: 0 },
+    fg: { email: '', sent: false, err: null, cooldown: 0 },
+    rs: { sim: 'form', pw: '', pw2: '', err: null },
+    vf: { sim: 'verifying', cooldown: 0 },
+    ob: { step: 1, mode: 'oauth', username: 'rama-l', avail: 'idle', msg: '', sugg: [], display: 'Ramakrishnan L.', bio: '', location: '', website: '', visibility: 'public', hasPhoto: true, editKey: null, editDraft: '', editErr: null, err2: null },
+    persona: 'owner', pfTab: 'games', bioEditing: false, bioDraft: '', bioSaved: false,
+    pf: { display: 'Ramakrishnan L.', username: 'makriman', email: 'makriman@eslams.com',
+      bio: 'Playing frontier models at board games since the Opus 3 days. Chess masochist.',
+      location: 'London, UK', website: 'rama.dev', vis: 'public', joined: 'Mar 2025', avatarPhoto: false },
+    artifacts: [
+      { name: 'opus-chess-gauntlet', game: 'Chess', vis: 'public', date: '2026-05-31', size: '2.4 MB' },
+      { name: 'connect4-run-v3', game: 'Connect Four', vis: 'public', date: '2026-05-28', size: '1.1 MB' },
+      { name: 'holdem-heads-up', game: "Texas Hold'em", vis: 'private', date: '2026-05-20', size: '3.2 MB' },
+    ],
+    copiedArt: null,
+    ssec: 'profile', edKey: null, edDraft: '', edDraft2: '', edErr: null, saved: null,
+    unAvail: 'idle', unMsg: '',
+    hasPassword: true, fresh: false, pendingEmail: null, twoFA: false,
+    notif: { matches: true, replay: true, news: false },
+    sessions: [
+      { id: 1, device: 'Chrome · macOS', loc: 'London, UK', last: 'now', current: true },
+      { id: 2, device: 'Safari · iPhone', loc: 'London, UK', last: '2h ago', current: false },
+      { id: 3, device: 'Firefox · Windows', loc: 'Berlin, DE', last: '3d ago', current: false },
+    ],
+    providers: { github: true, google: false }, linkGuard: null,
+    keys: [{ id: 1, name: 'CLI key', prefix: 'esl_live_8f2a', created: 'Mar 2026', last: '2 days ago' }],
+    deactivated: false, delRequested: false,
+    dlg: null, pendingAction: null,
+    sp: { pw: '', code: '', mode: 'password', busy: false },
+    cf: { kind: null, typed: '' },
+    av: { stage: 'idle', pct: 0, ctx: 'profile' },
+    tf: { stage: 'setup', code: '', err: null, copied: false },
+    ck: { name: '' }, nk: { full: '', copied: false },
+    rp: null, toast: null,
+  };
+
+  componentDidMount() {
+    const t = this.props.theme;
+    if (t === 'dark' || t === 'light') { this.applyTheme(t); this.setState({ theme: t, themeChoice: t }); }
+    else this.applyTheme(this.state.theme);
+    const s = this.props.startScreen;
+    if (s) this.goScreen(s);
+    this._esc = (e) => { if (e.key === 'Escape' && this.state.dlg) this.closeDlg(); };
+    document.addEventListener('keydown', this._esc);
+    // Focus trap for dialogs (§10): Tab cycles inside .modal
+    this._trap = (e) => {
+      if (e.key !== 'Tab' || !this.state.dlg) return;
+      const m = document.querySelector('.modal');
+      if (!m) return;
+      const f = [...m.querySelectorAll('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])')].filter((el) => !el.disabled && el.offsetParent !== null);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      else if (!m.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    };
+    document.addEventListener('keydown', this._trap, true);
+    this.timers = {};
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState || prevState.dlg === this.state.dlg) return;
+    if (this.state.dlg) {
+      // opening: remember invoker, move initial focus into the dialog
+      this._invoker = document.activeElement;
+      setTimeout(() => {
+        const m = document.querySelector('.modal');
+        if (!m) return;
+        const f = m.querySelector('input, textarea, select') || [...m.querySelectorAll('button')].find((b) => !b.classList.contains('modal-x') && !b.disabled) || m.querySelector('button');
+        if (f) f.focus();
+      }, 60);
+    } else if (this._invoker && this._invoker.focus && document.contains(this._invoker)) {
+      this._invoker.focus();
+      this._invoker = null;
+    }
+  }
+  setObMode(mode) {
+    const oauth = mode === 'oauth';
+    this.setState({ ob: { ...this.state.ob, mode, step: 1, display: oauth ? 'Ramakrishnan L.' : '', hasPhoto: oauth, username: 'rama-l', bio: '', location: '', website: '', visibility: 'public', editKey: null, editErr: null, err2: null } });
+    this.checkName('rama-l', 'ob');
+  }
+  commitOb() {
+    const o = this.state.ob, p = this.state.pf;
+    this.setState({ pf: { ...p, username: o.username || p.username, display: o.display || o.username || p.display, bio: o.bio, location: o.location || p.location, website: o.website || p.website, vis: o.visibility, avatarPhoto: o.hasPhoto } });
+  }
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this._esc);
+    document.removeEventListener('keydown', this._trap, true);
+    Object.values(this.timers || {}).forEach((t) => { clearTimeout(t); clearInterval(t); });
+  }
+  t(key, fn, ms) { this.timers = this.timers || {}; clearTimeout(this.timers[key]); this.timers[key] = setTimeout(fn, ms); }
+
+  applyTheme(t) { const r = document.documentElement; if (t) r.setAttribute('data-theme', t); else r.removeAttribute('data-theme'); }
+  setTheme(choice) {
+    const dark = choice === 'system' ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) : choice === 'dark';
+    this.applyTheme(choice === 'system' ? null : choice);
+    this.setState({ theme: dark ? 'dark' : 'light', themeChoice: choice });
+  }
+
+  goScreen(sc) {
+    this.setState({ screen: sc, toast: null, dlg: null });
+    if (sc === 'verify') this.playVerify();
+    if (sc === 'onboarding') this.checkName(this.state.ob.username, 'ob');
+  }
+  playVerify() {
+    this.setState((s) => ({ vf: { ...s.vf, sim: 'verifying' } }));
+    this.t('vf', () => this.setState((s) => (s.vf.sim === 'verifying' ? { vf: { ...s.vf, sim: 'success' } } : null)), 1400);
+  }
+  showToast(msg) { this.setState({ toast: msg }); this.t('toast', () => this.setState({ toast: null }), 2800); }
+  flash(key) { this.setState({ saved: key }); this.t('saved', () => this.setState({ saved: null }), 1800); }
+  closeDlg() { this.setState({ dlg: null, linkGuard: null }); }
+
+  strength(pw) {
+    let n = 0;
+    if (pw.length >= 12) n++;
+    if (/[A-Z]/.test(pw) && /[a-z]/.test(pw)) n++;
+    if (/\d/.test(pw)) n++;
+    if (/[^A-Za-z0-9]/.test(pw) || pw.length >= 16) n++;
+    return Math.min(4, n);
+  }
+  segStyle(i, score) {
+    const on = i < score;
+    return { flex: 1, height: '4px', borderRadius: '99px', background: on ? 'var(--accent)' : 'var(--surface-3)', display: 'block', transition: 'background .2s' };
+  }
+  strengthLabel(score) { return ['Too short', 'Weak', 'Okay', 'Strong', 'Very strong'][score]; }
+  validEmail(e) { return /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e); }
+
+  // ---- availability (shared) ----
+  checkName(name, stateKey) {
+    const reserved = ['makriman', 'admin', 'eslams', 'api', 'root', 'play', 'arena', 'login', 'settings'];
+    const clean = name.trim().toLowerCase();
+    const setA = (avail, msg, sugg) => {
+      if (stateKey === 'ob') this.setState((s) => ({ ob: { ...s.ob, avail, msg, sugg: sugg || [] } }));
+      else this.setState({ unAvail: avail, unMsg: msg || '' });
+    };
+    if (!clean) { setA('idle', ''); return; }
+    if (!/^[a-z0-9-]+$/.test(clean)) { setA('taken', 'Lowercase letters, numbers, hyphens only.'); return; }
+    if (clean.length < 3) { setA('taken', 'At least 3 characters.'); return; }
+    setA('checking', '');
+    this.t('avail' + stateKey, () => {
+      if (reserved.includes(clean)) setA('taken', 'Taken — try a suggestion.', [clean + '-gg', clean + '-2026']);
+      else setA('ok', '');
+    }, 650);
+  }
+
+  // ---- step-up machinery ----
+  needStepUp(action, label) {
+    if (this.state.fresh) { this.doAction(action); return; }
+    this.setState({ dlg: 'stepup', pendingAction: { action, label }, sp: { pw: '', code: '', mode: this.state.hasPassword ? 'password' : 'choose', busy: false } });
+  }
+  finishStepUp() {
+    const pa = this.state.pendingAction;
+    this.setState({ fresh: true, dlg: null, sp: { ...this.state.sp, busy: false } });
+    this.t('fresh', () => this.setState({ fresh: false }), 5 * 60 * 1000);
+    if (pa) this.doAction(pa.action);
+  }
+  doAction(a) {
+    const s = this.state;
+    if (a === 'email') this.setState({ edKey: 'email', edDraft: '', edErr: null });
+    else if (a === 'username') this.setState({ edKey: 'username', edDraft: s.pf.username, unAvail: 'idle', unMsg: '' });
+    else if (a === 'password') this.setState({ edKey: 'password', edDraft: '', edDraft2: '', edErr: null });
+    else if (a === 'revokeAll') { this.setState({ sessions: s.sessions.filter((x) => x.current) }); this.showToast('Signed out everywhere else.'); }
+    else if (a === 'unlink-github') {
+      if (!s.hasPassword && !s.providers.google) this.setState({ linkGuard: "GitHub is your only way to sign in — set a password or link Google first." });
+      else { this.setState({ providers: { ...s.providers, github: false } }); this.showToast('GitHub disconnected.'); }
+    }
+    else if (a === 'link-google') { this.setState({ providers: { ...s.providers, google: true } }); this.showToast('Google connected.'); }
+    else if (a === 'createkey') this.setState({ dlg: 'createkey', ck: { name: '' } });
+    else if (a === 'rotateKey') this.setState({ dlg: 'confirm', cf: { kind: 'rotate', typed: '' } });
+    else if (a === 'revokeKey') this.setState({ dlg: 'confirm', cf: { kind: 'revoke', typed: '' } });
+    else if (a === '2fa') this.setState({ dlg: '2fa', tf: { stage: 'setup', code: '', err: null, copied: false } });
+    else if (a === '2fa-off') { this.setState({ twoFA: false }); this.showToast('Two-factor disabled.'); }
+    else if (a === 'deactivate') this.setState({ dlg: 'confirm', cf: { kind: 'deactivate', typed: '' } });
+    else if (a === 'delete') this.setState({ dlg: 'confirm', cf: { kind: 'delete', typed: '' } });
+  }
+
+  renderVals() {
+    const s = this.state;
+    const S = (patch) => this.setState(patch);
+    const hue = [...s.pf.username].reduce((a, c) => (a * 31 + c.charCodeAt(0)) % 3600, 7) / 10;
+    const tint = `oklch(0.58 0.11 ${hue.toFixed(0)})`;
+    const avBase = { borderRadius: '50%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontFamily: 'var(--font-mono)', fontWeight: 680, flex: 'none', background: tint };
+    const photoBase = { borderRadius: '50%', display: 'inline-block', flex: 'none', border: '1px solid var(--border)', background: `repeating-linear-gradient(135deg, ${tint} 0 6px, color-mix(in oklch, ${tint} 70%, white) 6px 12px)` };
+    const av = (sz, fs) => ({ ...avBase, width: sz + 'px', height: sz + 'px', fontSize: fs + 'px' });
+    const photo = (sz) => ({ ...photoBase, width: sz + 'px', height: sz + 'px' });
+
+    // ---- rail ----
+    const railItem = (key, label) => ({ label, cls: s.screen === key ? 'btn-soft' : 'btn-ghost', go: () => this.goScreen(key) });
+    const railGroups = [
+      { label: 'Auth', items: [railItem('login', 'Sign in'), railItem('signup', 'Create account'), railItem('forgot', 'Forgot password'), railItem('reset', 'Reset password'), railItem('verify', 'Verify email')] },
+      { label: 'First run', items: [railItem('onboarding', 'Onboarding')] },
+      { label: 'Identity', items: [railItem('profile', 'Public profile'), railItem('settings', 'Settings')] },
+    ];
+
+    // ---- sim chips ----
+    const chip = (label, active, pick) => ({ label, cls: active ? 'active' : '', pick });
+    let simChips = [], screenTitle = '';
+    if (s.screen === 'login') {
+      screenTitle = 'Sign in';
+      const set = (patch) => S({ li: { ...s.li, busy: false, err: null, emailErr: null, pwErr: null, ...patch } });
+      simChips = [
+        chip('Default', !s.li.err && !s.li.busy, () => set({})),
+        chip('Submitting', s.li.busy, () => set({ busy: true })),
+        chip('Wrong password', s.li.err === 'Email or password is incorrect.', () => set({ err: 'Email or password is incorrect.', pwErr: ' ' })),
+        chip('Rate-limited', (s.li.err || '').startsWith('Too many'), () => set({ err: 'Too many attempts — try again in a moment.' })),
+        chip('OAuth error', (s.li.err || '').startsWith('That sign-in'), () => set({ err: 'That sign-in session expired — start again.' })),
+      ];
+    } else if (s.screen === 'signup') {
+      screenTitle = 'Create account';
+      simChips = [
+        chip('Form', s.su.stage === 'form' && !s.su.err, () => S({ su: { ...s.su, stage: 'form', err: null, emailErr: null } })),
+        chip('Account exists', s.su.err === 'An account already exists for that email — sign in instead.', () => S({ su: { ...s.su, stage: 'form', err: 'An account already exists for that email — sign in instead.', emailErr: ' ' } })),
+        chip('Check your email', s.su.stage === 'check', () => S({ su: { ...s.su, stage: 'check', email: s.su.email || 'you@lab.ai' } })),
+      ];
+    } else if (s.screen === 'forgot') {
+      screenTitle = 'Forgot password';
+      simChips = [chip('Form', !s.fg.sent, () => S({ fg: { ...s.fg, sent: false } })), chip('Sent', s.fg.sent, () => S({ fg: { ...s.fg, sent: true } }))];
+    } else if (s.screen === 'reset') {
+      screenTitle = 'Reset password';
+      const set = (sim) => () => S({ rs: { ...s.rs, sim } });
+      simChips = [chip('Form', s.rs.sim === 'form', set('form')), chip('Link expired', s.rs.sim === 'expired', set('expired')), chip('Success', s.rs.sim === 'success', set('success'))];
+    } else if (s.screen === 'verify') {
+      screenTitle = 'Verify email';
+      const set = (sim) => () => { clearTimeout((this.timers || {}).vf); S({ vf: { ...s.vf, sim } }); };
+      simChips = [chip('Verifying', s.vf.sim === 'verifying', () => this.playVerify()), chip('Verified', s.vf.sim === 'success', set('success')), chip('Expired', s.vf.sim === 'expired', set('expired')), chip('Already verified', s.vf.sim === 'already', set('already'))];
+    } else if (s.screen === 'onboarding') {
+      screenTitle = 'Onboarding';
+      const setStep = (step) => () => S({ ob: { ...s.ob, step, editKey: null } });
+      simChips = [
+        chip('OAuth · prefilled', s.ob.mode === 'oauth', () => this.setObMode('oauth')),
+        chip('Email · blank', s.ob.mode === 'email', () => this.setObMode('email')),
+        chip('1 · Your profile', s.ob.step === 1, setStep(1)),
+        chip('2 · About you', s.ob.step === 2, setStep(2)),
+        chip('3 · Confirm & go', s.ob.step === 3, setStep(3)),
+      ];
+    } else if (s.screen === 'profile') {
+      screenTitle = 'Public profile';
+      const set = (persona) => () => S({ persona, bioEditing: false });
+      simChips = [chip('Owner', s.persona === 'owner', set('owner')), chip('Visitor', s.persona === 'visitor', set('visitor')), chip('Signed out', s.persona === 'anon', set('anon')), chip('Private', s.persona === 'private', set('private')), chip('New user', s.persona === 'empty', set('empty'))];
+    } else if (s.screen === 'settings') {
+      screenTitle = 'Settings';
+      simChips = [
+        chip('Has password', s.hasPassword, () => S({ hasPassword: true })),
+        chip('OAuth-only (no password)', !s.hasPassword, () => S({ hasPassword: false })),
+        chip(s.fresh ? 'Session fresh ✓' : 'Session not fresh', false, () => { S({ fresh: !s.fresh }); }),
+      ];
+    }
+
+    // ---- history data ----
+    const provHue = { anthropic: 25, openai: 160, google: 220, deepseek: 260, meta: 210 };
+    const mkRow = (name, prov, model, res, date) => ({
+      name, prov, model, date,
+      provInit: prov.slice(0, 2).toUpperCase(),
+      provStyle: { width: '16px', height: '16px', fontSize: '7.5px', background: `color-mix(in oklch, oklch(0.62 0.13 ${provHue[prov] || 220}) 18%, transparent)`, color: `oklch(0.55 0.13 ${provHue[prov] || 220})` },
+      resCls: 'reschip-' + res, resLabel: res === 'win' ? 'Win' : res === 'loss' ? 'Loss' : 'Draw',
+      open: () => S({ dlg: 'replay', rp: { game: name, model: prov + '/' + model, resCls: 'reschip-' + res, resLabel: res === 'win' ? 'You won' : res === 'loss' ? 'You lost' : 'Draw', date } }),
+    });
+    const history = [
+      mkRow('Chess', 'anthropic', 'claude-opus-4.1', 'loss', '2026-05-31'),
+      mkRow('Connect Four', 'openai', 'gpt-5-mini', 'win', '2026-05-30'),
+      mkRow('Liar\u2019s Dice', 'google', 'gemini-2.5-pro', 'win', '2026-05-28'),
+      mkRow('Blackjack', 'deepseek', 'deepseek-r2', 'draw', '2026-05-26'),
+      mkRow('Hex', 'anthropic', 'claude-sonnet-4', 'win', '2026-05-24'),
+      mkRow('Go', 'anthropic', 'claude-sonnet-4', 'loss', '2026-05-22'),
+    ];
+    const catData = [['Board & Strategy', 62], ['Card & Hidden-Info', 49], ['Social & Economic', 58], ['Control & Arcade', 43]];
+
+    // ---- personas ----
+    const owner = s.persona === 'owner';
+    const anon = s.persona === 'anon';
+    const priv = s.persona === 'private';
+    const empty = s.persona === 'empty';
+    const onProfile = s.screen === 'profile';
+
+    // ---- settings nav ----
+    const navItem = (key, label, danger) => ({ label, go: () => S({ ssec: key, edKey: null }), cls: s.ssec === key ? 'btn-soft' : 'btn-ghost' + (danger ? '' : ''), });
+    const stNav = [navItem('profile', 'Profile'), navItem('account', 'Account'), navItem('security', 'Security'), navItem('keys', 'API keys'), navItem('notifications', 'Notifications'), navItem('appearance', 'Appearance'), navItem('danger', 'Danger zone')];
+
+    // ---- Tier A rows ----
+    const tierARow = (key, label, desc, isTextarea) => ({
+      label, desc, isTextarea: !!isTextarea, isInput: !isTextarea,
+      static: s.edKey !== key, editing: s.edKey === key,
+      value: s.pf[key], valCls: key === 'website' ? 'mono' : '',
+      saved: s.saved === key, err: s.edKey === key ? s.edErr : null,
+      edit: () => S({ edKey: key, edDraft: s.pf[key], edErr: null }),
+    });
+    const tierARows = [
+      tierARow('display', 'Display name', 'Your name as others see it.'),
+      tierARow('bio', 'Bio', 'A line about how you play. 160 characters.', true),
+      tierARow('location', 'Location', 'Shown on your public profile.'),
+      tierARow('website', 'Website', 'Linked from your profile.'),
+    ];
+    const saveTierA = () => {
+      const k = s.edKey;
+      if (k === 'website' && s.edDraft && !/^[\w.-]+\.[a-z]{2,}([/?#].*)?$/i.test(s.edDraft.replace(/^https?:\/\//, ''))) { S({ edErr: 'Enter a valid URL.' }); return; }
+      this.setState({ pf: { ...s.pf, [k]: s.edDraft }, edKey: null });
+      this.flash(k);
+    };
+
+    const visDescs = { public: 'Anyone can find and view your profile. It appears in listings.', unlisted: 'Viewable by anyone with the link, but not listed or indexed.', private: 'Only you can see your profile.' };
+    const setVis = (v) => () => { this.setState({ pf: { ...s.pf, vis: v } }); this.flash('vis'); };
+
+    // onboarding recap rows (step 3 inline edit)
+    const obWebRe = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}([/?#]\S*)?$/i;
+    const obRecapRows = [['display', 'Display name', false], ['bio', 'Bio', true], ['location', 'Location', false], ['website', 'Website', false]].map(([k, label, ta]) => ({
+      key: k, label, isTextarea: ta, isInput: !ta,
+      shown: s.ob[k] || 'Not set',
+      valCls: s.ob[k] ? (k === 'website' ? 'mono' : '') : '',
+      static: s.ob.editKey !== k, editing: s.ob.editKey === k,
+      edit: () => S({ ob: { ...s.ob, editKey: k, editDraft: s.ob[k], editErr: null } }),
+    }));
+
+    const notifRow = (key, label, desc) => ({
+      label, desc, on: s.notif[key], cls: s.notif[key] ? 'toggle-on' : '', toggleable: true, locked: false,
+      toggle: () => S({ notif: { ...s.notif, [key]: !s.notif[key] } }),
+    });
+
+    const artifacts = s.artifacts
+      .filter((a) => (owner ? true : a.vis === 'public'))
+      .map((a, i) => ({
+        ...a, canToggle: owner, readOnly: !owner,
+        visCls: a.vis === 'private' ? 'art-priv' : 'art-pub',
+        toggle: () => S({ artifacts: s.artifacts.map((x, j) => (j === i ? { ...x, vis: x.vis === 'public' ? 'private' : 'public' } : x)) }),
+        shareLabel: s.copiedArt === a.name ? 'Copied' : 'Share',
+        share: () => { try { navigator.clipboard && navigator.clipboard.writeText('eslams.com/' + s.pf.username + '/' + a.name); } catch (e) {} S({ copiedArt: a.name }); this.t('copyart', () => S({ copiedArt: null }), 1300); },
+      }));
+
+    const obSteps = [1, 2, 3].map((n) => {
+      const labels = ['YOUR PROFILE', 'ABOUT YOU', 'CONFIRM & GO'];
+      const done = s.ob.step > n, cur = s.ob.step === n;
+      return {
+        label: n + ' · ' + labels[n - 1], dotLabel: done ? '✓' : String(n),
+        dotStyle: { width: '24px', height: '24px', borderRadius: '50%', flex: 'none', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '11.5px', fontWeight: 650, fontFamily: 'var(--font-mono)', background: done || cur ? 'var(--accent)' : 'var(--surface-3)', color: done || cur ? '#fff' : 'var(--text-3)', opacity: done ? 0.75 : 1 },
+        txtStyle: { fontSize: '11px', letterSpacing: '0.1em', color: cur ? 'var(--text)' : 'var(--text-3)', fontWeight: cur ? 600 : 500 },
+      };
+    });
+
+    const cfCfg = {
+      rotate: { title: 'Rotate this key?', body: 'The current key stops working immediately. You\u2019ll get a new one to copy — update the CLI everywhere it\u2019s used.', btnLabel: 'Rotate key', needType: false },
+      revoke: { title: 'Revoke this key?', body: 'Anything using it loses access immediately. This cannot be undone.', btnLabel: 'Revoke key', needType: false },
+      deactivate: { title: 'Deactivate your account?', body: 'Your profile disappears from eSlams and you\u2019re signed out everywhere. You can reactivate by signing back in.', btnLabel: 'Deactivate', needType: false },
+      delete: { title: 'Request account deletion?', body: 'This requests permanent deletion of your account and data. Matches you played remain in opponents\u2019 records, anonymized.', btnLabel: 'Request deletion', needType: true },
+    };
+    const cfg = cfCfg[s.cf.kind] || {};
+    const cfGo = () => {
+      const k = s.cf.kind;
+      this.closeDlg();
+      if (k === 'rotate') { const full = 'esl_live_' + Math.random().toString(36).slice(2, 14) + Math.random().toString(36).slice(2, 10); this.setState({ nk: { full, copied: false }, dlg: 'newkey' }); }
+      else if (k === 'revoke') { this.setState({ keys: [] }); this.showToast('Key revoked.'); }
+      else if (k === 'deactivate') { this.setState({ deactivated: true, sessions: s.sessions.filter((x) => x.current) }); }
+      else if (k === 'delete') { this.setState({ delRequested: true }); }
+    };
+
+    const spConfirm = () => {
+      this.setState({ sp: { ...s.sp, busy: true } });
+      this.t('sp', () => this.finishStepUp(), 750);
+    };
+
+    const startAvatar = (ctx) => () => this.setState({ dlg: 'avatar', av: { stage: 'idle', pct: 0, ctx } });
+    const avStart = () => {
+      this.setState({ av: { ...this.state.av, stage: 'uploading', pct: 0 } });
+      this.timers = this.timers || {};
+      clearInterval(this.timers.av);
+      this.timers.av = setInterval(() => {
+        const a = this.state.av;
+        const pct = Math.min(100, a.pct + 9 + Math.random() * 16);
+        if (pct >= 100) { clearInterval(this.timers.av); this.setState({ av: { ...a, stage: 'done', pct: 100 } }); }
+        else this.setState({ av: { ...a, pct } });
+      }, 160);
+    };
+
+    const openLoginErr = (msg, fields) => S({ li: { ...s.li, busy: false, err: msg, ...(fields || {}) } });
+
+    return {
+      // shell
+      showRail: this.props.showRail !== false,
+      railGroups, screenTitle, simChips, hasSims: simChips.length > 0,
+      themeLightCls: s.themeChoice === 'light' ? 'active' : '', themeDarkCls: s.themeChoice === 'dark' ? 'active' : '',
+      pickLight: () => this.setTheme('light'), pickDark: () => this.setTheme('dark'),
+      mobileCls: s.mobile ? 'proto-mobile' : '',
+      vpDeskCls: s.mobile ? '' : 'active', vpMobCls: s.mobile ? 'active' : '',
+      pickDesktop: () => S({ mobile: false }), pickMobile: () => S({ mobile: true }),
+      isDark: s.theme === 'dark', isLight: s.theme !== 'dark',
+      toggleTheme: () => this.setTheme(s.theme === 'dark' ? 'light' : 'dark'),
+      logoSrc: s.theme === 'dark' ? 'eslams/assets/logo-dark.png' : 'eslams/assets/logo-light.png',
+      freshBadge: s.fresh, toastMsg: s.toast,
+      navOut: () => this.showToast('Outside this prototype — identity surfaces only.'),
+      stopProp: (e) => e.stopPropagation(),
+      demoEmail: 'you@lab.ai',
+
+      // header
+      signedIn: !(onProfile && anon), signedOut: onProfile && anon,
+      openProfile: () => { S({ persona: 'owner' }); this.goScreen('profile'); },
+      goProfileOwner: () => { S({ persona: 'owner' }); this.goScreen('profile'); },
+      avatarIsPhoto: s.pf.avatarPhoto, avatarIsInitial: !s.pf.avatarPhoto,
+      avInitial: s.pf.username[0].toUpperCase(),
+      avStyleNav: av(32, 13), photoStyleNav: photo(32),
+      avStyleSm: av(38, 15), photoStyleSm: photo(38),
+      avStyleMd: av(44, 17), photoStyleMd: photo(44),
+      avStyleLg: av(52, 20), photoStyleLg: photo(52),
+      avStyleXl: av(84, 32), photoStyleXl: photo(84),
+      avStyleHero: { background: tint }, photoStyleHero: { ...photo(68) },
+
+      // screens
+      isLogin: s.screen === 'login', isSignup: s.screen === 'signup', isForgot: s.screen === 'forgot',
+      isReset: s.screen === 'reset', isVerify: s.screen === 'verify', isOnboarding: s.screen === 'onboarding',
+      isProfile: onProfile, isSettings: s.screen === 'settings',
+      goLogin: () => this.goScreen('login'), goSignup: () => this.goScreen('signup'),
+      goForgot: () => this.goScreen('forgot'), goReset: () => { S({ rs: { ...s.rs, sim: 'form' } }); this.goScreen('reset'); },
+
+      // sign in
+      li: {
+        email: s.li.email, pw: s.li.pw, busy: s.li.busy, err: s.li.err, hasErr: !!s.li.err,
+        emailErr: s.li.emailErr && s.li.emailErr.trim() ? s.li.emailErr : null,
+        pwErr: s.li.pwErr && s.li.pwErr.trim() ? s.li.pwErr : null,
+        emailCls: s.li.emailErr ? 'auth-err' : '', pwCls: s.li.pwErr ? 'auth-err' : '',
+        pwType: s.li.show ? 'text' : 'password',
+        pwAria: s.li.show ? 'Hide password' : 'Show password',
+        submitLabel: s.li.busy ? 'Working…' : 'Continue with email',
+      },
+      liSetEmail: (e) => S({ li: { ...s.li, email: e.target.value, emailErr: null, err: null } }),
+      liSetPw: (e) => S({ li: { ...s.li, pw: e.target.value, pwErr: null, err: null } }),
+      liToggleShow: () => S({ li: { ...s.li, show: !s.li.show } }),
+      liSSO: () => { S({ li: { ...s.li, busy: true } }); this.t('li', () => { S({ li: { ...s.li, busy: false } }); this.goScreen('onboarding'); }, 900); },
+      liSubmit: (e) => {
+        e.preventDefault();
+        const errs = {};
+        if (!this.validEmail(s.li.email)) errs.emailErr = 'Enter a valid email.';
+        if (!s.li.pw) errs.pwErr = 'Enter your password.';
+        if (Object.keys(errs).length) { S({ li: { ...s.li, ...errs } }); return; }
+        S({ li: { ...s.li, busy: true, err: null } });
+        this.t('li', () => { S({ li: { ...s.li, busy: false, err: null }, persona: 'owner' }); this.goScreen('profile'); this.showToast('Signed in — welcome back.'); }, 900);
+      },
+
+      // signup
+      su: {
+        email: s.su.email, pw: s.su.pw, busy: s.su.busy, err: s.su.err, hasErr: !!s.su.err,
+        emailErr: s.su.emailErr && s.su.emailErr.trim() ? s.su.emailErr : null,
+        pwErr: s.su.pwErr, emailCls: s.su.emailErr ? 'auth-err' : '', pwCls: s.su.pwErr ? 'auth-err' : '',
+        pwType: s.su.show ? 'text' : 'password',
+        pwAria: s.su.show ? 'Hide password' : 'Show password',
+        formStage: s.su.stage === 'form', checkStage: s.su.stage === 'check',
+        showMeter: s.su.pw.length > 0,
+        segs: [0, 1, 2, 3].map((i) => ({ style: this.segStyle(i, this.strength(s.su.pw)) })),
+        strengthLabel: this.strengthLabel(this.strength(s.su.pw)),
+        submitLabel: s.su.busy ? 'Working…' : 'Create account',
+        resendDisabled: s.su.cooldown > 0,
+        resendLabel: s.su.cooldown > 0 ? `Resend email (${s.su.cooldown}s)` : 'Resend email',
+      },
+      suSetEmail: (e) => S({ su: { ...s.su, email: e.target.value, emailErr: null, err: null } }),
+      suSetPw: (e) => S({ su: { ...s.su, pw: e.target.value, pwErr: null } }),
+      suToggleShow: () => S({ su: { ...s.su, show: !s.su.show } }),
+      suSSO: () => { S({ su: { ...s.su, busy: true } }); this.t('su', () => { S({ su: { ...s.su, busy: false } }); this.goScreen('onboarding'); }, 900); },
+      suSubmit: (e) => {
+        e.preventDefault();
+        const errs = {};
+        if (!this.validEmail(s.su.email)) errs.emailErr = 'Enter a valid email.';
+        if (this.strength(s.su.pw) < 1) errs.pwErr = 'Use at least 12 characters.';
+        if (Object.keys(errs).length) { S({ su: { ...s.su, ...errs } }); return; }
+        S({ su: { ...s.su, busy: true } });
+        this.t('su', () => { this.startCooldown('su'); this.setState((x) => ({ su: { ...x.su, busy: false, stage: 'check' } })); }, 900);
+      },
+      suResend: () => this.startCooldown('su'),
+      suStartOver: () => S({ su: { ...s.su, stage: 'form', pw: '' } }),
+      suOpenLink: () => this.goScreen('verify'),
+
+      // forgot
+      fg: {
+        email: s.fg.email, err: s.fg.err, emailCls: s.fg.err ? 'auth-err' : '',
+        formStage: !s.fg.sent, sentStage: s.fg.sent,
+        resendDisabled: s.fg.cooldown > 0,
+        resendLabel: s.fg.cooldown > 0 ? `Resend (${s.fg.cooldown}s)` : 'Resend',
+      },
+      fgSetEmail: (e) => S({ fg: { ...s.fg, email: e.target.value, err: null } }),
+      fgSubmit: (e) => { e.preventDefault(); if (!this.validEmail(s.fg.email)) { S({ fg: { ...s.fg, err: 'Enter a valid email.' } }); return; } S({ fg: { ...s.fg, sent: true } }); this.startCooldown('fg'); },
+      fgResend: () => this.startCooldown('fg'),
+
+      // reset
+      rs: {
+        isForm: s.rs.sim === 'form', isExpired: s.rs.sim === 'expired', isSuccess: s.rs.sim === 'success',
+        pw: s.rs.pw, pw2: s.rs.pw2, err: s.rs.err, pw2Cls: s.rs.err ? 'auth-err' : '',
+        showMeter: s.rs.pw.length > 0,
+        segs: [0, 1, 2, 3].map((i) => ({ style: this.segStyle(i, this.strength(s.rs.pw)) })),
+        strengthLabel: this.strengthLabel(this.strength(s.rs.pw)),
+      },
+      rsSetPw: (e) => S({ rs: { ...s.rs, pw: e.target.value, err: null } }),
+      rsSetPw2: (e) => S({ rs: { ...s.rs, pw2: e.target.value, err: null } }),
+      rsSubmit: (e) => {
+        e.preventDefault();
+        if (this.strength(s.rs.pw) < 1) { S({ rs: { ...s.rs, err: 'Use at least 12 characters.' } }); return; }
+        if (s.rs.pw !== s.rs.pw2) { S({ rs: { ...s.rs, err: "Passwords don't match." } }); return; }
+        S({ rs: { ...s.rs, sim: 'success' } });
+      },
+
+      // verify
+      vf: {
+        verifying: s.vf.sim === 'verifying', success: s.vf.sim === 'success',
+        expired: s.vf.sim === 'expired', already: s.vf.sim === 'already',
+        resendDisabled: s.vf.cooldown > 0,
+        resendLabel: s.vf.cooldown > 0 ? `Resend verification (${s.vf.cooldown}s)` : 'Resend verification',
+      },
+      vfContinue: () => this.goScreen('onboarding'),
+      vfResend: () => this.startCooldown('vf'),
+
+      // onboarding v2 — full profile; OAuth = confirm-prefilled, email = fill
+      ob: {
+        step1: s.ob.step === 1, step2: s.ob.step === 2, step3: s.ob.step === 3,
+        asideTitle: s.ob.step === 3 ? 'Welcome in.' : (s.ob.mode === 'oauth' ? 'Confirm & go.' : 'Almost there.'),
+        asideSub: s.ob.mode === 'oauth' ? 'We pulled your details from GitHub — confirm them and your profile is live.' : 'Your profile, complete on arrival. Skip anything optional.',
+        steps: obSteps, isOauth: s.ob.mode === 'oauth',
+        title1: s.ob.mode === 'oauth' ? 'Confirm your details.' : 'Set up your profile.',
+        sub1: s.ob.mode === 'oauth' ? 'Everything is prefilled and editable — tweak anything, then claim your username.' : 'Add a face and a name, then claim your username.',
+        title3: s.ob.mode === 'oauth' ? 'Does this look right?' : 'You\u2019re set.',
+        username: s.ob.username, urlName: s.ob.username || 'your-name',
+        availChecking: s.ob.avail === 'checking', availOk: s.ob.avail === 'ok', availTaken: s.ob.avail === 'taken',
+        availMsg: s.ob.msg, hasSugg: s.ob.sugg.length > 0,
+        sugg: s.ob.sugg.map((name) => ({ name, pick: () => { this.setState((x) => ({ ob: { ...x.ob, username: name } })); this.checkName(name, 'ob'); } })),
+        cont1Disabled: s.ob.avail !== 'ok',
+        display: s.ob.display,
+        photoBtnLabel: s.ob.hasPhoto ? 'Replace' : 'Upload',
+        showSourceChip: s.ob.mode === 'oauth' && s.ob.hasPhoto,
+        emailVerified: s.ob.mode === 'oauth', emailPending: s.ob.mode !== 'oauth',
+        bio: s.ob.bio, bioCount: s.ob.bio.length,
+        location: s.ob.location, website: s.ob.website, err2: s.ob.err2,
+        visPubCls: s.ob.visibility === 'public' ? 'active' : '', visUnlCls: s.ob.visibility === 'unlisted' ? 'active' : '', visPrivCls: s.ob.visibility === 'private' ? 'active' : '',
+        visDesc: visDescs[s.ob.visibility],
+        hasPhoto: s.ob.hasPhoto, noPhoto: !s.ob.hasPhoto,
+        recapDisplay: s.ob.display || s.ob.username,
+        recapVis: s.ob.visibility, recapVisIsPublic: s.ob.visibility === 'public', recapVisNotPublic: s.ob.visibility !== 'public',
+        recapRows: obRecapRows,
+        editDraft: s.ob.editDraft, editErr: s.ob.editErr,
+      },
+      obSetU: (e) => { const v = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''); S({ ob: { ...s.ob, username: v } }); this.checkName(v, 'ob'); },
+      obCont1: () => this.setState({ ob: { ...s.ob, step: 2 }, pf: { ...s.pf, username: s.ob.username || s.pf.username } }),
+      obBack1: () => S({ ob: { ...s.ob, step: 1 } }),
+      obBack2: () => S({ ob: { ...s.ob, step: 2, editKey: null } }),
+      obSkip2: () => S({ ob: { ...s.ob, step: 3, err2: null } }),
+      obCont2: () => {
+        if (s.ob.website && !obWebRe.test(s.ob.website)) { S({ ob: { ...s.ob, err2: 'Enter a valid URL (https://…).' } }); return; }
+        S({ ob: { ...s.ob, step: 3, err2: null } });
+      },
+      obSetDisplay: (e) => S({ ob: { ...s.ob, display: e.target.value.slice(0, 50) } }),
+      obSetBio: (e) => S({ ob: { ...s.ob, bio: e.target.value.slice(0, 160) } }),
+      obSetLocation: (e) => S({ ob: { ...s.ob, location: e.target.value.slice(0, 60) } }),
+      obSetWebsite: (e) => S({ ob: { ...s.ob, website: e.target.value, err2: null } }),
+      obVisPub: () => S({ ob: { ...s.ob, visibility: 'public' } }),
+      obVisUnl: () => S({ ob: { ...s.ob, visibility: 'unlisted' } }),
+      obVisPriv: () => S({ ob: { ...s.ob, visibility: 'private' } }),
+      obEdSet: (e) => S({ ob: { ...s.ob, editDraft: e.target.value, editErr: null } }),
+      obEdSave: () => {
+        const k = s.ob.editKey;
+        if (!k) return;
+        if (k === 'website' && s.ob.editDraft && !obWebRe.test(s.ob.editDraft)) { S({ ob: { ...s.ob, editErr: 'Enter a valid URL (https://…).' } }); return; }
+        const lim = k === 'bio' ? 160 : k === 'location' ? 60 : k === 'display' ? 50 : 200;
+        S({ ob: { ...s.ob, [k]: (s.ob.editDraft || '').slice(0, lim), editKey: null, editErr: null } });
+      },
+      obEdCancel: () => S({ ob: { ...s.ob, editKey: null, editErr: null } }),
+      obUpload: startAvatar('onboarding'),
+      obRemovePhoto: () => S({ ob: { ...s.ob, hasPhoto: false } }),
+      obLaunch: () => { this.commitOb(); S({ persona: 'owner' }); this.goScreen('profile'); this.showToast('The Arena is outside this prototype — here\u2019s your live profile.'); },
+      obLeaderboard: () => { this.commitOb(); this.showToast('Outside this prototype — identity surfaces only.'); },
+      obFinishProfile: () => { this.commitOb(); S({ persona: 'owner' }); this.goScreen('profile'); },
+
+      // profile
+      pf: {
+        owner, priv, empty,
+        showBody: !priv,
+        display: s.pf.display, username: s.pf.username, bio: s.pf.bio,
+        bioShown: !!s.pf.bio || owner, bioStatic: !s.bioEditing, bioEditing: s.bioEditing,
+        bioDraft: s.bioDraft, bioSaved: s.bioSaved,
+        location: s.pf.location, website: s.pf.website, joined: s.pf.joined,
+        vis: s.pf.vis, visIsPublic: s.pf.vis === 'public', visNotPublic: s.pf.vis !== 'public',
+        visCls: s.pf.vis === 'public' ? 'pf2-vis-public' : '',
+        games: empty ? '0' : '1,284', winRate: empty ? '—' : '59%',
+        w: empty ? 0 : 712, l: empty ? 0 : 498, d: empty ? 0 : 74,
+        hasRecord: !empty,
+        catBars: catData.map(([name, pct]) => ({ name, pct: pct + '%', style: { width: pct + '%' } })),
+        form: ['W', 'W', 'L', 'D', 'W'].map((r) => ({ label: r, cls: 'pf2-form-' + r })),
+        favGame: 'Connect Four',
+        tabGames: s.pfTab === 'games', tabArts: s.pfTab === 'arts',
+        tabGamesCls: s.pfTab === 'games' ? 'active' : '', tabArtsCls: s.pfTab === 'arts' ? 'active' : '',
+        emptyHistory: empty, showHistory: !empty,
+        history, artifacts,
+      },
+      pfTabGames: () => S({ pfTab: 'games' }),
+      pfTabArts: () => S({ pfTab: 'arts' }),
+      startBioEdit: () => S({ bioEditing: true, bioDraft: s.pf.bio }),
+      bioSet: (e) => S({ bioDraft: e.target.value.slice(0, 160) }),
+      bioSave: () => { this.setState({ pf: { ...s.pf, bio: s.bioDraft }, bioEditing: false, bioSaved: true }); this.t('bio', () => this.setState({ bioSaved: false }), 1800); },
+      bioCancel: () => S({ bioEditing: false }),
+      visBadgeGo: () => { S({ ssec: 'profile' }); this.goScreen('settings'); },
+      editProfileGo: () => { S({ ssec: 'profile' }); this.goScreen('settings'); },
+      artUpload: () => S({ artifacts: [{ name: 'untitled-run-' + (s.artifacts.length + 1), game: 'Chess', vis: 'private', date: 'just now', size: (Math.random() * 3 + 0.5).toFixed(1) + ' MB' }, ...s.artifacts] }),
+      avatarOpen: startAvatar('profile'),
+
+      // settings
+      st: {
+        nav: stNav,
+        secProfile: s.ssec === 'profile', secAccount: s.ssec === 'account', secSecurity: s.ssec === 'security',
+        secKeys: s.ssec === 'keys', secNotif: s.ssec === 'notifications', secAppearance: s.ssec === 'appearance', secDanger: s.ssec === 'danger',
+        tierARows, edDraft: s.edDraft, edDraft2: s.edDraft2,
+        visDesc: visDescs[s.pf.vis], visSaved: s.saved === 'vis',
+        visPubCls: s.pf.vis === 'public' ? 'active' : '', visUnlCls: s.pf.vis === 'unlisted' ? 'active' : '', visPrivCls: s.pf.vis === 'private' ? 'active' : '',
+        email: s.pf.email, emailStatic: s.edKey !== 'email', emailEditing: s.edKey === 'email',
+        hasPending: !!s.pendingEmail, pendingEmail: s.pendingEmail,
+        usernameStatic: s.edKey !== 'username', usernameEditing: s.edKey === 'username', usernameSaved: s.saved === 'username',
+        unChecking: s.unAvail === 'checking', unOk: s.unAvail === 'ok', unTaken: s.unAvail === 'taken', unMsg: s.unMsg,
+        unSaveDisabled: s.unAvail !== 'ok',
+        methodsSummary: (s.providers.github ? 'GitHub' : '') + (s.providers.google ? ' · Google' : '') + (s.hasPassword ? ' · Email & password' : ''),
+        pwDesc: s.hasPassword ? 'Last changed Jan 2026.' : 'No password set — you sign in with GitHub.',
+        pwBtnLabel: s.hasPassword ? 'Change password' : 'Set a password',
+        pwStatic: s.edKey !== 'password', pwEditing: s.edKey === 'password', pwSaved: s.saved === 'password', pwErr: s.edErr,
+        twoFAOff: !s.twoFA, twoFAOn: s.twoFA,
+        sessions: s.sessions.map((x) => ({ ...x, revocable: !x.current, revoke: () => { S({ sessions: s.sessions.filter((y) => y.id !== x.id) }); this.showToast('Session revoked.'); } })),
+        linkGuardMsg: s.linkGuard,
+        providers: [
+          { name: 'GitHub', sub: s.providers.github ? 'Connected · used at last sign-in' : 'Not connected', linked: s.providers.github, unlinked: !s.providers.github, action: () => (s.providers.github ? this.needStepUp('unlink-github', 'disconnect GitHub') : this.doAction('link-google')) },
+          { name: 'Google', sub: s.providers.google ? 'Connected' : 'Not connected', linked: s.providers.google, unlinked: !s.providers.google, action: () => (s.providers.google ? this.needStepUp('unlink-google', 'disconnect Google') : this.doAction('link-google')) },
+        ],
+        keys: s.keys.map((k) => ({ ...k, rotate: () => this.needStepUp('rotateKey', 'rotate "' + k.name + '"'), revoke: () => this.needStepUp('revokeKey', 'revoke "' + k.name + '"') })),
+        noKeys: s.keys.length === 0,
+        notifRows: [
+          notifRow('matches', 'Match results', 'When a match against your agents finishes.'),
+          notifRow('replay', 'Replay processed', 'When an uploaded .eslams artifact is ready.'),
+          { label: 'Security alerts', desc: 'New sign-ins and sensitive changes.', locked: true, toggleable: false, on: true, cls: 'toggle-on', toggle: () => {} },
+          notifRow('news', 'Product news', 'Occasional updates — a few a year.'),
+        ],
+        thLightCls: s.themeChoice === 'light' ? 'set-themeopt-act' : '', thDarkCls: s.themeChoice === 'dark' ? 'set-themeopt-act' : '', thSysCls: s.themeChoice === 'system' ? 'set-themeopt-act' : '',
+        deactivated: s.deactivated, delRequested: s.delRequested, delNotRequested: !s.delRequested,
+      },
+      stEdSet: (e) => S({ edDraft: e.target.value, edErr: null }),
+      stEdSet2: (e) => S({ edDraft2: e.target.value, edErr: null }),
+      stEdSetU: (e) => { const v = e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''); S({ edDraft: v }); this.checkName(v, 'un'); },
+      stEdSave: saveTierA,
+      stEdCancel: () => S({ edKey: null, edErr: null }),
+      stVisPub: setVis('public'), stVisUnl: setVis('unlisted'), stVisPriv: setVis('private'),
+      stEditEmail: () => this.needStepUp('email', 'change your email'),
+      stEmailSave: () => {
+        if (!this.validEmail(s.edDraft)) { S({ edErr: 'Enter a valid email.' }); this.showToast('Enter a valid email.'); return; }
+        this.setState({ pendingEmail: s.edDraft, edKey: null }); this.showToast('Verification sent to ' + s.edDraft + '.');
+      },
+      stEditUsername: () => this.needStepUp('username', 'change your username'),
+      stUsernameSave: () => { this.setState({ pf: { ...s.pf, username: s.edDraft }, edKey: null }); this.flash('username'); this.showToast('eslams.com/' + s.edDraft + ' is yours. The old URL no longer resolves.'); },
+      stEditPassword: () => this.needStepUp('password', s.hasPassword ? 'change your password' : 'set a password'),
+      stPwSave: () => {
+        if (this.strength(s.edDraft) < 1) { S({ edErr: 'Use at least 12 characters.' }); return; }
+        if (s.edDraft !== s.edDraft2) { S({ edErr: "Passwords don't match." }); return; }
+        this.setState({ edKey: null, hasPassword: true }); this.flash('password');
+      },
+      stEnable2FA: () => this.needStepUp('2fa', 'enable two-factor'),
+      stDisable2FA: () => this.needStepUp('2fa-off', 'disable two-factor'),
+      stRevokeAll: () => this.needStepUp('revokeAll', 'sign out everywhere'),
+      stNewKey: () => this.needStepUp('createkey', 'create an API key'),
+      stDeactivate: () => this.needStepUp('deactivate', 'deactivate your account'),
+      stDelete: () => this.needStepUp('delete', 'request account deletion'),
+      stReactivate: () => { S({ deactivated: false }); this.showToast('Welcome back — your profile is visible again.'); },
+      stGoSecurity: () => S({ ssec: 'security' }),
+      avRemove: () => this.setState({ pf: { ...s.pf, avatarPhoto: false } }),
+
+      // dialogs
+      dlgStepup: s.dlg === 'stepup', dlgConfirm: s.dlg === 'confirm', dlgAvatar: s.dlg === 'avatar',
+      dlg2fa: s.dlg === '2fa', dlgCreateKey: s.dlg === 'createkey', dlgNewKey: s.dlg === 'newkey', dlgReplay: s.dlg === 'replay',
+      dlgCancel: () => this.closeDlg(),
+      sp: {
+        sub: s.sp.mode === 'password' ? 'Enter your password to' : s.sp.mode === 'otp' ? 'Enter the emailed code to' : 'Re-authenticate to',
+        actionLabel: (s.pendingAction || {}).label || 'continue',
+        pwMode: s.sp.mode === 'password', chooseMode: s.sp.mode === 'choose', otpMode: s.sp.mode === 'otp',
+        pw: s.sp.pw, code: s.sp.code, busy: s.sp.busy,
+        confirmDisabled: s.sp.busy || (s.sp.mode === 'password' ? s.sp.pw.length < 1 : s.sp.code.length < 6),
+      },
+      spSetPw: (e) => S({ sp: { ...s.sp, pw: e.target.value } }),
+      spSetCode: (e) => S({ sp: { ...s.sp, code: e.target.value.replace(/\D/g, '').slice(0, 6) } }),
+      spConfirm, spProvider: () => { S({ sp: { ...s.sp, busy: true } }); this.t('sp', () => this.finishStepUp(), 900); },
+      spSendCode: () => S({ sp: { ...s.sp, mode: 'otp', code: '' } }),
+      cf: { title: cfg.title || '', body: cfg.body || '', btnLabel: cfg.btnLabel || 'Confirm', needType: !!cfg.needType, typed: s.cf.typed, disabled: !!cfg.needType && s.cf.typed !== s.pf.username },
+      cfSetTyped: (e) => S({ cf: { ...s.cf, typed: e.target.value } }),
+      cfGo,
+      av: { idle: s.av.stage === 'idle', uploading: s.av.stage === 'uploading', done: s.av.stage === 'done', pctLabel: Math.round(s.av.pct) + '%', pctStyle: { display: 'block', height: '100%', width: s.av.pct + '%', background: 'var(--accent)', borderRadius: '99px', transition: 'width .15s' } },
+      avStart,
+      avUse: () => {
+        if (s.av.ctx === 'onboarding') this.setState({ ob: { ...s.ob, hasPhoto: true }, dlg: null });
+        else { this.setState({ pf: { ...s.pf, avatarPhoto: true }, dlg: null }); this.flash('avatar'); }
+        this.showToast('Photo updated.');
+      },
+      tf: {
+        setup: s.tf.stage === 'setup', done: s.tf.stage === 'done', code: s.tf.code, err: s.tf.err,
+        codes: ['h4x2-9kfm', 'p8w1-3jqz', 'r2d7-0mvt', 'k9s4-6bnc', 'w3f8-1lgd', 'y6t0-5xph'],
+        copyLabel: s.tf.copied ? 'Copied' : 'Copy codes',
+      },
+      tfSetCode: (e) => S({ tf: { ...s.tf, code: e.target.value.replace(/\D/g, '').slice(0, 6), err: null } }),
+      tfVerify: () => {
+        if (s.tf.code.length < 6) { S({ tf: { ...s.tf, err: 'Enter the 6-digit code from your app.' } }); return; }
+        this.setState({ tf: { ...s.tf, stage: 'done' }, twoFA: true });
+      },
+      tfCopy: () => { try { navigator.clipboard && navigator.clipboard.writeText('h4x2-9kfm p8w1-3jqz r2d7-0mvt k9s4-6bnc w3f8-1lgd y6t0-5xph'); } catch (e) {} S({ tf: { ...s.tf, copied: true } }); },
+      ck: { name: s.ck.name, disabled: !s.ck.name.trim() },
+      ckSetName: (e) => S({ ck: { name: e.target.value } }),
+      ckCreate: () => {
+        const full = 'esl_live_' + Math.random().toString(36).slice(2, 14) + Math.random().toString(36).slice(2, 10);
+        this.setState({ keys: [...s.keys, { id: Date.now(), name: s.ck.name.trim(), prefix: full.slice(0, 13), created: 'just now', last: 'never' }], nk: { full, copied: false }, dlg: 'newkey' });
+      },
+      nk: { full: s.nk.full, copyLabel: s.nk.copied ? 'Copied' : 'Copy' },
+      nkCopy: () => { try { navigator.clipboard && navigator.clipboard.writeText(s.nk.full); } catch (e) {} S({ nk: { ...s.nk, copied: true } }); },
+      rp: s.rp || { game: '', model: '', resCls: '', resLabel: '', date: '' },
+    };
+  }
+
+  startCooldown(which) {
+    const set = (n) => this.setState((s) => ({ [which]: { ...s[which], cooldown: n } }));
+    set(30);
+    this.timers = this.timers || {};
+    clearInterval(this.timers['cd' + which]);
+    this.timers['cd' + which] = setInterval(() => {
+      const n = this.state[which].cooldown - 1;
+      if (n <= 0) { clearInterval(this.timers['cd' + which]); set(0); } else set(n);
+    }, 1000);
+  }
+}
+</script>
+</body>
+</html>

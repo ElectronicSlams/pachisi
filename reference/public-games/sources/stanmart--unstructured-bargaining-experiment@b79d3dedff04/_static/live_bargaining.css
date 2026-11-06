@@ -1,0 +1,300 @@
+.section {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px;
+}
+
+.highlight-section {
+    border-width: 4px;
+    border-color: #b70505;
+}
+
+.highlight-section-title {
+    color: #b70505;
+}
+
+.side-by-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.flex-item {
+    display: "flex";
+    flex: 1;
+}
+
+.vertical-fill {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+}
+
+.otree-chat {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+    border: none;
+    overflow-y: auto;
+}
+
+.otree-chat .otree-chat__messages {
+    flex: 1;
+    background: none;
+}
+
+.otree-chat__input {
+    margin-top: 10px;
+}
+
+.otree-chat__btn-send {
+    margin-top: 10px;
+}
+
+button {
+    border-radius: 5px;
+}
+
+input {
+    border-radius: 5px;
+}
+
+.offer-left-col {
+    width: 40%;
+    text-align: left;
+}
+
+.offer-proposer-col {
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.offer-player-col {
+    width: 20%;
+    text-align: center;
+}
+
+.offer-total-col {
+    width: 20%;
+    text-align: right;
+}
+
+.offer-id-col {
+    width: 20%;
+    text-align: left;
+    color: #b70505;
+    font-weight: bold;
+}
+
+.coalition-member {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.allocation {
+    width: 50%;
+    text-align: center;
+}
+
+.allocation-total {
+    text-align: right;
+    font-weight: bold;
+}
+
+.offer-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+table.shaded-rows tbody tr:nth-child(odd) {
+    background-color:#eeeeee;
+}
+
+.horizontal-rules tr {
+    border-bottom: 1px solid black;
+    border-top: none;
+}
+
+.otree-chat__nickname {
+    width: 70px;
+}
+
+#payoff-table {
+    width: 100%;
+    font-size: 0.9rem;
+    border-collapse:separate;
+    border:solid black 1px;
+    border-radius:6px;
+}
+
+#payoff-table-header th {
+    border-top: none;
+    border-bottom: solid black 1px;;
+}
+
+#payoff-table td {
+    border-left: 1px solid black;
+    border-right: none;
+}
+
+#payoff-table th {
+    border-left: 1px solid black;
+    border-right: none;
+}
+
+#payoff-table th:first-child {
+    border-left: none;
+    border-right: none;
+}
+
+.payoff {
+    text-align: center;
+}
+
+.otree-timer {
+    position: sticky;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.otree-timer>p {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.highlight {
+    background-color: rgb(51, 169, 0);
+    animation-name: highlight-animation;
+    animation-fill-mode: forwards;
+    animation-duration: 5s;
+    animation-delay: 0s;
+}
+
+tr.highlight:nth-child(odd) {
+    animation-name: highlight-animation-odd;
+}
+
+tr.highlight:nth-child(even) {
+    animation-name: highlight-animation;
+}
+
+@keyframes highlight-animation-odd {
+    0% {
+        background-color: rgb(51, 169, 0);
+    }
+
+    100% {
+        background-color: #eeeeee;
+    }
+}
+
+@keyframes highlight-animation {
+    0% {
+        background-color: rgb(51, 169, 0);
+    }
+
+    100% {
+        background-color: white;
+    }
+}
+
+.red-highlight {
+    color: #b70505;
+    font-weight: bold;
+}
+
+#popup-full {
+    transition: opacity 300ms;
+    opacity: 0;
+    visibility: hidden;
+    background: rgba(0,0,0, 0.6);
+    height: 100vh;
+    position: fixed;
+    width: 100%;
+    z-index: 30;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#popup-full.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    min-height:200px;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    z-index: 1000;
+    border-width: 5px;
+}
+
+#btn-close-popup {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+.success h3 {
+    color: green;
+}
+
+.success > div {
+    border-color: green;
+}
+
+.error h3 {
+    color: #b70505;
+}
+
+.error > div {
+    border-color: #b70505;
+}
+
+.likert-table {
+    width: 100%;
+}
+
+.likert-table tr {
+    border-bottom: 1px solid black;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.likert-table thead {
+    border-bottom: 2px solid black;
+}
+
+.likert-table td {
+    text-align: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.likert-table th {
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.likert-table td:first-child {
+    text-align: left;
+    border-right: 1px solid black;
+}
+
+.likert-table th:first-child {
+    text-align: left;
+}
+
+.likert-table td:last-child {
+    border-left: 1px solid black;
+}

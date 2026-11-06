@@ -1,0 +1,334 @@
+/* eSlams mobile app — design tokens
+   Six themes. Apply one theme by setting a data-th attribute on a wrapping element:
+     <div data-th="dark"> … </div>
+   "dark" and "light" are the Classic pair (these two may follow the OS colour scheme).
+   "neon", "club", "arcade", "midnight" are fixed skins the user picks explicitly.
+
+   CONTRACT (do not break when adding themes):
+   - win / loss / draw hues re-tune per theme but NEVER re-map to different meanings.
+   - Exactly one accent per theme.
+   - --glow is `none` everywhere except Neon and Arcade, and only ever applied to
+     accent-carrying elements (selected dock tab, primary CTA, winning-line highlight).
+   - The brand mark artwork itself is never re-tinted by the theme.
+*/
+
+[data-th] {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, monospace;
+
+  /* radii */
+  --r-xs: 5px;
+  --r-sm: 7px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* layout */
+  --dock-h: 60px;
+  --share-safe: 20px;
+
+  --glow: none;
+}
+
+/* ─────────────────────────── Classic Dark (default) ─────────────────────────── */
+[data-th="dark"] {
+  --bg: #0c0c0e;
+  --surface: #121215;
+  --surface-2: #18181c;
+  --surface-3: #1f1f24;
+  --surface-inset: #101013;
+
+  --border: rgba(255, 255, 255, .085);
+  --border-strong: rgba(255, 255, 255, .16);
+  --border-faint: rgba(255, 255, 255, .05);
+
+  --text: #ededf0;
+  --text-2: #a2a2ad;
+  --text-3: #9a9aa5;
+  --text-on-accent: #ffffff;
+
+  --accent: #647cff;
+  --accent-hover: #7a8dff;
+  --accent-soft: rgba(100, 124, 255, .14);
+  --accent-softer: rgba(100, 124, 255, .07);
+  --accent-line: rgba(100, 124, 255, .30);
+
+  --win: #3ec97e;
+  --win-soft: rgba(62, 201, 126, .13);
+  --loss: #ec6a5f;
+  --loss-soft: rgba(236, 106, 95, .14);
+  --draw: #e0a94a;
+  --draw-soft: rgba(224, 169, 74, .14);
+
+  --board-light: #2b2b33;
+  --board-dark: #3a3a45;
+  --board-line: #4a4a56;
+  --board-bg: #1c1c21;
+  --stone-black: #0b0b0d;
+  --stone-white: #e9e9ee;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, .5), 0 1px 3px rgba(0, 0, 0, .4);
+  --shadow-lg: 0 -12px 48px rgba(0, 0, 0, .55);
+}
+
+/* ─────────────────────────── Classic Light ─────────────────────────── */
+[data-th="light"] {
+  --bg: #f7f7f9;
+  --surface: #ffffff;
+  --surface-2: #f2f2f5;
+  --surface-3: #ebebef;
+  --surface-inset: #fafafb;
+
+  --border: #e8e8ec;
+  --border-strong: #d6d6dd;
+  --border-faint: #f0f0f3;
+
+  --text: #0b0b0d;
+  --text-2: #56565f;
+  --text-3: #8a8a94;
+  --text-on-accent: #ffffff;
+
+  --accent: #1b32c4;
+  --accent-hover: #16299f;
+  --accent-soft: rgba(27, 50, 196, .08);
+  --accent-softer: rgba(27, 50, 196, .045);
+  --accent-line: rgba(27, 50, 196, .22);
+
+  --win: #1f8a4c;
+  --win-soft: rgba(31, 138, 76, .10);
+  --loss: #c43d33;
+  --loss-soft: rgba(196, 61, 51, .10);
+  --draw: #b0791b;
+  --draw-soft: rgba(176, 121, 27, .12);
+
+  --board-light: #efe9dd;
+  --board-dark: #b9a888;
+  --board-line: #9c9486;
+  --board-bg: #f4f1ea;
+  --stone-black: #16161a;
+  --stone-white: #f6f5f2;
+
+  --shadow-sm: 0 1px 2px rgba(15, 15, 20, .04);
+  --shadow-md: 0 4px 16px rgba(15, 15, 20, .07), 0 1px 3px rgba(15, 15, 20, .05);
+  --shadow-lg: 0 -12px 48px rgba(15, 15, 20, .18);
+}
+
+/* ─────────────────────────── Neon ─────────────────────────── */
+[data-th="neon"] {
+  --bg: #06060b;
+  --surface: #0c0c15;
+  --surface-2: #12121d;
+  --surface-3: #191926;
+  --surface-inset: #0a0a11;
+
+  --border: rgba(120, 150, 255, .14);
+  --border-strong: rgba(140, 170, 255, .30);
+  --border-faint: rgba(120, 150, 255, .07);
+
+  --text: #e8ecff;
+  --text-2: #a3adcf;
+  --text-3: #727ca8;
+  --text-on-accent: #041018;
+
+  --accent: #3fd6f2;
+  --accent-hover: #6ce1f7;
+  --accent-soft: rgba(63, 214, 242, .15);
+  --accent-softer: rgba(63, 214, 242, .07);
+  --accent-line: rgba(63, 214, 242, .36);
+
+  --win: #3ef58e;
+  --win-soft: rgba(62, 245, 142, .13);
+  --loss: #ff5c6a;
+  --loss-soft: rgba(255, 92, 106, .15);
+  --draw: #ffc24d;
+  --draw-soft: rgba(255, 194, 77, .14);
+
+  --board-light: #131322;
+  --board-dark: #1c1c30;
+  --board-line: #30305a;
+  --board-bg: #0d0d18;
+  --stone-black: #05050c;
+  --stone-white: #e6f6ff;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 10, .5);
+  --shadow-md: 0 4px 18px rgba(0, 0, 20, .6), 0 1px 3px rgba(0, 0, 10, .5);
+  --shadow-lg: 0 -12px 48px rgba(0, 0, 20, .65);
+
+  --glow: 0 0 14px rgba(63, 214, 242, .45);
+}
+
+/* ─────────────────────────── Club (wood & felt) ─────────────────────────── */
+[data-th="club"] {
+  --bg: #efe7d7;
+  --surface: #faf5ea;
+  --surface-2: #f1e9d8;
+  --surface-3: #e7dcc5;
+  --surface-inset: #f6f0e1;
+
+  --border: #ddd2ba;
+  --border-strong: #c3b292;
+  --border-faint: #e9e0cc;
+
+  --text: #2a2115;
+  --text-2: #665937;
+  --text-3: #8f815f;
+  --text-on-accent: #fff8ec;
+
+  --accent: #8a6414;
+  --accent-hover: #6f4f0d;
+  --accent-soft: rgba(138, 100, 20, .11);
+  --accent-softer: rgba(138, 100, 20, .055);
+  --accent-line: rgba(138, 100, 20, .32);
+
+  --win: #2e7d43;
+  --win-soft: rgba(46, 125, 67, .11);
+  --loss: #b8442f;
+  --loss-soft: rgba(184, 68, 47, .11);
+  --draw: #a2731c;
+  --draw-soft: rgba(162, 115, 28, .13);
+
+  --board-light: #ecdcbb;
+  --board-dark: #a97c4c;
+  --board-line: #8f7c58;
+  --board-bg: #decfae;
+  --stone-black: #221a10;
+  --stone-white: #f8f3e6;
+
+  --shadow-sm: 0 1px 2px rgba(60, 45, 20, .08);
+  --shadow-md: 0 4px 16px rgba(60, 45, 20, .12), 0 1px 3px rgba(60, 45, 20, .08);
+  --shadow-lg: 0 -12px 48px rgba(60, 45, 20, .22);
+
+  --glow: none;
+}
+
+/* ─────────────────────────── Arcade (phosphor) ─────────────────────────── */
+[data-th="arcade"] {
+  --bg: #020604;
+  --surface: #06110a;
+  --surface-2: #0a1a10;
+  --surface-3: #0f2417;
+  --surface-inset: #041008;
+
+  --border: rgba(51, 255, 119, .16);
+  --border-strong: rgba(51, 255, 119, .34);
+  --border-faint: rgba(51, 255, 119, .08);
+
+  --text: #c9ffd9;
+  --text-2: #7fd99a;
+  --text-3: #549e6e;
+  --text-on-accent: #02180a;
+
+  --accent: #33ff77;
+  --accent-hover: #66ff99;
+  --accent-soft: rgba(51, 255, 119, .13);
+  --accent-softer: rgba(51, 255, 119, .06);
+  --accent-line: rgba(51, 255, 119, .36);
+
+  --win: #33ff77;
+  --win-soft: rgba(51, 255, 119, .12);
+  --loss: #ff6640;
+  --loss-soft: rgba(255, 102, 64, .14);
+  --draw: #ffd23f;
+  --draw-soft: rgba(255, 210, 63, .13);
+
+  --board-light: #07200f;
+  --board-dark: #0d2f18;
+  --board-line: #1c4a2c;
+  --board-bg: #04150a;
+  --stone-black: #021007;
+  --stone-white: #ccffdd;
+
+  --shadow-sm: 0 1px 2px rgba(0, 10, 0, .5);
+  --shadow-md: 0 4px 16px rgba(0, 10, 0, .6), 0 1px 3px rgba(0, 10, 0, .5);
+  --shadow-lg: 0 -12px 48px rgba(0, 10, 0, .65);
+
+  --glow: 0 0 10px rgba(51, 255, 119, .35);
+}
+
+/* ─────────────────────────── Midnight (true black / OLED) ─────────────────────────── */
+[data-th="midnight"] {
+  --bg: #000000;
+  --surface: #0a0a0c;
+  --surface-2: #101013;
+  --surface-3: #16161a;
+  --surface-inset: #070709;
+
+  --border: rgba(255, 255, 255, .07);
+  --border-strong: rgba(255, 255, 255, .15);
+  --border-faint: rgba(255, 255, 255, .04);
+
+  --text: #d9d9de;
+  --text-2: #8f8f99;
+  --text-3: #6d6d78;
+  --text-on-accent: #ffffff;
+
+  --accent: #7d8dc9;
+  --accent-hover: #94a2d8;
+  --accent-soft: rgba(125, 141, 201, .15);
+  --accent-softer: rgba(125, 141, 201, .07);
+  --accent-line: rgba(125, 141, 201, .32);
+
+  --win: #4fae7d;
+  --win-soft: rgba(79, 174, 125, .13);
+  --loss: #c96a62;
+  --loss-soft: rgba(201, 106, 98, .14);
+  --draw: #bd9552;
+  --draw-soft: rgba(189, 149, 82, .14);
+
+  --board-light: #131316;
+  --board-dark: #1d1d22;
+  --board-line: #2a2a31;
+  --board-bg: #0c0c0f;
+  --stone-black: #000000;
+  --stone-white: #d6d6de;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .6);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, .7), 0 1px 3px rgba(0, 0, 0, .6);
+  --shadow-lg: 0 -12px 48px rgba(0, 0, 0, .75);
+
+  --glow: none;
+}
+
+/* ─────────────────────────── Motion ───────────────────────────
+   Durations used by the design. Keep these exact — the feel depends on them.
+     move (piece placed)                220ms  cubic-bezier(.2,.8,.3,1)
+     Connect Four gravity drop          320ms  see esC4Drop
+     hidden-info reveal (cards/chips)   300ms  ease-out, rotateY(88deg)→0
+     result curtain                     520ms
+     screen push (right→left)           200ms  ease-out
+     bottom sheet in                    280ms  cubic-bezier(.2,.8,.25,1)
+     dock tab pill                      250ms  cubic-bezier(.3,1.4,.4,1)
+*/
+@keyframes esFadeUp   { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes esRise     { from { opacity: 0; transform: translateY(52px); } to { opacity: 1; transform: none; } }
+@keyframes esPop      { from { opacity: 0; transform: scale(.4); }       to { opacity: 1; transform: scale(1); } }
+@keyframes esPulse    { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+@keyframes esSlideIn  { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes esSheet    { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes esBanner   { from { transform: translateY(-120%); } to { transform: none; } }
+@keyframes esCaret    { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+@keyframes esCoach    { 0%, 100% { transform: scale(1); } 18% { transform: scale(1.09); } 36% { transform: scale(1); } }
+@keyframes esFlipIn   { from { transform: rotateY(88deg); opacity: .4; } to { transform: none; opacity: 1; } }
+@keyframes esStoneLand{ 0% { transform: scale(.5); opacity: .4; } 60% { transform: scale(1.12); opacity: 1; } 80% { transform: scale(.97); } 100% { transform: scale(1); } }
+@keyframes esC4Drop {
+  0%   { transform: translateY(-150px); animation-timing-function: cubic-bezier(.5, 0, .9, .55); }
+  70%  { transform: translateY(0); }
+  82%  { transform: translateY(-9px); animation-timing-function: cubic-bezier(.3, .6, .4, 1); }
+  91%  { transform: translateY(0); }
+  96%  { transform: translateY(-3px); }
+  100% { transform: translateY(0); }
+}
+@keyframes esConfetti { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(560px) rotate(720deg); opacity: 0; } }
+@keyframes esPushIn   { from { transform: scale(1); } to { transform: scale(1.16); } }
+@keyframes esRing     { from { box-shadow: 0 0 0 1px var(--accent), 0 0 0 2px var(--accent-line); } to { box-shadow: 0 0 0 1px var(--accent), 0 0 0 12px rgba(0, 0, 0, 0); } }
+
+/* Non-negotiable: every motion beat must map to its final state instantly. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .01s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01s !important;
+  }
+}

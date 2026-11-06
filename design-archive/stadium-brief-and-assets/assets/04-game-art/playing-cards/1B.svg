@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 336">
+  <defs>
+    <pattern id="weave" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M-6 6 6-6M0 24 24 0M18 30 30 18" fill="none" stroke="#c8d0e3" stroke-width="1.5" opacity=".34"/>
+      <path d="m-6 18 12 12M0 0l24 24M18-6 30 6" fill="none" stroke="#f5f7fb" stroke-width="1" opacity=".18"/>
+    </pattern>
+  </defs>
+  <rect x="1" y="1" width="238" height="334" rx="13" fill="#f7f8fb" stroke="#15171b" stroke-width="2"/>
+  <rect x="9" y="9" width="222" height="318" rx="8" fill="#27345f"/>
+  <rect x="15" y="15" width="210" height="306" rx="5" fill="url(#weave)" stroke="#d7dceb" stroke-width="1.5"/>
+  <path d="M83 168c0-22 15-39 37-39s37 17 37 39-15 39-37 39-37-17-37-39Z" fill="#f7f8fb" stroke="#15171b" stroke-width="2"/>
+  <path d="M100 159h40v10h-30v10h30v10h-40Z" fill="#2c3fd1"/>
+</svg>

@@ -1,0 +1,1461 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-11-01",
+  "summary": {
+    "games": 50,
+    "queries": 57,
+    "searchResults": 282,
+    "uniqueCandidates": 270,
+    "deepInspections": 49,
+    "repositories": 38,
+    "files": 443,
+    "bytes": 12953443
+  },
+  "scope": "57 targeted repository queries across all 50 Pachisi identities, top five candidates by stars, supplemented by known primary renderer projects. Search results are discovery evidence, not endorsements or license clearance. This is not every public GitHub repository.",
+  "sources": [
+    {
+      "id": "shaack--cm-chessboard",
+      "repository": "shaack/cm-chessboard",
+      "commit": "2069b9ef3c10f1e2f005dad9eb9a2c35ee60a865",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Accessible SVG boards, responsive sizing, promotion controls and piece animation.",
+      "limits": "Code only. Staunty pieces have separate CC BY-NC-SA terms and are excluded, along with all other piece art.",
+      "fileCount": 10,
+      "bytes": 126790,
+      "url": "https://github.com/shaack/cm-chessboard/tree/2069b9ef3c10f1e2f005dad9eb9a2c35ee60a865",
+      "snapshotPath": "reference/public-games/sources/shaack--cm-chessboard@2069b9ef3c10",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "lichess-org--chessground",
+      "repository": "lichess-org/chessground",
+      "commit": "b4f605018e1043640c917e82a74b214cb58e4a05",
+      "license": "GPL-3.0-or-later",
+      "kind": "renderer",
+      "games": [
+        "chess"
+      ],
+      "idea": "Drag targets, animation plans, highlights and board-layer composition.",
+      "limits": "GPL reference; do not copy into the MIT library without a compatible licensing decision. No piece artwork.",
+      "fileCount": 7,
+      "bytes": 71038,
+      "url": "https://github.com/lichess-org/chessground/tree/b4f605018e1043640c917e82a74b214cb58e4a05",
+      "snapshotPath": "reference/public-games/sources/lichess-org--chessground@b4f605018e10",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "copyleft"
+    },
+    {
+      "id": "wandererxii--shogiground",
+      "repository": "WandererXII/shogiground",
+      "commit": "661ed8ca0c2ccb84679376ac523b5742e6235aee",
+      "license": "GPL-3.0-or-later",
+      "kind": "renderer",
+      "games": [
+        "shogi"
+      ],
+      "idea": "Shogi reserve hands, promotion choices, keyboard targets and movement.",
+      "limits": "GPL reference; no lishogi piece art or brand assets.",
+      "fileCount": 7,
+      "bytes": 68656,
+      "url": "https://github.com/WandererXII/shogiground/tree/661ed8ca0c2ccb84679376ac523b5742e6235aee",
+      "snapshotPath": "reference/public-games/sources/wandererxii--shogiground@661ed8ca0c2c",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "copyleft"
+    },
+    {
+      "id": "gbtami--chessgroundx",
+      "repository": "gbtami/chessgroundx",
+      "commit": "b898e080dfa2d9d2ef9d8f87c2ac9bd19071e053",
+      "license": "GPL-3.0-or-later",
+      "kind": "renderer",
+      "games": [
+        "chess",
+        "shogi",
+        "xiangqi"
+      ],
+      "idea": "Variant-aware dimensions, reserve pockets and piece roles.",
+      "limits": "GPL variant renderer; geometry support is not a rules engine or artwork license.",
+      "fileCount": 6,
+      "bytes": 62953,
+      "url": "https://github.com/gbtami/chessgroundx/tree/b898e080dfa2d9d2ef9d8f87c2ac9bd19071e053",
+      "snapshotPath": "reference/public-games/sources/gbtami--chessgroundx@b898e080dfa2",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "copyleft"
+    },
+    {
+      "id": "sabakihq--shudan",
+      "repository": "SabakiHQ/Shudan",
+      "commit": "bf2be30c568338c77294a782742036c1b3167c72",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "go",
+        "gomoku"
+      ],
+      "idea": "Go intersections, coordinates, markers, bounded views and simple vector stones.",
+      "limits": "Go is exact; Gomoku shares the intersection geometry only. Board texture is excluded.",
+      "fileCount": 14,
+      "bytes": 40084,
+      "url": "https://github.com/SabakiHQ/Shudan/tree/bf2be30c568338c77294a782742036c1b3167c72",
+      "snapshotPath": "reference/public-games/sources/sabakihq--shudan@bf2be30c5683",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "online-go--goban",
+      "repository": "online-go/goban",
+      "commit": "d139d00134dff1bce099f2acfafe827b2a5be6e6",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "Canvas/SVG board parity and procedural plain-board themes.",
+      "limits": "Third-party goscorer, image-stone payloads, textures and networking are excluded.",
+      "fileCount": 7,
+      "bytes": 391238,
+      "url": "https://github.com/online-go/goban/tree/d139d00134dff1bce099f2acfafe827b2a5be6e6",
+      "snapshotPath": "reference/public-games/sources/online-go--goban@d139d00134df",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "boris-em--goban",
+      "repository": "Boris-Em/Goban",
+      "commit": "44fcbe90a4f8e78c761e9d3992af93a49cc5c88f",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "go"
+      ],
+      "idea": "Native view geometry and annotations independent of rules.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "fileCount": 5,
+      "bytes": 26624,
+      "url": "https://github.com/Boris-Em/Goban/tree/44fcbe90a4f8e78c761e9d3992af93a49cc5c88f",
+      "snapshotPath": "reference/public-games/sources/boris-em--goban@44fcbe90a4f8",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "sotetsuk--pgx",
+      "repository": "sotetsuk/pgx",
+      "commit": "87278d2d6e677fd87248c457207b59cfa42e578d",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "backgammon",
+        "bridge",
+        "chess",
+        "connect-four",
+        "go",
+        "hex",
+        "leduc-holdem",
+        "mahjong",
+        "othello",
+        "shogi",
+        "tic-tac-toe"
+      ],
+      "idea": "Compact state-to-SVG renderers and game-specific board/seat geometry.",
+      "limits": "Bridge reference covers bidding, not play-phase dummy. Image assets are excluded because they have separate provenance.",
+      "fileCount": 14,
+      "bytes": 612269,
+      "url": "https://github.com/sotetsuk/pgx/tree/87278d2d6e677fd87248c457207b59cfa42e578d",
+      "snapshotPath": "reference/public-games/sources/sotetsuk--pgx@87278d2d6e67",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "bb4--bb4-games",
+      "repository": "bb4/bb4-games",
+      "commit": "2afbe944caad6c45d956d2b3d382bd74db09dec7",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "checkers",
+        "gomoku",
+        "hex",
+        "mancala",
+        "tic-tac-toe",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem"
+      ],
+      "idea": "Board/piece separation, Mancala pits and poker chip/hand/seat composition.",
+      "limits": "Generic poker layouts are shared design references, not certification of Pachisi betting variants.",
+      "fileCount": 15,
+      "bytes": 35644,
+      "url": "https://github.com/bb4/bb4-games/tree/2afbe944caad6c45d956d2b3d382bd74db09dec7",
+      "snapshotPath": "reference/public-games/sources/bb4--bb4-games@2afbe944caad",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "lengyanyu258--xiangqiboardjs",
+      "repository": "lengyanyu258/xiangqiboardjs",
+      "commit": "c36e1046c424e7abf1405904006043f6426b8ee8",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "xiangqi"
+      ],
+      "idea": "Xiangqi board interactions and board-specific geometry.",
+      "limits": "Piece images and site assets excluded.",
+      "fileCount": 4,
+      "bytes": 59461,
+      "url": "https://github.com/lengyanyu258/xiangqiboardjs/tree/c36e1046c424e7abf1405904006043f6426b8ee8",
+      "snapshotPath": "reference/public-games/sources/lengyanyu258--xiangqiboardjs@c36e1046c424",
+      "licensePaths": [
+        "LICENSE.md"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "calcitem--sanmill",
+      "repository": "calcitem/Sanmill",
+      "commit": "8901a06f088bf49a1602fee8686ed25ac5a33925",
+      "license": "AGPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "nine-mens-morris"
+      ],
+      "idea": "Mill board geometry, piece paint, turn highlights and animation coordination.",
+      "limits": "AGPL reference only; native engine, app branding, downloaded imagery and services excluded.",
+      "fileCount": 7,
+      "bytes": 134616,
+      "url": "https://github.com/calcitem/Sanmill/tree/8901a06f088bf49a1602fee8686ed25ac5a33925",
+      "snapshotPath": "reference/public-games/sources/calcitem--sanmill@8901a06f088b",
+      "licensePaths": [
+        "Copying.txt"
+      ],
+      "reuse": "copyleft"
+    },
+    {
+      "id": "girving--pentago",
+      "repository": "girving/pentago",
+      "commit": "d8ae9b10d407da2dfccc644b2f56cc59958772e1",
+      "license": "BSD-3-Clause",
+      "kind": "renderer",
+      "games": [
+        "pentago"
+      ],
+      "idea": "Quadrant rotation, board transforms and board SVG construction.",
+      "limits": "Source subset only; solver databases and Wasm are excluded. LICENSE text is BSD-3-Clause despite GitHub NOASSERTION.",
+      "fileCount": 5,
+      "bytes": 28467,
+      "url": "https://github.com/girving/pentago/tree/d8ae9b10d407da2dfccc644b2f56cc59958772e1",
+      "snapshotPath": "reference/public-games/sources/girving--pentago@d8ae9b10d407",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "arnowaczynski--utttai",
+      "repository": "arnowaczynski/utttai",
+      "commit": "622dae66b18198f6f12aef0a0bccd5bd40de2d8e",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "ultimate-tic-tac-toe"
+      ],
+      "idea": "Nested-board status, forced target, move history and analysis dashboard.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "fileCount": 7,
+      "bytes": 28051,
+      "url": "https://github.com/arnowaczynski/utttai/tree/622dae66b18198f6f12aef0a0bccd5bd40de2d8e",
+      "snapshotPath": "reference/public-games/sources/arnowaczynski--utttai@622dae66b181",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "bigardone--phoenix-battleship",
+      "repository": "bigardone/phoenix-battleship",
+      "commit": "1077e13eb871ab4fd52eef09c1b42cabd44f4d8f",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "battleship"
+      ],
+      "idea": "Own versus opponent board separation and fleet-placement controls.",
+      "limits": "Chat, sessions, logo components and service integration excluded.",
+      "fileCount": 6,
+      "bytes": 9476,
+      "url": "https://github.com/bigardone/phoenix-battleship/tree/1077e13eb871ab4fd52eef09c1b42cabd44f4d8f",
+      "snapshotPath": "reference/public-games/sources/bigardone--phoenix-battleship@1077e13eb871",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "quasoft--backgammonjs",
+      "repository": "quasoft/backgammonjs",
+      "commit": "f85f6ff0b0af9efcc5ef98a6d7bf7fc140090782",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "backgammon"
+      ],
+      "idea": "Point stacks, bar/off areas and board CSS.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "fileCount": 4,
+      "bytes": 39003,
+      "url": "https://github.com/quasoft/backgammonjs/tree/f85f6ff0b0af9efcc5ef98a6d7bf7fc140090782",
+      "snapshotPath": "reference/public-games/sources/quasoft--backgammonjs@f85f6ff0b0af",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "farama-foundation--pettingzoo",
+      "repository": "Farama-Foundation/PettingZoo",
+      "commit": "6b3f4950d23da03a0061a6225ab493a47aace3e3",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "chess",
+        "connect-four",
+        "go",
+        "hanabi",
+        "leduc-holdem",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem",
+        "rock-paper-scissors",
+        "tic-tac-toe"
+      ],
+      "idea": "Public observation rendering, turn cues, poker seats and simultaneous reveals.",
+      "limits": "Code only. Minecraft font, images, Atari ROMs and third-party dependencies excluded.",
+      "fileCount": 11,
+      "bytes": 135868,
+      "url": "https://github.com/Farama-Foundation/PettingZoo/tree/6b3f4950d23da03a0061a6225ab493a47aace3e3",
+      "snapshotPath": "reference/public-games/sources/farama-foundation--pettingzoo@6b3f4950d23d",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "datamllab--rlcard",
+      "repository": "datamllab/rlcard",
+      "commit": "d7d0a957baf4cc7225a50522adb0164bf130a9d0",
+      "license": "MIT",
+      "kind": "interaction",
+      "games": [
+        "gin-rummy",
+        "blackjack",
+        "dou-dizhu",
+        "shedding-card-game"
+      ],
+      "idea": "Gin Rummy GUI layout and input zones; terminal card presentation utilities.",
+      "limits": "Only Gin Rummy has a dedicated graphical GUI in this selection; other mapped games use shared/terminal card presentation. No card images or pretrained agents.",
+      "fileCount": 32,
+      "bytes": 183125,
+      "url": "https://github.com/datamllab/rlcard/tree/d7d0a957baf4cc7225a50522adb0164bf130a9d0",
+      "snapshotPath": "reference/public-games/sources/datamllab--rlcard@d7d0a957baf4",
+      "licensePaths": [
+        "LICENSE.md"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "yyjhao--html5-hearts",
+      "repository": "yyjhao/html5-hearts",
+      "commit": "501fffd98964ff1a543020be09e7efe4cc7c8f6a",
+      "license": "BSD-2-Clause",
+      "kind": "renderer",
+      "games": [
+        "hearts"
+      ],
+      "idea": "Trick area, hand arrangement, played-card collection and DOM interactions.",
+      "limits": "BSD-2-Clause text with an additional FreeBSD views disclaimer; retain the full original LICENSE. AI and card art excluded.",
+      "fileCount": 7,
+      "bytes": 17611,
+      "url": "https://github.com/yyjhao/html5-hearts/tree/501fffd98964ff1a543020be09e7efe4cc7c8f6a",
+      "snapshotPath": "reference/public-games/sources/yyjhao--html5-hearts@501fffd98964",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "mreishus--spades",
+      "repository": "mreishus/spades",
+      "commit": "095d840ba0084ed3bac57354286eb422b183d108",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "spades"
+      ],
+      "idea": "Partnership seating, table rotation, card primitives and scoring.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed. Two Mailgun API key occurrences are redacted from the archived README; original pin and blob metadata are retained.",
+      "fileCount": 7,
+      "bytes": 22031,
+      "url": "https://github.com/mreishus/spades/tree/095d840ba0084ed3bac57354286eb422b183d108",
+      "snapshotPath": "reference/public-games/sources/mreishus--spades@095d840ba008",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "ahuth--euchre",
+      "repository": "ahuth/euchre",
+      "commit": "57bee8016b38557e531e546b6e1d562775877056",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "euchre"
+      ],
+      "idea": "Trump selection, discard and trick-play phases as separate controls.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "fileCount": 9,
+      "bytes": 6633,
+      "url": "https://github.com/ahuth/euchre/tree/57bee8016b38557e531e546b6e1d562775877056",
+      "snapshotPath": "reference/public-games/sources/ahuth--euchre@57bee8016b38",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "lpaulger--cribbage-the-game",
+      "repository": "lpaulger/cribbage-the-game",
+      "commit": "26b1657b7a3735dfa7f773a9a5d9651d82533e99",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "cribbage"
+      ],
+      "idea": "Pegboard/scoreboard, count/play phases and visible-hand composition.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "fileCount": 9,
+      "bytes": 27559,
+      "url": "https://github.com/lpaulger/cribbage-the-game/tree/26b1657b7a3735dfa7f773a9a5d9651d82533e99",
+      "snapshotPath": "reference/public-games/sources/lpaulger--cribbage-the-game@26b1657b7a37",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "cezarbulancea--crazyeights",
+      "repository": "cezarbulancea/CrazyEights",
+      "commit": "5952844c828980c457d69c981802df944a453c4a",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "crazy-eights",
+        "shedding-card-game"
+      ],
+      "idea": "Desktop hand areas, card selection and draw/discard interaction.",
+      "limits": "Card PNGs excluded; rank/suit shedding is related, not the exact Core ruleset.",
+      "fileCount": 6,
+      "bytes": 23266,
+      "url": "https://github.com/cezarbulancea/CrazyEights/tree/5952844c828980c457d69c981802df944a453c4a",
+      "snapshotPath": "reference/public-games/sources/cezarbulancea--crazyeights@5952844c8289",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "bstnfrmry--hanabi",
+      "repository": "bstnfrmry/hanabi",
+      "commit": "9a9ce26ab14680cc48f7a105c32faec0cf002804",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "hanabi"
+      ],
+      "idea": "Cooperative hand information, fireworks, discard zones and clue-oriented layout.",
+      "limits": "Selected source files only; upstream dependencies are not installed or executed.",
+      "fileCount": 9,
+      "bytes": 25963,
+      "url": "https://github.com/bstnfrmry/hanabi/tree/9a9ce26ab14680cc48f7a105c32faec0cf002804",
+      "snapshotPath": "reference/public-games/sources/bstnfrmry--hanabi@9a9ce26ab146",
+      "licensePaths": [
+        "licence"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "hanabi-live--hanabi-live",
+      "repository": "Hanabi-Live/hanabi-live",
+      "commit": "1844d6db553f346f1b64f8a1cd68868f76ec0430",
+      "license": "GPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "hanabi"
+      ],
+      "idea": "Advanced card layout, clues and collaborative replay-oriented controls.",
+      "limits": "GPL source references; no artwork, audio, fonts or production game logs.",
+      "fileCount": 7,
+      "bytes": 104224,
+      "url": "https://github.com/Hanabi-Live/hanabi-live/tree/1844d6db553f346f1b64f8a1cd68868f76ec0430",
+      "snapshotPath": "reference/public-games/sources/hanabi-live--hanabi-live@1844d6db553f",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "copyleft"
+    },
+    {
+      "id": "kryha--boloney",
+      "repository": "Kryha/boloney",
+      "commit": "17e9e6236413bbb5ef982f92a5737f1e82686893",
+      "license": "Apache-2.0",
+      "kind": "renderer",
+      "games": [
+        "liars-dice"
+      ],
+      "idea": "Dice face/roll presentation, bid quantities and opponent dice summaries.",
+      "limits": "Related Liar\u2019s Dice variant. Wallet, backend, branding, icons and remote model assets excluded; retain NOTICE.",
+      "fileCount": 9,
+      "bytes": 61318,
+      "url": "https://github.com/Kryha/boloney/tree/17e9e6236413bbb5ef982f92a5737f1e82686893",
+      "snapshotPath": "reference/public-games/sources/kryha--boloney@17e9e6236413",
+      "licensePaths": [
+        "LICENSE",
+        "NOTICE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "ncase--trust",
+      "repository": "ncase/trust",
+      "commit": "6ec45d73befdb922bd40654dd1c1c903a953562f",
+      "license": "CC0-1.0",
+      "kind": "interaction",
+      "games": [
+        "prisoners-dilemma"
+      ],
+      "idea": "Payoff matrix explanation, repeated-round teaching and interactive parameter controls.",
+      "limits": "Only original simulation/control source is copied. CC BY-NC audio, third-party libraries, characters and music excluded.",
+      "fileCount": 7,
+      "bytes": 50651,
+      "url": "https://github.com/ncase/trust/tree/6ec45d73befdb922bd40654dd1c1c903a953562f",
+      "snapshotPath": "reference/public-games/sources/ncase--trust@6ec45d73befd",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "public-domain"
+    },
+    {
+      "id": "stanmart--unstructured-bargaining-experiment",
+      "repository": "stanmart/unstructured-bargaining-experiment",
+      "commit": "b79d3dedff04d70555aedf022735118eb4c76ad6",
+      "license": "MIT",
+      "kind": "interaction",
+      "games": [
+        "bargaining",
+        "negotiation"
+      ],
+      "idea": "Offer, acceptance, coalition/status and results interfaces.",
+      "limits": "Different experimental bargaining rules; not the exact Core price/delivery grid. Participant data, settings and backend excluded.",
+      "fileCount": 7,
+      "bytes": 33220,
+      "url": "https://github.com/stanmart/unstructured-bargaining-experiment/tree/b79d3dedff04d70555aedf022735118eb4c76ad6",
+      "snapshotPath": "reference/public-games/sources/stanmart--unstructured-bargaining-experiment@b79d3dedff04",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "google-deepmind--open_spiel",
+      "repository": "google-deepmind/open_spiel",
+      "commit": "8eb13ab561c4fac6829a5fa03635d3e1658bbb60",
+      "license": "Apache-2.0",
+      "kind": "rules",
+      "games": [
+        "bargaining",
+        "negotiation",
+        "first-price-sealed-bid-auction",
+        "goofspiel"
+      ],
+      "idea": "Information phases, outcome semantics and game-tree visualization.",
+      "limits": "Primarily rules/information reference, not ready-made game screens. Exact dedicated licensed visual sources remain gaps for Goofspiel and first-price sealed bidding.",
+      "fileCount": 7,
+      "bytes": 104104,
+      "url": "https://github.com/google-deepmind/open_spiel/tree/8eb13ab561c4fac6829a5fa03635d3e1658bbb60",
+      "snapshotPath": "reference/public-games/sources/google-deepmind--open_spiel@8eb13ab561c4",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "farama-foundation--gymnasium",
+      "repository": "Farama-Foundation/Gymnasium",
+      "commit": "c08564bb8edd741ff20430d3b500b2e76966772d",
+      "license": "MIT",
+      "kind": "physics",
+      "games": [
+        "cartpole",
+        "mountain-car",
+        "lunar-lander",
+        "car-racing",
+        "bipedal-walker",
+        "taxi",
+        "frozen-lake",
+        "cliff-walking",
+        "blackjack"
+      ],
+      "idea": "Reference state units, integration, control variants and rendering coordinate transforms.",
+      "limits": "Blackjack is rules-only here. Box2D scenes differ from Core lite models. Sprites, fonts, binaries and external dependencies excluded.",
+      "fileCount": 12,
+      "bytes": 219907,
+      "url": "https://github.com/Farama-Foundation/Gymnasium/tree/c08564bb8edd741ff20430d3b500b2e76966772d",
+      "snapshotPath": "reference/public-games/sources/farama-foundation--gymnasium@c08564bb8edd",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "maryrosecook--retro-games",
+      "repository": "maryrosecook/retro-games",
+      "commit": "2c9a82216cd4a97bd4bb2b9c40f95dbb0a6d2222",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "lunar-lander",
+        "alien-shooter"
+      ],
+      "idea": "Small canvas arcade render loops and readable collision/motion feedback.",
+      "limits": "Original source subset; no sound assets.",
+      "fileCount": 4,
+      "bytes": 15972,
+      "url": "https://github.com/maryrosecook/retro-games/tree/2c9a82216cd4a97bd4bb2b9c40f95dbb0a6d2222",
+      "snapshotPath": "reference/public-games/sources/maryrosecook--retro-games@2c9a82216cd4",
+      "licensePaths": [
+        "LICENSE.md"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "leerob--space-invaders",
+      "repository": "leerob/space-invaders",
+      "commit": "ccb37ac159e8528b41b96c4e6f65c30ed9e421fb",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "alien-shooter"
+      ],
+      "idea": "Arcade enemy formation, projectiles and player/collision presentation.",
+      "limits": "Sprites, sound effects and font assets excluded.",
+      "fileCount": 3,
+      "bytes": 28461,
+      "url": "https://github.com/leerob/space-invaders/tree/ccb37ac159e8528b41b96c4e6f65c30ed9e421fb",
+      "snapshotPath": "reference/public-games/sources/leerob--space-invaders@ccb37ac159e8",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "jatinmandav--gaming-in-python",
+      "repository": "jatinmandav/Gaming-in-Python",
+      "commit": "f51b9e1e0f8a2d5ac03285de7b37a66340216657",
+      "license": "MIT",
+      "kind": "physics",
+      "games": [
+        "paddle-ball"
+      ],
+      "idea": "Pong paddle/ball collision and presentation reference.",
+      "limits": "Two-sided Pong differs from the bundled bottom-paddle rally; no unrelated branded games are included.",
+      "fileCount": 3,
+      "bytes": 12978,
+      "url": "https://github.com/jatinmandav/Gaming-in-Python/tree/f51b9e1e0f8a2d5ac03285de7b37a66340216657",
+      "snapshotPath": "reference/public-games/sources/jatinmandav--gaming-in-python@f51b9e1e0f8a",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "mknsri--hockeyslam",
+      "repository": "Mknsri/HockeySlam",
+      "commit": "0776bc00b2a454c9ab67bcf4c14627301d10811d",
+      "license": "MIT",
+      "kind": "renderer",
+      "games": [
+        "ice-hockey-style-arena"
+      ],
+      "idea": "Hockey camera and animation-system reference.",
+      "limits": "Related real-time hockey, not Core\u2019s discrete rink. Models, textures, fonts and bundled third-party C++ headers excluded.",
+      "fileCount": 4,
+      "bytes": 22456,
+      "url": "https://github.com/Mknsri/HockeySlam/tree/0776bc00b2a454c9ab67bcf4c14627301d10811d",
+      "snapshotPath": "reference/public-games/sources/mknsri--hockeyslam@0776bc00b2a4",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "erfansn--boxingwithml",
+      "repository": "erfansn/BoxingWithML",
+      "commit": "254ac35a44649c0ea9f341d69db284a42170e43b",
+      "license": "Apache-2.0",
+      "kind": "interaction",
+      "games": [
+        "boxing-style-arena"
+      ],
+      "idea": "Pose-feedback overlay and boxing interaction presentation.",
+      "limits": "Camera/pose game differs from the discrete Core arena. No models, camera data or video imported.",
+      "fileCount": 3,
+      "bytes": 16502,
+      "url": "https://github.com/erfansn/BoxingWithML/tree/254ac35a44649c0ea9f341d69db284a42170e43b",
+      "snapshotPath": "reference/public-games/sources/erfansn--boxingwithml@254ac35a4464",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "fluffystuff--riichi-mahjong-tiles",
+      "repository": "FluffyStuff/riichi-mahjong-tiles",
+      "commit": "26e127ba2117f45cdce5ea0225748cc0cfad3169",
+      "license": "CC0-1.0",
+      "kind": "assets",
+      "games": [
+        "mahjong"
+      ],
+      "idea": "Two complete vector tile styles, including backs, honors and red fives.",
+      "limits": "Upstream LICENSE.md explicitly dedicates all assets to the public domain via CC0. No flower/season fork mixed into this set.",
+      "fileCount": 82,
+      "bytes": 1585962,
+      "url": "https://github.com/FluffyStuff/riichi-mahjong-tiles/tree/26e127ba2117f45cdce5ea0225748cc0cfad3169",
+      "snapshotPath": "reference/public-games/sources/fluffystuff--riichi-mahjong-tiles@26e127ba2117",
+      "licensePaths": [
+        "LICENSE.md"
+      ],
+      "reuse": "public-domain"
+    },
+    {
+      "id": "hayeah--playing-cards-assets",
+      "repository": "hayeah/playing-cards-assets",
+      "commit": "1e4497c05c3da9956c9f517bd386e9a7090ff7fa",
+      "license": "MIT",
+      "kind": "assets",
+      "games": [
+        "blackjack",
+        "leduc-holdem",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem",
+        "shedding-card-game",
+        "gin-rummy",
+        "dou-dizhu",
+        "bridge",
+        "hearts",
+        "spades",
+        "euchre",
+        "cribbage",
+        "crazy-eights",
+        "goofspiel"
+      ],
+      "idea": "Shared SVG card faces and alternative court designs.",
+      "limits": "Repository MIT license retained. README attributes underlying vector-playing-cards artwork to a public-domain source; retain that provenance. These assets do not establish game-rule coverage.",
+      "fileCount": 68,
+      "bytes": 8383635,
+      "url": "https://github.com/hayeah/playing-cards-assets/tree/1e4497c05c3da9956c9f517bd386e9a7090ff7fa",
+      "snapshotPath": "reference/public-games/sources/hayeah--playing-cards-assets@1e4497c05c3d",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    },
+    {
+      "id": "playhex--playhex",
+      "repository": "playhex/playhex",
+      "commit": "5750af48f8c3c9250f31c45d89a4b38d512bddc2",
+      "license": "AGPL-3.0",
+      "kind": "renderer",
+      "games": [
+        "hex"
+      ],
+      "idea": "Pixi Hex geometry, camera fit, edge goals, coordinates and last-move marks.",
+      "limits": "AGPL source reference. Sound packs have separate noncommercial licenses and are excluded; no texture or image assets.",
+      "fileCount": 11,
+      "bytes": 127790,
+      "url": "https://github.com/playhex/playhex/tree/5750af48f8c3c9250f31c45d89a4b38d512bddc2",
+      "snapshotPath": "reference/public-games/sources/playhex--playhex@5750af48f8c3",
+      "licensePaths": [
+        "LICENSE",
+        "src/packages/pixi-board/LICENSE"
+      ],
+      "reuse": "copyleft"
+    },
+    {
+      "id": "boardgameio--boardgame.io",
+      "repository": "boardgameio/boardgame.io",
+      "commit": "47adef2b46e375999931209ba7b41e9654c506e1",
+      "license": "MIT",
+      "kind": "interaction",
+      "games": [
+        "battleship",
+        "blackjack",
+        "leduc-holdem",
+        "limit-texas-holdem",
+        "no-limit-texas-holdem",
+        "gin-rummy",
+        "mahjong",
+        "dou-dizhu",
+        "bridge",
+        "hanabi",
+        "liars-dice",
+        "goofspiel",
+        "first-price-sealed-bid-auction",
+        "prisoners-dilemma",
+        "rock-paper-scissors"
+      ],
+      "idea": "Separate player views and redacted move history for hidden-information interfaces.",
+      "limits": "Shared interaction examples only, not implementations or rule certifications of the mapped games. No upstream networking or dependencies are run.",
+      "fileCount": 8,
+      "bytes": 9837,
+      "url": "https://github.com/boardgameio/boardgame.io/tree/47adef2b46e375999931209ba7b41e9654c506e1",
+      "snapshotPath": "reference/public-games/sources/boardgameio--boardgame.io@47adef2b46e3",
+      "licensePaths": [
+        "LICENSE"
+      ],
+      "reuse": "permissive"
+    }
+  ],
+  "games": [
+    {
+      "slug": "alien-shooter",
+      "name": "Alien Shooter",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "maryrosecook--retro-games",
+        "leerob--space-invaders"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "backgammon",
+      "name": "Backgammon",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": "Core variant uses 5 checkers a side; standard backgammon uses 15.",
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "quasoft--backgammonjs"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "bargaining",
+      "name": "Bargaining",
+      "category": "gametheory",
+      "variant": "core_bilateral_split",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "stanmart--unstructured-bargaining-experiment",
+        "google-deepmind--open_spiel"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "battleship",
+      "name": "Battleship",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "bigardone--phoenix-battleship",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "bipedal-walker",
+      "name": "Bipedal Walker",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Gymnasium Box2D renderer/physics; Core uses abstract alternating steps."
+    },
+    {
+      "slug": "blackjack",
+      "name": "Blackjack",
+      "category": "card",
+      "variant": "core_hit_stand_s17",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "datamllab--rlcard",
+        "farama-foundation--gymnasium",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Gymnasium includes graphical Blackjack rendering code. Its images and font are excluded. RLCard also supplies a terminal example, alongside shared card art."
+    },
+    {
+      "slug": "boxing-style-arena",
+      "name": "Boxing Style Arena",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "erfansn--boxingwithml"
+      ],
+      "coverageNote": "Related pose-based boxing overlay; no exact visual implementation of Core\u2019s discrete two-agent arena."
+    },
+    {
+      "slug": "bridge",
+      "name": "Bridge",
+      "category": "card",
+      "variant": "core_compact_bridge_play_phase",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Bidding diagram plus shared card assets. Play-phase dummy, declarer perspective and trick layout still need a dedicated visual reference."
+    },
+    {
+      "slug": "car-racing",
+      "name": "Car Racing",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Gymnasium Box2D renderer/physics; Core uses a different abstract lane model."
+    },
+    {
+      "slug": "cartpole",
+      "name": "CartPole",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "checkers",
+      "name": "Checkers",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "bb4--bb4-games"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "chess",
+      "name": "Chess",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "shaack--cm-chessboard",
+        "lichess-org--chessground",
+        "gbtami--chessgroundx",
+        "sotetsuk--pgx",
+        "farama-foundation--pettingzoo"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "cliff-walking",
+      "name": "Cliff Walking",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "connect-four",
+      "name": "Connect Four",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "farama-foundation--pettingzoo"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "crazy-eights",
+      "name": "Crazy Eights",
+      "category": "card",
+      "variant": "core_wild_eight_shedding",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "cezarbulancea--crazyeights",
+        "hayeah--playing-cards-assets"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "cribbage",
+      "name": "Cribbage",
+      "category": "card",
+      "variant": "core_discard_showdown",
+      "ruleVariantNote": "Core variant ends at the showdown after the crib discard; no pegging or counting is shown.",
+      "sourceIds": [
+        "lpaulger--cribbage-the-game",
+        "hayeah--playing-cards-assets"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "dou-dizhu",
+      "name": "Dou Dizhu",
+      "category": "card",
+      "variant": "core_landlord_shedding",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "datamllab--rlcard",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Shared card presentation and assets; no dedicated graphical Dou Dizhu UI was imported."
+    },
+    {
+      "slug": "euchre",
+      "name": "Euchre",
+      "category": "card",
+      "variant": "core_call_and_play",
+      "ruleVariantNote": "Core variant is 2-player; standard euchre is 4-player.",
+      "sourceIds": [
+        "ahuth--euchre",
+        "hayeah--playing-cards-assets"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "first-price-sealed-bid-auction",
+      "name": "First-Price Sealed-Bid Auction",
+      "category": "gametheory",
+      "variant": "core_two_bidder_private_values",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "google-deepmind--open_spiel",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Rules/information reference only. No exact licensed game-screen implementation was selected; public auction candidates were unlicensed or different auction formats."
+    },
+    {
+      "slug": "frozen-lake",
+      "name": "Frozen Lake",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "gin-rummy",
+      "name": "Gin Rummy",
+      "category": "card",
+      "variant": "core_compact_gin",
+      "ruleVariantNote": "Core deals 7 cards; standard gin rummy deals 10.",
+      "sourceIds": [
+        "datamllab--rlcard",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "go",
+      "name": "Go",
+      "category": "board",
+      "variant": "board_9x9",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sabakihq--shudan",
+        "online-go--goban",
+        "boris-em--goban",
+        "sotetsuk--pgx",
+        "farama-foundation--pettingzoo"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "gomoku",
+      "name": "Gomoku",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sabakihq--shudan",
+        "bb4--bb4-games"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "goofspiel",
+      "name": "Goofspiel",
+      "category": "card",
+      "variant": "core_five_card_goofspiel",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "google-deepmind--open_spiel",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Rules plus shared card assets. No dedicated licensed graphical Goofspiel UI was established in this search."
+    },
+    {
+      "slug": "hanabi",
+      "name": "Hanabi",
+      "category": "card",
+      "variant": "core_compact_hanabi",
+      "ruleVariantNote": "Core variant has 2 colours and a 12-card deck (standard: 5 colours, 50 cards); the trace discards while holding 8 clue tokens, which standard Hanabi forbids.",
+      "sourceIds": [
+        "farama-foundation--pettingzoo",
+        "bstnfrmry--hanabi",
+        "hanabi-live--hanabi-live",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "hearts",
+      "name": "Hearts",
+      "category": "card",
+      "variant": "core_penalty_tricks",
+      "ruleVariantNote": "Core variant is 2-player (standard is 4-player); the first trick is led with 3 of hearts rather than 2 of clubs, and a heart is led before hearts are broken while the leader holds a club.",
+      "sourceIds": [
+        "yyjhao--html5-hearts",
+        "hayeah--playing-cards-assets"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "hex",
+      "name": "Hex",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "bb4--bb4-games",
+        "playhex--playhex"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "ice-hockey-style-arena",
+      "name": "Ice Hockey Style Arena",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "mknsri--hockeyslam"
+      ],
+      "coverageNote": "Related real-time hockey camera/animation; no exact implementation of Core\u2019s discrete rink."
+    },
+    {
+      "slug": "leduc-holdem",
+      "name": "Leduc Hold'em",
+      "category": "card",
+      "variant": "core_compact_leduc_fixed_menu",
+      "ruleVariantNote": "Leduc Hold'em is a 2-player game; the bundled trace seats 4 players.",
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "farama-foundation--pettingzoo",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "liars-dice",
+      "name": "Liar's Dice",
+      "category": "card",
+      "variant": "core_single_round",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "kryha--boloney",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "limit-texas-holdem",
+      "name": "Limit Texas Hold'em",
+      "category": "card",
+      "variant": "core_compact_holdem_fixed_menu_limit",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "bb4--bb4-games",
+        "farama-foundation--pettingzoo",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "lunar-lander",
+      "name": "Lunar Lander",
+      "category": "rl",
+      "variant": "lander-lite",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium",
+        "maryrosecook--retro-games"
+      ],
+      "coverageNote": "Full Gymnasium/arcade renderers; neither is a drop-in implementation of Core lander-lite."
+    },
+    {
+      "slug": "mahjong",
+      "name": "Mahjong",
+      "category": "card",
+      "variant": "core_compact_draw_discard",
+      "ruleVariantNote": "Core variant uses 108 tiles with no honours and 10-tile hands (standard: 136 or 144 tiles, 13-tile hands); no calls occur in the trace.",
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "fluffystuff--riichi-mahjong-tiles",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "mancala",
+      "name": "Mancala",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "bb4--bb4-games"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "mountain-car",
+      "name": "Mountain Car",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "negotiation",
+      "name": "Negotiation",
+      "category": "gametheory",
+      "variant": "core_price_delivery_grid",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "stanmart--unstructured-bargaining-experiment",
+        "google-deepmind--open_spiel"
+      ],
+      "coverageNote": "Related experimental bargaining UI, not the exact Core price/delivery negotiation variant."
+    },
+    {
+      "slug": "nine-mens-morris",
+      "name": "Nine Men's Morris",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "calcitem--sanmill"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "no-limit-texas-holdem",
+      "name": "No-Limit Texas Hold'em",
+      "category": "card",
+      "variant": "core_compact_holdem_fixed_menu_no_limit",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "bb4--bb4-games",
+        "farama-foundation--pettingzoo",
+        "hayeah--playing-cards-assets",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "othello",
+      "name": "Othello",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sotetsuk--pgx"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "paddle-ball",
+      "name": "Paddle Ball",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "jatinmandav--gaming-in-python"
+      ],
+      "coverageNote": "Related two-sided Pong reference; Core\u2019s bottom-paddle collision model differs."
+    },
+    {
+      "slug": "pentago",
+      "name": "Pentago",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "girving--pentago"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "prisoners-dilemma",
+      "name": "Prisoner's Dilemma",
+      "category": "gametheory",
+      "variant": "core_one_shot_matrix",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "ncase--trust",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "rock-paper-scissors",
+      "name": "Rock Paper Scissors",
+      "category": "gametheory",
+      "variant": "core_one_shot_hidden_commit",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--pettingzoo",
+        "boardgameio--boardgame.io"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "shedding-card-game",
+      "name": "Shedding Card Game",
+      "category": "card",
+      "variant": "core_rank_suit_shedding",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "datamllab--rlcard",
+        "cezarbulancea--crazyeights",
+        "hayeah--playing-cards-assets"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "shogi",
+      "name": "Shogi",
+      "category": "board",
+      "variant": "core_compact_shogi",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "wandererxii--shogiground",
+        "gbtami--chessgroundx",
+        "sotetsuk--pgx"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "spades",
+      "name": "Spades",
+      "category": "card",
+      "variant": "core_trump_tricks",
+      "ruleVariantNote": "Core variant is 2-player (standard is 4-player); a spade is led before spades are broken while the leader still holds a club.",
+      "sourceIds": [
+        "mreishus--spades",
+        "hayeah--playing-cards-assets"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "taxi",
+      "name": "Taxi",
+      "category": "rl",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "farama-foundation--gymnasium"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "tic-tac-toe",
+      "name": "Tic-Tac-Toe",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "sotetsuk--pgx",
+        "bb4--bb4-games",
+        "farama-foundation--pettingzoo"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "ultimate-tic-tac-toe",
+      "name": "Ultimate Tic-Tac-Toe",
+      "category": "board",
+      "variant": "standard",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "arnowaczynski--utttai"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    },
+    {
+      "slug": "xiangqi",
+      "name": "Xiangqi",
+      "category": "board",
+      "variant": "core_compact_xiangqi",
+      "ruleVariantNote": null,
+      "sourceIds": [
+        "gbtami--chessgroundx",
+        "lengyanyu258--xiangqiboardjs"
+      ],
+      "coverageNote": "Dedicated or closely related visual references are included. Upstream rules, dependencies and assets are not automatically compatible with the declared Core variant."
+    }
+  ]
+}

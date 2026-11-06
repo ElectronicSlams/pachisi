@@ -1,0 +1,46 @@
+{
+  "name": "@eslams/game-visuals",
+  "version": "0.1.0",
+  "type": "module",
+  "sideEffects": [
+    "./src/styles.css"
+  ],
+  "exports": {
+    "./board": "./src/board.tsx",
+    "./board-types": "./src/board-types.ts",
+    "./scene": "./src/scene.tsx",
+    "./demo": "./src/demo.tsx",
+    "./demos": "./src/demos.ts",
+    "./catalogue": "./src/catalogue.ts",
+    "./motion": "./src/motion.ts",
+    "./icons": "./src/icons.tsx",
+    "./data": "./src/game-demonstrations.json",
+    "./source": "./src/game-demonstrations-source.json",
+    "./styles.css": "./src/styles.css",
+    "./icon-catalogue": "./src/icon-catalogue.ts",
+    "./ui-icons": "./src/ui-icons.tsx",
+    "./brand/mark.png": "./assets/mark.png",
+    "./brand/logo-light.png": "./assets/logo-light.png",
+    "./brand/logo-dark.png": "./assets/logo-dark.png"
+  },
+  "peerDependencies": {
+    "react": ">=19 <20"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "typescript": "^5",
+    "tsx": "^4.23.0",
+    "react-dom": "19.2.4",
+    "eslint": "^9.39.4",
+    "typescript-eslint": "^8.60.1",
+    "@types/react-dom": "^19",
+    "react": "19.2.4"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "lint": "eslint src tests"
+  },
+  "packageManager": "pnpm@11.13.0"
+}

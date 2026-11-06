@@ -1,0 +1,249 @@
+{
+  "chess": [
+    "fen",
+    "last_move_san"
+  ],
+  "go": [
+    "board"
+  ],
+  "hex": [
+    "board"
+  ],
+  "connect-four": [
+    "board"
+  ],
+  "tic-tac-toe": [
+    "board"
+  ],
+  "othello": [
+    "board"
+  ],
+  "checkers": [
+    "board"
+  ],
+  "shogi": [
+    "board",
+    "hands"
+  ],
+  "xiangqi": [
+    "board"
+  ],
+  "gomoku": [
+    "board"
+  ],
+  "pentago": [
+    "board"
+  ],
+  "ultimate-tic-tac-toe": [
+    "boards",
+    "local_status",
+    "next_board"
+  ],
+  "nine-mens-morris": [
+    "board",
+    "reserves",
+    "phase"
+  ],
+  "mancala": [
+    "pits",
+    "stores"
+  ],
+  "backgammon": [
+    "board",
+    "dice",
+    "bar",
+    "borne_off"
+  ],
+  "battleship": [
+    "grid_size",
+    "shots",
+    "hits",
+    "remaining_ship_counts"
+  ],
+  "blackjack": [
+    "player_hand",
+    "dealer_hand"
+  ],
+  "leduc-holdem": [
+    "street",
+    "board",
+    "pot",
+    "stacks",
+    "committed",
+    "folded"
+  ],
+  "limit-texas-holdem": [
+    "street",
+    "board",
+    "pot",
+    "stacks",
+    "committed",
+    "folded"
+  ],
+  "no-limit-texas-holdem": [
+    "street",
+    "board",
+    "pot",
+    "stacks",
+    "committed",
+    "folded"
+  ],
+  "shedding-card-game": [
+    "discard",
+    "deck_count",
+    "hand_counts"
+  ],
+  "crazy-eights": [
+    "discard",
+    "deck_count",
+    "hand_counts"
+  ],
+  "gin-rummy": [
+    "phase",
+    "discard_top",
+    "deck_count",
+    "hand_counts"
+  ],
+  "mahjong": [
+    "wall_count",
+    "discard_pile",
+    "hand_counts"
+  ],
+  "dou-dizhu": [
+    "landlord",
+    "hand_counts",
+    "last_play",
+    "passes"
+  ],
+  "bridge": [
+    "contract",
+    "current_trick",
+    "trick_history",
+    "tricks",
+    "hand_counts"
+  ],
+  "hearts": [
+    "current_trick",
+    "trick_history",
+    "penalties",
+    "hand_counts"
+  ],
+  "spades": [
+    "current_trick",
+    "trick_history",
+    "tricks",
+    "hand_counts"
+  ],
+  "euchre": [
+    "phase",
+    "trump",
+    "upcard",
+    "current_trick",
+    "history",
+    "tricks",
+    "hand_counts"
+  ],
+  "cribbage": [
+    "starter",
+    "discard_counts",
+    "hand_counts"
+  ],
+  "hanabi": [
+    "fireworks",
+    "discard",
+    "clues",
+    "lives",
+    "deck_count",
+    "hand_counts"
+  ],
+  "liars-dice": [
+    "current_bid",
+    "revealed_dice"
+  ],
+  "goofspiel": [
+    "current_prize",
+    "points",
+    "round_history",
+    "committed"
+  ],
+  "rock-paper-scissors": [
+    "revealed_actions"
+  ],
+  "prisoners-dilemma": [
+    "revealed_actions"
+  ],
+  "bargaining": [
+    "last_offer"
+  ],
+  "negotiation": [
+    "last_offer"
+  ],
+  "first-price-sealed-bid-auction": [
+    "revealed_bids"
+  ],
+  "taxi": [
+    "rows",
+    "cols",
+    "taxi",
+    "passenger",
+    "destination",
+    "onboard"
+  ],
+  "frozen-lake": [
+    "grid",
+    "position",
+    "goal"
+  ],
+  "cliff-walking": [
+    "rows",
+    "cols",
+    "position",
+    "goal",
+    "cliff"
+  ],
+  "cartpole": [
+    "cart",
+    "pole"
+  ],
+  "mountain-car": [
+    "position",
+    "velocity",
+    "goal_position"
+  ],
+  "lunar-lander": [
+    "lander",
+    "fuel",
+    "landing_pad"
+  ],
+  "car-racing": [
+    "car",
+    "track_window"
+  ],
+  "bipedal-walker": [
+    "walker",
+    "terrain_window"
+  ],
+  "paddle-ball": [
+    "paddle_x",
+    "ball",
+    "bounces"
+  ],
+  "alien-shooter": [
+    "player_x",
+    "aliens",
+    "bullets",
+    "destroyed"
+  ],
+  "boxing-style-arena": [
+    "health",
+    "stamina",
+    "stances",
+    "distance"
+  ],
+  "ice-hockey-style-arena": [
+    "positions",
+    "puck_owner",
+    "goals",
+    "rink"
+  ]
+}

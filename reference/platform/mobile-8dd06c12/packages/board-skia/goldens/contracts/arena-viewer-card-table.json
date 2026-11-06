@@ -1,0 +1,110 @@
+[
+  {
+    "id": "compact-phone",
+    "viewport": { "width": 288, "height": 225 },
+    "metadata": {
+      "variant": "poker",
+      "viewerScene": true,
+      "responsiveLayout": "arena-viewer-v1",
+      "ownerCardCount": 2,
+      "opponentCardBackCount": 6,
+      "centerCardCount": 3,
+      "hiddenCardCount": 6
+    },
+    "cards": [
+      { "id": "card-table:card:arena-seat-player_2-card-0-of-2:face", "rect": { "x": 35.047, "y": 64.543, "width": 25.08, "height": 35.614 } },
+      { "id": "card-table:card:arena-seat-player_2-card-1-of-2:face", "rect": { "x": 43.073, "y": 64.543, "width": 25.08, "height": 35.614 } },
+      { "id": "card-table:card:arena-seat-player_3-card-0-of-2:face", "rect": { "x": 127.447, "y": 20.323, "width": 25.08, "height": 35.614 } },
+      { "id": "card-table:card:arena-seat-player_3-card-1-of-2:face", "rect": { "x": 135.473, "y": 20.323, "width": 25.08, "height": 35.614 } },
+      { "id": "card-table:card:arena-seat-player_4-card-0-of-2:face", "rect": { "x": 219.847, "y": 64.543, "width": 25.08, "height": 35.614 } },
+      { "id": "card-table:card:arena-seat-player_4-card-1-of-2:face", "rect": { "x": 227.873, "y": 64.543, "width": 25.08, "height": 35.614 } },
+      { "id": "card-table:card:arena-center-card-0:face", "rect": { "x": 83.2, "y": 92.4, "width": 35.2, "height": 49.984 } },
+      { "id": "card-table:card:arena-center-card-1:face", "rect": { "x": 126.4, "y": 92.4, "width": 35.2, "height": 49.984 } },
+      { "id": "card-table:card:arena-center-card-2:face", "rect": { "x": 169.6, "y": 92.4, "width": 35.2, "height": 49.984 } },
+      { "id": "card-table:card:arena-owner-card-0:face", "rect": { "x": 110.651, "y": 148.298, "width": 43.88, "height": 62.31 } },
+      { "id": "card-table:card:arena-owner-card-1:face", "rect": { "x": 133.469, "y": 148.298, "width": 43.88, "height": 62.31 } }
+    ],
+    "labels": [
+      { "id": "card-table:arena:owner-label", "text": "YOUR HAND" },
+      { "id": "card-table:arena:center-label", "text": "TABLE" },
+      { "id": "card-table:arena:seat-label:player_2", "text": "SEAT 2 · 2 CARDS" },
+      { "id": "card-table:arena:seat-label:player_3", "text": "SEAT 3 · 2 CARDS" },
+      { "id": "card-table:arena:seat-label:player_4", "text": "SEAT 4 · 2 CARDS" }
+    ],
+    "hitZones": [
+      { "actionTargetId": "arena-owner-card-0", "rect": { "x": 110.651, "y": 148.298, "width": 43.88, "height": 62.31 } }
+    ]
+  },
+  {
+    "id": "portrait-tablet",
+    "viewport": { "width": 680, "height": 530 },
+    "metadata": {
+      "variant": "poker",
+      "viewerScene": true,
+      "responsiveLayout": "arena-viewer-v1",
+      "ownerCardCount": 2,
+      "opponentCardBackCount": 6,
+      "centerCardCount": 3,
+      "hiddenCardCount": 6
+    },
+    "cards": [
+      { "id": "card-table:card:arena-seat-player_2-card-0-of-2:face", "rect": { "x": 81.36, "y": 157.86, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_2-card-1-of-2:face", "rect": { "x": 95.44, "y": 157.86, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_3-card-0-of-2:face", "rect": { "x": 310.96, "y": 46.54, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_3-card-1-of-2:face", "rect": { "x": 325.04, "y": 46.54, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_4-card-0-of-2:face", "rect": { "x": 540.56, "y": 157.86, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_4-card-1-of-2:face", "rect": { "x": 554.64, "y": 157.86, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-center-card-0:face", "rect": { "x": 257, "y": 214.4, "width": 50, "height": 71 } },
+      { "id": "card-table:card:arena-center-card-1:face", "rect": { "x": 315, "y": 214.4, "width": 50, "height": 71 } },
+      { "id": "card-table:card:arena-center-card-2:face", "rect": { "x": 373, "y": 214.4, "width": 50, "height": 71 } },
+      { "id": "card-table:card:arena-owner-card-0:face", "rect": { "x": 291.36, "y": 417.589, "width": 64, "height": 90.88 } },
+      { "id": "card-table:card:arena-owner-card-1:face", "rect": { "x": 324.64, "y": 417.589, "width": 64, "height": 90.88 } }
+    ],
+    "labels": [
+      { "id": "card-table:arena:owner-label", "text": "YOUR HAND" },
+      { "id": "card-table:arena:center-label", "text": "TABLE" },
+      { "id": "card-table:arena:seat-label:player_2", "text": "SEAT 2 · 2 CARDS" },
+      { "id": "card-table:arena:seat-label:player_3", "text": "SEAT 3 · 2 CARDS" },
+      { "id": "card-table:arena:seat-label:player_4", "text": "SEAT 4 · 2 CARDS" }
+    ],
+    "hitZones": [
+      { "actionTargetId": "arena-owner-card-0", "rect": { "x": 291.36, "y": 417.589, "width": 64, "height": 90.88 } }
+    ]
+  },
+  {
+    "id": "landscape-tablet",
+    "viewport": { "width": 680, "height": 422 },
+    "metadata": {
+      "variant": "poker",
+      "viewerScene": true,
+      "responsiveLayout": "arena-viewer-v1",
+      "ownerCardCount": 2,
+      "opponentCardBackCount": 6,
+      "centerCardCount": 3,
+      "hiddenCardCount": 6
+    },
+    "cards": [
+      { "id": "card-table:card:arena-seat-player_2-card-0-of-2:face", "rect": { "x": 81.36, "y": 120.06, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_2-card-1-of-2:face", "rect": { "x": 95.44, "y": 120.06, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_3-card-0-of-2:face", "rect": { "x": 310.96, "y": 32.5, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_3-card-1-of-2:face", "rect": { "x": 325.04, "y": 32.5, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_4-card-0-of-2:face", "rect": { "x": 540.56, "y": 120.06, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-seat-player_4-card-1-of-2:face", "rect": { "x": 554.64, "y": 120.06, "width": 44, "height": 62.48 } },
+      { "id": "card-table:card:arena-center-card-0:face", "rect": { "x": 239, "y": 159.26, "width": 62, "height": 88.04 } },
+      { "id": "card-table:card:arena-center-card-1:face", "rect": { "x": 309, "y": 159.26, "width": 62, "height": 88.04 } },
+      { "id": "card-table:card:arena-center-card-2:face", "rect": { "x": 379, "y": 159.26, "width": 62, "height": 88.04 } },
+      { "id": "card-table:card:arena-owner-card-0:face", "rect": { "x": 291.36, "y": 313.369, "width": 64, "height": 90.88 } },
+      { "id": "card-table:card:arena-owner-card-1:face", "rect": { "x": 324.64, "y": 313.369, "width": 64, "height": 90.88 } }
+    ],
+    "labels": [
+      { "id": "card-table:arena:owner-label", "text": "YOUR HAND" },
+      { "id": "card-table:arena:center-label", "text": "TABLE" },
+      { "id": "card-table:arena:seat-label:player_2", "text": "SEAT 2 · 2 CARDS" },
+      { "id": "card-table:arena:seat-label:player_3", "text": "SEAT 3 · 2 CARDS" },
+      { "id": "card-table:arena:seat-label:player_4", "text": "SEAT 4 · 2 CARDS" }
+    ],
+    "hitZones": [
+      { "actionTargetId": "arena-owner-card-0", "rect": { "x": 291.36, "y": 313.369, "width": 64, "height": 90.88 } }
+    ]
+  }
+]

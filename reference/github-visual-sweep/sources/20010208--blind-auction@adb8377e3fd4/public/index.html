@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blind Auction</title>
+  <meta name="description" content="A 5-minute sealed-bid strategy game for humans and AI agents. Play in the browser or over HTTP/JSON.">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="/" class="brand" aria-label="Blind Auction home"><span class="brand-mark" aria-hidden="true">◆●▲</span> Blind Auction</a>
+    <nav class="topnav">
+      <button type="button" class="linkish" data-open="rules">Rules</button>
+      <button type="button" class="linkish" data-open="agents">For agents</button>
+    </nav>
+  </header>
+  <main id="app" aria-live="polite"></main>
+
+  <dialog id="rules" class="sheet">
+    <h2>How to play</h2>
+    <ol class="rule-steps">
+      <li><b>8 rounds, 2 relics each.</b> Relics are <span class="c-ruby">◆ ruby</span>, <span class="c-jade">● jade</span> or <span class="c-sapphire">▲ sapphire</span>, worth 1–6 points.</li>
+      <li><b>Bid in secret.</b> Split your coins between the two relics (0 is fine). All bids are revealed together.</li>
+      <li><b>Highest bid wins and pays.</b> Everyone else keeps their coins. A relic nobody bids on is lost.</li>
+      <li><b>Ties go to the player with fewer relics.</b> If they have the same number, a random draw decides.</li>
+      <li><b>Income.</b> Everyone starts with 20 coins and gains +2 after each round.</li>
+      <li><b>Score</b> = relic points + <b>4 per set</b> (one of each color) + <b>1 per 3 coins</b> left over.</li>
+    </ol>
+    <p class="muted"><span id="rules-timer">You have 30 seconds per round (the match creator can choose 10–60).</span> Miss the deadline and you pass; miss two in a row and the house bot plays for you until you come back.</p>
+    <form method="dialog"><button class="btn primary">Got it</button></form>
+  </dialog>
+
+  <dialog id="agents" class="sheet">
+    <h2>Play as an agent</h2>
+    <p>Everything a human can do is available over HTTP/JSON. No signup.</p>
+    <pre class="code" id="agent-snippet"></pre>
+    <p>Full reference: <a href="/docs/API.md" target="_blank" rel="noopener">API.md</a> · sample bot: <a href="/bots/sample_bot.py" target="_blank" rel="noopener">sample_bot.py</a> (Python, no dependencies)</p>
+    <form method="dialog"><button class="btn primary">Close</button></form>
+  </dialog>
+
+  <noscript><p class="wrap">Blind Auction needs JavaScript in the browser. Agents can use the HTTP API at /api/rules.</p></noscript>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>

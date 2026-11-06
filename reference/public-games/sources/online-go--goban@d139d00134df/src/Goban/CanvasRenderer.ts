@@ -1,0 +1,3437 @@
+/*
+ * Copyright (C) Online-Go.com
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import { JGOF, JGOFNumericPlayerColor } from "../engine/formats/JGOF";
+
+import { AdHocFormat } from "../engine/formats/AdHocFormat";
+
+import { GobanConfig } from "../GobanBase";
+import { GobanEngine } from "../engine";
+import { MoveTree } from "../engine/MoveTree";
+import { MoveTreeCanvas } from "./MoveTreeCanvas";
+import { forgetPreRenderedStones } from "./NativeThemeAssets";
+import { GobanTheme, THEMES } from "./themes";
+import { MoveTreePenMarks } from "../engine/MoveTree";
+import {
+    createDeviceScaledCanvas,
+    resizeDeviceScaledCanvas,
+    getRelativeEventPosition,
+} from "./canvas_utils";
+import { _ } from "../engine/translate";
+import { formatMessage, MessageID } from "../engine/messages";
+import { color_blend, encodePrettyXCoordinate, makeMatrix } from "../engine/util";
+import { callbacks } from "./callbacks";
+import {
+    Goban,
+    GobanMetrics,
+    GobanSelectedThemes,
+    GOBAN_FONT,
+    CaptureDisplayConfig,
+    CaptureDisplay,
+    ResolvedBoardBackground,
+} from "./Goban";
+import { AI_QUALITY_BADGES, AI_QUALITY_BADGE } from "./InteractiveBase";
+
+const __theme_cache: {
+    [bw: string]: { [name: string]: { [size: string]: any } };
+} = {
+    black: {},
+    white: {},
+};
+
+export interface CanvasRendererGobanConfig extends GobanConfig {}
+
+const HOT_PINK = "#ff69b4";
+
+export interface GobanCanvasInterface {
+    engine: GobanEngine;
+    move_tree_container?: HTMLElement;
+
+    clearAnalysisDrawing(): void;
+    drawPenMarks(pen_marks: MoveTreePenMarks): void;
+    enablePen(): void;
+    disablePen(): void;
+    setByoYomiLabel(label: string): void;
+    setLastMoveOpacity(opacity: number): void;
+
+    move_tree_redraw(no_warp?: boolean): void;
+    setMoveTreeContainer(container: HTMLElement | null): void;
+
+    showMessage(
+        message_id_or_error: MessageID,
+        parameters?: { [key: string]: any },
+        timeout?: number,
+    ): void;
+    clearMessage(): void;
+
+    drawSquare(i: number, j: number): void;
+
+    destroy(): void;
+}
+
+export class GobanCanvas extends Goban implements GobanCanvasInterface {
+    public engine: GobanEngine;
+    //private board_div: HTMLElement;
+    private board: HTMLCanvasElement;
+    private __set_board_height: number = -1;
+    private __set_board_width: number = -1;
+    private ready_to_draw: boolean = false;
+    private message_div?: HTMLDivElement;
+    private message_td?: HTMLElement;
+    private message_text?: HTMLDivElement;
+    private message_timeout?: number;
+    private shadow_layer?: HTMLCanvasElement;
+    private shadow_ctx?: CanvasRenderingContext2D;
+    private grid_layer?: HTMLCanvasElement;
+    private grid_ctx?: CanvasRenderingContext2D;
+    private grid_background_layer?: HTMLDivElement;
+    private handleShiftKey: (ev: KeyboardEvent) => void;
+
+    private last_move_opacity: number = 1;
+    /* Dedicated canvas for the last-move accessibility crosshair. It sits
+     * behind the (transparent) stone canvas, so the full-board horizontal and
+     * vertical lines are drawn as single strokes under the stones. */
+    private crosshair_layer?: HTMLCanvasElement;
+    private crosshair_ctx?: CanvasRenderingContext2D;
+    private move_tree_widget: MoveTreeCanvas;
+
+    private __borders_initialized: boolean = false;
+    private byoyomi_label: string = "";
+    private ctx: CanvasRenderingContext2D;
+    private current_pen_mark?: { color: string; points: [number, number] };
+    private labeling_mode?: "put" | "clear";
+    private last_label_position: { i: number; j: number } = { i: NaN, j: NaN };
+    private last_pen_position?: [number, number];
+    protected metrics: GobanMetrics = { width: NaN, height: NaN, mid: NaN, offset: NaN };
+
+    private drawing_enabled: boolean = true;
+    private pen_ctx?: CanvasRenderingContext2D;
+    private pen_layer?: HTMLCanvasElement;
+
+    private themes: GobanSelectedThemes = {
+        "board": "Plain",
+        "black": "Plain",
+        "white": "Plain",
+        "removal-graphic": "x",
+        "removal-scale": 1.0,
+        "stone-scale": 1.0,
+        "stone-shadows": "default",
+    };
+    private theme_black!: GobanTheme;
+    private theme_black_stone_color: string = HOT_PINK;
+    private theme_black_stones: Array<any> = [];
+    private theme_black_text_color: string = HOT_PINK;
+    private theme_blank_text_color: string = HOT_PINK;
+    private theme_board!: GobanTheme;
+    private theme_faded_line_color: string = HOT_PINK;
+    private theme_faded_star_color: string = HOT_PINK;
+    //private theme_faded_text_color:string;
+    private theme_line_color: string = "";
+    private theme_star_color: string = "";
+    private theme_stone_radius: number = 10;
+    private theme_white!: GobanTheme;
+    private theme_white_stone_color: string = HOT_PINK;
+    private theme_white_stones: Array<any> = [];
+    private theme_white_text_color: string = HOT_PINK;
+
+    constructor(config: CanvasRendererGobanConfig, preloaded_data?: AdHocFormat | JGOF) {
+        /* TODO: Need to reconcile the clock fields before we can get rid of this `any` cast */
+        super(config, preloaded_data as any);
+
+        this.board = createDeviceScaledCanvas(10, 10);
+        this.board.setAttribute("id", "board-canvas");
+        this.board.className = "StoneLayer";
+        this.last_move_opacity = config["last_move_opacity"] ?? 1;
+        const ctx = this.board.getContext("2d", { willReadFrequently: true });
+        if (ctx) {
+            this.ctx = ctx;
+        } else {
+            throw new Error(`Failed to obtain drawing context for board`);
+        }
+
+        this.parent.appendChild(this.board);
+        this.bindPointerBindings(this.board);
+
+        this.handleShiftKey = (ev) => {
+            if (this.destroyed) {
+                return;
+            }
+            try {
+                if (ev.shiftKey !== this.shift_key_is_down) {
+                    this.shift_key_is_down = ev.shiftKey;
+                    if (this.last_hover_square) {
+                        this.__drawSquare(this.last_hover_square.x, this.last_hover_square.y);
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        window.addEventListener("keydown", this.handleShiftKey);
+        window.addEventListener("keyup", this.handleShiftKey);
+
+        // these are set in this.setThemes(..)
+        // this.theme_board
+        // this.theme_white
+        // this.theme_black
+        this.setTheme(this.getSelectedThemes(), true);
+        this.move_tree_widget = new MoveTreeCanvas(this, () => ({
+            board: this.theme_board,
+            black: this.theme_black,
+            white: this.theme_white,
+            themes: this.themes,
+        }));
+        let first_pass = true;
+        const watcher = this.watchSelectedThemes((themes: GobanSelectedThemes) => {
+            if (!this.engine) {
+                return;
+            }
+            if (
+                themes.black === "Custom" ||
+                themes.white === "Custom" ||
+                themes.board === "Custom"
+            ) {
+                //first_pass = true;
+            }
+            delete __theme_cache.black?.["Custom"];
+            delete __theme_cache.white?.["Custom"];
+            delete __theme_cache.board?.["Custom"];
+            forgetPreRenderedStones("Custom");
+            this.setTheme(themes, first_pass ? true : false);
+            first_pass = false;
+        });
+        this.on("destroy", () => watcher.remove());
+
+        this.engine = this.post_config_constructor();
+        this.emit("engine.updated", this.engine);
+
+        this.move_tree_widget.setContainer(config.move_tree_container ?? null);
+
+        this.ready_to_draw = true;
+        this.redraw(true);
+    }
+    public setLastMoveOpacity(opacity: number): void {
+        this.last_move_opacity = opacity;
+    }
+
+    public enablePen(): void {
+        this.attachPenCanvas();
+    }
+    public disablePen(): void {
+        this.detachPenCanvas();
+    }
+
+    public override destroy(): void {
+        super.destroy();
+
+        if (this.board && this.board.parentNode) {
+            this.board.parentNode.removeChild(this.board);
+        }
+        delete (this as any).board;
+        delete (this as any).ctx;
+
+        this.detachGridBackgroundLayers();
+        this.detachPenCanvas();
+        this.detachShadowLayer();
+        this.detachCrosshairLayer();
+
+        if (this.message_timeout) {
+            clearTimeout(this.message_timeout);
+            delete this.message_timeout;
+        }
+
+        window.removeEventListener("keydown", this.handleShiftKey);
+        window.removeEventListener("keyup", this.handleShiftKey);
+
+        this.theme_black_stones = [];
+        this.theme_white_stones = [];
+        delete (this as any).theme_board;
+        delete (this as any).theme_black;
+        delete (this as any).theme_white;
+        delete this.message_div;
+        delete this.message_td;
+        delete this.message_text;
+        this.move_tree_widget.destroy();
+        delete this.title_div;
+    }
+    private detachShadowLayer(): void {
+        if (this.shadow_layer) {
+            if (this.shadow_layer.parentNode) {
+                this.shadow_layer.parentNode.removeChild(this.shadow_layer);
+            }
+            delete this.shadow_layer;
+            delete this.shadow_ctx;
+        }
+    }
+    private invalidateDrawState(): void {
+        this.__draw_state = makeMatrix(this.width, this.height, "");
+    }
+    private detachGridBackgroundLayers(): void {
+        const had_layers = !!this.grid_layer || !!this.grid_background_layer;
+        if (this.grid_layer) {
+            if (this.grid_layer.parentNode) {
+                this.grid_layer.parentNode.removeChild(this.grid_layer);
+            }
+            delete this.grid_layer;
+            delete this.grid_ctx;
+        }
+        if (this.grid_background_layer) {
+            if (this.grid_background_layer.parentNode) {
+                this.grid_background_layer.parentNode.removeChild(this.grid_background_layer);
+            }
+            delete this.grid_background_layer;
+        }
+        if (had_layers) {
+            this.invalidateDrawState();
+        }
+    }
+    private attachGridBackgroundLayers(): void {
+        const had_grid_layer = !!this.grid_layer;
+        // Stage new layers in locals so drawSquare does not switch to grid_ctx
+        // until the canvas is actually attached and visible.
+        let grid_layer = this.grid_layer;
+        let grid_ctx = this.grid_ctx;
+
+        if (!grid_layer) {
+            grid_layer = createDeviceScaledCanvas(this.metrics.width, this.metrics.height);
+            grid_layer.setAttribute("id", "grid-canvas");
+            grid_layer.className = "GridLayer";
+            grid_ctx = grid_layer.getContext("2d") ?? undefined;
+        } else if (!grid_ctx) {
+            grid_ctx = grid_layer.getContext("2d") ?? undefined;
+        }
+
+        if (!grid_ctx) {
+            console.error(new Error(`Failed to obtain drawing context for board grid`));
+            this.detachGridBackgroundLayers();
+            return;
+        }
+
+        let grid_background_layer = this.grid_background_layer;
+        if (!grid_background_layer) {
+            grid_background_layer = document.createElement("div");
+            grid_background_layer.className = "GridBackgroundLayer";
+        }
+
+        try {
+            // Keep the grid canvas directly before the grid background, both beneath the board.
+            if (grid_background_layer.nextSibling !== this.board) {
+                this.parent.insertBefore(grid_background_layer, this.board);
+            }
+            if (grid_layer.nextSibling !== grid_background_layer) {
+                this.parent.insertBefore(grid_layer, grid_background_layer);
+            }
+        } catch (e) {
+            console.warn("Error inserting grid background layers before board", e);
+            try {
+                this.parent.appendChild(grid_layer);
+                this.parent.appendChild(grid_background_layer);
+            } catch (e2) {
+                console.error(e2);
+                grid_layer.remove();
+                grid_background_layer.remove();
+                this.detachGridBackgroundLayers();
+                return;
+            }
+        }
+
+        this.grid_layer = grid_layer;
+        this.grid_ctx = grid_ctx;
+        this.grid_background_layer = grid_background_layer;
+
+        if (!had_grid_layer) {
+            this.invalidateDrawState();
+        }
+    }
+    private attachShadowLayer(): void {
+        if (!this.shadow_layer && this.parent) {
+            this.shadow_layer = createDeviceScaledCanvas(this.metrics.width, this.metrics.height);
+            this.shadow_layer.setAttribute("id", "shadow-canvas");
+            this.shadow_layer.className = "ShadowLayer";
+
+            try {
+                this.parent.insertBefore(this.shadow_layer, this.board);
+            } catch (e) {
+                // I'm not really sure how we ever get into this state, but sentry.io reports that we do
+                console.warn("Error inserting shadow layer before board");
+                console.warn(e);
+                try {
+                    this.parent.appendChild(this.shadow_layer);
+                } catch (e) {
+                    console.error(e);
+                }
+            }
+
+            const ctx = this.shadow_layer.getContext("2d", { willReadFrequently: true });
+            if (ctx) {
+                this.shadow_ctx = ctx;
+            } else {
+                //throw new Error(`Failed to obtain shadow layer drawing context`);
+                console.error(new Error(`Failed to obtain shadow layer drawing context`));
+                return;
+            }
+            this.bindPointerBindings(this.shadow_layer);
+        }
+    }
+    private attachCrosshairLayer(): void {
+        if (!this.crosshair_layer && this.parent) {
+            this.crosshair_layer = createDeviceScaledCanvas(
+                this.metrics.width,
+                this.metrics.height,
+            );
+            this.crosshair_layer.setAttribute("id", "crosshair-canvas");
+            this.crosshair_layer.className = "CrosshairLayer";
+            try {
+                this.parent.insertBefore(this.crosshair_layer, this.board);
+            } catch (e) {
+                // Mirrors attachShadowLayer's fallback: sentry.io shows insertBefore can
+                // occasionally throw. The appendChild fallback puts the layer last in DOM
+                // order, so correct under-stone stacking then relies on the consumer having
+                // defined --z-goban-crosshair-layer (as OGS does); without it both layers
+                // fall back to z-index:auto and the crosshair would paint over the stones.
+                console.warn("Error inserting crosshair layer before board", e);
+                try {
+                    this.parent.appendChild(this.crosshair_layer);
+                } catch (e2) {
+                    console.error(e2);
+                }
+            }
+            // Match the other layers. (createDeviceScaledCanvas already locks the
+            // context in with willReadFrequently on its first getContext call, so
+            // we pass the same option here for consistency rather than effect.)
+            const ctx = this.crosshair_layer.getContext("2d", { willReadFrequently: true });
+            if (ctx) {
+                this.crosshair_ctx = ctx;
+            }
+        }
+    }
+    private detachCrosshairLayer(): void {
+        if (this.crosshair_layer) {
+            if (this.crosshair_layer.parentNode) {
+                this.crosshair_layer.parentNode.removeChild(this.crosshair_layer);
+            }
+            delete this.crosshair_layer;
+            delete this.crosshair_ctx;
+        }
+    }
+    /* Draws (or clears) the last-move accessibility crosshair on its own canvas:
+     * two single full-board strokes through the last move, clamped to the edge
+     * intersections, sitting under the stones. The layer is attached lazily so
+     * boards never pay for it unless the setting is enabled. */
+    private drawLastMoveCrosshair(): void {
+        const ch = this.getLastMoveCrosshair();
+        const cur = this.engine?.cur_move;
+        const shows =
+            ch.enabled &&
+            !this.dont_draw_last_move &&
+            !this.dont_draw_last_move_crosshair &&
+            !!cur &&
+            cur.x >= 0 &&
+            cur.y >= 0 &&
+            (this.engine.phase === "play" || this.engine.phase === "finished");
+
+        if (!shows) {
+            if (this.crosshair_ctx && this.crosshair_layer) {
+                this.crosshair_ctx.clearRect(
+                    0,
+                    0,
+                    this.crosshair_layer.width,
+                    this.crosshair_layer.height,
+                );
+            }
+            return;
+        }
+
+        this.attachCrosshairLayer();
+        if (!this.crosshair_ctx || !this.crosshair_layer) {
+            return;
+        }
+
+        const ctx = this.crosshair_ctx;
+        ctx.clearRect(0, 0, this.crosshair_layer.width, this.crosshair_layer.height);
+
+        const s = this.square_size;
+        let ox = this.draw_left_labels ? s : 0;
+        let oy = this.draw_top_labels ? s : 0;
+        if (this.bounds.left > 0) {
+            ox = -s * this.bounds.left;
+        }
+        if (this.bounds.top > 0) {
+            oy = -s * this.bounds.top;
+        }
+        const mid = this.metrics.mid;
+        const cx = ox + cur.x * s + mid;
+        const cy = oy + cur.y * s + mid;
+        // span from the first to the last intersection centre
+        const x0 = ox + mid;
+        const x1 = ox + (this.width - 1) * s + mid;
+        const y0 = oy + mid;
+        const y1 = oy + (this.height - 1) * s + mid;
+
+        ctx.save();
+        ctx.strokeStyle = ch.color;
+        ctx.lineWidth = Math.max(1, s * ch.thickness);
+        ctx.beginPath();
+        ctx.moveTo(x0, cy);
+        ctx.lineTo(x1, cy);
+        ctx.moveTo(cx, y0);
+        ctx.lineTo(cx, y1);
+        ctx.stroke();
+        ctx.restore();
+    }
+    private detachPenCanvas(): void {
+        if (this.pen_layer) {
+            if (this.pen_layer.parentNode) {
+                this.pen_layer.parentNode.removeChild(this.pen_layer);
+            }
+            delete this.pen_layer;
+            delete this.pen_ctx;
+        }
+    }
+    private attachPenCanvas(): void {
+        if (!this.pen_layer) {
+            this.pen_layer = createDeviceScaledCanvas(this.metrics.width, this.metrics.height);
+            this.pen_layer.setAttribute("id", "pen-canvas");
+            this.pen_layer.className = "PenLayer";
+            this.parent.appendChild(this.pen_layer);
+            const ctx = this.pen_layer.getContext("2d", { willReadFrequently: true });
+            if (ctx) {
+                this.pen_ctx = ctx;
+            } else {
+                throw new Error(`Failed to obtain pen drawing context`);
+            }
+            this.bindPointerBindings(this.pen_layer);
+        }
+    }
+    private bindPointerBindings(canvas: HTMLCanvasElement): void {
+        if (!this.interactive) {
+            return;
+        }
+
+        if (canvas.getAttribute("data-pointers-bound") === "true") {
+            return;
+        }
+
+        canvas.setAttribute("data-pointers-bound", "true");
+
+        let dragging = false;
+
+        let pointer_down_timestamp = 0;
+
+        const pointerUp = (ev: MouseEvent | TouchEvent, double_clicked: boolean): void => {
+            const press_duration_ms = performance.now() - pointer_down_timestamp;
+            try {
+                if (!dragging) {
+                    /* if we didn't start the click in the canvas, don't respond to it */
+                    return;
+                }
+                let right_click = false;
+                if (ev instanceof MouseEvent) {
+                    if (ev.button === 2) {
+                        right_click = true;
+                        ev.preventDefault();
+                    }
+                }
+
+                dragging = false;
+
+                if (this.scoring_mode) {
+                    const pos = getRelativeEventPosition(ev);
+                    const pt = this.xy2ij(pos.x, pos.y);
+                    if (pt.i >= 0 && pt.i < this.width && pt.j >= 0 && pt.j < this.height) {
+                        if (this.score_estimator) {
+                            this.score_estimator.handleClick(
+                                pt.i,
+                                pt.j,
+                                ev.ctrlKey || ev.metaKey || ev.altKey || ev.shiftKey,
+                                press_duration_ms,
+                            );
+                        }
+                        this.emit("update");
+                    }
+                    return;
+                }
+
+                if (ev.ctrlKey || ev.metaKey || ev.altKey) {
+                    try {
+                        const pos = getRelativeEventPosition(ev);
+                        const pt = this.xy2ij(pos.x, pos.y);
+                        if (callbacks.addCoordinatesToChatInput) {
+                            callbacks.addCoordinatesToChatInput(
+                                this.engine.prettyCoordinates(pt.i, pt.j),
+                            );
+                        }
+                    } catch (e) {
+                        console.error(e);
+                    }
+                    return;
+                }
+
+                if (this.mode === "analyze" && this.analyze_tool === "draw") {
+                    /* might want to interpret this as a start/stop of a line segment */
+                } else if (this.mode === "analyze" && this.analyze_tool === "score") {
+                    // nothing to do here
+                } else if (this.mode === "analyze" && this.analyze_tool === "removal") {
+                    this.onAnalysisToggleStoneRemoval(ev);
+                } else {
+                    const pos = getRelativeEventPosition(ev);
+                    const pt = this.xy2ij(pos.x, pos.y);
+                    const resolution = this.resolveDoubleClick(pt, double_clicked, right_click);
+                    if (resolution === "ignore") {
+                        this.onMouseOut(ev);
+                        return;
+                    }
+
+                    this.onTap(ev, resolution === "double", right_click, press_duration_ms);
+                    this.onMouseOut(ev);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        const pointerDown = (ev: MouseEvent | TouchEvent): void => {
+            pointer_down_timestamp = performance.now();
+            try {
+                dragging = true;
+                if (this.mode === "analyze" && this.analyze_tool === "draw") {
+                    this.onPenStart(ev);
+                } else if (this.mode === "analyze" && this.analyze_tool === "label") {
+                    if (ev.shiftKey) {
+                        if (this.analyze_subtool === "letters") {
+                            const label_char = prompt(
+                                _("Enter the label you want to add to the board"),
+                                "",
+                            );
+                            if (label_char) {
+                                this.label_character = label_char.substring(0, 3);
+                                dragging = false;
+                                return;
+                            }
+                        }
+                    }
+
+                    this.onLabelingStart(ev);
+                } else if (this.mode === "analyze" && this.analyze_tool === "score") {
+                    this.onAnalysisScoringStart(ev);
+                } else if (this.mode === "analyze" && this.analyze_tool === "removal") {
+                    // nothing to do here, we act on pointerUp
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        const pointerMove = (ev: MouseEvent | TouchEvent): void => {
+            try {
+                if (this.mode === "analyze" && this.analyze_tool === "draw") {
+                    if (!dragging) {
+                        return;
+                    }
+                    this.onPenMove(ev);
+                } else if (dragging && this.mode === "analyze" && this.analyze_tool === "label") {
+                    this.onLabelingMove(ev);
+                } else if (dragging && this.mode === "analyze" && this.analyze_tool === "score") {
+                    this.onAnalysisScoringMove(ev);
+                } else if (dragging && this.mode === "analyze" && this.analyze_tool === "removal") {
+                    // nothing for moving
+                } else {
+                    this.onMouseMove(ev);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        const pointerOut = (ev: MouseEvent | TouchEvent): void => {
+            try {
+                dragging = false;
+                this.onMouseOut(ev);
+            } catch (e) {
+                console.error(e);
+            }
+        };
+
+        let mouse_disabled: any = 0;
+
+        // Buttons 3 and 4 are the browser back/forward thumb buttons. Cancelling
+        // them stops history navigation while the pointer is over the board.
+        const isHistoryNavigationButton = (ev: MouseEvent) => ev.button === 3 || ev.button === 4;
+
+        canvas.addEventListener("click", (ev) => {
+            if (isHistoryNavigationButton(ev)) {
+                return;
+            }
+            // pointerUp is handled in the mouseup listener below for reliability
+            // during rapid DOM updates: the browser drops click/dblclick when the
+            // DOM under the cursor is mutated between presses (e.g. after an
+            // opponent's pass), but mouseup still fires. See #3364.
+            ev.preventDefault();
+            return false;
+        });
+        canvas.addEventListener("mouseup", (ev) => {
+            if (isHistoryNavigationButton(ev)) {
+                return;
+            }
+            // Only the primary button is handled here. Right-clicks must keep
+            // flowing through the `contextmenu` handler below, which calls
+            // pointerUp and preventDefault()s the native menu (Firefox does not
+            // suppress it from a mousedown preventDefault the way Chrome does).
+            if (!mouse_disabled && ev.button === 0) {
+                pointerUp(ev, false);
+                dragging = false;
+            }
+            ev.preventDefault();
+            return false;
+        });
+        canvas.addEventListener("dblclick", (ev) => {
+            if (isHistoryNavigationButton(ev)) {
+                return;
+            }
+            if (!mouse_disabled) {
+                dragging = true;
+                pointerUp(ev, true);
+            }
+            ev.preventDefault();
+            return false;
+        });
+        canvas.addEventListener("mousedown", (ev) => {
+            if (isHistoryNavigationButton(ev)) {
+                return;
+            }
+            if (!mouse_disabled) {
+                pointerDown(ev);
+            }
+            ev.preventDefault();
+            return false;
+        });
+        canvas.addEventListener("mousemove", (ev) => {
+            if (!mouse_disabled) {
+                pointerMove(ev);
+            }
+            ev.preventDefault();
+            return false;
+        });
+        canvas.addEventListener("mouseout", (ev) => {
+            if (!mouse_disabled) {
+                pointerOut(ev);
+            } else {
+                ev.preventDefault();
+            }
+            return false;
+        });
+        canvas.addEventListener("contextmenu", (ev) => {
+            if (!mouse_disabled) {
+                pointerUp(ev, false);
+            } else {
+                ev.preventDefault();
+            }
+            return false;
+        });
+        canvas.addEventListener("focus", (ev) => {
+            ev.preventDefault();
+            return false;
+        });
+
+        let lastX = 0;
+        let lastY = 0;
+        let startX = 0;
+        let startY = 0;
+
+        // Android Chrome scrolls a focused chat field into view on touchstart,
+        // before touchend. Blur here as well so that scroll does not start.
+        const blurFocusedTextControl = () => {
+            const currentElement = document.activeElement;
+            if (
+                currentElement instanceof HTMLElement &&
+                (currentElement.tagName.toLowerCase() === "input" ||
+                    currentElement.tagName.toLowerCase() === "textarea")
+            ) {
+                currentElement.blur();
+            }
+        };
+
+        const onTouchStart = (ev: TouchEvent) => {
+            try {
+                if (mouse_disabled) {
+                    clearTimeout(mouse_disabled);
+                }
+                mouse_disabled = setTimeout(() => {
+                    mouse_disabled = 0;
+                }, 5000);
+                getRelativeEventPosition(ev); // enables tracking of last ev position so on touch end can always tell where we released from
+
+                if (ev.target === canvas) {
+                    lastX = ev.touches[0].clientX;
+                    lastY = ev.touches[0].clientY;
+                    startX = ev.touches[0].clientX;
+                    startY = ev.touches[0].clientY;
+                    pointerDown(ev);
+                    blurFocusedTextControl();
+                } else if (dragging) {
+                    pointerOut(ev);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        const onTouchEnd = (ev: TouchEvent) => {
+            try {
+                if (ev.target === canvas) {
+                    blurFocusedTextControl();
+                }
+
+                if (mouse_disabled) {
+                    clearTimeout(mouse_disabled);
+                }
+                mouse_disabled = setTimeout(() => {
+                    mouse_disabled = 0;
+                }, 5000);
+
+                if (ev.target === canvas) {
+                    if (
+                        Math.sqrt(
+                            (startX - lastX) * (startX - lastX) +
+                                (startY - lastY) * (startY - lastY),
+                        ) > 10
+                    ) {
+                        pointerOut(ev);
+                    } else {
+                        pointerUp(ev, false);
+                    }
+                } else if (dragging) {
+                    pointerOut(ev);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        };
+        const onTouchMove = (ev: TouchEvent) => {
+            try {
+                if (mouse_disabled) {
+                    clearTimeout(mouse_disabled);
+                }
+                mouse_disabled = setTimeout(() => {
+                    mouse_disabled = 0;
+                }, 5000);
+                getRelativeEventPosition(ev); // enables tracking of last ev position so on touch end can always tell where we released from
+
+                if (ev.target === canvas) {
+                    lastX = ev.touches[0].clientX;
+                    lastY = ev.touches[0].clientY;
+                    if (this.mode === "analyze" && this.analyze_tool === "draw") {
+                        pointerMove(ev);
+                        ev.preventDefault();
+                        return false;
+                    }
+                } else if (dragging) {
+                    pointerOut(ev);
+                }
+            } catch (e) {
+                console.error(e);
+            }
+            return undefined;
+        };
+
+        document.addEventListener("touchstart", onTouchStart);
+        document.addEventListener("touchend", onTouchEnd);
+        document.addEventListener("touchmove", onTouchMove);
+
+        const cleanup = () => {
+            document.removeEventListener("touchstart", onTouchStart);
+            document.removeEventListener("touchend", onTouchEnd);
+            document.removeEventListener("touchmove", onTouchMove);
+            this.off("destroy", cleanup);
+        };
+
+        this.on("destroy", cleanup);
+    }
+    public clearAnalysisDrawing(): void {
+        this.pen_marks = [];
+        if (this.pen_ctx) {
+            this.pen_ctx.clearRect(0, 0, this.metrics.width, this.metrics.height);
+        }
+    }
+    private xy2pen(x: number, y: number): [number, number] {
+        const lx = this.draw_left_labels ? 0.0 : 1.0;
+        const ly = this.draw_top_labels ? 0.0 : 1.0;
+        return [
+            Math.round((x / this.square_size + lx) * 64),
+            Math.round((y / this.square_size + ly) * 64),
+        ];
+    }
+    private pen2xy(x: number, y: number): [number, number] {
+        const lx = this.draw_left_labels ? 0.0 : 1.0;
+        const ly = this.draw_top_labels ? 0.0 : 1.0;
+
+        return [(x / 64 - lx) * this.square_size, (y / 64 - ly) * this.square_size];
+    }
+    private setPenStyle(color: string): void {
+        if (!this.pen_ctx) {
+            throw new Error(`setPenStyle called with null pen_ctx`);
+        }
+
+        this.pen_ctx.strokeStyle = color;
+        this.pen_ctx.lineWidth = Math.max(1, Math.round(this.square_size * 0.1));
+        this.pen_ctx.lineCap = "round";
+    }
+    private onPenStart(ev: MouseEvent | TouchEvent): void {
+        this.attachPenCanvas();
+
+        const pos = getRelativeEventPosition(ev);
+        this.last_pen_position = this.xy2pen(pos.x, pos.y);
+        this.current_pen_mark = { color: this.analyze_subtool, points: this.xy2pen(pos.x, pos.y) };
+        this.pen_marks.push(this.current_pen_mark);
+        this.setPenStyle(this.analyze_subtool);
+
+        this.syncReviewMove({ pen: this.analyze_subtool, pp: this.xy2pen(pos.x, pos.y) });
+    }
+    private onPenMove(ev: MouseEvent | TouchEvent): void {
+        if (!this.pen_ctx) {
+            throw new Error(`onPenMove called with null pen_ctx`);
+        }
+        if (!this.last_pen_position || !this.current_pen_mark) {
+            throw new Error(`onPenMove called with invalid last pen position or current pen mark`);
+        }
+
+        const pos = getRelativeEventPosition(ev);
+        const start = this.last_pen_position;
+        const s = this.pen2xy(start[0], start[1]);
+        const end = this.xy2pen(pos.x, pos.y);
+        const e = this.pen2xy(end[0], end[1]);
+
+        const dx = end[0] - start[0];
+        const dy = end[1] - start[1];
+
+        if (dx * dx + dy * dy < 64) {
+            return;
+        }
+
+        this.last_pen_position = end;
+        this.current_pen_mark.points.push(dx);
+        this.current_pen_mark.points.push(dy);
+
+        this.pen_ctx.beginPath();
+        this.pen_ctx.moveTo(s[0], s[1]);
+        this.pen_ctx.lineTo(e[0], e[1]);
+        this.pen_ctx.stroke();
+
+        this.syncReviewMove({ pp: [dx, dy] });
+    }
+    public drawPenMarks(pen_marks: MoveTreePenMarks): void {
+        if (this.review_id && !this.done_loading_review) {
+            return;
+        }
+        if (!pen_marks.length) {
+            return;
+        }
+        this.attachPenCanvas();
+        if (!this.pen_ctx) {
+            throw new Error(`onPenMove called with null pen_ctx`);
+        }
+        this.clearAnalysisDrawing();
+        this.pen_marks = pen_marks;
+        for (let i = 0; i < pen_marks.length; ++i) {
+            const stroke = pen_marks[i];
+            this.setPenStyle(stroke.color);
+
+            let px = stroke.points[0];
+            let py = stroke.points[1];
+            this.pen_ctx.beginPath();
+            const pt = this.pen2xy(px, py);
+            this.pen_ctx.moveTo(pt[0], pt[1]);
+            for (let j = 2; j < stroke.points.length; j += 2) {
+                px += stroke.points[j];
+                py += stroke.points[j + 1];
+                const pt = this.pen2xy(px, py);
+                this.pen_ctx.lineTo(pt[0], pt[1]);
+            }
+            this.pen_ctx.stroke();
+        }
+    }
+    protected tapAt(x: number, y: number, double_tap: boolean): void {
+        this.tapAtImpl(x, y, double_tap, false, false, 0);
+    }
+    private onTap(
+        event: MouseEvent | TouchEvent,
+        double_tap: boolean,
+        right_click: boolean,
+        press_duration_ms: number,
+    ): void {
+        // If there are modes where right click should not behave as if you clicked a placement on the canvas
+        // then return here instead of proceeding.
+        if (right_click && this.mode === "play") {
+            return;
+        }
+
+        const pos = getRelativeEventPosition(event);
+        const xx = pos.x;
+        const yy = pos.y;
+
+        const pt = this.xy2ij(xx, yy);
+        const x = pt.i;
+        const y = pt.j;
+
+        this.tapAtImpl(x, y, double_tap, right_click, event.shiftKey, press_duration_ms);
+    }
+    private onMouseMove(event: MouseEvent | TouchEvent): void {
+        if (
+            !(
+                this.stone_placement_enabled &&
+                (this.player_id ||
+                    !this.engine.players.black.id ||
+                    this.mode === "analyze" ||
+                    this.scoring_mode)
+            )
+        ) {
+            return;
+        }
+
+        const pos = getRelativeEventPosition(event);
+        const pt = this.xy2ij(pos.x, pos.y);
+
+        if (this.__last_pt.i === pt.i && this.__last_pt.j === pt.j) {
+            return;
+        }
+
+        if (this.__last_pt.valid) {
+            const last_hover = this.last_hover_square;
+            delete this.last_hover_square;
+            if (last_hover) {
+                this.drawSquare(last_hover.x, last_hover.y);
+            }
+        }
+
+        this.__last_pt = pt;
+
+        if (pt.valid) {
+            this.last_hover_square = { x: pt.i, y: pt.j };
+            this.drawSquare(pt.i, pt.j);
+        }
+    }
+    private onMouseOut(event: MouseEvent | TouchEvent): void {
+        if (this.__last_pt.valid) {
+            const last_hover = this.last_hover_square;
+            delete this.last_hover_square;
+            if (last_hover) {
+                this.drawSquare(last_hover.x, last_hover.y);
+            }
+        }
+        this.__last_pt = this.xy2ij(-1, -1);
+    }
+    protected enableDrawing(): void {
+        this.drawing_enabled = true;
+    }
+    protected disableDrawing(): void {
+        this.drawing_enabled = false;
+    }
+    public setByoYomiLabel(label: string): void {
+        if (this.byoyomi_label !== label) {
+            this.byoyomi_label = label;
+            if (this.last_hover_square) {
+                this.drawSquare(this.last_hover_square.x, this.last_hover_square.y);
+            }
+        }
+    }
+    private drawGridSquare(
+        ctx: CanvasRenderingContext2D,
+        i: number,
+        j: number,
+        l: number,
+        r: number,
+        t: number,
+        b: number,
+        have_text_to_draw: boolean,
+    ): void {
+        let sx = l;
+        let ex = r;
+        const mx = (r + l) / 2 - this.metrics.offset;
+        let sy = t;
+        let ey = b;
+        const my = (t + b) / 2 - this.metrics.offset;
+
+        if (i === 0) {
+            sx += this.metrics.mid;
+        }
+        if (i === this.width - 1) {
+            ex -= this.metrics.mid;
+        }
+        if (j === 0) {
+            sy += this.metrics.mid;
+        }
+        if (j === this.height - 1) {
+            ey -= this.metrics.mid;
+        }
+
+        if (i === this.width - 1 && j === this.height - 1) {
+            if (mx === ex && my === ey) {
+                ex += 1;
+                ey += 1;
+            }
+        }
+
+        ctx.lineWidth = this.square_size < 5 ? 0.2 : 1;
+        ctx.strokeStyle = have_text_to_draw ? this.theme_faded_line_color : this.theme_line_color;
+        ctx.lineCap = "butt";
+        ctx.beginPath();
+        ctx.moveTo(Math.floor(sx), my);
+        ctx.lineTo(Math.floor(ex), my);
+        ctx.moveTo(mx, Math.floor(sy));
+        ctx.lineTo(mx, Math.floor(ey));
+        ctx.stroke();
+
+        let star_radius;
+        if (this.square_size < 5) {
+            star_radius = 0.5;
+        } else {
+            star_radius = Math.max(2, (this.metrics.mid - 1.5) * 0.16);
+        }
+        let draw_star_point = false;
+        if (
+            this.width === 19 &&
+            this.height === 19 &&
+            ((i === 3 && (j === 3 || j === 9 || j === 15)) ||
+                (i === 9 && (j === 3 || j === 9 || j === 15)) ||
+                (i === 15 && (j === 3 || j === 9 || j === 15)))
+        ) {
+            draw_star_point = true;
+        }
+
+        if (
+            this.width === 13 &&
+            this.height === 13 &&
+            ((i === 3 && (j === 3 || j === 9)) ||
+                (i === 6 && j === 6) ||
+                (i === 9 && (j === 3 || j === 9)))
+        ) {
+            draw_star_point = true;
+        }
+
+        if (
+            this.width === 9 &&
+            this.height === 9 &&
+            ((i === 2 && (j === 2 || j === 6)) ||
+                (i === 4 && j === 4) ||
+                (i === 6 && (j === 2 || j === 6)))
+        ) {
+            draw_star_point = true;
+        }
+
+        if (draw_star_point) {
+            ctx.beginPath();
+            ctx.fillStyle = have_text_to_draw ? this.theme_faded_star_color : this.theme_star_color;
+            ctx.arc(
+                l + this.metrics.mid,
+                t + this.metrics.mid,
+                star_radius,
+                0.001,
+                2 * Math.PI,
+                false,
+            ); /* 0.001 to workaround fucked up chrome 27 bug */
+            ctx.fill();
+        }
+    }
+    private syncBoardBackground(background: ResolvedBoardBackground): void {
+        this.applyBaseBoardBackground(background);
+
+        const grid = background.grid;
+        if (!grid) {
+            this.detachGridBackgroundLayers();
+            return;
+        }
+
+        this.attachGridBackgroundLayers();
+        if (!this.grid_ctx || !this.grid_layer || !this.grid_background_layer) {
+            return;
+        }
+
+        this.grid_background_layer.style.width = `${this.metrics.width}px`;
+        this.grid_background_layer.style.height = `${this.metrics.height}px`;
+        this.grid_background_layer.style.backgroundImage = grid.css["background-image"] || "";
+        this.grid_background_layer.style.backgroundSize = grid.css["background-size"] || "";
+        this.grid_background_layer.style.backgroundPosition = grid.css["background-position"] || "";
+        this.grid_background_layer.style.backgroundRepeat = grid.css["background-repeat"] || "";
+    }
+    public drawSquare(i: number, j: number): void {
+        if (this.destroyed) {
+            return;
+        }
+        if (i < 0 || j < 0 || !this.drawing_enabled || this.no_display) {
+            return;
+        }
+        if (this.__draw_state[j][i] !== this.drawingHash(i, j)) {
+            this.__drawSquare(i, j);
+        }
+    }
+    private __drawSquare(i: number, j: number): void {
+        if (!this.drawing_enabled || this.no_display) {
+            return;
+        }
+        const ctx = this.ctx;
+        if (!ctx) {
+            return;
+        }
+        if (i < 0 || j < 0) {
+            return;
+        }
+        const s = this.square_size;
+        let ox = this.draw_left_labels ? s : 0;
+        let oy = this.draw_top_labels ? s : 0;
+        if (this.bounds.left > 0) {
+            ox = -s * this.bounds.left;
+        }
+        if (this.bounds.top > 0) {
+            oy = -s * this.bounds.top;
+        }
+
+        let cx: number;
+        let cy: number;
+        let draw_last_move = !this.dont_draw_last_move;
+
+        let stone_color = 0;
+        if (this.engine) {
+            stone_color = this.engine.board[j][i];
+        }
+
+        /* Figure out marks for this spot */
+        let pos = this.getMarks(i, j);
+        if (!pos) {
+            console.error("No position for ", j, i);
+            pos = {};
+        }
+        const should_draw_undo =
+            this.engine &&
+            this.getShowUndoRequestIndicator() &&
+            this.engine.isStoneInUndoRequest(i, j);
+        let alt_marking: string | undefined;
+        if (
+            this.engine &&
+            this.engine.cur_move &&
+            (this.mode !== "play" || this.isInPushedAnalysis?.())
+        ) {
+            let cur: MoveTree | null = this.engine.cur_move;
+            for (; cur && !cur.trunk; cur = cur.parent) {
+                if (cur.x === i && cur.y === j) {
+                    const move_diff = cur.getMoveNumberDifferenceFromTrunk();
+                    if (move_diff !== cur.move_number) {
+                        if (!cur.edited && this.show_variation_move_numbers) {
+                            alt_marking = cur.getMoveNumberDifferenceFromTrunk().toString();
+                        }
+                    }
+                }
+            }
+        }
+
+        let movetree_contains_this_square = false;
+        if (this.engine && this.engine.cur_move.lookupMove(i, j, this.engine.player, false)) {
+            movetree_contains_this_square = true;
+        }
+
+        let have_text_to_draw = false;
+        let text_color = this.theme_blank_text_color;
+        for (const key in pos) {
+            if (key.length <= 3) {
+                have_text_to_draw = true;
+            }
+        }
+        if (
+            pos.circle ||
+            pos.triangle ||
+            pos.chat_triangle ||
+            pos.sub_triangle ||
+            pos.ai_quality ||
+            pos.cross ||
+            pos.square
+        ) {
+            have_text_to_draw = true;
+        }
+        if (pos.letter && pos.letter.length > 0) {
+            have_text_to_draw = true;
+        }
+        if (pos.subscript && pos.subscript.length > 0) {
+            have_text_to_draw = true;
+        }
+        if (pos.subscript2 && pos.subscript2.length > 0) {
+            have_text_to_draw = true;
+        }
+        if (this.colored_circles?.[j][i]) {
+            have_text_to_draw = true;
+        }
+
+        /* clear and draw lines */
+        {
+            const l = i * s + ox;
+            const r = (i + 1) * s + ox;
+            const t = j * s + oy;
+            const b = (j + 1) * s + oy;
+
+            ctx.clearRect(l, t, r - l, b - t);
+            if (this.shadow_ctx) {
+                let shadow_offset = this.square_size * 0.1;
+                this.shadow_ctx.clearRect(
+                    l + shadow_offset,
+                    t + shadow_offset,
+                    this.square_size,
+                    this.square_size,
+                );
+                shadow_offset = this.square_size * 0.2;
+                this.shadow_ctx.clearRect(
+                    l + shadow_offset,
+                    t + shadow_offset,
+                    this.square_size,
+                    this.square_size,
+                );
+                shadow_offset = this.square_size * 0.3;
+                this.shadow_ctx.clearRect(
+                    l + shadow_offset,
+                    t + shadow_offset,
+                    this.square_size,
+                    this.square_size,
+                );
+            }
+
+            cx = l + this.metrics.mid;
+            cy = t + this.metrics.mid;
+            const grid_ctx = this.grid_ctx;
+            if (grid_ctx) {
+                grid_ctx.clearRect(l, t, r - l, b - t);
+            }
+            this.drawGridSquare(grid_ctx ?? ctx, i, j, l, r, t, b, have_text_to_draw);
+        }
+
+        /* Heatmap */
+
+        if (this.heatmap) {
+            if (this.heatmap[j][i] > 0.001) {
+                const color = "#00FF00";
+                ctx.lineCap = "square";
+                ctx.save();
+                ctx.beginPath();
+                ctx.globalAlpha = Math.min(this.heatmap[j][i], 0.5);
+                const r = Math.floor(this.square_size * 0.5) - 0.5;
+                ctx.moveTo(cx - r, cy - r);
+                ctx.lineTo(cx + r, cy - r);
+                ctx.lineTo(cx + r, cy + r);
+                ctx.lineTo(cx - r, cy + r);
+                ctx.lineTo(cx - r, cy - r);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        /* Draw square highlights if any */
+        {
+            if (
+                pos.hint ||
+                (this.highlight_movetree_moves && movetree_contains_this_square) ||
+                pos.color
+            ) {
+                const color = pos.color ? pos.color : pos.hint ? "#8EFF0A" : "#FF8E0A";
+
+                ctx.lineCap = "square";
+                ctx.save();
+                ctx.beginPath();
+                ctx.globalAlpha = 0.6;
+                const r = Math.floor(this.square_size * 0.5) - 0.5;
+                ctx.moveTo(cx - r, cy - r);
+                ctx.lineTo(cx + r, cy - r);
+                ctx.lineTo(cx + r, cy + r);
+                ctx.lineTo(cx - r, cy + r);
+                ctx.lineTo(cx - r, cy - r);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        /* Colored stones */
+
+        const circle = this.colored_circles?.[j][i];
+        if (circle) {
+            const color = circle.color;
+
+            ctx.save();
+            ctx.globalAlpha = 1.0;
+            const radius = Math.floor(this.square_size * 0.5) - 0.5;
+            let lineWidth = radius * (circle.border_width || 0.1);
+
+            if (lineWidth < 0.3) {
+                lineWidth = 0;
+            }
+            ctx.fillStyle = color;
+            ctx.strokeStyle = circle.border_color || "#000000";
+            if (lineWidth > 0) {
+                ctx.lineWidth = lineWidth;
+            }
+            ctx.beginPath();
+            ctx.arc(
+                cx,
+                cy,
+                Math.max(0.1, radius - lineWidth / 2),
+                0.001,
+                2 * Math.PI,
+                false,
+            ); /* 0.001 to workaround fucked up chrome bug */
+            if (lineWidth > 0) {
+                ctx.stroke();
+            }
+            ctx.fill();
+            ctx.restore();
+        }
+
+        /* Draw stones & hovers */
+        let draw_removal_x = false;
+        {
+            if (
+                stone_color /* if there is really a stone here */ ||
+                (this.stone_placement_enabled &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j &&
+                    (this.mode !== "analyze" || this.analyze_tool === "stone") &&
+                    this.engine &&
+                    !this.scoring_mode &&
+                    (this.engine.phase === "play" ||
+                        (this.engine.phase === "finished" && this.mode === "analyze")) &&
+                    (this.engine.puzzle_player_move_mode !== "fixed" ||
+                        movetree_contains_this_square ||
+                        (this.getPuzzlePlacementSetting &&
+                            this.getPuzzlePlacementSetting().mode === "play"))) ||
+                (this.scoring_mode &&
+                    this.score_estimator &&
+                    this.score_estimator.board[j][i] &&
+                    this.score_estimator.removal[j][i]) ||
+                (this.engine &&
+                    this.engine.phase === "stone removal" &&
+                    this.engine.board[j][i] &&
+                    this.engine.removal[j][i]) ||
+                pos.black ||
+                pos.white
+            ) {
+                //let color = stone_color ? stone_color : (this.move_selected ? this.engine.otherPlayer() : this.engine.player);
+                let translucent = false;
+                let stoneAlphaValue = 0.6;
+                let color;
+                if (
+                    this.scoring_mode &&
+                    this.score_estimator &&
+                    this.score_estimator.board[j][i] &&
+                    this.score_estimator.removal[j][i]
+                ) {
+                    color = this.score_estimator.board[j][i];
+                    translucent = true;
+                } else if (
+                    this.engine &&
+                    ((this.engine.phase === "stone removal" &&
+                        this.engine.last_official_move === this.engine.cur_move) ||
+                        (this.engine.phase === "finished" && this.mode !== "analyze")) &&
+                    this.engine.board &&
+                    this.engine.removal &&
+                    this.engine.board[j][i] &&
+                    this.engine.removal[j][i]
+                ) {
+                    color = this.engine.board[j][i];
+                    translucent = true;
+                } else if (stone_color) {
+                    color = stone_color;
+                } else if (
+                    this.mode === "analyze" &&
+                    this.analyze_tool === "stone" &&
+                    this.analyze_subtool !== "alternate"
+                ) {
+                    color = this.edit_color === "black" ? 1 : 2;
+                    if (this.shift_key_is_down) {
+                        color = this.edit_color === "black" ? 2 : 1;
+                    }
+                } else if (this.move_selected) {
+                    if (this.engine.handicapMovesLeft() <= 0) {
+                        color = this.engine.otherPlayer();
+                    } else {
+                        color = this.engine.player;
+                    }
+                } else if (this.mode === "puzzle") {
+                    if (this.getPuzzlePlacementSetting) {
+                        const s = this.getPuzzlePlacementSetting();
+                        if (s.mode === "setup") {
+                            color = s.color;
+                            if (this.shift_key_is_down) {
+                                color = color === 1 ? 2 : 1;
+                            }
+                        } else {
+                            color = this.engine.player;
+                        }
+                    } else {
+                        color = this.engine.player;
+                    }
+                } else if (pos.black || pos.white) {
+                    color = this.placementHoverAt(i, j) ? this.engine.player : pos.black ? 1 : 2;
+                    translucent = true;
+                    stoneAlphaValue = this.variation_stone_opacity;
+                    if (
+                        this.last_hover_square &&
+                        this.last_hover_square.x === i &&
+                        this.last_hover_square.y === j
+                    ) {
+                        /* make the stone stand out while hovered */
+                        stoneAlphaValue = 1.0;
+                    }
+                } else {
+                    color = this.engine.player;
+                }
+
+                if (pos.stone_removed) {
+                    translucent = true;
+                }
+
+                if (!(this.autoplaying_puzzle_move && !stone_color)) {
+                    text_color =
+                        color === 1 ? this.theme_black_text_color : this.theme_white_text_color;
+
+                    if (!this.theme_black_stones) {
+                        const err = new Error(
+                            `Goban.theme_black_stones not set. Current themes is ${JSON.stringify(
+                                this.themes,
+                            )}`,
+                        );
+                        setTimeout(() => {
+                            throw err;
+                        }, 1);
+                        return;
+                    }
+                    if (!this.theme_white_stones) {
+                        const err = new Error(
+                            `Goban.theme_white_stones not set. Current themes is ${JSON.stringify(
+                                this.themes,
+                            )}`,
+                        );
+                        setTimeout(() => {
+                            throw err;
+                        }, 1);
+                        return;
+                    }
+                    ctx.save();
+                    let shadow_ctx: CanvasRenderingContext2D | null | undefined = this.shadow_ctx;
+                    if (!stone_color || translucent) {
+                        ctx.globalAlpha = stoneAlphaValue;
+                        shadow_ctx = null;
+                    }
+                    if (shadow_ctx === undefined) {
+                        shadow_ctx = null;
+                    }
+                    if (color === 1) {
+                        const stone = this.theme_black.getStone(
+                            i,
+                            j,
+                            this.theme_black_stones,
+                            this,
+                        );
+                        this.theme_black.placeBlackStone(
+                            ctx,
+                            shadow_ctx,
+                            stone,
+                            cx,
+                            cy,
+                            this.theme_stone_radius,
+                        );
+                    } else {
+                        const stone = this.theme_white.getStone(
+                            i,
+                            j,
+                            this.theme_white_stones,
+                            this,
+                        );
+                        this.theme_white.placeWhiteStone(
+                            ctx,
+                            shadow_ctx,
+                            stone,
+                            cx,
+                            cy,
+                            this.theme_stone_radius,
+                        );
+                    }
+                    ctx.restore();
+                }
+
+                const circle = this.colored_circles?.[j]?.[i];
+                if (pos.blue_move && circle) {
+                    ctx.save();
+                    ctx.globalAlpha = 1.0;
+                    const radius = Math.floor(this.square_size * 0.5) - 0.5;
+                    let lineWidth = radius * (circle.border_width || 0.1);
+
+                    if (lineWidth < 0.3) {
+                        lineWidth = 0;
+                    }
+                    ctx.strokeStyle = circle.border_color || "#000000";
+                    if (lineWidth > 0) {
+                        ctx.lineWidth = lineWidth;
+                    }
+                    ctx.beginPath();
+                    ctx.arc(
+                        cx,
+                        cy,
+                        Math.max(0.1, radius - lineWidth / 2),
+                        0.001,
+                        2 * Math.PI,
+                        false,
+                    ); /* 0.001 to workaround fucked up chrome bug */
+                    if (lineWidth > 0) {
+                        ctx.stroke();
+                    }
+                    ctx.restore();
+                }
+
+                /* Red X if the stone is marked for removal */
+                if (
+                    (this.engine &&
+                        this.engine.phase === "stone removal" &&
+                        this.engine.last_official_move === this.engine.cur_move &&
+                        this.engine.board[j][i] &&
+                        this.engine.removal[j][i]) ||
+                    (this.scoring_mode &&
+                        this.score_estimator &&
+                        this.score_estimator.board[j][i] &&
+                        this.score_estimator.removal[j][i]) ||
+                    pos.stone_removed
+                ) {
+                    //draw_removal_x = true;
+                    draw_removal_x = this.themes["removal-graphic"] === "x";
+                }
+            }
+        }
+        if (
+            draw_removal_x ||
+            (this.mode === "analyze" &&
+                this.analyze_tool === "removal" &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j) ||
+            (this.engine.phase === "stone removal" &&
+                this.engine.isActivePlayer(this.player_id) &&
+                this.engine.cur_move === this.engine.last_official_move &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j)
+        ) {
+            const color =
+                this.engine.board[j][i] === JGOFNumericPlayerColor.BLACK ? "black" : "white";
+
+            const opacity = this.engine.board[j][i] ? 1.0 : 0.2;
+            ctx.lineCap = "square";
+            ctx.save();
+            ctx.beginPath();
+            ctx.lineWidth = this.square_size * 0.125;
+            ctx.globalAlpha = opacity;
+            const r = Math.max(1, this.metrics.mid * 0.65);
+            ctx.moveTo(cx - r, cy - r);
+            ctx.lineTo(cx + r, cy + r);
+            ctx.moveTo(cx + r, cy - r);
+            ctx.lineTo(cx - r, cy + r);
+
+            if (pos.score === "black" && color === "white") {
+                ctx.strokeStyle = this.theme_black_stone_color;
+            } else if (pos.score === "white" && color === "black") {
+                ctx.strokeStyle = this.theme_white_stone_color;
+            } else if (
+                (pos.score === "white" && color === "white") ||
+                (pos.score === "black" && color === "black")
+            ) {
+                // score point for the same color where the stone is removed
+                // should call special attention to it
+                ctx.strokeStyle = "#ff0000";
+            } else {
+                // otherwise, no score but removed stones can happen when
+                // territory isn't properly sealed, so we are going to mark
+                // it grey to avoid calling too much attention, but still
+                // denote that removing these stones doesn't result in
+                // the territory being territory yet.
+                ctx.strokeStyle = "#888888";
+            }
+
+            ctx.stroke();
+            ctx.restore();
+            draw_last_move = false;
+        }
+
+        if (should_draw_undo) {
+            const letter = "↶";
+            ctx.save();
+            ctx.fillStyle =
+                stone_color === 1 ? this.theme_black_text_color : this.theme_white_text_color;
+            const metrics = ctx.measureText(letter);
+            const xx = cx - metrics.width / 2;
+            const yy =
+                cy + (/WebKit|Trident/.test(navigator.userAgent) ? this.square_size * -0.03 : 1);
+            ctx.textBaseline = "middle";
+            ctx.fillText(letter, xx, yy);
+            draw_last_move = false;
+            ctx.restore();
+        }
+
+        /* Draw Scores */
+        {
+            if (
+                (pos.score &&
+                    (this.engine.phase !== "finished" ||
+                        this.mode === "play" ||
+                        this.mode === "analyze")) ||
+                (this.scoring_mode &&
+                    this.score_estimator &&
+                    (this.score_estimator.territory[j][i] ||
+                        (this.score_estimator.removal[j][i] &&
+                            this.score_estimator.board[j][i] === 0))) ||
+                ((this.engine.phase === "stone removal" ||
+                    (this.engine.phase === "finished" && this.mode === "play")) &&
+                    this.engine.board[j][i] === 0 &&
+                    (this.engine.removal[j][i] || pos.needs_sealing)) ||
+                (this.mode === "analyze" &&
+                    this.analyze_tool === "score" &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j)
+            ) {
+                ctx.beginPath();
+
+                let color = pos.score;
+                if (
+                    this.scoring_mode &&
+                    this.score_estimator &&
+                    (this.score_estimator.territory[j][i] ||
+                        (this.score_estimator.removal[j][i] &&
+                            this.score_estimator.board[j][i] === 0))
+                ) {
+                    color = this.score_estimator.territory[j][i] === 1 ? "black" : "white";
+                    if (
+                        this.score_estimator.board[j][i] === 0 &&
+                        this.score_estimator.removal[j][i]
+                    ) {
+                        color = "dame";
+                    }
+                }
+
+                if (
+                    (this.engine.phase === "stone removal" ||
+                        (this.engine.phase === "finished" && this.mode === "play")) &&
+                    this.engine.board[j][i] === 0 &&
+                    this.engine.removal[j][i]
+                ) {
+                    color = "dame";
+                }
+
+                if (pos.needs_sealing) {
+                    color = "seal";
+                }
+
+                if (
+                    this.mode === "analyze" &&
+                    this.analyze_tool === "score" &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j
+                ) {
+                    color = this.analyze_subtool;
+                }
+
+                if (color === "white") {
+                    ctx.fillStyle = this.theme_white_stone_color;
+                    ctx.strokeStyle = "#777777";
+                } else if (color === "black") {
+                    ctx.fillStyle = this.theme_black_stone_color;
+                    ctx.strokeStyle = "#888888";
+                } else if (color === "dame") {
+                    ctx.fillStyle = "#ff0000";
+                    ctx.strokeStyle = "#365FE6";
+                } else if (color === "seal") {
+                    ctx.fillStyle = "#ff0000";
+                    ctx.strokeStyle = "#E079CE";
+                }
+                if (color?.[0] === "#") {
+                    ctx.fillStyle = color;
+                    ctx.strokeStyle = color_blend("#888888", color);
+                }
+                ctx.lineWidth = Math.ceil(this.square_size * 0.065) - 0.5;
+
+                const r = this.square_size * 0.15;
+                ctx.rect(cx - r, cy - r, r * 2, r * 2);
+                if (color !== "dame") {
+                    ctx.fill();
+                }
+                ctx.stroke();
+            }
+        }
+
+        /* Draw letters and numbers */
+        let letter_was_drawn = false;
+        {
+            let letter: string | undefined;
+            let subscript: string | undefined;
+            let transparent = false;
+            if (pos.letter) {
+                letter = pos.letter;
+            }
+            if (pos.subscript) {
+                subscript = pos.subscript;
+            }
+
+            if (
+                this.mode === "play" &&
+                this.byoyomi_label &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j
+            ) {
+                letter = this.byoyomi_label;
+            }
+            if (
+                this.mode === "analyze" &&
+                this.analyze_tool === "label" &&
+                (this.analyze_subtool === "letters" || this.analyze_subtool === "numbers") &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j
+            ) {
+                transparent = true;
+                letter = this.label_character;
+            }
+            if (!letter && alt_marking !== "triangle") {
+                letter = alt_marking;
+            }
+
+            if (
+                this.show_variation_move_numbers &&
+                !letter &&
+                !(
+                    pos.circle ||
+                    pos.triangle ||
+                    pos.chat_triangle ||
+                    pos.sub_triangle ||
+                    pos.cross ||
+                    pos.square
+                )
+            ) {
+                const m = this.engine.getMoveByLocation(i, j, false);
+                if (m && !m.trunk) {
+                    if (m.edited) {
+                        //letter = "triangle";
+                        if (this.engine.board[j][i]) {
+                            //alt_marking = "triangle";
+                        }
+                    } else {
+                        letter = m.getMoveNumberDifferenceFromTrunk().toString();
+                    }
+                }
+            }
+
+            if (letter) {
+                letter_was_drawn = true;
+                ctx.save();
+                ctx.fillStyle = text_color;
+                const [, , metrics] = fitText(
+                    ctx,
+                    letter,
+                    `bold FONT_SIZEpx ${GOBAN_FONT}`,
+                    this.square_size * 0.4,
+                    this.square_size * 0.8 * (subscript ? 0.9 : 1.0),
+                );
+
+                const xx = cx - metrics.width / 2;
+                let yy =
+                    cy +
+                    (/WebKit|Trident/.test(navigator.userAgent)
+                        ? this.square_size * -0.03
+                        : 1); /* middle centering is different on firefox */
+
+                if (subscript) {
+                    yy -= this.square_size * 0.15;
+                }
+
+                ctx.textBaseline = "middle";
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                ctx.fillText(letter, xx, yy);
+                draw_last_move = false;
+                ctx.restore();
+            }
+
+            if (subscript) {
+                letter_was_drawn = true;
+                ctx.save();
+                ctx.fillStyle = text_color;
+                if (letter && subscript === "0") {
+                    subscript = "0.0"; // clarifies the markings on the blue move typically
+                }
+
+                const [, , metrics] = fitText(
+                    ctx,
+                    subscript,
+                    `bold FONT_SIZEpx ${GOBAN_FONT}`,
+                    this.square_size * 0.4,
+                    this.square_size * 0.8 * (letter ? 0.9 : 1.0),
+                );
+
+                const xx = cx - metrics.width / 2;
+                let yy =
+                    cy +
+                    (/WebKit|Trident/.test(navigator.userAgent)
+                        ? this.square_size * -0.03
+                        : 1); /* middle centering is different on firefox */
+
+                if (letter) {
+                    yy += this.square_size * 0.3;
+                }
+
+                if (pos.subscript2) {
+                    yy -= this.square_size * 0.15;
+                }
+
+                ctx.textBaseline = "middle";
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                ctx.fillText(subscript, xx, yy);
+                draw_last_move = false;
+                ctx.restore();
+            }
+
+            if (pos.subscript2) {
+                letter_was_drawn = true;
+                ctx.save();
+                ctx.fillStyle = text_color;
+
+                const [, , metrics] = fitText(
+                    ctx,
+                    pos.subscript2,
+                    `bold FONT_SIZEpx ${GOBAN_FONT}`,
+                    this.square_size * 0.28,
+                    this.square_size * 0.7,
+                );
+
+                ctx.textBaseline = "middle";
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                ctx.fillText(pos.subscript2, cx - metrics.width / 2, cy + this.square_size * 0.35);
+                draw_last_move = false;
+                ctx.restore();
+            }
+        }
+
+        /* draw special symbols */
+        {
+            let transparent = letter_was_drawn;
+            let hover_mark: string | undefined;
+            const symbol_color =
+                stone_color === 1
+                    ? this.theme_black_text_color
+                    : stone_color === 2
+                      ? this.theme_white_text_color
+                      : text_color;
+
+            if (
+                this.analyze_tool === "label" &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j
+            ) {
+                if (
+                    this.analyze_subtool === "triangle" ||
+                    this.analyze_subtool === "square" ||
+                    this.analyze_subtool === "cross" ||
+                    this.analyze_subtool === "circle"
+                ) {
+                    transparent = true;
+                    hover_mark = this.analyze_subtool;
+                }
+            }
+
+            if (pos.circle || hover_mark === "circle") {
+                ctx.lineCap = "round";
+                ctx.save();
+                ctx.beginPath();
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                ctx.strokeStyle = symbol_color;
+                ctx.lineWidth = this.square_size * 0.075;
+                const r = Math.max(0.1, this.square_size * this.circle_radius);
+                ctx.arc(cx, cy, r, 0, 2 * Math.PI, false);
+                ctx.stroke();
+                ctx.restore();
+                draw_last_move = false;
+            }
+            if (pos.ai_quality) {
+                const badge = AI_QUALITY_BADGES[pos.ai_quality];
+                if (badge) {
+                    const ss = this.square_size;
+                    const by = cy + ss * AI_QUALITY_BADGE.offset_y;
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.fillStyle =
+                        getComputedStyle(document.documentElement)
+                            .getPropertyValue(`--move-quality-${pos.ai_quality}`)
+                            .trim() || badge.color;
+                    const r = ss * AI_QUALITY_BADGE.radius;
+                    let theta = -(Math.PI * 2) / 4;
+                    ctx.moveTo(cx + r * Math.cos(theta), by + r * Math.sin(theta));
+                    theta += (Math.PI * 2) / 3;
+                    ctx.lineTo(cx + r * Math.cos(theta), by + r * Math.sin(theta));
+                    theta += (Math.PI * 2) / 3;
+                    ctx.lineTo(cx + r * Math.cos(theta), by + r * Math.sin(theta));
+                    ctx.closePath();
+                    ctx.fill();
+                    ctx.lineWidth = ss * AI_QUALITY_BADGE.border_width;
+                    ctx.lineJoin = "round";
+                    ctx.strokeStyle = AI_QUALITY_BADGE.border_color;
+                    ctx.stroke();
+                    ctx.restore();
+                    draw_last_move = false;
+                }
+            }
+            if (
+                !pos.ai_quality &&
+                (pos.triangle ||
+                    pos.chat_triangle ||
+                    pos.sub_triangle ||
+                    alt_marking === "triangle" ||
+                    hover_mark === "triangle")
+            ) {
+                let scale = 1.0;
+                let oy = 0.0;
+                if (pos.sub_triangle) {
+                    scale = 0.5;
+                    oy = this.square_size * 0.3;
+                    transparent = false;
+                }
+                ctx.lineCap = "round";
+                ctx.save();
+                ctx.beginPath();
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                ctx.strokeStyle = symbol_color;
+                if (pos.chat_triangle) {
+                    ctx.strokeStyle = "#00aaFF";
+                }
+                ctx.lineWidth = this.square_size * 0.075 * scale;
+                let theta = -(Math.PI * 2) / 4;
+                const r = this.square_size * 0.3 * scale;
+                ctx.moveTo(cx + r * Math.cos(theta), cy + oy + r * Math.sin(theta));
+                theta += (Math.PI * 2) / 3;
+                ctx.lineTo(cx + r * Math.cos(theta), cy + oy + r * Math.sin(theta));
+                theta += (Math.PI * 2) / 3;
+                ctx.lineTo(cx + r * Math.cos(theta), cy + oy + r * Math.sin(theta));
+                theta += (Math.PI * 2) / 3;
+                ctx.lineTo(cx + r * Math.cos(theta), cy + oy + r * Math.sin(theta));
+                ctx.stroke();
+                ctx.restore();
+                draw_last_move = false;
+            }
+            if (pos.cross || hover_mark === "cross") {
+                ctx.lineCap = "square";
+                ctx.save();
+                ctx.beginPath();
+                ctx.lineWidth = this.square_size * 0.075;
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                const r = Math.max(1, this.metrics.mid * 0.35);
+                ctx.moveTo(cx - r, cy - r);
+                ctx.lineTo(cx + r, cy + r);
+                ctx.moveTo(cx + r, cy - r);
+                ctx.lineTo(cx - r, cy + r);
+                ctx.strokeStyle = symbol_color;
+                ctx.stroke();
+                ctx.restore();
+                draw_last_move = false;
+            }
+
+            if (pos.square || hover_mark === "square") {
+                ctx.lineCap = "square";
+                ctx.save();
+                ctx.beginPath();
+                ctx.lineWidth = this.square_size * 0.075;
+                if (transparent) {
+                    ctx.globalAlpha = 0.6;
+                }
+                const r = Math.max(1, this.metrics.mid * 0.4);
+                ctx.moveTo(cx - r, cy - r);
+                ctx.lineTo(cx + r, cy - r);
+                ctx.lineTo(cx + r, cy + r);
+                ctx.lineTo(cx - r, cy + r);
+                ctx.lineTo(cx - r, cy - r);
+                ctx.strokeStyle = symbol_color;
+                ctx.stroke();
+                ctx.restore();
+                draw_last_move = false;
+            }
+        }
+
+        /* Clear last move */
+        // Tracks whether the crosshair was already refreshed in this draw, so the
+        // "draw last move" block below doesn't redraw it a second time for the
+        // same cur_move.
+        let crosshair_synced = false;
+        if (this.last_move && this.engine && !this.last_move.is(this.engine.cur_move)) {
+            const m = this.last_move;
+            delete this.last_move;
+            this.drawSquare(m.x, m.y);
+            // The last-move crosshair lives on its own canvas; refresh it whenever
+            // the last move changes (live moves / navigation are targeted draws).
+            // This also clears it when navigating to a position with no last-move
+            // stone, which the "draw last move" block below cannot.
+            this.drawLastMoveCrosshair();
+            crosshair_synced = true;
+        }
+
+        /* Draw last move */
+        if (draw_last_move && this.engine && this.engine.cur_move) {
+            if (
+                this.engine.cur_move.x === i &&
+                this.engine.cur_move.y === j &&
+                (this.engine.board[j][i] || !this.engine.cur_move.edited) &&
+                (this.engine.phase === "play" || this.engine.phase === "finished")
+            ) {
+                this.last_move = this.engine.cur_move;
+                // Sync the crosshair on the first move (no prior last move to
+                // trigger the "clear last move" path above); skip if already done.
+                if (!crosshair_synced) {
+                    this.drawLastMoveCrosshair();
+                }
+
+                if (i >= 0 && j >= 0) {
+                    const color = stone_color
+                        ? stone_color === 1
+                            ? this.theme_black_text_color
+                            : this.theme_white_text_color
+                        : this.theme_blank_text_color;
+
+                    const last_move_opacity = this.last_move_opacity;
+
+                    if (this.submit_move) {
+                        ctx.lineCap = "square";
+                        ctx.save();
+                        ctx.beginPath();
+                        ctx.lineWidth = this.square_size * 0.075;
+                        ctx.globalAlpha = last_move_opacity;
+                        const r = Math.max(1, this.metrics.mid * 0.35) * 0.8;
+                        ctx.moveTo(cx - r, cy);
+                        ctx.lineTo(cx + r, cy);
+                        ctx.moveTo(cx, cy - r);
+                        ctx.lineTo(cx, cy + r);
+                        ctx.strokeStyle = color;
+                        ctx.stroke();
+                        ctx.restore();
+                        draw_last_move = false;
+                    } else {
+                        if (should_draw_undo) {
+                            draw_last_move = false;
+                        } else {
+                            ctx.save();
+                            ctx.beginPath();
+                            ctx.strokeStyle = color;
+                            ctx.lineWidth = this.square_size * 0.075;
+                            ctx.globalAlpha = last_move_opacity;
+                            let r = this.square_size * this.last_move_radius;
+                            if (this.submit_move) {
+                                r = this.square_size * 0.3;
+                            }
+
+                            r = Math.max(0.1, r);
+                            ctx.arc(cx, cy, r, 0, 2 * Math.PI, false);
+                            ctx.stroke();
+                            ctx.restore();
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Score Estimation */
+        if (
+            (this.scoring_mode === true && this.score_estimator) ||
+            (this.scoring_mode === "stalling-scoring-mode" &&
+                this.stalling_score_estimate &&
+                this.mode !== "analyze")
+        ) {
+            const se =
+                this.scoring_mode === "stalling-scoring-mode"
+                    ? this.stalling_score_estimate
+                    : this.score_estimator;
+            const est = se!.ownership[j][i];
+
+            ctx.beginPath();
+
+            const color = est < 0 ? "white" : "black";
+            const color_num = color === "black" ? 1 : 2;
+
+            if (color_num !== stone_color) {
+                if (color === "white") {
+                    ctx.fillStyle = this.theme_white_stone_color;
+                    ctx.strokeStyle = "#777777";
+                } else if (color === "black") {
+                    ctx.fillStyle = this.theme_black_stone_color;
+                    ctx.strokeStyle = "#888888";
+                }
+                ctx.lineWidth = Math.ceil(this.square_size * 0.035) - 0.5;
+                const r = this.square_size * 0.2 * Math.abs(est);
+                ctx.rect(cx - r, cy - r, r * 2, r * 2);
+                ctx.fill();
+                ctx.stroke();
+            }
+        }
+
+        this.__draw_state[j][i] = this.drawingHash(i, j);
+    }
+    private drawingHash(i: number, j: number): string {
+        if (this.no_display) {
+            return "";
+        }
+        if (i < 0 || j < 0) {
+            return "..";
+        }
+
+        let ret = this.square_size + ",";
+
+        const draw_last_move = !this.dont_draw_last_move;
+        let stone_color = 0;
+        if (this.engine) {
+            stone_color = this.engine.board[j][i];
+        }
+
+        ret += stone_color + ",";
+
+        /* Draw heatmap */
+        if (this.heatmap) {
+            if (this.heatmap[j][i] > 0.001) {
+                ret += "heat " + this.heatmap[j][i] + ",";
+            }
+        }
+
+        /* Colored stones */
+        const circle = this.colored_circles?.[j][i];
+        if (circle) {
+            ret += "circle " + circle.color;
+        }
+
+        /* Figure out marks for this spot */
+        let pos = this.getMarks(i, j);
+        if (!pos) {
+            console.error("No position for ", j, i);
+            pos = {};
+        }
+        let alt_marking: string | undefined;
+        if (
+            this.engine &&
+            this.engine.cur_move &&
+            (this.mode !== "play" || this.isInPushedAnalysis?.())
+        ) {
+            let cur: MoveTree | null = this.engine.cur_move;
+            for (; cur && !cur.trunk; cur = cur.parent) {
+                if (cur.x === i && cur.y === j) {
+                    const move_diff = cur.getMoveNumberDifferenceFromTrunk();
+                    if (move_diff !== cur.move_number) {
+                        if (!cur.edited && this.show_variation_move_numbers) {
+                            alt_marking = cur.getMoveNumberDifferenceFromTrunk().toString();
+                        }
+                    }
+                }
+            }
+        }
+
+        let movetree_contains_this_square = false;
+        if (this.engine && this.engine.cur_move.lookupMove(i, j, this.engine.player, false)) {
+            movetree_contains_this_square = true;
+        }
+
+        const should_draw_undo =
+            this.engine &&
+            this.getShowUndoRequestIndicator() &&
+            this.engine.isStoneInUndoRequest(i, j);
+
+        /* Draw stones & hovers */
+        let draw_removal_x = false;
+        {
+            if (
+                stone_color /* if there is really a stone here */ ||
+                (this.stone_placement_enabled &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j &&
+                    (this.mode !== "analyze" || this.analyze_tool === "stone") &&
+                    this.engine &&
+                    !this.scoring_mode &&
+                    (this.engine.phase === "play" ||
+                        (this.engine.phase === "finished" && this.mode === "analyze")) &&
+                    (this.engine.puzzle_player_move_mode !== "fixed" ||
+                        movetree_contains_this_square ||
+                        (this.getPuzzlePlacementSetting &&
+                            this.getPuzzlePlacementSetting().mode !== "play"))) ||
+                (this.scoring_mode &&
+                    this.score_estimator &&
+                    this.score_estimator.board[j][i] &&
+                    this.score_estimator.removal[j][i]) ||
+                (this.engine &&
+                    this.engine.phase === "stone removal" &&
+                    this.engine.board[j][i] &&
+                    this.engine.removal[j][i]) ||
+                pos.black ||
+                pos.white
+            ) {
+                let translucent = false;
+                let color;
+                if (
+                    this.scoring_mode &&
+                    this.score_estimator &&
+                    this.score_estimator.board[j][i] &&
+                    this.score_estimator.removal[j][i]
+                ) {
+                    color = this.score_estimator.board[j][i];
+                    translucent = true;
+                } else if (
+                    this.engine &&
+                    this.engine.phase === "stone removal" &&
+                    this.engine.board &&
+                    this.engine.removal &&
+                    this.engine.board[j][i] &&
+                    this.engine.removal[j][i]
+                ) {
+                    color = this.engine.board[j][i];
+                    translucent = true;
+                } else if (stone_color) {
+                    color = stone_color;
+                } else if (
+                    this.mode === "analyze" &&
+                    this.analyze_tool === "stone" &&
+                    this.analyze_subtool !== "alternate"
+                ) {
+                    color = this.edit_color === "black" ? 1 : 2;
+                } else if (this.move_selected) {
+                    if (this.engine.handicapMovesLeft() <= 0) {
+                        color = this.engine.otherPlayer();
+                    } else {
+                        color = this.engine.player;
+                    }
+                } else if (pos.black || pos.white) {
+                    color = this.placementHoverAt(i, j) ? this.engine.player : pos.black ? 1 : 2;
+                    translucent = true;
+                } else {
+                    color = this.engine.player;
+                }
+
+                //if (this.mode === "analyze" && pos.stone_removed) {
+                if (pos.stone_removed) {
+                    translucent = true;
+                }
+
+                if (color === 1) {
+                    ret += this.theme_black.getStoneHash(i, j, this.theme_black_stones, this);
+                }
+                if (color === 2) {
+                    ret += this.theme_white.getStoneHash(i, j, this.theme_white_stones, this);
+                }
+
+                if (
+                    (this.engine &&
+                        this.engine.phase === "stone removal" &&
+                        this.engine.last_official_move === this.engine.cur_move &&
+                        this.engine.board[j][i] &&
+                        this.engine.removal[j][i]) ||
+                    (this.scoring_mode &&
+                        this.score_estimator &&
+                        this.score_estimator.board[j][i] &&
+                        this.score_estimator.removal[j][i]) ||
+                    //(this.mode === "analyze" && pos.stone_removed)
+                    pos.stone_removed
+                ) {
+                    draw_removal_x = true;
+                }
+
+                ret += (translucent ? "T" : "") + color + ",";
+                if (
+                    (pos.black || pos.white) &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j
+                ) {
+                    /* hovered mark stones draw less translucently */
+                    ret += "hover,";
+                }
+            }
+        }
+
+        if (
+            draw_removal_x ||
+            (this.mode === "analyze" &&
+                this.analyze_tool === "removal" &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j) ||
+            (this.engine.phase === "stone removal" &&
+                this.engine.isActivePlayer(this.player_id) &&
+                this.engine.cur_move === this.engine.last_official_move &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j)
+        ) {
+            const color =
+                this.engine.board[j][i] === JGOFNumericPlayerColor.BLACK ? "black" : "white";
+            if (pos.score === "black" && color === "white") {
+                ret += "whiteX";
+            } else if (pos.score === "white" && color === "black") {
+                ret += "blackX";
+            } else {
+                ret += "redX";
+            }
+        }
+
+        if (should_draw_undo) {
+            ret += "undo↶";
+        }
+
+        /* Draw square highlights if any */
+        {
+            if (pos.hint || (this.highlight_movetree_moves && movetree_contains_this_square)) {
+                if (pos.hint) {
+                    ret += "hint,";
+                } else {
+                    ret += "highlight,";
+                }
+            }
+        }
+
+        /* Draw delete X's */
+        {
+            let draw_x = false;
+            let transparent = false;
+            if (
+                this.engine &&
+                (this.scoring_mode || this.engine.phase === "stone removal") &&
+                this.stone_placement_enabled &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j &&
+                (this.mode !== "analyze" || this.analyze_tool === "stone")
+            ) {
+                draw_x = true;
+                transparent = true;
+            }
+
+            if (pos.mark_x) {
+                draw_x = true;
+                transparent = false;
+            }
+
+            if (this.scoring_mode && this.score_estimator && this.score_estimator.removal[j][i]) {
+                draw_x = true;
+                transparent = false;
+            }
+
+            if (pos.remove && this.mode !== "analyze") {
+                draw_x = true;
+                transparent = false;
+            }
+
+            ret += draw_x + "," + transparent;
+        }
+
+        /* Draw Scores */
+        {
+            if (
+                (pos.score &&
+                    (this.engine.phase !== "finished" ||
+                        this.mode === "play" ||
+                        this.mode === "analyze")) ||
+                (this.scoring_mode &&
+                    this.score_estimator &&
+                    (this.score_estimator.territory[j][i] ||
+                        (this.score_estimator.removal[j][i] &&
+                            this.score_estimator.board[j][i] === 0))) ||
+                ((this.engine.phase === "stone removal" ||
+                    (this.engine.phase === "finished" && this.mode === "play")) &&
+                    this.engine.board[j][i] === 0 &&
+                    (this.engine.removal[j][i] || pos.needs_sealing)) ||
+                (this.mode === "analyze" &&
+                    this.analyze_tool === "score" &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j)
+            ) {
+                let color = pos.score;
+                if (
+                    this.scoring_mode &&
+                    this.score_estimator &&
+                    (this.score_estimator.territory[j][i] ||
+                        (this.score_estimator.removal[j][i] &&
+                            this.score_estimator.board[j][i] === 0))
+                ) {
+                    color = this.score_estimator.territory[j][i] === 1 ? "black" : "white";
+                    if (
+                        this.score_estimator.board[j][i] === 0 &&
+                        this.score_estimator.removal[j][i]
+                    ) {
+                        color = "dame";
+                    }
+                }
+
+                if (
+                    (this.engine.phase === "stone removal" ||
+                        (this.engine.phase === "finished" && this.mode === "play")) &&
+                    this.engine.board[j][i] === 0 &&
+                    this.engine.removal[j][i]
+                ) {
+                    color = "dame";
+                }
+
+                if (pos.needs_sealing) {
+                    color = "seal";
+                }
+
+                if (
+                    this.mode === "analyze" &&
+                    this.analyze_tool === "score" &&
+                    this.last_hover_square &&
+                    this.last_hover_square.x === i &&
+                    this.last_hover_square.y === j
+                ) {
+                    color = this.analyze_subtool;
+                }
+
+                if (
+                    this.scoring_mode &&
+                    this.score_estimator &&
+                    this.score_estimator.territory[j][i]
+                ) {
+                    color = this.score_estimator.territory[j][i] === 1 ? "black" : "white";
+                }
+                ret += "score " + color + ",";
+            }
+        }
+
+        /* Draw letters and numbers */
+        {
+            let letter: string | undefined;
+            let transparent = false;
+            if (pos.letter) {
+                letter = pos.letter;
+            }
+            if (
+                this.mode === "play" &&
+                this.byoyomi_label &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j
+            ) {
+                //transparent = true;
+                letter = this.byoyomi_label;
+            }
+            if (
+                this.mode === "analyze" &&
+                this.analyze_tool === "label" &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j
+            ) {
+                transparent = true;
+                letter = this.label_character;
+            }
+            if (!letter && alt_marking !== "triangle") {
+                letter = alt_marking;
+            }
+
+            if (
+                this.show_variation_move_numbers &&
+                !letter &&
+                !(pos.circle || pos.triangle || pos.chat_triangle || pos.cross || pos.square)
+            ) {
+                const m = this.engine.getMoveByLocation(i, j, false);
+                if (m && !m.trunk) {
+                    if (m.edited) {
+                        //letter = "triangle";
+                        if (this.engine.board[j][i]) {
+                            //alt_marking = "triangle";
+                        }
+                    } else {
+                        letter = m.getMoveNumberDifferenceFromTrunk().toString();
+                    }
+                }
+            }
+
+            if (letter) {
+                ret += letter + (transparent ? " fade" : "") + ",";
+            }
+            if (pos.subscript) {
+                ret += " _ " + pos.subscript + (transparent ? " fade" : "") + ",";
+            }
+            if (pos.subscript2) {
+                ret += " _2 " + pos.subscript2 + ",";
+            }
+        }
+
+        /* draw special symbols */
+        {
+            if (
+                this.analyze_tool === "label" &&
+                this.last_hover_square &&
+                this.last_hover_square.x === i &&
+                this.last_hover_square.y === j
+            ) {
+                if (
+                    this.analyze_subtool === "triangle" ||
+                    this.analyze_subtool === "square" ||
+                    this.analyze_subtool === "cross" ||
+                    this.analyze_subtool === "circle"
+                ) {
+                    ret += "hover " + this.analyze_subtool + ",";
+                }
+            }
+
+            if (pos.circle) {
+                ret += "circle,";
+            }
+            if (pos.ai_quality) {
+                ret += "aiq " + pos.ai_quality + ",";
+            }
+            if (pos.triangle || pos.chat_triangle || alt_marking === "triangle") {
+                ret += "triangle,";
+            }
+            if (pos.cross) {
+                ret += "cross,";
+            }
+            if (pos.square) {
+                ret += "square,";
+            }
+        }
+
+        /* Draw last move */
+        if (draw_last_move && this.engine && this.engine.cur_move) {
+            if (
+                this.engine.cur_move.x === i &&
+                this.engine.cur_move.y === j &&
+                (this.engine.board[j][i] || !this.engine.cur_move.edited) &&
+                (this.engine.phase === "play" || this.engine.phase === "finished")
+            ) {
+                ret += "last_move,";
+                if (this.getShowUndoRequestIndicator() && this.engine.isStoneInUndoRequest(i, j)) {
+                    ret += "?" + ",";
+                }
+            }
+        }
+
+        /* Score Estimation */
+        if (
+            (this.scoring_mode === true && this.score_estimator) ||
+            (this.scoring_mode === "stalling-scoring-mode" &&
+                this.stalling_score_estimate &&
+                this.mode !== "analyze")
+        ) {
+            const se =
+                this.scoring_mode === "stalling-scoring-mode"
+                    ? this.stalling_score_estimate
+                    : this.score_estimator;
+            const est = se!.ownership[j][i];
+
+            ret += est.toFixed(5) + ",";
+        }
+
+        return ret;
+    }
+    public redraw(force_clear?: boolean): void {
+        if (!this.ready_to_draw) {
+            return;
+        }
+        if (this.destroyed) {
+            console.debug("Attempting to redraw destroyed goban");
+            return;
+        }
+        if (!this.drawing_enabled) {
+            return;
+        }
+        if (this.no_display) {
+            return;
+        }
+
+        const metrics = (this.metrics = this.computeMetrics());
+        if (
+            force_clear ||
+            !(
+                this.__set_board_width === metrics.width &&
+                this.__set_board_height === metrics.height &&
+                this.theme_stone_radius === this.computeThemeStoneRadius()
+            )
+        ) {
+            force_clear = true;
+            try {
+                //this.parent.css({"width": metrics.width + "px", "height": metrics.height + "px"});
+                this.parent.style.width = metrics.width + "px";
+                this.parent.style.height = metrics.height + "px";
+                resizeDeviceScaledCanvas(this.board, metrics.width, metrics.height);
+
+                if (this.pen_layer) {
+                    if (this.pen_marks.length) {
+                        resizeDeviceScaledCanvas(this.pen_layer, metrics.width, metrics.height);
+                        const ctx = this.pen_layer.getContext("2d", { willReadFrequently: true });
+                        if (ctx) {
+                            this.pen_ctx = ctx;
+                        } else {
+                            throw new Error(`Failed to obtain drawing context for pen layer`);
+                        }
+                    } else {
+                        this.detachPenCanvas();
+                    }
+                }
+
+                if (this.shadow_layer) {
+                    resizeDeviceScaledCanvas(this.shadow_layer, metrics.width, metrics.height);
+                    const ctx = this.shadow_layer.getContext("2d", { willReadFrequently: true });
+                    if (ctx) {
+                        this.shadow_ctx = ctx;
+                    } else {
+                        throw new Error(`Failed to obtain drawing context for shadow layer`);
+                    }
+                }
+
+                if (this.crosshair_layer) {
+                    resizeDeviceScaledCanvas(this.crosshair_layer, metrics.width, metrics.height);
+                    // Consistent with the other layers (see attachCrosshairLayer).
+                    const ctx = this.crosshair_layer.getContext("2d", { willReadFrequently: true });
+                    if (ctx) {
+                        this.crosshair_ctx = ctx;
+                    } else {
+                        // resizeDeviceScaledCanvas reset the backing store; if we can't
+                        // re-acquire the context (e.g. GPU context loss) drop the stale
+                        // reference so drawLastMoveCrosshair skips rather than draws at the
+                        // wrong scale. The crosshair is an optional accessibility overlay,
+                        // so degrade gracefully instead of throwing like the core layers.
+                        delete this.crosshair_ctx;
+                    }
+                }
+
+                if (this.grid_layer) {
+                    resizeDeviceScaledCanvas(this.grid_layer, metrics.width, metrics.height);
+                    const grid_ctx = this.grid_layer.getContext("2d");
+                    if (grid_ctx) {
+                        this.grid_ctx = grid_ctx;
+                    } else {
+                        this.detachGridBackgroundLayers();
+                    }
+                }
+
+                this.__set_board_width = metrics.width;
+                this.__set_board_height = metrics.height;
+                const ctx = this.board.getContext("2d", { willReadFrequently: true });
+                if (ctx) {
+                    this.ctx = ctx;
+                } else {
+                    throw new Error(`Failed to obtain drawing context for board`);
+                }
+
+                this.setTheme(this.getSelectedThemes(), true);
+            } catch (e) {
+                setTimeout(() => {
+                    throw e;
+                }, 1);
+                return;
+            }
+        }
+        const ctx = this.ctx;
+
+        const place = (ch: string, x: number, y: number): void => {
+            /* places centered (horizontally & vertically) text at x,y */
+            const metrics = ctx.measureText(ch);
+            const xx = x - metrics.width / 2;
+            const yy = y;
+            ctx.fillText(ch, xx, yy);
+        };
+        const v_place = (ch: string, x: number, y: number): void => {
+            /* places centered (horizontally & vertically) text at x,y, with text going down vertically. */
+            for (let i = 0; i < ch.length; ++i) {
+                const metrics = ctx.measureText(ch[i]);
+                const xx = x - metrics.width / 2;
+                let yy = y;
+                const H =
+                    metrics.width; /* should be height in an ideal world, measureText doesn't seem to return it though. For our purposes this works well enough though. */
+
+                if (ch.length === 2) {
+                    yy = yy - H + i * H;
+                }
+                if (ch.length === 3) {
+                    yy = yy - H * 1.5 + i * H;
+                }
+
+                ctx.fillText(ch[i], xx, yy);
+            }
+        };
+
+        const drawHorizontal = (i: number, j: number): void => {
+            switch (this.getCoordinateDisplaySystem()) {
+                case "A1":
+                    for (let c = 0; c < this.width; ++i, ++c) {
+                        const x =
+                            (i -
+                                this.bounds.left -
+                                (this.bounds.left > 0 ? +this.draw_left_labels : 0)) *
+                                this.square_size +
+                            this.square_size / 2;
+                        const y = j * this.square_size + this.square_size / 2;
+                        place(encodePrettyXCoordinate(c), x, y);
+                    }
+                    break;
+                case "1-1":
+                    for (let c = 0; c < this.width; ++i, ++c) {
+                        const x =
+                            (i -
+                                this.bounds.left -
+                                (this.bounds.left > 0 ? +this.draw_left_labels : 0)) *
+                                this.square_size +
+                            this.square_size / 2;
+                        const y = j * this.square_size + this.square_size / 2;
+                        place("" + (c + 1), x, y);
+                    }
+                    break;
+            }
+        };
+
+        const drawVertical = (i: number, j: number): void => {
+            switch (this.getCoordinateDisplaySystem()) {
+                case "A1":
+                    for (let c = 0; c < this.height; ++j, ++c) {
+                        const x = i * this.square_size + this.square_size / 2;
+                        const y =
+                            (j -
+                                this.bounds.top -
+                                (this.bounds.top > 0 ? +this.draw_top_labels : 0)) *
+                                this.square_size +
+                            this.square_size / 2;
+                        place("" + (this.height - c), x, y);
+                    }
+                    break;
+                case "1-1":
+                    const chinese_japanese_numbers = [
+                        "一",
+                        "二",
+                        "三",
+                        "四",
+                        "五",
+                        "六",
+                        "七",
+                        "八",
+                        "九",
+                        "十",
+                        "十一",
+                        "十二",
+                        "十三",
+                        "十四",
+                        "十五",
+                        "十六",
+                        "十七",
+                        "十八",
+                        "十九",
+                        "二十",
+                        "二十一",
+                        "二十二",
+                        "二十三",
+                        "二十四",
+                        "二十五",
+                    ];
+                    for (let c = 0; c < this.height; ++j, ++c) {
+                        const x = i * this.square_size + this.square_size / 2;
+                        const y =
+                            (j -
+                                this.bounds.top -
+                                (this.bounds.top > 0 ? +this.draw_top_labels : 0)) *
+                                this.square_size +
+                            this.square_size / 2;
+                        v_place(chinese_japanese_numbers[c], x, y);
+                    }
+                    break;
+            }
+        };
+
+        if (force_clear || !this.__borders_initialized) {
+            this.__borders_initialized = true;
+            if (this.shadow_ctx) {
+                this.shadow_ctx.clearRect(0, 0, metrics.width, metrics.height);
+            }
+            ctx.clearRect(0, 0, metrics.width, metrics.height);
+
+            /* Draw labels */
+            let text_size = Math.round(this.square_size * 0.5);
+            let bold = "bold";
+            if (this.getCoordinateDisplaySystem() === "1-1") {
+                text_size *= 0.7;
+                bold = "";
+
+                if (this.height > 20) {
+                    text_size *= 0.7;
+                }
+            }
+
+            ctx.font = `${bold} ${text_size}px ${GOBAN_FONT}`;
+            ctx.textBaseline = "middle";
+            ctx.fillStyle = this.theme_board.getLabelTextColor();
+            ctx.save();
+
+            if (this.draw_top_labels && this.bounds.top === 0) {
+                drawHorizontal(this.draw_left_labels ? 1 : 0, 0);
+            }
+            if (this.draw_bottom_labels && this.bounds.bottom === this.height - 1) {
+                drawHorizontal(
+                    this.draw_left_labels ? 1 : 0,
+                    +this.draw_top_labels + this.bounded_height,
+                );
+            }
+            if (this.draw_left_labels && this.bounds.left === 0) {
+                drawVertical(0, this.draw_top_labels ? 1 : 0);
+            }
+            if (this.draw_right_labels && this.bounds.right === this.width - 1) {
+                drawVertical(+this.draw_left_labels + this.bounded_width, +this.draw_top_labels);
+            }
+
+            ctx.restore();
+        }
+
+        this.syncBoardBackgroundIfNeeded(
+            this.theme_board,
+            this.themes,
+            (background) => this.syncBoardBackground(background),
+            !!force_clear,
+        );
+
+        /* Draw squares */
+        if (
+            !this.__draw_state ||
+            force_clear ||
+            this.__draw_state.length !== this.height ||
+            this.__draw_state[0].length !== this.width
+        ) {
+            this.__draw_state = makeMatrix(this.width, this.height, "");
+        }
+
+        /* Set font for text overlay */
+        {
+            const text_size = Math.round(this.square_size * 0.45);
+            ctx.font = "bold " + text_size + "px " + GOBAN_FONT;
+        }
+
+        for (let j = this.bounds.top; j <= this.bounds.bottom; ++j) {
+            for (let i = this.bounds.left; i <= this.bounds.right; ++i) {
+                this.drawSquare(i, j);
+            }
+        }
+
+        this.drawPenMarks(this.pen_marks);
+        this.drawLastMoveCrosshair();
+        this.move_tree_redraw();
+    }
+    public showMessage(
+        message_id_or_error: MessageID,
+        parameters?: { [key: string]: any },
+        timeout: number = 5000,
+    ): void {
+        this.clearMessage();
+
+        const message_id = parameters?.error?.message_id || message_id_or_error;
+
+        const msg = formatMessage(message_id, parameters);
+        this.emit("show-message", {
+            formatted: msg,
+            message_id: message_id,
+            parameters: parameters,
+        });
+
+        if (!this.config.dont_show_messages) {
+            this.message_div = document.createElement("div");
+            this.message_div.className = "GobanMessage";
+            this.message_td = document.createElement("td");
+            const table = document.createElement("table");
+            const tr = document.createElement("tr");
+            tr.appendChild(this.message_td);
+            table.appendChild(tr);
+            this.message_div.appendChild(table);
+            this.message_text = document.createElement("div");
+            this.message_text.innerHTML = msg;
+            this.message_td.appendChild(this.message_text);
+            this.parent.appendChild(this.message_div);
+
+            const message_time = Date.now();
+            this.message_div.addEventListener("click", () => {
+                try {
+                    if (Date.now() - message_time < 100) {
+                        return;
+                    }
+
+                    if (timeout > 0) {
+                        this.clearMessage();
+                    }
+                } catch (e) {
+                    console.error(e);
+                }
+            });
+        }
+
+        if (!timeout) {
+            timeout = 5000;
+        }
+
+        if (timeout > 0) {
+            this.message_timeout = window.setTimeout(() => {
+                this.clearMessage();
+            }, timeout);
+        }
+    }
+    public clearMessage(): void {
+        if (this.message_div) {
+            this.message_div.parentNode?.removeChild(this.message_div);
+            delete this.message_div;
+        }
+        if (this.message_timeout) {
+            clearTimeout(this.message_timeout);
+            delete this.message_timeout;
+        }
+
+        this.emit("clear-message");
+    }
+    public setTheme(themes: GobanSelectedThemes, dont_redraw: boolean): void {
+        if (this.no_display) {
+            return;
+        }
+
+        this.themes = themes;
+        this.invalidateBoardBackgroundSync();
+        const BoardTheme = THEMES["board"]?.[themes.board] || THEMES["board"]["Plain"];
+        const WhiteTheme = THEMES["white"]?.[themes.white] || THEMES["white"]["Plain"];
+        const BlackTheme = THEMES["black"]?.[themes.black] || THEMES["black"]["Plain"];
+        this.theme_board = new BoardTheme();
+        this.theme_white = new WhiteTheme(this.theme_board);
+        this.theme_black = new BlackTheme(this.theme_board);
+
+        if (!this.metrics) {
+            this.metrics = this.computeMetrics();
+        }
+        this.theme_stone_radius = this.computeThemeStoneRadius();
+        if (isNaN(this.theme_stone_radius)) {
+            console.error(
+                "setThemes was not able to find the board size, metrics were: ",
+                JSON.stringify(this.metrics),
+            );
+            throw new Error("invalid stone radius computed");
+        }
+
+        if (
+            this.theme_white.stoneCastsShadow(this.theme_stone_radius) ||
+            this.theme_black.stoneCastsShadow(this.theme_stone_radius)
+        ) {
+            if (this.shadow_layer) {
+                resizeDeviceScaledCanvas(
+                    this.shadow_layer,
+                    this.metrics.width,
+                    this.metrics.height,
+                );
+                const ctx = this.shadow_layer.getContext("2d", { willReadFrequently: true });
+                if (ctx) {
+                    this.shadow_ctx = ctx;
+                } else {
+                    throw new Error(`Failed to get drawing context for shadow layer`);
+                }
+            } else {
+                this.attachShadowLayer();
+            }
+        } else {
+            this.detachShadowLayer();
+        }
+
+        if (!(themes.white in __theme_cache.white)) {
+            __theme_cache.white[themes.white] = {
+                creation_order: [],
+            };
+        }
+        if (!(themes.black in __theme_cache.black)) {
+            __theme_cache.black[themes.black] = {
+                creation_order: [],
+            };
+        }
+
+        const deferredRenderCallback = () => {
+            this.redraw(true);
+            this.move_tree_redraw();
+        };
+
+        try {
+            if (!(this.theme_stone_radius in __theme_cache.white[themes.white])) {
+                __theme_cache.white[themes.white][this.theme_stone_radius] =
+                    this.theme_white.preRenderWhite(
+                        this.theme_stone_radius,
+                        23434,
+                        deferredRenderCallback,
+                    );
+                __theme_cache.white[themes.white].creation_order.push(this.theme_stone_radius);
+            }
+            if (!(this.theme_stone_radius in __theme_cache.black[themes.black])) {
+                __theme_cache.black[themes.black][this.theme_stone_radius] =
+                    this.theme_black.preRenderBlack(
+                        this.theme_stone_radius,
+                        2081,
+                        deferredRenderCallback,
+                    );
+                __theme_cache.black[themes.black].creation_order.push(this.theme_stone_radius);
+            }
+        } catch (e) {
+            console.error(`Error pre-rendering stones.`, { themes });
+            throw e;
+        }
+
+        // We should only need a few sizes, like 6 in most cases, but when we resize a window slowly or
+        // have a bunch of weird sized boards, we'll need more. These are very small and there aren't
+        // any devices that should have a problem with them, except for an artificial limit on iOS devices
+        // which we'll handle below.
+        let max_cache_size = 500;
+        try {
+            /* ipads only allow a very small amount of memory to be allocated to canvases,
+             * so we will be more aggressive about cleaning up the cache on those devices */
+            if (
+                /iP(ad|hone|od).+(Version\/[\d.]|OS \d.*like mac os x)+.*Safari/i.test(
+                    navigator.userAgent,
+                )
+            ) {
+                console.log("iOS device detected, reducing cache size");
+                max_cache_size = 12; // mini goban, main boards, 9x9, 13x13, 19x19 should account for 6. We double that for good measure for odd sizes and resizing.
+            }
+        } catch (e) {
+            console.error(e);
+        }
+
+        if (__theme_cache.black[themes.black].creation_order.length > max_cache_size) {
+            const old_radius = __theme_cache.black[themes.black].creation_order.shift();
+            if (old_radius) {
+                console.log("deleting old radius [black]", old_radius);
+                delete __theme_cache.black[themes.black][old_radius];
+            }
+        }
+        if (__theme_cache.white[themes.white].creation_order.length > max_cache_size) {
+            const old_radius = __theme_cache.white[themes.white].creation_order.shift();
+            if (old_radius) {
+                console.log("deleting old radius [white]", old_radius);
+                delete __theme_cache.white[themes.white][old_radius];
+            }
+        }
+
+        this.theme_white_stones = __theme_cache.white[themes.white][this.theme_stone_radius];
+        this.theme_black_stones = __theme_cache.black[themes.black][this.theme_stone_radius];
+        if (!this.theme_white_stones || !this.theme_black_stones) {
+            throw new Error(
+                "Failed to load stone images for given radius" + this.theme_stone_radius,
+            );
+        }
+        this.theme_line_color = this.theme_board.getLineColor();
+        this.theme_faded_line_color = this.theme_board.getFadedLineColor();
+        this.theme_star_color = this.theme_board.getStarColor();
+        this.theme_faded_star_color = this.theme_board.getFadedStarColor();
+        this.theme_blank_text_color = this.theme_board.getBlankTextColor();
+        this.theme_black_stone_color = this.theme_black.getBlackStoneColor();
+        this.theme_black_text_color = this.theme_black.getBlackTextColor();
+        this.theme_white_stone_color = this.theme_white.getWhiteStoneColor();
+        this.theme_white_text_color = this.theme_white.getWhiteTextColor();
+        if (dont_redraw && this.ready_to_draw) {
+            this.syncBoardBackgroundIfNeeded(this.theme_board, this.themes, (background) =>
+                this.syncBoardBackground(background),
+            );
+        } else {
+            // Preserve the previous eager base-board update; redraw will sync grid layers if needed.
+            const background = this.resolveBoardBackground(this.theme_board, this.themes);
+            this.applyBaseBoardBackground(background);
+        }
+
+        if (!dont_redraw) {
+            this.redraw(true);
+            this.move_tree_redraw();
+        }
+    }
+    private onLabelingStart(ev: MouseEvent | TouchEvent) {
+        const pos = getRelativeEventPosition(ev);
+        this.last_label_position = this.xy2ij(pos.x, pos.y, false);
+
+        {
+            const x = this.last_label_position.i;
+            const y = this.last_label_position.j;
+            if (!(x >= 0 && x < this.width && y >= 0 && y < this.height)) {
+                return;
+            }
+        }
+
+        this.labeling_mode = this.putOrClearLabel(
+            this.last_label_position.i,
+            this.last_label_position.j,
+        )
+            ? "put"
+            : "clear";
+
+        /* clear hover */
+        if (this.__last_pt.valid) {
+            const last_hover = this.last_hover_square;
+            delete this.last_hover_square;
+            if (last_hover) {
+                this.drawSquare(last_hover.x, last_hover.y);
+            }
+        }
+        this.__last_pt = this.xy2ij(-1, -1);
+        this.drawSquare(this.last_label_position.i, this.last_label_position.j);
+    }
+    private onLabelingMove(ev: MouseEvent | TouchEvent) {
+        const pos = getRelativeEventPosition(ev);
+        const cur = this.xy2ij(pos.x, pos.y);
+
+        {
+            const x = cur.i;
+            const y = cur.j;
+            if (!(x >= 0 && x < this.width && y >= 0 && y < this.height)) {
+                return;
+            }
+        }
+
+        if (cur.i !== this.last_label_position.i || cur.j !== this.last_label_position.j) {
+            this.last_label_position = cur;
+            this.putOrClearLabel(cur.i, cur.j, this.labeling_mode);
+            this.setLabelCharacterFromMarks();
+        }
+    }
+
+    protected setTitle(title: string): void {
+        this.title = title;
+        if (this.title_div) {
+            this.title_div.innerHTML = title;
+        }
+    }
+    protected watchSelectedThemes(cb: (themes: GobanSelectedThemes) => void): {
+        remove: () => any;
+    } {
+        if (callbacks.watchSelectedThemes) {
+            return callbacks.watchSelectedThemes(cb);
+        }
+        return { remove: () => {} };
+    }
+
+    //
+    // Move tree
+    //
+    public get move_tree_container(): HTMLElement | undefined {
+        return this.move_tree_widget.container;
+    }
+
+    public setMoveTreeContainer(container: HTMLElement | null): void {
+        this.move_tree_widget.setContainer(container);
+    }
+
+    public move_tree_redraw(no_warp?: boolean): void {
+        this.move_tree_widget.redraw(no_warp);
+    }
+
+    protected computeThemeStoneRadius(): number {
+        // Scale proportionally in general
+        let r = this.square_size * 0.488;
+
+        // Prevent pixel sharing in low-res
+        if (this.square_size % 2 === 0) {
+            r = Math.min(r, (this.square_size - 1) / 2);
+        }
+
+        return Math.max(1, r * this.getStoneScale());
+    }
+
+    private getStoneScale(): number {
+        const stone_scale = this.themes["stone-scale"];
+        return Math.min(Number.isFinite(stone_scale) ? stone_scale : 1.0, 1.0);
+    }
+
+    //
+    // Score display (captured stones)
+    //
+    public createCaptureDisplay(config: CaptureDisplayConfig): CaptureDisplay {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+            throw new Error("Failed to get 2d context for score display canvas");
+        }
+
+        const normalizedConfig = this.normalizeCaptureConfig(config);
+        let currentCount = normalizedConfig.stone_count;
+
+        const render = () => {
+            this.renderCaptureDisplay(canvas, ctx, normalizedConfig, currentCount);
+        };
+
+        render();
+
+        return {
+            element: canvas,
+            updateStoneCount: (count: number) => {
+                currentCount = Math.max(0, Math.round(count));
+                normalizedConfig.stone_count = currentCount;
+                render();
+            },
+            destroy: () => {
+                if (canvas.parentNode) {
+                    canvas.parentNode.removeChild(canvas);
+                }
+            },
+        };
+    }
+
+    private renderCaptureDisplay(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        config: Required<CaptureDisplayConfig>,
+        count: number,
+    ): void {
+        const { radius, displayCount, stone_spacing, width, height } =
+            this.calculateCaptureDisplayDimensions(config, count);
+
+        canvas.width = width;
+        canvas.height = height;
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+
+        ctx.clearRect(0, 0, width, height);
+
+        if (displayCount === 0) {
+            return;
+        }
+
+        const stones = this.getCaptureDisplayStones(config);
+        if (!stones || stones.length === 0) {
+            return;
+        }
+
+        const theme = config.stone_color === "black" ? this.theme_black : this.theme_white;
+        const placeStone =
+            config.stone_color === "black"
+                ? theme.placeBlackStone.bind(theme)
+                : theme.placeWhiteStone.bind(theme);
+
+        const cy = radius;
+
+        for (let i = 0; i < displayCount; i++) {
+            const cx = radius + i * stone_spacing;
+            const stone_idx = (i * 31) % stones.length;
+            const stone = stones[stone_idx];
+            placeStone(ctx, null, stone, cx, cy, radius);
+        }
+    }
+
+    private getCaptureDisplayStones(config: Required<CaptureDisplayConfig>): any[] {
+        const color = config.stone_color;
+        const themeName = color === "black" ? this.themes.black : this.themes.white;
+        const radius = config.stone_radius;
+
+        this.ensureCaptureDisplayStonesPreRendered(config);
+
+        return __theme_cache[color][themeName][radius];
+    }
+
+    private ensureCaptureDisplayStonesPreRendered(config: Required<CaptureDisplayConfig>): void {
+        const color = config.stone_color;
+        const themeName = color === "black" ? this.themes.black : this.themes.white;
+        const theme = color === "black" ? this.theme_black : this.theme_white;
+        const radius = config.stone_radius;
+
+        if (!__theme_cache[color][themeName]) {
+            __theme_cache[color][themeName] = {
+                creation_order: [],
+            };
+        }
+
+        if (!__theme_cache[color][themeName][radius]) {
+            const callback = () => {
+                /* Stones are pre-rendered, no need for deferred callback */
+            };
+            __theme_cache[color][themeName][radius] =
+                color === "black"
+                    ? theme.preRenderBlack(radius, Math.random(), callback)
+                    : theme.preRenderWhite(radius, Math.random(), callback);
+            __theme_cache[color][themeName].creation_order.push(radius);
+
+            // Evict old cache entries if we've exceeded the cache size
+            let max_cache_size = 24;
+            try {
+                // iOS devices have memory constraints, use smaller cache
+                if (
+                    /iP(ad|hone|od).+(Version\/[\d.]|OS \d.*like mac os x)+.*Safari/i.test(
+                        navigator.userAgent,
+                    )
+                ) {
+                    max_cache_size = 12;
+                }
+            } catch (e) {
+                // Ignore errors
+            }
+
+            if (__theme_cache[color][themeName].creation_order.length > max_cache_size) {
+                const old_radius = __theme_cache[color][themeName].creation_order.shift();
+                if (old_radius) {
+                    delete __theme_cache[color][themeName][old_radius];
+                }
+            }
+        }
+    }
+}
+
+const fitTextCache: { [key: string]: [number, string, TextMetrics] } = {};
+
+// fontPattern MUST have a FONT_SIZE string in it that will be replaced
+// ctx.font will be set to the appropriate size when this returns.
+// @returns font_size, font_string, metrics
+function fitText(
+    ctx: CanvasRenderingContext2D,
+    text: string,
+    fontPattern: string,
+    startingFontSize: number,
+    width: number,
+): [number, string, TextMetrics] {
+    const MIN_FONT_SIZE = 4;
+
+    if (fontPattern.indexOf("FONT_SIZE") < 0) {
+        throw new Error(
+            `fitText expects FONT_SIZE to be present in the fontPattern, was ${fontPattern}`,
+        );
+    }
+
+    const key = `${width} ${fontPattern} ${startingFontSize} ${text}`;
+    if (key in fitTextCache) {
+        const cached = fitTextCache[key];
+        ctx.font = cached[1];
+        return cached;
+    }
+
+    let font_size = startingFontSize;
+
+    do {
+        const font = fontPattern.replace("FONT_SIZE", font_size.toString());
+        ctx.font = font;
+        const metrics = ctx.measureText(text);
+        if (font_size <= MIN_FONT_SIZE || metrics.width < width) {
+            fitTextCache[key] = [font_size, font, metrics];
+            return fitTextCache[key];
+        }
+
+        const new_font_size = Math.floor((font_size * width) / metrics.width);
+        if (new_font_size >= font_size) {
+            font_size = font_size - 1;
+        } else {
+            font_size = new_font_size;
+        }
+    } while (true);
+}

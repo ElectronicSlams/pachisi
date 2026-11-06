@@ -1,0 +1,686 @@
+/* ============================================================
+   eSlams Arena app prototype · tokens.css  [agent E]
+   Port of assets/02-tokens/web-tokens.css (production canon).
+   Token NAMES are identical to production; only the scope changed.
+
+   Scope
+   - The two colour sets apply to the phone root, never to :root:
+       #phone[data-theme="light"]   Classic Light
+       #phone[data-theme="dark"]    Classic Dark
+     No data-theme (or data-theme="system"): Light, and Dark when the OS
+     prefers dark. The page canvas around the phone has its own look.
+   - Optional hook for side panels that must render a themed fragment
+     outside the phone (share card, app icon): put class "es-theme" and a
+     data-theme="light|dark" on the wrapper. Same token values, same rules.
+   - Non-colour tokens (radii, fonts, motion, phone metrics) live on :root
+     because they carry no theme and the canvas may read them too.
+
+   Extras on top of production (all additive)
+     --motion-*, --ease          timings from CONTRACT section 1 and brief section 8
+     --safe-top / --safe-bottom  47px status bar / 34px home indicator
+     --gutter / --tap            18px side padding / 44px minimum tap target
+     @keyframes fadeUp fadeIn popIn pulse spin   (production names)
+     .mono .tnum .eyebrow .sr-only  (scoped to the phone and .es-theme)
+
+   Reduced motion: html.reduced-motion (canvas toggle) and the OS media
+   query both collapse every animation and transition to 1ms, so every
+   beat snaps to its end state.
+   ============================================================ */
+
+/* ---------- Non-colour tokens (theme independent) ---------- */
+:root {
+  /* Radii */
+  --r-xs: 5px;
+  --r-sm: 7px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-pill: 999px;
+
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", "SF Mono", "IBM Plex Mono", ui-monospace, Menlo, monospace;
+
+  /* Motion (brief section 8, platform animation spec) */
+  --motion-move: 220ms;          /* a piece arrives (Connect Four uses --motion-drop) */
+  --motion-drop: 320ms;          /* Connect Four gravity settle */
+  --motion-reveal: 300ms;        /* hidden-information reveal */
+  --motion-reveal-fast: 180ms;   /* every other reveal */
+  --motion-result: 520ms;        /* the result curtain */
+  --motion-sheet: 280ms;         /* sheet up / down */
+  --motion-push: 200ms;          /* screen push */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+
+  /* Phone metrics (CONTRACT section 1) */
+  --safe-top: 47px;
+  --safe-bottom: 34px;
+  --gutter: 18px;
+  --tap: 44px;
+}
+
+/* ---------- LIGHT (default; also the no-attribute and "system" fallback) ---------- */
+#phone,
+#phone[data-theme="light"],
+.es-theme,
+.es-theme[data-theme="light"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg:          #ffffff;
+  --surface:     #ffffff;
+  --surface-2:   #f7f7f9;
+  --surface-3:   #f0f0f3;
+  --surface-inset:#fafafb;
+
+  /* Borders */
+  --border:        #e8e8ec;
+  --border-strong: #d6d6dd;
+  --border-faint:  #f0f0f3;
+
+  /* Text */
+  --text:   #0b0b0d;
+  --text-2: #56565f;
+  --text-3: #666672;
+  --text-on-accent: #ffffff;
+
+  /* Accent: eSlams logo blue */
+  --accent:        #1b32c4;
+  --accent-hover:  #16299f;
+  --accent-press:  #112184;
+  --accent-soft:   rgba(27, 50, 196, 0.08);
+  --accent-softer: rgba(27, 50, 196, 0.045);
+  --accent-line:   rgba(27, 50, 196, 0.22);
+  /* filled controls (primary button, You tile) carry --text-on-accent */
+  --accent-fill:       #1b32c4;
+  --accent-fill-hover: #16299f;
+  --accent-fill-press: #112184;
+
+  /* Status: muted */
+  --win:  #1f8a4c;
+  --win-soft: rgba(31, 138, 76, 0.10);
+  --loss: #c43d33;
+  --loss-soft: rgba(196, 61, 51, 0.10);
+  --draw: #b0791b;
+  --draw-soft: rgba(176, 121, 27, 0.12);
+  /* status words in small type on tints (pills, chips, readiness): AA at 11px */
+  --win-text:  #17703d;
+  --draw-text: #85590c;
+  --loss-text: #a8322a;
+
+  /* Medals */
+  --gold:   #c79a2e;
+  --silver: #9aa0aa;
+  --bronze: #b07440;
+
+  /* Board (Arena / Battlefield) */
+  --board-light: #efe9dd;
+  --board-dark:  #b9a888;
+  --board-line:  #9c9486;
+  --board-bg:    #f4f1ea;
+  --stone-black: #16161a;
+  --stone-white: #f6f5f2;
+
+  /* Terminal (always dark, same in both themes) */
+  --term-bg:   #16161a;
+  --term-bar:  #1f1f25;
+  --term-text: #e8e8ec;
+  --term-dim:  #8b8b96;
+  --term-green:#7ee0a8;
+  --term-blue: #8fa6ff;
+  --term-amber:#f1c277;
+  --term-pink: #f59ec0;
+
+  /* Elevation: subtle, no heavy shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 15, 20, 0.04);
+  --shadow-md: 0 4px 16px rgba(15, 15, 20, 0.06), 0 1px 3px rgba(15, 15, 20, 0.05);
+  --shadow-lg: 0 12px 40px rgba(15, 15, 20, 0.10), 0 2px 8px rgba(15, 15, 20, 0.05);
+  --shadow-pop: 0 8px 28px rgba(15, 15, 20, 0.12);
+}
+
+/* ---------- DARK ---------- */
+#phone[data-theme="dark"],
+.es-theme[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:          #0c0c0e;
+  --surface:     #121215;
+  --surface-2:   #18181c;
+  --surface-3:   #1f1f24;
+  --surface-inset:#101013;
+
+  --border:        rgba(255,255,255,0.085);
+  --border-strong: rgba(255,255,255,0.16);
+  --border-faint:  rgba(255,255,255,0.05);
+
+  --text:   #ededf0;
+  --text-2: #a2a2ad;
+  --text-3: #9a9aa5;
+  --text-on-accent: #ffffff;
+
+  --accent:        #647cff;
+  --accent-hover:  #7a8dff;
+  --accent-press:  #8f9eff;
+  --accent-soft:   rgba(100, 124, 255, 0.14);
+  --accent-softer: rgba(100, 124, 255, 0.07);
+  --accent-line:   rgba(100, 124, 255, 0.30);
+  /* the periwinkle accent reads on dark surfaces; fills step down to a deeper blue so white text holds AA */
+  --accent-fill:       #3a52ec;
+  --accent-fill-hover: #4a61f0;
+  --accent-fill-press: #5a6ff2;
+
+  --win:  #3ec97e;
+  --win-soft: rgba(62, 201, 126, 0.13);
+  --loss: #ec6a5f;
+  --loss-soft: rgba(236, 106, 95, 0.14);
+  --draw: #e0a94a;
+  --draw-soft: rgba(224, 169, 74, 0.14);
+  --win-text:  #3ec97e;
+  --draw-text: #e0a94a;
+  --loss-text: #ec6a5f;
+
+  --gold:   #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  --board-light: #2b2b33;
+  --board-dark:  #3a3a45;
+  --board-line:  #4a4a56;
+  --board-bg:    #1c1c21;
+  --stone-black: #0b0b0d;
+  --stone-white: #e9e9ee;
+  --chess-b-edge: color-mix(in oklab, var(--stone-black) 42%, var(--stone-white)); /* a thin light rim so black pieces read on a dark board */
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- DARK via system preference (no explicit light/dark chosen) ---------- */
+@media (prefers-color-scheme: dark) {
+  #phone:not([data-theme="light"]):not([data-theme="dark"]),
+  .es-theme:not([data-theme="light"]):not([data-theme="dark"]) {
+    color-scheme: dark;
+
+    --bg:          #0c0c0e;
+    --surface:     #121215;
+    --surface-2:   #18181c;
+    --surface-3:   #1f1f24;
+    --surface-inset:#101013;
+
+    --border:        rgba(255,255,255,0.085);
+    --border-strong: rgba(255,255,255,0.16);
+    --border-faint:  rgba(255,255,255,0.05);
+
+    --text:   #ededf0;
+    --text-2: #a2a2ad;
+    --text-3: #9a9aa5;
+    --text-on-accent: #ffffff;
+
+    --accent:        #647cff;
+    --accent-hover:  #7a8dff;
+    --accent-press:  #8f9eff;
+    --accent-soft:   rgba(100, 124, 255, 0.14);
+    --accent-softer: rgba(100, 124, 255, 0.07);
+    --accent-line:   rgba(100, 124, 255, 0.30);
+  /* the periwinkle accent reads on dark surfaces; fills step down to a deeper blue so white text holds AA */
+  --accent-fill:       #3a52ec;
+  --accent-fill-hover: #4a61f0;
+  --accent-fill-press: #5a6ff2;
+
+    --win:  #3ec97e;
+    --win-soft: rgba(62, 201, 126, 0.13);
+    --loss: #ec6a5f;
+    --loss-soft: rgba(236, 106, 95, 0.14);
+    --draw: #e0a94a;
+    --draw-soft: rgba(224, 169, 74, 0.14);
+  --win-text:  #3ec97e;
+  --draw-text: #e0a94a;
+  --loss-text: #ec6a5f;
+
+    --gold:   #e3b94a;
+    --silver: #b6bcc6;
+    --bronze: #cd8b54;
+
+    --board-light: #2b2b33;
+    --board-dark:  #3a3a45;
+    --board-line:  #4a4a56;
+    --board-bg:    #1c1c21;
+    --stone-black: #0b0b0d;
+    --stone-white: #e9e9ee;
+    --chess-b-edge: color-mix(in oklab, var(--stone-black) 42%, var(--stone-white)); /* a thin light rim so black pieces read on a dark board */
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.5);
+    --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* ============================================================
+   Base element styles: inside the phone (and .es-theme fragments) only
+   ============================================================ */
+#phone, #phone *, #phone *::before, #phone *::after,
+.es-theme, .es-theme *, .es-theme *::before, .es-theme *::after { box-sizing: border-box; }
+
+#phone,
+.es-theme {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "cv01", "ss01", "tnum" 0;
+}
+
+#phone ::selection,
+.es-theme ::selection { background: var(--accent-soft); }
+
+#phone h1, #phone h2, #phone h3, #phone h4,
+.es-theme h1, .es-theme h2, .es-theme h3, .es-theme h4 {
+  margin: 0;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+#phone p, .es-theme p { margin: 0; }
+#phone a, .es-theme a { color: inherit; text-decoration: none; }
+#phone button, .es-theme button {
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+#phone img, .es-theme img { display: block; }
+#phone input, #phone select, #phone textarea,
+.es-theme input, .es-theme select, .es-theme textarea { font-family: inherit; }
+
+/* Machine facts: ids, counts, clocks, turn numbers, variant tokens */
+#phone .mono, .es-theme .mono { font-family: var(--font-mono); font-feature-settings: "tnum"; }
+#phone .tnum, .es-theme .tnum { font-variant-numeric: tabular-nums; }
+#phone .eyebrow, .es-theme .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+}
+#phone .sr-only, .es-theme .sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* Focus: one 2px accent ring, shape follows the element's own radius */
+#phone :focus-visible,
+.es-theme :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+#phone :focus:not(:focus-visible),
+.es-theme :focus:not(:focus-visible) { outline: none; }
+
+/* No visible scrollbars inside the phone (it is a device screen) */
+#phone *, .es-theme * { scrollbar-width: none; }
+#phone *::-webkit-scrollbar, .es-theme *::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+/* ---------- Shared keyframes (production names) ---------- */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes popIn { from { transform: scale(0.35); } to { transform: scale(1); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   Reduced motion: every beat snaps to its end state.
+   Canvas toggle (html.reduced-motion) and the OS preference behave the same.
+   The extra declarations stop infinite loops from strobing at 1ms and make
+   staggered delays collapse too.
+   ============================================================ */
+html.reduced-motion *, html.reduced-motion *::before, html.reduced-motion *::after {
+  animation-duration: 1ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.reduced-motion *, html.reduced-motion *::before, html.reduced-motion *::after,
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Six themes [agent G, from research/six-themes.css]
+   Classic Light and Classic Dark are the two blocks above. Neon, Club,
+   Arcade and Midnight are fixed skins (brief 6.1) with values from
+   assets/02-tokens/mobile-six-themes.ts. Each selector repeats the
+   :not([data-theme="light"]):not([data-theme="dark"]) chain so it reaches
+   specificity (1,3,0) and beats the prefers-color-scheme block above
+   (1,2,0) on a dark OS. Material tokens: --theme-plane (board plane),
+   --theme-card-face / -back / -table, --glow (Neon and Arcade only, accent
+   roles only), --mark-ink (in-app mark tint). Status words use the
+   --win-text / --loss-text / --draw-text tokens.
+   ============================================================ */
+
+/* Classic pair: material tokens resolve to what the renderers draw today */
+#phone,
+.es-theme {
+  --theme-plane: var(--board-bg);
+  --theme-card-face: var(--surface);
+  --theme-card-back: var(--surface-3);
+  --theme-card-table: var(--surface-2);
+  --glow: none;
+  --mark-ink: #1b32c4;
+  --theme-ink-filter: none;   /* only Club lacquers its discs; nested tiles reset it */
+}
+
+/* ---------- NEON (dark, glass plane, cold cathode glow on accent roles only) ---------- */
+#phone[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="neon"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #06060b;
+  --surface: #0c0c15;
+  --surface-2: #12121d;
+  --surface-3: #191926;
+  --surface-inset: #0a0a11;
+
+  /* Borders */
+  --border: rgba(120, 150, 255, 0.14);
+  --border-strong: rgba(140, 170, 255, 0.30);
+  --border-faint: rgba(120, 150, 255, 0.07);
+
+  /* Text */
+  --text: #e8ecff;
+  --text-2: #a3adcf;
+  --text-3: #7a84ad;
+  --text-on-accent: #041018;
+
+  /* Accent (one per theme) */
+  --accent: #3fd6f2;
+  --accent-hover: #6ce1f7;
+  --accent-press: #99ecfc; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(63, 214, 242, 0.15);
+  --accent-softer: rgba(63, 214, 242, 0.07);
+  --accent-line: rgba(63, 214, 242, 0.36);
+  /* filled controls (primary button, You tile): the theme accent itself, carrying --text-on-accent */
+  --accent-fill: var(--accent);
+  --accent-fill-hover: var(--accent-hover);
+  --accent-fill-press: var(--accent-press);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #3ef58e;
+  --win-text: #3ef58e;
+  --win-soft: rgba(62, 245, 142, 0.13);
+  --loss: #ff5c6a;
+  --loss-text: #ff5c6a;
+  --loss-soft: rgba(255, 92, 106, 0.15);
+  --draw: #ffc24d;
+  --draw-text: #ffc24d;
+  --draw-soft: rgba(255, 194, 77, 0.14);
+
+  /* Medals (not in the token source: carried from the Classic Dark set) */
+  --gold: #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  /* Board */
+  --board-light: #131322;
+  --board-dark: #1c1c30;
+  --board-line: #30305a;
+  --board-bg: #0d0d18;
+  --stone-black: #05050c;
+  --stone-white: #e6f6ff;
+  --chess-b-edge: color-mix(in oklab, var(--stone-black) 42%, var(--stone-white)); /* a thin light rim so black pieces read on a dark board */
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: linear-gradient(180deg, #0d0d18, #08080f);
+  --theme-card-face: var(--surface);
+  --theme-card-back: #0a0a14;
+  --theme-card-table: #0b0b16;
+  --glow: 0 0 14px rgba(63, 214, 242, 0.45);
+  --mark-ink: #3fd6f2;
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 10, 0.5);
+  --shadow-md: 0 4px 18px rgba(0, 0, 20, 0.6), 0 1px 3px rgba(0, 0, 10, 0.5);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 20, 0.65), 0 2px 8px rgba(0, 0, 10, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 20, 0.6);
+}
+
+/* ---------- CLUB (light, wood plane, felt table, brass accent, no glow) ---------- */
+#phone[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="club"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #efe7d7;
+  --surface: #faf5ea;
+  --surface-2: #f1e9d8;
+  --surface-3: #e7dcc5;
+  --surface-inset: #f6f0e1;
+
+  /* Borders */
+  --border: #ddd2ba;
+  --border-strong: #c3b292;
+  --border-faint: #e9e0cc;
+
+  /* Text */
+  --text: #2a2115;
+  --text-2: #665937;
+  --text-3: #6b5f41;
+  --text-on-accent: #fff8ec;
+
+  /* Accent (one per theme) */
+  --accent: #8a6414;
+  --accent-hover: #6f4f0d;
+  --accent-press: #5b3f08; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(138, 100, 20, 0.11);
+  --accent-softer: rgba(138, 100, 20, 0.055);
+  --accent-line: rgba(138, 100, 20, 0.32);
+  /* filled controls (primary button, You tile): the theme accent itself, carrying --text-on-accent */
+  --accent-fill: var(--accent);
+  --accent-fill-hover: var(--accent-hover);
+  --accent-fill-press: var(--accent-press);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #2e7d43;
+  --win-text: #276a39;
+  --win-soft: rgba(46, 125, 67, 0.11);
+  --loss: #b8442f;
+  --loss-text: #a13c29;
+  --loss-soft: rgba(184, 68, 47, 0.11);
+  --draw: #a2731c;
+  --draw-text: #785515;
+  --draw-soft: rgba(162, 115, 28, 0.13);
+
+  /* Medals (not in the token source: carried from the Classic Light set) */
+  --gold: #c79a2e;
+  --silver: #9aa0aa;
+  --bronze: #b07440;
+
+  /* Board */
+  --board-light: #ecdcbb;
+  --board-dark: #a97c4c;
+  --board-line: #8f7c58;
+  --board-bg: #decfae;
+  --stone-black: #221a10;
+  --stone-white: #f8f3e6;
+  --chess-b-edge: var(--stone-black); /* light board: no extra rim, and it must not inherit the dark-OS value */
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: repeating-linear-gradient(90deg, #c99a5a, #c99a5a 6px, #c19152 6px, #c19152 12px);
+  --theme-card-face: #fbf6ea;
+  --theme-card-back: #8a6414;
+  --theme-card-table: radial-gradient(circle, #2e7d43, #25683a);
+  --glow: none;
+  --mark-ink: #8a6414;
+  --theme-ink-filter: drop-shadow(0 -0.6px 0 color-mix(in srgb, var(--stone-white) 55%, transparent)) drop-shadow(0 1.2px 1.2px color-mix(in srgb, var(--stone-black) 38%, transparent)); /* lacquered discs; extra token, only Club defines it */
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(60, 45, 20, 0.08);
+  --shadow-md: 0 4px 16px rgba(60, 45, 20, 0.12), 0 1px 3px rgba(60, 45, 20, 0.08);
+  --shadow-lg: 0 12px 40px rgba(60, 45, 20, 0.16), 0 2px 8px rgba(60, 45, 20, 0.08);
+  --shadow-pop: 0 8px 28px rgba(60, 45, 20, 0.16);
+}
+
+/* ---------- ARCADE (dark, phosphor plane, glow and persistence trail on accent roles only) ---------- */
+#phone[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="arcade"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #020604;
+  --surface: #06110a;
+  --surface-2: #0a1a10;
+  --surface-3: #0f2417;
+  --surface-inset: #041008;
+
+  /* Borders */
+  --border: rgba(51, 255, 119, 0.16);
+  --border-strong: rgba(51, 255, 119, 0.34);
+  --border-faint: rgba(51, 255, 119, 0.08);
+
+  /* Text */
+  --text: #c9ffd9;
+  --text-2: #7fd99a;
+  --text-3: #549e6e;
+  --text-on-accent: #02180a;
+
+  /* Accent (one per theme) */
+  --accent: #33ff77;
+  --accent-hover: #66ff99;
+  --accent-press: #99ffbb; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(51, 255, 119, 0.13);
+  --accent-softer: rgba(51, 255, 119, 0.06);
+  --accent-line: rgba(51, 255, 119, 0.36);
+  /* filled controls (primary button, You tile): the theme accent itself, carrying --text-on-accent */
+  --accent-fill: var(--accent);
+  --accent-fill-hover: var(--accent-hover);
+  --accent-fill-press: var(--accent-press);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #33ff77;
+  --win-text: #33ff77;
+  --win-soft: rgba(51, 255, 119, 0.12);
+  --loss: #ff6640;
+  --loss-text: #ff6640;
+  --loss-soft: rgba(255, 102, 64, 0.14);
+  --draw: #ffd23f;
+  --draw-text: #ffd23f;
+  --draw-soft: rgba(255, 210, 63, 0.13);
+
+  /* Medals (not in the token source: carried from the Classic Dark set) */
+  --gold: #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  /* Board */
+  --board-light: #07200f;
+  --board-dark: #0d2f18;
+  --board-line: #1c4a2c;
+  --board-bg: #04150a;
+  --stone-black: #021007;
+  --stone-white: #ccffdd;
+  --chess-b-edge: color-mix(in oklab, var(--stone-black) 42%, var(--stone-white)); /* a thin light rim so black pieces read on a dark board */
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: #04150a;
+  --theme-card-face: var(--surface);
+  --theme-card-back: #07200f;
+  --theme-card-table: #04150a;
+  --glow: 0 0 10px rgba(51, 255, 119, 0.35);
+  --mark-ink: #33ff77;
+  --theme-trail: 0.5; /* start opacity of the phosphor persistence trail; extra token, only Arcade defines it */
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(0, 10, 0, 0.5);
+  --shadow-md: 0 4px 16px rgba(0, 10, 0, 0.6), 0 1px 3px rgba(0, 10, 0, 0.5);
+  --shadow-lg: 0 12px 40px rgba(0, 10, 0, 0.65), 0 2px 8px rgba(0, 10, 0, 0.5);
+  --shadow-pop: 0 8px 28px rgba(0, 10, 0, 0.6);
+}
+
+/* ---------- MIDNIGHT (dark, true black void, no glow) ---------- */
+#phone[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]),
+.es-theme[data-theme="midnight"]:not([data-theme="light"]):not([data-theme="dark"]) {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: #000000;
+  --surface: #0a0a0c;
+  --surface-2: #101013;
+  --surface-3: #16161a;
+  --surface-inset: #070709;
+
+  /* Borders */
+  --border: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-faint: rgba(255, 255, 255, 0.04);
+
+  /* Text */
+  --text: #d9d9de;
+  --text-2: #8f8f99;
+  --text-3: #81818b;
+  --text-on-accent: #0b0b0d;
+
+  /* Accent (one per theme) */
+  --accent: #7d8dc9;
+  --accent-hover: #94a2d8;
+  --accent-press: #abb7e7; /* derived from accent and hover: not in the token source */
+  --accent-soft: rgba(125, 141, 201, 0.15);
+  --accent-softer: rgba(125, 141, 201, 0.07);
+  --accent-line: rgba(125, 141, 201, 0.32);
+  /* filled controls (primary button, You tile): the theme accent itself, carrying --text-on-accent */
+  --accent-fill: var(--accent);
+  --accent-fill-hover: var(--accent-hover);
+  --accent-fill-press: var(--accent-press);
+
+  /* Status: re-tuned per theme, never re-mapped */
+  --win: #4fae7d;
+  --win-text: #4fae7d;
+  --win-soft: rgba(79, 174, 125, 0.13);
+  --loss: #c96a62;
+  --loss-text: #c96a62;
+  --loss-soft: rgba(201, 106, 98, 0.14);
+  --draw: #bd9552;
+  --draw-text: #bd9552;
+  --draw-soft: rgba(189, 149, 82, 0.14);
+
+  /* Medals (not in the token source: carried from the Classic Dark set) */
+  --gold: #e3b94a;
+  --silver: #b6bcc6;
+  --bronze: #cd8b54;
+
+  /* Board */
+  --board-light: #131316;
+  --board-dark: #1d1d22;
+  --board-line: #2a2a31;
+  --board-bg: #0c0c0f;
+  --stone-black: #000000;
+  --stone-white: #d6d6de;
+  --chess-b-edge: color-mix(in oklab, var(--stone-black) 42%, var(--stone-white)); /* a thin light rim so black pieces read on a dark board */
+
+  /* Material (mobile-six-themes.ts material.*) */
+  --theme-plane: #000000;
+  --theme-card-face: var(--surface);
+  --theme-card-back: var(--surface-3);
+  --theme-card-table: var(--surface-2);
+  --glow: none;
+  --mark-ink: #7d8dc9;
+
+  /* Elevation (v3 sm and md; lg and pop re-based to this prototype's downward geometry) */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.7), 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.75), 0 2px 8px rgba(0, 0, 0, 0.6);
+  --shadow-pop: 0 8px 28px rgba(0, 0, 0, 0.7);
+}

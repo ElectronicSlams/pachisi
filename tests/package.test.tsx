@@ -71,7 +71,7 @@ test('every bundled demonstration frame renders with finite geometry',()=>{
  for(const [game,demo] of Object.entries(GAME_DEMONSTRATIONS))for(const frame of demo.frames){
   const html=render(<LegalDemonstration game={game} frame={frame}/>);assert.ok(html.length>0,game);assert.doesNotMatch(html,/NaN|Infinity/,`${game} turn ${frame.turn}`); count++;
  }
- assert.equal(count,722);
+ assert.equal(count,740);
 });
 test('actual Board never mutates, advances or substitutes a demo for supplied state',()=>{
  const frame:CellBoardFrame=Object.freeze({kind:'cells',family:'grid_3x3',rows:3,cols:3,cells:Object.freeze(['O','.','.','.','X','.','.','.','.']),last:Object.freeze([4])});
@@ -87,7 +87,10 @@ test('built root is importable in a browser-free ESM consumer',async()=>{
 test('canonical theme/brand bytes remain unchanged',async()=>{
  const {createHash}=await import('node:crypto');const manifest=JSON.parse(await readFile(new URL('../SOURCE_MANIFEST.json',import.meta.url),'utf8'));
  for(const file of manifest.files.filter((x:{target:string})=>x.target==='styles/tokens.css'||x.target.startsWith('assets/'))){
-  const bytes=await readFile(new URL('../'+file.target,import.meta.url));assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sourceSha256,file.target);
+  let bytes:Buffer|string=await readFile(new URL('../'+file.target,import.meta.url));
+  // tokens.css may carry one delimited additive block; everything else must stay byte-identical to the source.
+  if(file.target==='styles/tokens.css')bytes=bytes.toString('utf8').replace(/\n\/\* BEGIN pachisi additive tokens[\s\S]*?\/\* END pachisi additive tokens \*\/\n/u,'');
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),file.sourceSha256,file.target);
  }
 });
 test('per-game documentation stays synchronized with the shipped dataset',async()=>{

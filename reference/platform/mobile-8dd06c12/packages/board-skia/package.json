@@ -1,0 +1,35 @@
+{
+  "name": "@eslams/board-skia",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./native": "./src/native.ts"
+  },
+  "types": "./src/index.ts",
+  "dependencies": {
+    "@eslams/core-types": "workspace:*",
+    "@eslams/game-render-contract": "workspace:*",
+    "@eslams/theme-tokens": "workspace:*"
+  },
+  "peerDependencies": {
+    "@shopify/react-native-skia": "2.6.2",
+    "react": "19.2.3",
+    "react-native": "0.86.2",
+    "react-native-reanimated": "4.5.1",
+    "react-native-worklets": "0.10.1"
+  },
+  "devDependencies": {
+    "@expo-google-fonts/inter": "0.4.2",
+    "canvaskit-wasm": "0.41.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json --noEmit",
+    "golden:check": "tsx scripts/golden-offscreen.ts --compare",
+    "golden:update": "tsx scripts/golden-offscreen.ts --update",
+    "lint": "pnpm --dir ../.. exec eslint \"packages/board-skia/{scripts,src,tests}/**/*.ts\"",
+    "test": "tsx --test tests/*.test.ts",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  }
+}
