@@ -124,7 +124,7 @@
     },
     {
       "geometry": {
-        "frames": 740,
+        "frames": 745,
         "bad": 0,
         "invalid": []
       },
@@ -219,6 +219,12 @@
         "frames": 47,
         "bad": 0,
         "invalid": []
+      },
+      "replayHost": {
+        "afterNext": "2",
+        "afterRerenders": "2",
+        "ticks": 12,
+        "afterSwap": "0"
       },
       "replayPlayback": true
     },
